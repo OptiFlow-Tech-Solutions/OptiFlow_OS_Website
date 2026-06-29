@@ -1,0 +1,137 @@
+# Design System
+
+## Purpose
+
+Define the shared design tokens, typography, spacing, and component primitives that every marketing page inherits from `assets/css/core.css`.
+
+## Requirements
+
+### Requirement: CSS Custom Properties
+
+The system SHALL define all colors as CSS custom properties in `:root`.
+
+#### Scenario: Color variables available
+
+- **GIVEN** `core.css` is loaded on any page
+- **WHEN** a component references `var(--bg)`, `var(--fg)`, `var(--surface)`, `var(--muted)`, `var(--border)`, `var(--accent)`, `var(--teal)`, `var(--green)`, or `var(--lime)`
+- **THEN** the correct color value SHALL be applied
+
+#### Scenario: Soft color variants
+
+- **GIVEN** `core.css` is loaded
+- **WHEN** a component references `var(--accent-soft)`, `var(--teal-soft)`, or `var(--green-soft)`
+- **THEN** a low-opacity mix of the corresponding brand color SHALL be applied
+
+### Requirement: Neutral-to-Brand Color Ratio
+
+The system SHALL maintain approximately 88% neutral / 12% brand color ratio.
+
+#### Scenario: Neutral-dominant interface
+
+- **GIVEN** any page in the marketing website
+- **WHEN** the page is visually assessed
+- **THEN** the majority of surface area SHALL use neutral colors (--bg, --surface, --fg, --muted, --border)
+- **AND** brand colors (--accent, --teal, --green, --lime) SHALL be reserved for accent elements, CTAs, and highlights
+
+### Requirement: Light and Dark Themes
+
+The system SHALL support light and dark themes via the `data-theme` attribute on the `<html>` element.
+
+#### Scenario: Light theme (default)
+
+- **GIVEN** `<html data-theme="light">` or no `data-theme` attribute
+- **WHEN** the page renders
+- **THEN** light-theme color values from `:root` SHALL be applied
+
+#### Scenario: Dark theme
+
+- **GIVEN** `<html data-theme="dark">`
+- **WHEN** the page renders
+- **THEN** dark-theme color values from `[data-theme="dark"]` SHALL override `:root` values
+- **AND** shadow tokens SHALL switch to dark-mode shadows
+- **AND** noise texture opacity SHALL increase
+
+### Requirement: Typography
+
+The system SHALL use Inter as the primary font family and JetBrains Mono for monospace.
+
+#### Scenario: Display and body text
+
+- **GIVEN** `core.css` is loaded
+- **WHEN** headings and body text render
+- **THEN** `--font-display` and `--font-body` SHALL resolve to Inter with system font fallbacks
+- **AND** `--font-mono` SHALL resolve to JetBrains Mono with monospace fallbacks
+
+### Requirement: Type Scale
+
+The system SHALL provide a complete type scale with responsive clamping.
+
+#### Scenario: Heading sizes
+
+- **GIVEN** `<h1>` and `<h2>` elements
+- **WHEN** the page renders at any viewport width
+- **THEN** `h1` SHALL use `--fs-h1` (clamped between 36px and 68px)
+- **AND** `h2` SHALL use `--fs-h2` (clamped between 28px and 46px)
+- **AND** `h3` SHALL use `--fs-h3` (20px)
+
+#### Scenario: Body and utility sizes
+
+- **GIVEN** `.lead`, `.body`, `.meta`, and `.eyebrow` elements
+- **WHEN** the page renders
+- **THEN** `.lead` SHALL use 18px, `.body` SHALL use 16px, `.meta` SHALL use 13px
+- **AND** `.eyebrow` SHALL use 12px uppercase monospace with teal color
+
+### Requirement: 8px Baseline Grid
+
+The system SHALL use an 8px baseline grid spacing system.
+
+#### Scenario: Gap tokens
+
+- **GIVEN** `core.css` is loaded
+- **WHEN** any layout spacing is applied
+- **THEN** spacing SHALL use `var(--gap-*)` tokens: `--gap-xs` (8px), `--gap-sm` (12px), `--gap-md` (20px), `--gap-lg` (32px), `--gap-xl` (56px), `--gap-2xl` (96px)
+
+### Requirement: Shared Components
+
+The system SHALL provide shared component styles via utility classes in `core.css`.
+
+#### Scenario: Button variants
+
+- **GIVEN** an element with `.btn-primary`, `.btn-secondary`, or `.btn-ghost`
+- **WHEN** the page renders
+- **THEN** `.btn-primary` SHALL render as a gradient blue button with glow effect
+- **AND** `.btn-secondary` SHALL render as an outlined button with backdrop blur
+- **AND** `.btn-ghost` SHALL render as a transparent text button
+- **AND** all buttons SHALL have hover lift, active press, and focus-visible states
+
+#### Scenario: Card components
+
+- **GIVEN** an element with `.card` or `.glass-card`
+- **WHEN** the page renders
+- **THEN** `.card` SHALL render with surface background, border, border-radius, and shadow
+- **AND** `.glass-card` SHALL render with backdrop blur and semi-transparent background
+- **AND** both SHALL have hover lift and border-color transition
+
+#### Scenario: Grid layouts
+
+- **GIVEN** elements with `.grid-2`, `.grid-3`, `.grid-4`, or `.grid-5`
+- **WHEN** the page renders
+- **THEN** child elements SHALL be arranged in responsive CSS Grid columns matching the class name
+- **AND** grids SHALL collapse to single column at mobile breakpoints
+
+#### Scenario: FAQ accordion
+
+- **GIVEN** FAQ markup with `.faq-item`, `.faq-question`, `.faq-answer`
+- **WHEN** a question is clicked
+- **THEN** the answer SHALL expand with a `grid-template-rows` transition
+- **AND** the icon SHALL rotate 45 degrees
+
+### Requirement: No Hardcoded Colors
+
+The system SHALL NOT use hardcoded hex colors in page content outside the design system.
+
+#### Scenario: Validation enforces variable usage
+
+- **GIVEN** any page HTML content outside `<style>` blocks and SVG fills
+- **WHEN** `npm run validate` is executed
+- **THEN** hardcoded hex colors SHALL be flagged as warnings

@@ -1,0 +1,23 @@
+# Explore Phase Pipeline
+# Auto-loads specs, discovers context, indexes codebase
+name: explore
+description: Research existing specs and codebase before committing to a change
+
+steps:
+  - id: load-specs
+    type: hook
+    command: pre-build
+    blocking: true
+    description: Load and validate all capability specs
+
+  - id: index-codebase
+    type: info
+    description: Index codebase structure, pages, assets, and dependencies
+
+  - id: resolve-context
+    type: info
+    description: Resolve affected specs and domains from task description
+
+  - id: capability-report
+    type: info
+    description: Generate capability report showing matching skills, agents, and MCPs

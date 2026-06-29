@@ -1,0 +1,75 @@
+[build]
+  command = "node scripts/assemble.mjs"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/features"
+  to = "/features/"
+  status = 301
+
+[[redirects]]
+  from = "/pricing"
+  to = "/pricing/"
+  status = 301
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq/"
+  status = 301
+
+[[redirects]]
+  from = "/newsletter"
+  to = "/newsletter/"
+[[redirects]]
+  from = "/blog"
+  to = "/newsletter/"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/demo-booking"
+  to = "/demo-booking/"
+  status = 301
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy/"
+  status = 301
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms/"
+  status = 301
+
+[[redirects]]
+  from = "/product-overview"
+  to = "/product-overview/"
+  status = 301
+
+[[redirects]]
+  from = "/problem-solutions"
+  to = "/problem-solutions/"
+  status = 301
+
+[[redirects]]
+  from = "/why-optiflow"
+  to = "/why-optiflow/"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000"
+    Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://plausible.io; img-src 'self' data:; connect-src 'self' https://plausible.io"

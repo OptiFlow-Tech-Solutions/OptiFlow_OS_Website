@@ -1,0 +1,26 @@
+name: audit
+description: Full compliance audit pipeline
+steps:
+  - id: pre-build
+    command: node hooks/pre-build.mjs
+    blocking: true
+  - id: assemble
+    command: node scripts/assemble.mjs
+    blocking: true
+  - id: validate
+    command: node scripts/validate.mjs
+    blocking: true
+  - id: a11y-test
+    command: npx playwright test tests/e2e/a11y.spec.js
+    blocking: true
+    continue-on-error: true
+  - id: seo-check
+    command: node scripts/validate.mjs --seo-only
+    blocking: true
+  - id: design-audit
+    command: node hooks/theme-change.mjs
+    blocking: false
+  - id: report
+    command: echo "Audit complete"
+    blocking: false
+    depends: [validate, a11y-test]

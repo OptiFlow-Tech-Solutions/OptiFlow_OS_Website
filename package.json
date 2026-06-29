@@ -1,0 +1,32 @@
+{
+  "name": "optiflow-website",
+  "version": "1.0.0",
+  "description": "OptiFlow OS Marketing Website — Business Execution OS for Indian MSMEs",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/assemble.mjs",
+    "validate": "node scripts/validate.mjs",
+    "check": "npm run lint:all && npm run validate",
+    "serve": "npx serve dist",
+    "dev": "node scripts/assemble.mjs && npx serve dist",
+    "watch": "node scripts/watch.mjs",
+    "prebuild": "node hooks/pre-build.mjs",
+    "postbuild": "node hooks/post-build.mjs",
+    "precommit": "node hooks/pre-commit.mjs",
+    "orchestrate": "node orchestrate/coordinator.mjs",
+    "validate:full": "node scripts/validate.mjs && node hooks/theme-change.mjs && node orchestrate/context-loader.mjs",
+    "pages:status": "node scripts/validate.mjs --report-only",
+    "specs:list": "node -e \"const fs=require('fs');fs.readdirSync('openspec/specs').forEach(d=>console.log('  '+d))\"",
+    "lint": "npx stylelint \"assets/css/**/*.css\" --allow-empty-input",
+    "lint:html": "npx html-validate \"dist/**/*.html\"",
+    "lint:js": "npx eslint \"scripts/**/*.mjs\" \"orchestrate/**/*.mjs\" \"hooks/**/*.mjs\"",
+    "lint:all": "npm run lint && npm run lint:html && npm run lint:js",
+    "test": "npx playwright test --config tests/e2e/playwright.config.js",
+    "test:e2e": "npm run build && npm run test",
+    "deploy": "node hooks/pre-build.mjs && npm run build && npm run validate"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1"
+  }
+}

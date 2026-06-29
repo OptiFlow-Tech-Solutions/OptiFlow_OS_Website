@@ -1,0 +1,271 @@
+{
+  "command": "explore",
+  "changeName": "dark-mode",
+  "size": "standard",
+  "branch": "main",
+  "context": {
+    "runId": "mqz9sff4-f2514e98",
+    "changeName": "dark-mode",
+    "taskDescription": "add dark mode toggle to home page",
+    "branch": "main",
+    "timestamp": "2026-06-29T13:45:09.904Z",
+    "affectedSpecs": [
+      {
+        "specName": "dark-mode",
+        "requirements": [
+          "Theme Attribute",
+          "Preference Persistence",
+          "System Preference Detection",
+          "Smooth Transition",
+          "Theme Toggle in Navigation",
+          "Theme Toggle in Footer",
+          "Component Dark Mode Rendering",
+          "Page-Specific Dark Mode Overrides"
+        ],
+        "confidence": 0.5,
+        "domains": [
+          "design",
+          "frontend",
+          "content",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "build-pipeline",
+        "requirements": [
+          "Page Assembly",
+          "Placeholder Variable Replacement",
+          "Partial Injection",
+          "Asset Copying",
+          "Validation",
+          "Validation Exit Code",
+          "Clean URLs",
+          "Development Server"
+        ],
+        "confidence": 0.4,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "accessibility",
+          "seo",
+          "content",
+          "quality",
+          "security",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "design-system",
+        "requirements": [
+          "CSS Custom Properties",
+          "Neutral-to-Brand Color Ratio",
+          "Light and Dark Themes",
+          "Typography",
+          "Type Scale",
+          "8px Baseline Grid",
+          "Shared Components",
+          "No Hardcoded Colors"
+        ],
+        "confidence": 0.3,
+        "domains": [
+          "design",
+          "frontend",
+          "accessibility",
+          "seo",
+          "content",
+          "quality",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "marketing-pages",
+        "requirements": [
+          "Page Inventory",
+          "Unique Metadata",
+          "Sticky Navigation",
+          "Shared Footer",
+          "Scroll-Reveal Animations",
+          "Page Structure"
+        ],
+        "confidence": 0.3,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "seo",
+          "content",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "shared-components",
+        "requirements": [
+          "Shared Navigation Component",
+          "Shared Footer Component",
+          "Theme Toggle",
+          "Scroll-Reveal Animation",
+          "Animated Counters",
+          "FAQ Accordion",
+          "Sticky CTA Visibility",
+          "Scroll-to-Top Button"
+        ],
+        "confidence": 0.3,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "accessibility",
+          "seo",
+          "content",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "accessibility",
+        "requirements": [
+          "WCAG 2.2 Level AA Compliance",
+          "Skip-to-Content Link",
+          "Visible Focus Indicators",
+          "Minimum Contrast Ratio",
+          "Semantic HTML Landmarks",
+          "ARIA Labels",
+          "Reduced Motion",
+          "Keyboard Navigation"
+        ],
+        "confidence": 0.2,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "accessibility",
+          "content",
+          "quality",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "seo",
+        "requirements": [
+          "Unique Title Tag",
+          "Unique Meta Description",
+          "OpenGraph Tags",
+          "Twitter Card",
+          "Single H1 Element",
+          "Clean URLs",
+          "Favicon",
+          "Canonical Page Inventory"
+        ],
+        "confidence": 0.1,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "seo",
+          "content"
+        ]
+      }
+    ],
+    "capabilities": [
+      "dark-mode",
+      "build-pipeline",
+      "design-system",
+      "marketing-pages",
+      "shared-components",
+      "accessibility",
+      "seo"
+    ],
+    "phases": "explore",
+    "tier": "standard",
+    "affectedDomains": [
+      "design",
+      "frontend",
+      "content",
+      "dark-mode",
+      "build",
+      "accessibility",
+      "seo",
+      "quality",
+      "security"
+    ]
+  },
+  "capabilities": {
+    "skills": [
+      "design-system",
+      "make-interfaces-feel-better",
+      "frontend-design-direction",
+      "frontend-patterns",
+      "frontend-a11y",
+      "article-writing",
+      "brand-voice",
+      "build-error-resolver",
+      "accessibility",
+      "seo",
+      "tdd-workflow",
+      "verification-loop",
+      "eval-harness",
+      "security-review"
+    ],
+    "agents": {
+      "primary": "frontend-design-direction",
+      "support": [
+        "tdd-guide",
+        "content-writer",
+        "build-error-resolver",
+        "a11y-architect",
+        "seo-specialist",
+        "code-reviewer",
+        "security-reviewer"
+      ]
+    },
+    "mcpServers": [
+      "magic",
+      "chrome-devtools",
+      "playwright",
+      "parallel-search",
+      "context7",
+      "cloudflare-docs"
+    ],
+    "hooks": {
+      "pre": [
+        "pre-build"
+      ],
+      "post": []
+    },
+    "commands": [
+      "/opsx:explore"
+    ]
+  },
+  "phases": [
+    "explore",
+    "propose",
+    "apply",
+    "verify",
+    "archive"
+  ],
+  "validationLevels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "qualityGates": [],
+  "pagesToRebuild": [
+    "home.html",
+    "problem-solutions.html",
+    "product-overview.html",
+    "features.html",
+    "why-optiflow.html",
+    "pricing.html",
+    "blog.html",
+    "faq.html",
+    "contact.html",
+    "demo-booking.html",
+    "privacy-policy.html",
+    "terms.html"
+  ],
+  "buildCommand": "npm run build && npm run validate"
+}

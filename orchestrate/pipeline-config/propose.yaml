@@ -1,0 +1,38 @@
+# Propose Phase Pipeline
+# Generates proposal.md, design.md, tasks.md, and delta specs
+name: propose
+description: Generate proposal artifacts with spec deltas for a change
+
+steps:
+  - id: pre-build-check
+    type: hook
+    command: pre-build
+    blocking: true
+    description: Validate project state before proposing
+
+  - id: generate-proposal
+    type: agent
+    command: planner
+    task: Generate proposal.md for the change
+    blocking: true
+    description: Create proposal document from task description
+
+  - id: generate-design
+    type: info
+    description: Create design.md with architectural decisions
+
+  - id: generate-spec-deltas
+    type: info
+    description: Create delta specs for affected capability specs
+
+  - id: generate-tasks
+    type: info
+    description: Create tasks.md with implementation checklist
+
+  - id: validate-proposal
+    type: check
+    command: node hooks/pre-build.mjs
+    blocking: true
+    continueOnError: true
+    depends: [generate-proposal, generate-design, generate-spec-deltas, generate-tasks]
+    description: Validate the complete proposal

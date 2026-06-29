@@ -1,0 +1,5 @@
+name = "optiflow-website"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-06-29"
+
+[env.production]

@@ -1,0 +1,13 @@
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": ["dist/**", "node_modules/**", "Web-Prototype/**"],
+  "rules": {
+    "color-no-hex": [true, { "severity": "warning" }],
+    "declaration-no-important": [true, { "severity": "warning" }],
+    "selector-max-id": 1,
+    "max-nesting-depth": 3,
+    "selector-class-pattern": "^[a-z][a-z0-9-]*$",
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null
+  }
+}

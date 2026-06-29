@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact OptiFlow OS — Let's Talk About Your Business Operations</title>
+  <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any" />
+  <meta name="description" content="Contact the OptiFlow OS team. Get in touch for demos, sales inquiries, support, or partnership discussions. We respond within 1 business day." />
+  <meta property="og:title" content="OptiFlow OS — Contact Us" />
+  <meta property="og:description" content="We're here to help you build better systems. Reach out for demos, support, or business consultations." />
+  <meta property="og:image" content="/assets/img/OptiFlow.Logo.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="/assets/css/core.css" />
+  <style>
+    /* ─── Hero (contact) ─── */
+    .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 8%, transparent) 0%, transparent 70%); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-content h1 { margin-bottom: 20px; }
+    .hero-content .lead { margin-bottom: 32px; }
+    .hero-cta { display: flex; gap: var(--gap-sm); flex-wrap: wrap; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 600; margin-bottom: 20px; }
+    .hero-visual { position: relative; z-index: 1; }
+    .hero-illus { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; text-align: center; min-height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 16px 48px color-mix(in oklch, var(--fg) 8%, transparent); }
+    .hero-illustration-stats { display: flex; gap: 24px; margin-top: 28px; }
+    .hil-stat { text-align: center; }
+    .hil-stat-value { font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--accent); }
+    .hil-stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    @keyframes floatContact { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .support-float { animation: floatContact 4s ease-in-out infinite; }
+
+    /* ─── Trust bar ─── */
+    .trust-bar { padding-block: 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); overflow: hidden; }
+    .trust-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); text-align: center; }
+    .trust-metric-value { font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--accent); }
+    .trust-metric-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* ─── Contact Form ─── */
+    .form-wrap { max-width: 760px; margin: 0 auto; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-md); }
+    .form-field { margin-bottom: var(--gap-md); }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--fg); }
+    .form-label .req { color: oklch(50% 0.18 25); }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: 14px 16px; font-family: var(--font-body); font-size: 15px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--fg); transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px color-mix(in oklch, var(--teal) 20%, transparent); outline: none; }
+    .form-input.error, .form-select.error { border-color: oklch(50% 0.18 25); }
+    .form-input:user-invalid, .form-select:user-invalid { border-color: oklch(50% 0.18 25); }
+    .form-input:user-valid, .form-select:user-valid { border-color: var(--green); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); opacity: 0.6; }
+    [data-theme="dark"] .form-input::placeholder, [data-theme="dark"] .form-textarea::placeholder { color: oklch(65% 0.01 240); opacity: 0.5; }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%23666' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
+    .form-textarea { min-height: 120px; resize: vertical; }
+    .form-error { font-size: 12px; color: oklch(50% 0.18 25); margin-top: 4px; display: none; }
+    .form-error.visible { display: block; }
+    .form-note { font-size: 13px; color: var(--muted); margin-top: 16px; text-align: center; }
+    .form-submit { margin-top: 28px; text-align: center; }
+    .form-success { display: none; text-align: center; padding: 48px 24px; }
+    .form-success.visible { display: block; }
+    .form-success .success-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--green-soft); display: grid; place-items: center; margin: 0 auto 20px; color: var(--green); }
+    .form-success .success-icon svg { width: 32px; height: 32px; }
+    .form-success h3 { margin-bottom: 8px; }
+    .form-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--green-soft); color: var(--green); margin-top: 16px; }
+    .form-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulseDot 1.5s ease-in-out infinite; }
+    @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* ─── Contact Channels ─── */
+    .contact-chan { display: flex; align-items: flex-start; gap: 16px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); transition: opacity 0.25s, transform 0.25s; }
+    .contact-chan:hover { border-color: var(--teal); box-shadow: 0 8px 24px color-mix(in oklch, var(--fg) 4%, transparent); }
+    .contact-chan-icon { width: 44px; height: 44px; display: grid; place-items: center; background: var(--accent-soft); border-radius: var(--radius); color: var(--accent); flex-shrink: 0; }
+    .contact-chan-icon svg { width: 20px; height: 20px; }
+    .contact-chan h3 { font-size: 16px; margin-bottom: 4px; }
+    .contact-chan .chan-detail { font-size: 14px; color: var(--muted); }
+    .contact-chan .chan-action { font-size: 13px; color: var(--teal); font-weight: 600; margin-top: 8px; display: inline-block; }
+
+    /* ─── Office Card ─── */
+    .office-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; max-width: 540px; margin: 0 auto; text-align: center; }
+    .office-card h3 { margin-bottom: 16px; }
+    .office-detail { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 12px; font-size: 14px; color: var(--muted); }
+    .office-detail svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
+    .office-hours { display: inline-block; padding: 8px 16px; border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: 13px; font-weight: 600; margin-top: 12px; }
+
+    /* ─── Response Cards ─── */
+    .response-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); }
+    .response-card { padding: 24px; text-align: center; }
+    .response-time { font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--teal); margin-top: 12px; }
+
+    /* ─── Dark mode overrides ─── */
+    [data-theme="dark"] .dash-kpi { background: color-mix(in oklch, var(--fg) 4%, transparent); }
+    [data-theme="dark"] .contact-chan { background: color-mix(in oklch, var(--fg) 4%, transparent); border-color: var(--border); }
+    [data-theme="dark"] .contact-chan:hover { border-color: var(--teal); }
+    [data-theme="dark"] .form-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px color-mix(in oklch, var(--teal) 25%, transparent); }
+    [data-theme="dark"] .response-card { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .office-card { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .form-note { color: color-mix(in oklch, var(--fg) 45%, transparent); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 40px; }
+      .response-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero { padding-top: calc(var(--nav-h) + 24px); }
+      .hero-content .lead { font-size: 16px; margin-bottom: 24px; }
+      .hero-cta { flex-direction: column; }
+      .response-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+      .hero-illustration-stats { flex-direction: column; gap: 12px; }
+      .office-card { padding: 28px; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding-top: calc(var(--nav-h) + 16px); }
+      .response-grid { grid-template-columns: 1fr; }
+      .trust-metrics { grid-template-columns: repeat(2, 1fr); gap: var(--gap-md); }
+      .trust-metric-value { font-size: 28px; }
+      .office-card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#content" class="skip-link">Skip to content</a>
+  <!-- INCLUDE: nav -->
+
+  <main id="content" role="main" >
+
+    <!-- SECTION 01: HERO -->
+    <section class="section hero">
+      <div class="container" style="position:relative;z-index:1">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge reveal">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              LET'S TALK ABOUT YOUR BUSINESS
+            </div>
+            <h1 class="reveal reveal-delay-1">We're Here To Help You Build Better Systems</h1>
+            <p class="lead reveal reveal-delay-2">Whether you're exploring OptiFlow, evaluating solutions for your MSME, or looking for support, our team is ready to help. No sales pitch — just a real conversation about your business operations.</p>
+            <div class="hero-cta reveal reveal-delay-3">
+              <a href="#contact-form" class="btn btn-primary btn-lg btn-glow">Contact Our Team</a>
+              <a href="/demo-booking/" class="btn btn-secondary btn-lg">Book Free Demo</a>
+            </div>
+          </div>
+          <div class="hero-visual reveal reveal-delay-2">
+            <div class="hero-illus support-float">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" stroke="#1B4D81" stroke-width="2"/><circle cx="40" cy="40" r="32" fill="color-mix(in oklch, var(--accent) 10%, transparent)"/><path d="M40 20 C28 20 20 28 20 40 C20 52 28 60 40 60 C46 60 52 57 56 52 L68 64 L62 52 C66 48 68 44 68 40 C68 28 60 20 40 20Z" fill="#1B4D81"/></svg>
+              <h3 style="margin-top:20px;font-size:20px">Your Business Transformation Starts Here</h3>
+              <p style="color:var(--muted);font-size:15px;max-width:360px">A real conversation about your operations, challenges, and how OptiFlow can help.</p>
+              <div class="hero-illustration-stats">
+                <div class="hil-stat"><div class="hil-stat-value">4hrs</div><div class="hil-stat-label">Avg Response Time</div></div>
+                <div class="hil-stat"><div class="hil-stat-value">500+</div><div class="hil-stat-label">Businesses Served</div></div>
+                <div class="hil-stat"><div class="hil-stat-value">7</div><div class="hil-stat-label">Industries</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 02: CONTACT FORM -->
+    <section class="section" id="contact-form">
+      <div class="container">
+        <div class="section-header reveal">
+
+          <h2>Tell Us About Your Business</h2>
+          <p class="lead">Fill in the details below and we'll connect you with the right expert — typically within one business day.</p>
+        </div>
+        <div class="form-wrap">
+          <div class="glass-card reveal" id="formCard">
+            <form id="contactForm" novalidate>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="name">Full Name <span class="req">*</span></label>
+                  <input type="text" id="name" class="form-input" placeholder="Your full name" required />
+                  <span class="form-error" data-error="name">Please enter your name</span>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="company">Company Name <span class="req">*</span></label>
+                  <input type="text" id="company" class="form-input" placeholder="Your company name" required />
+                  <span class="form-error" data-error="company">Please enter your company name</span>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="phone">Mobile Number <span class="req">*</span></label>
+                  <input type="tel" id="phone" class="form-input" placeholder="+91 00000 00000" required />
+                  <span class="form-error" data-error="phone">Please enter a valid mobile number</span>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="email">Email Address <span class="req">*</span></label>
+                  <input type="email" id="email" class="form-input" placeholder="you@company.com" required />
+                  <span class="form-error" data-error="email">Please enter a valid email address</span>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="teamsize">Team Size</label>
+                  <select id="teamsize" class="form-select">
+                    <option value="">Select team size</option>
+                    <option>1 — 10</option>
+                    <option>11 — 25</option>
+                    <option>26 — 50</option>
+                    <option>51 — 100</option>
+                    <option>101 — 250</option>
+                    <option>250+</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="industry">Industry</label>
+                  <select id="industry" class="form-select">
+                    <option value="">Select your industry</option>
+                    <option>Textile</option>
+                    <option>Manufacturing</option>
+                    <option>Trading</option>
+                    <option>Warehousing</option>
+                    <option>Distribution</option>
+                    <option>Logistics</option>
+                    <option>Service</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="form-field full">
+                  <label class="form-label" for="challenges">Current Operational Challenges</label>
+                  <textarea id="challenges" class="form-textarea" placeholder="Tell us about your current operations — what's working, what's not, and what you'd like to improve. This helps us prepare a relevant demo for you."></textarea>
+                </div>
+              </div>
+              <div class="form-submit">
+                <button type="submit" class="btn btn-primary btn-lg btn-glow">Send Enquiry</button>
+                <p class="form-note">We'll get back to you within one business day. No spam, no pressure.</p>
+              </div>
+            </form>
+            <div class="form-success" id="formSuccess">
+              <div class="success-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <h3>Thank you for reaching out!</h3>
+              <p style="color:var(--muted);font-size:15px;max-width:400px;margin:0 auto">Our team will review your enquiry and get back to you within one business day. We look forward to helping you build better systems.</p>
+              <div class="form-badge"><span class="dot"></span> Expect a response within 24 hours</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03: SALES CONTACT -->
+    <section class="section" style="background:var(--surface)">
+      <div class="container">
+        <div class="section-header reveal">
+
+          <h2>Talk To Our Product Specialists</h2>
+          <p class="lead">Need help evaluating OptiFlow? Reach our team directly through any of these channels.</p>
+        </div>
+        <div class="grid-3 stagger-3" style="max-width:900px;margin:0 auto">
+          <div class="contact-chan reveal">
+            <div class="contact-chan-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <h3>Call Us</h3>
+              <p class="chan-detail">{{PHONE}}<br/>Mon — Sat, 10 AM — 7 PM IST</p>
+              <span class="chan-action">Call Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
+            </div>
+          </div>
+          <div class="contact-chan reveal">
+            <div class="contact-chan-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <h3>Email Us</h3>
+              <p class="chan-detail">{{EMAIL}}<br/>Response within 4—8 business hours</p>
+              <span class="chan-action">Send Email <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
+            </div>
+          </div>
+          <div class="contact-chan reveal">
+            <div class="contact-chan-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </div>
+            <div>
+              <h3>WhatsApp</h3>
+              <p class="chan-detail">{{PHONE}}<br/>Quick questions & demo scheduling</p>
+              <span class="chan-action">Chat on WhatsApp <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: SUPPORT CONTACT -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+
+          <h2>Need Help? We're Ready</h2>
+          <p class="lead">Whether it's a technical question, training request, or platform guidance — our support team is here.</p>
+        </div>
+        <div class="grid-3 stagger-3" style="max-width:900px;margin:0 auto">
+          <div class="contact-chan reveal">
+            <div class="contact-chan-icon" style="background:var(--teal-soft);color:var(--teal)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div>
+              <h3>Support Email</h3>
+              <p class="chan-detail">support@optiflow.in<br/>Response within 4—8 hours</p>
+              <span class="chan-action">Email Support <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
+            </div>
+          </div>
+          <div class="contact-chan reveal">
+            <div class="contact-chan-icon" style="background:var(--teal-soft);color:var(--teal)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <h3>Helpdesk Portal</h3>
+              <p class="chan-detail">Track issues, view status<br/>Log in from your dashboard</p>
+              <span class="chan-action">Open Helpdesk <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
+            </div>
+          </div>
+          <div class="contact-chan reveal">
+            <div class="contact-chan-icon" style="background:var(--teal-soft);color:var(--teal)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <div>
+              <h3>Knowledge Base</h3>
+              <p class="chan-detail">Guides, tutorials, FAQs<br/>Self-serve resources 24/7</p>
+              <span class="chan-action">Browse Articles <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: OFFICE INFO -->
+    <section class="section" style="background:var(--surface)">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">Visit Or Reach Us</p>
+          <h2>Our Office</h2>
+          <p class="lead">We're based in Ahmedabad, serving MSMEs across India.</p>
+        </div>
+        <div class="office-card reveal">
+          <h3>OptiFlow OS — Head Office</h3>
+          <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Ahmedabad, Gujarat, India</div>
+          <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> {{PHONE}}</div>
+          <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> {{EMAIL}}</div>
+          <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Mon — Sat, 10 AM — 7 PM IST</div>
+          <div class="office-hours">Open for business</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: RESPONSE TIME PROMISE -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+
+          <h2>We Respect Your Time</h2>
+          <p class="lead">Every enquiry matters. Here's our commitment to you.</p>
+        </div>
+        <div class="response-grid stagger-4">
+          <div class="response-card card reveal">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h3 style="margin-top:16px;font-size:16px">Sales Enquiries</h3>
+            <div class="response-time">Within 1 Business Day</div>
+            <p style="font-size:13px;color:var(--muted);margin-top:6px">Product demos, pricing, evaluation guidance</p>
+          </div>
+          <div class="response-card card reveal">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h3 style="margin-top:16px;font-size:16px">Support Requests</h3>
+            <div class="response-time">Within 4—8 Business Hours</div>
+            <p style="font-size:13px;color:var(--muted);margin-top:6px">Technical issues, training, platform help</p>
+          </div>
+          <div class="response-card card reveal">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="oklch(50% 0.18 25)" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h3 style="margin-top:16px;font-size:16px">Critical Issues</h3>
+            <div class="response-time">Priority Escalation</div>
+            <p style="font-size:13px;color:var(--muted);margin-top:6px">System-down or blocker issues raised immediately</p>
+          </div>
+          <div class="response-card card reveal">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <h3 style="margin-top:16px;font-size:16px">Demo Requests</h3>
+            <div class="response-time">Fast Scheduling</div>
+            <p style="font-size:13px;color:var(--muted);margin-top:6px">Live demo scheduled at your convenience</p></div>
+      </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <section class="trust-bar">
+      <div class="container">
+        <div class="trust-metrics">
+          <div class="reveal"><div class="trust-metric-value num" data-count="500">0</div><div class="trust-metric-label">Businesses Served</div></div>
+          <div class="reveal reveal-delay-1"><div class="trust-metric-value num" data-count="10000">0</div><div class="trust-metric-label">Active Users</div></div>
+          <div class="reveal reveal-delay-2"><div class="trust-metric-value num" data-count="250000">0</div><div class="trust-metric-label">Tasks Managed</div></div>
+          <div class="reveal reveal-delay-3"><div class="trust-metric-value num" data-count="1200">0</div><div class="trust-metric-label">Departments Managed</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 07: FAQ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+
+          <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal">
+            <button class="faq-question">How quickly will someone contact me? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            <div class="faq-answer"><p>Sales enquiries receive a response within one business day. Support requests are handled within 4—8 business hours. Critical issues are escalated immediately. We take response times seriously — most enquiries receive a reply the same day.</p></div>
+          <div class="faq-item reveal">
+            <button class="faq-question">Can I schedule a demo directly? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            <div class="faq-answer"><p>Yes. You can use our <a href="/demo-booking/" style="color:var(--teal);text-decoration:underline">Demo Booking page</a> to schedule a personalized demo at your convenience. Alternatively, contact us through any channel above and we'll arrange one.</p></div>
+          <div class="faq-item reveal">
+            <button class="faq-question">Do you support businesses outside my industry? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            <div class="faq-answer"><p>OptiFlow is purpose-built for operational businesses — textile, manufacturing, trading, warehousing, distribution, logistics, and service companies. If your business manages teams, tasks, and processes, OptiFlow can help. Contact us and we'll assess fit during the discovery call.</p></div>
+          <div class="faq-item reveal">
+            <button class="faq-question">Do you offer implementation services? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            <div class="faq-answer"><p>Yes. Every OptiFlow plan includes guided onboarding: data migration, team training, and workflow configuration. Our implementation specialists ensure your team is productive from Day 1. Most businesses are fully operational within 5—10 working days.</p></div>
+          <div class="faq-item reveal">
+            <button class="faq-question">Can my team join the discussions? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            <div class="faq-answer"><p>Absolutely. We encourage operations managers, HR heads, factory managers, and team leaders to join demo calls and evaluation discussions. The more context we get from your team, the better we can tailor the conversation to your specific operational challenges.</p></div>
+          <div class="faq-item reveal">
+            <button class="faq-question">What happens after I submit the enquiry form? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            <div class="faq-answer"><p>Our team reviews your enquiry and matches you with the right product specialist based on your industry and team size. You'll receive a call or email within one business day to understand your needs better and schedule a personalized demo if it makes sense. No pressure, no spam — just a real conversation.</p></div>
+          <div class="faq-item reveal">
+            <button class="faq-question">Do you provide support after we go live? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+            <div class="faq-answer"><p>Yes. Every plan includes ongoing support. Post-go-live, you get priority chat and phone support, regular check-ins during the first 30 days, and access to our knowledge base. We don't consider deployment complete until your team is comfortable using the platform independently. Dedicated success managers are available for Scale plan customers.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 08: FINAL CTA -->
+    <section class="section cta-section">
+      <div class="container" style="max-width:640px;position:relative;z-index:1">
+        <h2 class="reveal">Let's Build A More Accountable And Scalable Business Together</h2>
+        <p class="lead reveal reveal-delay-1">Whether you're exploring solutions, evaluating operations, or looking for support, we're ready to help. One conversation could transform how your business runs.</p>
+        <div class="hero-cta reveal reveal-delay-2" style="justify-content:center">
+          <a href="#contact-form" class="btn btn-primary btn-lg">Contact Our Team</a>
+          <a href="/demo-booking/" class="btn btn-secondary btn-lg">Book Free Demo</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INCLUDE: footer -->
+
+  <script src="/assets/js/core.js" defer></script>
+
+  <script>
+    (function() {
+      var form = document.getElementById('contactForm');
+      var formCard = document.getElementById('formCard');
+      var formSuccess = document.getElementById('formSuccess');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var valid = true;
+        ['name', 'company', 'phone', 'email'].forEach(function(id) {
+          var input = document.getElementById(id);
+          var err = document.querySelector('[data-error="' + id + '"]');
+          if (!input.value.trim()) {
+            input.classList.add('error');
+            if (err) err.classList.add('visible');
+            valid = false;
+          } else {
+            input.classList.remove('error');
+            if (err) err.classList.remove('visible');
+          }
+        });
+        var email = document.getElementById('email');
+        var emailErr = document.querySelector('[data-error="email"]');
+        if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          email.classList.add('error');
+          if (emailErr) { emailErr.textContent = 'Please enter a valid email'; emailErr.classList.add('visible'); }
+          valid = false;
+        }
+        var phone = document.getElementById('phone');
+        var phoneErr = document.querySelector('[data-error="phone"]');
+        if (phone.value.trim() && !/^\+?\d{7,15}$/.test(phone.value.trim().replace(/[\s-]/g, ''))) {
+          phone.classList.add('error');
+          if (phoneErr) { phoneErr.textContent = 'Please enter a valid mobile number'; phoneErr.classList.add('visible'); }
+          valid = false;
+        }
+        if (valid) {
+          form.style.display = 'none';
+          formSuccess.classList.add('visible');
+          formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

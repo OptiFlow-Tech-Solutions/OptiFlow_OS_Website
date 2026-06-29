@@ -1,0 +1,40 @@
+# Archive Phase Pipeline
+# Syncs delta specs to main, generates traceability, updates docs
+name: archive
+description: Archive a completed change, sync specs, generate traceability matrix
+
+steps:
+  - id: pre-commit-check
+    type: hook
+    command: pre-commit
+    blocking: true
+    description: Pre-commit validation
+
+  - id: sync-specs
+    type: agent
+    command: doc-updater
+    task: Sync delta specs to main spec files
+    blocking: true
+    description: Merge delta specs into capability specs
+
+  - id: update-docs
+    type: info
+    depends: [sync-specs]
+    description: Update affected documentation
+
+  - id: generate-changelog
+    type: info
+    depends: [sync-specs]
+    description: Generate changelog entry from deltas
+
+  - id: generate-trace
+    type: info
+    depends: [sync-specs]
+    description: Generate full traceability matrix
+
+  - id: final-build
+    type: command
+    command: node scripts/assemble.mjs
+    blocking: true
+    depends: [sync-specs]
+    description: Final build after spec sync

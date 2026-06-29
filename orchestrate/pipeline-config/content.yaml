@@ -1,0 +1,27 @@
+name: content
+description: Newsletter content creation pipeline
+steps:
+  - id: plan
+    command: echo "Plan newsletter topic and audience"
+    blocking: true
+  - id: research
+    command: echo "Research topic using research-ops skill"
+    blocking: false
+  - id: draft
+    command: echo "Draft article using article-writing skill"
+    blocking: true
+    depends: [research]
+  - id: review
+    command: echo "Review for brand voice and SEO"
+    blocking: true
+  - id: publish
+    command: node scripts/assemble.mjs
+    blocking: true
+    depends: [draft, review]
+  - id: validate
+    command: node scripts/validate.mjs
+    blocking: true
+  - id: distribute
+    command: echo "Distribute via content-engine skill"
+    blocking: false
+    depends: [publish]

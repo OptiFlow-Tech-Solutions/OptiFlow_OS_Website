@@ -1,0 +1,65 @@
+# Verify Phase Pipeline
+# L1-L7 validation, quality gates, and spec compliance check
+name: verify
+description: Verify implementation matches spec deltas and meets quality standards
+
+steps:
+  - id: pre-build
+    type: hook
+    command: pre-build
+    blocking: true
+    description: Pre-build validation
+
+  - id: build
+    type: command
+    command: node scripts/assemble.mjs
+    blocking: true
+    description: Build the project
+
+  - id: validate
+    type: command
+    command: node scripts/validate.mjs
+    blocking: true
+    depends: [build]
+    description: Full validation
+
+  - id: a11y-check
+    type: command
+    command: npx playwright test tests/e2e/a11y.spec.js
+    blocking: false
+    continueOnError: true
+    depends: [build]
+    description: Accessibility audit
+
+  - id: seo-check
+    type: command
+    command: npx playwright test tests/e2e/seo.spec.js
+    blocking: false
+    continueOnError: true
+    depends: [build]
+    description: SEO audit
+
+  - id: responsive-check
+    type: command
+    command: npx playwright test tests/e2e/responsive.spec.js
+    blocking: false
+    continueOnError: true
+    depends: [build]
+    description: Responsive design check
+
+  - id: theme-audit
+    type: hook
+    command: theme-change
+    blocking: false
+    depends: [build]
+    description: Theme consistency audit
+
+  - id: brand-check
+    type: info
+    depends: [build, validate, a11y-check, seo-check]
+    description: Brand compliance verification
+
+  - id: generate-trace
+    type: info
+    depends: [validate]
+    description: Generate traceability report

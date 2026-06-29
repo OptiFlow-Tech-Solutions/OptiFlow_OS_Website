@@ -1,0 +1,10 @@
+{
+  "extends": ["html-validate:standard"],
+  "rules": {
+    "no-inline-style": "off",
+    "prefer-button": "off",
+    "no-dup-id": "error",
+    "element-case": "off",
+    "attribute-allowed-values": "off"
+  }
+}
