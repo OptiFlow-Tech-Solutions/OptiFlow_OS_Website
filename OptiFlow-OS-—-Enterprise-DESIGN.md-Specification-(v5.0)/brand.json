@@ -1,0 +1,217 @@
+{
+  "name": "OptiFlow OS — Enterprise DESIGN.md Specification (v5.0)",
+  "tagline": "Business Execution Operating System for Indian MSMEs",
+  "description": "OptiFlow OS is a premium Business Execution Operating System built for Indian MSMEs to simplify daily operations, improve accountability, and enable structured business growth. The brand represents clarity, trust, operational excellence, and continuous improvement, helping businesses replace manual coordination, scattered communication, and spreadsheet-driven management with a single, intelligent execution platform.\n\nThe visual identity is inspired by the OptiFlow logo, symbolizing continuous workflow, execution, visibility, and growth through its circular motion and blue–teal–green color palette. The overall experience should feel professional, modern, calm, and executive, emphasizing simplicity over complexity and confidence over decoration.\n\nEvery interaction should communicate reliability, structure, and enterprise quality. The interface must remain clean, spacious, and purposeful, using neutral surfaces as the foundation while applying brand colors strategically to highlight actions, insights, and progress. Motion should be subtle and meaningful, supporting usability rather than attracting attention.\n\nOptiFlow OS is not designed to feel like a trendy startup product or an overly technical enterprise application. Instead, it combines the simplicity of modern SaaS with the maturity, consistency, and trust expected from world-class business software.",
+  "sourceUrl": "designmd://optiflow-os-enterprise-design-md-specification-v",
+  "logo": {
+    "primary": "logos/OptiFlow.Logo.png",
+    "alternates": [],
+    "notes": "No logo supplied in pasted DESIGN.md. Logo mark should be placed in top navigation; its circular blue-teal-green geometry should inspire abstract background patterns and decorative elements."
+  },
+  "colors": [
+    {
+      "role": "background",
+      "hex": "#f8fafc",
+      "oklch": "oklch(98.56% 0.003 247)",
+      "name": "Slate 50",
+      "usage": "page canvas — used for the main page background, never for cards or elevated surfaces"
+    },
+    {
+      "role": "foreground",
+      "hex": "#0f172a",
+      "oklch": "oklch(20.78% 0.039 265)",
+      "name": "Slate 900",
+      "usage": "body text, headings, and high-contrast UI elements"
+    },
+    {
+      "role": "accent",
+      "hex": "#1b4d81",
+      "oklch": "oklch(37.5% 0.095 262)",
+      "name": "Primary Blue",
+      "usage": "primary actions, CTAs, navigation active state, hero highlights, links, dashboard highlights, important metrics. Use sparingly — max 12% of interface."
+    },
+    {
+      "role": "accent-secondary",
+      "hex": "#278d9f",
+      "oklch": "oklch(55% 0.09 210)",
+      "name": "Secondary Teal",
+      "usage": "icons, feature cards, analytics, graph lines, hover borders, decorative gradients"
+    },
+    {
+      "role": "surface",
+      "hex": "#ffffff",
+      "oklch": "oklch(100% 0 0)",
+      "name": "White",
+      "usage": "cards, panels, modals, sidebar, elevated surfaces, input backgrounds"
+    },
+    {
+      "role": "muted",
+      "hex": "#64748b",
+      "oklch": "oklch(55% 0.02 265)",
+      "name": "Slate 500",
+      "usage": "secondary text, metadata, placeholder text, disabled labels"
+    },
+    {
+      "role": "border",
+      "hex": "#e2e8f0",
+      "oklch": "oklch(75% 0.01 260)",
+      "name": "Slate 200",
+      "usage": "default borders, dividers, card outlines, table cell borders"
+    }
+  ],
+  "typography": {
+    "display": {
+      "family": "Inter",
+      "fallbacks": [
+        "system-ui",
+        "-apple-system",
+        "Segoe UI",
+        "Helvetica Neue",
+        "Arial",
+        "sans-serif"
+      ],
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "body": {
+      "family": "Inter",
+      "fallbacks": [
+        "system-ui",
+        "-apple-system",
+        "Segoe UI",
+        "Helvetica Neue",
+        "Arial",
+        "sans-serif"
+      ],
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "fallbacks": [
+        "SFMono-Regular",
+        "Consolas",
+        "Liberation Mono",
+        "Menlo",
+        "Courier",
+        "monospace"
+      ],
+      "weights": [
+        400,
+        500,
+        600
+      ]
+    }
+  },
+  "voice": {
+    "adjectives": [
+      "Professional",
+      "Premium",
+      "Executive",
+      "Modern",
+      "Clean",
+      "Minimal",
+      "Confident",
+      "Human",
+      "Practical",
+      "Trustworthy",
+      "Intelligent",
+      "Calm",
+      "Purposeful"
+    ],
+    "tone": "Clear, professional, executive, helpful, direct. Use simple English. Replace buzzwords with precise claims. Confidence without arrogance. Every page should communicate trust, structure, and operational excellence.",
+    "messagingPillars": [
+      "From chaos to clarity — Replace WhatsApp + Excel sprawl with a single operating system for MSMEs",
+      "Built for MSMEs — Easy adoption, fast deployment, high visibility, better accountability",
+      "Process-driven operations — Move from people-dependent to process-driven execution",
+      "Enterprise quality, Indian context — Premium enterprise SaaS tailored for Indian businesses"
+    ],
+    "vocabulary": {
+      "use": [
+        "Operating System",
+        "Platform",
+        "Workspace",
+        "Tasks",
+        "Teams",
+        "SOPs",
+        "Attendance",
+        "Reports",
+        "Accountability",
+        "Visibility",
+        "Control",
+        "Indian MSMEs",
+        "Business Owners",
+        "Execution",
+        "Process-driven",
+        "Structured",
+        "Scalable"
+      ],
+      "avoid": [
+        "Buzzwords (synergy, disrupt, pivot)",
+        "Marketing hype",
+        "Fear tactics",
+        "Over-promising",
+        "Complex technical jargon",
+        "Overly playful language",
+        "Visual noise",
+        "Generic SMB language",
+        "Cartoon imagery",
+        "Stock clichés"
+      ]
+    }
+  },
+  "imagery": {
+    "style": "Clean, professional, data-driven, enterprise. Dashboard mockups, analytics screens, workflow diagrams, process graphics, clean SVG illustrations, product visualizations.",
+    "subjects": [
+      "Dashboard mockups with real KPI data",
+      "Analytics screens with charts and graphs",
+      "Workflow diagrams showing process automation",
+      "Process graphics illustrating operational flow",
+      "Product visualizations of the OptiFlow interface"
+    ],
+    "treatment": "Flat or softly elevated illustrations. Use brand blue-teal-green palette for accents. Clean lines, generous whitespace, professional photography only when showing real business context.",
+    "avoid": [
+      "Generic stock photography",
+      "Cartoon illustrations or characters",
+      "Clipart of any kind",
+      "Random 3D characters",
+      "Busy or noisy backgrounds",
+      "Non-Indian cultural contexts",
+      "Hand-drawn SVG humans / faces / scenery"
+    ]
+  },
+  "layout": {
+    "radius": "8px (default), 14px (buttons and inputs), 20px (cards), 24px (dialogs), 999px (badges)",
+    "borderWeight": "1px",
+    "spacing": "8px baseline grid. Max container 1320px. Section spacing 120px. Block spacing 80px. Component spacing 40px. Card padding 24px. Small spacing 16px.",
+    "postureRules": [
+      "Generous whitespace is a feature — never crowd sections, always let content breathe",
+      "88% neutral colors / 12% brand colors ratio — reserve brand colors for emphasis, actions, and identity",
+      "Alternate surface and background colors to delineate sections",
+      "Equal-height cards enforced via flex/grid",
+      "Sticky 80px navigation, glass effect, transparent on hero then solid on scroll",
+      "Two-column 50/50 or 60/40 split for hero and feature sections",
+      "Premium shadows: XS 0 1px 2px rgba(15,23,42,0.04), SM 0 4px 10px rgba(15,23,42,0.06), MD 0 10px 30px rgba(15,23,42,0.08), LG 0 20px 50px rgba(15,23,42,0.10)",
+      "Gradients: hero uses Blue→Teal→Green, CTA uses Dark Blue→Primary Blue→Teal, glow uses Accent Green radial at 18% opacity",
+      "Motion: hover 200ms, reveal 350ms, page 500ms, easing cubic-bezier(0.4,0,0.2,1)",
+      "Buttons: primary = #1B4D81 + white text + soft glow + hover lift; secondary = outline + blue border + white bg; ghost = transparent",
+      "Cards: equal height, soft border, premium shadow, hover lift",
+      "Forms: floating labels, inline validation, blue focus ring",
+      "Tables: sticky header, soft zebra rows",
+      "Charts: animated, minimal, dashboard style",
+      "Buttons: ripple + shine sweep animation on hover",
+      "Sections: fade up + stagger reveal on scroll",
+      "WCAG AA minimum: keyboard navigation, visible focus states, semantic HTML, sufficient contrast, accessible forms",
+      "Responsive: mobile, tablet, laptop, desktop, ultra-wide — no layout shifts, no horizontal scrolling",
+      "Icons: 24px, rounded, 2px stroke, single consistent outline family"
+    ]
+  }
+}

@@ -1,0 +1,1239 @@
+﻿<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OptiFlow OS — Product Overview</title>
+  <link rel="icon" href="mqrk6wlm-OptiFlow.Logo.png" sizes="any" />
+  <meta name="description" content="OptiFlow OS is a complete Business Operating System — Task Management, Attendance, SOPs, Workflows, Reporting, and Analytics built for Indian MSMEs." />
+  <meta property="og:title" content="OptiFlow OS — Product Overview" />
+  <meta property="og:description" content="One platform to run your entire business. Explore all OptiFlow OS modules — from task management to executive reporting." />
+  <meta property="og:image" content="mqrk6wlm-OptiFlow.Logo.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <style>
+    :root {
+      --bg: oklch(97.5% 0.005 240);
+      --surface: oklch(100% 0 0);
+      --fg: oklch(15% 0.02 250);
+      --muted: oklch(50% 0.018 250);
+      --border: oklch(92% 0.006 240);
+      --accent: oklch(33% 0.09 255);
+      --teal: oklch(55% 0.10 210);
+      --green: oklch(72% 0.12 145);
+      --lime: oklch(82% 0.14 125);
+      --fg-soft: color-mix(in oklch, var(--fg) 5%, transparent);
+      --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+      --font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+      --fs-h1: clamp(36px, 5.5vw, 68px);
+      --fs-h2: clamp(28px, 3.8vw, 46px);
+      --fs-h3: 20px;
+      --fs-lead: 18px;
+      --fs-body: 16px;
+      --fs-meta: 13px;
+      --gap-xs: 8px; --gap-sm: 12px; --gap-md: 20px; --gap-lg: 32px; --gap-xl: 56px; --gap-2xl: 96px;
+      --container: 1200px; --gutter: 32px;
+      --radius: 10px; --radius-lg: 16px; --radius-xl: 24px;
+      --nav-h: 80px;
+      --shadow-card: 0 1px 3px rgba(15,23,42,.04), 0 4px 12px rgba(15,23,42,.06), 0 10px 24px rgba(15,23,42,.07);
+      --shadow-card-hover: 0 1px 3px rgba(15,23,42,.06), 0 8px 18px rgba(15,23,42,.08), 0 18px 42px rgba(15,23,42,.10);
+      --shadow-elevated: 0 2px 6px rgba(15,23,42,.05), 0 8px 20px rgba(15,23,42,.08), 0 20px 48px rgba(15,23,42,.10);
+      --shadow-button: 0 1px 3px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.10);
+      --shadow-button-hover: 0 2px 6px rgba(15,23,42,.10), 0 8px 20px rgba(15,23,42,.14), 0 16px 36px rgba(15,23,42,.12);
+      --shadow-inset: inset 0 1px 4px rgba(15,23,42,.10), inset 0 -1px 1px rgba(255,255,255,.40);
+    }
+    [data-theme="dark"] {
+      --bg: oklch(15% 0.02 250);
+      --surface: oklch(20% 0.018 250);
+      --fg: oklch(95% 0.005 240);
+      --muted: oklch(68% 0.012 240);
+      --border: oklch(27% 0.012 250);
+      --accent: oklch(68% 0.12 210);
+      --teal: oklch(58% 0.10 210);
+      --green: oklch(72% 0.12 145);
+      --lime: oklch(80% 0.14 125);
+      --fg-soft: color-mix(in oklch, var(--fg) 8%, transparent);
+      --shadow-card: 0 1px 3px rgba(0,0,0,.20), 0 4px 12px rgba(0,0,0,.25), 0 10px 24px rgba(0,0,0,.30);
+      --shadow-card-hover: 0 1px 3px rgba(0,0,0,.25), 0 8px 18px rgba(0,0,0,.30), 0 18px 42px rgba(0,0,0,.35);
+      --shadow-elevated: 0 2px 6px rgba(0,0,0,.22), 0 8px 20px rgba(0,0,0,.28), 0 20px 48px rgba(0,0,0,.32);
+      --shadow-button: 0 1px 3px rgba(0,0,0,.20), 0 3px 8px rgba(0,0,0,.25);
+      --shadow-button-hover: 0 2px 6px rgba(0,0,0,.25), 0 8px 20px rgba(0,0,0,.32), 0 16px 36px rgba(0,0,0,.28);
+      --shadow-inset: inset 0 1px 4px rgba(0,0,0,.20), inset 0 -1px 1px rgba(255,255,255,.06);
+    }
+    [data-theme="dark"] .card { background: var(--surface); border-color: var(--border); box-shadow: var(--shadow-card), 0 0 1px rgba(255,255,255,.04); }
+    [data-theme="dark"] .card:hover { border-color: color-mix(in oklch, var(--teal) 30%, var(--border)); box-shadow: var(--shadow-card-hover), 0 0 18px rgba(39,141,159,.10); }
+    .section-header h2 { position: relative; display: inline-block; }
+    .section-header h2::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 48px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--teal)); border-radius: 2px; }
+    [data-theme="dark"] .section-header h2::after { background: linear-gradient(90deg, var(--lime), var(--teal)); }
+    [data-theme="dark"] .btn-secondary { background: var(--surface); border-color: var(--border); color: var(--fg); }
+    [data-theme="dark"] .btn-secondary:hover { border-color: var(--fg); }
+    [data-theme="dark"] .btn-ghost { color: var(--muted); }
+    [data-theme="dark"] .btn-ghost:hover { color: oklch(95% 0.002 240); }
+    [data-theme="dark"] .topnav.scrolled { background: color-mix(in oklch, var(--surface) 95%, transparent); backdrop-filter: blur(20px); border-color: var(--border); box-shadow: 0 1px 20px color-mix(in oklch, black 20%, transparent); }
+    [data-theme="dark"] .cta-section { background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--accent) 50%, var(--teal)), var(--teal)); }
+    [data-theme="dark"] .cta-section .btn-primary { background: oklch(95% 0.002 240); color: var(--accent); }
+    [data-theme="dark"] .pagefoot { background: oklch(10% 0.018 250); }
+    [data-theme="dark"] .pagefoot .logo-img { filter: brightness(0.9); }
+    [data-theme="dark"] .arch-tooltip { background: var(--surface); border-color: color-mix(in oklch, var(--teal) 20%, var(--border)); }
+    [data-theme="dark"] .workflow-step { background: var(--surface); }
+    [data-theme="dark"] .perm-badge { background: color-mix(in oklch, var(--teal) 15%, transparent); }
+    [data-theme="dark"] .report-kpi { background: var(--surface); }
+    /* -- Architecture diagram -- */
+    [data-theme="dark"] .arch-connections line { stroke: oklch(42% 0.012 250); }
+    [data-theme="dark"] .arch-node { background: var(--surface); border-color: oklch(42% 0.012 250); color: var(--fg); }
+    [data-theme="dark"] .arch-node:hover, [data-theme="dark"] .arch-node.active { border-color: var(--teal); box-shadow: 0 0 0 6px color-mix(in oklch, var(--teal) 18%, transparent); }
+    /* -- Transform stages -- */
+    [data-theme="dark"] .transform-stage { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .transform-stage.chaos { background: oklch(18% 0.04 20); border-color: oklch(35% 0.06 20); }
+    [data-theme="dark"] .transform-stage.optiflow { background: color-mix(in oklch, var(--accent) 15%, transparent); border-color: color-mix(in oklch, var(--accent) 40%, transparent); }
+    [data-theme="dark"] .transform-stage.system { background: color-mix(in oklch, var(--green) 12%, transparent); border-color: color-mix(in oklch, var(--green) 35%, transparent); }
+    /* -- Module cards -- */
+    [data-theme="dark"] .module-card { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .module-card:hover { border-color: color-mix(in oklch, var(--teal) 40%, var(--border)); }
+    [data-theme="dark"] .module-icon { background: color-mix(in oklch, var(--accent) 18%, transparent); color: var(--accent); }
+    [data-theme="dark"] .module-body h4 { color: var(--fg); }
+    [data-theme="dark"] .show-all-btn { border-color: color-mix(in oklch, var(--accent) 50%, transparent); color: var(--accent); }
+    /* -- Panel visuals -- */
+    [data-theme="dark"] .panel-visual { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .panel-visual .vis-row { border-bottom-color: var(--border); color: var(--fg); }
+    [data-theme="dark"] .panel-benefit { background: color-mix(in oklch, var(--teal) 10%, transparent); }
+    [data-theme="dark"] .panel-benefit h5 { color: var(--fg); }
+    /* -- Workflow -- */
+    [data-theme="dark"] .workflow-step { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .workflow-connector { color: oklch(45% 0.012 250); }
+    [data-theme="dark"] .workflow-step h4 { color: var(--fg); }
+    /* -- Reporting -- */
+    [data-theme="dark"] .report-item { background: color-mix(in oklch, var(--fg) 6%, transparent); }
+    [data-theme="dark"] .report-item:hover { background: color-mix(in oklch, var(--teal) 14%, transparent); }
+    /* -- Security -- */
+    [data-theme="dark"] .sec-feat { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .sec-feat h4 { color: var(--fg); }
+    [data-theme="dark"] .perm-matrix th { color: var(--accent); }
+    [data-theme="dark"] .perm-badge.none { background: color-mix(in oklch, var(--fg) 10%, transparent); color: var(--muted); }
+    /* -- Dashboard elements -- */
+    [data-theme="dark"] .dash-card { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .dash-chart { background: color-mix(in oklch, var(--fg) 6%, transparent); }
+    [data-theme="dark"] .dash-widget { background: color-mix(in oklch, var(--fg) 6%, transparent); }
+    [data-theme="dark"] .dash-widget .w-val { color: var(--fg); }
+    [data-theme="dark"] .dash-kpi-item { background: color-mix(in oklch, var(--teal) 8%, transparent); }
+    /* -- Breadcrumb -- */
+    [data-theme="dark"] .breadcrumb .current { color: var(--fg); }
+
+    /* --- Reduced Motion --- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      .reveal, .stagger > * { opacity: 1; transform: none; }
+      .cta-section { animation: none; }
+    }
+
+    .theme-toggle { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius); cursor: pointer; transition: background 0.2s; color: var(--fg); border: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+    .theme-toggle:hover { border-color: var(--fg); }
+    .theme-toggle svg { width: 18px; height: 18px; }
+    .theme-toggle .icon-sun { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+    [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+    body { transition: background 0.3s ease, color 0.3s ease; }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%;  background: var(--bg); scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.6; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: 0; background: none; }
+    p, h1, h2, h3 { margin: 0; text-wrap: pretty; }
+    h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1.08; letter-spacing: -0.025em; font-weight: 700; }
+    h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.02em; font-weight: 700; }
+    h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+    h1, h2, h3 { color: var(--fg); }
+    .lead { font-size: var(--fs-lead); line-height: 1.6; color: var(--muted); max-width: 60ch; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); font-weight: 500; margin: 0 0 var(--gap-md); }
+    .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .meta { font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--muted); }
+    .spaced { margin: 0; padding: 0; }
+
+    .container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+    .section { padding-block: clamp(56px, 8vw, var(--gap-2xl)); position: relative; 
+content-visibility: auto; contain-intrinsic-size: 500px }
+    .section-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+    .section-header .lead { margin: 12px auto 0; }
+
+    .skip-link { position: absolute; top: -100px; left: 0; background: var(--accent); color: #fff; padding: 8px 16px; z-index: 200; border-radius: 0 0 var(--radius) 0; font-weight: 600; }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+
+    .topnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; background: var(--bg); transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+    .topnav.scrolled { background: color-mix(in oklch, var(--surface) 96%, transparent); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px color-mix(in oklch, var(--fg) 4%, transparent); }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; max-width: var(--container); width: 100%; margin-inline: auto; padding-inline: var(--gutter); }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+    .logo-img { height: 32px; width: auto; border-radius: 6px; }
+    .nav-cta { display: flex; gap: var(--gap-sm); align-items: center; }
+    .nav-center { display: flex; align-items: center; gap: 20px; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius); font-size: 15px; font-weight: 600; transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; position: relative; overflow: hidden; }
+    .btn-primary { background: linear-gradient(135deg, #1B4D81 0%, #23708A 50%, #1B4D81 100%); background-size: 200% 200%; color: #fff; box-shadow: var(--shadow-button), 0 0 0 1px rgba(27,77,129,.25); }
+    .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%); transform: translateX(-100%); transition: transform 0.6s ease; }
+    .btn-primary:hover::after { transform: translateX(100%); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px color-mix(in oklch, var(--accent) 35%, transparent); }
+    .btn-primary:active { transform: translateY(0); box-shadow: 0 2px 6px color-mix(in oklch, var(--accent) 20%, transparent); }
+    .btn-secondary { background: var(--surface); color: var(--fg); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--fg); transform: translateY(-1px); }
+    .btn-secondary:active { background: color-mix(in oklch, var(--fg) 5%, var(--surface)); }
+    .btn-ghost { color: var(--muted); padding-inline: 12px; }
+    .btn-ghost:hover { color: var(--fg); }
+    .btn-ghost:active { opacity: 0.7; }
+    .btn-lg { padding: 16px 32px; font-size: 16px; border-radius: var(--radius-lg); }
+
+    /* --- Desktop Navigation --- */
+    .desktop-nav { display: flex; align-items: center; gap: 2px; }
+    .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; white-space: nowrap; letter-spacing: 0.01em; }
+    .nav-link:hover { color: var(--fg); background: var(--fg-soft); }
+    .nav-link.active { color: var(--accent); font-weight: 600; position: relative; }
+    .nav-link.active::after { content: ''; position: absolute; bottom: -2px; left: 12px; right: 12px; height: 2px; background: var(--accent); border-radius: 2px; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown .nav-link { cursor: default; }
+    .nav-dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 190px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 8px 30px color-mix(in oklch, var(--fg) 10%, transparent); padding: 8px; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease; z-index: 101; }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(4px); }
+    .nav-dropdown-menu a { display: block; padding: 8px 14px; border-radius: 6px; font-size: 13px; color: var(--muted); transition: color 0.15s, background 0.15s; }
+    .nav-dropdown-menu a:hover { background: var(--fg-soft); color: var(--fg); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; border-radius: 6px; cursor: pointer; z-index: 102; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--fg); border-radius: 2px; transition: opacity 0.25s, transform 0.25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-drawer { position: fixed; top: 0; right: -320px; width: 300px; height: 100vh; background: var(--surface); border-left: 1px solid var(--border); z-index: 101; padding: 24px; display: flex; flex-direction: column; gap: 4px; transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1); overflow-y: auto; box-shadow: -8px 0 30px color-mix(in oklch, var(--fg) 8%, transparent); }
+    .mobile-drawer.open { right: 0; }
+    .mobile-drawer .nav-link { font-size: 16px; padding: 12px 16px; }
+    .mobile-drawer .nav-dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: none; padding: 0 0 0 16px; background: transparent; }
+    .mobile-drawer .nav-dropdown-menu a { padding: 10px 16px; font-size: 14px; }
+    .mobile-drawer .drawer-cta { flex-direction: column; gap: var(--gap-sm); margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; }
+    .drawer-overlay { position: fixed; inset: 0; background: color-mix(in oklch, var(--fg) 30%, transparent); z-index: 100; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .drawer-overlay.active { opacity: 1; visibility: visible; }
+    .breadcrumb { padding: calc(var(--nav-h) + 20px) var(--gutter) 0; max-width: var(--container); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+    .breadcrumb a { color: var(--teal); transition: color 0.15s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb .sep { color: var(--border); user-select: none; }
+    .breadcrumb .current { color: var(--fg); font-weight: 500; }
+
+    .btn-glow { position: relative; }
+    .btn-glow::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; background: linear-gradient(135deg, var(--accent), var(--teal), var(--green), var(--teal), var(--accent)); background-size: 300% 300%; z-index: -1; opacity: 0; transition: opacity 0.4s ease; animation: glowShift 4s linear infinite; }
+    .btn-glow:hover::before { opacity: 1; }
+    @keyframes glowShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-card); transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card:hover { border-color: color-mix(in oklch, var(--teal) 30%, var(--border)); box-shadow: var(--shadow-card-hover); transform: translateY(-3px); }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-lg); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-md); }
+
+    .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 8%, transparent) 0%, transparent 70%); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-content h1 { margin-bottom: 20px; }
+    .hero-content .lead { margin-bottom: 32px; }
+    .hero-cta { display: flex; gap: var(--gap-sm); flex-wrap: wrap; margin-bottom: 40px; }
+    .hero-trust { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; }
+    .hero-trust-item { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: var(--muted); }
+    .hero-trust-item svg { flex-shrink: 0; width: 18px; height: 18px; color: var(--green); }
+
+    .hero-dashboard { position: relative; z-index: 2; }
+    .dash-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 24px; box-shadow: 0 4px 24px color-mix(in oklch, var(--fg) 8%, transparent); }
+
+    .dash-kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-sm); margin-bottom: var(--gap-md); }
+    .dash-kpi-item { text-align: center; padding: 12px 8px; border-radius: var(--radius); background: color-mix(in oklch, var(--teal) 5%, var(--bg)); }
+    .dash-kpi-val { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--accent); }
+    .dash-kpi-label { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .dash-chart { background: color-mix(in oklch, var(--fg) 3%, var(--bg)); border-radius: var(--radius); padding: 16px; margin-bottom: var(--gap-sm); }
+    .dash-chart-bar { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--teal)); margin-bottom: 12px; }
+    .dash-chart-bar.s2 { width: 78%; }
+    .dash-chart-bar.s3 { width: 63%; }
+    .dash-chart-bar.s4 { width: 89%; }
+
+    .dash-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-sm); }
+    .dash-widget { background: color-mix(in oklch, var(--fg) 3%, var(--bg)); border-radius: var(--radius); padding: 14px; }
+    .dash-widget h4 { font-size: 13px; font-weight: 500; color: var(--muted); margin: 0 0 8px; }
+    .dash-widget .w-val { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--fg); }
+
+    .dash-table { width: 100%; text-align: left; font-size: 12px; border-collapse: collapse; }
+    .dash-table th, .dash-table td { padding: 6px 8px; }
+    .dash-table th { color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--border); }
+    .dash-table td { border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent); }
+    .dash-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+    .dash-badge.done { background: color-mix(in oklch, var(--green) 15%, transparent); color: var(--green); }
+    .dash-badge.wip { background: color-mix(in oklch, var(--teal) 15%, transparent); color: var(--teal); }
+
+    .float-anim { animation: floatDash 5s ease-in-out infinite; }
+    @keyframes floatDash { 0%, 100% { transform: translateY(0) scale(1) rotate(0deg); } 50% { transform: translateY(-10px) scale(1.01) rotate(-0.5deg); } }
+
+    /* --- What Is OptiFlow --- */
+    .transform-flow { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 32px 0; }
+    .transform-stage { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; min-width: 180px; flex: 1; max-width: 260px; transition: transform 0.3s ease; }
+    .transform-stage:hover { transform: translateY(-3px); box-shadow: 0 8px 32px color-mix(in oklch, var(--fg) 5%, transparent); }
+    .transform-stage.chaos { border-color: color-mix(in oklch, red 25%, transparent); background: color-mix(in oklch, red 4%, transparent); }
+    .transform-stage.optiflow { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 6%, transparent); }
+    .transform-stage.system { border-color: var(--green); background: color-mix(in oklch, var(--green) 6%, transparent); }
+    .transform-arrow { display: flex; align-items: center; color: var(--teal); flex-shrink: 0; }
+    .transform-arrow svg { width: 32px; height: 32px; animation: arrowPulse 1.5s ease-in-out infinite; }
+    @keyframes arrowPulse { 0%, 100% { transform: translateX(0); opacity: 0.5; } 50% { transform: translateX(6px); opacity: 1; } }
+
+    .transform-tag { display: inline-flex; gap: 6px; align-items: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .transform-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--fg); opacity: 0.25; }
+
+    /* --- Platform Architecture --- */
+    .arch-diagram { position: relative; display: flex; align-items: center; justify-content: center; min-height: 420px; margin: 40px 0; }
+    .arch-hub { position: relative; z-index: 2; width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px; text-align: center; line-height: 1.2; box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 35%, transparent); animation: hubPulse 3s ease-in-out infinite; }
+    @keyframes hubPulse { 0%, 100% { box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 35%, transparent); } 50% { box-shadow: 0 8px 48px color-mix(in oklch, var(--accent) 55%, transparent); } }
+
+    .arch-connections { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+    .arch-node { position: absolute; z-index: 3; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border); background: var(--surface); display: grid; place-items: center; font-size: 14px; transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+    .arch-node:hover, .arch-node.active { border-color: var(--teal); box-shadow: 0 0 0 6px color-mix(in oklch, var(--teal) 12%, transparent); transform: scale(1.15); background: color-mix(in oklch, var(--teal) 8%, var(--surface)); }
+
+    .arch-tooltip { position: absolute; z-index: 10; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; min-width: 180px; box-shadow: 0 12px 40px color-mix(in oklch, var(--fg) 10%, transparent); opacity: 0; pointer-events: none; transition: opacity 0.2s ease; }
+    .arch-tooltip.visible { opacity: 1; }
+    .arch-tooltip .tt-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--accent); }
+    .arch-tooltip .tt-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .arch-tooltip .tt-benefit { font-size: 12px; color: var(--green); margin-top: 6px; font-weight: 500; }
+
+    /* --- Core Modules --- */
+    .module-spotlight { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-md); }
+    .module-card { display: flex; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; cursor: default; }
+    .module-card:hover { border-color: color-mix(in oklch, var(--teal) 30%, var(--border)); box-shadow: 0 8px 28px color-mix(in oklch, var(--fg) 5%, transparent); transform: translateY(-2px); }
+    .module-icon { width: 44px; height: 44px; border-radius: var(--radius); background: color-mix(in oklch, var(--accent) 10%, transparent); display: grid; place-items: center; font-size: 18px; flex-shrink: 0; color: var(--accent); }
+    .module-body { flex: 1; }
+    .module-body h4 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+    .module-body p { font-size: 13px; color: var(--muted); margin: 0 0 8px; line-height: 1.5; }
+    .module-benefit { font-size: 12px; font-weight: 500; color: var(--green); }
+
+    .module-expand-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    .module-expand-wrap.open { grid-template-rows: 1fr; }
+    .module-expand-wrap > div { overflow: hidden; }
+    .module-expand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-md); margin-top: var(--gap-md); }
+    .module-expand-grid .module-card { padding: 18px; }
+
+    .show-all-btn { display: inline-flex; align-items: center; gap: 8px; margin: 28px auto 0; padding: 12px 28px; border-radius: var(--radius); border: 1px solid var(--accent); color: var(--accent); font-weight: 600; font-size: 14px; transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; cursor: pointer; background: transparent; }
+    .show-all-btn:hover { background: var(--accent); color: #fff; }
+    .show-all-btn svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
+    .show-all-btn.open svg { transform: rotate(180deg); }
+
+    /* --- Panels: Admin / Captain / Doer --- */
+    .panel-layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-xl); align-items: center; }
+    .panel-features { display: flex; flex-direction: column; gap: var(--gap-sm); }
+    .panel-feat { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent); font-size: 14px; }
+    .panel-feat svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; }
+    .panel-visual { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 28px; box-shadow: 0 4px 24px color-mix(in oklch, var(--fg) 6%, transparent); }
+    .panel-visual h4 { font-size: 14px; font-weight: 600; margin: 0 0 16px; color: var(--accent); }
+    .panel-visual .vis-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent); font-size: 13px; }
+    .panel-visual .vis-row span:last-child { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+    .panel-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-md); margin-top: var(--gap-lg); }
+    .panel-benefit { text-align: center; padding: 16px; border-radius: var(--radius); background: color-mix(in oklch, var(--teal) 5%, transparent); }
+    .panel-benefit .pb-icon { font-size: 28px; margin-bottom: 8px; }
+    .panel-benefit h5 { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
+
+    /* --- Workflow Engine --- */
+    .workflow-flow { display: flex; align-items: flex-start; justify-content: center; gap: 12px; margin: 40px 0; flex-wrap: wrap; }
+    .workflow-step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 20px; text-align: center; min-width: 160px; flex: 1; max-width: 200px; transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+    .workflow-step:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 32px color-mix(in oklch, var(--fg) 6%, transparent); }
+    .workflow-step-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; font-family: var(--font-mono); font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .wf-s1 .workflow-step-num { background: color-mix(in oklch, var(--accent) 12%, transparent); color: var(--accent); }
+    .wf-s2 .workflow-step-num { background: color-mix(in oklch, var(--teal) 12%, transparent); color: var(--teal); }
+    .wf-s3 .workflow-step-num { background: color-mix(in oklch, var(--green) 12%, transparent); color: var(--green); }
+    .wf-s4 .workflow-step-num { background: color-mix(in oklch, var(--lime) 12%, transparent); color: var(--green); }
+    .wf-s5 .workflow-step-num { background: color-mix(in oklch, var(--accent) 12%, transparent); color: var(--accent); }
+    .workflow-step h4 { font-size: 14px; font-weight: 600; margin: 0 0 6px; }
+    .workflow-step p { font-size: 12px; color: var(--muted); line-height: 1.5; margin: 0; }
+    .workflow-example { font-size: 11px; font-weight: 500; color: var(--teal); margin-top: 8px; }
+
+    .workflow-connector { display: flex; align-items: center; color: var(--border); flex-shrink: 0; padding-top: 42px; }
+    .workflow-connector svg { width: 24px; height: 24px; }
+
+    /* --- Reporting --- */
+    .report-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); margin-bottom: var(--gap-lg); }
+    .report-kpi { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 16px; }
+    .report-kpi .rkpi-val { font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--accent); }
+    .report-kpi .rkpi-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .report-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-sm); }
+    .report-item { display: flex; align-items: center; gap: 10px; padding: 14px; background: color-mix(in oklch, var(--fg) 3%, var(--bg)); border-radius: var(--radius); font-size: 14px; font-weight: 500; transition: background 0.2s ease; }
+    .report-item:hover { background: color-mix(in oklch, var(--teal) 8%, var(--bg)); }
+    .report-item svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
+
+    /* --- Security --- */
+    .perm-matrix { overflow-x: auto; margin: 32px 0; }
+    .perm-matrix table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .perm-matrix th, .perm-matrix td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .perm-matrix th { font-weight: 600; color: var(--accent); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .perm-matrix td:first-child, .perm-matrix th:first-child { font-weight: 600; }
+    .perm-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .perm-badge.full { background: color-mix(in oklch, var(--green) 15%, transparent); color: var(--green); }
+    .perm-badge.limited { background: color-mix(in oklch, var(--teal) 15%, transparent); color: var(--teal); }
+    .perm-badge.none { background: color-mix(in oklch, var(--fg) 6%, transparent); color: var(--muted); }
+
+    .sec-feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-md); margin-top: var(--gap-lg); }
+    .sec-feat { text-align: center; padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
+    .sec-feat svg { width: 28px; height: 28px; color: var(--teal); margin-bottom: 12px; }
+    .sec-feat h4 { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
+    .sec-feat p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+
+    /* --- CTA Section --- */
+    .cta-section { background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--accent) 50%, var(--teal)), var(--teal)); color: #fff; text-align: center; padding-block: clamp(64px, 10vw, 100px); position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: url('mqrk6wlm-OptiFlow.Logo.png') center / 300px no-repeat; opacity: 0.04; }
+    .cta-section .container { position: relative; z-index: 2; }
+    .cta-section h2 { color: #fff; margin-bottom: 16px; }
+    .cta-section .lead { color: color-mix(in srgb, #fff 80%, transparent); margin: 0 auto 32px; }
+    .cta-btns { display: flex; justify-content: center; gap: var(--gap-sm); flex-wrap: wrap; margin-bottom: 36px; }
+    .cta-section .btn-primary { background: #fff; color: var(--accent); }
+    .cta-section .btn-secondary { background: transparent; color: #fff; border-color: color-mix(in srgb, #fff 40%, transparent); }
+    .cta-section .btn-secondary:hover { border-color: #fff; background: color-mix(in srgb, #fff 12%, transparent); }
+    .cta-trust { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 13px; color: color-mix(in srgb, #fff 70%, transparent); }
+    .cta-trust-item { display: flex; align-items: center; gap: 6px; }
+
+    /* --- Footer --- */
+    .pagefoot { background: var(--fg); color: oklch(85% 0.008 240); padding-block: 64px 32px; }
+    .pagefoot .container { max-width: var(--container); }
+    .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--gap-xl); margin-bottom: var(--gap-xl); }
+    .foot-brand .logo-img { height: 28px; margin-bottom: var(--gap-sm); }
+    .foot-brand p { font-size: 13px; line-height: 1.6; color: oklch(70% 0.01 240); max-width: 30ch; }
+    .foot-col h4 { font-size: 13px; font-weight: 600; margin: 0 0 12px; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
+    .foot-col a { display: block; font-size: 13px; color: oklch(70% 0.01 240); padding: 4px 0; transition: color 0.2s; }
+    .foot-col a:hover { color: #fff; }
+    .foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: var(--gap-lg); border-top: 1px solid oklch(30% 0.01 240); font-size: 12px; color: oklch(60% 0.01 240); }
+    .foot-bottom .theme-toggle { border-color: oklch(30% 0.01 240); color: oklch(70% 0.01 240); }
+
+    /* --- Animations --- */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+    .stagger.visible > *:nth-child(3) { transition-delay: 0.15s; }
+    .stagger.visible > *:nth-child(4) { transition-delay: 0.2s; }
+    .stagger.visible > *:nth-child(5) { transition-delay: 0.25s; }
+    .stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
+    .stagger.visible > * { opacity: 1; transform: translateY(0); }
+
+    section { scroll-margin-top: var(--nav-h); }
+
+
+    /* ─── Sticky CTA ─── */
+    .sticky-cta { position: fixed; bottom: 24px; right: 24px; z-index: 200; display: inline-flex; align-items: center; gap: 6px; padding: 14px 22px; background: linear-gradient(135deg, #1B4D81, #278D9F); color: white; border-radius: 50px; font-weight: 600; font-size: 14px; text-decoration: none; box-shadow: var(--shadow-elevated); transform: translateY(100px); opacity: 0; transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1); }
+    .sticky-cta.visible { opacity: 1; transform: translateY(0); }
+    .sticky-cta:hover { box-shadow: var(--shadow-button-hover); transform: translateY(-2px); }
+    @media (max-width: 480px) { .sticky-cta { bottom: 16px; right: 16px; left: 16px; justify-content: center; } }
+
+    /* ─── Scroll-to-Top ─── */
+    .scroll-top { position: fixed; bottom: 32px; right: 32px; z-index: 199; width: 44px; height: 44px; border-radius: var(--radius); background: var(--accent); color: white; display: grid; place-items: center; cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.25s ease; box-shadow: var(--shadow-button); }
+    .scroll-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .scroll-top:hover { box-shadow: var(--shadow-button-hover); transform: translateY(-2px); }
+    .scroll-top:active { transform: translateY(0) scale(0.95); }
+    @media (max-width: 480px) { .scroll-top { bottom: 76px; right: 20px; width: 40px; height: 40px; } }
+/* --- Responsive --- */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .panel-layout { grid-template-columns: 1fr; gap: 32px; }
+      .module-spotlight { grid-template-columns: 1fr; }
+      .module-expand-grid { grid-template-columns: repeat(2, 1fr); }
+      .arch-diagram { min-height: 340px; }
+      .workflow-flow { flex-direction: column; align-items: center; }
+      .workflow-connector { transform: rotate(90deg); padding-top: 0; }
+      .workflow-step { max-width: 100%; width: 100%; }
+      .report-kpis { grid-template-columns: repeat(2, 1fr); }
+      .report-list { grid-template-columns: repeat(2, 1fr); }
+      .sec-feats { grid-template-columns: repeat(2, 1fr); }
+      .foot-grid { grid-template-columns: repeat(2, 1fr); }
+      .desktop-nav { display: none; } .hamburger { display: flex; }
+    }
+    @media (max-width: 768px) {
+      :root { --gutter: 24px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-5 { grid-template-columns: repeat(2, 1fr); }
+      .panel-benefits { grid-template-columns: 1fr; }
+      .report-kpis { grid-template-columns: repeat(2, 1fr); }
+      .sec-feats { grid-template-columns: 1fr; }
+      .transform-flow { flex-direction: column; }
+      .transform-arrow { transform: rotate(90deg); }
+      .dash-kpi { grid-template-columns: repeat(3, 1fr); }
+      .hero-dashboard .dash-grid-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      :root { --gutter: 16px; }
+      .nav-center { display: none; }
+      .hero-trust { grid-template-columns: 1fr; }
+      .hero-cta { flex-direction: column; }
+      .dash-kpi { grid-template-columns: repeat(2, 1fr); }
+      .panel-benefits { grid-template-columns: 1fr; }
+      .cta-btns { flex-direction: column; }
+      .cta-trust { flex-direction: column; gap: 12px; }
+      .report-list { grid-template-columns: 1fr; }
+      .module-expand-grid { grid-template-columns: 1fr; }
+      .foot-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .btn { padding: 10px 18px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#content" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <header class="topnav" role="navigation" aria-label="Main navigation"  id="topnav">
+    <div class="topnav-inner">
+      <a href="optiflow-homepage.html" class="logo">
+        <img class="logo-img" src="mqrk6wlm-OptiFlow.Logo.png" alt="OptiFlow" loading="lazy" decoding="async" width="32" height="32" />
+        OptiFlow
+      </a>
+      <nav class="desktop-nav">
+        <a href="optiflow-homepage.html" class="nav-link">Home</a>
+        <a href="problem-solutions.html" class="nav-link">Solutions</a>
+        <a href="product-overview.html" class="nav-link active">Product</a>
+        <a href="features.html" class="nav-link">Features</a>
+        <a href="why-choose-optiflow.html" class="nav-link">Why OptiFlow</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <div class="nav-dropdown">
+          <span class="nav-link" style="cursor:default">Resources <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="1,1 5,5 9,1"/></svg></span>
+          <div class="nav-dropdown-menu">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">FAQ</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="nav-cta">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="product-overview.html" class="btn btn-ghost">Watch Demo</a>
+        <a href="demo-booking.html" class="btn btn-primary btn-glow">Book Demo</a>
+      </div>
+    </div>
+  </header>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="optiflow-homepage.html" class="nav-link">Home</a>
+    <a href="problem-solutions.html" class="nav-link">Solutions</a>
+    <a href="product-overview.html" class="nav-link">Product</a>
+    <a href="features.html" class="nav-link">Features</a>
+    <a href="why-choose-optiflow.html" class="nav-link">Why OptiFlow</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <div class="nav-dropdown">
+      <span class="nav-link" style="cursor:default">Resources</span>
+      <div class="nav-dropdown-menu">
+        <a href="blog.html">Blog</a>
+        <a href="faq.html">FAQ</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <div class="drawer-cta">
+      <button class="btn btn-primary" style="width:100%;text-align:center;justify-content:center" onclick="location.href='demo-booking.html'">Book Demo</button>
+          </div>
+          </div>
+        </div>
+
+  <main id="content" role="main" >
+    <!-- S01: Hero -->
+    <section class="hero" data-screen-label="01 Hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="eyebrow">BUSINESS OPERATING SYSTEM FOR MSMEs</div>
+            <h1>One Platform To Run Your Entire Business.</h1>
+            <p class="lead">Manage Tasks, Teams, SOPs, Attendance, Workflows, Reporting, Accountability, and Operations from a single operating system built specifically for MSMEs.</p>
+            <div class="hero-cta">
+              <a href="demo-booking.html" class="btn btn-primary btn-lg btn-glow">Book Demo</a>
+              <a href="product-overview.html" class="btn btn-secondary btn-lg">Watch Platform Tour</a>
+            </div>
+            <div class="hero-trust">
+              <div class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Built For MSMEs</div>
+              <div class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Fast Deployment</div>
+              <div class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Easy Adoption</div>
+              <div class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> High Accountability</div>
+            </div>
+          </div>
+          <div class="hero-dashboard">
+            <div class="dash-card float-anim">
+              <div class="dash-kpi">
+                <div class="dash-kpi-item"><div class="dash-kpi-val">92%</div><div class="dash-kpi-label">Completion</div></div>
+                <div class="dash-kpi-item"><div class="dash-kpi-val">8.2K</div><div class="dash-kpi-label">Tasks / Mo</div></div>
+                <div class="dash-kpi-item"><div class="dash-kpi-val">47</div><div class="dash-kpi-label">Present</div></div>
+              </div>
+              <div class="dash-chart"><div class="dash-chart-bar"></div><div class="dash-chart-bar s2"></div><div class="dash-chart-bar s3"></div><div class="dash-chart-bar s4"></div></div>
+              <div class="dash-grid-2">
+                <div class="dash-widget">
+                  <h4>Attendance</h4>
+                  <div class="w-val">47 / 52</div>
+                  <div style="font-size:11px;color:var(--green);margin-top:4px;">3 on leave — 2 late</div>
+                </div>
+                <div class="dash-widget">
+                  <h4>Tasks Done Today</h4>
+                  <div class="w-val">28</div>
+                  <div style="font-size:11px;color:var(--muted);margin-top:4px;">9 overdue</div>
+                </div>
+                <div class="dash-widget">
+                  <h4>SOP Adherence</h4>
+                  <div class="w-val">98%</div>
+                  <div style="font-size:11px;color:var(--green);margin-top:4px;">? 3% vs last week</div>
+                </div>
+                <div class="dash-widget">
+                  <h4>Pending Approvals</h4>
+                  <div class="w-val">12</div>
+                  <div style="font-size:11px;color:var(--muted);margin-top:4px;">Avg wait: 4.2 hrs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S02: What Is OptiFlow -->
+    <section class="section" data-screen-label="02 What Is OptiFlow">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>What Is OptiFlow OS?</h2>
+          <p class="lead">A Business Operating System that transforms organisations from people-dependent operations into process-driven enterprises.</p>
+        </div>
+        <div class="transform-flow reveal">
+          <div class="transform-stage chaos">
+            <h3 style="font-size:18px;color:color-mix(in oklch, red 70%, white);margin:0 0 8px">Traditional Operations</h3>
+            <div class="transform-tag">WhatsApp</div>
+            <div class="transform-tag">Excel</div>
+            <div class="transform-tag">Calls</div>
+            <div class="transform-tag">Manual Follow-ups</div>
+          </div>
+          <div class="transform-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="transform-stage optiflow">
+            <h3 style="font-size:18px;color:var(--accent);margin:0 0 8px">OptiFlow OS</h3>
+            <p style="font-size:13px;color:var(--muted);margin:0;">One centralised platform replacing scattered tools, messages, and spreadsheets.</p>
+          </div>
+          <div class="transform-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="transform-stage system">
+            <h3 style="font-size:18px;color:var(--green);margin:0 0 8px">Systemised Operations</h3>
+            <div class="transform-tag">Predictable</div>
+            <div class="transform-tag">Accountable</div>
+            <div class="transform-tag">Scalable</div>
+            <div class="transform-tag">Audit-Ready</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S03: Product Vision -->
+    <section class="section" data-screen-label="03 Product Vision">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Building The Operating System For Growing Businesses</h2>
+          <p class="lead">A single platform that gives every business — regardless of size — the same operational discipline as the world's best-run companies.</p>
+        </div>
+        <div class="grid-3 stagger reveal" style="margin-top:32px">
+          <div class="card">
+            <div style="font-size:28px;margin-bottom:12px">&#9679;</div>
+            <h3>Single Source of Truth</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">No more scattered data across WhatsApp, Excel, and employee memory. Every task, report, and approval lives in one place.</p>
+          </div>
+          <div class="card">
+            <div style="font-size:28px;margin-bottom:12px">&#9650;</div>
+            <h3>Operational Excellence</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Standardise how work gets done. SOPs, checklists, and workflows ensure consistency — even when key people are absent.</p>
+          </div>
+          <div class="card">
+            <div style="font-size:28px;margin-bottom:12px">&#8593;</div>
+            <h3>Business Scalability</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Growing from 20 to 200 employees without adding management layers. The system scales — not the chaos.</p>
+          </div>
+          <div class="card">
+            <div style="font-size:28px;margin-bottom:12px">&#9881;</div>
+            <h3>Process-Driven Culture</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Shift from "who do I ask?" to "what does the system say?" Build a culture where processes — not people — run operations.</p>
+          </div>
+          <div class="card">
+            <div style="font-size:28px;margin-bottom:12px">&#9776;</div>
+            <h3>Visibility & Accountability</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Every task has an owner, deadline, and status. Owners see what's pending. Managers see who's accountable. Zero ambiguity.</p>
+          </div>
+          <div class="card">
+            <div style="font-size:28px;margin-bottom:12px">&#9733;</div>
+            <h3>Owner Independence</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">The business runs on systems, not on the owner's availability. Take a day off without 47 WhatsApp messages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S04: Platform Architecture -->
+    <section class="section" data-screen-label="04 Platform Architecture">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>How The Entire Platform Works Together</h2>
+          <p class="lead">Hover over any module to see how it connects to the OptiFlow OS hub.</p>
+        </div>
+        <div class="arch-diagram" id="archDiagram">
+          <div class="arch-hub">OptiFlow<br/>OS</div>
+          <svg class="arch-connections" viewBox="0 0 600 440" preserveAspectRatio="xMidYMid meet">
+            <line x1="300" y1="220" x2="90" y2="60" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="300" y2="34" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="510" y2="60" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="90" y2="220" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="510" y2="220" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="90" y2="380" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="300" y2="406" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="510" y2="380" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="70" y2="140" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="530" y2="140" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="70" y2="300" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <line x1="300" y1="220" x2="530" y2="300" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          </svg>
+          <div class="arch-node" style="top:44px;left:calc(50% - 18px)" data-module="tasks">&#9745;</div>
+          <div class="arch-node" style="top:70px;left:90px" data-module="worklists">&#9776;</div>
+          <div class="arch-node" style="top:70px;right:90px" data-module="attendance">&#9997;</div>
+          <div class="arch-node" style="top:calc(50% - 18px);left:90px" data-module="reports">&#9881;</div>
+          <div class="arch-node" style="top:calc(50% - 18px);right:90px" data-module="analytics">&#9776;</div>
+          <div class="arch-node" style="bottom:54px;left:90px" data-module="sop">&#9881;</div>
+          <div class="arch-node" style="bottom:34px;left:calc(50% - 18px)" data-module="training">&#9733;</div>
+          <div class="arch-node" style="bottom:54px;right:90px" data-module="notifications">&#9993;</div>
+          <div class="arch-node" style="top:140px;left:70px" data-module="leaves">&#9728;</div>
+          <div class="arch-node" style="top:140px;right:70px" data-module="meetings">&#9745;</div>
+          <div class="arch-node" style="bottom:140px;left:70px" data-module="inventory">&#9636;</div>
+          <div class="arch-node" style="bottom:140px;right:70px" data-module="verification">&#10003;</div>
+          <div class="arch-tooltip" id="archTooltip"><div class="tt-name"></div><div class="tt-desc"></div><div class="tt-benefit"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S05: Core Modules -->
+    <section class="section" data-screen-label="05 Core Modules">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Everything You Need To Run Operations</h2>
+          <p class="lead">Spotlight on the 6 modules MSMEs use most. Every module is built for Indian business workflows.</p>
+        </div>
+        <div class="module-spotlight stagger reveal" id="moduleSpotlight">
+          <div class="module-card">
+            <div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="module-body">
+              <h4>Task Management</h4>
+              <p>Create, assign, track, and verify every task. Each task has an owner, deadline, priority, and verifier. No task falls through cracks.</p>
+              <div class="module-benefit">Outcome: Zero missed deliverables. Every task tracked to completion.</div>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+            <div class="module-body">
+              <h4>Attendance</h4>
+              <p>Digital check-in/check-out with location tagging and face verification. Real-time attendance dashboards for every department.</p>
+              <div class="module-benefit">Outcome: Eliminate manual registers. Accurate payroll in one click.</div>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
+            <div class="module-body">
+              <h4>SOP Library</h4>
+              <p>Document every business process as a standard operating procedure. Version-controlled, searchable, with training records.</p>
+              <div class="module-benefit">Outcome: Zero dependency on key employees. Processes survive people.</div>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+            <div class="module-body">
+              <h4>Reports & Analytics</h4>
+              <p>Executive dashboards with real-time metrics. Task completion rates, department performance, attendance trends, audit trails.</p>
+              <div class="module-benefit">Outcome: Data-driven decisions. Know exactly what's happening across the business.</div>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></div>
+            <div class="module-body">
+              <h4>Worklists</h4>
+              <p>Pre-built task templates for recurring operations. Daily production checklists, shift handover lists, quality inspection workflows.</p>
+              <div class="module-benefit">Outcome: Standardise recurring work. 80% fewer checklist errors.</div>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><polyline points="9 12 11 14 15 10"></polyline></svg></div>
+            <div class="module-body">
+              <h4>Checklist Management</h4>
+              <p>Create, assign, and verify checklists for production, quality, safety, and maintenance. Photo proof capture, timestamped verification.</p>
+              <div class="module-benefit">Outcome: 98% checklist compliance. Audit-ready records always available.</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <button class="show-all-btn" id="showAllBtn" onclick="toggleModules()">
+            Show all 12 modules
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+        <div class="module-expand-wrap" id="moduleExpand">
+          <div>
+          <div class="module-expand-grid">
+            <div class="module-card"><div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><div class="module-body"><h4>Leave Management</h4><p>Apply, approve, and track leaves with balance visibility. Auto-deduct from attendance. Team calendar for planning.</p><div class="module-benefit">Outcome: Zero leave disputes. Automated balance tracking.</div></div></div>
+            <div class="module-card"><div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"></path></svg></div><div class="module-body"><h4>Training</h4><p>Assign SOP-based training modules to employees. Track completion, quiz scores, and re-training schedules.</p><div class="module-benefit">Outcome: Every employee trained on their role. Compliance records always current.</div></div></div>
+            <div class="module-card"><div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><div class="module-body"><h4>Inventory</h4><p>Track raw materials, finished goods, and consumables. Low-stock alerts, consumption trends, supplier management.</p><div class="module-benefit">Outcome: 15% lower inventory carrying costs. Never run out of critical stock.</div></div></div>
+            <div class="module-card"><div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div><div class="module-body"><h4>Meetings</h4><p>Schedule, track attendance, document minutes, and assign action items. Every meeting drives accountability.</p><div class="module-benefit">Outcome: Meetings produce tasks, not just talk. 100% action-item follow-through.</div></div></div>
+            <div class="module-card"><div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div><div class="module-body"><h4>Verification</h4><p>Multi-level task and checklist verification. Photo proof, timestamped sign-offs, escalation on rejection.</p><div class="module-benefit">Outcome: Quality assurance built into every process. 90% fewer quality escapes.</div></div></div>
+            <div class="module-card"><div class="module-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"></path><path d="M15 17v2a3 3 0 0 1-6 0v-2"></path></svg></div><div class="module-body"><h4>Notifications</h4><p>In-app, email, and SMS alerts for assignments, deadlines, approvals, and escalations. Never miss a follow-up.</p><div class="module-benefit">Outcome: Zero missed deadlines from forgotten tasks. Automated reminders for every stakeholder.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S06: Admin Panel -->
+    <section class="section" data-screen-label="06 Admin Panel">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Complete Business Visibility For Owners & Admins</h2>
+          <p class="lead">See everything. Control everything. Measure everything — from one dashboard built for business owners.</p>
+        </div>
+        <div class="panel-layout reveal">
+          <div class="panel-features">
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> User Management — Add, remove, and manage every employee.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Role Management — Define Admin, Captain, and Doer access levels.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Branch & Department Structure — Multi-location, multi-department.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Attendance Monitoring — Real-time presence across all locations.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Executive Reports — Task, attendance, and performance reports.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Audit Trails — Every action logged, timestamped, searchable.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> System Configuration — Customise workflows to your business.</div>
+          </div>
+          <div class="panel-visual">
+            <h4>Admin Dashboard Preview</h4>
+            <div class="vis-row"><span>Total Employees</span><span>52</span></div>
+            <div class="vis-row"><span>Active Today</span><span>47</span></div>
+            <div class="vis-row"><span>Pending Tasks</span><span>142</span></div>
+            <div class="vis-row"><span>Completed Today</span><span>28</span></div>
+            <div class="vis-row"><span>Overdue Tasks</span><span>9</span></div>
+            <div class="vis-row"><span>Pending Approvals</span><span>12</span></div>
+            <div class="vis-row"><span>Checklist Compliance</span><span>98%</span></div>
+          </div>
+        </div>
+        <div class="panel-benefits reveal">
+          <div class="panel-benefit"><div class="pb-icon">&#9650;</div><h5>See Everything</h5><p style="font-size:13px;color:var(--muted);margin:0;">Real-time visibility across all departments, branches, and teams from a single dashboard.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#9881;</div><h5>Control Everything</h5><p style="font-size:13px;color:var(--muted);margin:0;">Define roles, permissions, and workflows. The system enforces your business rules — not the other way around.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#9776;</div><h5>Measure Everything</h5><p style="font-size:13px;color:var(--muted);margin:0;">Task completion, attendance trends, department performance, audit trails — every metric in one place.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S07: Captain Panel -->
+    <section class="section" data-screen-label="07 Captain Panel">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Manage Teams With Clarity</h2>
+          <p class="lead">Built for managers, supervisors, and team leads who need to delegate, verify, and report — without chasing people.</p>
+        </div>
+        <div class="panel-layout reveal" style="direction:rtl;">
+          <div class="panel-features" style="direction:ltr;">
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Task Delegation — Assign work with one click. Set priority, deadline, verifier.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Verification Queue — Review and approve completed work with photo proof.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Team Reports — See who's performing, who's struggling, what's stuck.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Checklist Monitoring — Track daily checklist completion across your team.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Leave Approvals — Approve or reject leave requests. Auto-deduct from attendance.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Performance Visibility — Task completion rates and attendance patterns per employee.</div>
+          </div>
+          <div class="panel-visual" style="direction:ltr;">
+            <h4>Captain Dashboard Preview</h4>
+            <div class="vis-row"><span>Team Size</span><span>14</span></div>
+            <div class="vis-row"><span>Tasks Assigned Today</span><span>31</span></div>
+            <div class="vis-row"><span>Pending Verification</span><span>8</span></div>
+            <div class="vis-row"><span>Completed (Verified)</span><span>19</span></div>
+            <div class="vis-row"><span>Leave Requests Pending</span><span>2</span></div>
+            <div class="vis-row"><span>Checklist Compliance</span><span>96%</span></div>
+            <div class="vis-row"><span>Top Performer</span><span>Rajesh K.</span></div>
+          </div>
+        </div>
+        <div class="panel-benefits reveal">
+          <div class="panel-benefit"><div class="pb-icon">&#8651;</div><h5>Less Follow-Up</h5><p style="font-size:13px;color:var(--muted);margin:0;">The system auto-reminds, auto-escalates, and auto-tracks. Managers verify outcomes — not chase status.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#9650;</div><h5>More Accountability</h5><p style="font-size:13px;color:var(--muted);margin:0;">Every task has an owner and deadline. Every completion needs verification. No ambiguity.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#9889;</div><h5>Faster Execution</h5><p style="font-size:13px;color:var(--muted);margin:0;">Assign work in seconds. Track progress in real-time. Remove bottlenecks before they become delays.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S08: Doer Panel -->
+    <section class="section" data-screen-label="08 Doer Panel">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>One Place For Every Task</h2>
+          <p class="lead">Employees open one app and see exactly what they need to do today. No confusion. No missed work. Clear priorities.</p>
+        </div>
+        <div class="panel-layout reveal">
+          <div class="panel-features">
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> My Task Center — Today's tasks, upcoming deadlines, overdue items.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Attendance — Check in/out with location. View monthly summary.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Checklists — Complete daily production, quality, and safety checklists.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Leave Requests — Apply for leave. Track balance and approval status.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Training — Complete assigned SOP training modules and quizzes.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Meetings — View schedule, confirm attendance, access meeting notes.</div>
+          </div>
+          <div class="panel-visual">
+            <h4>Doer Workspace Preview</h4>
+            <div style="display:flex;gap:8px;margin-bottom:16px;">
+              <span style="font-size:11px;padding:3px 10px;border-radius:20px;background:color-mix(in oklch,var(--accent) 10%,transparent);color:var(--accent);font-weight:600;">Desktop</span>
+              <span style="font-size:11px;padding:3px 10px;border-radius:20px;background:color-mix(in oklch,var(--teal) 10%,transparent);color:var(--teal);font-weight:600;">Mobile</span>
+            </div>
+            <div class="vis-row"><span>Today's Tasks</span><span>8</span></div>
+            <div class="vis-row"><span>Completed</span><span>3</span></div>
+            <div class="vis-row"><span>Pending</span><span>5</span></div>
+            <div class="vis-row"><span>Overdue</span><span>1</span></div>
+            <div class="vis-row"><span>Attendance Status</span><span style="color:var(--green)">Present</span></div>
+            <div class="vis-row"><span>Leave Balance</span><span>12 days</span></div>
+            <div class="vis-row"><span style="display:flex;align-items:center;gap:6px;">&#9889; Next Deadline <span style="color:var(--accent);font-weight:600;">QC Report — 4:30 PM</span></span></div>
+          </div>
+        </div>
+        <div class="panel-benefits reveal">
+          <div class="panel-benefit"><div class="pb-icon">&#9783;</div><h5>Clear Priorities</h5><p style="font-size:13px;color:var(--muted);margin:0;">Open the app. See today's tasks. No searching WhatsApp. No asking the manager. Everything is right there.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#10003;</div><h5>No Confusion</h5><p style="font-size:13px;color:var(--muted);margin:0;">Every task has instructions, deadlines, and checklists. Employees know exactly what "done" looks like.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#9650;</div><h5>Better Productivity</h5><p style="font-size:13px;color:var(--muted);margin:0;">Less time figuring out what to do. More time doing it. Daily task completion rates improve within the first week.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S09: Workflow Engine -->
+    <section class="section" data-screen-label="09 Workflow Engine">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Turn Business Processes Into Repeatable Systems</h2>
+          <p class="lead">Every business has processes. OptiFlow turns them into automated workflows that run without the owner or manager pushing every step.</p>
+        </div>
+        <div class="workflow-flow reveal">
+          <div class="workflow-step wf-s1">
+            <div class="workflow-step-num">1</div>
+            <h4>Create Workflow</h4>
+            <p>Define the process: tasks, sequence, checklists, verifiers, and deadlines.</p>
+            <div class="workflow-example">e.g. Daily Production QC</div>
+          </div>
+          <div class="workflow-connector">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="workflow-step wf-s2">
+            <div class="workflow-step-num">2</div>
+            <h4>Assign Doer</h4>
+            <p>Assign to individuals or roles. Auto-rotate shifts. Set backup assignees.</p>
+            <div class="workflow-example">e.g. Shift Supervisor A</div>
+          </div>
+          <div class="workflow-connector">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="workflow-step wf-s3">
+            <div class="workflow-step-num">3</div>
+            <h4>Execute Work</h4>
+            <p>Doer completes checklist items with photo proof. System timestamps every action.</p>
+            <div class="workflow-example">e.g. 14 checklist items completed</div>
+          </div>
+          <div class="workflow-connector">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="workflow-step wf-s4">
+            <div class="workflow-step-num">4</div>
+            <h4>Verify Completion</h4>
+            <p>Captain or admin verifies work. Approve, reject with reason, or request re-work.</p>
+            <div class="workflow-example">e.g. QC Manager approval</div>
+          </div>
+          <div class="workflow-connector">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="workflow-step wf-s5">
+            <div class="workflow-step-num">5</div>
+            <h4>Generate Reports</h4>
+            <p>Auto-generated reports: completion rates, compliance %, bottleneck analysis.</p>
+            <div class="workflow-example">e.g. Weekly QC Dashboard</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S10: Reporting Engine -->
+    <section class="section" data-screen-label="10 Reporting Engine">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Data-Driven Decisions Start Here</h2>
+          <p class="lead">Every action in OptiFlow generates data. Every data point feeds reports. Every report drives better decisions.</p>
+        </div>
+        <div class="report-kpis reveal">
+          <div class="report-kpi"><div class="rkpi-val">92%</div><div class="rkpi-label">Task Completion Rate</div></div>
+          <div class="report-kpi"><div class="rkpi-val">87%</div><div class="rkpi-label">On-Time Delivery</div></div>
+          <div class="report-kpi"><div class="rkpi-val">100%</div><div class="rkpi-label">Audit Trail Coverage</div></div>
+          <div class="report-kpi"><div class="rkpi-val num">&#8377;3.2L</div><div class="rkpi-label">Cost Saved This Month</div></div>
+        </div>
+        <div class="report-list reveal">
+          <div class="report-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            Task Reports
+          </div>
+          <div class="report-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Attendance Reports
+          </div>
+          <div class="report-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Department Reports
+          </div>
+          <div class="report-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Performance Reports
+          </div>
+          <div class="report-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Audit Reports
+          </div>
+          <div class="report-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Analytics Reports
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S11: Security & Permissions -->
+    <section class="section" data-screen-label="11 Security & Permissions">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Enterprise Security. MSME Simplicity.</h2>
+          <p class="lead">Role-based access, audit trails, and data protection — built for business owners who need control without complexity.</p>
+        </div>
+        <div class="perm-matrix reveal">
+          <table>
+            <thead>
+              <tr><th>Module</th><th>Employee</th><th>Manager</th><th>Admin</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Task Management</td><td><span class="perm-badge limited">My Tasks</span></td><td><span class="perm-badge full">Team + Assign</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
+              <tr><td>Attendance</td><td><span class="perm-badge limited">Check In/Out</span></td><td><span class="perm-badge full">Team View</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
+              <tr><td>Reports</td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge limited">Team Only</span></td><td><span class="perm-badge full">All Reports</span></td></tr>
+              <tr><td>SOP Library</td><td><span class="perm-badge limited">View</span></td><td><span class="perm-badge limited">View + Assign</span></td><td><span class="perm-badge full">Create + Edit</span></td></tr>
+              <tr><td>Leave Management</td><td><span class="perm-badge limited">Apply</span></td><td><span class="perm-badge full">Approve</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
+              <tr><td>Checklists</td><td><span class="perm-badge limited">Complete</span></td><td><span class="perm-badge full">Assign + Verify</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
+              <tr><td>Audit Logs</td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
+              <tr><td>System Config</td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sec-feats reveal">
+          <div class="sec-feat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <h4>Role-Based Access</h4>
+            <p>Three roles — Admin, Captain, Doer — with granular module-level permissions that match real business hierarchy.</p>
+          </div>
+          <div class="sec-feat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <h4>Audit Trails</h4>
+            <p>Every action — task creation, modification, deletion, verification — is logged with timestamp, user, and IP address.</p>
+          </div>
+          <div class="sec-feat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h4>Secure Authentication</h4>
+            <p>Username + password with account lockout protection. Optional biometric auth on mobile. Session timeout.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S12: CTA -->
+    <section class="cta-section" data-screen-label="12 CTA">
+      <div class="container">
+        <h2>Ready To See OptiFlow In Action?</h2>
+        <p class="lead">Discover how OptiFlow helps MSMEs build systems, improve accountability, and scale operations — without adding management layers.</p>
+        <div class="cta-btns">
+          <a href="demo-booking.html" class="btn btn-primary btn-lg btn-glow">Book Free Demo</a>
+          <a href="product-overview.html" class="btn btn-secondary btn-lg">Watch Product Tour</a>
+        </div>
+        <div class="cta-trust">
+          <div class="cta-trust-item">&#10003; Fast Deployment</div>
+          <div class="cta-trust-item">&#10003; MSME Focused</div>
+          <div class="cta-trust-item">&#10003; Dedicated Support</div>
+          <div class="cta-trust-item">&#10003; Easy Adoption</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="pagefoot">
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <img src="mqrk6wlm-OptiFlow.Logo.png" alt="OptiFlow Logo" class="logo-img" />
+          <p>The Business Operating System that transforms MSMEs from people-dependent to process-driven.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="product-overview.html">Overview</a>
+          <a href="features.html">Features</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="demo-booking.html">Book Demo</a>
+        </div>
+        <div class="foot-col">
+          <h4>Solutions</h4>
+          <a href="problem-solutions.html">Problem &amp; Solutions</a>
+          <a href="why-choose-optiflow.html">Why OptiFlow</a>
+        </div>
+        <div class="foot-col">
+          <h4>Resources</h4>
+          <a href="blog.html">Blog</a>
+          <a href="faq.html">FAQ</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>&copy; 2026 OptiFlow OS. All rights reserved.</span>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Theme Toggle ---
+    function toggleTheme() {
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme');
+      var next = current === 'dark' ? null : 'dark';
+      if (next) { html.setAttribute('data-theme', next); }
+      else { html.removeAttribute('data-theme'); }
+      try { localStorage.setItem('optiflow-theme', next || 'light'); } catch(e) {}
+    }
+
+    (function() {
+      try {
+        var saved = localStorage.getItem('optiflow-theme');
+        if (saved === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); }
+        else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch(e) {}
+    })();
+
+    // --- Sticky Nav ---
+    window.addEventListener('scroll', function() {
+      var nav = document.getElementById('topnav');
+      if (window.scrollY > 50) { nav.classList.add('scrolled'); }
+      else { nav.classList.remove('scrolled'); }
+    });
+
+    // -- Hamburger + mobile drawer --
+    var hamburger = document.getElementById('hamburger');
+    var drawer = document.getElementById('mobileDrawer');
+    var overlay = document.getElementById('drawerOverlay');
+    if (hamburger && drawer && overlay) {
+      var close = function() { hamburger.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('active'); };
+      hamburger.addEventListener('click', function() {
+        if (drawer.classList.contains('open')) close(); else { hamburger.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('active'); }
+      });
+      overlay.addEventListener('click', close);
+      drawer.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', close); });
+    }
+
+    // --- Scroll Reveal ---
+    (function() {
+      if (typeof IntersectionObserver === 'undefined') return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+      document.querySelectorAll('.stagger').forEach(function(el) { observer.observe(el); });
+    })();
+
+    // --- Interactive Architecture Diagram ---
+    (function() {
+      if (typeof IntersectionObserver === 'undefined') return;
+      var moduleData = {
+        tasks:        { name: 'Task Management', desc: 'Create, assign, track, and verify every task across the organisation.', benefit: 'Zero missed deliverables. Every task traced to completion.' },
+        worklists:    { name: 'Worklists', desc: 'Pre-built task templates for recurring daily, shift, and production operations.', benefit: 'Standardise recurring work. 80% fewer checklist errors.' },
+        attendance:   { name: 'Attendance', desc: 'Digital check-in/out with location tagging and face verification.', benefit: 'Eliminate manual registers. Payroll accuracy in one click.' },
+        reports:      { name: 'Reports & Analytics', desc: 'Executive dashboards with real-time task, attendance, and performance data.', benefit: 'Data-driven decisions. Know exactly what is happening.' },
+        analytics:    { name: 'Analytics', desc: 'Deep analysis: bottleneck detection, trend identification, predictive insights.', benefit: 'Spot problems before they become crises. 40% fewer escalations.' },
+        sop:          { name: 'SOP Library', desc: 'Version-controlled standard operating procedures with training records.', benefit: 'Zero dependency on key employees. Processes survive people.' },
+        training:     { name: 'Training', desc: 'Assign SOP-based training modules. Track completion and quiz scores.', benefit: 'Every employee trained on their role. Compliance records current.' },
+        notifications:{ name: 'Notifications', desc: 'In-app, email, and SMS alerts for assignments, deadlines, and approvals.', benefit: 'Zero missed deadlines. Automated reminders for every stakeholder.' },
+        leaves:       { name: 'Leave Management', desc: 'Apply, approve, track leaves with balance visibility and team calendar.', benefit: 'Zero leave disputes. Automated balance tracking.' },
+        meetings:     { name: 'Meetings', desc: 'Schedule, track attendance, document minutes, assign action items.', benefit: 'Meetings produce tasks, not just talk. Action items auto-tracked.' },
+        inventory:    { name: 'Inventory', desc: 'Track raw materials, finished goods, consumables. Low-stock alerts.', benefit: '15% lower carrying costs. Never run out of critical stock.' },
+        verification: { name: 'Verification', desc: 'Multi-level task and checklist verification with photo proof and timestamps.', benefit: 'Quality assurance in every process. 90% fewer quality escapes.' }
+      };
+
+      var tooltip = document.getElementById('archTooltip');
+      var activeNode = null;
+
+      function showTooltip(node, data) {
+        var rect = node.getBoundingClientRect();
+        var diagram = document.getElementById('archDiagram');
+        var dRect = diagram.getBoundingClientRect();
+        var top = rect.top - dRect.top - 10;
+        var left = rect.left - dRect.left + 44;
+        tooltip.querySelector('.tt-name').textContent = data.name;
+        tooltip.querySelector('.tt-desc').textContent = data.desc;
+        tooltip.querySelector('.tt-benefit').textContent = data.benefit;
+        tooltip.style.top = top + 'px';
+        tooltip.style.left = left + 'px';
+        tooltip.classList.add('visible');
+        activeNode = node;
+        node.classList.add('active');
+      }
+
+      function hideTooltip() {
+        tooltip.classList.remove('visible');
+        if (activeNode) { activeNode.classList.remove('active'); activeNode = null; }
+      }
+
+      document.querySelectorAll('.arch-node').forEach(function(node) {
+        var module = node.getAttribute('data-module');
+        var data = moduleData[module];
+        if (!data) return;
+
+        node.addEventListener('mouseenter', function() { showTooltip(node, data); });
+        node.addEventListener('mouseleave', hideTooltip);
+        node.addEventListener('focus', function() { showTooltip(node, data); });
+        node.addEventListener('blur', hideTooltip);
+        node.setAttribute('tabindex', '0');
+        node.setAttribute('role', 'button');
+        node.setAttribute('aria-label', data.name + ' - ' + data.desc);
+      });
+    })();
+
+    // --- Core Modules: Spotlight 6 + Expand All 12 ---
+    function toggleModules() {
+      var wrap = document.getElementById('moduleExpand');
+      var btn = document.getElementById('showAllBtn');
+      var isOpen = wrap.classList.contains('open');
+      if (isOpen) {
+        wrap.classList.remove('open');
+        btn.classList.remove('open');
+        btn.innerHTML = 'Show all 12 modules <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
+      } else {
+        wrap.classList.add('open');
+        btn.classList.add('open');
+        btn.innerHTML = 'Show less <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

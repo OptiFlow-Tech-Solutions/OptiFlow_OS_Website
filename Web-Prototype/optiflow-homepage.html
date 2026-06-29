@@ -1,0 +1,1151 @@
+﻿<!doctype html>
+<html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OptiFlow OS — Business Operating System for Indian MSMEs</title>
+  <link rel="icon" href="mqrk6wlm-OptiFlow.Logo.png" sizes="any">
+  <meta name="description" content="OptiFlow OS is the Business Operating System for Indian MSMEs — replace WhatsApp and Excel with one platform. Book a free demo.">
+  <meta property="og:title" content="OptiFlow OS — Business Operating System for Indian MSMEs">
+  <meta property="og:description" content="Stop managing work through WhatsApp &amp; Excel. Run your entire business from one operating system.">
+  <meta property="og:image" content="mqrk6wlm-OptiFlow.Logo.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <style>
+    /* ═══════════════════════════════════════════
+       OptiFlow Design System — Skeuomorphic Edition
+       ═══════════════════════════════════════════ */
+    :root {
+      --bg: oklch(97.5% 0.005 240);
+      --surface: oklch(100% 0 0);
+      --fg: oklch(15% 0.02 250);
+      --muted: oklch(50% 0.018 250);
+      --border: oklch(92% 0.006 240);
+      --accent: oklch(33% 0.09 255);
+      --teal: oklch(55% 0.10 210);
+      --green: oklch(72% 0.12 145);
+      --lime: oklch(82% 0.14 125);
+      --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+      --teal-soft: color-mix(in oklch, var(--teal) 10%, transparent);
+      --green-soft: color-mix(in oklch, var(--green) 10%, transparent);
+      --fg-soft: color-mix(in oklch, var(--fg) 5%, transparent);
+      --nav-bg: transparent;
+      --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+      --font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+      --fs-h1: clamp(36px, 5.5vw, 68px);
+      --fs-h2: clamp(28px, 3.8vw, 46px);
+      --fs-h3: 20px; --fs-lead: 18px; --fs-body: 16px; --fs-meta: 13px;
+      --gap-xs: 8px; --gap-sm: 12px; --gap-md: 20px; --gap-lg: 32px; --gap-xl: 56px; --gap-2xl: 96px;
+      --container: 1200px; --gutter: 32px;
+      --radius: 10px; --radius-lg: 16px; --radius-xl: 24px;
+      --nav-h: 80px;
+      /* Skeuomorphic shadow layers */
+      --shadow-card: 0 1px 3px rgba(15,23,42,.04), 0 4px 12px rgba(15,23,42,.06), 0 10px 24px rgba(15,23,42,.07);
+      --shadow-card-hover: 0 1px 3px rgba(15,23,42,.06), 0 8px 18px rgba(15,23,42,.08), 0 18px 42px rgba(15,23,42,.10);
+      --shadow-elevated: 0 2px 6px rgba(15,23,42,.05), 0 8px 20px rgba(15,23,42,.08), 0 20px 48px rgba(15,23,42,.10);
+      --shadow-button: 0 1px 3px rgba(15,23,42,.08), 0 3px 8px rgba(15,23,42,.10);
+      --shadow-button-hover: 0 2px 6px rgba(15,23,42,.10), 0 8px 20px rgba(15,23,42,.14), 0 16px 36px rgba(15,23,42,.12);
+      --shadow-inset: inset 0 1px 4px rgba(15,23,42,.10), inset 0 -1px 1px rgba(255,255,255,.40);
+      --shadow-nav: 0 1px 20px rgba(15,23,42,.06);
+      --noise-opacity: .03;
+    }
+
+    [data-theme="dark"] {
+      --bg: oklch(9% 0.02 250);
+      --surface: oklch(15% 0.018 250);
+      --fg: oklch(98% 0.002 240);
+      --muted: oklch(70% 0.016 240);
+      --border: oklch(28% 0.015 250);
+      --accent: oklch(68% 0.12 210);
+      --teal: oklch(72% 0.11 215);
+      --accent-soft: color-mix(in oklch, var(--accent) 18%, transparent);
+      --teal-soft: color-mix(in oklch, var(--teal) 14%, transparent);
+      --green-soft: color-mix(in oklch, var(--green) 14%, transparent);
+      --fg-soft: color-mix(in oklch, var(--fg) 8%, transparent);
+      --shadow-card: 0 1px 3px rgba(0,0,0,.20), 0 4px 12px rgba(0,0,0,.25), 0 10px 24px rgba(0,0,0,.30);
+      --shadow-card-hover: 0 1px 3px rgba(0,0,0,.25), 0 8px 18px rgba(0,0,0,.30), 0 18px 42px rgba(0,0,0,.35);
+      --shadow-elevated: 0 2px 6px rgba(0,0,0,.22), 0 8px 20px rgba(0,0,0,.28), 0 20px 48px rgba(0,0,0,.32);
+      --shadow-button: 0 1px 3px rgba(0,0,0,.20), 0 3px 8px rgba(0,0,0,.25);
+      --shadow-button-hover: 0 2px 6px rgba(0,0,0,.25), 0 8px 20px rgba(0,0,0,.32), 0 16px 36px rgba(0,0,0,.28);
+      --shadow-inset: inset 0 1px 4px rgba(0,0,0,.20), inset 0 -1px 1px rgba(255,255,255,.06);
+      --shadow-nav: 0 1px 20px rgba(0,0,0,.25);
+      --noise-opacity: .06;
+    }
+    [data-theme="dark"] .topnav.scrolled {
+      background: color-mix(in oklch, var(--surface) 92%, transparent);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    }
+    [data-theme="dark"] .section-dark { background: oklch(12% 0.018 250); color: var(--fg); }
+    [data-theme="dark"] .section-dark h2, [data-theme="dark"] .section-dark h3 { color: var(--fg); }
+    [data-theme="dark"] .section-dark .lead { color: var(--muted); }
+    [data-theme="dark"] .section-dark .card { background: oklch(18% 0.018 250); border-color: oklch(25% 0.015 250); }
+    [data-theme="dark"] .dash-kpi { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.07); }
+    [data-theme="dark"] .dash-table-row { border-color: rgba(255,255,255,.06); }
+    [data-theme="dark"] .btn-secondary { background: var(--surface); color: var(--fg); border-color: var(--border); }
+    [data-theme="dark"] .pagefoot { background: oklch(6% 0.015 250); }
+    [data-theme="dark"] .comparison-table th { background: rgba(255,255,255,.04); }
+    [data-theme="dark"] .section-dark .comparison-table th { background: rgba(255,255,255,.06); }
+    [data-theme="dark"] .section-dark .comparison-table td { color: rgba(255,255,255,.85); border-bottom-color: rgba(255,255,255,.12); }
+    [data-theme="dark"] .section-dark .comparison-table .traditional { color: rgba(255,255,255,.50); }
+    [data-theme="dark"] .section-dark .comparison-table .optiflow-col { color: rgba(255,255,255,.92); }
+    [data-theme="dark"] .hero::after { opacity: .06; }
+    [data-theme="dark"] .breadcrumb a { color: var(--teal); }
+    [data-theme="dark"] .faq-item { border-bottom-color: var(--border); }
+    [data-theme="dark"] .faq-question:hover { color: var(--teal); }
+    [data-theme="dark"] .faq-icon { color: var(--muted); }
+    [data-theme="dark"] .faq-item.open .faq-icon { color: var(--teal); }
+    [data-theme="dark"] .faq-answer p { color: var(--muted); }
+    [data-theme="dark"] .faq-list .btn-secondary { background: var(--surface); color: var(--fg); border-color: var(--border); }
+    [data-theme="dark"] .theme-toggle { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.12); color: rgba(255,255,255,.70); }
+    [data-theme="dark"] .theme-toggle:hover { border-color: var(--teal); color: var(--fg); box-shadow: 0 0 20px rgba(39,141,159,.15); }
+    [data-theme="dark"] .nav-dropdown-menu { background: rgba(15,23,42,.94); border-color: var(--border); box-shadow: var(--shadow-elevated); }
+    [data-theme="dark"] .nav-dropdown-menu a { color: var(--muted); }
+    [data-theme="dark"] .nav-dropdown-menu a:hover { background: rgba(255,255,255,.06); color: var(--fg); }
+
+    /* Problem cards — dark mode */
+    [data-theme="dark"] .problem-icon { background: rgba(255,255,255,.08); color: var(--teal); box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+    [data-theme="dark"] .problem-card h3 { color: var(--fg); }
+    [data-theme="dark"] .problem-card .problem-desc { color: var(--muted); }
+    [data-theme="dark"] .problem-card .problem-impact { color: oklch(78% 0.06 220); background: rgba(39,141,159,.18); }
+    [data-theme="dark"] .problem-card:hover .problem-icon { background: rgba(255,255,255,.12); color: var(--teal); }
+    [data-theme="dark"] .problem-card .problem-roi { color: var(--lime); }
+
+    /* ─── Reduced Motion ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      .reveal, .stagger-3 > *, .stagger-4 > *, .stagger-5 > *, .hero-content h1, .hero-content .lead, .hero-content .hero-cta > *, .hero-trust { opacity: 1; transform: none; }
+      .floating-widget, .btn-glow::before, .trust-logos, .cta-section::after { animation: none; }
+    }
+
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%;  background: var(--bg); scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.6;
+      text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+      transition: background 0.35s, color 0.35s;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    p, h1, h2, h3 { margin: 0; text-wrap: pretty; }
+    h1, h2, h3 { color: var(--fg); }
+    h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1.08; letter-spacing: -0.025em; font-weight: 700; }
+    h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.02em; font-weight: 700; }
+    h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+    [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 { color: var(--fg); }
+    .lead { font-size: var(--fs-lead); line-height: 1.6; color: var(--muted); max-width: 60ch; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); font-weight: 500; margin: 0 0 var(--gap-md); }
+    .meta { font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--muted); }
+    .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+    .section { padding-block: clamp(56px, 8vw, var(--gap-2xl)); position: relative; scroll-margin-top: var(--nav-h); content-visibility: auto; contain-intrinsic-size: 500px }
+    .section-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+    .section-header .lead { margin: 12px auto 0; }
+
+    .skip-link { position: absolute; top: -100%; left: 16px; padding: 8px 16px; background: var(--accent); color: #fff; font-weight: 600; border-radius: 6px; z-index: 1000; }
+    .skip-link:focus { top: 8px; }
+    :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+
+    /* ─── Noise texture (hero backgrounds) ─── */
+    .noise-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: var(--noise-opacity); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; }
+
+    /* ─── Navigation — Glass ─── */
+    .topnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; background: var(--nav-bg); background: var(--bg); transition: background 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.35s, box-shadow 0.35s; }
+    .topnav.scrolled { background: rgba(255,255,255,.78); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-nav); }
+    [data-theme="dark"] .topnav.scrolled { background: rgba(15,23,42,.85); }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; max-width: var(--container); width: 100%; margin-inline: auto; padding-inline: var(--gutter); }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+    .logo-img { height: 32px; width: auto; border-radius: 6px; }
+    .nav-cta { display: flex; gap: var(--gap-sm); align-items: center; }
+    .nav-cta .btn-ghost { padding-inline: 12px; }
+
+    /* ─── Buttons — Skeuomorphic 3-state ─── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius); font-size: 15px; font-weight: 600; white-space: nowrap; position: relative; overflow: hidden; cursor: pointer; border: 0; font-family: inherit; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.25s; }
+    /* Primary — deep gradient + layered shadow + light sweep */
+    .btn-primary { background: linear-gradient(135deg, #1B4D81 0%, #23708A 50%, #1B4D81 100%); background-size: 200% 200%; color: white; box-shadow: var(--shadow-button), 0 0 0 1px rgba(27,77,129,.25); }
+    .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,.12) 45%, transparent 100%); transform: translateX(-100%); transition: transform 0.55s ease; pointer-events: none; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-button-hover), 0 0 0 1px rgba(27,77,129,.35); }
+    .btn-primary:hover::after { transform: translateX(100%); }
+    .btn-primary:active { transform: translateY(1px); box-shadow: var(--shadow-inset), 0 0 0 1px rgba(27,77,129,.15); }
+    /* Secondary — glass surface */
+    .btn-secondary { background: rgba(255,255,255,.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--fg); border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(15,23,42,.04); }
+    .btn-secondary:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); border-color: var(--fg); }
+    .btn-secondary:active { transform: translateY(1px); box-shadow: var(--shadow-inset); }
+    .btn-ghost { color: var(--muted); background: transparent; }
+    .btn-ghost:hover { color: var(--fg); }
+    [data-theme="dark"] .btn-ghost { color: rgba(255,255,255,.78); }
+    [data-theme="dark"] .btn-ghost:hover { color: var(--teal); }
+    .btn-lg { padding: 16px 32px; font-size: 16px; border-radius: var(--radius-lg); }
+
+    /* Glow ring CTA */
+    .btn-glow { position: relative; }
+    .btn-glow::before { content: ''; position: absolute; inset: -3px; border-radius: inherit; background: linear-gradient(135deg, var(--accent), var(--teal), var(--green), var(--teal), var(--accent)); background-size: 300% 300%; z-index: -1; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
+    .btn-glow:hover::before { opacity: 1; }
+
+    /* ─── Desktop Navigation ─── */
+    .desktop-nav { display: flex; align-items: center; gap: 2px; }
+    .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); padding: 6px 12px; border-radius: 6px; transition: color 0.2s, background 0.2s; white-space: nowrap; letter-spacing: 0.01em; }
+    .nav-link:hover { color: var(--fg); background: var(--fg-soft); }
+    .nav-link.active { color: var(--accent); font-weight: 600; position: relative; }
+    .nav-link.active::after { content: ''; position: absolute; bottom: -2px; left: 12px; right: 12px; height: 2px; background: var(--accent); border-radius: 2px; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 190px; background: rgba(255,255,255,.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-elevated); padding: 8px; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity 0.2s, visibility 0.2s, transform 0.2s; z-index: 101; }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(4px); }
+    .nav-dropdown-menu a { display: block; padding: 8px 14px; border-radius: 6px; font-size: 13px; color: var(--muted); transition: color 0.15s, background 0.15s; }
+    .nav-dropdown-menu a:hover { background: var(--fg-soft); color: var(--fg); }
+
+    /* ─── Theme Toggle ─── */
+    .theme-toggle { width: 40px; height: 40px; display: grid; place-items: center; border-radius: var(--radius); border: 1px solid var(--border); background: rgba(255,255,255,.60); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: pointer; transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s; margin-right: 4px; color: var(--muted); }
+    .theme-toggle:hover { border-color: var(--fg); color: var(--fg); box-shadow: var(--shadow-card); }
+    .theme-toggle svg { width: 18px; height: 18px; }
+    [data-theme="dark"] .theme-toggle .sun, [data-theme="light"] .theme-toggle .moon { display: none; }
+    [data-theme="dark"] .theme-toggle .moon, [data-theme="light"] .theme-toggle .sun { display: block; }
+
+    /* ─── Hamburger ─── */
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; border-radius: 6px; cursor: pointer; z-index: 102; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--fg); border-radius: 2px; transition: opacity 0.25s, transform 0.25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-drawer { position: fixed; top: 0; right: -320px; width: 300px; height: 100vh; background: rgba(255,255,255,.95); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-left: 1px solid var(--border); z-index: 101; padding: 24px; display: flex; flex-direction: column; gap: 4px; transition: right 0.3s cubic-bezier(0.22,1,0.36,1); overflow-y: auto; box-shadow: -8px 0 40px rgba(15,23,42,.12); }
+    .mobile-drawer.open { right: 0; }
+    .mobile-drawer .nav-link { font-size: 16px; padding: 12px 16px; }
+    .mobile-drawer .nav-dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: none; padding: 0 0 0 16px; background: transparent; }
+    .mobile-drawer .nav-dropdown-menu a { padding: 10px 16px; font-size: 14px; }
+    .mobile-drawer .drawer-cta { flex-direction: column; gap: var(--gap-sm); margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; }
+    .drawer-overlay { position: fixed; inset: 0; background: rgba(15,23,42,.35); z-index: 100; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .drawer-overlay.active { opacity: 1; visibility: visible; }
+
+    /* ─── Breadcrumb ─── */
+    .breadcrumb { padding: calc(var(--nav-h) + 20px) var(--gutter) 0; max-width: var(--container); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+    .breadcrumb a { color: var(--teal); transition: color 0.15s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb .sep { color: var(--border); user-select: none; }
+    .breadcrumb .current { color: var(--fg); font-weight: 500; }
+
+    /* ═══ CARDS — Skeuomorphic Layered Shadows ═══ */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-card); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1), border-color 0.35s; }
+    .card:hover { transform: translateY(-4px) scale(1.01); box-shadow: var(--shadow-card-hover); border-color: color-mix(in oklch, var(--teal) 30%, var(--border)); }
+    [data-theme="dark"] .card { box-shadow: var(--shadow-card), 0 0 1px rgba(255,255,255,.06); }
+    [data-theme="dark"] .card:hover { box-shadow: var(--shadow-card-hover), 0 0 24px rgba(39,141,159,.12); }
+    .card-tilt { perspective: 800px; }
+    .card-tilt > .card { transform-style: preserve-3d; will-change: transform; }
+
+    /* ─── Sticky CTA ─── */
+    .sticky-cta { position: fixed; bottom: 24px; right: 24px; z-index: 90; display: flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 999px; background: var(--accent); color: white; font-weight: 600; font-size: 15px; box-shadow: 0 8px 28px rgba(27,77,129,.35); transition: opacity .35s ease, transform .35s ease; opacity: 0; transform: translateY(12px); pointer-events: none; }
+    .sticky-cta.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .sticky-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(27,77,129,.45); }
+    .sticky-cta:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(27,77,129,.25); }
+    .sticky-arrow { display: inline-block; transition: transform .25s ease; }
+    .sticky-cta:hover .sticky-arrow { transform: translateX(3px); }
+
+    /* Glass card variant */
+    .glass-card { background: rgba(255,255,255,.70); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.60); box-shadow: var(--shadow-card), 0 0 0 1px rgba(255,255,255,.30) inset; }
+    .glass-card:hover { background: rgba(255,255,255,.80); box-shadow: var(--shadow-card-hover), 0 0 0 1px rgba(255,255,255,.40) inset; }
+    [data-theme="dark"] .glass-card { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.08); box-shadow: var(--shadow-card); }
+    [data-theme="dark"] .glass-card:hover { background: rgba(255,255,255,.09); }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-lg); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-md); }
+
+    /* ═══ HERO — White in light mode, deep gradient in dark ═══ */
+    .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; background: #F8FAFC; box-shadow: inset 0 -1px 0 rgba(15,23,42,.06); }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(39,141,159,.04) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+    .hero .noise-overlay { display: none; }
+    [data-theme="dark"] .hero { background: #0F172A; }
+    [data-theme="dark"] .hero .noise-overlay { display: block; z-index: 1; opacity: .04; }
+    .hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(39,141,159,.04) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+    [data-theme="dark"] .hero::after { opacity: .06; background: radial-gradient(ellipse 70% 40% at 50% 50%, rgba(39,141,159,.10) 0%, transparent 70%); }
+    [data-theme="dark"] .hero-content h1 { color: rgba(255,255,255,.80); text-shadow: 0 2px 14px rgba(0,0,0,.40), 0 1px 3px rgba(0,0,0,.30); }
+    [data-theme="dark"] .hero h1, [data-theme="dark"] .hero h2, [data-theme="dark"] .hero h3 { color: rgba(255,255,255,.80); }
+    [data-theme="dark"] .hero p, [data-theme="dark"] .hero li { color: rgba(255,255,255,.68); }
+    [data-theme="dark"] .hero .lead { color: rgba(255,255,255,.62); }
+    [data-theme="dark"] .hero .eyebrow { color: var(--lime); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; position: relative; z-index: 2; }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-content h1 { margin-bottom: 20px; min-height: 1.2em; color: #0F172A; text-shadow: 0 2px 12px rgba(15,23,42,.10), 0 1px 2px rgba(15,23,42,.06); }
+    .highlight-gradient { background: linear-gradient(135deg, var(--accent), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .tw-cursor { display: inline-block; width:3px; height:0.8em; background:#FF3B3B; border-radius:2px; animation:blink 0.8s steps(1) infinite; vertical-align:middle; margin-left:4px; }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .tw-cursor { animation: none; opacity: 1; } }
+    .hero-content .lead { margin-bottom: 32px; }
+    .hero-cta { display: flex; gap: var(--gap-sm); flex-wrap: wrap; margin-bottom: 40px; }
+    .hero-trust { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .hero-trust span { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+    [data-theme="dark"] .hero-trust span { color: rgba(255,255,255,.70); }
+    .hero-trust svg { color: var(--green); flex-shrink: 0; }
+    .hero .btn-secondary { }
+    [data-theme="dark"] .hero .btn-secondary { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.20); color: white; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    [data-theme="dark"] .hero .btn-secondary:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.35); }
+
+    /* Hero entry reveal */
+    .hero-content .eyebrow, .hero-content h1, .hero-content .lead, .hero-content .hero-cta > *, .hero-content .hero-trust > * { opacity: 0; transform: translateY(16px); animation: heroReveal 0.65s cubic-bezier(0.22,0.61,0.36,1) forwards; }
+    .hero-content .eyebrow { animation-delay: 0.05s; }
+    .hero-content h1 { animation-delay: 0.12s; }
+    .hero-content .lead { animation-delay: 0.22s; }
+    .hero-content .hero-cta > * { animation-delay: 0.32s; }
+    .hero-content .hero-cta > *:nth-child(2) { animation-delay: 0.38s; }
+    .hero-content .hero-trust > * { animation-delay: 0.46s; }
+    .hero-content .hero-trust > *:nth-child(2) { animation-delay: 0.50s; }
+    .hero-content .hero-trust > *:nth-child(3) { animation-delay: 0.54s; }
+    .hero-content .hero-trust > *:nth-child(4) { animation-delay: 0.58s; }
+    @keyframes heroReveal { to { opacity: 1; transform: translateY(0); } }
+
+    /* Hero hook badge — adapts to light/dark */
+    .hook-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--fg-soft); color: var(--fg); font-size: 13px; font-weight: 600; margin-bottom: 20px; border: 1px solid var(--border); }
+    [data-theme="dark"] .hook-badge { background: rgba(255,255,255,.10); color: rgba(255,255,255,.90); border: 1px solid rgba(255,255,255,.15); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .hook-badge svg { width: 14px; height: 14px; color: var(--green); }
+    [data-theme="dark"] .hook-badge svg { color: var(--lime); }
+
+    /* Mouse glow — ambient light follow on hero, visible in both themes */
+    .mouse-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(27,77,129,.15) 0%, rgba(39,141,159,.08) 35%, rgba(84,184,154,.04) 55%, transparent 70%); pointer-events: none; transform: translate(-50%,-50%); z-index: 1; opacity: 0; transition: opacity 0.4s ease; }
+    .mouse-glow.active { opacity: 1; }
+    [data-theme="dark"] .mouse-glow { background: radial-gradient(circle, rgba(39,141,159,.22) 0%, rgba(27,77,129,.10) 40%, transparent 65%); }
+
+    /* ═══ Dashboard mockup — Glass ═══ */
+    .dashboard-mockup { position: relative; background: rgba(255,255,255,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.50); border-radius: var(--radius-xl); padding: 20px; box-shadow: var(--shadow-elevated), 0 0 0 1px rgba(255,255,255,.20) inset; transform: translateY(0); }
+    [data-theme="dark"] .dashboard-mockup { background: rgba(15,23,42,.75); border-color: rgba(255,255,255,.10); }
+    .dashboard-mockup.parallax { will-change: transform; }
+    @keyframes floatDashboard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .dash-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,.08); margin-bottom: 16px; }
+    [data-theme="dark"] .dash-header { border-color: rgba(255,255,255,.08); }
+    .dash-header h4 { font-size: 14px; font-weight: 600; color: #0F172A; margin: 0; }
+    [data-theme="dark"] .dash-header h4 { color: var(--fg); }
+    .dash-dots { display: flex; gap: 6px; }
+    .dash-dots span { width: 9px; height: 9px; border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+    .dash-dots span:nth-child(1) { background: #FF5F57; }
+    .dash-dots span:nth-child(2) { background: #FFBD2E; }
+    .dash-dots span:nth-child(3) { background: #28C840; }
+    .dash-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .dash-kpi { background: rgba(0,0,0,.03); border-radius: var(--radius); padding: 14px; border: 1px solid rgba(0,0,0,.04); }
+    [data-theme="dark"] .dash-kpi { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.06); }
+    .dash-kpi-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .dash-kpi-value { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: #0F172A; }
+    [data-theme="dark"] .dash-kpi-value { color: var(--fg); }
+    .dash-kpi-change { font-size: 11px; color: var(--green); margin-top: 2px; }
+    .dash-chart { background: rgba(0,0,0,.03); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; border: 1px solid rgba(0,0,0,.04); }
+    [data-theme="dark"] .dash-chart { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.08); }
+    .dash-table-row { display: grid; grid-template-columns: 2fr 1fr 1fr 80px; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,.06); font-size: 12px; align-items: center; color: #0F172A; }
+    [data-theme="dark"] .dash-table-row { border-color: rgba(255,255,255,.06); color: var(--fg); }
+    .dash-table-row:last-child { border-bottom: 0; }
+    .dash-table-row.header { color: var(--muted); font-weight: 500; font-size: 11px; }
+    .dash-status { display: inline-flex; padding: 2px 10px; border-radius: 999px; font-size: 10px; font-weight: 500; }
+    .dash-status.active { background: rgba(84,184,154,.15); color: oklch(35% 0.12 145); }
+    .dash-status.pending { background: rgba(240,171,0,.12); color: oklch(45% 0.10 85); }
+    [data-theme="dark"] .dash-status.active { color: oklch(72% 0.12 145); }
+    [data-theme="dark"] .dash-status.pending { color: oklch(72% 0.10 85); }
+
+    .floating-widget { position: absolute; background: rgba(255,255,255,.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.50); border-radius: var(--radius); padding: 12px 16px; box-shadow: var(--shadow-elevated); font-size: 13px; animation: floatWidget 4s ease-in-out infinite; z-index: 3; }
+    [data-theme="dark"] .floating-widget { background: rgba(15,23,42,.80); border-color: rgba(255,255,255,.10); }
+    .floating-widget.w1 { top: -18px; right: -24px; animation-delay: 0s; }
+    .floating-widget.w2 { bottom: 48px; left: -32px; animation-delay: 1.3s; }
+    .floating-widget.w3 { bottom: -10px; right: 50px; animation-delay: 2.6s; }
+    @keyframes floatWidget { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .fw-label { font-size: 11px; color: var(--muted); }
+    .fw-value { font-family: var(--font-mono); font-weight: 700; font-size: 16px; color: #0F172A; }
+    [data-theme="dark"] .fw-value { color: var(--fg); }
+
+    /* ─── Trust bar ─── */
+    .trust-bar { padding-block: 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); overflow: hidden; }
+    .trust-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); text-align: center; margin-bottom: 24px; }
+    .trust-metric-value { font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--accent); }
+    .trust-metric-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .trust-logos { display: flex; align-items: center; gap: 56px; opacity: 0.5; animation: logoScroll 30s linear infinite; width: max-content; }
+    .trust-logos-wrap { overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%); }
+    .trust-logo { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--muted); letter-spacing: -0.02em; white-space: nowrap; }
+    @keyframes logoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ─── Problem ─── */
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); }
+    .problem-card { padding: 32px; }
+    .problem-icon { width: 44px; height: 44px; display: grid; place-items: center; background: oklch(96% 0.01 230); border-radius: var(--radius); margin-bottom: 20px; color: var(--accent); box-shadow: 0 2px 6px rgba(27,77,129,.08); }
+    .problem-icon svg { width: 22px; height: 22px; }
+    .problem-card h3 { margin-bottom: 8px; color: var(--fg); }
+    .problem-card .problem-desc { color: var(--muted); font-size: 14px; line-height: 1.5; margin-bottom: 12px; }
+    .problem-card .problem-impact { font-size: 12px; color: var(--accent); font-weight: 500; background: var(--accent-soft); display: inline-block; padding: 4px 10px; border-radius: 999px; }
+    .problem-card .problem-roi { font-size: 13px; color: var(--green); font-weight: 600; margin-top: 8px; }
+
+    /* ─── Dark section ─── */
+    .section-dark { background: #0F172A; color: var(--bg); }
+    .section-dark .noise-overlay { z-index: 0; }
+    .section-dark .container { position: relative; z-index: 1; }
+    .section-dark .eyebrow { color: var(--green); }
+    .section-dark .lead { color: color-mix(in oklch, var(--bg) 70%, transparent); }
+    .section-dark h2, .section-dark h3 { color: white; }
+    .section-dark .card { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .section-dark .card:hover { border-color: rgba(84,184,154,.40); background: rgba(255,255,255,.12); }
+    .impact-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-md); }
+    .impact-card { text-align: center; padding: 24px 16px; }
+    .impact-card h3 { color: white; }
+    .impact-card p { font-size: 13px; color: rgba(255,255,255,.55); }
+    .impact-cost { margin-top: 12px; font-family: var(--font-mono); font-size: 14px; color: var(--lime); font-weight: 600; }
+
+    /* ─── Solution ─── */
+    .solution-visual { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-top: 48px; }
+    .solution-stage { padding: 20px 40px; border-radius: var(--radius-lg); font-weight: 600; font-size: 18px; text-align: center; }
+    .solution-stage.chaos { background: rgba(200,80,30,.08); color: oklch(40% 0.10 25); border: 1px solid rgba(200,80,30,.15); box-shadow: 0 2px 8px rgba(200,80,30,.06); }
+    .solution-stage.optiflow { background: linear-gradient(135deg, #1B4D81, #278D9F); color: white; font-size: 22px; padding: 28px 56px; box-shadow: var(--shadow-elevated), 0 0 40px rgba(27,77,129,.20); }
+    .solution-stage.excellence { background: rgba(84,184,154,.10); color: oklch(30% 0.10 145); border: 1px solid rgba(84,184,154,.25); }
+    [data-theme="dark"] .solution-stage.chaos { color: rgba(255,255,255,.80); background: rgba(200,80,30,.15); border-color: rgba(200,80,30,.25); }
+    [data-theme="dark"] .solution-stage.excellence { color: rgba(255,255,255,.80); background: rgba(84,184,154,.16); border-color: rgba(84,184,154,.30); }
+    .solution-arrow { color: var(--muted); font-size: 24px; }
+    .solution-modules { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; }
+    .solution-module { padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; font-weight: 500; box-shadow: 0 1px 3px rgba(15,23,42,.04); transition: color 0.2s, background 0.2s, box-shadow 0.2s; }
+    .solution-module:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-card); }
+
+    /* ─── Modules ─── */
+    .module-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); }
+    .module-card { text-align: center; padding: 32px 20px; }
+    .module-icon { width: 52px; height: 52px; display: grid; place-items: center; background: linear-gradient(135deg, var(--accent-soft), var(--teal-soft)); border-radius: var(--radius-lg); margin: 0 auto 16px; color: var(--teal); box-shadow: 0 2px 8px rgba(39,141,159,.10); }
+    .module-icon svg { width: 24px; height: 24px; }
+    .module-card h3 { font-size: 16px; margin-bottom: 8px; color: var(--fg); }
+    [data-theme="dark"] .module-card h3 { color: var(--fg); }
+    [data-theme="dark"] .module-card .module-desc { color: var(--muted); }
+    [data-theme="dark"] .module-icon { background: rgba(39,141,159,.12); color: var(--teal); }
+    [data-theme="dark"] .module-card .module-benefit { color: var(--lime); }
+    .module-card .module-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .module-card .module-benefit { font-size: 12px; color: var(--green); font-weight: 500; margin-top: 8px; }
+
+    /* ─── Steps ─── */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); position: relative; }
+    .steps::before { content: ''; position: absolute; top: 32px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal), var(--green), var(--lime)); border-radius: 2px; box-shadow: 0 1px 4px rgba(27,77,129,.15); }
+    .section-header h2 { position: relative; display: inline-block; }
+    .section-header h2::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 48px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--teal)); border-radius: 2px; }
+    [data-theme="dark"] .section-header h2::after { background: linear-gradient(90deg, var(--lime), var(--teal)); }
+    .step { text-align: center; position: relative; }
+    .step-number { width: 64px; height: 64px; display: grid; place-items: center; background: var(--surface); border: 2px solid var(--accent); border-radius: 50%; margin: 0 auto 20px; font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--accent); position: relative; z-index: 2; box-shadow: var(--shadow-card), inset 0 2px 4px rgba(255,255,255,.60); transition: color 0.25s, background 0.25s, box-shadow 0.25s; }
+    .step:hover .step-number { background: var(--accent); color: white; box-shadow: var(--shadow-elevated), 0 0 20px rgba(27,77,129,.20); }
+    .step h3 { font-size: 16px; margin-bottom: 8px; color: var(--fg); }
+    .step p { font-size: 13px; color: var(--muted); }
+    .step .step-outcome { font-size: 12px; color: var(--green); font-weight: 500; margin-top: 6px; }
+
+    /* ─── Features ─── */
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); }
+    .feature-item { padding: 24px; }
+    .feature-item .feature-mark { width: 40px; height: 40px; display: grid; place-items: center; background: var(--accent-soft); border-radius: var(--radius); margin-bottom: 16px; color: var(--accent); box-shadow: 0 1px 4px rgba(27,77,129,.08); }
+    .feature-item .feature-mark svg { width: 20px; height: 20px; }
+    .feature-item h3 { font-size: 16px; margin-bottom: 4px; color: var(--fg); }
+    [data-theme="dark"] .feature-item h3 { color: var(--fg); }
+    [data-theme="dark"] .feature-item .feature-mark { color: var(--lime); background: rgba(39,141,159,.12); }
+    [data-theme="dark"] .feature-item .feature-roi { color: var(--lime); }
+    .feature-item .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .feature-item .feature-roi { font-size: 12px; color: var(--accent); font-weight: 500; margin-top: 6px; }
+    [data-theme="dark"] .step p { color: var(--muted); }
+    [data-theme="dark"] .step .step-outcome { color: var(--lime); }
+    [data-theme="dark"] .step-number { border-color: var(--lime); color: var(--lime); }
+    [data-theme="dark"] .step:hover .step-number { background: var(--lime); color: var(--fg); }
+
+    /* ─── Industries ─── */
+    .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); }
+    .industry-card { padding: 28px; text-align: center; }
+    .industry-icon { width: 56px; height: 56px; display: grid; place-items: center; background: linear-gradient(135deg, var(--accent-soft), var(--teal-soft)); border-radius: var(--radius-lg); margin: 0 auto 16px; color: var(--accent); box-shadow: 0 2px 8px rgba(27,77,129,.08); }
+    .industry-icon svg { width: 26px; height: 26px; }
+    .industry-card h3 { font-size: 16px; margin-bottom: 6px; color: var(--fg); }
+    [data-theme="dark"] .industry-card h3 { color: var(--fg); }
+    [data-theme="dark"] .industry-card .ind-challenge { color: rgba(255,255,255,.55); }
+    [data-theme="dark"] .industry-card .ind-solution { color: var(--lime); }
+    [data-theme="dark"] .industry-icon { background: rgba(39,141,159,.12); color: var(--lime); }
+    .industry-card .ind-challenge { font-size: 12px; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
+    .industry-card .ind-solution { font-size: 13px; color: var(--green); font-weight: 500; }
+
+    /* ─── Comparison ─── */
+    .comparison-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+    .comparison-table th, .comparison-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .comparison-table th { font-weight: 600; font-size: 14px; background: var(--surface); }
+    .comparison-table .traditional { color: var(--muted); font-size: 13px; }
+    .comparison-table .optiflow-col { color: var(--fg); font-weight: 500; font-size: 13px; }
+    .comparison-table .check { color: var(--green); font-weight: 700; }
+    .comparison-table .cross { color: oklch(60% 0.12 25); }
+    .comparison-table td:first-child { font-weight: 600; }
+    /* Comparison table inside dark sections */
+    .section-dark .comparison-table th { background: rgba(255,255,255,.06); color: rgba(255,255,255,.85); border-bottom-color: rgba(255,255,255,.12); }
+    .section-dark .comparison-table td { color: rgba(255,255,255,.85); border-bottom-color: rgba(255,255,255,.10); }
+    .section-dark .comparison-table td:first-child { color: rgba(255,255,255,.90); font-weight: 600; }
+    .section-dark .comparison-table .traditional { color: rgba(255,255,255,.55); }
+    .section-dark .comparison-table .optiflow-col { color: rgba(255,255,255,.95); }
+    .section-dark .comparison-table .check { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 6px; background: rgba(84,184,154,.15); }
+    .section-dark .comparison-table tr:hover td { background: rgba(255,255,255,.04); }
+
+    /* ─── Testimonials ─── */
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); }
+    .testimonial-card { padding: 32px; }
+    .testimonial-quote { font-size: 16px; line-height: 1.6; margin-bottom: 20px; font-style: italic; color: var(--fg); }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); display: grid; place-items: center; flex-shrink: 0; box-shadow: var(--shadow-card); position: relative; overflow: hidden; }
+    .testimonial-avatar svg { width: 20px; height: 20px; color: white; }
+    .testimonial-avatar::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 60%); pointer-events: none; }
+    .testimonial-name { font-weight: 600; font-size: 14px; }
+    .testimonial-role { font-size: 12px; color: var(--muted); }
+    .testimonial-outcome { font-size: 12px; color: var(--green); font-weight: 500; margin-top: 12px; }
+    .testimonial-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); text-align: center; }
+    .testimonial-stat-value { font-family: var(--font-mono); font-size: 32px; font-weight: 700; color: var(--teal); }
+    .testimonial-stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* ─── CTA section ─── */
+    .cta-section { background: linear-gradient(135deg, #1B4D81 0%, #278D9F 50%, #1B4D81 100%); background-size: 200% 200%; color: white; text-align: center; position: relative; overflow: hidden; }
+    .cta-section::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--teal), color-mix(in oklch, var(--accent) 50%, var(--teal)), var(--accent)); opacity: 0; animation: ctaFade 6s ease-in-out infinite; pointer-events: none; }
+    @keyframes ctaFade { 0%, 100% { opacity: 0; } 50% { opacity: 0.35; } }
+    .cta-section h2 { color: white; }
+    .cta-section .lead { color: rgba(255,255,255,.75); margin: 16px auto 32px; }
+    .cta-section .btn-primary { background: white; color: var(--accent); box-shadow: var(--shadow-button-hover); }
+    .cta-section .btn-primary:hover { box-shadow: var(--shadow-elevated); transform: translateY(-2px); }
+    .cta-section .btn-secondary { background: transparent; color: white; border: 1px solid rgba(255,255,255,.40); }
+    .cta-section .btn-secondary:hover { border-color: white; background: rgba(255,255,255,.08); }
+    .cta-section .hero-trust span { color: rgba(255,255,255,.88); }
+    .cta-section .hero-trust svg { color: var(--lime); }
+
+    /* ─── FAQ — smooth grid-row expand ─── */
+    .faq-list { max-width: 800px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { display: flex; align-items: center; justify-content: space-between; padding: 24px 0; cursor: pointer; font-size: 17px; font-weight: 600; width: 100%; text-align: left; color: var(--fg); background: none; border: 0; font-family: inherit; }
+    .faq-question:hover { color: var(--teal); }
+    .faq-icon { width: 24px; height: 24px; display: grid; place-items: center; transition: transform 0.3s ease; color: var(--muted); flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
+    .faq-item.open .faq-answer { grid-template-rows: 1fr; }
+    .faq-answer > div { overflow: hidden; }
+    .faq-answer p { color: var(--muted); font-size: 15px; line-height: 1.6; padding-bottom: 24px; }
+
+    /* ─── Footer ─── */
+    .pagefoot { background: #0F172A; color: rgba(255,255,255,.65); padding-block: 64px 32px; }
+    .pagefoot .logo-img { filter: brightness(10); }
+    .pagefoot h4 { color: white; }
+    .pagefoot a { color: rgba(255,255,255,.65); }
+    .pagefoot a:hover { color: white; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 14px; line-height: 1.6; margin-top: 16px; max-width: 280px; }
+    .footer-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size: 14px; transition: color 0.15s; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.10); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 16px; }
+
+    /* ─── Scroll reveal ─── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .stagger-3 > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-3 > *:nth-child(2) { transition-delay: 0.1s; }
+    .stagger-3 > *:nth-child(3) { transition-delay: 0.2s; }
+    .stagger-3 > *:nth-child(4) { transition-delay: 0.3s; }
+    .stagger-3 > *:nth-child(5) { transition-delay: 0.4s; }
+    .stagger-3 > *:nth-child(6) { transition-delay: 0.5s; }
+    .stagger-4 > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-4 > *:nth-child(2) { transition-delay: 0.08s; }
+    .stagger-4 > *:nth-child(3) { transition-delay: 0.16s; }
+    .stagger-4 > *:nth-child(4) { transition-delay: 0.24s; }
+    .stagger-4 > *:nth-child(5) { transition-delay: 0.32s; }
+    .stagger-4 > *:nth-child(6) { transition-delay: 0.40s; }
+    .stagger-4 > *:nth-child(7) { transition-delay: 0.48s; }
+    .stagger-4 > *:nth-child(8) { transition-delay: 0.56s; }
+    .stagger-5 > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-5 > *:nth-child(2) { transition-delay: 0.06s; }
+    .stagger-5 > *:nth-child(3) { transition-delay: 0.12s; }
+    .stagger-5 > *:nth-child(4) { transition-delay: 0.18s; }
+    .stagger-5 > *:nth-child(5) { transition-delay: 0.24s; }
+
+    /* ─── Scroll-to-Top ─── */
+    .scroll-top { position: fixed; bottom: 32px; right: 32px; z-index: 199; width: 44px; height: 44px; border-radius: var(--radius); background: var(--accent); color: white; display: grid; place-items: center; cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.25s ease; box-shadow: var(--shadow-button); }
+    .scroll-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .scroll-top:hover { box-shadow: var(--shadow-button-hover); transform: translateY(-2px); }
+    .scroll-top:active { transform: translateY(0) scale(0.95); }
+    @media (max-width: 480px) { .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } }
+
+    /* ─── Exit-Intent Popup ─── */
+    .exit-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(15,23,42,.50); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .exit-overlay.active { opacity: 1; pointer-events: auto; }
+    .exit-card { background: var(--surface); border-radius: var(--radius-xl); padding: 40px; max-width: 480px; width: calc(100% - 64px); text-align: center; box-shadow: var(--shadow-elevated); position: relative; animation: exitFadeIn 0.4s cubic-bezier(0.22, 0.61, 0.36, 1); }
+    @keyframes exitFadeIn { from { opacity: 0; transform: translateY(24px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .exit-card h2 { margin-bottom: 12px; }
+    .exit-card .lead { margin-bottom: 28px; }
+    .exit-card .btn-primary { width: 100%; justify-content: center; }
+    .exit-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--fg-soft); display: grid; place-items: center; cursor: pointer; transition: background 0.2s ease; border: 0; font-family: inherit; font-size: 16px; color: var(--muted); }
+    .exit-close:hover { background: var(--border); }
+    [data-theme="dark"] .exit-overlay { background: rgba(15,23,42,.70); }
+
+    /* ─── WhatsApp Floating Widget ─── */
+    .whatsapp-float { position: fixed; bottom: 88px; right: 32px; z-index: 198; width: 52px; height: 52px; border-radius: 50%; background: #25D366; color: white; display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow-elevated); transition: transform 0.25s ease, box-shadow 0.25s ease; text-decoration: none; }
+    .whatsapp-float:hover { transform: scale(1.08); box-shadow: var(--shadow-button-hover); }
+    .whatsapp-float:active { transform: scale(0.94); }
+    .whatsapp-float svg { width: 26px; height: 26px; }
+    @media (max-width: 480px) { .whatsapp-float { bottom: 72px; right: 20px; } }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .desktop-nav { display: none; }
+      .hamburger { display: flex; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 40px; }
+      .grid-4, .feature-grid, .module-grid, .industry-grid { grid-template-columns: repeat(2, 1fr); }
+      .impact-grid { grid-template-columns: repeat(3, 1fr); }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .steps::before { display: none; }
+      .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(3, 1fr); }
+      .dash-kpis { grid-template-columns: repeat(2, 1fr); }
+      .comparison-table { font-size: 13px; }
+      .comparison-table th, .comparison-table td { padding: 12px 14px; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 20px; --fs-h1: clamp(30px,7vw,48px); --fs-h2: clamp(26px,5vw,36px); }
+      .topnav-inner { gap: 12px; }
+      .nav-cta .btn-ghost { display: none; }
+      .btn { padding: 10px 18px; font-size: 14px; }
+      .btn-lg { padding: 14px 24px; font-size: 15px; }
+      .hero { padding-top: calc(var(--nav-h) + 24px); }
+      .hero-content h1 { margin-bottom: 14px; }
+      .hero-content .lead { font-size: 16px; margin-bottom: 24px; }
+      .hero-trust { gap: 8px; }
+      .hero-trust span { font-size: 12px; }
+      .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+      .feature-grid, .module-grid { grid-template-columns: repeat(2, 1fr); }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .testimonial-stats { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .dash-kpis { grid-template-columns: repeat(2, 1fr); }
+      .floating-widget { display: none; }
+      .trust-metrics { grid-template-columns: repeat(2, 1fr); }
+      .industry-grid { grid-template-columns: repeat(2, 1fr); }
+      .comparison-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .section-header { margin-bottom: 40px; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 16px; --fs-h1: clamp(28px,8vw,40px); --fs-h2: clamp(24px,6vw,32px); --fs-lead: 16px; }
+      .topnav-inner { padding-inline: 16px; }
+      .logo { font-size: 16px; }
+      .logo-img { height: 28px; }
+      .theme-toggle { width: 34px; height: 34px; margin-right: 2px; }
+      .nav-cta { gap: 6px; }
+      .btn { padding: 8px 14px; font-size: 13px; }
+      .btn-lg { padding: 12px 20px; font-size: 14px; }
+      .hero { padding-top: calc(var(--nav-h) + 16px); }
+      .hero-cta { flex-direction: column; }
+      .feature-grid, .module-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .testimonial-stats { grid-template-columns: 1fr; gap: var(--gap-md); }
+      .trust-metrics { grid-template-columns: repeat(2, 1fr); gap: var(--gap-md); }
+      .trust-metric-value { font-size: 28px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .industry-grid { grid-template-columns: 1fr; }
+      .section { padding-block: 48px; content-visibility: auto; contain-intrinsic-size: 500px }
+      .dash-kpis { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .dash-kpi-value { font-size: 16px; }
+      .problem-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .mouse-glow { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#content" class="skip-link">Skip to content</a>
+  <header class="topnav" role="navigation" aria-label="Main navigation">
+    <div class="topnav-inner">
+      <a href="optiflow-homepage.html" class="logo">
+        <img class="logo-img" src="mqrk6wlm-OptiFlow.Logo.png" alt="OptiFlow" loading="lazy" decoding="async" width="32" height="32">
+        OptiFlow
+      </a>
+      <nav class="desktop-nav">
+        <a href="optiflow-homepage.html" class="nav-link active">Home</a>
+        <a href="problem-solutions.html" class="nav-link">Solutions</a>
+        <a href="product-overview.html" class="nav-link">Product</a>
+        <a href="features.html" class="nav-link">Features</a>
+        <a href="why-choose-optiflow.html" class="nav-link">Why OptiFlow</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <div class="nav-dropdown"><span class="nav-link">Resources <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="1,1 5,5 9,1"></polyline></svg></span><div class="nav-dropdown-menu"><a href="blog.html">Blog</a><a href="faq.html">FAQ</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="nav-cta">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+        </button>
+        <a href="demo-booking.html" class="btn btn-ghost">Watch Demo</a>
+        <a href="demo-booking.html" class="btn btn-primary btn-glow">Book Demo</a>
+      </div>
+    </div>
+  </header>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="optiflow-homepage.html" class="nav-link">Home</a>
+    <a href="problem-solutions.html" class="nav-link">Solutions</a>
+    <a href="product-overview.html" class="nav-link">Product</a>
+    <a href="features.html" class="nav-link">Features</a>
+    <a href="why-choose-optiflow.html" class="nav-link">Why OptiFlow</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <div class="nav-dropdown"><span class="nav-link" style="cursor:default">Resources</span><div class="nav-dropdown-menu"><a href="blog.html">Blog</a><a href="faq.html">FAQ</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <div class="drawer-cta"><button class="btn btn-primary" style="width:100%;text-align:center;justify-content:center" onclick="location.href='demo-booking.html'">Book Demo</button></div>
+  </div>
+
+  <main id="content" role="main">
+
+    <!-- S01: HERO — Deep gradient + glass dashboard -->
+    <section class="section hero" data-screen-label="01 Hero">
+      <div class="noise-overlay"></div>
+      <div class="mouse-glow" id="mouseGlow"></div>
+      <div class="container" style="position:relative;z-index:2">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hook-badge reveal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Stop Losing Time on Manual Processes
+            </div>
+            <h1 class="reveal reveal-delay-1"><span id="typewriterText" aria-live="polite" style="color: rgb(239, 68, 68);">Daily Operations Feel Out Of Control?</span><span class="tw-cursor" aria-hidden="true">|</span></h1>
+            <p class="lead reveal reveal-delay-2">OptiFlow OS replaces scattered messages and spreadsheets with a single operating system — giving you complete visibility, reliable accountability, and the operational efficiency to scale your business without adding headcount.</p>
+            <div class="hero-cta reveal reveal-delay-3">
+              <a href="demo-booking.html" class="btn btn-primary btn-lg btn-glow">Book Your Demo — It's Free</a>
+              <a href="product-overview.html" class="btn btn-secondary btn-lg">See OptiFlow In Action</a>
+            </div>
+            <div class="hero-trust reveal reveal-delay-3">
+              <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> Zero IT Team Needed</span>
+              <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> Results In Days, Not Months</span>
+              <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> Built For Indian Businesses</span>
+              <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> Trusted Across 7 Industries</span>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-2" id="dashWrap">
+            <div class="dashboard-mockup parallax" id="dashboard">
+              <div class="dash-header"><h4>OptiFlow Dashboard — Today</h4><div class="dash-dots"><span></span><span></span><span></span></div></div>
+              <div class="dash-kpis">
+                <div class="dash-kpi"><div class="dash-kpi-label">Active Tasks</div><div class="dash-kpi-value num">1,247</div><div class="dash-kpi-change">↑ 12% vs last month</div></div>
+                <div class="dash-kpi"><div class="dash-kpi-label">Team Members</div><div class="dash-kpi-value num">86</div><div class="dash-kpi-change">↑ 4% growth</div></div>
+                <div class="dash-kpi"><div class="dash-kpi-label">Completion Rate</div><div class="dash-kpi-value num" style="color:var(--green)">94%</div><div class="dash-kpi-change">↑ 8% improvement</div></div>
+                <div class="dash-kpi"><div class="dash-kpi-label">On-Time Delivery</div><div class="dash-kpi-value num" style="color:var(--green)">97%</div><div class="dash-kpi-change">↑ 2% gain</div></div>
+              </div>
+              <div class="dash-chart">
+                <svg viewBox="0 0 440 100" preserveAspectRatio="none" style="width:100%;height:80px">
+                  <defs><linearGradient id="dag" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1B4D81" stop-opacity="0.35"></stop><stop offset="100%" stop-color="#1B4D81" stop-opacity="0"></stop></linearGradient></defs>
+                  <path d="M0,80 Q30,80 40,68 T80,45 T120,55 T160,30 T200,40 T240,18 T280,35 T320,22 T360,12 T400,28 T440,8" fill="none" stroke="#1B4D81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M0,80 Q30,80 40,68 T80,45 T120,55 T160,30 T200,40 T240,18 T280,35 T320,22 T360,12 T400,28 T440,8 L440,100 L0,100 Z" fill="url(#dag)"></path>
+                </svg>
+              </div>
+              <div class="dash-table-row header"><span>Task</span><span>Assignee</span><span>Due</span><span>Status</span></div>
+              <div class="dash-table-row"><span>Quality check — Batch #412</span><span>Rajesh K.</span><span class="num">Today</span><span class="dash-status active">Active</span></div>
+              <div class="dash-table-row"><span>Client follow-up — Apex Textiles</span><span>Priya M.</span><span class="num">Tomorrow</span><span class="dash-status pending">Pending</span></div>
+              <div class="dash-table-row"><span>SOP update — Warehouse</span><span>Amit S.</span><span class="num">Jun 26</span><span class="dash-status active">Active</span></div>
+              <div class="floating-widget w1"><div class="fw-label">Tasks Completed Today</div><div class="fw-value num">24</div></div>
+              <div class="floating-widget w2"><div class="fw-label">On-Time Rate</div><div class="fw-value num" style="color:var(--green)">96%</div></div>
+              <div class="floating-widget w3"><div class="fw-label">Pending Actions</div><div class="fw-value num" style="color:var(--teal)">3</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S02: TRUST BAR -->
+    <section class="section trust-bar" data-screen-label="02 Trust Bar">
+      <div class="container">
+        <div class="trust-metrics stagger-4">
+          <div class="reveal"><div class="trust-metric-value num">10,000+</div><div class="trust-metric-label">Tasks Managed Daily</div></div>
+          <div class="reveal"><div class="trust-metric-value num">500+</div><div class="trust-metric-label">Businesses Onboarded</div></div>
+          <div class="reveal"><div class="trust-metric-value num">95%</div><div class="trust-metric-label">On-Time Completion</div></div>
+          <div class="reveal"><div class="trust-metric-value num">4.8/5</div><div class="trust-metric-label">Customer Rating</div></div>
+        </div>
+        <div class="trust-logos-wrap"><div class="trust-logos">
+          <span class="trust-logo">Vertex Manufacturing</span>
+          <span class="trust-logo">Apex Textiles</span>
+          <span class="trust-logo">SwiftLog Logistics</span>
+          <span class="trust-logo">Prime Distributors</span>
+          <span class="trust-logo">Craft Exports</span>
+          <span class="trust-logo">Sparsh Services</span>
+          <span class="trust-logo">Vertex Manufacturing</span>
+          <span class="trust-logo">Apex Textiles</span>
+          <span class="trust-logo">SwiftLog Logistics</span>
+          <span class="trust-logo">Prime Distributors</span>
+          <span class="trust-logo">Craft Exports</span>
+          <span class="trust-logo">Sparsh Services</span>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- S03: THE PROBLEM -->
+    <section class="section" data-screen-label="03 The Problem">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">The Problem</p>
+          <h2>Growth Stops When Operations Depend On One Person</h2>
+          <p class="lead">As your business grows, WhatsApp and Excel become liabilities — not tools. Without systems, every new order, employee, and client adds chaos instead of capacity.</p>
+        </div>
+        <div class="problem-grid stagger-3">
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path></svg></div><h3>Tasks Get Missed</h3><p class="problem-desc">Critical work vanishes into message threads. No one knows what's pending, who owns it, or when it was due.</p><span class="problem-impact">Lost Revenue · Delayed Deliveries</span><div class="problem-roi">Fix this: recover ₹5–12L/year in missed billing</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg></div><h3>No Accountability</h3><p class="problem-desc">Without clear ownership, work bounces between people. Blame replaces responsibility when things go wrong.</p><span class="problem-impact">Missed Deadlines · Blame Games</span><div class="problem-roi">Fix this: 40% fewer missed commitments</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg></div><h3>WhatsApp Chaos</h3><p class="problem-desc">Work buried in 20+ groups. Instructions get lost, updates get missed, and nothing is searchable.</p><span class="problem-impact">Duplicated Effort · Confusion</span><div class="problem-roi">Fix this: save 2–4 hours/manager daily</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div><h3>Excel Dependency</h3><p class="problem-desc">Spreadsheets live on one person's laptop. They break, get overwritten, and can't be accessed remotely.</p><span class="problem-impact">Data Loss · Version Conflicts</span><div class="problem-roi">Fix this: one source of truth, always accessible</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div><h3>No Visibility</h3><p class="problem-desc">You discover problems at month-end — not in real time. Decisions are based on gut feel, not data.</p><span class="problem-impact">Slow Decisions · Blind Spots</span><div class="problem-roi">Fix this: spot bottlenecks before they cost you</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><h3>Delayed Follow-Ups</h3><p class="problem-desc">Client queries, vendor payments, internal approvals — all slip through when there's no tracking.</p><span class="problem-impact">Lost Clients · Late Payments</span><div class="problem-roi">Fix this: eliminate 70% of follow-up delays</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S04: COST OF INACTION — Dark premium section with noise -->
+    <section class="section section-dark" data-screen-label="04 Cost of Inaction">
+      <div class="noise-overlay"></div>
+      <div class="container">
+        <div class="section-header reveal" style="margin:0 auto 56px;text-align:center;max-width:600px">
+          <h2>Every Day Without A System, Money Leaks</h2>
+          <p class="lead">The real cost isn't software — it's the revenue, productivity, and growth you lose every day you operate without structure.</p>
+        </div>
+        <div class="impact-grid stagger-5">
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Revenue Leakage</h3><p>Delayed invoicing, unbilled work, missed payment follow-ups</p><div class="impact-cost num">₹8–15L/yr</div></div></div>
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Productivity Drain</h3><p>2–4 hrs/day wasted on chasing status updates</p><div class="impact-cost num">₹12–20L/yr</div></div></div>
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Delivery Penalties</h3><p>Late orders, client escalations, lost repeat business</p><div class="impact-cost num">₹5–10L/yr</div></div></div>
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Key-Person Risk</h3><p>Operations depend on 2–3 people — losing one halts everything</p><div class="impact-cost num">₹10–25L/yr</div></div></div>
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Founder Burnout</h3><p>You're the bottleneck. Every problem escalates to you.</p><div class="impact-cost num">Growth Ceiling</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S05: SOLUTION -->
+    <section class="section" data-screen-label="05 Solution">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>From Operational Chaos To Predictable Growth</h2>
+          <p class="lead">OptiFlow OS replaces disconnected tools with one unified platform — so your business runs on processes, not people.</p>
+        </div>
+        <div class="solution-visual reveal">
+          <div class="solution-stage chaos">Scattered WhatsApp · Excel · Memory</div>
+          <div class="solution-arrow" style="font-size:20px;color:var(--muted)">↓</div>
+          <div class="solution-stage optiflow">OptiFlow OS — Unified Operations</div>
+          <div class="solution-arrow" style="font-size:20px;color:var(--green)">↓</div>
+          <div class="solution-stage excellence">Predictable · Accountable · Scalable</div>
+          <div class="solution-modules">
+            <span class="solution-module">Tasks</span><span class="solution-module">Attendance</span><span class="solution-module">SOPs</span><span class="solution-module">Reports</span><span class="solution-module">Teams</span><span class="solution-module">Checklists</span><span class="solution-module">Leaves</span><span class="solution-module">Analytics</span>
+          </div>
+          <p style="font-size:14px;color:var(--muted);margin-top:20px;text-align:center;max-width:500px">One platform. Eight integrated modules. Zero chaos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- S06: PRODUCT SNAPSHOT -->
+    <section class="section" data-screen-label="06 Product Snapshot" style="background:var(--surface)">
+      <div class="container">
+        <div class="section-header reveal"><h2>Every Module Delivers Measurable Business Value</h2><p class="lead">Not just features — each module is designed to solve a specific operational challenge and produce a clear business outcome.</p></div>
+        <div class="module-grid stagger-4">
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg></div><h3>Task Management</h3><p class="module-desc">Every task has an owner, deadline, and status. No ambiguity. No lost work.</p><div class="module-benefit">Outcome: zero missed deliverables</div></div>
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></div><h3>Worklists</h3><p class="module-desc">Tasks, checklists, approvals, and meetings in one unified list. Zero context switching.</p><div class="module-benefit">Outcome: 30% faster task completion</div></div>
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><h3>Attendance</h3><p class="module-desc">GPS, selfie, office, and IP-based attendance. Real-time workforce visibility.</p><div class="module-benefit">Outcome: accurate payroll, zero disputes</div></div>
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div><h3>SOP Library</h3><p class="module-desc">Document, version-control, and deploy standard operating procedures across departments.</p><div class="module-benefit">Outcome: 80% fewer quality escapes</div></div>
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div><h3>Reports &amp; Analytics</h3><p class="module-desc">Task, attendance, department, and audit reports — live, exportable, and decision-ready.</p><div class="module-benefit">Outcome: data-driven decisions, not gut feel</div></div>
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3>Leave Management</h3><p class="module-desc">Leave requests with buddy replacement, auto-task reassignment, and calendar view.</p><div class="module-benefit">Outcome: zero work stoppage from absenteeism</div></div>
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg></div><h3>Team Management</h3><p class="module-desc">Branch, department, and role-based user management with granular permissions.</p><div class="module-benefit">Outcome: right person, right access, right work</div></div>
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg></div><h3>Helpdesk</h3><p class="module-desc">Internal support ticketing with routing, priority levels, and resolution tracking.</p><div class="module-benefit">Outcome: zero lost requests, faster resolutions</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S07: HOW IT WORKS -->
+    <section class="section" data-screen-label="07 How It Works">
+      <div class="container">
+        <div class="section-header reveal"><h2>Go From Chaos To Clarity In Four Steps</h2><p class="lead">OptiFlow is designed for speed — your team starts using it within days, not weeks.</p></div>
+        <div class="steps stagger-4">
+          <div class="step reveal"><div class="step-number">01</div><h3>Create Process</h3><p>Define the workflow: what, who, when, and how verification works.</p><div class="step-outcome">Clarity in under 60 seconds</div></div>
+          <div class="step reveal"><div class="step-number">02</div><h3>Assign Doer</h3><p>Delegate work with clear ownership. No ambiguity. No "I thought someone else..."</p><div class="step-outcome">Accountability from day one</div></div>
+          <div class="step reveal"><div class="step-number">03</div><h3>Track Work</h3><p>Monitor progress in real time. See every task, every department, every stage.</p><div class="step-outcome">Full visibility, zero follow-ups</div></div>
+          <div class="step reveal"><div class="step-number">04</div><h3>Generate Reports</h3><p>Automated reports for owners, managers, and auditors. One click, always ready.</p><div class="step-outcome">Data-driven decisions, not gut feel</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S08: FEATURES -->
+    <section class="section" data-screen-label="08 Features" style="background:var(--surface)">
+      <div class="container">
+        <div class="section-header reveal"><h2>Built For The Way MSMEs Actually Operate</h2><p class="lead">Every feature was designed after studying how textile, manufacturing, trading, and distribution businesses really work — not how software companies think they should work.</p></div>
+        <div class="feature-grid stagger-4">
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"></path></svg></div><h3>Delegation</h3><p class="feature-desc">WWHWE framework — every task has What, Who, How, When, and Evidence.</p><div class="feature-roi">Save 3 hrs/day on status follow-ups</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><h3>Attendance</h3><p class="feature-desc">GPS, selfie, office IP, and shift-based attendance with payroll-ready reports.</p><div class="feature-roi">Eliminate 100% of attendance disputes</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"></path></svg></div><h3>SOPs</h3><p class="feature-desc">Version-controlled SOP library with department-level access and acknowledgement tracking.</p><div class="feature-roi">80% reduction in process deviations</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg></div><h3>Dashboard</h3><p class="feature-desc">Real-time KPI dashboard with task completion, attendance, and department performance.</p><div class="feature-roi">Spot problems in minutes, not weeks</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div><h3>Helpdesk</h3><p class="feature-desc">Internal ticketing with department routing, priority levels, and resolution time-tracking.</p><div class="feature-roi">50% faster issue resolution</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div><h3>Analytics</h3><p class="feature-desc">Department-level analytics with trend detection, comparisons, and exportable reports.</p><div class="feature-roi">Better decisions, faster growth</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg></div><h3>Leave</h3><p class="feature-desc">Buddy replacement, auto-task reassignment, leave calendar, and approval workflow.</p><div class="feature-roi">Zero work stoppage when people are away</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3>Audit Logs</h3><p class="feature-desc">Full activity trail — every task, approval, and change timestamped and attributable.</p><div class="feature-roi">100% audit-ready, zero panic</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S09: INDUSTRIES -->
+    <section class="section" data-screen-label="09 Industries">
+      <div class="container">
+        <div class="section-header reveal"><h2>Built For Seven Industries. Proven In All Of Them.</h2><p class="lead">OptiFlow is not generic software. It's designed around how textile units, factories, trading firms, warehouses, distribution networks, logistics operators, and service companies actually work.</p></div>
+        <div class="industry-grid stagger-4">
+          <div class="card industry-card reveal"><div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"></path></svg></div><h3>Textile</h3><p class="ind-challenge">Challenge: QC checklists skipped, dye batch variance, shift handover gaps.</p><div class="ind-solution">Solution: SOP library + shift-wise checklists + real-time compliance dashboard.</div></div>
+          <div class="card industry-card reveal"><div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"></path></svg></div><h3>Manufacturing</h3><p class="ind-challenge">Challenge: Machine maintenance missed, purchase approvals delayed, production delays invisible.</p><div class="ind-solution">Solution: WWHWE tasks + approval workflow + live production KPI dashboard.</div></div>
+          <div class="card industry-card reveal"><div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path></svg></div><h3>Trading</h3><p class="ind-challenge">Challenge: Sales follow-ups forgotten, client commitments missed, invoice tracking scattered.</p><div class="ind-solution">Solution: Task automation + deadline alerts + payment tracking workflow.</div></div>
+          <div class="card industry-card reveal"><div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 21 13 16 18 16 8"></polygon></svg></div><h3>Warehousing</h3><p class="ind-challenge">Challenge: Dispatch pick-lists outdated, inventory visibility low, stock mismatch errors.</p><div class="ind-solution">Solution: Checklist management + real-time task tracking + audit-ready reports.</div></div>
+          <div class="card industry-card reveal"><div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></div><h3>Distribution</h3><p class="ind-challenge">Challenge: Multi-location visibility absent, field team accountability gaps, delivery delays.</p><div class="ind-solution">Solution: GPS attendance + multi-branch reporting + automated task delegation.</div></div>
+          <div class="card industry-card reveal"><div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg></div><h3>Logistics</h3><p class="ind-challenge">Challenge: Driver attendance, vehicle checklist compliance, delivery confirmation delays.</p><div class="ind-solution">Solution: Selfie attendance + daily checklists + mobile task confirmation.</div></div>
+          <div class="card industry-card reveal"><div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg></div><h3>Services</h3><p class="ind-challenge">Challenge: Team utilization invisible, client project progress untracked, billing delayed.</p><div class="ind-solution">Solution: Worklist management + time tracking + automated reporting.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S10: WHY OPTIFLOW + COMPARISON -->
+    <section class="section section-dark" data-screen-label="10 Why OptiFlow">
+      <div class="noise-overlay"></div>
+      <div class="container">
+        <div class="section-header reveal" style="margin:0 auto 56px;text-align:center;max-width:600px"><h2>Why Businesses Choose OptiFlow Over The Status Quo</h2><p class="lead">The choice isn't between OptiFlow and another tool. It's between systems that scale and chaos that compounds.</p></div>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+          <table class="comparison-table">
+            <thead><tr><th>Capability</th><th class="traditional">Traditional</th><th class="optiflow-col">OptiFlow OS</th></tr></thead>
+            <tbody>
+            <tr><td>Task Ownership</td><td class="traditional">Verbal / WhatsApp — lost</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Clear owner + deadline + evidence</td></tr>
+            <tr><td>Accountability</td><td class="traditional">Blame culture, no audit trail</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> WWHWE + verification workflow</td></tr>
+            <tr><td>Visibility</td><td class="traditional">Month-end discovery</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Real-time dashboard, every device</td></tr>
+            <tr><td>Attendance</td><td class="traditional">Registers / WhatsApp photos</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> GPS + selfie + IP, payroll-ready</td></tr>
+            <tr><td>Approvals</td><td class="traditional">Chased in person or on call</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> In-app workflow, instant notification</td></tr>
+            <tr><td>Reporting</td><td class="traditional">One person's Excel, once a month</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Automated, live, exportable</td></tr>
+            <tr><td>SOPs</td><td class="traditional">In someone's head</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Version-controlled SOP library</td></tr>
+            <tr><td>Scalability</td><td class="traditional">More people = more chaos</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Processes scale, not dependency</td></tr>
+            <tr><td>MSME Fit</td><td class="traditional">Enterprise software, MSME price</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Built for MSMEs from day one</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- S11: TESTIMONIALS -->
+    <section class="section" data-screen-label="11 Stories">
+      <div class="container">
+        <div class="section-header reveal"><h2>Real Results From Real Businesses</h2><p class="lead">Hear from MSME owners who transformed their operations with OptiFlow.</p></div>
+        <div class="testimonial-grid stagger-3">
+          <div class="card testimonial-card reveal"><div class="testimonial-quote">"Before OptiFlow, I was spending 3 hours every evening just following up. Now I open the dashboard and see everything. My team completes 92% of tasks on time without me chasing."</div><div class="testimonial-author"><div class="testimonial-avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"></circle><path d="M4 21c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" stroke-width="2"></path></svg></div><div><div class="testimonial-name">Amit Kumar</div><div class="testimonial-role">MD, Vertex Manufacturing</div></div></div><div class="testimonial-outcome">Result: 80% fewer follow-ups. Saved 3 hrs/day.</div></div>
+          <div class="card testimonial-card reveal"><div class="testimonial-quote">"We had 47 employees across two shifts. Attendance reconciliation took 4 hours every month-end. With OptiFlow, it's real-time. Payroll disputes dropped to zero."</div><div class="testimonial-author"><div class="testimonial-avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"></circle><path d="M4 21c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" stroke-width="2"></path></svg></div><div><div class="testimonial-name">Neha Sharma</div><div class="testimonial-role">HR Head, Apex Textiles</div></div></div><div class="testimonial-outcome">Result: Payroll accuracy 100%. Zero disputes.</div></div>
+          <div class="card testimonial-card reveal"><div class="testimonial-quote">"We run 3 warehouses across Gujarat and Maharashtra. Before OptiFlow, I had no visibility beyond phone calls. Now every dispatch, every checklist, every SOP is tracked in one place."</div><div class="testimonial-author"><div class="testimonial-avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"></circle><path d="M4 21c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" stroke-width="2"></path></svg></div><div><div class="testimonial-name">Rajesh Patel</div><div class="testimonial-role">Owner, SwiftLog Logistics</div></div></div><div class="testimonial-outcome">Result: 40% faster dispatch. 100% multi-location visibility.</div></div>
+        </div>
+        <div class="testimonial-stats reveal">
+          <div><div class="testimonial-stat-value">80%</div><div class="testimonial-stat-label">Fewer Follow-Ups</div></div>
+          <div><div class="testimonial-stat-value">95%</div><div class="testimonial-stat-label">Accountability Score</div></div>
+          <div><div class="testimonial-stat-value">92%</div><div class="testimonial-stat-label">On-Time Completion</div></div>
+          <div><div class="testimonial-stat-value">100%</div><div class="testimonial-stat-label">Audit Readiness</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S12: FINAL CTA -->
+    <section class="section cta-section" data-screen-label="12 Final CTA">
+      <div class="noise-overlay"></div>
+      <div class="container" style="position:relative;z-index:1">
+        <div class="reveal"><h2>Ready To Build A Process-Driven Business?</h2></div>
+        <p class="lead reveal reveal-delay-1">See how OptiFlow helps MSMEs improve visibility, accountability, execution, and growth — with one operating system.</p>
+        <div class="reveal reveal-delay-2" style="display:flex;gap:var(--gap-sm);justify-content:center;flex-wrap:wrap;margin-top:8px">
+          <a href="demo-booking.html" class="btn btn-primary btn-lg btn-glow">Book Free Demo</a>
+          <a href="product-overview.html" class="btn btn-secondary btn-lg">Watch Product Tour</a>
+        </div>
+        <div class="hero-trust reveal reveal-delay-3" style="grid-template-columns:repeat(4,1fr);margin:40px auto 0;justify-content:center;max-width:600px;display:grid;gap:12px;text-align:left">
+          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> Fast Deployment</span>
+          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> MSME Focused</span>
+          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> Dedicated Support</span>
+          <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> Easy Adoption</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- S13: FAQ PREVIEW -->
+    <section class="section" data-screen-label="13 FAQ">
+      <div class="container">
+        <div class="section-header reveal"><h2>Frequently Asked Questions</h2></div>
+        <div class="faq-list">
+          <div class="faq-item reveal"><button class="faq-question"><span>What is OptiFlow OS?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>OptiFlow OS is a Business Operating System built for MSMEs. It replaces WhatsApp, Excel, and manual tracking with one platform that manages tasks, attendance, SOPs, leave, reports, and accountability — giving owners complete visibility from a single dashboard.</p></div></div></div>
+          <div class="faq-item reveal"><button class="faq-question"><span>How quickly can we go live?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>Most businesses go live in 2-4 weeks. The platform is designed for fast adoption — no IT team needed, no complex setup. We provide guided onboarding and training for your team.</p></div></div></div>
+          <div class="faq-item reveal"><button class="faq-question"><span>Can it really replace WhatsApp and Excel?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>Yes. Every task, attendance record, checklist, and approval moves out of WhatsApp groups and spreadsheets into OptiFlow — where it's searchable, trackable, and auditable. Our customers report saving 2-4 hours per manager per day.</p></div></div></div>
+          <div class="faq-item reveal"><button class="faq-question"><span>Do you charge per user?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>No. OptiFlow has simple, fixed annual pricing based on team size — not per-user charges. No hidden costs, no surprise invoices. Cloud hosting and product updates are included.</p></div></div></div>
+          <div class="faq-item reveal"><button class="faq-question"><span>Is our business data secure?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>Absolutely. Data is encrypted in transit and at rest, hosted on secure cloud infrastructure in India. Role-based access ensures every user sees only what they should. Full audit logs track every action.</p></div></div></div>
+        </div>
+        <div style="text-align:center;margin-top:32px"><a href="faq.html" class="btn btn-secondary">View All FAQs</a></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="pagefoot">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="optiflow-homepage.html" style="display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:20px;font-weight:700;color:white"><img class="logo-img" src="mqrk6wlm-OptiFlow.Logo.png" alt="OptiFlow" style="height:28px"> OptiFlow</a>
+          <p>The Business Operating System for Indian MSMEs. Move from people-dependent operations to process-driven growth.</p>
+        </div>
+        <div class="footer-col"><h4>Product</h4><ul><li><a href="product-overview.html">Overview</a></li><li><a href="features.html">Features</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="demo-booking.html">Book Demo</a></li></ul></div>
+        <div class="footer-col"><h4>Solutions</h4><ul><li><a href="problem-solutions.html">Problem &amp; Solutions</a></li><li><a href="why-choose-optiflow.html">Why OptiFlow</a></li></ul></div>
+        <div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="faq.html">FAQ</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+917874677836">+91 7874677836</a></li><li><a href="mailto:hello@optiflow.in">hello@optiflow.in</a></li><li>Surat, India</li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 OptiFlow Tech Solutions. Built for Indian MSMEs.</span>
+        <button class="theme-toggle" id="footerThemeToggle" aria-label="Toggle theme" style="width:36px;height:36px;border:1px solid rgba(255,255,255,.15);border-radius:8px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.60);display:grid;place-items:center">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      // Theme toggle
+      const html = document.documentElement;
+      const stored = localStorage.getItem('optiflow-theme');
+      if (stored === 'dark') html.dataset.theme = 'dark';
+      function swapTheme() {
+        const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+        html.dataset.theme = next;
+        localStorage.setItem('optiflow-theme', next);
+      }
+      document.getElementById('themeToggle').addEventListener('click', swapTheme);
+      document.getElementById('footerThemeToggle').addEventListener('click', swapTheme);
+
+      // Nav scroll
+      const nav = document.querySelector('.topnav');
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+
+      // Mobile drawer
+      const hamburger = document.getElementById('hamburger');
+      const drawer = document.getElementById('mobileDrawer');
+      const overlay = document.getElementById('drawerOverlay');
+      function openDrawer() { hamburger.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('active'); }
+      function closeDrawer() { hamburger.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('active'); }
+      hamburger.addEventListener('click', function() { hamburger.classList.contains('open') ? closeDrawer() : openDrawer(); });
+      overlay.addEventListener('click', closeDrawer);
+      drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeDrawer); });
+
+      // Scroll reveal
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+      // Counter animation
+      function countUp(el) { var t = parseInt(el.dataset.count) || 0, d = 1500, s = 0, r = Math.max(Math.floor(t / 60), 1), i = setInterval(function() { s += r; if (s >= t) { el.textContent = t.toLocaleString('en-IN'); clearInterval(i); } else { el.textContent = Math.floor(s).toLocaleString('en-IN'); } }, d / (t / r)); }
+      var co = new IntersectionObserver(function(es) { es.forEach(function(e) { if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); } }); }, { threshold: 0.5 });
+      document.querySelectorAll('[data-count]').forEach(function(el) { co.observe(el); });
+
+      // FAQ accordion
+      document.querySelectorAll('.faq-question').forEach(function(btn) {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.addEventListener('click', function() { var item = btn.parentElement, open = item.classList.contains('open'); item.classList.toggle('open'); btn.setAttribute('aria-expanded', !open); });
+      });
+
+      // Mouse glow follower (hero)
+      var mg = document.getElementById('mouseGlow');
+      if (mg) document.addEventListener('mousemove', function(e) { mg.style.left = e.clientX + 'px'; mg.style.top = e.clientY + 'px'; mg.classList.add('active'); });
+
+      // 3D card tilt on Cost of Inaction section
+      document.querySelectorAll('.card-tilt > .card').forEach(function(card) {
+        card.parentElement.addEventListener('mousemove', function(e) {
+          var rect = this.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
+          var rx = ((y / rect.height) - 0.5) * 12, ry = ((x / rect.width) - 0.5) * -12;
+          card.style.transform = 'translateY(-4px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+        });
+        card.parentElement.addEventListener('mouseleave', function() { card.style.transform = ''; });
+      });
+
+      // Dashboard parallax
+      var dashEl = document.getElementById('dashboard');
+      if (dashEl) document.addEventListener('mousemove', function(e) { var dx = (e.clientX / window.innerWidth - 0.5) * 16, dy = (e.clientY / window.innerHeight - 0.5) * 12; dashEl.style.transform = 'translateX('+dx+'px) translateY('+dy+'px)'; });
+
+      // Typewriter animation
+      (function() {
+        var el = document.getElementById('typewriterText');
+        if (!el) return;
+        var phrases = ['Daily Operations Feel Out Of Control?', 'Important Tasks Keep Getting Missed?', 'No One Takes Full Ownership?', 'No Clear Visibility Into Daily Operations?', 'Your Business Can\'t Run Without You?'];
+        var pi = 0, ci = 0, typing = true, pause = 0, speed = 60, delSpeed = 30, hold = 2200;
+        function tick() {
+          var txt = phrases[pi];
+          if (typing) {
+            ci++;
+            el.textContent = txt.substring(0, ci);
+            if (ci >= txt.length) { typing = false; pause = hold; }
+          } else if (pause > 0) {
+            pause -= speed;
+          } else {
+            ci--;
+            el.textContent = txt.substring(0, ci);
+            if (ci <= 0) { typing = true; pi = (pi + 1) % phrases.length; }
+          }
+          requestAnimationFrame(function() { setTimeout(tick, typing ? speed : delSpeed); });
+        }
+        tick();
+      })();
+    })();
+  </script>
+  <a href="demo-booking.html" class="sticky-cta">Book Demo <span class="sticky-arrow">→</span></a>
+
+  <!-- WhatsApp floating widget -->
+  <a href="https://wa.me/917874677836" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+  </a>
+
+  <!-- Scroll-to-top button -->
+  <button class="scroll-top" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <!-- Exit-intent popup -->
+  <div class="exit-overlay" id="exitOverlay">
+    <div class="exit-card">
+      <button class="exit-close" onclick="document.getElementById('exitOverlay').classList.remove('active')" aria-label="Close">✕</button>
+      <span class="eyebrow" style="display:block;margin-bottom:8px">Before you go</span>
+      <h2>See How Much Time Your Business Could Save</h2>
+      <p class="lead">Book a free 15-minute demo and see OptiFlow working with real business scenarios — tailored to your industry.</p>
+      <a href="demo-booking.html" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">Book Your Free Demo</a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var s = document.querySelector('.sticky-cta');
+      if (!s) return;
+      var hero = document.querySelector('.hero');
+      var heroH = hero ? hero.offsetHeight * 0.7 : 500;
+      window.addEventListener('scroll', function() {
+        s.classList.toggle('visible', window.scrollY > heroH);
+      });
+    })();
+  </script>
+
+  <script>
+    // Scroll-to-top button visibility
+    (function() {
+      var st = document.querySelector('.scroll-top');
+      if (!st) return;
+      window.addEventListener('scroll', function() {
+        st.classList.toggle('visible', window.scrollY > 600);
+      });
+    })();
+  </script>
+
+  <script>
+    // Exit-intent popup (fires once per session when cursor leaves viewport)
+    (function() {
+      var overlay = document.getElementById('exitOverlay');
+      if (!overlay) return;
+      var fired = false;
+      document.addEventListener('mouseleave', function(e) {
+        if (!fired && e.clientY <= 0 && window.scrollY > 400) {
+          fired = true;
+          overlay.classList.add('active');
+        }
+      });
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.classList.remove('active');
+      });
+    })();
+  </script>
+
+</body></html>
