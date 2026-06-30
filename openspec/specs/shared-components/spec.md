@@ -215,3 +215,13 @@ All animated counters SHALL use `data-count` attribute. Incorrect `data-target` 
 - **WHEN** the element enters the viewport
 - **THEN** an easeOutExpo animation SHALL count from 0 to 1500
 - **AND** `data-prefix`, `data-suffix`, `data-fmt`, `data-duration` attributes SHALL be respected
+
+### Requirement: Navigation Links
+
+The navigation bar SHALL include a "Showcase" link pointing to `/feature-showcase/`.
+
+#### Scenario: Showcase nav link present
+
+- **GIVEN** `site.json` nav configuration
+- **WHEN** inspected
+- **THEN** the `nav.links` array SHALL include `{ "label": "Showcase", "href": "/feature-showcase/" }`

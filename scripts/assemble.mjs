@@ -20,6 +20,7 @@ const SRC_MAP = {
   'problem-solutions/index.html': 'problem-solutions.html',
   'product-overview/index.html': 'product-overview.html',
   'features/index.html': 'features.html',
+  'feature-showcase/index.html': 'feature-showcase.html',
   'why-optiflow/index.html': 'why-optiflow.html',
   'pricing/index.html': 'pricing.html',
   'newsletter/index.html': 'newsletter.html',

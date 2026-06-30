@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Define the structure, metadata, and behavior of all 12 marketing pages that comprise the OptiFlow OS public website.
+Define the structure, metadata, and behavior of all 13 marketing pages that comprise the OptiFlow OS public website.
 
 ## Requirements
 
 ### Requirement: Page Inventory
 
-The system SHALL render exactly 12 marketing pages as defined in the `site.json` pages array.
+The system SHALL render exactly 13 marketing pages as defined in the `site.json` pages array.
 
 #### Scenario: All pages present
 
-- **GIVEN** `site.json` contains entries for Home, Problem-Solutions, Product-Overview, Features, Why-OptiFlow, Pricing, Newsletter, FAQ, Contact, Demo-Booking, Privacy-Policy, and Terms
+- **GIVEN** `site.json` contains entries for Home, Problem-Solutions, Product-Overview, Features, Feature-Showcase, Why-OptiFlow, Pricing, Newsletter, FAQ, Contact, Demo-Booking, Privacy-Policy, and Terms
 - **WHEN** `npm run build` is executed
-- **THEN** all 12 pages SHALL be generated in `dist/` with corresponding directory structures
+- **THEN** all 13 pages SHALL be generated in `dist/` with corresponding directory structures
 - **AND** only pages defined in `site.json` SHALL be generated
 
 ### Requirement: Unique Metadata
@@ -94,7 +94,13 @@ Each page SHALL use scroll-reveal animations for content sections.
 
 ### Requirement: Source File Naming
 
-Source page files SHALL be named to match their purpose. The newsletter page source SHALL be `newsletter.html` (not `blog.html`).
+Source page files SHALL be named to match their purpose. The newsletter page source SHALL be `newsletter.html` (not `blog.html`). The feature showcase page source SHALL be `feature-showcase.html`.
+
+#### Scenario: Feature Showcase source file
+
+- **GIVEN** the `src/pages/` directory
+- **WHEN** inspected
+- **THEN** `feature-showcase.html` SHALL exist
 
 #### Scenario: Newsletter source file
 
@@ -108,6 +114,12 @@ Source page files SHALL be named to match their purpose. The newsletter page sou
 - **GIVEN** the SRC_MAP in `assemble.mjs`
 - **WHEN** the newsletter entry is inspected
 - **THEN** it SHALL map `newsletter/index.html` → `newsletter.html`
+
+#### Scenario: Build mapping for feature showcase
+
+- **GIVEN** the SRC_MAP in `assemble.mjs`
+- **WHEN** the feature showcase entry is inspected
+- **THEN** it SHALL map `feature-showcase/index.html` → `feature-showcase.html`
 
 ### Requirement: Page Structure
 

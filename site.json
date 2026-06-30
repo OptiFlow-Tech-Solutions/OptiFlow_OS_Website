@@ -15,6 +15,7 @@
     { "file": "problem-solutions/index.html", "title": "Problems & Solutions — OptiFlow OS", "description": "See how OptiFlow OS solves the 6 biggest operational challenges Indian MSMEs face daily — from WhatsApp chaos to zero accountability.", "active": "Solutions" },
     { "file": "product-overview/index.html", "title": "Product Overview — OptiFlow OS", "description": "Explore every module of OptiFlow OS — the complete Business Execution platform for MSMEs. Task management, attendance, SOPs, reporting, and more.", "active": "Product" },
     { "file": "features/index.html", "title": "Features — OptiFlow OS", "description": "Detailed feature breakdown of OptiFlow OS — task management, attendance tracking, SOPs, checklists, reports, dashboards, and mobile access.", "active": "Features" },
+    { "file": "feature-showcase/index.html", "title": "Feature Showcase — OptiFlow OS", "description": "See OptiFlow OS in action — real feature transformations with before/after comparisons and quantified business outcomes for Indian MSMEs.", "active": "Showcase" },
     { "file": "why-optiflow/index.html", "title": "Why OptiFlow — OptiFlow OS", "description": "Why Indian MSMEs choose OptiFlow OS over WhatsApp, Excel, and generic tools. Built for operators with fast ROI, full visibility, and real accountability.", "active": "Why OptiFlow" },
     { "file": "pricing/index.html", "title": "Pricing — OptiFlow OS", "description": "Simple, transparent pricing for OptiFlow OS. No per-user charges, no hidden costs. Starter, Growth, and Scale plans with predictable annual pricing.", "active": "Pricing" },
     { "file": "newsletter/index.html", "title": "Newsletter — OptiFlow OS", "description": "Practical strategies, operational frameworks, and business systems designed to help Indian MSMEs scale with accountability and operational excellence.", "active": "Resources" },
@@ -30,6 +31,7 @@
       { "label": "Solutions", "href": "/problem-solutions/" },
       { "label": "Product", "href": "/product-overview/" },
       { "label": "Features", "href": "/features/" },
+      { "label": "Showcase", "href": "/feature-showcase/" },
       { "label": "Why OptiFlow", "href": "/why-optiflow/" },
       { "label": "Pricing", "href": "/pricing/" },
       { "label": "Contact", "href": "/contact/" }

@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any">
+  <meta name="description" content="{{PAGE_DESCRIPTION}}">
+  <meta property="og:image" content="/assets/img/OptiFlow.Logo.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/assets/css/core.css">
+  <style>
+    :root {
+      --accent: oklch(48% 0.14 260);
+      --teal: oklch(52% 0.12 230);
+      --green: oklch(44% 0.13 155);
+      --lime: oklch(78% 0.14 150);
+      --shadow-inset: inset 0 1px 4px rgba(15,23,42,.10), inset 0 -1px 1px rgba(255,255,255,.40);
+      --fnav-h: 52px;
+    }
+    [data-theme="dark"] {
+      --green: oklch(76% 0.14 145);
+      --lime: oklch(78% 0.14 150);
+      --shadow-inset: inset 0 1px 4px rgba(0,0,0,.20), inset 0 -1px 1px rgba(255,255,255,.06);
+    }
+    [data-theme="dark"] .card { background: var(--surface); border-color: var(--border); box-shadow: 0 1px 3px rgba(0,0,0,.18), 0 0 1px rgba(255,255,255,.04); }
+    [data-theme="dark"] .card:hover { border-color: color-mix(in oklch, var(--teal) 25%, var(--border)); box-shadow: 0 12px 40px color-mix(in oklch, white 3%, transparent), 0 0 18px rgba(39,141,159,.10); }
+    [data-theme="dark"] .btn-secondary { background: var(--surface); border-color: var(--border); color: var(--fg); }
+    [data-theme="dark"] .btn-secondary:hover { border-color: var(--fg); }
+    [data-theme="dark"] .btn-ghost { color: var(--muted); }
+    [data-theme="dark"] .dashboard-preview { background: oklch(16% 0.018 245); }
+    [data-theme="dark"] .phone-frame { background: oklch(21% 0.018 245); }
+    [data-theme="dark"] .feature-cta { background: var(--surface); border-color: var(--border); }
+    [data-theme="dark"] .process-step::before { background: oklch(23% 0.018 250); }
+    [data-theme="dark"] .process-step.active::before { background: var(--accent); }
+    html { scroll-padding-top: calc(var(--nav-h) + var(--fnav-h) + 20px); }
+
+    .btn-sm { padding: 8px 16px; font-size: 13px; border-radius: 8px; }
+    .fc-h { font-size: 15px; margin-bottom: 4px; }
+    .fc-p { font-size: 14px; color: var(--muted); }
+    .fc-p-sm { font-size: 13px; color: var(--muted); }
+    .fc-p-mt { font-size: 14px; color: var(--muted); margin-top: 6px; }
+
+    .feature-nav { position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99; height: var(--fnav-h); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; overflow-x: auto; -webkit-overflow-scrolling: touch; transition: box-shadow .3s; scrollbar-width: none; }
+    .feature-nav::-webkit-scrollbar { display: none; }
+    .feature-nav.stuck { box-shadow: 0 2px 16px color-mix(in oklch, var(--fg) 5%, transparent); }
+    .feature-nav-inner { display: flex; gap: 4px; padding-inline: var(--gutter); min-width: max-content; margin: 0 auto; }
+    .feature-tab { padding: 8px 18px; border-radius: var(--radius); font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.2s, background 0.2s, border-color 0.2s; white-space: nowrap; letter-spacing: -.01em; }
+    .feature-tab:hover { color: var(--fg); background: var(--accent-soft); }
+    .feature-tab.active { color: white; background: var(--accent); font-weight: 600; }
+
+    .hero { padding-top: calc(var(--nav-h) + 68px); padding-bottom: 80px; overflow: hidden; position: relative; }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 80%; height: 140%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 7%, transparent) 0%, transparent 70%); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-content h1 { margin-bottom: 18px; }
+    .hero-content .lead { margin-bottom: 28px; }
+    .hero-cta { display: flex; gap: var(--gap-sm); flex-wrap: wrap; margin-bottom: 32px; }
+    .hero-trust { display: grid; grid-template-columns: 1fr 1fr; gap: 6px var(--gap-lg); }
+    .hero-trust span { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+    .hero-trust svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; stroke-width: 2; }
+    .hero-visual { position: relative; z-index: 1; }
+    .hero-ecosystem { display: flex; align-items: center; justify-content: center; position: relative; min-height: 380px; }
+    .ecosystem-hub { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 13px; text-align: center; z-index: 2; line-height: 1.2; position: relative; }
+    .ecosystem-hub::after { content: ''; position: absolute; inset: -12px; border-radius: 50%; background: color-mix(in oklch, var(--accent) 40%, transparent); animation: hubGlow 3s ease-in-out infinite; z-index: -1; }
+    @keyframes hubGlow { 0%,100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+    .eco-module { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 16px; font-size: 12px; font-weight: 600; color: var(--fg); box-shadow: 0 4px 16px color-mix(in oklch, var(--fg) 4%, transparent); animation: orbitFloat 6s ease-in-out infinite; white-space: nowrap; }
+    .eco-module:nth-child(2) { top: 2%; left: 18%; animation-delay: 0s; }
+    .eco-module:nth-child(3) { top: 2%; right: 18%; animation-delay: -.8s; }
+    .eco-module:nth-child(4) { top: 32%; left: -2%; animation-delay: -1.6s; }
+    .eco-module:nth-child(5) { top: 32%; right: -2%; animation-delay: -2.4s; }
+    .eco-module:nth-child(6) { bottom: 28%; left: -2%; animation-delay: -3.2s; }
+    .eco-module:nth-child(7) { bottom: 28%; right: -2%; animation-delay: -4s; }
+    .eco-module:nth-child(8) { bottom: 2%; left: 18%; animation-delay: -4.8s; }
+    .eco-module:nth-child(9) { bottom: 2%; right: 18%; animation-delay: -5.2s; }
+    @keyframes orbitFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .feature-section { scroll-margin-top: calc(var(--nav-h) + var(--fnav-h) + 32px); }
+    .feature-hero { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-xl); align-items: start; }
+
+    .showcase-problem { background: color-mix(in oklch, oklch(44% 0.16 20) 4%, var(--bg)); border-left: 3px solid oklch(44% 0.16 20); padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: var(--gap-md); font-size: 14px; color: var(--muted); }
+    .showcase-problem strong { color: var(--fg); }
+    .showcase-problem .cost { display: inline-block; background: color-mix(in oklch, oklch(44% 0.16 20) 10%, transparent); color: oklch(44% 0.16 20); padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-top: 8px; }
+    .showcase-solution { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-xs); margin-bottom: var(--gap-md); }
+    .showcase-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-sm); margin-bottom: var(--gap-md); }
+    .showcase-metric { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .showcase-metric .val { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--accent); }
+    .showcase-metric .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .04em; }
+    .showcase-visual { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+    .dashboard-preview { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; overflow: hidden; flex: 1; min-width: 260px; }
+    .dash-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-sm); margin-bottom: var(--gap-md); }
+    .dash-metric { background: var(--bg); border-radius: var(--radius); padding: 14px; text-align: center; border: 1px solid var(--border); }
+    .dash-metric .val { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--accent); }
+    .dash-metric .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .04em; }
+    .dash-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .dash-table th { text-align: left; color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+    .dash-table td { padding: 10px; border-bottom: 1px solid var(--border); }
+    .dash-bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--accent); }
+    .status-pill { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .status-pill.done { background: var(--green-soft); color: var(--green); }
+    .status-pill.pending { background: var(--accent-soft); color: var(--accent); }
+
+    .phone-frame { width: 220px; border-radius: 32px; background: var(--surface); border: 2px solid var(--border); padding: 16px 8px; box-shadow: 0 8px 40px color-mix(in oklch, var(--fg) 6%, transparent); flex-shrink: 0; }
+    .phone-notch { width: 80px; height: 24px; background: var(--fg); border-radius: 0 0 16px 16px; margin: -8px auto 14px; }
+    .phone-row { height: 8px; background: var(--border); border-radius: 4px; margin-bottom: 10px; }
+    .phone-row.short { width: 60%; }
+    .phone-app-title { font-weight: 700; font-size: 11px; text-align: center; margin-bottom: 12px; color: var(--accent); }
+
+    .feature-cta { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--gap-md); margin-top: var(--gap-lg); }
+    .feature-cta p { font-weight: 600; font-size: 15px; }
+
+    .process-steps { display: flex; gap: 0; position: relative; margin-bottom: 24px; }
+    .process-step { flex: 1; text-align: center; position: relative; padding-top: 32px; }
+    .process-step::before { content: ''; position: absolute; top: 8px; left: 0; right: 0; height: 2px; background: var(--border); }
+    .process-step::after { content: ''; position: absolute; top: -2px; left: 50%; transform: translateX(-50%); width: 22px; height: 22px; border-radius: 50%; background: var(--border); transition: background 0.4s, border-color 0.4s; z-index: 1; }
+    .process-step.active::after { background: var(--green); box-shadow: 0 0 12px color-mix(in oklch, var(--green) 35%, transparent); }
+    .process-step .step-label { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .process-step .step-example { font-size: 11px; color: var(--muted); line-height: 1.3; }
+
+    @media (max-width: 1024px) {
+      .hero-grid, .feature-hero { grid-template-columns: 1fr; gap: var(--gap-xl); }
+      .hero-visual { order: -1; }
+      .hero-ecosystem { min-height: 300px; }
+      .showcase-solution, .showcase-metrics { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero-cta { flex-direction: column; }
+      .hero-trust { grid-template-columns: 1fr; }
+      .feature-cta { flex-direction: column; text-align: center; }
+      .showcase-solution, .showcase-metrics { grid-template-columns: 1fr; }
+      .dash-metrics { grid-template-columns: 1fr; }
+      .process-steps { flex-wrap: wrap; gap: var(--gap-md); }
+      .process-step { flex: 1 1 45%; }
+    }
+    @media (max-width: 480px) {
+      .phone-frame { width: 200px; border-radius: 26px; padding: 12px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#showcase-start">Skip to showcase</a>
+
+<!-- INCLUDE: nav -->
+
+<div class="feature-nav" id="fnav">
+  <div class="feature-nav-inner">
+    <button class="feature-tab active" data-target="task">Tasks</button>
+    <button class="feature-tab" data-target="attendance">Attendance</button>
+    <button class="feature-tab" data-target="sop">SOPs</button>
+    <button class="feature-tab" data-target="reports">Reports</button>
+    <button class="feature-tab" data-target="checklist">Checklists</button>
+    <button class="feature-tab" data-target="leave">Leave</button>
+  </div>
+</div>
+
+<main id="content" role="main">
+
+  <section class="hero" data-screen-label="00 Hero">
+    <div class="hero-grid container">
+      <div class="hero-content reveal">
+        <div class="eyebrow">Feature Transformations</div>
+        <h1>See What OptiFlow OS Actually Does For Your Business.</h1>
+        <p class="lead">Six core features. Real operational problems. Tangible outcomes. See exactly how OptiFlow transforms daily chaos into predictable, measurable results — with actual dashboards, not abstract promises.</p>
+        <div class="hero-cta">
+          <a href="/demo-booking/" class="btn btn-primary btn-lg">Book Free Demo</a>
+          <a href="/features/" class="btn btn-secondary btn-lg">Explore All Features</a>
+        </div>
+        <div class="hero-trust">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg> 6 Feature Deep-Dives</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg> Before & After Comparisons</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg> Real Outcome Metrics</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg> Dual Device Previews</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-ecosystem">
+          <div class="ecosystem-hub">OptiFlow<br>OS</div>
+          <div class="eco-module">Tasks</div>
+          <div class="eco-module">Attendance</div>
+          <div class="eco-module">SOPs</div>
+          <div class="eco-module">Reports</div>
+          <div class="eco-module">Checklists</div>
+          <div class="eco-module">Leave</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="task" data-screen-label="01 Task Management">
+    <div class="container">
+      <div class="section-header reveal"><h2>From WhatsApp Chaos To Verified Execution.</h2><p class="lead">Stop losing tasks in group chats. Every assignment gets an owner, a deadline, evidence, and verification — with real-time visibility for the owner.</p></div>
+      <div class="feature-hero reveal">
+        <div>
+          <div class="showcase-problem"><strong>The Problem:</strong> "Did you do what I asked?" — the most repeated question in MSMEs. Tasks are assigned verbally or in WhatsApp groups. By lunch, 40% are forgotten. Zero traceability. Zero accountability. <span class="cost">Cost: 2-4 hours/day in follow-ups</span></div>
+          <div class="showcase-solution">
+            <div class="card"><h3 class="fc-h">WWHWE Framework</h3><p class="fc-p">What, Who, How, When, Evidence — every task created with a complete brief. No ambiguity, no back-and-forth.</p></div>
+            <div class="card"><h3 class="fc-h">Verification Workflow</h3><p class="fc-p">Captain approves or rejects each task. Nothing is "done" until it's verified. Closed-loop execution.</p></div>
+          </div>
+          <div class="showcase-metrics">
+            <div class="showcase-metric"><div class="val">94%</div><div class="lbl">On-Time Rate</div></div>
+            <div class="showcase-metric"><div class="val">0</div><div class="lbl">Missed Tasks</div></div>
+            <div class="showcase-metric"><div class="val">3.5hrs</div><div class="lbl">Saved Daily</div></div>
+          </div>
+        </div>
+        <div class="showcase-visual">
+          <div class="dashboard-preview">
+            <div class="dash-metrics">
+              <div class="dash-metric"><div class="val">142</div><div class="lbl">Active Tasks</div></div>
+              <div class="dash-metric"><div class="val">28</div><div class="lbl">Done Today</div></div>
+              <div class="dash-metric"><div class="val">94%</div><div class="lbl">On-Time</div></div>
+            </div>
+            <table class="dash-table">
+              <tr><th>Task</th><th>Owner</th><th>Due</th><th>Status</th></tr>
+              <tr><td>QC inspection — Line 3</td><td>Ramesh K.</td><td>Today</td><td><span class="status-pill done">Done</span></td></tr>
+              <tr><td>Update SOP v2.1</td><td>Priya M.</td><td>Tomorrow</td><td><span class="status-pill done">Done</span></td></tr>
+              <tr><td>Vendor dispatch — #482</td><td>Anil S.</td><td>Jun 26</td><td><span class="status-pill pending">Pending</span></td></tr>
+              <tr><td>Attendance reconciliation</td><td>Deepa R.</td><td>Today</td><td><span class="status-pill pending">Pending</span></td></tr>
+            </table>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-app-title">My Tasks — Today</div>
+            <div class="phone-row" style="width:90%"></div>
+            <div class="phone-row" style="width:95%"></div>
+            <div class="phone-row" style="width:75%"></div>
+            <div class="phone-row"></div>
+            <div class="phone-row" style="width:85%"></div>
+            <div class="phone-row" style="width:65%"></div>
+            <div style="margin-top:14px;height:28px;border-radius:14px;background:var(--accent);opacity:.7"></div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-cta reveal">
+        <p>Stop chasing people for updates. Every task tracked, every outcome verified.</p>
+        <a href="/demo-booking/" class="btn btn-primary">See Task Management Live</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="attendance" data-screen-label="02 Attendance">
+    <div class="container">
+      <div class="section-header reveal"><h2>Attendance You Can Trust. Payroll You Don't Question.</h2><p class="lead">GPS-based check-in, selfie verification, and shift tracking that eliminates buddy punching and gives HR payroll-ready data every month.</p></div>
+      <div class="feature-hero reveal">
+        <div class="showcase-visual" style="flex-direction:row-reverse">
+          <div class="dashboard-preview">
+            <div class="dash-metrics">
+              <div class="dash-metric"><div class="val">47</div><div class="lbl">Present</div></div>
+              <div class="dash-metric"><div class="val">6</div><div class="lbl">On Leave</div></div>
+              <div class="dash-metric"><div class="val">2</div><div class="lbl">Late</div></div>
+            </div>
+            <table class="dash-table">
+              <tr><th>Employee</th><th>Shift</th><th>Check-In</th><th>Location</th></tr>
+              <tr><td>Rajesh P.</td><td>Morning</td><td>8:52 AM</td><td>On-site</td></tr>
+              <tr><td>Meena S.</td><td>Morning</td><td>9:03 AM</td><td>On-site</td></tr>
+              <tr><td>Vikram D.</td><td>General</td><td>9:58 AM</td><td>WFH</td></tr>
+              <tr><td>Anita K.</td><td>Evening</td><td>—</td><td style="color:var(--muted)">Not yet</td></tr>
+            </table>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-app-title">Attendance</div>
+            <div style="width:50px;height:50px;border-radius:50%;background:var(--green);margin:0 auto 14px"></div>
+            <div class="phone-row" style="width:70%;margin:0 auto 10px"></div>
+            <div style="font-size:10px;text-align:center;color:var(--muted);margin-bottom:10px">Punched in at 8:52 AM</div>
+            <div class="phone-row" style="width:60%"></div>
+            <div class="phone-row" style="width:80%"></div>
+            <div style="margin-top:16px;height:28px;border-radius:14px;background:var(--green);opacity:.5"></div>
+          </div>
+        </div>
+        <div>
+          <div class="showcase-problem"><strong>The Problem:</strong> "How many people actually came today?" requires 3 phone calls to answer. Buddy punching is common. Payroll takes hours of manual reconciliation. <span class="cost">Cost: 6-8 hours/month on payroll</span></div>
+          <div class="showcase-solution">
+            <div class="card"><h3 class="fc-h">GPS + Selfie Check-In</h3><p class="fc-p">Field staff punch in from locations. Selfie confirms identity. No one can punch for someone else.</p></div>
+            <div class="card"><h3 class="fc-h">Shift Auto-Assignment</h3><p class="fc-p">Morning, General, Evening, Night — assigned automatically. Late arrivals flagged instantly.</p></div>
+          </div>
+          <div class="showcase-metrics">
+            <div class="showcase-metric"><div class="val">100%</div><div class="lbl">Payroll Accuracy</div></div>
+            <div class="showcase-metric"><div class="val">0</div><div class="lbl">Buddy Punches</div></div>
+            <div class="showcase-metric"><div class="val">6hrs</div><div class="lbl">Saved Monthly</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-cta reveal">
+        <p>Real-time attendance visibility. Zero payroll disputes.</p>
+        <a href="/demo-booking/" class="btn btn-primary">Explore Attendance</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="sop" data-screen-label="03 SOP Library">
+    <div class="container">
+      <div class="section-header reveal"><h2>Don't Let Your Best Operator's Knowledge Walk Out The Door.</h2><p class="lead">Capture every process, version every update, and track who acknowledged each SOP. When your star operator takes leave, the process stays.</p></div>
+      <div class="feature-hero reveal">
+        <div>
+          <div class="showcase-problem"><strong>The Problem:</strong> "Only Rajesh knows how to set up Line 3." Rajesh takes a sick day. Production drops to 60%. Why? Because the process lived in his head — not in the system. <span class="cost">Cost: ₹12,000+ per incident in lost output</span></div>
+          <div class="showcase-solution">
+            <div class="card"><h3 class="fc-h">Central SOP Library</h3><p class="fc-p">Searchable by department, keyword, or linked task. Every process documented and accessible to everyone.</p></div>
+            <div class="card"><h3 class="fc-h">Version Control + Ack Tracking</h3><p class="fc-p">Every edit is versioned. Track who read and acknowledged each version. Prove training compliance.</p></div>
+          </div>
+          <div class="showcase-metrics">
+            <div class="showcase-metric"><div class="val">3x</div><div class="lbl">Faster Onboarding</div></div>
+            <div class="showcase-metric"><div class="val">47</div><div class="lbl">SOPs Live</div></div>
+            <div class="showcase-metric"><div class="val">0%</div><div class="lbl">Knowledge Loss</div></div>
+          </div>
+        </div>
+        <div class="showcase-visual">
+          <div class="dashboard-preview">
+            <div class="dash-metrics">
+              <div class="dash-metric"><div class="val">47</div><div class="lbl">Published SOPs</div></div>
+              <div class="dash-metric"><div class="val">12</div><div class="lbl">Departments</div></div>
+              <div class="dash-metric"><div class="val">v2.4</div><div class="lbl">Latest Version</div></div>
+            </div>
+            <table class="dash-table">
+              <tr><th>SOP</th><th>Dept</th><th>Version</th><th>Ack'd</th></tr>
+              <tr><td>Machine startup — Line 1</td><td>Production</td><td>v2.4</td><td><span class="status-pill done">18/18</span></td></tr>
+              <tr><td>Dispatch quality gate</td><td>Logistics</td><td>v1.8</td><td><span class="status-pill done">12/12</span></td></tr>
+              <tr><td>Purchase approval flow</td><td>Admin</td><td>v3.1</td><td><span class="status-pill pending">14/16</span></td></tr>
+            </table>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-app-title">SOP: Machine Setup</div>
+            <div class="phone-row" style="width:50%;height:4px;margin-bottom:4px"></div>
+            <div class="phone-row" style="width:90%"></div>
+            <div class="phone-row" style="width:85%"></div>
+            <div class="phone-row" style="width:70%"></div>
+            <div class="phone-row"></div>
+            <div class="phone-row" style="width:80%"></div>
+            <div class="phone-row" style="width:60%"></div>
+            <div style="margin-top:10px;font-size:10px;color:var(--accent);text-align:center">v2.4 — Acknowledged by 18/18</div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-cta reveal">
+        <p>Institutional knowledge belongs in the system, not in one person's head.</p>
+        <a href="/demo-booking/" class="btn btn-primary">Explore SOP Library</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="reports" data-screen-label="04 Reports & Analytics">
+    <div class="container">
+      <div class="section-header reveal"><h2>From Gut-Feel Decisions To Data-Driven Management.</h2><p class="lead">Task completion rates, attendance trends, department performance, SOP adherence — every metric you need to run a data-driven MSME on one dashboard.</p></div>
+      <div class="feature-hero reveal">
+        <div class="showcase-visual">
+          <div class="dashboard-preview" style="flex:1;min-width:100%">
+            <div class="dash-metrics" style="grid-template-columns:repeat(4,1fr)">
+              <div class="dash-metric"><div class="val">92%</div><div class="lbl">Task Completion</div></div>
+              <div class="dash-metric"><div class="val">87%</div><div class="lbl">On-Time Delivery</div></div>
+              <div class="dash-metric"><div class="val">100%</div><div class="lbl">Audit Trail</div></div>
+              <div class="dash-metric"><div class="val">₹3.2L</div><div class="lbl">Saved (Q2)</div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="showcase-problem"><strong>The Problem:</strong> "Which department is performing?" can't be answered without spending 3 hours in Excel. Most MSMEs run on gut feel — not data. <span class="cost">Cost: Blind spots across departments</span></div>
+          <div class="showcase-solution">
+            <div class="card"><h3 class="fc-h">Daily Task Reports</h3><p class="fc-p">Assigned, completed, delayed, escalated — per person, per department. Exportable in one click.</p></div>
+            <div class="card"><h3 class="fc-h">Performance Dashboards</h3><p class="fc-p">Compare departments, spot bottlenecks, celebrate top performers. Decisions backed by data, not instinct.</p></div>
+          </div>
+          <div class="showcase-metrics">
+            <div class="showcase-metric"><div class="val">₹3.2L</div><div class="lbl">Saved This Quarter</div></div>
+            <div class="showcase-metric"><div class="val">100%</div><div class="lbl">Audit Ready</div></div>
+            <div class="showcase-metric"><div class="val">3hrs</div><div class="lbl">Reporting Saved/Week</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-cta reveal">
+        <p>Stop guessing. Start measuring. Every decision backed by data.</p>
+        <a href="/demo-booking/" class="btn btn-primary">See Reports Live</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="checklist" data-screen-label="05 Checklist Management">
+    <div class="container">
+      <div class="section-header reveal"><h2>Never Miss A Daily Discipline Again.</h2><p class="lead">Recurring checklists auto-generate on schedule. Every item confirmed. Every gap visible. Turn operational discipline from memory-dependent to system-automatic.</p></div>
+      <div class="feature-hero reveal">
+        <div>
+          <div class="showcase-problem"><strong>The Problem:</strong> A production manager forgets the morning QC checklist. By noon, 3 hours of defective output has been produced — and no one knew until the customer complained. <span class="cost">Cost: ₹12,000+ in material waste per incident</span></div>
+          <div class="showcase-solution">
+            <div class="card"><h3 class="fc-h">Auto-Generated Checklists</h3><p class="fc-p">Daily, weekly, monthly checklists appear automatically. No one needs to remember to start them.</p></div>
+            <div class="card"><h3 class="fc-h">Real-Time Compliance Gaps</h3><p class="fc-p">Supervisor dashboard shows which departments completed checklists and which haven't — instantly.</p></div>
+          </div>
+          <div class="showcase-metrics">
+            <div class="showcase-metric"><div class="val">98%</div><div class="lbl">Adherence Rate</div></div>
+            <div class="showcase-metric"><div class="val">18</div><div class="lbl">Active Checklists</div></div>
+            <div class="showcase-metric"><div class="val">0</div><div class="lbl">Missed QC Incidents</div></div>
+          </div>
+        </div>
+        <div class="showcase-visual">
+          <div class="dashboard-preview">
+            <div class="dash-metrics">
+              <div class="dash-metric"><div class="val">18</div><div class="lbl">Active</div></div>
+              <div class="dash-metric"><div class="val">98%</div><div class="lbl">Adherence</div></div>
+              <div class="dash-metric"><div class="val">847</div><div class="lbl">Checks/Week</div></div>
+            </div>
+            <table class="dash-table">
+              <tr><th>Checklist</th><th>Dept</th><th>Freq</th><th>Done</th></tr>
+              <tr><td>Shop floor opening</td><td>Production</td><td>Daily</td><td><span class="dash-bar" style="width:52px"></span></td></tr>
+              <tr><td>Machine maint — Line 1</td><td>Maintenance</td><td>Weekly</td><td><span class="dash-bar" style="width:32px"></span></td></tr>
+              <tr><td>Dispatch quality gate</td><td>Logistics</td><td>Daily</td><td><span class="dash-bar" style="width:42px"></span></td></tr>
+            </table>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-app-title">Today's Checklist</div>
+            <div class="phone-row" style="width:90%"></div>
+            <div style="margin-bottom:8px;font-size:11px;color:var(--green)">☑ Machine safety check</div>
+            <div class="phone-row" style="width:85%"></div>
+            <div style="margin-bottom:8px;font-size:11px;color:var(--green)">☑ Raw material QC</div>
+            <div class="phone-row" style="width:75%"></div>
+            <div style="margin-bottom:8px;font-size:11px;color:var(--accent)">☐ Floor cleanliness</div>
+            <div class="phone-row" style="width:95%"></div>
+            <div style="font-size:11px;color:var(--muted)">5 of 8 completed</div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-cta reveal">
+        <p>Operational discipline, automated. Zero manual reminders.</p>
+        <a href="/demo-booking/" class="btn btn-primary">Explore Checklists</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section feature-section" id="leave" data-screen-label="06 Leave Management">
+    <div class="container">
+      <div class="section-header reveal"><h2>Leave Shouldn't Mean Lost Work.</h2><p class="lead">When someone takes leave, their tasks auto-reassign to a designated buddy. Critical checklists don't stall. Operations continue without the owner making panicked phone calls.</p></div>
+      <div class="feature-hero reveal">
+        <div class="showcase-visual" style="flex-direction:row-reverse">
+          <div class="dashboard-preview">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;padding:12px;background:var(--bg);border-radius:var(--radius)">
+              <div style="width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px">ST</div>
+              <div><div style="font-weight:600;font-size:14px">Sanjay T. → Ruchi M.</div><div style="font-size:12px;color:var(--muted)">3 active tasks reassigned</div></div>
+              <span class="status-pill done" style="margin-left:auto">Done</span>
+            </div>
+            <table class="dash-table">
+              <tr><th>Task</th><th>Reassigned To</th><th>Status</th></tr>
+              <tr><td>QC — Batch #T-482</td><td>Ruchi Mehta</td><td><span class="status-pill done">Done</span></td></tr>
+              <tr><td>Checklist — shop floor</td><td>Ruchi Mehta</td><td><span class="status-pill pending">Pending</span></td></tr>
+              <tr><td>Vendor follow-up — ABC</td><td>Ruchi Mehta</td><td><span class="status-pill pending">Pending</span></td></tr>
+            </table>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-app-title">Leave Request</div>
+            <div class="phone-row" style="width:60%"></div>
+            <div class="phone-row" style="width:80%"></div>
+            <div style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:8px">Jun 28-29 (2 days)</div>
+            <div style="background:var(--accent-soft);padding:8px;border-radius:8px;font-size:10px;color:var(--accent);text-align:center;margin-bottom:10px">Buddy: Ruchi — 3 tasks reassigned</div>
+            <div class="phone-row" style="width:70%"></div>
+            <div class="phone-row" style="width:50%"></div>
+            <div style="margin-top:12px;height:28px;border-radius:14px;background:var(--green);opacity:.7"></div>
+          </div>
+        </div>
+        <div>
+          <div class="showcase-problem"><strong>The Problem:</strong> A key operator takes 2 days off. 3 critical tasks stall. 2 checklists go undone. The production line loses 4 hours of productive time because no one knew what was pending. <span class="cost">Cost: 4+ hours of lost productivity per leave event</span></div>
+          <div class="showcase-solution">
+            <div class="card"><h3 class="fc-h">Buddy Auto-Assignment</h3><p class="fc-p">When leave is approved, active tasks auto-reassign. Buddy gets notified. No gap. No panic.</p></div>
+            <div class="card"><h3 class="fc-h">Leave Calendar + Analytics</h3><p class="fc-p">Team visibility. Managers plan around absence, not react to it. Leave patterns inform hiring.</p></div>
+          </div>
+          <div class="showcase-metrics">
+            <div class="showcase-metric"><div class="val">0</div><div class="lbl">Lost Work Hours</div></div>
+            <div class="showcase-metric"><div class="val">100%</div><div class="lbl">Task Continuity</div></div>
+            <div class="showcase-metric"><div class="val">Instant</div><div class="lbl">Reassignment</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-cta reveal">
+        <p>Leave without losing momentum. Every task keeps moving.</p>
+        <a href="/demo-booking/" class="btn btn-primary">See Leave Management</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" data-screen-label="07 CTA">
+    <div class="container reveal">
+      <h2>Ready To See Your Operations Transformed?</h2>
+      <p class="lead">Every feature shown here is live in OptiFlow OS today. Book a personalized demo and see exactly how these transformations apply to your business.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a href="/demo-booking/" class="btn btn-primary btn-lg">Book Free Demo</a>
+        <a href="/product-overview/" class="btn btn-secondary btn-lg">Watch Product Tour</a>
+      </div>
+      <div class="hero-trust" style="grid-template-columns:repeat(4,1fr);justify-items:center;margin-top:28px;color:color-mix(in oklch, white 80%, transparent)">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg> Built For MSMEs</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg> Fast Deployment</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg> Easy Adoption</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Support</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- INCLUDE: footer -->
+
+<a href="/demo-booking/" class="sticky-cta" aria-label="Book a free demo">Book Free Demo</a>
+<button class="scroll-top" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+<script src="/assets/js/core.js" defer></script>
+<script>
+  const featureSections = document.querySelectorAll('.feature-section');
+  const featureTabs = document.querySelectorAll('.feature-tab');
+
+  function setActiveTab(id) {
+    featureTabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+  }
+
+  featureTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = document.getElementById(tab.dataset.target);
+      if (target) target.scrollIntoView();
+    });
+  });
+
+  const fnav = document.getElementById('fnav');
+  const sectionObserver = new IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        setActiveTab(e.target.id);
+        const tab = document.querySelector('.feature-tab[data-target="' + e.target.id + '"]');
+        if (tab) tab.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  featureSections.forEach(s => sectionObserver.observe(s));
+
+  const navObserver = new IntersectionObserver(([e]) => {
+    fnav.classList.toggle('stuck', e.intersectionRatio < 1);
+  }, { threshold: [1] });
+  navObserver.observe(fnav);
+</script>
+</body>
+</html>
