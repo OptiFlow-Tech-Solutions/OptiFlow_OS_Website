@@ -1,0 +1,9 @@
+name: apply
+description: Apply / implementation pipeline
+steps:
+  - id: build
+    command: node scripts/assemble.mjs
+    blocking: true
+  - id: validate
+    command: node scripts/validate.mjs
+    blocking: true
