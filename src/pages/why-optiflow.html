@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Why Choose OptiFlow — Built for MSMEs, Not Adapted for Them</title>
+  <title>{{PAGE_TITLE}}</title>
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any">
-  <meta name="description" content="Built for MSMEs, not adapted for them. See why Indian businesses choose OptiFlow OS — fast implementation, high ROI, and complete operational visibility.">
-  <meta property="og:title" content="OptiFlow OS — Why Choose OptiFlow">
-  <meta property="og:description" content="Built by operators, for growing businesses. Compare OptiFlow against WhatsApp, Excel, and traditional tools — and see the ROI.">
+  <meta name="description" content="{{PAGE_DESCRIPTION}}">
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
@@ -552,28 +550,27 @@
 
   <script src="/assets/js/core.js" defer></script>
   <script>
-    /* ─── Mouse Glow (hero-scoped) ─── */
+    /* ─── Mouse Glow (hero-scoped, throttled) ─── */
     (function() {
       var hero = document.querySelector('.hero');
       var glow = document.getElementById('mouseGlow');
       if (!hero || !glow) return;
+      var ticking = false, lastX, lastY;
       hero.addEventListener('mousemove', function(e) {
-        var rect = hero.getBoundingClientRect();
-        glow.style.left = (e.clientX - rect.left) + 'px';
-        glow.style.top = (e.clientY - rect.top) + 'px';
+        lastX = e.clientX; lastY = e.clientY;
+        if (!ticking) { ticking = true; requestAnimationFrame(function() { var rect = hero.getBoundingClientRect(); glow.style.left = (lastX - rect.left) + 'px'; glow.style.top = (lastY - rect.top) + 'px'; ticking = false; }); }
       });
       hero.addEventListener('mouseenter', function() { glow.classList.add('active'); });
       hero.addEventListener('mouseleave', function() { glow.classList.remove('active'); });
     })();
 
-    /* ─── Magnetic Buttons ─── */
+    /* ─── Magnetic Buttons (throttled) ─── */
     (function() {
       document.querySelectorAll('.magnetic').forEach(function(btn) {
+        var ticking = false, lastX, lastY;
         btn.addEventListener('mousemove', function(e) {
-          var rect = btn.getBoundingClientRect();
-          var x = e.clientX - rect.left - rect.width / 2;
-          var y = e.clientY - rect.top - rect.height / 2;
-          btn.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)';
+          lastX = e.clientX; lastY = e.clientY;
+          if (!ticking) { ticking = true; var self = btn; requestAnimationFrame(function() { var rect = self.getBoundingClientRect(); var x = lastX - rect.left - rect.width / 2; var y = lastY - rect.top - rect.height / 2; self.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)'; ticking = false; }); }
         });
         btn.addEventListener('mouseleave', function() {
           btn.style.transform = 'translate(0px, 0px)';
@@ -583,7 +580,7 @@
       });
     })();
 
-    /* ─── Why OptiFlow Typewriter ─── */
+    /* ─── Why OptiFlow Typewriter (pauses on blur) ─── */
     (function() {
       var el = document.getElementById('twText');
       var cursor = document.querySelector('.tw-cursor');
@@ -595,10 +592,16 @@
         'Scale With Systems, Not Stress.',
         'Work On Your Business, Not In It.'
       ];
-      var msgIdx = 0, phase = 'type', charIdx = 0, holdTimer = null;
+      var msgIdx = 0, phase = 'type', charIdx = 0, holdTimer = null, timeoutId;
       var typeSpeed = 50, deleteSpeed = 22, holdTime = 2500;
 
+      function schedule(fn, delay) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(fn, delay);
+      }
+
       function nextTick() {
+        if (document.hidden) { schedule(tick, 200); return; }
         if (phase === 'type') {
           if (charIdx >= msgs[msgIdx].length) {
             phase = 'hold';
@@ -612,19 +615,19 @@
           }
           charIdx++;
           el.textContent = msgs[msgIdx].slice(0, charIdx);
-          setTimeout(tick, typeSpeed);
+          schedule(tick, typeSpeed);
         } else if (phase === 'delete') {
           if (charIdx <= 0) {
             phase = 'type';
             msgIdx = (msgIdx + 1) % msgs.length;
             charIdx = 0;
             el.textContent = '';
-            setTimeout(tick, 200);
+            schedule(tick, 200);
             return;
           }
           charIdx--;
           el.textContent = msgs[msgIdx].slice(0, charIdx);
-          setTimeout(tick, deleteSpeed);
+          schedule(tick, deleteSpeed);
         }
       }
 

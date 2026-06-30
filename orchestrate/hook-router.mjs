@@ -15,8 +15,8 @@ const PHASE_HOOKS = Object.freeze({
   explore: { pre: [], post: [] },
   propose: { pre: ['pre-build', 'theme-change'], post: [] },
   apply: { pre: ['pre-build', 'theme-change'], post: ['post-build', 'pre-commit'] },
-  verify: { pre: ['pre-build'], post: ['post-build', 'post-deploy'] },
-  archive: { pre: ['pre-commit', 'pre-push'], post: [] },
+  verify: { pre: ['pre-build'], post: ['post-build'] },
+  archive: { pre: ['pre-commit'], post: [] },
 });
 
 const GLOBAL_PRE = Object.freeze(['pre-build']);

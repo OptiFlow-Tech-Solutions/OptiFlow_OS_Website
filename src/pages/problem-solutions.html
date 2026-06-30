@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OptiFlow OS — Problems & Solutions | MSME Business Operating System</title>
+  <title>{{PAGE_TITLE}}</title>
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any" />
-  <meta name="description" content="The hidden challenges slowing MSME growth — WhatsApp chaos, Excel dependency, missed tasks, and zero accountability. See how OptiFlow OS solves them." />
-  <meta property="og:title" content="OptiFlow OS — Problem &amp; Solutions" />
-  <meta property="og:description" content="Why most MSMEs struggle to scale — and how OptiFlow OS turns operational chaos into process-driven growth." />
+  <meta name="description" content="{{PAGE_DESCRIPTION}}" />
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
@@ -597,7 +595,8 @@
       var items = document.querySelectorAll('.pain-points .pp-item');
       var curr = 0;
       if (items.length > 1) {
-        setInterval(function() {
+        var intervalId = setInterval(function() {
+          if (document.hidden) return;
           items[curr].classList.remove('active');
           curr = (curr + 1) % items.length;
           items[curr].classList.add('active');

@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact OptiFlow OS — Let's Talk About Your Business Operations</title>
+  <title>{{PAGE_TITLE}}</title>
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any" />
-  <meta name="description" content="Contact the OptiFlow OS team. Get in touch for demos, sales inquiries, support, or partnership discussions. We respond within 1 business day." />
-  <meta property="og:title" content="OptiFlow OS — Contact Us" />
-  <meta property="og:description" content="We're here to help you build better systems. Reach out for demos, support, or business consultations." />
+  <meta name="description" content="{{PAGE_DESCRIPTION}}" />
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
@@ -331,11 +329,11 @@
         <div class="section-header reveal">
           <p class="eyebrow">Visit Or Reach Us</p>
           <h2>Our Office</h2>
-          <p class="lead">We're based in Ahmedabad, serving MSMEs across India.</p>
+          <p class="lead">We're based in {{LOCATION}}, serving MSMEs across India.</p>
         </div>
         <div class="office-card reveal">
           <h3>OptiFlow OS — Head Office</h3>
-          <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Ahmedabad, Gujarat, India</div>
+          <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Surat, Gujarat, India</div>
           <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> {{PHONE}}</div>
           <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> {{EMAIL}}</div>
           <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Mon — Sat, 10 AM — 7 PM IST</div>
@@ -455,10 +453,12 @@
           var err = document.querySelector('[data-error="' + id + '"]');
           if (!input.value.trim()) {
             input.classList.add('error');
+            input.setAttribute('aria-invalid', 'true');
             if (err) err.classList.add('visible');
             valid = false;
           } else {
             input.classList.remove('error');
+            input.removeAttribute('aria-invalid');
             if (err) err.classList.remove('visible');
           }
         });
@@ -466,15 +466,21 @@
         var emailErr = document.querySelector('[data-error="email"]');
         if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
           email.classList.add('error');
+          email.setAttribute('aria-invalid', 'true');
           if (emailErr) { emailErr.textContent = 'Please enter a valid email'; emailErr.classList.add('visible'); }
           valid = false;
+        } else if (email.value.trim()) {
+          email.removeAttribute('aria-invalid');
         }
         var phone = document.getElementById('phone');
         var phoneErr = document.querySelector('[data-error="phone"]');
         if (phone.value.trim() && !/^\+?\d{7,15}$/.test(phone.value.trim().replace(/[\s-]/g, ''))) {
           phone.classList.add('error');
+          phone.setAttribute('aria-invalid', 'true');
           if (phoneErr) { phoneErr.textContent = 'Please enter a valid mobile number'; phoneErr.classList.add('visible'); }
           valid = false;
+        } else if (phone.value.trim()) {
+          phone.removeAttribute('aria-invalid');
         }
         if (valid) {
           form.style.display = 'none';

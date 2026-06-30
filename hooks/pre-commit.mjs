@@ -74,22 +74,36 @@ for (const f of srcFiles) {
 }
 if (!secretFound) console.log('  ✓ no secrets found');
 
-// 3. site.json phone matches footer phone
+// 3. site.json phone matches footer phone (placeholders)
 console.log('3. Contact consistency');
 const site = JSON.parse(readText(path.join(ROOT, 'site.json')));
 const footerHtml = readText(path.join(ROOT, 'src', 'partials', 'footer.html'));
-const sitePhone = site.phone.replace(/\D/g, '');
-// Extract the visible 10-digit Indian mobile from footer (may or may not include +91)
-const footerPhoneMatch = footerHtml.match(/(\d{10})(?:\s|<)/);
-const footerPhone = footerPhoneMatch ? footerPhoneMatch[1] : '';
-// Compare last 10 digits (site phone may include country code prefix)
-const sitePhone10 = sitePhone.slice(-10);
-if (footerPhone && sitePhone10 !== footerPhone) {
-  fail(`site.json phone (${site.phone}) doesn't match footer phone (+91 ${footerPhone.slice(0,5)} ${footerPhone.slice(5)})`);
-} else if (!footerPhone) {
-  fail('could not extract phone from footer.html');
+
+// Footer must use {{PHONE}} placeholder — not hardcoded number
+if (!footerHtml.includes('{{PHONE}}') && !footerHtml.includes('{{PHONE_TEL}}')) {
+  fail('footer.html: use {{PHONE}} placeholder instead of hardcoded phone number');
 } else {
-  console.log('  ✓ phone consistent');
+  // Verify no hardcoded Indian mobile remains in footer (catch accidentally re-hardcoded)
+  const hardcodedPhone = footerHtml.match(/\+91[\s-]?\d{10}/);
+  if (hardcodedPhone) {
+    fail(`footer.html: hardcoded phone "${hardcodedPhone[0]}" found — use {{PHONE}} placeholder`);
+  } else {
+    // Validate site.json phone format
+    const sitePhoneDigits = site.phone.replace(/\D/g, '');
+    if (sitePhoneDigits.length !== 12 || !sitePhoneDigits.startsWith('91')) {
+      fail(`site.json phone "${site.phone}" invalid — expected +91 XXXXXXXXXX`);
+    } else {
+      console.log('  ✓ phone consistent');
+    }
+  }
+}
+
+// Verify location consistency: no stale "Ahmedabad" in source pages
+if (site.location.toLowerCase().includes('surat')) {
+  const contactHtml = readText(path.join(ROOT, 'src', 'pages', 'contact.html'));
+  if (contactHtml.match(/Ahmedabad/)) {
+    fail('contact.html: stale location "Ahmedabad" — replace with {{LOCATION}} or "Surat"');
+  }
 }
 
 // 4. Merge conflict markers

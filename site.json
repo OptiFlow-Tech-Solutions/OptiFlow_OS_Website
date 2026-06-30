@@ -12,17 +12,17 @@
   "logo": "mqrk6wlm-OptiFlow.Logo.png",
   "pages": [
     { "file": "index.html", "title": "OptiFlow OS — Business Operating System for Indian MSMEs", "description": "OptiFlow OS is the Business Operating System for Indian MSMEs — replace WhatsApp and Excel with one platform. Book a free demo.", "active": "Home" },
-    { "file": "problem-solutions/index.html", "title": "Problems & Solutions — OptiFlow OS", "description": "See how OptiFlow OS solves the 6 biggest operational challenges Indian MSMEs face daily.", "active": "Solutions" },
-    { "file": "product-overview/index.html", "title": "Product Overview — OptiFlow OS", "description": "Explore every module of OptiFlow OS — the complete Business Execution platform for MSMEs.", "active": "Product" },
-    { "file": "features/index.html", "title": "Features — OptiFlow OS", "description": "Detailed feature breakdown of OptiFlow OS — task management, attendance, SOPs, reports, and more.", "active": "Features" },
-    { "file": "why-optiflow/index.html", "title": "Why OptiFlow — OptiFlow OS", "description": "Why Indian MSMEs choose OptiFlow OS over WhatsApp, Excel, generic tools, and traditional systems.", "active": "Why OptiFlow" },
-    { "file": "pricing/index.html", "title": "Pricing — OptiFlow OS", "description": "Simple, transparent pricing for OptiFlow OS. No per-user charges, no hidden costs.", "active": "Pricing" },
-    { "file": "newsletter/index.html", "title": "Newsletter — OptiFlow OS", "description": "Practical strategies, operational frameworks, and business systems designed to help MSMEs scale with accountability.", "active": "Resources" },
-    { "file": "faq/index.html", "title": "FAQ — OptiFlow OS", "description": "Frequently asked questions about OptiFlow OS — setup, pricing, security, and more.", "active": "Resources" },
-    { "file": "contact/index.html", "title": "Contact — OptiFlow OS", "description": "Get in touch with the OptiFlow OS team. We'd love to hear from you.", "active": "Contact" },
-    { "file": "demo-booking/index.html", "title": "Book a Demo — OptiFlow OS", "description": "Book a free personalized demo of OptiFlow OS and see how it transforms your business operations.", "active": null },
-    { "file": "privacy-policy/index.html", "title": "Privacy Policy — OptiFlow OS", "description": "OptiFlow OS privacy policy — how we collect, use, and protect your business data.", "active": "Resources" },
-    { "file": "terms/index.html", "title": "Terms & Conditions — OptiFlow OS", "description": "Terms and conditions for using OptiFlow OS — usage rights, responsibilities, and policies.", "active": "Resources" }
+    { "file": "problem-solutions/index.html", "title": "Problems & Solutions — OptiFlow OS", "description": "See how OptiFlow OS solves the 6 biggest operational challenges Indian MSMEs face daily — from WhatsApp chaos to zero accountability.", "active": "Solutions" },
+    { "file": "product-overview/index.html", "title": "Product Overview — OptiFlow OS", "description": "Explore every module of OptiFlow OS — the complete Business Execution platform for MSMEs. Task management, attendance, SOPs, reporting, and more.", "active": "Product" },
+    { "file": "features/index.html", "title": "Features — OptiFlow OS", "description": "Detailed feature breakdown of OptiFlow OS — task management, attendance tracking, SOPs, checklists, reports, dashboards, and mobile access.", "active": "Features" },
+    { "file": "why-optiflow/index.html", "title": "Why OptiFlow — OptiFlow OS", "description": "Why Indian MSMEs choose OptiFlow OS over WhatsApp, Excel, and generic tools. Built for operators with fast ROI, full visibility, and real accountability.", "active": "Why OptiFlow" },
+    { "file": "pricing/index.html", "title": "Pricing — OptiFlow OS", "description": "Simple, transparent pricing for OptiFlow OS. No per-user charges, no hidden costs. Starter, Growth, and Scale plans with predictable annual pricing.", "active": "Pricing" },
+    { "file": "newsletter/index.html", "title": "Newsletter — OptiFlow OS", "description": "Practical strategies, operational frameworks, and business systems designed to help Indian MSMEs scale with accountability and operational excellence.", "active": "Resources" },
+    { "file": "faq/index.html", "title": "FAQ — OptiFlow OS", "description": "Frequently asked questions about OptiFlow OS — product features, pricing plans, data security, implementation timeline, and support options.", "active": "Resources" },
+    { "file": "contact/index.html", "title": "Contact — OptiFlow OS", "description": "Get in touch with the OptiFlow OS team for demos, sales inquiries, support, or partnership discussions. We respond within one business day.", "active": "Contact" },
+    { "file": "demo-booking/index.html", "title": "Book a Demo — OptiFlow OS", "description": "Book a free personalized demo of OptiFlow OS and see how our Business Operating System transforms your MSME operations with better accountability.", "active": null },
+    { "file": "privacy-policy/index.html", "title": "Privacy Policy — OptiFlow OS", "description": "OptiFlow OS privacy policy — learn how we collect, use, store, and protect your business and employee data. GDPR and Indian DPDP Act 2023 compliant.", "active": "Resources" },
+    { "file": "terms/index.html", "title": "Terms & Conditions — OptiFlow OS", "description": "Terms and conditions for using OptiFlow OS — platform usage rules, customer responsibilities, payment terms, data ownership, and governing law.", "active": "Resources" }
   ],
   "nav": {
     "links": [
@@ -38,13 +38,10 @@
       "label": "Resources",
       "items": [
         { "label": "Newsletter", "href": "/newsletter/" },
-        { "label": "FAQ", "href": "/faq/" },
-        { "label": "Privacy Policy", "href": "/privacy-policy/" },
-        { "label": "Terms & Conditions", "href": "/terms/" }
+        { "label": "FAQ", "href": "/faq/" }
       ]
     },
     "cta": [
-      { "label": "Watch Demo", "href": "/demo-booking/", "class": "btn-ghost" },
       { "label": "Book Demo", "href": "/demo-booking/", "class": "btn-primary btn-glow" }
     ]
   },

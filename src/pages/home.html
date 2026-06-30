@@ -2,10 +2,8 @@
 <html lang="en" data-theme="light"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OptiFlow OS — Business Operating System for Indian MSMEs</title>
-  <meta name="description" content="OptiFlow OS is the Business Operating System for Indian MSMEs — replace WhatsApp and Excel with one platform. Book a free demo.">
-  <meta property="og:title" content="OptiFlow OS — Business Operating System for Indian MSMEs">
-  <meta property="og:description" content="Stop managing work through WhatsApp &amp; Excel. Run your entire business from one operating system.">
+  <title>{{PAGE_TITLE}}</title>
+  <meta name="description" content="{{PAGE_DESCRIPTION}}">
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
@@ -555,20 +553,33 @@
 
   <script>
     (function() {
-      // Mouse glow follower (hero)
+      // Mouse glow follower (hero) — throttled via rAF
       var mg = document.getElementById('mouseGlow');
-      if (mg) document.addEventListener('mousemove', function(e) { mg.style.left = e.clientX + 'px'; mg.style.top = e.clientY + 'px'; mg.classList.add('active'); });
+      if (mg) {
+        var ticking = false, lastX, lastY;
+        mg.parentElement.addEventListener('mousemove', function(e) {
+          lastX = e.clientX; lastY = e.clientY;
+          if (!ticking) { ticking = true; requestAnimationFrame(function() { mg.style.left = lastX + 'px'; mg.style.top = lastY + 'px'; mg.classList.add('active'); ticking = false; }); }
+        });
+      }
     })();
   </script>
 
   <script>
     (function() {
-      // 3D card tilt on Cost of Inaction section
+      // 3D card tilt — throttled
+      var ticking = false;
       document.querySelectorAll('.card-tilt > .card').forEach(function(card) {
         card.parentElement.addEventListener('mousemove', function(e) {
-          var rect = this.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
-          var rx = ((y / rect.height) - 0.5) * 12, ry = ((x / rect.width) - 0.5) * -12;
-          card.style.transform = 'translateY(-4px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+          if (ticking) return;
+          ticking = true;
+          var self = this;
+          requestAnimationFrame(function() {
+            var rect = self.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
+            var rx = ((y / rect.height) - 0.5) * 12, ry = ((x / rect.width) - 0.5) * -12;
+            card.style.transform = 'translateY(-4px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+            ticking = false;
+          });
         });
         card.parentElement.addEventListener('mouseleave', function() { card.style.transform = ''; });
       });
@@ -577,20 +588,33 @@
 
   <script>
     (function() {
-      // Dashboard parallax
+      // Dashboard parallax — throttled
       var dashEl = document.getElementById('dashboard');
-      if (dashEl) document.addEventListener('mousemove', function(e) { var dx = (e.clientX / window.innerWidth - 0.5) * 16, dy = (e.clientY / window.innerHeight - 0.5) * 12; dashEl.style.transform = 'translateX('+dx+'px) translateY('+dy+'px)'; });
+      if (dashEl) {
+        var ticking = false;
+        document.addEventListener('mousemove', function(e) {
+          if (ticking) return;
+          ticking = true;
+          var cx = e.clientX, cy = e.clientY;
+          requestAnimationFrame(function() {
+            var dx = (cx / window.innerWidth - 0.5) * 16, dy = (cy / window.innerHeight - 0.5) * 12;
+            dashEl.style.transform = 'translateX('+dx+'px) translateY('+dy+'px)';
+            ticking = false;
+          });
+        });
+      }
     })();
   </script>
 
   <script>
     (function() {
-      // Typewriter animation
+      // Typewriter animation — pauses on tab blur
       var el = document.getElementById('typewriterText');
       if (!el) return;
       var phrases = ['Daily Operations Feel Out Of Control?', 'Important Tasks Keep Getting Missed?', 'No One Takes Full Ownership?', 'No Clear Visibility Into Daily Operations?', 'Your Business Can\'t Run Without You?'];
-      var pi = 0, ci = 0, typing = true, pause = 0, speed = 60, delSpeed = 30, hold = 2200;
+      var pi = 0, ci = 0, typing = true, pause = 0, speed = 60, delSpeed = 30, hold = 2200, rafId;
       function tick() {
+        if (document.hidden) { rafId = requestAnimationFrame(function() { setTimeout(tick, 200); }); return; }
         var txt = phrases[pi];
         if (typing) {
           ci++;
@@ -603,7 +627,7 @@
           el.textContent = txt.substring(0, ci);
           if (ci <= 0) { typing = true; pi = (pi + 1) % phrases.length; }
         }
-        requestAnimationFrame(function() { setTimeout(tick, typing ? speed : delSpeed); });
+        rafId = requestAnimationFrame(function() { setTimeout(tick, typing ? speed : delSpeed); });
       }
       tick();
     })();
@@ -631,30 +655,6 @@
       <a href="/demo-booking/" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">Book Your Free Demo</a>
     </div>
   </div>
-
-  <script>
-    (function() {
-      // Sticky CTA visibility
-      var s = document.querySelector('.sticky-cta');
-      if (!s) return;
-      var hero = document.querySelector('.hero');
-      var heroH = hero ? hero.offsetHeight * 0.7 : 500;
-      window.addEventListener('scroll', function() {
-        s.classList.toggle('visible', window.scrollY > heroH);
-      });
-    })();
-  </script>
-
-  <script>
-    (function() {
-      // Scroll-to-top button visibility
-      var st = document.querySelector('.scroll-top');
-      if (!st) return;
-      window.addEventListener('scroll', function() {
-        st.classList.toggle('visible', window.scrollY > 600);
-      });
-    })();
-  </script>
 
   <script>
     (function() {

@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy — OptiFlow OS</title>
+  <title>{{PAGE_TITLE}}</title>
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any">
-  <meta name="description" content="OptiFlow OS Privacy Policy — how we collect, use, store, and protect your business and employee data. GDPR and Indian DPDP Act 2023 compliant.">
-  <meta property="og:title" content="OptiFlow OS — Privacy Policy">
-  <meta property="og:description" content="Your privacy and data security are important to us. Read how OptiFlow OS protects your business information.">
+  <meta name="description" content="{{PAGE_DESCRIPTION}}">
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
@@ -476,7 +474,7 @@
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
         bar.style.width = progress + '%';
-      });
+      }, { passive: true });
 
       /* --- Side nav active tracking --- */
       const sections = document.querySelectorAll('.content-card[id]');
@@ -490,15 +488,9 @@
         links.forEach(function(a) {
           a.classList.toggle('active', a.getAttribute('href') === '#' + current);
         });
-      });
+      }, { passive: true });
 
-      /* --- Sticky CTA visibility --- */
-      var st = document.querySelector('.sticky-cta');
-      if (st) {
-        var hero = document.querySelector('.hero-section');
-        var heroH = hero ? hero.offsetHeight * 0.7 : 500;
-        window.addEventListener('scroll', function() { st.classList.toggle('visible', window.scrollY > heroH); });
-      }
+      // ponytail: sticky CTA handled by core.js
     })();
   </script>
 </body>

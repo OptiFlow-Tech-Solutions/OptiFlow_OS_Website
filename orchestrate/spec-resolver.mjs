@@ -5,7 +5,7 @@
  * @module orchestrate/spec-resolver
  */
 
-import { search } from './spec-indexer.mjs';
+import { searchRequirements as search } from './spec-indexer.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 
 /**

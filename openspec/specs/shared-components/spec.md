@@ -127,3 +127,91 @@ The system SHALL provide a scroll-to-top button with visibility control.
 - **WHEN** the user scrolls past 600px
 - **THEN** the `.visible` class SHALL be added
 - **AND** clicking the button SHALL smoothly scroll to the top of the page
+
+### Requirement: Skip-to-Content Link
+
+The navigation partial SHALL include a skip-to-content link as the first focusable element in the page.
+
+#### Scenario: Skip link present and functional
+
+- **GIVEN** any page with injected navigation
+- **WHEN** the page renders and the user presses Tab
+- **THEN** a "Skip to content" link SHALL appear at the top of the viewport
+- **AND** clicking it SHALL move focus to `<main id="content">`
+
+### Requirement: Mobile Drawer Active State
+
+The mobile drawer SHALL resolve active link indicators identical to desktop nav.
+
+#### Scenario: Active link in mobile drawer
+
+- **GIVEN** the current page has `active: "Features"` in `site.json`
+- **WHEN** the mobile drawer is opened
+- **THEN** the Features link in the drawer SHALL have the `.active` class
+
+### Requirement: Resources Dropdown
+
+The Resources dropdown in both desktop nav and mobile drawer SHALL contain only Newsletter and FAQ.
+
+#### Scenario: Resources dropdown content
+
+- **GIVEN** the nav is rendered
+- **WHEN** the Resources dropdown is opened
+- **THEN** it SHALL display only "Newsletter" and "FAQ"
+- **AND** it SHALL NOT display "Privacy Policy" or "Terms & Conditions"
+
+### Requirement: Footer Placeholders
+
+The footer partial SHALL use `{{PHONE}}`, `{{EMAIL}}`, `{{LOCATION}}`, `{{COMPANY}}`, and `{{YEAR}}` placeholders instead of hardcoded values.
+
+#### Scenario: Footer uses placeholders
+
+- **GIVEN** the footer partial source
+- **WHEN** inspected
+- **THEN** phone SHALL be `{{PHONE}}` (not a hardcoded number)
+- **AND** email SHALL be `{{EMAIL}}` (not a hardcoded email)
+- **AND** year SHALL be `{{YEAR}}` (not a hardcoded year)
+
+### Requirement: Navigation CTA
+
+The nav CTA area SHALL show a single "Book Demo" button linking to `/demo-booking/`.
+
+#### Scenario: Single CTA in nav
+
+- **GIVEN** the nav header
+- **WHEN** it renders
+- **THEN** only one CTA button ("Book Demo") SHALL be visible
+- **AND** no secondary "Watch Demo" button SHALL be present
+
+### Requirement: Keyboard Drawer Control
+
+The interactive runtime SHALL close the mobile drawer on Escape key press.
+
+#### Scenario: Escape closes drawer
+
+- **GIVEN** the mobile drawer is open
+- **WHEN** the user presses the Escape key
+- **THEN** the drawer SHALL close
+- **AND** the hamburger button SHALL return to closed state
+
+### Requirement: Unified FAQ Accordion
+
+All FAQ toggles SHALL use the `.faq-question` class exclusively.
+
+#### Scenario: FAQ toggle via .faq-question
+
+- **GIVEN** any FAQ toggle button with class `.faq-question`
+- **WHEN** the button is clicked
+- **THEN** the parent `.faq-item` SHALL toggle `.open`
+- **AND** `aria-expanded` SHALL update to reflect state
+
+### Requirement: Unified Counter System
+
+All animated counters SHALL use `data-count` attribute. Incorrect `data-target` usage SHALL be migrated.
+
+#### Scenario: Counter via data-count
+
+- **GIVEN** an element with `data-count="1500"`
+- **WHEN** the element enters the viewport
+- **THEN** an easeOutExpo animation SHALL count from 0 to 1500
+- **AND** `data-prefix`, `data-suffix`, `data-fmt`, `data-duration` attributes SHALL be respected

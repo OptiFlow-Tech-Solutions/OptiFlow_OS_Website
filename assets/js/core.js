@@ -167,4 +167,27 @@
       scrollTop.classList.toggle('visible', window.scrollY > 600);
     }, { passive: true });
   }
+
+  /* ─── Keyboard: Escape closes drawer ─── */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && drawer && drawer.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
+
+  /* ─── Visibility change: pause animations ─── */
+  document.addEventListener('visibilitychange', function() {
+    document.documentElement.classList.toggle('page-hidden', document.hidden);
+  });
+
+  /* ─── Smooth scroll for hash links ─── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
 })();

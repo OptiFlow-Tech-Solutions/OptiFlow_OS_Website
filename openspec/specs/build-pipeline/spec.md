@@ -23,6 +23,59 @@ The system SHALL assemble all pages from `src/pages/`, `src/partials/`, and shar
 - **WHEN** `npm run build` is executed
 - **THEN** the existing `dist/` SHALL be removed and recreated from scratch
 
+### Requirement: SEO Meta Injection
+
+The build pipeline SHALL inject canonical URLs, OpenGraph URL/site name/locale/dimensions, Twitter image, and robots meta tags into every assembled page.
+
+#### Scenario: Canonical URL injection
+
+- **GIVEN** a page with file path `features/index.html` in site.json
+- **WHEN** the build pipeline assembles the page
+- **THEN** `<link rel="canonical" href="https://optiflow.in/features/">` SHALL be injected into `<head>`
+
+#### Scenario: OG URL and site name injection
+
+- **GIVEN** any page being assembled
+- **WHEN** the build pipeline processes the page
+- **THEN** `<meta property="og:url" content="https://optiflow.in/<path>/">` SHALL be injected
+- **AND** `<meta property="og:site_name" content="OptiFlow OS">` SHALL be injected
+- **AND** `<meta property="og:locale" content="en_IN">` SHALL be injected
+- **AND** `<meta property="og:image:width" content="512">` SHALL be injected
+- **AND** `<meta property="og:image:height" content="512">` SHALL be injected
+
+#### Scenario: Robots meta injection
+
+- **GIVEN** any page being assembled
+- **WHEN** the build pipeline processes the page
+- **THEN** `<meta name="robots" content="index, follow">` SHALL be injected into `<head>`
+
+#### Scenario: Twitter image injection
+
+- **GIVEN** any page being assembled
+- **WHEN** the build pipeline processes the page
+- **THEN** `<meta name="twitter:image" content="/assets/img/OptiFlow.Logo.png">` SHALL be injected
+- **AND** `<meta name="twitter:image:alt" content="OptiFlow OS Logo">` SHALL be injected
+
+### Requirement: BreadcrumbList Structured Data Injection
+
+The build pipeline SHALL inject BreadcrumbList JSON-LD structured data into every assembled page.
+
+#### Scenario: BreadcrumbList generation
+
+- **GIVEN** a page at `/problem-solutions/`
+- **WHEN** the build pipeline injects JSON-LD
+- **THEN** a BreadcrumbList schema SHALL be present with items for Home and Solutions
+
+### Requirement: Article Structured Data on Newsletter
+
+The build pipeline SHALL inject Article JSON-LD structured data into the newsletter page.
+
+#### Scenario: Article schema on newsletter
+
+- **GIVEN** the newsletter page
+- **WHEN** the build pipeline injects JSON-LD
+- **THEN** an Article schema SHALL be present with headline, description, publisher, and datePublished fields
+
 ### Requirement: Placeholder Variable Replacement
 
 The system SHALL replace `{{PLACEHOLDER}}` variables in source pages with values from `site.json`.
@@ -50,6 +103,7 @@ The system SHALL inject navigation and footer partials via `<!-- INCLUDE: nav --
 - **WHEN** the page is assembled
 - **THEN** the comment SHALL be replaced with the contents of `src/partials/nav.html`
 - **AND** the active page indicator SHALL be resolved based on the page's `active` field in `site.json`
+- **AND** active state SHALL be resolved for both desktop nav AND mobile drawer links
 
 #### Scenario: Footer injection
 
@@ -137,6 +191,38 @@ The system SHALL produce clean, directory-based URLs without `.html` extensions.
 - **WHEN** the page is assembled
 - **THEN** the output SHALL be written to `dist/features/index.html`
 - **AND** the URL path SHALL be `/features/`
+
+### Requirement: CI/CD Pipeline
+
+The system SHALL include a GitHub Actions CI workflow that runs on pull requests and pushes to main.
+
+#### Scenario: PR validation
+
+- **GIVEN** a pull request is opened against `main`
+- **WHEN** the CI workflow triggers
+- **THEN** the build SHALL run via `npm run build`
+- **AND** validation SHALL run via `npm run validate`
+- **AND** lint checks SHALL run via `npm run lint:all`
+- **AND** all steps SHALL complete within 5 minutes
+
+#### Scenario: Deploy scripts
+
+- **GIVEN** the project is configured for deployment
+- **WHEN** `npm run deploy:netlify` is executed
+- **THEN** the site SHALL be deployed to Netlify
+- **WHEN** `npm run deploy:cloudflare` is executed
+- **THEN** the site SHALL be deployed to Cloudflare Pages
+
+### Requirement: Pipeline Configuration
+
+The system SHALL have a deploy step in the build pipeline config that invokes the actual deploy script.
+
+#### Scenario: Pipeline deploy step
+
+- **GIVEN** the build pipeline config at `orchestrate/pipeline-config/build.yaml`
+- **WHEN** the deploy step is executed
+- **THEN** it SHALL run `npm run deploy`
+- **AND** it SHALL NOT be a placeholder echo command
 
 ### Requirement: Development Server
 

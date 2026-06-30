@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terms &amp; Conditions — OptiFlow OS</title>
+  <title>{{PAGE_TITLE}}</title>
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any" />
-  <meta name="description" content="OptiFlow OS Terms &amp; Conditions — platform usage rules, customer responsibilities, payment terms, data ownership, intellectual property, and governing law." />
-  <meta property="og:title" content="OptiFlow OS — Terms &amp; Conditions" />
-  <meta property="og:description" content="Read the terms that govern your use of OptiFlow OS — clear rules, transparent obligations, and enterprise-grade governance." />
+  <meta name="description" content="{{PAGE_DESCRIPTION}}" />
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
@@ -529,7 +527,7 @@
         var st = window.scrollY;
         var dh = document.documentElement.scrollHeight - window.innerHeight;
         bar.style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
-      });
+      }, { passive: true });
 
       /* --- Side nav active tracking --- */
       var sections = document.querySelectorAll('.content-card[id]');
@@ -539,15 +537,9 @@
         var offset = 100;
         sections.forEach(function(s) { if (s.getBoundingClientRect().top <= offset) current = s.id; });
         links.forEach(function(a) { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
-      });
+      }, { passive: true });
 
-      /* --- Sticky CTA visibility --- */
-      var st = document.querySelector('.sticky-cta');
-      if (st) {
-        var hero = document.querySelector('.hero-section');
-        var heroH = hero ? hero.offsetHeight * 0.7 : 500;
-        window.addEventListener('scroll', function() { st.classList.toggle('visible', window.scrollY > heroH); });
-      }
+      // ponytail: sticky CTA handled by core.js
     })();
   </script>
 </body>

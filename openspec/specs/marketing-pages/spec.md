@@ -19,7 +19,22 @@ The system SHALL render exactly 12 marketing pages as defined in the `site.json`
 
 ### Requirement: Unique Metadata
 
-Each page SHALL have a unique `<title>`, `<meta name="description">`, OpenGraph tags, and canonical URL.
+Each page SHALL have a unique `<title>`, `<meta name="description">`, OpenGraph tags, and canonical URL. All SEO metadata in page source files SHALL use build-time placeholders that resolve from `site.json`.
+
+#### Scenario: Title uses placeholder
+
+- **GIVEN** any page source file in `src/pages/`
+- **WHEN** the file is inspected
+- **THEN** the `<title>` tag SHALL contain `{{PAGE_TITLE}}` as its content
+- **AND** the title SHALL NOT be hardcoded in the source file
+
+#### Scenario: Description uses placeholder
+
+- **GIVEN** any page source file in `src/pages/`
+- **WHEN** the file is inspected
+- **THEN** the `<meta name="description">` tag SHALL use `{{PAGE_DESCRIPTION}}` as its content attribute
+- **AND** the `<meta property="og:description">` tag SHALL use `{{PAGE_DESCRIPTION}}` as its content attribute
+- **AND** the description SHALL NOT be hardcoded in the source file
 
 #### Scenario: Title and description
 
@@ -77,6 +92,23 @@ Each page SHALL use scroll-reveal animations for content sections.
 - **THEN** it SHALL transition from translateY(28px) and opacity 0 to visible state
 - **AND** staggered children SHALL animate sequentially via `--delay` values
 
+### Requirement: Source File Naming
+
+Source page files SHALL be named to match their purpose. The newsletter page source SHALL be `newsletter.html` (not `blog.html`).
+
+#### Scenario: Newsletter source file
+
+- **GIVEN** the `src/pages/` directory
+- **WHEN** inspected
+- **THEN** `newsletter.html` SHALL exist
+- **AND** `blog.html` SHALL NOT exist
+
+#### Scenario: Build mapping for newsletter
+
+- **GIVEN** the SRC_MAP in `assemble.mjs`
+- **WHEN** the newsletter entry is inspected
+- **THEN** it SHALL map `newsletter/index.html` → `newsletter.html`
+
 ### Requirement: Page Structure
 
 The system SHALL maintain a consistent page structure on every page.
@@ -87,3 +119,42 @@ The system SHALL maintain a consistent page structure on every page.
 - **WHEN** the page is inspected
 - **THEN** the content SHALL follow the order: navigation (`<header>`) → main content (`<main>`) → footer (`<footer>`)
 - **AND** a skip-to-content link SHALL precede the navigation
+- **AND** the main content area SHALL have `id="content"`
+
+### Requirement: Shared Logic Deduplication
+
+Page-specific scripts SHALL NOT duplicate logic already handled by `core.js`. Sticky CTA visibility, scroll-to-top, scroll reveal, stagger animation, FAQ accordion, and counter animation SHALL be handled exclusively by core.js.
+
+#### Scenario: No duplicate sticky CTA
+
+- **GIVEN** the home, pricing, privacy-policy, and terms pages
+- **WHEN** page-specific scripts are inspected
+- **THEN** no sticky CTA scroll listener SHALL be present (core.js handles it)
+
+#### Scenario: No duplicate scroll-to-top
+
+- **GIVEN** the home and pricing pages
+- **WHEN** page-specific scripts are inspected
+- **THEN** no scroll-to-top scroll listener SHALL be present (core.js handles it)
+
+#### Scenario: No duplicate reveal or stagger
+
+- **GIVEN** the product-overview and newsletter pages
+- **WHEN** page-specific scripts are inspected
+- **THEN** no reveal or stagger IntersectionObserver SHALL be present (core.js handles it)
+
+### Requirement: Performance Standards
+
+All page-specific scroll listeners SHALL use `{passive: true}`. Mousemove listeners SHALL be throttled via `requestAnimationFrame`. Animations SHALL pause when the page is hidden.
+
+#### Scenario: Scroll listeners are passive
+
+- **GIVEN** any page-specific scroll listener
+- **WHEN** the listener is registered
+- **THEN** the options object SHALL include `{passive: true}`
+
+#### Scenario: Mousemove listeners are throttled
+
+- **GIVEN** mousemove listeners on home or why-optiflow pages
+- **WHEN** the mouse moves rapidly
+- **THEN** the callback SHALL fire at most once per animation frame

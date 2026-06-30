@@ -8,6 +8,7 @@
 import { execSync } from 'node:child_process';
 import { resolvePaths } from './config-resolver.mjs';
 import { logEvent } from './audit-log.mjs';
+import { emit } from './event-bus.mjs';
 
 const { projectRoot, hooksDir } = resolvePaths();
 
@@ -59,7 +60,6 @@ const EXECUTORS = {
 
   /** Load a skill (emits event for the agent harness to pick up) */
   skill: async (step, context) => {
-    const { emit } = await import('./event-bus.mjs');
     emit('skill:request', { skill: step.command, context });
     // ponytail: skill loading is harness-side; we just signal the intent.
     // The actual agent harness (open-code) responds to skill:request events.
@@ -68,7 +68,6 @@ const EXECUTORS = {
 
   /** Delegate to an agent */
   agent: async (step, context) => {
-    const { emit } = await import('./event-bus.mjs');
     emit('agent:request', {
       agent: step.command,
       task: step.task || context?.taskDescription || '',
@@ -79,7 +78,6 @@ const EXECUTORS = {
 
   /** Delegate to a sub-agent */
   subagent: async (step, context) => {
-    const { emit } = await import('./event-bus.mjs');
     emit('subagent:request', {
       type: step.subagentType || 'general',
       task: step.task || step.command || '',
@@ -93,8 +91,7 @@ const EXECUTORS = {
 
   /** Quality gate (emits event for gate execution) */
   gate: async (step, context) => {
-    const { emit } = await import('./event-bus.mjs');
-    await emit('gate:check', { gate: step.command, context });
+    emit('gate:check', { gate: step.command, context });
     return { status: 'done', output: `Gate checked: ${step.command}`, duration: 0 };
   },
 

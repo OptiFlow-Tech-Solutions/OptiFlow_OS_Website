@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OptiFlow OS — Simple, Transparent Pricing for MSMEs</title>
+  <title>{{PAGE_TITLE}}</title>
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any">
-  <meta name="description" content="Simple, transparent pricing for Indian MSMEs. No per-user charges, no hidden costs. Starter, Growth, and Scale plans with predictable annual pricing.">
-  <meta property="og:title" content="OptiFlow OS — Pricing">
-  <meta property="og:description" content="Transparent MSME pricing with no per-user charges. See plans, compare features, and calculate your ROI.">
+  <meta name="description" content="{{PAGE_DESCRIPTION}}">
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
@@ -174,13 +172,13 @@
     /* ─── FAQ (page-specific: different inner structure than core.css) ─── */
     .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--gap-sm); }
     .faq-item { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; background: var(--surface); }
-    .faq-q { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; transition: color 0.2s; color: var(--fg); font-family: inherit; background: none; border: 0; }
-    .faq-q:hover { color: var(--teal); }
-    .faq-q svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.3s ease; color: var(--muted); }
+    .faq-q, .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; transition: color 0.2s; color: var(--fg); font-family: inherit; background: none; border: 0; }
+    .faq-q:hover, .faq-question:hover { color: var(--teal); }
+    .faq-q svg, .faq-question svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.3s ease; color: var(--muted); }
     .faq-answer { padding: 0 24px; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; font-size: 15px; color: var(--muted); line-height: 1.7; }
     .faq-answer > div { overflow: hidden; }
     .faq-item.open .faq-answer { grid-template-rows: 1fr; }
-    .faq-item.open .faq-q svg { transform: rotate(180deg); color: var(--teal); }
+    .faq-item.open .faq-q svg, .faq-item.open .faq-question svg { transform: rotate(180deg); color: var(--teal); }
 
     /* ─── CTA section overrides ─── */
     .cta-section .btn-primary { background: white; color: var(--accent); box-shadow: var(--shadow-button-hover); }
@@ -374,19 +372,19 @@
   <div class="container">
     <div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-lg);text-align:center">
       <div>
-        <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--accent);margin-bottom:4px" class="counter" data-target="500">0</div>
+        <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--accent);margin-bottom:4px" class="counter" data-count="500">0</div>
         <div style="font-size:13px;color:var(--muted);font-weight:500">Businesses Running On OptiFlow</div>
       </div>
       <div>
-        <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--teal);margin-bottom:4px" class="counter" data-target="10000">0</div>
+        <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--teal);margin-bottom:4px" class="counter" data-count="10000">0</div>
         <div style="font-size:13px;color:var(--muted);font-weight:500">Team Members Managed Daily</div>
       </div>
       <div>
-        <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--green);margin-bottom:4px" class="counter" data-target="500000">0</div>
+        <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--green);margin-bottom:4px" class="counter" data-count="500000">0</div>
         <div style="font-size:13px;color:var(--muted);font-weight:500">Tasks Processed</div>
       </div>
       <div>
-        <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--lime);margin-bottom:4px" class="counter" data-target="1200">0</div>
+        <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--lime);margin-bottom:4px" class="counter" data-count="1200">0</div>
         <div style="font-size:13px;color:var(--muted);font-weight:500">Departments Managed</div>
       </div>
     </div>
@@ -690,13 +688,13 @@
       <h2>Frequently Asked Questions</h2>
     </div>
     <div class="faq-list reveal">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are there any hidden charges? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>No hidden charges. The annual subscription, one-time implementation, and any add-on modules are clearly communicated before you sign up. What you see is what you pay.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you charge per user? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>No. OptiFlow charges by plan tier (team size range), not per individual user. You can add team members within your plan's capacity at no extra cost.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is included in implementation? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation includes system setup, data migration assistance, department configuration, role-based training, workflow setup, and go-live support with post-launch check-ins.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can we upgrade plans later? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. You can upgrade (or downgrade) at any time. When upgrading mid-year, you only pay the difference. Your data, workflows, and history stay intact.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does implementation take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation typically takes 2—4 weeks depending on team size and process complexity. We follow a structured 5-phase rollout: Discovery → Setup → Configuration → Training → Go Live.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is cloud hosting included? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. Cloud hosting, product updates, security patches, and standard support are all included in your annual subscription. No separate infrastructure costs.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can multiple branches use the system? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. The Scale plan supports multi-location operations with centralized visibility. The Growth plan supports multiple departments. Each branch or department can have its own structure, users, and reports — all visible to leadership.</div></div></div>
+      <div class="faq-item"><button class="faq-question">Are there any hidden charges? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>No hidden charges. The annual subscription, one-time implementation, and any add-on modules are clearly communicated before you sign up. What you see is what you pay.</div></div></div>
+      <div class="faq-item"><button class="faq-question">Do you charge per user? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>No. OptiFlow charges by plan tier (team size range), not per individual user. You can add team members within your plan's capacity at no extra cost.</div></div></div>
+      <div class="faq-item"><button class="faq-question">What is included in implementation? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation includes system setup, data migration assistance, department configuration, role-based training, workflow setup, and go-live support with post-launch check-ins.</div></div></div>
+      <div class="faq-item"><button class="faq-question">Can we upgrade plans later? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. You can upgrade (or downgrade) at any time. When upgrading mid-year, you only pay the difference. Your data, workflows, and history stay intact.</div></div></div>
+      <div class="faq-item"><button class="faq-question">How long does implementation take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation typically takes 2—4 weeks depending on team size and process complexity. We follow a structured 5-phase rollout: Discovery → Setup → Configuration → Training → Go Live.</div></div></div>
+      <div class="faq-item"><button class="faq-question">Is cloud hosting included? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. Cloud hosting, product updates, security patches, and standard support are all included in your annual subscription. No separate infrastructure costs.</div></div></div>
+      <div class="faq-item"><button class="faq-question">Can multiple branches use the system? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. The Scale plan supports multi-location operations with centralized visibility. The Growth plan supports multiple departments. Each branch or department can have its own structure, users, and reports — all visible to leadership.</div></div></div>
     </div>
   </div>
 </section>
@@ -780,21 +778,9 @@
   });
   calcPriceCompare();
 
-  /* --- FAQ accordion --- */
-  function toggleFaq(el) {
-    var item = el.closest('.faq-item');
-    var wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
-    if (!wasOpen) item.classList.add('open');
-  }
+  /* --- FAQ accordion — handled by core.js via .faq-question class --- */
 
-  /* --- Sticky CTA + Scroll top --- */
-  document.addEventListener('scroll', function() {
-    var s = document.querySelector('.sticky-cta');
-    if (s) s.classList.toggle('visible', window.scrollY > 500);
-    var st = document.querySelector('.scroll-top');
-    if (st) st.classList.toggle('visible', window.scrollY > 800);
-  }, { passive: true });
+  /* --- Sticky CTA + Scroll top — handled by core.js --- */
 </script>
 
 </body>

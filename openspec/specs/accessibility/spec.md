@@ -71,6 +71,7 @@ The system SHALL include `aria-label` attributes on interactive elements.
 - **WHEN** the page is inspected
 - **THEN** each SHALL have an `aria-label` attribute (e.g., hamburger button: "Toggle menu", theme toggle: "Toggle theme")
 - **AND** FAQ question buttons SHALL have `aria-expanded` reflecting open/closed state
+- **AND** form validation errors SHALL set `aria-invalid="true"` on invalid fields
 
 ### Requirement: Reduced Motion
 
@@ -94,3 +95,36 @@ The system SHALL ensure all navigation and interactive elements are keyboard-acc
 - **WHEN** the Tab key is used to move through interactive elements
 - **THEN** all nav links, buttons, theme toggles, FAQ accordion items, and form fields SHALL be focusable and operable
 - **AND** the mobile drawer SHALL not trap focus when closed
+- **AND** the mobile drawer SHALL close on Escape key press when open
+
+### Requirement: Calendar Keyboard Accessibility
+
+The demo-booking calendar SHALL be keyboard accessible with all date cells as `<button>` elements.
+
+#### Scenario: Calendar date via keyboard
+
+- **GIVEN** the calendar widget on the demo-booking page
+- **WHEN** the user focuses a date cell and presses Enter or Space
+- **THEN** the date SHALL be selected
+- **AND** `aria-label` SHALL describe the full date
+
+### Requirement: Form Validation Accessibility
+
+Form validation errors SHALL be communicated to screen readers via `aria-invalid`.
+
+#### Scenario: Invalid field announced
+
+- **GIVEN** a form with validation on demo-booking or contact page
+- **WHEN** a required field is empty and the form is submitted
+- **THEN** the field SHALL receive `aria-invalid="true"`
+
+### Requirement: Animation Pause on Visibility Change
+
+Animations SHALL pause when the page is hidden (tab switch, minimize).
+
+#### Scenario: Typewriter pauses on blur
+
+- **GIVEN** a typewriter animation is running
+- **WHEN** the user switches to a different browser tab
+- **THEN** the typewriter SHALL pause
+- **AND** it SHALL resume when the tab becomes visible again

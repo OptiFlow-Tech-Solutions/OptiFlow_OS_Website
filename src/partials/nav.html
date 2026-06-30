@@ -1,4 +1,5 @@
 <!-- NAV partial — injected by build script -->
+<a class="skip-link" href="#content">Skip to content</a>
 <header class="topnav" role="navigation" aria-label="Main navigation">
   <div class="topnav-inner">
     <a href="/" class="logo">
@@ -12,7 +13,7 @@
       <a href="/features/" class="nav-link {{ACTIVE_PAGE === 'Features' ? 'active' : ''}}">Features</a>
       <a href="/why-optiflow/" class="nav-link {{ACTIVE_PAGE === 'Why OptiFlow' ? 'active' : ''}}">Why OptiFlow</a>
       <a href="/pricing/" class="nav-link {{ACTIVE_PAGE === 'Pricing' ? 'active' : ''}}">Pricing</a>
-      <div class="nav-dropdown"><span class="nav-link {{ACTIVE_PAGE === 'Resources' ? 'active' : ''}}">Resources <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="1,1 5,5 9,1"></polyline></svg></span><div class="nav-dropdown-menu"><a href="/newsletter/">Newsletter</a><a href="/faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms &amp; Conditions</a></div></div>
+      <div class="nav-dropdown"><span class="nav-link {{ACTIVE_PAGE === 'Resources' ? 'active' : ''}}">Resources <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="1,1 5,5 9,1"></polyline></svg></span><div class="nav-dropdown-menu"><a href="/newsletter/">Newsletter</a><a href="/faq/">FAQ</a></div></div>
       <a href="/contact/" class="nav-link {{ACTIVE_PAGE === 'Contact' ? 'active' : ''}}">Contact</a>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -21,20 +22,19 @@
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
       </button>
-      <a href="/product-overview/" class="btn btn-ghost">Watch Demo</a>
       <a href="/demo-booking/" class="btn btn-primary btn-glow">Book Demo</a>
     </div>
   </div>
 </header>
 <div class="drawer-overlay" id="drawerOverlay"></div>
 <div class="mobile-drawer" id="mobileDrawer">
-  <a href="/" class="nav-link">Home</a>
-  <a href="/problem-solutions/" class="nav-link">Solutions</a>
-  <a href="/product-overview/" class="nav-link">Product</a>
-  <a href="/features/" class="nav-link">Features</a>
-  <a href="/why-optiflow/" class="nav-link">Why OptiFlow</a>
-  <a href="/pricing/" class="nav-link">Pricing</a>
-  <div class="nav-dropdown"><span class="nav-link" style="cursor:default">Resources</span><div class="nav-dropdown-menu"><a href="/newsletter/">Newsletter</a><a href="/faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms &amp; Conditions</a></div></div>
-  <a href="/contact/" class="nav-link">Contact</a>
+  <a href="/" class="nav-link {{ACTIVE_PAGE === 'Home' ? 'active' : ''}}">Home</a>
+  <a href="/problem-solutions/" class="nav-link {{ACTIVE_PAGE === 'Solutions' ? 'active' : ''}}">Solutions</a>
+  <a href="/product-overview/" class="nav-link {{ACTIVE_PAGE === 'Product' ? 'active' : ''}}">Product</a>
+  <a href="/features/" class="nav-link {{ACTIVE_PAGE === 'Features' ? 'active' : ''}}">Features</a>
+  <a href="/why-optiflow/" class="nav-link {{ACTIVE_PAGE === 'Why OptiFlow' ? 'active' : ''}}">Why OptiFlow</a>
+  <a href="/pricing/" class="nav-link {{ACTIVE_PAGE === 'Pricing' ? 'active' : ''}}">Pricing</a>
+  <div class="nav-dropdown"><span class="nav-link {{ACTIVE_PAGE === 'Resources' ? 'active' : ''}}" style="cursor:default">Resources</span><div class="nav-dropdown-menu"><a href="/newsletter/">Newsletter</a><a href="/faq/">FAQ</a></div></div>
+  <a href="/contact/" class="nav-link {{ACTIVE_PAGE === 'Contact' ? 'active' : ''}}">Contact</a>
   <div class="drawer-cta"><a href="/demo-booking/" class="btn btn-primary" style="width:100%;text-align:center;justify-content:center">Book Demo</a></div>
 </div>

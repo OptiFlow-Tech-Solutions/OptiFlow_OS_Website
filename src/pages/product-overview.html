@@ -2,10 +2,8 @@
 <html lang="en" data-theme="light"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OptiFlow OS — Product Overview</title>
-  <meta name="description" content="OptiFlow OS is a complete Business Operating System — Task Management, Attendance, SOPs, Workflows, Reporting, and Analytics built for Indian MSMEs.">
-  <meta property="og:title" content="OptiFlow OS — Product Overview">
-  <meta property="og:description" content="One platform to run your entire business. Explore all OptiFlow OS modules — from task management to executive reporting.">
+  <title>{{PAGE_TITLE}}</title>
+  <meta name="description" content="{{PAGE_DESCRIPTION}}">
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
@@ -860,18 +858,5 @@
     }
   </script>
 
-  <script>
-    if (typeof IntersectionObserver !== 'undefined') {
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-      document.querySelectorAll('.stagger').forEach(function(el) { observer.observe(el); });
-    }
-  </script>
+  <!-- ponytail: reveal + stagger handled by core.js -->
 </body></html>

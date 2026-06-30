@@ -3,11 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OptiFlow OS — Frequently Asked Questions</title>
+  <title>{{PAGE_TITLE}}</title>
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any" />
-  <meta name="description" content="Frequently asked questions about OptiFlow OS — product, pricing, security, implementation, and support. Everything MSME owners need to know before booking a demo." />
-  <meta property="og:title" content="OptiFlow OS — Frequently Asked Questions" />
-  <meta property="og:description" content="Get answers to common questions about OptiFlow OS — product, pricing, security, and implementation." />
+  <meta name="description" content="{{PAGE_DESCRIPTION}}" />
   <meta property="og:image" content="/assets/img/OptiFlow.Logo.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
@@ -295,7 +293,11 @@
           });
         });
       }
-      input.addEventListener('input', function() { doSearch(input.value); });
+      var searchTimeout;
+      input.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function() { doSearch(input.value); }, 200);
+      });
       document.getElementById('searchBtn').addEventListener('click', function() { doSearch(input.value); });
       document.querySelectorAll('.search-suggestion').forEach(function(s) {
         s.addEventListener('click', function() { input.value = s.textContent; doSearch(s.textContent); });

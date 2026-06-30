@@ -24,9 +24,16 @@
     "lint:all": "npm run lint && npm run lint:html && npm run lint:js",
     "test": "npx playwright test --config tests/e2e/playwright.config.js",
     "test:e2e": "npm run build && npm run test",
-    "deploy": "node hooks/pre-build.mjs && npm run build && npm run validate"
+    "deploy": "node hooks/pre-build.mjs && npm run build && npm run validate",
+    "deploy:netlify": "npm run deploy && npx netlify-cli deploy --prod --dir=dist",
+    "deploy:cloudflare": "npm run deploy && npx wrangler pages deploy dist --project-name=optiflow-website"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.12.1"
+    "@axe-core/playwright": "^4.12.1",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0",
+    "html-validate": "^11.5.3",
+    "stylelint": "^17.14.0",
+    "stylelint-config-standard": "^40.0.0"
   }
 }

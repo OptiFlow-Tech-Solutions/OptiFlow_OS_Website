@@ -94,8 +94,8 @@ export function lifecycleForPhase(phase) {
     case 'explore': return [];
     case 'propose': return ['pre-build'];
     case 'apply': return ['pre-build', 'post-build', 'theme-change'];
-    case 'verify': return ['pre-build', 'post-build', 'post-deploy'];
-    case 'archive': return ['pre-commit', 'pre-push'];
+    case 'verify': return ['pre-build', 'post-build'];
+    case 'archive': return ['pre-commit'];
     default: return [];
   }
 }

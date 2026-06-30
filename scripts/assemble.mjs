@@ -22,7 +22,7 @@ const SRC_MAP = {
   'features/index.html': 'features.html',
   'why-optiflow/index.html': 'why-optiflow.html',
   'pricing/index.html': 'pricing.html',
-  'newsletter/index.html': 'blog.html',
+  'newsletter/index.html': 'newsletter.html',
   'faq/index.html': 'faq.html',
   'contact/index.html': 'contact.html',
   'demo-booking/index.html': 'demo-booking.html',
@@ -82,12 +82,18 @@ function buildPage(pageInfo) {
   html = html.replace(/<!-- INCLUDE:\s*footer\s*-->/g, footerRaw);
   html = html.replace(/<!-- INCLUDE:\s*analytics\s*-->/g, analyticsRaw);
 
+  const urlPath = pageFile === 'index.html'
+    ? ''
+    : pageFile.replace('/index.html', '/').replace('.html', '/');
+  const pageUrl = `https://${site.domain}/${urlPath}`;
+
   const reps = {
     '{{SITE_NAME}}': site.name,
     '{{SITE_TAGLINE}}': site.tagline,
     '{{SITE_DESCRIPTION}}': site.description,
     '{{COMPANY}}': site.company,
     '{{PHONE}}': site.phone,
+    '{{PHONE_TEL}}': site.phone.replace(/\s/g, ''),
     '{{EMAIL}}': site.email,
     '{{WHATSAPP}}': site.whatsapp,
     '{{LOCATION}}': site.location,
@@ -95,6 +101,7 @@ function buildPage(pageInfo) {
     '{{DOMAIN}}': site.domain,
     '{{PAGE_TITLE}}': pageInfo.title,
     '{{PAGE_DESCRIPTION}}': pageInfo.description,
+    '{{PAGE_URL}}': pageUrl,
   };
 
   for (const [key, value] of Object.entries(reps)) {
@@ -109,6 +116,26 @@ function buildPage(pageInfo) {
   html = html.replace(
     /<link rel="icon"([^>]*)\/>/,
     '<link rel="icon"$1/><link rel="apple-touch-icon" href="/assets/img/OptiFlow.Logo.png" />'
+  );
+
+  // ponytail: inject SEO meta tags after viewport — canonical, OG, Twitter, robots
+  const seoMetas = [
+    `<link rel="canonical" href="${pageUrl}" />`,
+    `<meta property="og:title" content="${pageInfo.title}">`,
+    `<meta property="og:description" content="${pageInfo.description}">`,
+    `<meta property="og:url" content="${pageUrl}">`,
+    '<meta property="og:site_name" content="OptiFlow OS">',
+    '<meta property="og:locale" content="en_IN">',
+    '<meta property="og:image:width" content="512">',
+    '<meta property="og:image:height" content="512">',
+    '<meta name="twitter:image" content="/assets/img/OptiFlow.Logo.png">',
+    '<meta name="twitter:image:alt" content="OptiFlow OS Logo">',
+    '<meta name="robots" content="index, follow">',
+  ].join('\n  ');
+
+  html = html.replace(
+    '<meta name="viewport"',
+    `${seoMetas}\n  <meta name="viewport"`
   );
 
   const destDir = pageFile === 'index.html'
@@ -146,6 +173,31 @@ function injectJSONLD(pageInfo) {
   }
   </script>\n`;
 
+  // ponytail: BreadcrumbList — derive from URL path segments
+  {
+    const crumbs = [{ name: 'Home', url: `https://${site.domain}/` }];
+    if (urlPath) {
+      const segments = urlPath.replace(/\/$/, '').split('/').filter(Boolean);
+      let acc = '';
+      for (const seg of segments) {
+        acc += `/${seg}`;
+        const name = seg.replace(/-/g, ' ')
+          .replace(/\b\w/g, c => c.toUpperCase());
+        crumbs.push({ name, url: `https://${site.domain}${acc}/` });
+      }
+    }
+    const items = crumbs.map((c, i) =>
+      `{"@type": "ListItem", "position": ${i + 1}, "name": "${c.name}", "item": "${c.url}"}`
+    ).join(',');
+    scripts += `  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [${items}]
+  }
+  </script>\n`;
+  }
+
   if (pageInfo.file === 'faq/index.html') {
     scripts += `  <script type="application/ld+json">
   {
@@ -178,8 +230,27 @@ function injectJSONLD(pageInfo) {
   </script>\n`;
   }
 
-  // ponytail: inject Article/NewsletterArticle schema here when blog posts get individual pages.
-  //  return scripts + `  <script type="application/ld+json">{ "@type": "Article", ... }</script>\n`;
+  if (pageInfo.file === 'newsletter/index.html') {
+    const today = new Date().toISOString().slice(0, 10);
+    scripts += `  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "${pageInfo.title}",
+    "description": "${pageInfo.description}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "${site.name}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "${logoUrl}"
+      }
+    },
+    "datePublished": "${today}",
+    "dateModified": "${today}"
+  }
+  </script>\n`;
+  }
 
   return scripts;
 }

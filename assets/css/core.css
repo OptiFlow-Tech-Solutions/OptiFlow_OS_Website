@@ -28,9 +28,9 @@
   --fg-soft: color-mix(in oklch, var(--fg) 5%, transparent);
   --glow-accent: color-mix(in oklch, var(--lime) 18%, transparent);
   --nav-bg: transparent;
-  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
-  --font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  --font-display: -apple-system, blinkmacsystemfont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  --font-body: -apple-system, blinkmacsystemfont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', menlo, monospace;
   --fs-h1: clamp(36px, 5.5vw, 68px);
   --fs-h2: clamp(28px, 3.8vw, 46px);
   --fs-h3: 20px; --fs-lead: 18px; --fs-body: 16px; --fs-meta: 13px;
@@ -98,10 +98,11 @@
 /* ─── Reset & Base ─── */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; background: var(--bg); scroll-behavior: smooth; }
+
 body {
   margin: 0; background: var(--bg); color: var(--fg);
   font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.6;
-  text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  text-rendering: optimizelegibility; -webkit-font-smoothing: antialiased; overflow-x: hidden;
   transition: background 0.35s, color 0.35s;
 }
 img, svg { display: block; max-width: 100%; }

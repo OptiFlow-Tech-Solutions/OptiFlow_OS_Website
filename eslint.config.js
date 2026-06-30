@@ -9,11 +9,19 @@ export default [
     files: ["scripts/**/*.mjs", "orchestrate/**/*.mjs", "hooks/**/*.mjs", "tests/**/*.mjs"],
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: "module"
+      sourceType: "module",
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        performance: "readonly",
+      }
     },
     rules: {
       "no-console": "warn",
-      "no-unused-vars": "error",
+      "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
       "no-debugger": "error",
       "prefer-const": "error",
       "no-var": "error"

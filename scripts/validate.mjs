@@ -96,9 +96,49 @@ for (const page of pages) {
   const html = fs.readFileSync(page, 'utf-8');
   const name = path.relative(DIST, page);
   if (!html.includes('<title>')) log('error', `Missing <title> in ${name}`);
-  if (!html.includes('meta name="description"')) log('warn', `Missing meta description in ${name}`);
+  if (!html.includes('meta name="description"')) log('error', `Missing meta description in ${name}`);
   if (!html.includes('<h1')) log('warn', `Missing <h1> in ${name}`);
-  if (!html.includes('og:title')) log('warn', `Missing OG tags in ${name}`);
+  if (!html.includes('og:title')) log('error', `Missing OG tags in ${name}`);
+}
+
+// 4a. Check meta description length
+console.log('\n─ Description Length (120-160) ─');
+for (const page of pages) {
+  const html = fs.readFileSync(page, 'utf-8');
+  const name = path.relative(DIST, page);
+  const match = html.match(/<meta name="description" content="([^"]+)"/);
+  if (match) {
+    const desc = match[1];
+    if (desc.length < 120) log('error', `Description too short (${desc.length} chars) in ${name}`);
+    else if (desc.length > 160) log('error', `Description too long (${desc.length} chars) in ${name}`);
+  }
+}
+
+// 4b. Check canonical URL
+console.log('\n─ Canonical URLs ─');
+for (const page of pages) {
+  const html = fs.readFileSync(page, 'utf-8');
+  const name = path.relative(DIST, page);
+  if (!html.includes('rel="canonical"')) log('error', `Missing canonical URL in ${name}`);
+}
+
+// 4c. Check OG URL
+console.log('\n─ OpenGraph URLs ─');
+for (const page of pages) {
+  const html = fs.readFileSync(page, 'utf-8');
+  const name = path.relative(DIST, page);
+  if (!html.includes('og:url')) log('error', `Missing og:url in ${name}`);
+  if (!html.includes('og:site_name')) log('error', `Missing og:site_name in ${name}`);
+  if (!html.includes('og:locale')) log('error', `Missing og:locale in ${name}`);
+}
+
+// 4d. Check structured data
+console.log('\n─ Structured Data ─');
+for (const page of pages) {
+  const html = fs.readFileSync(page, 'utf-8');
+  const name = path.relative(DIST, page);
+  if (!html.includes('"@type":"Organization"') && !html.includes('"@type": "Organization"')) log('warn', `Missing Organization schema in ${name}`);
+  if (!html.includes('BreadcrumbList')) log('warn', `Missing BreadcrumbList in ${name}`);
 }
 
 // 5. Check canonical data consistency

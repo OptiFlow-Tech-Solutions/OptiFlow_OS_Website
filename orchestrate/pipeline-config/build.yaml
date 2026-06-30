@@ -15,6 +15,6 @@ steps:
     blocking: true
     continue-on-error: true
   - id: deploy
-    command: echo "Deploy ready"
+    command: npm run deploy
     blocking: false
     depends: [assemble, validate]

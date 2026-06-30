@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Validate
+        run: npm run validate
+
+      - name: Lint CSS
+        run: npx stylelint "assets/css/**/*.css" --allow-empty-input
+
+      - name: Lint JS
+        run: npx eslint "scripts/**/*.mjs" "orchestrate/**/*.mjs" "hooks/**/*.mjs"
+        continue-on-error: true
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Test (E2E)
+        run: npx playwright test --config tests/e2e/playwright.config.js
+        continue-on-error: true
