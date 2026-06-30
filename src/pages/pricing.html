@@ -57,16 +57,6 @@
     .pricing-visual .cch-row:nth-child(4) { animation-delay: 0.54s; }
     .pricing-visual .cch-row:nth-child(5) { animation-delay: 0.62s; }
 
-    /* ─── Stagger (page-specific: generic stagger, core.css uses stagger-3/4/5) ─── */
-    .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
-    .stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
-    .stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
-    .stagger.visible > *:nth-child(3) { transition-delay: 0.15s; }
-    .stagger.visible > *:nth-child(4) { transition-delay: 0.2s; }
-    .stagger.visible > *:nth-child(5) { transition-delay: 0.25s; }
-    .stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
-    .stagger.visible > * { opacity: 1; transform: translateY(0); }
-
     /* ─── Pricing cards ─── */
     .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); align-items: start; }
     .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 36px 32px; position: relative; transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -345,7 +335,7 @@
       <h2>Built Around Business Value, Not User Counts</h2>
       <p class="lead">Most SaaS tools charge per user — the bigger your team, the higher the bill. OptiFlow was designed differently: one fixed annual investment that covers your entire team so you can scale without surprise costs.</p>
     </div>
-    <div class="grid-4 stagger reveal" style="max-width:1000px;margin-inline:auto">
+    <div class="grid-4 stagger-4 reveal" style="max-width:1000px;margin-inline:auto">
       <div class="card" style="text-align:center">
         <svg style="width:32px;height:32px;margin:0 auto 12px;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         <h4 style="font-size:15px;margin-bottom:4px">Unlimited Users</h4>
@@ -401,7 +391,7 @@
       <p class="lead">Annual pricing. One-time implementation. Everything included.</p>
     </div>
 
-    <div class="pricing-grid stagger reveal" id="pricingCards">
+    <div class="pricing-grid stagger-3 reveal" id="pricingCards">
       <!-- -- STARTER -- -->
       <div class="pricing-card" data-plan="starter">
         <h3 class="pc-name">Starter</h3>
@@ -631,14 +621,14 @@
       <h2>Implementation &amp; Onboarding</h2>
       <p class="lead">A structured rollout designed for MSMEs — discovery to go-live in weeks, not months.</p>
     </div>
-    <div class="imp-timeline stagger reveal">
+    <div class="imp-timeline stagger-5 reveal">
       <div class="imp-step"><div class="imp-step-num">1</div><h4>Discovery</h4><p>Understand your operations, workflows, and pain points</p></div>
       <div class="imp-step"><div class="imp-step-num">2</div><h4>Setup</h4><p>System configuration, user profiles, department structure</p></div>
       <div class="imp-step"><div class="imp-step-num">3</div><h4>Configuration</h4><p>Custom workflows, SOPs, checklists, approval chains</p></div>
       <div class="imp-step"><div class="imp-step-num">4</div><h4>Training</h4><p>Role-based training for admins, managers, and team members</p></div>
       <div class="imp-step"><div class="imp-step-num">5</div><h4>Go Live</h4><p>Launch with on-ground support and post-go-live check-ins</p></div>
     </div>
-    <div class="imp-metrics stagger reveal">
+    <div class="imp-metrics stagger-3 reveal">
       <div class="card imp-metric">
         <div class="imp-metric-value" style="color:var(--accent)">2-4</div>
         <p class="imp-metric-label">Weeks to go live</p>
@@ -663,7 +653,7 @@
       <h2>Built-In Security. Included With Every Plan.</h2>
       <p class="lead" style="color:var(--muted)">Role-based access, audit logs, secure infrastructure — the same security enterprises demand, designed for MSME simplicity.</p>
     </div>
-    <div class="grid-3 stagger reveal">
+    <div class="grid-3 stagger-3 reveal">
       <div class="card" style="text-align:center">
         <svg style="width:32px;height:32px;margin:0 auto 12px;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         <h3 style="font-size:16px;margin-bottom:6px">Role-Based Access</h3>
