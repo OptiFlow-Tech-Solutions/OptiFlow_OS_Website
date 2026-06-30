@@ -151,14 +151,14 @@ The mobile drawer SHALL resolve active link indicators identical to desktop nav.
 
 ### Requirement: Resources Dropdown
 
-The Resources dropdown in both desktop nav and mobile drawer SHALL contain only Newsletter and FAQ.
+The Resources dropdown in both desktop nav and mobile drawer SHALL contain Newsletter, FAQ, and Competitive Positioning.
 
 #### Scenario: Resources dropdown content
 
 - **GIVEN** the nav is rendered
 - **WHEN** the Resources dropdown is opened
-- **THEN** it SHALL display only "Newsletter" and "FAQ"
-- **AND** it SHALL NOT display "Privacy Policy" or "Terms & Conditions"
+- **THEN** it SHALL display "Newsletter", "FAQ", and "Competitive Positioning"
+- **AND** the Competitive Positioning link SHALL point to `/competitive-positioning/`
 
 ### Requirement: Footer Placeholders
 

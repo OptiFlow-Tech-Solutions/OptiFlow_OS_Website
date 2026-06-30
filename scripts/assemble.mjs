@@ -29,6 +29,7 @@ const SRC_MAP = {
   'demo-booking/index.html': 'demo-booking.html',
   'privacy-policy/index.html': 'privacy-policy.html',
   'terms/index.html': 'terms.html',
+  'competitive-positioning/index.html': 'competitive-positioning.html',
 };
 
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.json'), 'utf-8'));
