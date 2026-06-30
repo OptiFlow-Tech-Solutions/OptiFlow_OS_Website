@@ -1,0 +1,184 @@
+{
+  "version": "5.0",
+  "feature": {
+    "id": "F-016",
+    "name": "page-demo-booking",
+    "description": "Demo booking page — hero with dashboard preview, 6 benefit cards (Why book a demo), trust bar with stats, What You'll See 6-step timeline, What You'll Walk Away With value grid, booking form with interactive calendar and time slot selector, FAQ accordion for common objections.",
+    "parentModule": "Tier 2: Page Features",
+    "priority": "critical",
+    "status": "complete",
+    "acceptanceCriteria": [
+      "6 benefit cards with clear value propositions",
+      "What You'll See timeline with 6 visual steps",
+      "What You'll Walk Away With value grid",
+      "Booking form with all required fields",
+      "Interactive calendar with selectable time slots",
+      "FAQ accordion addresses common objections",
+      "Form validates before submission"
+    ],
+    "seo": {
+      "title": "Book a Demo — OptiFlow OS",
+      "description": "Book a free personalized demo of OptiFlow OS and see how it transforms your business operations.",
+      "active": null
+    },
+    "conversionGoal": "demo_booking_form_submit",
+    "metrics": null
+  },
+  "context": {
+    "version": "1.0.0",
+    "feature": {
+      "id": "F-016",
+      "name": "page-demo-booking",
+      "description": "Demo booking page — hero with dashboard preview, 6 benefit cards (Why book a demo), trust bar with stats, What You'll See 6-step timeline, What You'll Walk Away With value grid, booking form with interactive calendar and time slot selector, FAQ accordion for common objections.",
+      "parentModule": "Tier 2: Page Features",
+      "priority": "critical",
+      "status": "complete",
+      "acceptanceCriteria": [
+        "6 benefit cards with clear value propositions",
+        "What You'll See timeline with 6 visual steps",
+        "What You'll Walk Away With value grid",
+        "Booking form with all required fields",
+        "Interactive calendar with selectable time slots",
+        "FAQ accordion addresses common objections",
+        "Form validates before submission"
+      ],
+      "seo": {
+        "title": "Book a Demo — OptiFlow OS",
+        "description": "Book a free personalized demo of OptiFlow OS and see how it transforms your business operations.",
+        "active": null
+      },
+      "conversionGoal": "demo_booking_form_submit",
+      "metrics": null
+    },
+    "dependencies": {
+      "chain": [
+        "F-016",
+        "F-001",
+        "F-002",
+        "F-003",
+        "F-004",
+        "F-005",
+        "F-006"
+      ],
+      "count": 7,
+      "byPhase": {
+        "phase-2": [
+          "F-016"
+        ],
+        "phase-0": [
+          "F-001",
+          "F-002",
+          "F-003"
+        ],
+        "phase-1": [
+          "F-004",
+          "F-005",
+          "F-006"
+        ]
+      }
+    },
+    "specs": {
+      "files": [
+        "openspec/specs/marketing-pages/spec.md"
+      ],
+      "parsed": [
+        {
+          "name": "spec",
+          "error": "not found"
+        }
+      ],
+      "count": 1
+    },
+    "files": {
+      "source": [
+        "src/pages/demo-booking/index.html"
+      ],
+      "affected": [
+        "src/pages/demo-booking/index.html",
+        "site.json"
+      ],
+      "sourceCount": 1,
+      "affectedCount": 2
+    },
+    "tests": {
+      "files": [
+        "tests/e2e/a11y.spec.js",
+        "tests/e2e/seo.spec.js",
+        "tests/e2e/navigation.spec.js",
+        "tests/e2e/responsive.spec.js",
+        "tests/e2e/core-assets.spec.js"
+      ],
+      "count": 5
+    },
+    "build": {
+      "config": [
+        "site.json pages[9]",
+        "site.json nav.cta"
+      ]
+    },
+    "routing": {
+      "skills": [
+        "design-system",
+        "seo",
+        "accessibility",
+        "frontend-patterns"
+      ],
+      "agents": [
+        "tdd-guide",
+        "code-reviewer"
+      ],
+      "hooks": [
+        "pre-build",
+        "theme-change",
+        "post-build",
+        "pre-commit"
+      ],
+      "mcpServers": [
+        "context7",
+        "parallel-search"
+      ]
+    },
+    "integration": {
+      "branch": "main",
+      "pipelineConfig": "apply.yaml",
+      "qualityGates": [
+        "GATE_SPEC",
+        "GATE_SECURITY"
+      ]
+    }
+  },
+  "changeName": "F-016-page-demo-booking",
+  "capabilities": {
+    "skills": [
+      "design-system",
+      "seo",
+      "accessibility",
+      "frontend-patterns"
+    ],
+    "agents": {
+      "primary": "tdd-guide",
+      "support": [
+        "code-reviewer"
+      ]
+    },
+    "mcpServers": [
+      "context7",
+      "parallel-search"
+    ],
+    "hooks": {
+      "pre": [
+        "pre-build",
+        "pre-commit"
+      ],
+      "post": [
+        "post-build"
+      ]
+    }
+  },
+  "qualityGates": [
+    "GATE_SPEC",
+    "GATE_SECURITY"
+  ],
+  "buildCommand": "npm run build && npm run validate",
+  "timestamp": "2026-06-30T12:54:15.651Z"
+}

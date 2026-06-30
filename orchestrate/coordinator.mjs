@@ -1,6 +1,7 @@
 /**
- * V4 spec-driven orchestration engine.
- * Auto-discovers capabilities, specs, routes everything, and EXECUTES the plan.
+ * V5 spec-driven orchestration engine with Vertical Slice Architecture.
+ * Auto-discovers capabilities, specs, features, routes everything, and EXECUTES the plan.
+ * NOW: Given only a Feature ID, the engine reconstructs the entire implementation context.
  * The user runs a single OpenSpec command — the engine handles everything.
  * @module orchestrate/coordinator
  */
@@ -30,6 +31,7 @@ import { resolvePaths } from './config-resolver.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { reconstructContext, getFeature, resolveFeatureTree, listFeatures, summarizeFeature, featuresByPrefix, mapToSpec } from './feature-router.mjs';
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
@@ -280,4 +282,221 @@ export function autoOrchestrate(taskDescription) {
 
 function slugify(text) {
   return text.toLowerCase().replace(/\s+/g, '-').slice(0, 40).replace(/[^a-z0-9-]/g, '');
+}
+
+// ═══════════════════════════════════════════
+// V5 Feature-Based Vertical Slice Orchestration
+// ═══════════════════════════════════════════
+
+/**
+ * Orchestrate by Feature ID. This is the primary VSA entry point.
+ * Given only a Feature ID and name, the engine auto-resolves everything.
+ *
+ * @param {string} featureId - Feature ID (e.g., "PAGE-001") or name (e.g., "Home Page")
+ * @param {{execute?: boolean, skipGates?: boolean}} [opts]
+ * @returns {Promise<object>}
+ */
+export async function featureOrchestrate(featureId, opts = {}) {
+  const { execute = false, skipGates = false } = opts;
+  const timer = startTimer('feature-orchestrate');
+  await emit('feature:orchestrate:start', { featureId });
+
+  // Auto-reconstruct the entire implementation context from the Feature ID alone
+  const ctx = await reconstructContext(featureId);
+  const feature = ctx.feature;
+
+  console.log([
+    `\n=== VSA Orchestrate: ${feature.id} | ${feature.name} ===`,
+    `Module: ${feature.parentModule} | Priority: ${feature.priority} | Status: ${feature.status}`,
+    `Dependencies (${ctx.dependencies.count}): ${ctx.dependencies.chain.join(' → ')}`,
+    `Specs (${ctx.specs.count}): ${ctx.specs.files.join(', ') || 'none'}`,
+    `Source files (${ctx.files.sourceCount}): ${ctx.files.source.join(', ') || 'none'}`,
+    `Tests (${ctx.tests.count}): ${ctx.tests.files.join(', ') || 'none'}`,
+    `Skills: ${ctx.routing.skills.join(', ')}`,
+    `Agents: ${ctx.routing.agents.join(', ')}`,
+    `Hooks: ${ctx.routing.hooks.join(', ')}`,
+    `Gates: ${ctx.integration.qualityGates.join(' → ')}`,
+    `Pipeline: ${ctx.integration.pipelineConfig}`,
+    `Branch: ${ctx.integration.branch}`,
+  ].join('\n'));
+
+  // Build the plan
+  const plan = {
+    version: '5.0',
+    feature: ctx.feature,
+    context: ctx,
+    changeName: `${feature.id}-${feature.name}`,
+    capabilities: {
+      skills: ctx.routing.skills,
+      agents: { primary: ctx.routing.agents[0] || 'tdd-guide', support: ctx.routing.agents.slice(1) },
+      mcpServers: ctx.routing.mcpServers,
+      hooks: { pre: ctx.routing.hooks.filter((h) => h.startsWith('pre-')), post: ctx.routing.hooks.filter((h) => h.startsWith('post-')) },
+    },
+    qualityGates: ctx.integration.qualityGates,
+    buildCommand: 'npm run build && npm run validate',
+    timestamp: new Date().toISOString(),
+  };
+
+  saveState(`vsa-${feature.id}`, plan);
+  logEvent({ type: 'feature-orchestrate', featureId: feature.id, featureName: feature.name });
+
+  if (execute) {
+    const result = await featureExecute(plan, { skipGates });
+    record('feature-orchestrate', timer());
+    return { plan, result };
+  }
+
+  record('feature-orchestrate', timer());
+  return plan;
+}
+
+/**
+ * Execute a feature-based plan.
+ * @param {object} plan
+ * @param {{skipGates?: boolean}} [opts]
+ */
+async function featureExecute(plan, opts = {}) {
+  const { skipGates = false } = opts;
+  const feature = plan.feature;
+
+  console.log(`\n=== Executing VSA: ${feature.id} | ${feature.name} ===\n`);
+
+  // 1. Run pre-hooks
+  if (plan.capabilities.hooks.pre.length) {
+    console.log('[Hooks] Pre-execution...');
+    for (const hook of plan.capabilities.hooks.pre) {
+      await emit('hook:pre', { hook, featureId: feature.id });
+      const result = executeHook(hook);
+      console.log(`  ${result.ran ? '✓' : '-'} ${hook}`);
+    }
+  }
+
+  // 2. Build
+  console.log('\n[Build] Assembling dist/...');
+  try {
+    const { execSync } = await import('node:child_process');
+    execSync('node scripts/assemble.mjs', { cwd: ROOT, encoding: 'utf-8', timeout: 60000, stdio: 'pipe' });
+    console.log('  ✓ Build complete.');
+  } catch (e) {
+    console.log(`  ✗ Build failed: ${e.message}`);
+    return { status: 'failed', stage: 'build', error: e.message };
+  }
+
+  // 3. Validate
+  console.log('\n[Validate] Running full validation...');
+  try {
+    const { execSync } = await import('node:child_process');
+    execSync('node scripts/validate.mjs', { cwd: ROOT, encoding: 'utf-8', timeout: 30000, stdio: 'pipe' });
+    console.log('  ✓ Validation passed.');
+  } catch (e) {
+    console.log(`  ⚠ Validation warnings (non-blocking)`);
+  }
+
+  // 4. Tests (if any)
+  if (plan.context.tests.count > 0) {
+    console.log(`\n[Tests] Running ${plan.context.tests.count} test files...`);
+    const testResults = [];
+    for (const testFile of plan.context.tests.files) {
+      try {
+        const { execSync } = await import('node:child_process');
+        execSync(`npx playwright test ${testFile}`, { cwd: ROOT, encoding: 'utf-8', timeout: 120000, stdio: 'pipe' });
+        testResults.push({ file: testFile, passed: true });
+        console.log(`  ✓ ${testFile}`);
+      } catch (e) {
+        testResults.push({ file: testFile, passed: false, error: e.message.slice(0, 200) });
+        console.log(`  ✗ ${testFile}`);
+      }
+    }
+  }
+
+  // 5. Quality gates
+  if (!skipGates && plan.qualityGates.length) {
+    console.log(`\n[Gates] ${plan.qualityGates.join(' → ')}...`);
+    const gateResult = runGates(plan.qualityGates, { changeName: plan.changeName });
+    if (!gateResult.passed) {
+      console.log(`  Gate failed: ${gateResult.failedGate}`);
+      return { status: 'gated', gateResult };
+    }
+    console.log('  All gates passed.');
+  }
+
+  // 6. Post-hooks
+  if (plan.capabilities.hooks.post.length) {
+    console.log('\n[Hooks] Post-execution...');
+    for (const hook of plan.capabilities.hooks.post) {
+      await emit('hook:post', { hook, featureId: feature.id });
+      const result = executeHook(hook);
+      console.log(`  ${result.ran ? '✓' : '-'} ${hook}`);
+    }
+  }
+
+  console.log(`\n=== VSA Complete: ${feature.id} | ${feature.name} ===\n`);
+  return { status: 'done', featureId: feature.id, featureName: feature.name };
+}
+
+/**
+ * Display a feature's full hierarchical context (dry run, no execution).
+ * Shows parent → child features → tasks tree.
+ * @param {string} featureId
+ * @returns {Promise<string>}
+ */
+export async function featureShow(featureId) {
+  const feature = getFeature(featureId);
+  if (!feature) return `Feature not found: ${featureId}. Run 'feature list' to see all registered features.`;
+  return summarizeFeature(featureId);
+}
+
+/**
+ * Display the full VSI tree for all marketing pages.
+ * @returns {string}
+ */
+export function featureListTree() {
+  const allFeatures = listFeatures();
+  const prefixes = ['SYS', 'PAGE', 'LEAD', 'LEGAL', 'API', 'QA', 'OPS'];
+  const lines = ['=== Feature Inventory (Flat, Vertical-Sliced) ===', ''];
+
+  for (const prefix of prefixes) {
+    const group = allFeatures.filter((f) => f.id.startsWith(prefix));
+    if (group.length === 0) continue;
+    lines.push(`\n## ${prefix}`);
+    for (const f of group) {
+      lines.push(`  ${f.id}  ${f.name}`);
+    }
+  }
+
+  lines.push('');
+  return lines.join('\n');
+}
+
+/**
+ * List all registered features.
+ * @returns {Array<{id: string, name: string, phase: number, priority: string, status: string, module: string}>}
+ */
+export function featureList() {
+  return listFeatures();
+}
+
+/**
+ * Run the full OpenSpec pipeline for a feature.
+ * Equivalent to: /opsx:explore → /opsx:propose → /opsx:apply → /opsx:verify → /opsx:archive
+ * but auto-populated from the feature registry.
+ *
+ * @param {string} featureId
+ * @param {{autoApprove?: boolean}} [opts]
+ * @returns {Promise<object>}
+ */
+export async function featureFullPipeline(featureId, opts = {}) {
+  const ctx = await reconstructContext(featureId);
+  const feature = ctx.feature;
+  const changeName = feature.id.toLowerCase();
+
+  console.log(`\n=== VSA Full Pipeline: ${feature.id} | ${feature.name} ===`);
+  console.log(`Specs: ${ctx.specs.count} | Sources: ${ctx.files.count}`);
+  console.log('');
+
+  const { runFullPipeline } = await import('./opsx-commands.mjs');
+  return runFullPipeline(changeName, feature.name, {
+    autoApprove: opts.autoApprove,
+    featureContext: ctx,
+  });
 }

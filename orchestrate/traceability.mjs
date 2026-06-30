@@ -1,7 +1,7 @@
 /**
- * V4 Full traceability engine.
- * Links spec requirements → tasks → git commits → changed files.
- * V4 adds real git commit integration and the complete trace chain.
+ * V5 Full traceability engine with Feature ID support.
+ * Links feature IDs → spec requirements → tasks → git commits → changed files.
+ * The Feature ID is the root of every trace chain (Vertical Slice Architecture).
  * @module orchestrate/traceability
  */
 
@@ -225,4 +225,60 @@ export function exportTrace(trace, format) {
     }
   }
   return lines.join('\n');
+}
+
+/**
+ * V5: Generate traceability for a feature ID.
+ * Reconstructs the full trace chain: feature → spec → delta → task → commit → file.
+ * @param {string} featureId - Feature ID (e.g., "F-010")
+ * @param {string} [commitHash='HEAD'] - Git commit hash
+ * @returns {object}
+ */
+export async function generateFeatureTrace(featureId, commitHash = 'HEAD') {
+  const featurePath = resolve(projectRoot, 'features', 'features.json');
+  let feature = null;
+
+  if (existsSync(featurePath)) {
+    const registry = JSON.parse(readFileSync(featurePath, 'utf-8'));
+    feature = registry.features.find((f) => f.id === featureId || f.name === featureId);
+  }
+
+  const trace = {
+    featureId,
+    feature: feature ? { id: feature.id, name: feature.name, module: feature.parentModule, priority: feature.priority, status: feature.status } : null,
+    specs: [],
+    commits: [],
+    files: [],
+  };
+
+  // Get changed files for the commit
+  if (commitHash !== 'HEAD') {
+    trace.files = getChangedFiles(commitHash);
+  }
+
+  // Get relevant commits
+  trace.commits = getRelevantCommits('').slice(0, 10);
+
+  // Find related specs from change directories
+  const changesDir = resolve(projectRoot, 'openspec', 'changes');
+  if (existsSync(changesDir)) {
+    for (const entry of readdirSync(changesDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const changeDir = join(changesDir, entry.name);
+      const deltas = readSpecDeltas(changeDir);
+      if (deltas.length > 0) {
+        trace.specs.push({ change: entry.name, deltas });
+      }
+    }
+  }
+
+  // Add capability specs
+  const capabilitySpecs = readSpecDeltas(resolve(projectRoot, 'openspec', 'specs'));
+  if (capabilitySpecs.length > 0) {
+    trace.specs.push({ change: 'capability-specs', deltas: capabilitySpecs });
+  }
+
+  logEvent({ type: 'feature-trace', featureId, commitHash });
+
+  return trace;
 }

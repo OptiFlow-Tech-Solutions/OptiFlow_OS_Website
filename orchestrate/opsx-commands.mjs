@@ -96,6 +96,22 @@ export async function runOpsxCommand(command, changeName, context = {}) {
       return { syncResult, traceResult, pipelineResult };
     }
 
+    case 'feature': {
+      // V5: Feature-based orchestration — given only Feature ID, reconstruct everything
+      console.log(`[Feature] Auto-orchestrating from Feature ID: ${changeName}`);
+      try {
+        const { reconstructContext, summarizeFeature } = await import('./feature-router.mjs');
+        const ctx = await reconstructContext(changeName);
+        const summary = await summarizeFeature(changeName);
+
+        await emit('opsx:complete', { command, changeName, ctx, summary });
+        return { featureContext: ctx, summary, status: 'context-reconstructed' };
+      } catch (e) {
+        await emit('opsx:error', { command, changeName, error: e.message });
+        return { error: e.message };
+      }
+    }
+
     default:
       return { error: `Unknown command: ${command}` };
   }
