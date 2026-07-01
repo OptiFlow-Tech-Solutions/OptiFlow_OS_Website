@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/assets/css/core.css" />
   <style>
     /* ─── Hero (FAQ) ─── */
-    .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
+    .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 0; overflow: hidden; position: relative; }
     .hero-content { position: relative; z-index: 2; text-align: center; max-width: 740px; margin: 0 auto; }
     .hero-content h1 { margin-bottom: 16px; }
     .hero-content .lead { margin: 0 auto 32px; }
@@ -39,6 +39,16 @@
     .cat-tab:hover { color: var(--fg); background: var(--bg); }
     .cat-tab.active { background: var(--accent); color: white; }
 
+    /* ─── Self-Service Toolbar ─── */
+    .help-toolbar { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); margin: 60px 0 56px; }
+    .help-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
+    .help-card:hover { transform: translateY(-3px); box-shadow: var(--card-hover); }
+    .help-card-icon { width: 48px; height: 48px; display: grid; place-items: center; margin: 0 auto 16px; background: var(--accent-soft); border-radius: var(--radius); color: var(--accent); }
+    .help-card-icon svg { width: 24px; height: 24px; }
+    .help-card h3 { font-size: 18px; margin-bottom: 8px; }
+    .help-card p { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+    .help-card .btn { font-size: 13px; }
+
     /* ─── FAQ sections ─── */
     .faq-section { margin-bottom: var(--gap-xl); }
     .faq-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
@@ -47,7 +57,42 @@
     .faq-section-header h2 { font-size: 24px; }
     .faq-section-count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-left: auto; }
 
-    /* ─── Micro CTA ─── */
+    /* ─── Feedback Buttons ─── */
+    .faq-feedback { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .faq-feedback-text { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .faq-feedback-btns { display: flex; gap: 8px; }
+    .faq-feedback-btn { padding: 6px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); font-size: 13px; cursor: pointer; transition: color 0.2s, background 0.2s, border-color 0.2s; font-family: var(--font-body); }
+    .faq-feedback-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .faq-feedback-thanks { font-size: 13px; color: var(--green); margin-top: 10px; }
+    .faq-followup { font-size: 14px; color: var(--fg); margin-top: 10px; padding: 12px 16px; background: var(--bg); border-radius: var(--radius); }
+    .faq-followup a { color: var(--accent); font-weight: 600; }
+
+    /* ─── Related Questions ─── */
+    .faq-related { margin-top: 12px; }
+    .faq-related-label { font-size: 12px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .faq-related-link { display: block; padding: 6px 0; font-size: 14px; color: var(--accent); cursor: pointer; transition: color 0.15s; }
+    .faq-related-link:hover { color: var(--teal); }
+
+    /* ─── Troubleshooting Widget ─── */
+    .troubleshoot-wrap { max-width: 740px; margin: 0 auto; padding: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); }
+    .troubleshoot-selects { display: flex; flex-direction: column; gap: var(--gap-sm); }
+    .troubleshoot-select { width: 100%; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--fg); font-size: 15px; font-family: var(--font-body); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; }
+    .troubleshoot-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 15%, transparent); }
+    .troubleshoot-resolution { margin-top: 24px; padding: 20px 24px; background: var(--bg); border-radius: var(--radius-lg); display: none; }
+    .troubleshoot-resolution.visible { display: block; }
+    .troubleshoot-resolution h4 { font-size: 18px; margin-bottom: 8px; }
+    .troubleshoot-resolution p { font-size: 15px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+    .troubleshoot-resolution .btn { margin-top: 4px; }
+
+    /* ─── Escalation Section ─── */
+    .escalation-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); margin-top: 32px; }
+    .escalation-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+    .escalation-card:hover { transform: translateY(-2px); box-shadow: var(--card-hover); }
+    .escalation-card-icon { color: var(--accent); margin-bottom: 12px; }
+    .escalation-card-icon svg { width: 28px; height: 28px; }
+    .escalation-card h4 { font-size: 16px; margin-bottom: 6px; }
+    .escalation-card p { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+    .escalation-card .btn { font-size: 13px; padding: 8px 20px; }
     .micro-cta { display: flex; align-items: center; gap: 16px; padding: 20px 28px; background: var(--bg); border-radius: var(--radius-lg); margin-top: 32px; max-width: 800px; }
     .micro-cta p { font-size: 14px; color: var(--muted); flex: 1; }
     .micro-cta .btn { flex-shrink: 0; }
@@ -59,6 +104,13 @@
     [data-theme="dark"] .cat-tab { color: var(--muted); }
     [data-theme="dark"] .cat-tab:hover { color: var(--fg); }
     [data-theme="dark"] .micro-cta { background: var(--surface); }
+    [data-theme="dark"] .help-card { background: var(--surface); }
+    [data-theme="dark"] .faq-feedback-btn { background: var(--bg); }
+    [data-theme="dark"] .faq-followup { background: var(--surface); }
+    [data-theme="dark"] .troubleshoot-wrap { background: var(--surface); }
+    [data-theme="dark"] .troubleshoot-select { background: var(--bg); color: var(--fg); }
+    [data-theme="dark"] .troubleshoot-resolution { background: var(--surface); }
+    [data-theme="dark"] .escalation-card { background: var(--surface); }
 
     /* ─── Responsive ─── */
     @media (max-width: 1024px) {
@@ -69,12 +121,18 @@
       .hero-content .lead { font-size: 16px; margin-bottom: 24px; }
       .search-wrap { max-width: 100%; }
       .cat-nav { overflow-x: auto; max-width: 100%; }
+      .help-toolbar { grid-template-columns: repeat(2, 1fr); margin: 40px 0 32px; }
+      .escalation-grid { grid-template-columns: repeat(2, 1fr); }
+      .troubleshoot-wrap { padding: 24px; }
     }
     @media (max-width: 480px) {
       .hero { padding-top: calc(var(--nav-h) + 16px); }
       .hero-badges { gap: 12px; flex-direction: column; align-items: center; }
       .faq-question { font-size: 15px; padding: 18px 0; }
       .cat-tab { padding: 8px 16px; font-size: 13px; }
+      .help-toolbar { grid-template-columns: 1fr; }
+      .escalation-grid { grid-template-columns: 1fr; }
+      .troubleshoot-wrap { padding: 20px; }
     }
   </style>
 </head>
@@ -122,6 +180,38 @@
           <button class="cat-tab" data-cat="pricing">Pricing</button>
           <button class="cat-tab" data-cat="security">Security</button>
           <button class="cat-tab" data-cat="implementation">Implementation</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELF-SERVICE TOOLBAR -->
+    <section class="section" data-screen-label="01.5 Self-Service">
+      <div class="container">
+        <div class="help-toolbar">
+          <div class="help-card reveal">
+            <div class="help-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+            <h3>Video Tutorials</h3>
+            <p>Watch step-by-step videos on task management, attendance, checklists, and reporting.</p>
+            <a href="/features/" class="btn btn-secondary">Browse Tutorials</a>
+          </div>
+          <div class="help-card reveal reveal-delay-1">
+            <div class="help-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+            <h3>SOP Library</h3>
+            <p>Access standard operating procedures, checklists, and workflow templates.</p>
+            <a href="/product-overview/" class="btn btn-secondary">Explore Library</a>
+          </div>
+          <div class="help-card reveal reveal-delay-2">
+            <div class="help-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <h3>Guided Setup</h3>
+            <p>Follow our structured setup guide to configure departments, roles, and workflows.</p>
+            <a href="/demo-booking/" class="btn btn-secondary">Start Setup</a>
+          </div>
+          <div class="help-card reveal reveal-delay-3">
+            <div class="help-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <h3>Troubleshooting</h3>
+            <p>Diagnose common issues with our guided selector — find your problem and fix it fast.</p>
+            <a href="#troubleshoot" class="btn btn-secondary">Diagnose Now</a>
+          </div>
         </div>
       </div>
     </section>
@@ -223,6 +313,77 @@
       </div>
     </section>
 
+    <!-- TROUBLESHOOTING WIDGET -->
+    <section class="section" data-screen-label="02.5 Troubleshooting" id="troubleshoot">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">Self-Diagnostic Tool</p>
+          <h2>What Issue Are You Facing?</h2>
+          <p class="lead">Tell us what's wrong, and we'll guide you to the right solution.</p>
+        </div>
+        <div class="troubleshoot-wrap reveal">
+          <div class="troubleshoot-selects">
+            <select class="troubleshoot-select" id="ts-category">
+              <option value="">-- Select Issue Category --</option>
+              <option value="login">Login &amp; Access Problems</option>
+              <option value="task">Task &amp; Workflow Issues</option>
+              <option value="attendance">Attendance &amp; Leave Issues</option>
+              <option value="report">Reporting &amp; Data Issues</option>
+              <option value="mobile">Mobile &amp; App Problems</option>
+            </select>
+            <select class="troubleshoot-select" id="ts-problem" disabled>
+              <option value="">-- Select Specific Problem --</option>
+            </select>
+            <select class="troubleshoot-select" id="ts-resolution" disabled>
+              <option value="">-- Select Issue Detail --</option>
+            </select>
+          </div>
+          <div class="troubleshoot-resolution" id="ts-result">
+            <h4 id="ts-result-title"></h4>
+            <p id="ts-result-desc"></p>
+            <a id="ts-result-cta" class="btn btn-primary" href="#">Get Help</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESCALATION: STILL NEED HELP -->
+    <section class="section" data-screen-label="02.8 Escalation">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">Still Need Help?</p>
+          <h2>We're Here for You</h2>
+          <p class="lead">If you couldn't find what you're looking for, our team is ready to help through any channel you prefer.</p>
+        </div>
+        <div class="escalation-grid">
+          <div class="escalation-card reveal">
+            <div class="escalation-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <h4>Book a Demo</h4>
+            <p>See OptiFlow in action with a personalised walkthrough.</p>
+            <a href="/demo-booking/" class="btn btn-secondary">Book Demo</a>
+          </div>
+          <div class="escalation-card reveal reveal-delay-1">
+            <div class="escalation-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <h4>Email Us</h4>
+            <p>Drop us a message and we'll respond within 4-8 business hours.</p>
+            <a href="/contact/" class="btn btn-secondary">Contact Form</a>
+          </div>
+          <div class="escalation-card reveal reveal-delay-2">
+            <div class="escalation-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+            <h4>WhatsApp</h4>
+            <p>Quick questions? Message us on WhatsApp for a fast response.</p>
+            <a href="https://wa.me/{{WHATSAPP}}" class="btn btn-secondary" target="_blank" rel="noopener">Chat Now</a>
+          </div>
+          <div class="escalation-card reveal reveal-delay-3">
+            <div class="escalation-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <h4>Call Us</h4>
+            <p>Talk to our team directly during business hours at {{PHONE}}.</p>
+            <a href="tel:{{PHONE}}" class="btn btn-secondary">Call {{PHONE}}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- SECTION 03: CTA -->
     <section class="section cta-section" data-screen-label="03 CTA">
       <div class="container">
@@ -274,7 +435,7 @@
         if (q.length < 2) { results.classList.remove('active'); results.innerHTML = ''; return; }
         var matches = allQuestions.filter(function(btn) { return btn.textContent.toLowerCase().indexOf(q) !== -1; });
         if (!matches.length) { results.innerHTML = '<p style="text-align:center;color:var(--muted);padding:16px">No matching questions found. Try a different search term.</p>'; results.classList.add('active'); return; }
-        results.innerHTML = matches.map(function(btn, i) {
+        results.innerHTML = '<p style="font-size:13px;color:var(--muted);margin-bottom:8px;padding:0 4px">' + matches.length + ' match' + (matches.length !== 1 ? 'es' : '') + ' found</p>' + matches.map(function(btn, i) {
           var item = btn.parentElement;
           var section = item.closest('.faq-section');
           var catName = section ? section.querySelector('h2').textContent : '';
@@ -288,10 +449,50 @@
             var item = btn.parentElement;
             item.classList.add('open');
             btn.scrollIntoView({behavior:'smooth',block:'center'});
+            var answer = item.querySelector('.faq-answer');
+            if (answer && input.value.trim()) {
+              highlightTerms(answer, input.value.trim());
+            }
             results.classList.remove('active');
             input.value = btn.textContent;
           });
         });
+      }
+      function highlightTerms(el, q) {
+        el.querySelectorAll('mark').forEach(function(m) { m.replaceWith(m.textContent); });
+        var words = q.split(/\s+/).filter(function(w) { return w.length > 1; });
+        if (!words.length) return;
+        function walk(node) {
+          if (node.nodeType === 3 && node.parentElement && node.parentElement.tagName !== 'STYLE' && node.parentElement.tagName !== 'SCRIPT') {
+            var text = node.textContent;
+            var lower = text.toLowerCase();
+            var changed = false;
+            var frag = document.createDocumentFragment();
+            var last = 0;
+            for (var i = 0; i <= lower.length; i++) {
+              for (var w = 0; w < words.length; w++) {
+                if (lower.indexOf(words[w], i) === i) {
+                  changed = true;
+                  if (i > last) frag.appendChild(document.createTextNode(text.slice(last, i)));
+                  var mark = document.createElement('mark');
+                  mark.textContent = text.slice(i, i + words[w].length);
+                  mark.style.cssText = 'background:color-mix(in oklch,var(--teal) 20%,transparent);color:var(--fg);border-radius:2px;padding:1px 0';
+                  frag.appendChild(mark);
+                  i += words[w].length;
+                  last = i;
+                  break;
+                }
+              }
+            }
+            if (changed) {
+              if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+              node.parentElement.replaceChild(frag, node);
+            }
+          } else if (node.nodeType === 1) {
+            for (var c = 0; c < node.childNodes.length; c++) walk(node.childNodes[c]);
+          }
+        }
+        walk(el);
       }
       var searchTimeout;
       input.addEventListener('input', function() {
@@ -302,6 +503,156 @@
       document.querySelectorAll('.search-suggestion').forEach(function(s) {
         s.addEventListener('click', function() { input.value = s.textContent; doSearch(s.textContent); });
       });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var answers = document.querySelectorAll('.faq-answer');
+      answers.forEach(function(answer, i) {
+        var key = 'faq-feedback-' + i;
+        var stored = localStorage.getItem(key);
+        var feedback = document.createElement('div');
+        feedback.className = 'faq-feedback';
+        if (stored) {
+          feedback.innerHTML = '<div class="faq-feedback-thanks">' + (stored === 'yes' ? 'Thanks for your positive feedback!' : 'Thanks for letting us know.') + '</div>';
+        } else {
+          feedback.innerHTML = '<div class="faq-feedback-text">Was this helpful?</div><div class="faq-feedback-btns"><button class="faq-feedback-btn faq-fb-yes">Yes</button><button class="faq-feedback-btn faq-fb-no">No</button></div>';
+        }
+        answer.appendChild(feedback);
+        var yesBtn = feedback.querySelector('.faq-fb-yes');
+        var noBtn = feedback.querySelector('.faq-fb-no');
+        if (yesBtn) {
+          yesBtn.addEventListener('click', function() {
+            localStorage.setItem(key, 'yes');
+            feedback.innerHTML = '<div class="faq-feedback-thanks">Thanks for your positive feedback!</div>';
+          });
+        }
+        if (noBtn) {
+          noBtn.addEventListener('click', function() {
+            localStorage.setItem(key, 'no');
+            feedback.innerHTML = '<div class="faq-feedback-thanks">Thanks for letting us know.</div><div class="faq-followup">What were you looking for? <a href="/contact/">Contact us</a> or <a href="/demo-booking/">book a demo</a> and we\'ll help.</div>';
+          });
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var allItems = Array.from(document.querySelectorAll('.faq-item'));
+      var allBtns = allItems.map(function(item) { return item.querySelector('.faq-question').textContent; });
+      var relatedMap = {};
+      allItems.forEach(function(item, i) {
+        var cat = item.closest('.faq-section').dataset.cat;
+        var sameCat = allItems.filter(function(it, j) {
+          return j !== i && it.closest('.faq-section').dataset.cat === cat;
+        });
+        var shuffled = sameCat.sort(function() { return Math.random() - 0.5; });
+        relatedMap[i] = shuffled.slice(0, Math.min(3, shuffled.length));
+      });
+      allItems.forEach(function(item, i) {
+        var links = relatedMap[i];
+        if (!links || !links.length) return;
+        var answer = item.querySelector('.faq-answer');
+        var related = document.createElement('div');
+        related.className = 'faq-related';
+        related.innerHTML = '<div class="faq-related-label">Related Questions</div>' + links.map(function(relItem) {
+          var relQ = relItem.querySelector('.faq-question').textContent;
+          return '<span class="faq-related-link">' + relQ + '</span>';
+        }).join('');
+        answer.appendChild(related);
+        related.querySelectorAll('.faq-related-link').forEach(function(link, idx) {
+          link.addEventListener('click', function() {
+            var target = links[idx];
+            target.classList.add('open');
+            target.querySelector('.faq-question').scrollIntoView({behavior:'smooth',block:'center'});
+          });
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var tree = {
+        login: [
+          { label: 'Forgot password', resolution: { title: 'Reset Your Password', desc: 'Use the "Forgot Password" link on the login page. You\'ll receive a reset email within 2 minutes. If you don\'t see it, check your spam folder.', cta: '/contact/', ctaLabel: 'Contact Support' } },
+          { label: 'Account locked', resolution: { title: 'Account Locked?', desc: 'After 5 failed login attempts, your account locks for 15 minutes. Contact your Admin to unlock it immediately, or wait and try again.', cta: '/contact/', ctaLabel: 'Contact Admin' } },
+          { label: 'Can\'t log in at all', resolution: { title: 'Login Troubleshooting', desc: 'Check: (1) Are you using the correct email? (2) Is Caps Lock off? (3) Clear your browser cache. If still stuck, our support team can help.', cta: '/contact/', ctaLabel: 'Contact Support' } }
+        ],
+        task: [
+          { label: 'Task not showing up', resolution: { title: 'Task Visibility', desc: 'Tasks are filtered by department and role. If you can\'t see a task, check: (1) Are you assigned to it? (2) Is it in your department? (3) Is the filter active?', cta: '/features/', ctaLabel: 'Learn About Tasks' } },
+          { label: 'Can\'t mark task complete', resolution: { title: 'Task Completion', desc: 'Some tasks require evidence or checklist completion before they can be marked done. Check if all required fields are filled. If the task is waiting for verification, only the verifier can mark it complete.', cta: '/demo-booking/', ctaLabel: 'Book Training' } },
+          { label: 'Verification not working', resolution: { title: 'Verification Issues', desc: 'Verification follows a defined chain. If you\'re the assigned verifier, check the Verification Queue. If you\'re not seeing items to verify, your role permissions may need updating — contact your Admin.', cta: '/contact/', ctaLabel: 'Contact Support' } }
+        ],
+        attendance: [
+          { label: 'GPS attendance not working', resolution: { title: 'GPS Attendance Fix', desc: 'Ensure: (1) Location permission is enabled in your browser, (2) You\'re within the geofence radius set by your Admin, (3) Your device GPS is turned on. Try refreshing and marking again.', cta: '/features/', ctaLabel: 'Attendance Guide' } },
+          { label: 'Leave not getting approved', resolution: { title: 'Leave Approval', desc: 'Leave requests follow an approval chain: Buddy confirmation → Manager approval. Check if your buddy has confirmed. If pending for more than 24 hours, follow up with your manager directly.', cta: '/demo-booking/', ctaLabel: 'See Leave Workflow' } },
+          { label: 'Wrong attendance count', resolution: { title: 'Attendance Correction', desc: 'Attendance counts are calculated daily. If your count seems wrong, check: (1) Did you mark both check-in and check-out? (2) Were there any half-day or leave entries? Contact HR for corrections.', cta: '/contact/', ctaLabel: 'Contact Support' } }
+        ],
+        report: [
+          { label: 'Reports showing no data', resolution: { title: 'Empty Reports', desc: 'Reports use real-time data. If empty, check: (1) Is the date range correct? (2) Do you have data for that period? (3) Are your department filters set correctly?', cta: '/features/', ctaLabel: 'Reports Guide' } },
+          { label: 'Export not working', resolution: { title: 'Export Issues', desc: 'Exports are available in CSV and PDF. If the download doesn\'t start, check your browser\'s pop-up blocker and download settings. Large reports may take 10-15 seconds to generate.', cta: '/contact/', ctaLabel: 'Contact Support' } }
+        ],
+        mobile: [
+          { label: 'App not loading', resolution: { title: 'Mobile Access', desc: 'OptiFlow works in any mobile browser — no app installation needed. If the page won\'t load, check your internet connection and try clearing your browser cache. Use Chrome or Firefox for best results.', cta: '/demo-booking/', ctaLabel: 'Get Setup Help' } },
+          { label: 'Selfie verification failing', resolution: { title: 'Selfie Verification', desc: 'Ensure: (1) Your face is clearly visible and well-lit, (2) The camera permission is granted, (3) You\'re not wearing anything that obscures your face. Retry in good lighting conditions.', cta: '/contact/', ctaLabel: 'Contact Support' } }
+        ]
+      };
+
+      var selCat = document.getElementById('ts-category');
+      var selProb = document.getElementById('ts-problem');
+      var selRes = document.getElementById('ts-resolution');
+      var result = document.getElementById('ts-result');
+
+      selCat.addEventListener('change', function() {
+        var cat = this.value;
+        selProb.disabled = !cat;
+        selRes.disabled = true;
+        result.classList.remove('visible');
+        selProb.innerHTML = '<option value="">-- Select Specific Problem --</option>';
+        selRes.innerHTML = '<option value="">-- Select Issue Detail --</option>';
+        if (cat && tree[cat]) {
+          tree[cat].forEach(function(item, i) {
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = item.label;
+            selProb.appendChild(opt);
+          });
+        }
+      });
+
+      selProb.addEventListener('change', function() {
+        var cat = selCat.value;
+        var idx = parseInt(this.value);
+        selRes.disabled = isNaN(idx);
+        result.classList.remove('visible');
+        selRes.innerHTML = '<option value="">-- Select Issue Detail --</option>';
+        if (!isNaN(idx) && tree[cat] && tree[cat][idx]) {
+          var opt = document.createElement('option');
+          opt.value = idx;
+          opt.textContent = tree[cat][idx].label;
+          selRes.appendChild(opt);
+          selRes.value = idx;
+          showResolution();
+        }
+      });
+
+      selRes.addEventListener('change', showResolution);
+
+      function showResolution() {
+        var cat = selCat.value;
+        var idx = parseInt(selRes.value);
+        if (isNaN(idx) || !tree[cat] || !tree[cat][idx]) { result.classList.remove('visible'); return; }
+        var res = tree[cat][idx].resolution;
+        document.getElementById('ts-result-title').textContent = res.title;
+        document.getElementById('ts-result-desc').textContent = res.desc;
+        var cta = document.getElementById('ts-result-cta');
+        cta.textContent = res.ctaLabel;
+        cta.href = res.cta;
+        result.classList.add('visible');
+      }
     })();
   </script>
 </body>
