@@ -24,7 +24,8 @@
     { "file": "demo-booking/index.html", "title": "Book a Demo — OptiFlow OS", "description": "Book a free personalized demo of OptiFlow OS and see how our Business Operating System transforms your MSME operations with better accountability.", "active": null },
     { "file": "privacy-policy/index.html", "title": "Privacy Policy — OptiFlow OS", "description": "OptiFlow OS privacy policy — learn how we collect, use, store, and protect your business and employee data. GDPR and Indian DPDP Act 2023 compliant.", "active": "Resources" },
     { "file": "terms/index.html", "title": "Terms & Conditions — OptiFlow OS", "description": "Terms and conditions for using OptiFlow OS — platform usage rules, customer responsibilities, payment terms, data ownership, and governing law.", "active": "Resources" },
-    { "file": "competitive-positioning/index.html", "title": "Competitive Positioning — OptiFlow OS", "description": "See how OptiFlow OS compares against WhatsApp chaos, generic SaaS tools, traditional ERPs, and manual systems. Feature-by-feature comparison for Indian MSMEs.", "active": "Resources" }
+    { "file": "competitive-positioning/index.html", "title": "Competitive Positioning — OptiFlow OS", "description": "See how OptiFlow OS compares against WhatsApp chaos, generic SaaS tools, traditional ERPs, and manual systems. Feature-by-feature comparison for Indian MSMEs.", "active": "Resources" },
+    { "file": "admin/index.html", "title": "Admin Dashboard — OptiFlow OS", "description": "OptiFlow OS internal admin dashboard for managing form submissions, lead data, and monitoring platform activity and performance.", "active": null, "noindex": true }
   ],
   "nav": {
     "links": [

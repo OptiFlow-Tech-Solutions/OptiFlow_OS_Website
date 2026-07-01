@@ -30,6 +30,7 @@ const SRC_MAP = {
   'privacy-policy/index.html': 'privacy-policy.html',
   'terms/index.html': 'terms.html',
   'competitive-positioning/index.html': 'competitive-positioning.html',
+  'admin/index.html': 'admin.html',
 };
 
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.json'), 'utf-8'));
@@ -132,7 +133,7 @@ function buildPage(pageInfo) {
     '<meta property="og:image:height" content="512">',
     '<meta name="twitter:image" content="/assets/img/OptiFlow.Logo.png">',
     '<meta name="twitter:image:alt" content="OptiFlow OS Logo">',
-    '<meta name="robots" content="index, follow">',
+    '<meta name="robots" content="' + (pageInfo.noindex ? 'noindex, nofollow' : 'index, follow') + '">',
   ].join('\n  ');
 
   html = html.replace(
@@ -308,6 +309,7 @@ function generateSitemap() {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   for (const page of site.pages) {
+    if (page.noindex) continue;
     const urlPath = page.file === 'index.html'
       ? ''
       : page.file.replace('/index.html', '/').replace('.html', '/');

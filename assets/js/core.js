@@ -294,6 +294,89 @@
     }
   });
 
+  /* ─── Admin Authentication ─── */
+  if (window.location.pathname.startsWith('/admin')) {
+    const TOKEN_KEY = 'optiflow-admin-token';
+    const loginEl = document.getElementById('adminLogin');
+    const dashEl = document.getElementById('adminDashboard');
+    const errorEl = document.getElementById('adminError');
+
+    function showError(msg) {
+      if (errorEl) { errorEl.textContent = msg; errorEl.classList.add('visible'); }
+    }
+    function hideError() {
+      if (errorEl) { errorEl.textContent = ''; errorEl.classList.remove('visible'); }
+    }
+
+    async function verifyToken() {
+      var token = localStorage.getItem(TOKEN_KEY);
+      if (!token) return false;
+      try {
+        var res = await fetch('/api/admin/verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: token }) });
+        var data = await res.json();
+        return data.valid === true;
+      } catch (e) { return false; }
+    }
+
+    window.adminLogin = async function() {
+      hideError();
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      if (!username || !password) { showError('Please enter both username and password.'); return; }
+      try {
+        var res = await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: username, password: password }) });
+        var data = await res.json();
+        if (data.success && data.token) {
+          localStorage.setItem(TOKEN_KEY, data.token);
+          showDashboard();
+        } else {
+          showError(data.error || 'Invalid credentials.');
+        }
+      } catch (e) { showError('Network error. Please try again.'); }
+    };
+
+    window.adminLogout = function() {
+      localStorage.removeItem(TOKEN_KEY);
+      if (loginEl) loginEl.classList.add('visible');
+      if (dashEl) dashEl.classList.remove('visible');
+    };
+
+    async function loadSubmissions() {
+      var token = localStorage.getItem(TOKEN_KEY);
+      var listEl = document.getElementById('submissionList');
+      if (!listEl) return;
+      try {
+        var res = await fetch('/api/admin/submissions', { headers: { 'Authorization': 'Bearer ' + token } });
+        var data = await res.json();
+        if (data.success && data.submissions) {
+          if (data.submissions.length === 0) {
+            listEl.innerHTML = '<div class="admin-empty">No submissions yet.</div>';
+            return;
+          }
+          listEl.innerHTML = data.submissions.map(function(s) {
+            var fieldsHtml = Object.entries(s.fields || {}).map(function(e) { return e[0] + ': ' + e[1]; }).join(' | ');
+            return '<div class="admin-submission-item"><div class="sub-header"><span class="sub-form">' + (s.formName || 'Unknown') + '</span><span class="sub-date">' + (s.timestamp || '') + '</span></div><div class="sub-fields">' + (fieldsHtml || 'No field data') + '</div></div>';
+          }).join('');
+        } else {
+          listEl.innerHTML = '<div class="admin-empty">Unable to load submissions.</div>';
+        }
+      } catch (e) {
+        listEl.innerHTML = '<div class="admin-empty">Error loading submissions.</div>';
+      }
+    }
+
+    async function showDashboard() {
+      if (loginEl) loginEl.classList.remove('visible');
+      if (dashEl) dashEl.classList.add('visible');
+      await loadSubmissions();
+    }
+
+    verifyToken().then(function(valid) {
+      if (valid) { showDashboard(); }
+      else if (loginEl) { loginEl.classList.add('visible'); }
+    });
+  }
+
   /* ─── Smooth scroll for hash links ─── */
   document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {

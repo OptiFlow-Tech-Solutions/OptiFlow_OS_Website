@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — OptiFlow OS</title>
+  <meta name="description" content="{{PAGE_DESCRIPTION}}" />
+  <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any" />
+  <link rel="stylesheet" href="/assets/css/core.css" />
+  <style>
+    .admin-body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
+    .admin-login { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 400px; }
+    .admin-login.visible { display: flex; }
+    .admin-login-card { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-elevated); }
+    .admin-login-card::before { content: ''; display: block; height: 3px; background: linear-gradient(90deg, var(--accent), var(--teal), var(--green)); border-radius: 3px 3px 0 0; margin: -40px -40px 32px -40px; width: calc(100% + 80px); }
+    .admin-login-header { text-align: center; margin-bottom: 32px; }
+    .admin-login-header h1 { font-size: 24px; margin-bottom: 8px; }
+    .admin-login-header p { color: var(--muted); font-size: 14px; }
+    .admin-form-group { margin-bottom: 20px; }
+    .admin-form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .admin-form-group input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .admin-form-group input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-soft); }
+    .admin-error { display: none; padding: 10px 14px; border-radius: var(--radius); background: color-mix(in oklch, oklch(60% 0.15 25) 12%, transparent); border: 1px solid color-mix(in oklch, oklch(60% 0.15 25) 25%, transparent); color: oklch(50% 0.14 25); font-size: 14px; margin-bottom: 16px; }
+    .admin-error.visible { display: block; }
+    .admin-dashboard { display: none; width: 100%; max-width: 900px; padding: 40px 0; }
+    .admin-dashboard.visible { display: block; }
+    .admin-dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .admin-dash-header h1 { font-size: 24px; }
+    .admin-submission-list { display: flex; flex-direction: column; gap: 12px; }
+    .admin-submission-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; transition: border-color 0.2s; }
+    .admin-submission-item:hover { border-color: var(--teal); }
+    .admin-submission-item .sub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .admin-submission-item .sub-form { font-weight: 600; font-size: 14px; color: var(--accent); }
+    .admin-submission-item .sub-date { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+    .admin-submission-item .sub-fields { font-size: 13px; color: var(--muted); }
+    .admin-empty { text-align: center; padding: 48px 0; color: var(--muted); }
+
+    [data-theme="dark"] .admin-error { background: color-mix(in oklch, oklch(55% 0.14 25) 14%, transparent); border-color: color-mix(in oklch, oklch(55% 0.14 25) 30%, transparent); color: oklch(65% 0.12 25); }
+
+    @media (max-width: 480px) {
+      .admin-login-card { padding: 28px; }
+      .admin-login-card::before { margin: -28px -28px 24px -28px; width: calc(100% + 56px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-body">
+    <div class="container">
+      <!-- Login -->
+      <div class="admin-login visible" id="adminLogin">
+        <div class="admin-login-card">
+          <div class="admin-login-header">
+            <h1>Admin Login</h1>
+            <p>OptiFlow OS Internal Dashboard</p>
+          </div>
+          <div class="admin-error" id="adminError"></div>
+          <form id="loginForm" onsubmit="return false;">
+            <div class="admin-form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" placeholder="Enter admin username" autocomplete="username" />
+            </div>
+            <div class="admin-form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" placeholder="Enter admin password" autocomplete="current-password" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="adminLogin()">Sign In</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Dashboard -->
+      <div class="admin-dashboard" id="adminDashboard">
+        <div class="admin-dash-header">
+          <h1>Dashboard</h1>
+          <button class="btn btn-secondary" onclick="adminLogout()">Sign Out</button>
+        </div>
+        <div class="admin-submission-list" id="submissionList">
+          <div class="admin-empty">Loading submissions...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/core.js" defer></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); adminLogin(); }
+    });
+  </script>
+</body>
+</html>

@@ -1,5 +1,17 @@
 export default {
   async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    if (url.pathname === '/api/admin/login' && request.method === 'POST') {
+      return handleAdminLogin(request, env);
+    }
+    if (url.pathname === '/api/admin/verify' && request.method === 'POST') {
+      return handleAdminVerify(request, env);
+    }
+    if (url.pathname === '/api/admin/submissions' && request.method === 'GET') {
+      return handleAdminSubmissions(request, env);
+    }
+
     if (request.method !== 'POST') {
       return json({ success: false, error: 'Method not allowed' }, 405);
     }
@@ -155,4 +167,72 @@ async function sendNotification(formName, fields, utm, env) {
 /* ─── Logging ─── */
 function log(entry) {
   console.log(JSON.stringify(entry));
+}
+
+/* ─── JWT utilities ─── */
+async function signJWT(payload, secret, expiresInHours = 24) {
+  const encoder = new TextEncoder();
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const now = Math.floor(Date.now() / 1000);
+  const full = { ...payload, iat: now, exp: now + expiresInHours * 3600 };
+  const b64 = (s) => btoa(s).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  const headerEnc = b64(JSON.stringify(header));
+  const payloadEnc = b64(JSON.stringify(full));
+  const signingInput = `${headerEnc}.${payloadEnc}`;
+  const key = await crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const sig = await crypto.subtle.sign('HMAC', key, encoder.encode(signingInput));
+  const sigEnc = btoa(String.fromCharCode(...new Uint8Array(sig))).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  return `${signingInput}.${sigEnc}`;
+}
+
+async function verifyJWT(token, secret) {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']);
+    const sig = parts[2].replace(/-/g, '+').replace(/_/g, '/');
+    const sigBytes = Uint8Array.from(atob(sig), c => c.charCodeAt(0));
+    const valid = await crypto.subtle.verify('HMAC', key, sigBytes, encoder.encode(`${parts[0]}.${parts[1]}`));
+    if (!valid) return null;
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+    if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) return null;
+    return payload;
+  } catch (e) {
+    return null;
+  }
+}
+
+/* ─── Admin endpoints ─── */
+async function handleAdminLogin(request, env) {
+  let body;
+  try { body = await request.json(); } catch (e) {
+    return json({ success: false, error: 'Invalid JSON' }, 400);
+  }
+  const { username, password } = body;
+  if (!username || !password) {
+    return json({ success: false, error: 'Missing credentials' }, 400);
+  }
+  if (username !== env.ADMIN_USERNAME || password !== env.ADMIN_PASSWORD) {
+    return json({ success: false, error: 'Invalid credentials' }, 401);
+  }
+  const token = await signJWT({ username }, env.JWT_SECRET);
+  return json({ success: true, token });
+}
+
+async function handleAdminVerify(request, env) {
+  let body;
+  try { body = await request.json(); } catch (e) {
+    return json({ valid: false });
+  }
+  const payload = await verifyJWT(body.token || '', env.JWT_SECRET);
+  return json({ valid: payload !== null });
+}
+
+async function handleAdminSubmissions(request, env) {
+  const authHeader = request.headers.get('Authorization') || '';
+  const token = authHeader.replace('Bearer ', '');
+  const payload = await verifyJWT(token, env.JWT_SECRET);
+  if (!payload) return json({ success: false, error: 'Unauthorized' }, 401);
+  return json({ success: true, submissions: [] });
 }
