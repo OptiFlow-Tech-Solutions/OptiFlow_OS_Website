@@ -18,7 +18,7 @@ const GLOBAL_HOOKS_DIR = resolve('C:\\Users\\Deel\\.config\\opencode\\hooks');
  * @param {Record<string, any>} [context={}]
  * @returns {{ran: boolean, output: string}}
  */
-export function executeHook(hookName, context = {}) {
+export function executeHook(hookName, _context = {}) {
   const hookPath = resolve(PROJECT_HOOKS_DIR, hookName);
   if (!existsSync(hookPath)) return { ran: false, output: '' };
 
@@ -43,20 +43,23 @@ export function executeHook(hookName, context = {}) {
  */
 export function executeLifecycle(event, context = {}) {
   const hookFile = `${event}.mjs`;
-  const projectResults = [];
-  const globalResults = [];
+  const projectHooksRun = [];
+  const globalHooksRun = [];
+  const allResults = [];
 
   // Project hook
   const projectPath = resolve(PROJECT_HOOKS_DIR, hookFile);
   if (existsSync(projectPath)) {
     const r = executeHook(hookFile, context);
-    projectResults.push(hookFile);
+    projectHooksRun.push(hookFile);
+    allResults.push(r);
   }
 
   // Global hooks
   if (existsSync(GLOBAL_HOOKS_DIR)) {
     const globalPath = resolve(GLOBAL_HOOKS_DIR, hookFile);
     if (existsSync(globalPath)) {
+      let result;
       try {
         const output = execSync(`node "${globalPath}"`, {
           cwd: ROOT,
@@ -64,22 +67,18 @@ export function executeLifecycle(event, context = {}) {
           timeout: 300000,
           stdio: 'pipe',
         }).trim();
-        globalResults.push({ ran: true, output });
+        result = { ran: true, output };
       } catch (e) {
-        globalResults.push({ ran: true, output: e.stderr || e.stdout || e.message });
+        result = { ran: true, output: e.stderr || e.stdout || e.message };
       }
-      globalResults.push(hookFile);
+      globalHooksRun.push(hookFile);
+      allResults.push(result);
     }
   }
 
-  const allResults = [
-    ...projectResults.map((name) => ({ ran: true, output: '' })),
-    ...globalResults.map((o) => (typeof o === 'string' ? { ran: false, output: '' } : o)),
-  ];
-
   return {
-    project: projectResults,
-    global: globalResults.filter((g) => typeof g === 'string'),
+    project: projectHooksRun,
+    global: globalHooksRun,
     allResults,
   };
 }
@@ -93,9 +92,10 @@ export function lifecycleForPhase(phase) {
   switch (phase) {
     case 'explore': return [];
     case 'propose': return ['pre-build'];
-    case 'apply': return ['pre-build', 'post-build', 'theme-change'];
+    case 'apply': return ['pre-build', 'post-build', 'theme-change', 'post-merge'];
     case 'verify': return ['pre-build', 'post-build'];
     case 'archive': return ['pre-commit'];
+    case 'gate': return ['pre-push'];
     default: return [];
   }
 }

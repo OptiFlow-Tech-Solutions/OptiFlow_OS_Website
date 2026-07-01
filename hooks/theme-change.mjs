@@ -6,26 +6,12 @@
    ═══════════════════════════════════════════ */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '..');
-
-function findDesignMd() {
-  for (const entry of fs.readdirSync(ROOT, { withFileTypes: true })) {
-    if (entry.isDirectory() && entry.name.startsWith('OptiFlow-OS')) {
-      const fp = path.join(ROOT, entry.name, 'DESIGN.md');
-      if (fs.existsSync(fp)) return fp;
-    }
-  }
-  return null;
-}
+import { ROOT, readText, findDesignMd } from './_utils.mjs';
 
 function extractColors(mdPath) {
-  const text = fs.readFileSync(mdPath, 'utf-8');
+  const text = readText(mdPath);
   const colors = [];
 
-  // Extract from the Color Palette table rows
   const tableRe = /\|\s*(\w+)\s*\|\s*([^|]+?)\s*\|\s*`([#A-Fa-f0-9]+)`\s*\|/g;
   let match;
   while ((match = tableRe.exec(text)) !== null) {
@@ -35,7 +21,6 @@ function extractColors(mdPath) {
     colors.push({ role, token, hex });
   }
 
-  // Extract from yaml frontmatter colors
   const yamlColorRe = /\b(\w[\w-]*):\s*"?(#[A-Fa-f0-9]{6})"?/g;
   const yamlSection = text.match(/^---([\s\S]*?)^---/m);
   if (yamlSection) {
@@ -48,12 +33,8 @@ function extractColors(mdPath) {
 }
 
 function cssUsesVarFor(css, hex) {
-  // Check if any CSS variable resolves to this hex (approximate check)
-  // Look for var(--*) usages in property values, and check if the hex appears
-  // only in :root variable definitions.
   const hexUpper = hex.toUpperCase();
 
-  // Find all CSS variable definitions
   const varDefRe = /--([\w-]+)\s*:\s*([^;]+?)\s*;/g;
   const varDefs = [];
   let m;
@@ -63,11 +44,9 @@ function cssUsesVarFor(css, hex) {
     varDefs.push({ name, value });
   }
 
-  // Check if this hex is captured in a CSS variable
   const matchedVar = varDefs.find(v => v.value.includes(hexUpper));
   if (!matchedVar) return { ok: false, reason: 'no CSS variable defined for this hex' };
 
-  // Check if var() usage exists outside of :root definitions
   const outsideRoot = css.replace(/:root\s*\{[\s\S]*?\}/g, '');
   const varUsage = outsideRoot.includes(`var(${matchedVar.name})`);
   if (!varUsage) {
@@ -94,7 +73,7 @@ if (!fs.existsSync(cssPath)) {
 console.log(`core.css:  assets/css/core.css\n`);
 
 const designColors = extractColors(designPath);
-const cssRaw = fs.readFileSync(cssPath, 'utf-8');
+const cssRaw = readText(cssPath);
 
 const uniqueColors = [];
 const seen = new Set();
@@ -113,8 +92,6 @@ for (const { role, token, hex } of uniqueColors) {
   }
 }
 
-// Also check: are there hardcoded hexes in core.css outside :root?
-// This is a looser check than the validate.mjs scan on dist pages.
 const outsideRoot = cssRaw.replace(/:root\s*\{[\s\S]*?\}/g, '').replace(/\[data-theme="dark"\]\s*\{[\s\S]*?\}/g, '');
 const hexInCss = outsideRoot.match(/#[0-9a-fA-F]{6}/g) || [];
 if (hexInCss.length > 0) {

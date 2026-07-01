@@ -8,11 +8,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
-
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '..');
-const DIST = path.join(ROOT, 'dist');
+import { ROOT, DIST } from './_utils.mjs';
 
 function fmtBytes(bytes) {
   if (bytes < 1024) return `${bytes} B`;
@@ -36,7 +32,6 @@ function getSize(fp) {
 
 console.log('\n─ Post-Build Report ─\n');
 
-// 1. Run validate
 console.log('Running validate...');
 try {
   execSync('node scripts/validate.mjs', { cwd: ROOT, stdio: 'inherit' });
@@ -48,7 +43,6 @@ try {
   console.log('  ⚠ validate.mjs exited with non-zero. Warnings above, build continues.');
 }
 
-// 2. Build statistics
 if (!fs.existsSync(DIST)) {
   console.error('dist/ not found. Build may have failed.');
   process.exit(0);

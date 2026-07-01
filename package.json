@@ -14,6 +14,8 @@
     "prebuild": "node hooks/pre-build.mjs",
     "postbuild": "node hooks/post-build.mjs",
     "precommit": "node hooks/pre-commit.mjs",
+    "postmerge": "node hooks/post-merge.mjs",
+    "prepush": "node hooks/pre-push.mjs",
     "orchestrate": "node orchestrate/coordinator.mjs",
     "validate:full": "node scripts/validate.mjs && node hooks/theme-change.mjs && node orchestrate/context-loader.mjs",
     "pages:status": "node scripts/validate.mjs --report-only",

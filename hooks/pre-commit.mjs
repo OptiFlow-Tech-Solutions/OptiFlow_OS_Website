@@ -2,39 +2,21 @@
 /* ═══════════════════════════════════════════
    OptiFlow OS — Pre-Commit Hook
    Scans for debug statements, secrets,
-   merge conflicts, and data drift.
+   merge conflicts, data drift, commit
+   message format, and branch name convention.
    Exits 0 on clean, 1 on issues found.
    ═══════════════════════════════════════════ */
-import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '..');
-
-let errors = 0;
-
-function fail(msg) { console.error(`  ✗ ${msg}`); errors++; }
-
-function readText(fp) {
-  try { return fs.readFileSync(fp, 'utf-8'); } catch { return ''; }
-}
-
-function walkSrc(exts, dir = path.join(ROOT, 'src')) {
-  const files = [];
-  if (!fs.existsSync(dir)) return files;
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.isDirectory()) files.push(...walkSrc(exts, path.join(dir, entry.name)));
-    else if (exts.some(e => entry.name.endsWith(e))) files.push(path.join(dir, entry.name));
-  }
-  return files;
-}
+import { execSync } from 'node:child_process';
+import { ROOT, SRC_PAGES, SRC_PARTIALS, readText, fail, ok, walkDir, getErrors } from './_utils.mjs';
 
 console.log('\n─ Pre-Commit Check ─\n');
 
 // 1. console.log / debugger in src/ files
 console.log('1. Debug statements');
-const srcFiles = walkSrc(['.html', '.mjs', '.js', '.css']);
+const srcFiles = walkDir(SRC_PAGES, ['.html', '.mjs', '.js', '.css']).concat(
+  walkDir(SRC_PARTIALS, ['.html', '.mjs', '.js', '.css'])
+);
 const debugPattern = /\bconsole\.(log|warn|error|debug|info)\(/;
 let debugFound = false;
 for (const f of srcFiles) {
@@ -52,14 +34,14 @@ for (const f of srcFiles) {
     }
   }
 }
-if (!debugFound) console.log('  ✓ no debug statements');
+if (!debugFound) ok('no debug statements');
 
 // 2. Hardcoded secrets
 console.log('2. Secrets scan');
 const secretPatterns = [
-  { name: 'API key', re: /(?:api[_\-]?key|apikey|api_secret|secret_key)\s*[:=]\s*['"][A-Za-z0-9_\-]{16,}['"]/i },
+  { name: 'API key', re: /(?:api[-_]?key|apikey|api_secret|secret_key)\s*[:=]\s*['"][A-Za-z0-9_-]{16,}['"]/i },
   { name: 'password literal', re: /(?:password|passwd|pwd)\s*[:=]\s*['"][^'"]+['"]/i },
-  { name: 'token', re: /(?:access_token|auth_token|bearer)\s*[:=]\s*['"][A-Za-z0-9_\-.]{16,}['"]/i },
+  { name: 'token', re: /(?:access_token|auth_token|bearer)\s*[:=]\s*['"][A-Za-z0-9_.-]{16,}['"]/i },
   { name: 'private key', re: /-----BEGIN (?:RSA |EC )?PRIVATE KEY-----/ },
 ];
 let secretFound = false;
@@ -72,35 +54,31 @@ for (const f of srcFiles) {
     }
   }
 }
-if (!secretFound) console.log('  ✓ no secrets found');
+if (!secretFound) ok('no secrets found');
 
 // 3. site.json phone matches footer phone (placeholders)
 console.log('3. Contact consistency');
 const site = JSON.parse(readText(path.join(ROOT, 'site.json')));
-const footerHtml = readText(path.join(ROOT, 'src', 'partials', 'footer.html'));
+const footerHtml = readText(path.join(SRC_PARTIALS, 'footer.html'));
 
-// Footer must use {{PHONE}} placeholder — not hardcoded number
 if (!footerHtml.includes('{{PHONE}}') && !footerHtml.includes('{{PHONE_TEL}}')) {
   fail('footer.html: use {{PHONE}} placeholder instead of hardcoded phone number');
 } else {
-  // Verify no hardcoded Indian mobile remains in footer (catch accidentally re-hardcoded)
   const hardcodedPhone = footerHtml.match(/\+91[\s-]?\d{10}/);
   if (hardcodedPhone) {
     fail(`footer.html: hardcoded phone "${hardcodedPhone[0]}" found — use {{PHONE}} placeholder`);
   } else {
-    // Validate site.json phone format
     const sitePhoneDigits = site.phone.replace(/\D/g, '');
     if (sitePhoneDigits.length !== 12 || !sitePhoneDigits.startsWith('91')) {
       fail(`site.json phone "${site.phone}" invalid — expected +91 XXXXXXXXXX`);
     } else {
-      console.log('  ✓ phone consistent');
+      ok('phone consistent');
     }
   }
 }
 
-// Verify location consistency: no stale "Ahmedabad" in source pages
 if (site.location.toLowerCase().includes('surat')) {
-  const contactHtml = readText(path.join(ROOT, 'src', 'pages', 'contact.html'));
+  const contactHtml = readText(path.join(SRC_PAGES, 'contact.html'));
   if (contactHtml.match(/Ahmedabad/)) {
     fail('contact.html: stale location "Ahmedabad" — replace with {{LOCATION}} or "Surat"');
   }
@@ -108,7 +86,14 @@ if (site.location.toLowerCase().includes('surat')) {
 
 // 4. Merge conflict markers
 console.log('4. Merge conflicts');
-const allFiles = [...walkSrc(['.html', '.mjs', '.js', '.css', '.json', '.md'], ROOT)];
+const allFiles = [
+  ...walkDir(SRC_PAGES, ['.html', '.mjs', '.js', '.css', '.json', '.md']),
+  ...walkDir(SRC_PARTIALS, ['.html', '.mjs', '.js', '.css', '.json', '.md']),
+  ...walkDir(path.join(ROOT, 'scripts'), ['.mjs']),
+  ...walkDir(path.join(ROOT, 'orchestrate'), ['.mjs']),
+  ...walkDir(path.join(ROOT, 'hooks'), ['.mjs']),
+  ...walkDir(path.join(ROOT, 'functions'), ['.js']),
+];
 let conflictFound = false;
 for (const f of allFiles) {
   if (f.includes('node_modules') || f.includes('.git')) continue;
@@ -118,7 +103,47 @@ for (const f of allFiles) {
     conflictFound = true;
   }
 }
-if (!conflictFound) console.log('  ✓ no merge conflicts');
+if (!conflictFound) ok('no merge conflicts');
 
-console.log(`\n${errors} issue(s)`);
-process.exit(errors > 0 ? 1 : 0);
+// 5. Commit message format (Conventional Commits)
+console.log('5. Commit message format');
+const isAmend = process.env.GIT_REFLOG_ACTION?.includes('rebase') ||
+  (() => { try { execSync('git rev-parse --verify HEAD', { encoding: 'utf-8', cwd: ROOT }); return true; } catch { return false; } })();
+if (isAmend) {
+  ok('amend — skipping');
+} else {
+  const msgFile = process.env.GIT_DIR
+    ? path.join(process.env.GIT_DIR, 'COMMIT_EDITMSG')
+    : path.join(ROOT, '.git', 'COMMIT_EDITMSG');
+  try {
+    const msg = readText(msgFile).split('\n')[0].trim();
+    const commitRe = /^(feat|fix|refactor|docs|test|chore|perf|ci|style)(\(.+\))?: .{1,72}/;
+    if (commitRe.test(msg)) {
+      ok(msg);
+    } else {
+      fail(`commit message must match: type(scope): description`);
+      console.log('  Allowed types: feat, fix, refactor, docs, test, chore, perf, ci, style');
+    }
+  } catch {
+    fail('could not read commit message');
+  }
+}
+
+// 6. Branch name convention
+console.log('6. Branch name');
+try {
+  const branch = execSync('git symbolic-ref --short HEAD', { encoding: 'utf-8', cwd: ROOT }).trim();
+  const branchRe = /^(main|staging|develop|feature\/|fix\/|chore\/|docs\/)/;
+  if (branchRe.test(branch)) {
+    ok(branch);
+  } else {
+    fail(`branch "${branch}" not allowed`);
+    console.log('  Allowed: main, staging, develop, feature/*, fix/*, chore/*, docs/*');
+  }
+} catch {
+  fail('could not read branch name');
+}
+
+const errs = getErrors();
+console.log(`\n${errs} issue(s)`);
+process.exit(errs > 0 ? 1 : 0);
