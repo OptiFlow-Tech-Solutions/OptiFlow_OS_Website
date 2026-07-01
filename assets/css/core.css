@@ -288,9 +288,8 @@ h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing
 .faq-question:hover { color: var(--teal); }
 .faq-icon { width: 24px; height: 24px; display: grid; place-items: center; transition: transform 0.3s ease; color: var(--muted); flex-shrink: 0; }
 .faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
-.faq-item.open .faq-answer { grid-template-rows: 1fr; }
-.faq-answer > div { overflow: hidden; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.faq-item.open .faq-answer { max-height: 2000px; }
 .faq-answer p { color: var(--muted); font-size: 15px; line-height: 1.6; padding-bottom: 24px; }
 [data-theme="dark"] .faq-item { border-bottom-color: var(--border); }
 [data-theme="dark"] .faq-question:hover { color: var(--teal); }
