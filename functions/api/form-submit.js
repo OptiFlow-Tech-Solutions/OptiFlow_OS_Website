@@ -50,7 +50,14 @@ export default {
 
     let emailSent = true;
     try {
-      await sendNotification(formName, fields, utm, env);
+      const emailUrl = new URL('/api/email', request.url);
+      const emailRes = await fetch(emailUrl.toString(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: formName, fields, utm: utm || {} }),
+      });
+      const emailBody = await emailRes.json();
+      if (!emailBody.emailSent) emailSent = false;
     } catch (e) {
       emailSent = false;
       console.warn(`Email notification failed for ${formName}:`, e.message);
@@ -135,44 +142,6 @@ function rateLimited(ip) {
   globalThis._rateLimit = globalThis._rateLimit || {};
   const timestamps = (globalThis._rateLimit[ip] || []).filter(t => now - t < 600000);
   return timestamps.length >= 5;
-}
-
-/* ─── Email notification ─── */
-async function sendNotification(formName, fields, utm, env) {
-  const to = 'hello@optiflow.in';
-  const subjects = {
-    contact: 'New Contact Form Submission — OptiFlow OS',
-    'demo-booking': 'New Demo Booking — OptiFlow OS',
-    newsletter: 'New Newsletter Signup — OptiFlow OS',
-  };
-  const subject = subjects[formName] || `New ${formName} Submission — OptiFlow OS`;
-
-  let body = '';
-  for (const [key, value] of Object.entries(fields)) {
-    body += `${key}: ${value}\n`;
-  }
-  if (utm && Object.keys(utm).length > 0) {
-    body += '\n--- UTM ---\n';
-    for (const [key, value] of Object.entries(utm)) {
-      body += `${key}: ${value}\n`;
-    }
-  }
-
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${env.RESEND_API_KEY}`,
-    },
-    body: JSON.stringify({
-      from: 'OptiFlow OS <noreply@optiflow.in>',
-      to,
-      subject,
-      text: body,
-    }),
-  });
-
-  if (!res.ok) throw new Error(`Resend API error: ${res.status}`);
 }
 
 /* ─── Logging ─── */

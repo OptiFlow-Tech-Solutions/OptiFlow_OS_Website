@@ -61,26 +61,30 @@ The system SHALL enforce a per-IP rate limit of 5 submissions per 10-minute slid
 
 ### Requirement: Email Notification
 
-The system SHALL send an email notification via Resend API for every valid form submission.
+The system SHALL delegate email notification delivery to the email-notifications Worker at `/api/email` for every valid form submission.
 
-#### Scenario: Email sent for contact form
+#### Scenario: Email dispatched for contact form
 - **WHEN** a valid "contact" form submission is received
-- **THEN** an email SHALL be sent to `hello@optiflow.in` with subject "New Contact Form Submission — OptiFlow OS"
-- **AND** the email body SHALL include all form fields and UTM parameters
+- **THEN** the form-submit Worker SHALL POST to `/api/email` with `{ "type": "contact", "fields": <form fields>, "utm": <utm params> }`
+- **AND** the form-submit Worker SHALL NOT call the Resend API directly
 
-#### Scenario: Email sent for demo booking
+#### Scenario: Email dispatched for demo booking
 - **WHEN** a valid "demo-booking" form submission is received
-- **THEN** an email SHALL be sent to `hello@optiflow.in` with subject "New Demo Booking — OptiFlow OS"
+- **THEN** the form-submit Worker SHALL POST to `/api/email` with `{ "type": "demo-booking", "fields": <form fields>, "utm": <utm params> }`
 
-#### Scenario: Email sent for newsletter
+#### Scenario: Email dispatched for newsletter
 - **WHEN** a valid "newsletter" form submission is received
-- **THEN** an email SHALL be sent to `hello@optiflow.in` with subject "New Newsletter Signup — OptiFlow OS"
+- **THEN** the form-submit Worker SHALL POST to `/api/email` with `{ "type": "newsletter", "fields": <form fields>, "utm": <utm params> }`
 
-#### Scenario: Email failure degrades gracefully
-- **WHEN** the Resend API call fails (network error or non-2xx)
+#### Scenario: Email Worker failure degrades gracefully
+- **WHEN** the POST to `/api/email` fails or returns `emailSent: false`
 - **THEN** the submission SHALL still be accepted (HTTP 200)
 - **AND** a warning SHALL be logged to the worker console
 - **AND** the response body SHALL include `"emailSent": false`
+
+#### Scenario: Email Worker returns success
+- **WHEN** the POST to `/api/email` returns HTTP 200 with `emailSent: true`
+- **THEN** the response body SHALL include `"emailSent": true`
 
 ### Requirement: Structured Logging
 

@@ -4,7 +4,7 @@
 
 ### 1. Footer placeholders → build-time injection
 
-Footer currently has `+91 7874677836`, `hello@optiflow.in`, `2026` hardcoded. Replace with `{{PHONE}}`, `{{EMAIL}}`, `{{YEAR}}` — the build pipeline already supports this via `assemble.mjs`.
+Footer currently has `+91 7874677836`, `info@optiflow.co.in`, `2026` hardcoded. Replace with `{{PHONE}}`, `{{EMAIL}}`, `{{YEAR}}` — the build pipeline already supports this via `assemble.mjs`.
 
 ### 2. Skip-to-content link
 

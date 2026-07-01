@@ -41,7 +41,7 @@ The footer SHALL use `{{PHONE}}`, `{{EMAIL}}`, and `{{YEAR}}` placeholders inste
 - **GIVEN** the footer partial source
 - **WHEN** inspected
 - **THEN** phone SHALL be `{{PHONE}}` (not `+91 7874677836`)
-- **AND** email SHALL be `{{EMAIL}}` (not `hello@optiflow.in`)
+- **AND** email SHALL be `{{EMAIL}}` (not `info@optiflow.co.in`)
 - **AND** year SHALL be `{{YEAR}}` (not `2026`)
 
 ## MODIFIED: Nav CTA

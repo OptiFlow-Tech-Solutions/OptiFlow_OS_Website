@@ -68,16 +68,16 @@ The system SHALL send an email notification via Resend API for every valid form 
 
 #### Scenario: Email sent for contact form
 - **WHEN** a valid "contact" form submission is received
-- **THEN** an email SHALL be sent to `hello@optiflow.in` with subject "New Contact Form Submission — OptiFlow OS"
+- **THEN** an email SHALL be sent to `info@optiflow.co.in` with subject "New Contact Form Submission — OptiFlow OS"
 - **AND** the email body SHALL include all form fields and UTM parameters
 
 #### Scenario: Email sent for demo booking
 - **WHEN** a valid "demo-booking" form submission is received
-- **THEN** an email SHALL be sent to `hello@optiflow.in` with subject "New Demo Booking — OptiFlow OS"
+- **THEN** an email SHALL be sent to `info@optiflow.co.in` with subject "New Demo Booking — OptiFlow OS"
 
 #### Scenario: Email sent for newsletter
 - **WHEN** a valid "newsletter" form submission is received
-- **THEN** an email SHALL be sent to `hello@optiflow.in` with subject "New Newsletter Signup — OptiFlow OS"
+- **THEN** an email SHALL be sent to `info@optiflow.co.in` with subject "New Newsletter Signup — OptiFlow OS"
 
 #### Scenario: Email failure degrades gracefully
 - **WHEN** the Resend API call fails (network error or non-2xx)
