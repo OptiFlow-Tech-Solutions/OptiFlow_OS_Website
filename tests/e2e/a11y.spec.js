@@ -14,6 +14,8 @@ const PAGES = [
   { path: '/demo-booking/', label: 'Demo Booking' },
   { path: '/privacy-policy/', label: 'Privacy Policy' },
   { path: '/terms/', label: 'Terms' },
+  { path: '/feature-showcase/', label: 'Feature Showcase' },
+  { path: '/competitive-positioning/', label: 'Competitive Positioning' },
 ];
 
 test.describe('Accessibility (axe-core)', () => {

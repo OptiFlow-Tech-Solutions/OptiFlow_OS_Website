@@ -210,3 +210,13 @@ The system SHALL write audit entries on admin authentication events.
 #### Scenario: Failed login audit
 - **WHEN** admin login fails
 - **THEN** an audit entry SHALL be written with `action: "admin_login_failed"`
+
+### Requirement: Admin Tab Accessibility
+
+The admin dashboard tablist SHALL follow the WAI-ARIA tabs pattern with `aria-controls` attributes.
+
+#### Scenario: Tab aria-controls
+
+- **WHEN** the admin dashboard renders the tab bar
+- **THEN** each tab button SHALL have an `aria-controls` attribute pointing to the corresponding `role="tabpanel"` element
+- **AND** each `<div role="tabpanel">` SHALL have an `id` matching the `aria-controls` value

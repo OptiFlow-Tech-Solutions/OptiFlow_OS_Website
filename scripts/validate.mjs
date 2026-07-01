@@ -141,7 +141,96 @@ for (const page of pages) {
   if (!html.includes('BreadcrumbList')) log('warn', `Missing BreadcrumbList in ${name}`);
 }
 
-// 5. Check canonical data consistency
+// 5. Contrast ratio check (WCAG 2.2 AA)
+console.log('\n─ Contrast Ratios (WCAG 2.2 AA) ─');
+
+function parseOklch(str) {
+  const m = str.match(/oklch\(([\d.]+)%?\s+([\d.]+)\s+([\d.]+)\)/);
+  if (!m) return null;
+  return { l: parseFloat(m[1]) / 100, c: parseFloat(m[2]), h: parseFloat(m[3]) };
+}
+
+function oklchToRgb({ l, c, h }) {
+  const hr = h * Math.PI / 180;
+  const a = c * Math.cos(hr);
+  const b = c * Math.sin(hr);
+
+  const l_ = l + 0.3963377774 * a + 0.2158037573 * b;
+  const m_ = l - 0.1055613458 * a - 0.0638541728 * b;
+  const s_ = l - 0.0894841775 * a - 1.2914855480 * b;
+
+  const l3 = l_ * l_ * l_;
+  const m3 = m_ * m_ * m_;
+  const s3 = s_ * s_ * s_;
+
+  const r_ = 4.0767416621 * l3 - 3.3077115913 * m3 + 0.2309699292 * s3;
+  const g_ = -1.2684380046 * l3 + 2.6097574011 * m3 - 0.3413193965 * s3;
+  const bl = -0.0041960863 * l3 - 0.7034186147 * m3 + 1.7076147010 * s3;
+
+  const toSrgb = (x) => {
+    const abs = Math.abs(x);
+    const sign = x < 0 ? -1 : 1;
+    return sign * (abs > 0.0031308 ? 1.055 * Math.pow(abs, 1 / 2.4) - 0.055 : 12.92 * abs);
+  };
+
+  return { r: toSrgb(r_), g: toSrgb(g_), bl: toSrgb(bl) };
+}
+
+function relativeLuminance({ r, g, bl }) {
+  const toLinear = (c) => {
+    const s = c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    return s;
+  };
+  return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(bl);
+}
+
+function contrastRatio(l1, l2) {
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function getTokens(block) {
+  const tokens = {};
+  for (const match of block.matchAll(/--([\w-]+):\s*(oklch\([\d.]+%?\s+[\d.]+\s+[\d.]+\))/g)) {
+    tokens[match[1]] = parseOklch(match[2]);
+  }
+  return tokens;
+}
+
+try {
+  const css = fs.readFileSync(path.join(ROOT, 'assets', 'css', 'core.css'), 'utf-8');
+  const rootMatch = css.match(/:root\s*\{([^}]+)\}/);
+  const darkMatch = css.match(/\[data-theme="dark"\]\s*\{([^}]+)\}/);
+
+  const lightTokens = rootMatch ? getTokens(rootMatch[1]) : {};
+  const darkTokens = darkMatch ? getTokens(darkMatch[1]) : {};
+
+  const pairs = [
+    ['--fg', '--bg', 'Body text on background'],
+    ['--muted', '--bg', 'Muted text on background'],
+    ['--accent', '--bg', 'Accent text on background'],
+    ['--accent', '--surface', 'Accent text on surface'],
+    ['--teal', '--bg', 'Teal text on background'],
+  ];
+
+  for (const [fgKey, bgKey, label] of pairs) {
+    for (const [mode, tokens] of [['light', lightTokens], ['dark', darkTokens]]) {
+      if (!tokens[fgKey.slice(2)] || !tokens[bgKey.slice(2)]) continue;
+      const fgRgb = oklchToRgb(tokens[fgKey.slice(2)]);
+      const bgRgb = oklchToRgb(tokens[bgKey.slice(2)]);
+      const cr = contrastRatio(relativeLuminance(fgRgb), relativeLuminance(bgRgb));
+      const threshold = label.includes('Muted') ? 4.5 : 4.5;
+      if (cr < threshold) {
+        log('warn', `${label} (${mode}): ${cr.toFixed(2)}:1 (needs ${threshold}:1)`);
+      }
+    }
+  }
+} catch (e) {
+  log('warn', `Could not run contrast check: ${e.message}`);
+}
+
+// 6. Check canonical data consistency
 console.log('\n─ Data Consistency ─');
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.json'), 'utf-8'));
 for (const page of pages) {

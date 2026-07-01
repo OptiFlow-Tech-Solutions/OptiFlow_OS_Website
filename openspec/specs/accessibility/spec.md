@@ -49,6 +49,13 @@ The system SHALL maintain a minimum 4.5:1 contrast ratio for all text content.
 - **THEN** the contrast ratio SHALL be at least 4.5:1
 - **AND** large text (18px+ or 14px+ bold) SHALL meet at least 3:1
 
+#### Scenario: Automated contrast validation
+
+- **GIVEN** the build validation pipeline runs
+- **WHEN** `npm run validate` executes
+- **THEN** all oklch color variable pairs defined in `core.css` SHALL be checked for WCAG 2.2 AA contrast compliance
+- **AND** any pair below 4.5:1 (normal text) or 3:1 (large text) SHALL produce a warning
+
 ### Requirement: Semantic HTML Landmarks
 
 The system SHALL use semantic HTML landmarks on every page.
@@ -128,3 +135,14 @@ Animations SHALL pause when the page is hidden (tab switch, minimize).
 - **WHEN** the user switches to a different browser tab
 - **THEN** the typewriter SHALL pause
 - **AND** it SHALL resume when the tab becomes visible again
+
+### Requirement: E2E Accessibility Testing
+
+The system SHALL include automated accessibility scans for all public pages in the E2E test suite.
+
+#### Scenario: Page-level axe scan
+
+- **GIVEN** the E2E test suite runs
+- **WHEN** any public page is loaded
+- **THEN** an `axe-core` scan SHALL run at `wcag2aa` standard
+- **AND** zero violations SHALL be present
