@@ -26,7 +26,8 @@
     "test:e2e": "npm run build && npm run test",
     "deploy": "node hooks/pre-build.mjs && npm run build && npm run validate",
     "deploy:netlify": "npm run deploy && npx netlify-cli deploy --prod --dir=dist",
-    "deploy:cloudflare": "npm run deploy && npx wrangler pages deploy dist --project-name=optiflow-website"
+    "deploy:cloudflare": "npm run deploy && npx wrangler pages deploy dist --project-name=optiflow-website",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

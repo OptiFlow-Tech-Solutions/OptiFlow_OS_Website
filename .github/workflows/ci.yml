@@ -30,12 +30,13 @@ jobs:
         run: npx stylelint "assets/css/**/*.css" --allow-empty-input
 
       - name: Lint JS
-        run: npx eslint "scripts/**/*.mjs" "orchestrate/**/*.mjs" "hooks/**/*.mjs"
-        continue-on-error: true
+        run: npx eslint "scripts/**/*.mjs" "orchestrate/**/*.mjs" "hooks/**/*.mjs" "functions/**/*.js"
 
       - name: Install Playwright browsers
         run: npx playwright install chromium --with-deps
 
       - name: Test (E2E)
         run: npx playwright test --config tests/e2e/playwright.config.js
-        continue-on-error: true
+
+      - name: Dependency audit
+        run: npm audit --production

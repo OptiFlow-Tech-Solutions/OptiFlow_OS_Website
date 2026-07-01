@@ -26,5 +26,32 @@ export default [
       "prefer-const": "error",
       "no-var": "error"
     }
+  },
+  {
+    files: ["functions/**/*.js"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: {
+        console: "readonly",
+        crypto: "readonly",
+        fetch: "readonly",
+        Response: "readonly",
+        Request: "readonly",
+        URL: "readonly",
+        Headers: "readonly",
+        TextEncoder: "readonly",
+        TextDecoder: "readonly",
+        atob: "readonly",
+        btoa: "readonly",
+        setTimeout: "readonly",
+        setInterval: "readonly",
+      }
+    },
+    rules: {
+      "no-console": "warn",
+      "no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_", "caughtErrorsIgnorePattern": "^_" }],
+      "no-undef": "error"
+    }
   }
 ];

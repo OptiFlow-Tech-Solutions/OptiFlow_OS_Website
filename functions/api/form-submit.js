@@ -1,5 +1,5 @@
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env, _ctx) {
     const url = new URL(request.url);
 
     if (url.pathname === '/api/admin/login' && request.method === 'POST') {
@@ -29,7 +29,7 @@ export default {
     }
 
     let body;
-    try { body = await request.json(); } catch (e) {
+    try { body = await request.json(); } catch (_e) {
       return json({ success: false, error: 'Invalid JSON body' }, 400);
     }
 
@@ -219,7 +219,7 @@ async function verifyJWT(token, secret) {
     const payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
     if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) return null;
     return payload;
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 }
@@ -227,7 +227,7 @@ async function verifyJWT(token, secret) {
 /* ─── Admin endpoints ─── */
 async function handleAdminLogin(request, env) {
   let body;
-  try { body = await request.json(); } catch (e) {
+  try { body = await request.json(); } catch (_e) {
     return json({ success: false, error: 'Invalid JSON' }, 400);
   }
   const { username, password } = body;
@@ -245,7 +245,7 @@ async function handleAdminLogin(request, env) {
 
 async function handleAdminVerify(request, env) {
   let body;
-  try { body = await request.json(); } catch (e) {
+  try { body = await request.json(); } catch (_e) {
     return json({ valid: false });
   }
   const payload = await verifyJWT(body.token || '', env.JWT_SECRET);
@@ -348,7 +348,7 @@ async function handleAdminExport(request, env) {
     if (env.AUDIT) await env.AUDIT.put(`audit:${new Date().toISOString().slice(0, 10)}:${uuid()}`, JSON.stringify({
       schema: 'audit.v1', id: uuid(), timestamp: new Date().toISOString(), action: 'submission_export', actor: hashedIp, resource: `export:${format}`, detail: { count: submissions.length, formName: formNameFilter || 'all' },
     }));
-  } catch (e) { /* audit log failure is non-blocking */ }
+  } catch (_e) { /* audit log failure is non-blocking */ }
 
   if (format === 'json') {
     return new Response(JSON.stringify(submissions), {
@@ -391,7 +391,7 @@ async function auditLog(env, request, action, resource) {
     if (env.AUDIT) await env.AUDIT.put(`audit:${new Date().toISOString().slice(0, 10)}:${uuid()}`, JSON.stringify({
       schema: 'audit.v1', id: uuid(), timestamp: new Date().toISOString(), action, actor: hashedIp, resource, detail: {},
     }));
-  } catch (e) { /* audit failure is non-blocking */ }
+  } catch (_e) { /* audit failure is non-blocking */ }
 }
 
 async function handleAdminStats(request, env) {

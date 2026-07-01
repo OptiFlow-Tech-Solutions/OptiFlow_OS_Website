@@ -40,7 +40,11 @@ console.log('\n─ Post-Build Report ─\n');
 console.log('Running validate...');
 try {
   execSync('node scripts/validate.mjs', { cwd: ROOT, stdio: 'inherit' });
-} catch {
+} catch (e) {
+  if (e.status && e.status !== 0) {
+    console.error('  ✗ validate.mjs failed with errors. Build aborted.');
+    process.exit(e.status);
+  }
   console.log('  ⚠ validate.mjs exited with non-zero. Warnings above, build continues.');
 }
 

@@ -40,7 +40,7 @@ The test suite SHALL run across Chromium, Firefox, WebKit desktop, and Chromium 
 
 ### Requirement: CI Integration
 
-The test suite SHALL be integrated into the CI/CD pipeline and quality gates.
+The test suite SHALL be integrated into the CI/CD pipeline and quality gates via a GitHub Actions workflow.
 
 #### Scenario: PR validation includes tests
 
@@ -54,6 +54,13 @@ The test suite SHALL be integrated into the CI/CD pipeline and quality gates.
 - **GIVEN** the orchestration engine runs quality gates
 - **WHEN** GATE_TEST is executed
 - **THEN** the gate SHALL pass only when all E2E tests pass across all browser projects
+
+#### Scenario: CI workflow exists
+
+- **GIVEN** the project repository
+- **WHEN** a CI pipeline is required
+- **THEN** `.github/workflows/ci.yml` SHALL exist
+- **AND** it SHALL run on pull requests to `main`
 
 ### Requirement: Accessibility Gate
 

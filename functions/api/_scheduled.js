@@ -1,5 +1,5 @@
 export default {
-  async scheduled(event, env, ctx) {
+  async scheduled(event, env, _ctx) {
     const now = new Date();
     const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
     const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);

@@ -1,0 +1,15 @@
+name: security
+description: Security audit pipeline
+steps:
+  - id: audit-deps
+    command: npm audit --production
+    blocking: true
+    description: Scan dependencies for known vulnerabilities
+  - id: secrets-scan
+    command: node hooks/pre-commit.mjs
+    blocking: true
+    description: Scan for hardcoded secrets, keys, tokens
+  - id: header-check
+    command: node scripts/validate.mjs
+    blocking: true
+    description: Verify security headers and CSP configuration

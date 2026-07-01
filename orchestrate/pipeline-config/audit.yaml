@@ -1,0 +1,19 @@
+name: audit
+description: Full compliance audit — a11y, SEO, design, performance
+steps:
+  - id: a11y-scan
+    command: npx playwright test tests/e2e/a11y.spec.js --config tests/e2e/playwright.config.js
+    blocking: true
+    description: Accessibility audit with axe-core across all pages
+  - id: seo-check
+    command: node scripts/validate.mjs
+    blocking: true
+    description: SEO tag presence, structured data, canonical URLs
+  - id: design-audit
+    command: node hooks/theme-change.mjs
+    blocking: true
+    description: Design token consistency between DESIGN.md and core.css
+  - id: perf-budget
+    command: node -e "const fs=require('fs');const css=fs.statSync('dist/assets/css/core.css').size;const js=fs.statSync('dist/assets/js/core.js').size;const kb=css+js;process.exit(kb>102400?1:0)"
+    blocking: true
+    description: Enforce CSS+JS combined size under 100KB

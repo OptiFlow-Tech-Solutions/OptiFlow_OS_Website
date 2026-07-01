@@ -5,7 +5,7 @@ export default {
     }
 
     let body;
-    try { body = await request.json(); } catch (e) {
+    try { body = await request.json(); } catch (_e) {
       return json({ success: false, error: 'Invalid JSON body' }, 400);
     }
 
@@ -164,7 +164,7 @@ function buildTeamText(type, fields, utm) {
 
 /* ─── Welcome email templates ─── */
 
-function buildWelcomeTemplate(toEmail) {
+function buildWelcomeTemplate(_toEmail) {
   return `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:0;padding:0;background:#F8FAFC;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif">
 <table cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;margin:0 auto;background:#FFFFFF">
   <tr><td style="padding:32px 32px 24px;text-align:center"><img src="${BRAND.logo}" alt="OptiFlow OS" style="height:40px;display:block;margin:0 auto"></td></tr>
@@ -174,7 +174,7 @@ function buildWelcomeTemplate(toEmail) {
 </table></body></html>`;
 }
 
-function buildWelcomeText(toEmail) {
+function buildWelcomeText(_toEmail) {
   return `Welcome to OptiFlow OS\n\nThank you for subscribing to the OptiFlow OS newsletter.\nYou'll receive insights on business execution, operational excellence, and strategies for Indian MSMEs.\n\nVisit our website: ${BRAND.domain}\n\n---\n${BRAND.company} — ${BRAND.location}\nYou received this email because you subscribed on ${BRAND.domain}.\nTo unsubscribe, reply to this email or contact us at info@optiflow.co.in.`;
 }
 

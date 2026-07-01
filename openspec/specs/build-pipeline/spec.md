@@ -113,7 +113,7 @@ The system SHALL inject navigation and footer partials via `<!-- INCLUDE: nav --
 
 ### Requirement: Asset Copying
 
-The system SHALL copy shared assets (CSS, JS, images) from `assets/` into `dist/assets/`.
+The build pipeline SHALL copy shared assets (CSS, JS, images) from `assets/` into `dist/assets/`, and SHALL minify CSS and JS during production build.
 
 #### Scenario: Shared assets copy
 
@@ -127,6 +127,12 @@ The system SHALL copy shared assets (CSS, JS, images) from `assets/` into `dist/
 - **GIVEN** a design specification directory exists in the project root
 - **WHEN** the build runs
 - **THEN** PNG logo files SHALL be copied into `dist/assets/img/`
+
+#### Scenario: CSS and JS minification
+
+- **WHEN** assets are copied in production build mode
+- **THEN** `core.css` and `core.js` SHALL be minified before writing to `dist/assets/`
+- **AND** source files in `assets/` SHALL remain unminified
 
 ### Requirement: Validation
 
@@ -167,7 +173,7 @@ The system SHALL validate all generated pages via `npm run validate`, checking i
 
 ### Requirement: Validation Exit Code
 
-The system SHALL exit with a non-zero code when validation errors are present.
+The system SHALL exit with a non-zero code when validation errors are present, and the post-build hook SHALL propagate this exit code.
 
 #### Scenario: Errors cause failure
 
@@ -186,6 +192,12 @@ The system SHALL exit with a non-zero code when validation errors are present.
 - **GIVEN** validation finds only warnings and no errors
 - **WHEN** `npm run validate` completes
 - **THEN** the process SHALL exit with code 0
+
+#### Scenario: Post-build propagates validate exit code
+
+- **GIVEN** validation exits with code 1 (errors found)
+- **WHEN** the post-build hook runs
+- **THEN** the build SHALL exit with code 1
 
 ### Requirement: Clean URLs
 
@@ -252,3 +264,14 @@ The system SHALL include an `npm test` script that runs the full Playwright E2E 
 - **WHEN** `npm test` is executed
 - **THEN** Playwright SHALL run all test specs across configured browser projects
 - **AND** the dev server SHALL be started automatically via `webServer` config
+
+### Requirement: Preconnect Resource Hints Injection
+
+The build pipeline SHALL inject `<link rel="preconnect">` hints into every assembled page's `<head>` for Google Fonts and Plausible analytics.
+
+#### Scenario: Preconnect hints present
+
+- **WHEN** a page is assembled
+- **THEN** `<link rel="preconnect" href="https://fonts.googleapis.com">` SHALL be present in `<head>`
+- **AND** `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>` SHALL be present
+- **AND** `<link rel="preconnect" href="https://plausible.io">` SHALL be present

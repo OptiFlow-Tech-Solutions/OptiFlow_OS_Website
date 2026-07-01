@@ -11,9 +11,8 @@ steps:
     command: node scripts/validate.mjs
     blocking: true
   - id: test
-    command: npx playwright test
+    command: npx playwright test --config tests/e2e/playwright.config.js
     blocking: true
-    continue-on-error: true
   - id: deploy
     command: npm run deploy
     blocking: false

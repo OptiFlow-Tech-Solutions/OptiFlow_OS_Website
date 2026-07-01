@@ -114,7 +114,7 @@ function buildPage(pageInfo) {
 
   html = html.replace(
     '<meta name="viewport"',
-    '<link rel="manifest" href="/manifest.json" />\n  <meta name="theme-color" content="#0a1628" />\n  <meta name="viewport"'
+    '<link rel="manifest" href="/manifest.json" />\n  <meta name="theme-color" content="#0a1628" />\n  <link rel="preconnect" href="https://fonts.googleapis.com" />\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n  <link rel="preconnect" href="https://plausible.io" />\n  <meta name="viewport"'
   );
 
   html = html.replace(
@@ -373,6 +373,52 @@ function injectAllJSONLD() {
   console.log('  ✓ JSON-LD injected into all pages');
 }
 
-// ponytail: minification not needed yet. CSS/JS both under 50KB. Add csso + terser step if they grow.
+// ponytail: simple regex minification for CSS/JS. Both under 50KB. Add csso + terser if they grow.
+function minifyCSS(content) {
+  return content
+    .replace(/\/\*[\s\S]*?\*\//g, '')  // remove comments
+    .replace(/;\s*/g, ';')              // collapse whitespace after semicolons
+    .replace(/{\s*/g, '{')             // collapse whitespace after braces
+    .replace(/}\s*/g, '}')             // collapse whitespace before closing braces
+    .replace(/:\s*/g, ':')             // collapse whitespace after colons
+    .replace(/,\s*/g, ',')             // collapse whitespace after commas
+    .replace(/\n\s*/g, '\n')           // trim leading whitespace on lines
+    .replace(/[\t ]{2,}/g, ' ')        // collapse multiple spaces/tabs
+    .replace(/\n{2,}/g, '\n')          // collapse multiple newlines
+    .trim();
+}
+
+function minifyJS(content) {
+  return content
+    .replace(/\/\*[\s\S]*?\*\//g, '')  // remove block comments
+    .replace(/\/\/[^\n]*/g, '')        // remove line comments
+    .replace(/;\s*/g, ';')             // collapse whitespace after semicolons
+    .replace(/{\s*/g, '{')             // collapse whitespace after braces
+    .replace(/}\s*/g, '}')             // collapse whitespace before closing braces
+    .replace(/:\s*/g, ':')             // collapse whitespace after colons
+    .replace(/,\s*/g, ',')             // collapse whitespace after commas
+    .replace(/\n\s*/g, '\n')           // trim leading whitespace on lines
+    .replace(/[\t ]{2,}/g, ' ')        // collapse multiple spaces/tabs
+    .replace(/\n{2,}/g, '\n')          // collapse multiple newlines
+    .trim();
+}
+
+// Apply minification to copied CSS/JS in dist
+{
+  const distCss = path.join(DIST, 'assets', 'css', 'core.css');
+  const distJs = path.join(DIST, 'assets', 'js', 'core.js');
+  if (fs.existsSync(distCss)) {
+    const raw = fs.readFileSync(distCss, 'utf-8');
+    fs.writeFileSync(distCss, minifyCSS(raw), 'utf-8');
+    const pct = ((1 - fs.statSync(distCss).size / raw.length) * 100).toFixed(0);
+    console.log(`  ✓ core.css minified (${pct}% reduction)`);
+  }
+  if (fs.existsSync(distJs)) {
+    const raw = fs.readFileSync(distJs, 'utf-8');
+    fs.writeFileSync(distJs, minifyJS(raw), 'utf-8');
+    const pct = ((1 - fs.statSync(distJs).size / raw.length) * 100).toFixed(0);
+    console.log(`  ✓ core.js minified (${pct}% reduction)`);
+  }
+}
 
 main();
