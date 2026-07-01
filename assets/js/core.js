@@ -318,6 +318,9 @@
       } catch (e) { return false; }
     }
 
+    var allSubmissions = [];
+    var refreshInterval = null;
+
     window.adminLogin = async function() {
       hideError();
       var username = document.getElementById('username').value;
@@ -337,9 +340,39 @@
 
     window.adminLogout = function() {
       localStorage.removeItem(TOKEN_KEY);
+      if (refreshInterval) { clearInterval(refreshInterval); refreshInterval = null; }
       if (loginEl) loginEl.classList.add('visible');
       if (dashEl) dashEl.classList.remove('visible');
     };
+
+    async function loadStats() {
+      var token = localStorage.getItem(TOKEN_KEY);
+      try {
+        var res = await fetch('/api/admin/stats', { headers: { 'Authorization': 'Bearer ' + token } });
+        var data = await res.json();
+        if (data.success && data.stats) {
+          var s = data.stats;
+          document.getElementById('statTotal').textContent = s.total || 0;
+          document.getElementById('statToday').textContent = s.today || 0;
+          document.getElementById('statContact').textContent = (s.byForm && s.byForm.contact) || 0;
+          document.getElementById('statDemo').textContent = (s.byForm && s.byForm['demo-booking']) || 0;
+          document.getElementById('statNewsletter').textContent = (s.byForm && s.byForm.newsletter) || 0;
+        }
+      } catch (e) { /* stats optional, ignore errors */ }
+    }
+
+    function filterSubmissions() {
+      var search = (document.getElementById('submissionSearch').value || '').toLowerCase();
+      var formFilter = document.getElementById('formTypeFilter').value;
+      var items = document.querySelectorAll('.admin-submission-item');
+      items.forEach(function(item) {
+        var formName = (item.dataset.formName || '').toLowerCase();
+        var text = (item.textContent || '').toLowerCase();
+        var matchForm = !formFilter || formName === formFilter;
+        var matchSearch = !search || text.indexOf(search) !== -1;
+        item.style.display = (matchForm && matchSearch) ? '' : 'none';
+      });
+    }
 
     async function loadSubmissions() {
       var token = localStorage.getItem(TOKEN_KEY);
@@ -349,13 +382,14 @@
         var res = await fetch('/api/admin/submissions', { headers: { 'Authorization': 'Bearer ' + token } });
         var data = await res.json();
         if (data.success && data.submissions) {
+          allSubmissions = data.submissions;
           if (data.submissions.length === 0) {
             listEl.innerHTML = '<div class="admin-empty">No submissions yet.</div>';
             return;
           }
           listEl.innerHTML = data.submissions.map(function(s) {
-            var fieldsHtml = Object.entries(s.fields || {}).map(function(e) { return e[0] + ': ' + e[1]; }).join(' | ');
-            return '<div class="admin-submission-item"><div class="sub-header"><span class="sub-form">' + (s.formName || 'Unknown') + '</span><span class="sub-date">' + (s.timestamp || '') + '</span></div><div class="sub-fields">' + (fieldsHtml || 'No field data') + '</div></div>';
+            var fieldsHtml = Object.entries(s.fields || {}).map(function(e) { return '<div class="sub-field-row"><strong>' + e[0] + ':</strong> ' + e[1] + '</div>'; }).join('');
+            return '<div class="admin-submission-item" data-form-name="' + (s.formName || '') + '" onclick="this.classList.toggle(\'expanded\')"><div class="sub-header"><span class="sub-toggle sub-form">' + (s.formName || 'Unknown') + '</span><span class="sub-date">' + (s.timestamp || '') + '</span></div><div class="sub-fields">' + (fieldsHtml || 'No field data') + '</div></div>';
           }).join('');
         } else {
           listEl.innerHTML = '<div class="admin-empty">Unable to load submissions.</div>';
@@ -368,8 +402,14 @@
     async function showDashboard() {
       if (loginEl) loginEl.classList.remove('visible');
       if (dashEl) dashEl.classList.add('visible');
+      await loadStats();
       await loadSubmissions();
+      if (refreshInterval) clearInterval(refreshInterval);
+      refreshInterval = setInterval(function() { loadSubmissions(); }, 30000);
     }
+
+    document.getElementById('submissionSearch').addEventListener('input', filterSubmissions);
+    document.getElementById('formTypeFilter').addEventListener('change', filterSubmissions);
 
     verifyToken().then(function(valid) {
       if (valid) { showDashboard(); }

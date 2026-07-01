@@ -11,6 +11,9 @@ export default {
     if (url.pathname === '/api/admin/submissions' && request.method === 'GET') {
       return handleAdminSubmissions(request, env);
     }
+    if (url.pathname === '/api/admin/stats' && request.method === 'GET') {
+      return handleAdminStats(request, env);
+    }
 
     if (request.method !== 'POST') {
       return json({ success: false, error: 'Method not allowed' }, 405);
@@ -53,7 +56,15 @@ export default {
       console.warn(`Email notification failed for ${formName}:`, e.message);
     }
 
-    log({ timestamp: new Date().toISOString(), formName, fieldKeys: Object.keys(fields), ip, utm: utm || {}, spam: false, emailSent });
+    const entry = { timestamp: new Date().toISOString(), formName, fields, ip, utm: utm || {}, spam: false, emailSent };
+    log({ timestamp: entry.timestamp, formName, fieldKeys: Object.keys(fields), ip, utm: utm || {}, spam: false, emailSent });
+
+    const key = `sub:${entry.timestamp}-${Math.random().toString(36).substring(2, 8)}`;
+    try {
+      if (env.SUBMISSIONS) await env.SUBMISSIONS.put(key, JSON.stringify(entry));
+    } catch (e) {
+      console.warn('KV submission storage failed:', e.message);
+    }
 
     return json({ success: true, message: 'Submission received', emailSent });
   }
@@ -234,5 +245,47 @@ async function handleAdminSubmissions(request, env) {
   const token = authHeader.replace('Bearer ', '');
   const payload = await verifyJWT(token, env.JWT_SECRET);
   if (!payload) return json({ success: false, error: 'Unauthorized' }, 401);
-  return json({ success: true, submissions: [] });
+
+  const limit = 50;
+  const submissions = [];
+  try {
+    if (env.SUBMISSIONS) {
+      const list = await env.SUBMISSIONS.list({ prefix: 'sub:', limit });
+      for (const k of list.keys) {
+        const val = await env.SUBMISSIONS.get(k.name);
+        if (val) submissions.push(JSON.parse(val));
+      }
+      submissions.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+    }
+  } catch (e) {
+    console.warn('KV submissions fetch failed:', e.message);
+  }
+  return json({ success: true, submissions: submissions.slice(0, limit) });
+}
+
+async function handleAdminStats(request, env) {
+  const authHeader = request.headers.get('Authorization') || '';
+  const token = authHeader.replace('Bearer ', '');
+  const payload = await verifyJWT(token, env.JWT_SECRET);
+  if (!payload) return json({ success: false, error: 'Unauthorized' }, 401);
+
+  const stats = { total: 0, today: 0, byForm: {} };
+  const today = new Date().toISOString().slice(0, 10);
+  try {
+    if (env.SUBMISSIONS) {
+      const list = await env.SUBMISSIONS.list({ prefix: 'sub:', limit: 500 });
+      for (const k of list.keys) {
+        const val = await env.SUBMISSIONS.get(k.name);
+        if (!val) continue;
+        const s = JSON.parse(val);
+        stats.total++;
+        if ((s.timestamp || '').startsWith(today)) stats.today++;
+        const fn = s.formName || 'unknown';
+        stats.byForm[fn] = (stats.byForm[fn] || 0) + 1;
+      }
+    }
+  } catch (e) {
+    console.warn('KV stats fetch failed:', e.message);
+  }
+  return json({ success: true, stats });
 }
