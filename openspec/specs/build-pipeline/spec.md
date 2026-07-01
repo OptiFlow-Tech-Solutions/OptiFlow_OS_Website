@@ -175,6 +175,12 @@ The system SHALL exit with a non-zero code when validation errors are present.
 - **WHEN** `npm run validate` completes
 - **THEN** the process SHALL exit with code 1
 
+#### Scenario: Test failures cause CI failure
+
+- **GIVEN** one or more E2E tests fail
+- **WHEN** `npm test` completes
+- **THEN** the process SHALL exit with code 1
+
 #### Scenario: Warnings-only success
 
 - **GIVEN** validation finds only warnings and no errors
@@ -203,7 +209,8 @@ The system SHALL include a GitHub Actions CI workflow that runs on pull requests
 - **THEN** the build SHALL run via `npm run build`
 - **AND** validation SHALL run via `npm run validate`
 - **AND** lint checks SHALL run via `npm run lint:all`
-- **AND** all steps SHALL complete within 5 minutes
+- **AND** E2E tests SHALL run via `npm test`
+- **AND** all steps SHALL complete within 10 minutes
 
 #### Scenario: Deploy scripts
 
@@ -234,3 +241,14 @@ The system SHALL support `npm run dev` for local development (build + serve).
 - **WHEN** `npm run dev` is executed
 - **THEN** the build SHALL run first
 - **AND** a local HTTP server SHALL serve the `dist/` directory
+
+### Requirement: Test Command
+
+The system SHALL include an `npm test` script that runs the full Playwright E2E test suite.
+
+#### Scenario: Test command execution
+
+- **GIVEN** the project has test files in `tests/e2e/`
+- **WHEN** `npm test` is executed
+- **THEN** Playwright SHALL run all test specs across configured browser projects
+- **AND** the dev server SHALL be started automatically via `webServer` config
