@@ -473,9 +473,18 @@
             <span class="nl-benefit"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Frameworks</span>
             <span class="nl-benefit"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> No Spam</span>
           </div>
-          <form class="nl-form" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--green);font-weight:600\'>You&apos;re subscribed. Welcome aboard!</p>'">
-            <input type="email" id="nlEmail" placeholder="Your email address" required />
-            <button type="submit" class="btn btn-primary">Subscribe</button>
+          <form class="nl-form form-capture" name="newsletter">
+            <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none">
+            <div class="form-fields">
+              <input type="email" id="nlEmail" name="email" placeholder="Your email address" required />
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+            <div class="form-success-msg" style="display:none">
+              <h4>You're subscribed!</h4>
+              <p>Welcome aboard. Check your inbox for our next issue.</p>
+            </div>
+            <div class="form-error-msg" role="alert"></div>
+            <button type="button" class="form-error-retry btn btn-primary">Try Again</button>
           </form>
         </div>
       </div>

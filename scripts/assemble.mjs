@@ -265,6 +265,9 @@ function main() {
 
   copyDir(ASSETS, path.join(DIST, 'assets'));
 
+  const FUNCTIONS_DIR = path.join(ROOT, 'functions');
+  if (fs.existsSync(FUNCTIONS_DIR)) copyDir(FUNCTIONS_DIR, path.join(DIST, 'functions'));
+
   const designRoot = fs.readdirSync(ROOT).find(d => d.startsWith('OptiFlow-OS'));
   if (designRoot) {
     const realDesignSrc = path.join(ROOT, designRoot);

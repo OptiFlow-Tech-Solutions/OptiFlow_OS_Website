@@ -203,24 +203,34 @@
     return data;
   }
 
+  /* ─── Honey-Pot Injection ─── */
+  function ensureHoneyPot(form) {
+    if (form.querySelector('input[name="_hp"]')) return;
+    var hp = document.createElement('input');
+    hp.type = 'text';
+    hp.name = '_hp';
+    hp.tabIndex = -1;
+    hp.autocomplete = 'off';
+    hp.setAttribute('aria-hidden', 'true');
+    form.appendChild(hp);
+  }
+
   /* ─── Shared Form Submission ─── */
   function submitForm(form) {
     if (!form) return;
     form.classList.remove('form-error');
     form.classList.add('form-submitting');
 
+    ensureHoneyPot(form);
+
     var isNetlify = form.hasAttribute('data-netlify');
     var endpoint = form.getAttribute('data-endpoint');
 
-    if (!isNetlify && !endpoint) {
-      form.classList.remove('form-submitting');
-      form.classList.add('form-error');
-      var msgEl = form.querySelector('.form-error-msg');
-      if (msgEl) msgEl.textContent = 'No submission endpoint configured.';
-      return;
-    }
+    if (!isNetlify && !endpoint) endpoint = '/api/form-submit';
 
     var data = collectFormData(form);
+    var honeyPotVal = data._hp || '';
+    delete data._hp;
 
     if (form.dataset.selectedDate) data.selected_date = form.dataset.selectedDate;
     if (form.dataset.selectedSlot) data.selected_slot = form.dataset.selectedSlot;
@@ -230,22 +240,32 @@
     if (isNetlify) {
       var body = new URLSearchParams();
       Object.keys(data).forEach(function(k) { body.append(k, data[k]); });
+      body.append('_hp', honeyPotVal);
       body.append('form-name', form.getAttribute('name') || '');
       options.headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
       options.body = body.toString();
     } else {
+      var utm = getUTMParams();
+      var payload = {
+        formName: form.getAttribute('name') || '',
+        fields: data,
+        honeyPot: honeyPotVal,
+        utm: Object.keys(utm).length > 0 ? utm : {}
+      };
       options.headers = { 'Content-Type': 'application/json' };
-      options.body = JSON.stringify(data);
+      options.body = JSON.stringify(payload);
     }
 
-    fetch(endpoint || '/', options)
+    fetch(endpoint, options)
       .then(function(res) {
-        if (res.ok) {
-          form.classList.remove('form-submitting');
-          form.classList.add('form-success');
-        } else {
-          return res.text().then(function(text) { throw new Error(text || 'Submission failed. Please try again.'); });
-        }
+        return res.json().then(function(json) {
+          if (res.ok && json.success === true) {
+            form.classList.remove('form-submitting');
+            form.classList.add('form-success');
+          } else {
+            throw new Error(json.error || 'Submission failed. Please try again.');
+          }
+        });
       })
       .catch(function(err) {
         form.classList.remove('form-submitting');
@@ -256,7 +276,7 @@
   }
 
   /* ─── Global form submission binding ─── */
-  document.querySelectorAll('form[data-endpoint], form[data-netlify]').forEach(function(form) {
+  document.querySelectorAll('form[data-endpoint], form[data-netlify], form.form-capture').forEach(function(form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       if (typeof window.validateForm === 'function') {
