@@ -404,6 +404,8 @@ form.form-error .btn[type="submit"] { display: none; }
 .admin-submission-item .sub-field-row { line-height: 1.6; }
 .admin-submission-item .sub-field-row strong { color: var(--fg); }
 .admin-empty { text-align: center; padding: 48px 0; color: var(--muted); }
+.admin-pagination { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 0; border-top: 1px solid var(--border-soft); margin-top: 16px; }
+.admin-pagination span { font-size: 13px; color: var(--muted); }
 [data-theme="dark"] .admin-form-group input { background: var(--bg); color: var(--fg); border-color: var(--border); }
 [data-theme="dark"] .admin-error { background: color-mix(in oklch, oklch(55% 0.14 25) 14%, transparent); border-color: color-mix(in oklch, oklch(55% 0.14 25) 30%, transparent); color: oklch(65% 0.12 25); }
 @media (max-width: 480px) {

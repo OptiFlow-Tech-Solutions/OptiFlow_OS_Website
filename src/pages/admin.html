@@ -45,6 +45,7 @@
           <div class="admin-stat-card"><span class="admin-stat-num" id="statContact">--</span><span class="admin-stat-label">Contact</span></div>
           <div class="admin-stat-card"><span class="admin-stat-num" id="statDemo">--</span><span class="admin-stat-label">Demos</span></div>
           <div class="admin-stat-card"><span class="admin-stat-num" id="statNewsletter">--</span><span class="admin-stat-label">Newsletter</span></div>
+          <div class="admin-stat-card"><span class="admin-stat-num" id="statSubscribers">--</span><span class="admin-stat-label">Subscribers</span></div>
         </div>
         <div class="admin-filter-bar">
           <input type="text" id="submissionSearch" class="admin-search-input" placeholder="Search submissions..." />
@@ -54,9 +55,18 @@
             <option value="demo-booking">Demo Booking</option>
             <option value="newsletter">Newsletter</option>
           </select>
+          <button class="btn btn-secondary" onclick="exportSubmissions('csv')" style="margin-left:8px">Export CSV</button>
+          <button class="btn btn-secondary" onclick="exportSubmissions('json')" style="margin-left:4px">Export JSON</button>
         </div>
         <div class="admin-submission-list" id="submissionList">
           <div class="admin-empty">Loading submissions...</div>
+        </div>
+        <div class="admin-pagination" id="adminPagination" style="display:none;">
+          <span id="pageInfo">Page 1 of 1</span>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-secondary btn-sm" id="btnPrev" onclick="goToPage('prev')">Previous</button>
+            <button class="btn btn-secondary btn-sm" id="btnNext" onclick="goToPage('next')">Next</button>
+          </div>
         </div>
       </div>
     </div>

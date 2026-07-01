@@ -153,3 +153,60 @@ Each submission item SHALL support expand/collapse to show full field values.
 - **WHEN** user clicks a submission item
 - **THEN** the item SHALL expand to show all field key-value pairs
 - **AND** clicking again SHALL collapse the detail
+
+### Requirement: Admin Submissions Pagination
+
+The admin submissions endpoint SHALL support offset-based pagination via query parameters.
+
+#### Scenario: Default page
+- **WHEN** GET `/api/admin/submissions` is called without page params
+- **THEN** page 1 with 20 items per page SHALL be returned
+- **AND** the response SHALL include `pagination: { page: 1, perPage: 20, total: N, pages: ceil(N/20) }`
+
+#### Scenario: Per-page capped to max
+- **WHEN** GET `/api/admin/submissions?per_page=200` is called
+- **THEN** `per_page` SHALL be capped to 100 (the maximum allowed)
+
+#### Scenario: Form type filter
+- **WHEN** GET `/api/admin/submissions?formName=contact` is called
+- **THEN** only submissions with matching formName SHALL be returned
+
+### Requirement: Admin Data Export
+
+The system SHALL expose an export endpoint at `/api/admin/submissions/export` with CSV and JSON format support, secured by Bearer token.
+
+#### Scenario: CSV export
+- **WHEN** GET `/api/admin/submissions/export?format=csv` is called with valid Bearer token
+- **THEN** the response SHALL be `text/csv` with `Content-Disposition: attachment` header
+
+#### Scenario: JSON export
+- **WHEN** GET `/api/admin/submissions/export?format=json` is called
+- **THEN** the response SHALL be a JSON array of submission objects
+
+#### Scenario: Filtered export
+- **WHEN** GET `/api/admin/submissions/export?format=csv&formName=contact` is called
+- **THEN** only matching submissions SHALL be included
+
+#### Scenario: Audit on export
+- **WHEN** an export is performed
+- **THEN** an audit entry SHALL be written with `action: "submission_export"`
+
+### Requirement: Subscriber Metrics
+
+The admin stats endpoint SHALL include newsletter subscriber count.
+
+#### Scenario: Subscribers in stats
+- **WHEN** GET `/api/admin/stats` is called
+- **THEN** the response SHALL include `stats.subscribers` with count of `subscriber:*` KV keys
+
+### Requirement: Admin Audit Logging
+
+The system SHALL write audit entries on admin authentication events.
+
+#### Scenario: Successful login audit
+- **WHEN** admin login succeeds
+- **THEN** an audit entry SHALL be written with `action: "admin_login"`
+
+#### Scenario: Failed login audit
+- **WHEN** admin login fails
+- **THEN** an audit entry SHALL be written with `action: "admin_login_failed"`

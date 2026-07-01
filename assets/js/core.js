@@ -319,6 +319,9 @@
     }
 
     var allSubmissions = [];
+    var currentPage = 1;
+    var totalPages = 1;
+    var perPage = 20;
     var refreshInterval = null;
 
     window.adminLogin = async function() {
@@ -357,32 +360,69 @@
           document.getElementById('statContact').textContent = (s.byForm && s.byForm.contact) || 0;
           document.getElementById('statDemo').textContent = (s.byForm && s.byForm['demo-booking']) || 0;
           document.getElementById('statNewsletter').textContent = (s.byForm && s.byForm.newsletter) || 0;
+          document.getElementById('statSubscribers').textContent = s.subscribers || 0;
         }
       } catch (e) { /* stats optional, ignore errors */ }
     }
 
     function filterSubmissions() {
       var search = (document.getElementById('submissionSearch').value || '').toLowerCase();
-      var formFilter = document.getElementById('formTypeFilter').value;
       var items = document.querySelectorAll('.admin-submission-item');
       items.forEach(function(item) {
-        var formName = (item.dataset.formName || '').toLowerCase();
         var text = (item.textContent || '').toLowerCase();
-        var matchForm = !formFilter || formName === formFilter;
-        var matchSearch = !search || text.indexOf(search) !== -1;
-        item.style.display = (matchForm && matchSearch) ? '' : 'none';
+        item.style.display = (!search || text.indexOf(search) !== -1) ? '' : 'none';
       });
     }
+
+    function onFormFilterChange() {
+      currentPage = 1;
+      loadSubmissions();
+    }
+
+    window.goToPage = function(dir) {
+      if (dir === 'prev' && currentPage > 1) { currentPage--; loadSubmissions(); }
+      if (dir === 'next' && currentPage < totalPages) { currentPage++; loadSubmissions(); }
+    };
+
+    window.exportSubmissions = async function(format) {
+      var token = localStorage.getItem(TOKEN_KEY);
+      var formFilter = document.getElementById('formTypeFilter').value;
+      var url = '/api/admin/submissions/export?format=' + format;
+      if (formFilter) url += '&formName=' + encodeURIComponent(formFilter);
+      try {
+        var res = await fetch(url, { headers: { 'Authorization': 'Bearer ' + token } });
+        if (!res.ok) { alert('Export failed: ' + res.status); return; }
+        var blob = await res.blob();
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'optiflow-submissions.' + format;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      } catch (e) { alert('Export failed'); }
+    };
 
     async function loadSubmissions() {
       var token = localStorage.getItem(TOKEN_KEY);
       var listEl = document.getElementById('submissionList');
       if (!listEl) return;
       try {
-        var res = await fetch('/api/admin/submissions', { headers: { 'Authorization': 'Bearer ' + token } });
+        var formFilter = document.getElementById('formTypeFilter').value;
+        var url = '/api/admin/submissions?page=' + currentPage + '&per_page=' + perPage;
+        if (formFilter) url += '&formName=' + encodeURIComponent(formFilter);
+        var res = await fetch(url, { headers: { 'Authorization': 'Bearer ' + token } });
         var data = await res.json();
         if (data.success && data.submissions) {
           allSubmissions = data.submissions;
+          var pag = data.pagination || {};
+          totalPages = pag.pages || 1;
+          document.getElementById('pageInfo').textContent = 'Page ' + (pag.page || 1) + ' of ' + totalPages + ' (' + (pag.total || 0) + ' total)';
+          document.getElementById('btnPrev').disabled = currentPage <= 1;
+          document.getElementById('btnNext').disabled = currentPage >= totalPages;
+          if (totalPages > 1) {
+            document.getElementById('adminPagination').style.display = 'flex';
+          } else {
+            document.getElementById('adminPagination').style.display = 'none';
+          }
           if (data.submissions.length === 0) {
             listEl.innerHTML = '<div class="admin-empty">No submissions yet.</div>';
             return;
@@ -409,7 +449,7 @@
     }
 
     document.getElementById('submissionSearch').addEventListener('input', filterSubmissions);
-    document.getElementById('formTypeFilter').addEventListener('change', filterSubmissions);
+    document.getElementById('formTypeFilter').addEventListener('change', onFormFilterChange);
 
     verifyToken().then(function(valid) {
       if (valid) { showDashboard(); }

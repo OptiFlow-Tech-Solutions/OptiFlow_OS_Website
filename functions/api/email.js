@@ -107,10 +107,13 @@ async function sendEmail({ to, subject, html, text }, env) {
 }
 
 async function logEmail(entry, env) {
-  const data = { timestamp: new Date().toISOString(), ...entry };
-  const key = `notif:${data.timestamp}-${Math.random().toString(36).substring(2, 8)}`;
+  const id = crypto.randomUUID();
+  const timestamp = new Date().toISOString();
+  const datePrefix = timestamp.slice(0, 10);
+  const data = { schema: 'notification.v1', id, timestamp, ...entry };
+  const key = `notif:${datePrefix}:${id}`;
   try {
-    if (env.SUBMISSIONS) await env.SUBMISSIONS.put(key, JSON.stringify(data));
+    if (env.NOTIFICATIONS) await env.NOTIFICATIONS.put(key, JSON.stringify(data));
   } catch (e) {
     console.warn('KV email log failed:', e.message);
   }

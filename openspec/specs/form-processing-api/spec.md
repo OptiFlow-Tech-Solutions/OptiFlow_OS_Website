@@ -111,3 +111,42 @@ The system SHALL function as both a Cloudflare Worker and a Netlify Function usi
 - **WHEN** deployed to Netlify via `netlify/functions/form-submit.js`
 - **THEN** the function SHALL handle POST requests and return valid JSON responses
 
+### Requirement: KV Data Schema
+
+The system SHALL use versioned data schemas and structured key naming for all KV records.
+
+#### Scenario: Submission key format
+- **WHEN** a valid submission is stored in KV
+- **THEN** the key SHALL be `sub:{YYYY-MM-DD}:{uuid}`
+- **AND** the value SHALL include `"schema": "submission.v1"` and `"id"` matching the UUID
+
+#### Scenario: Hashed IP storage
+- **WHEN** a submission is stored
+- **THEN** the `ip` field SHALL be SHA-256 hashed before storage
+
+#### Scenario: KV namespace bindings
+- **WHEN** the worker is deployed
+- **THEN** it SHALL bind to `SUBMISSIONS`, `NOTIFICATIONS`, and `AUDIT` KV namespaces
+
+### Requirement: Newsletter Subscriber Persistence
+
+The system SHALL persist newsletter subscribers with email-based deduplication.
+
+#### Scenario: Subscriber stored
+- **WHEN** a newsletter signup is accepted
+- **THEN** a record SHALL be stored at `subscriber:{sha256(email)}`
+- **AND** the value SHALL include `email`, `subscribedAt`, `source`, and `firstSeen`
+
+#### Scenario: Duplicate subscriber
+- **WHEN** an existing subscriber re-subscribes
+- **THEN** `subscribedAt` SHALL be updated while preserving `firstSeen`
+
+### Requirement: Audit Logging on Write
+
+The system SHALL write an audit entry for each successful form submission.
+
+#### Scenario: Audit entry written
+- **WHEN** a submission is accepted and stored
+- **THEN** an audit entry SHALL be written with `action: "submission_write"` and the submission key in `resource`
+- **AND** KV audit write failure SHALL NOT fail the submission
+

@@ -99,3 +99,22 @@ The system SHALL ensure that email delivery failures never propagate as errors t
 - **WHEN** the Resend API returns HTTP 4xx or 5xx
 - **THEN** the endpoint SHALL return HTTP 200 with `{ "success": true, "emailSent": false }`
 - **AND** the error details SHALL be included in the log entry
+
+### Requirement: Notification Log Schema
+
+The system SHALL use a versioned, structured schema for notification log KV records.
+
+#### Scenario: Notification key format
+- **WHEN** a notification log is stored in KV
+- **THEN** the key SHALL be `notif:{YYYY-MM-DD}:{uuid}`
+- **AND** the value SHALL include `"schema": "notification.v1"` and `"id"` matching the UUID
+
+#### Scenario: KV namespace separation
+- **WHEN** the email worker writes notification logs
+- **THEN** logs SHALL be written to the `NOTIFICATIONS` KV namespace (not `SUBMISSIONS`)
+
+#### Scenario: KV failure non-blocking
+- **WHEN** KV write fails during logging
+- **THEN** the email dispatch SHALL still succeed or fail independently
+- **AND** a console warning SHALL be logged
+- **AND** error log entries SHALL exclude sensitive fields
