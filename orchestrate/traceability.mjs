@@ -54,7 +54,7 @@ function readTasks(changeDir) {
 /**
  * Get recent git commits matching the change.
  */
-function getRelevantCommits(changeName) {
+function getRelevantCommits(_changeName) {
   try {
     const log = execSync(
       `git log --oneline --no-merges -20`,

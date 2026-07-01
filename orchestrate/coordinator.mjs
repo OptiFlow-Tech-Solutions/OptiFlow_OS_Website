@@ -18,20 +18,18 @@ import { buildContext } from './execution-context.mjs';
 import { determineLevels } from './validation-pipeline.mjs';
 import { gatesForPhase } from './quality-gate.mjs';
 import { resolveDependencies } from './dependency-resolver.mjs';
-import { saveState, loadState } from './state-manager.mjs';
+import { saveState } from './state-manager.mjs';
 import { startTimer, record } from './metrics.mjs';
 import { logEvent } from './audit-log.mjs';
 import { getBranch } from './project-scanner.mjs';
 import { executePipeline, loadPipeline } from './pipeline-engine.mjs';
-import { runOpsxCommand } from './opsx-commands.mjs';
 import { executeHook } from './hook-engine.mjs';
 import { runGates } from './quality-gate.mjs';
 import { emit } from './event-bus.mjs';
 import { resolvePaths } from './config-resolver.mjs';
-import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 import { existsSync, readFileSync } from 'node:fs';
-import { resolve, join } from 'node:path';
-import { reconstructContext, getFeature, resolveFeatureTree, listFeatures, summarizeFeature, featuresByPrefix, mapToSpec } from './feature-router.mjs';
+import { join } from 'node:path';
+import { reconstructContext, getFeature, listFeatures, summarizeFeature } from './feature-router.mjs';
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
@@ -231,9 +229,7 @@ export async function runPhase(command, changeName, taskDescription, opts = {}) 
  */
 export function autoOrchestrate(taskDescription) {
   const slug = slugify(taskDescription);
-  const plan = orchestrateOpenSpec('auto', slug, taskDescription, { execute: false });
   // Since orchestrateOpenSpec is async but we're in sync code, use the sync path
-  // Actually, let's handle this differently
 
   const parsedSpecs = parseAllSpecs();
   const affected = resolveAffectedSpecs(taskDescription, parsedSpecs);
@@ -377,9 +373,9 @@ async function featureExecute(plan, opts = {}) {
     const { execSync } = await import('node:child_process');
     execSync('node scripts/assemble.mjs', { cwd: ROOT, encoding: 'utf-8', timeout: 60000, stdio: 'pipe' });
     console.log('  ✓ Build complete.');
-  } catch (e) {
-    console.log(`  ✗ Build failed: ${e.message}`);
-    return { status: 'failed', stage: 'build', error: e.message };
+    } catch (_e) {
+    console.log(`  ✗ Build failed: ${_e.message}`);
+    return { status: 'failed', stage: 'build', error: _e.message };
   }
 
   // 3. Validate
@@ -388,7 +384,7 @@ async function featureExecute(plan, opts = {}) {
     const { execSync } = await import('node:child_process');
     execSync('node scripts/validate.mjs', { cwd: ROOT, encoding: 'utf-8', timeout: 30000, stdio: 'pipe' });
     console.log('  ✓ Validation passed.');
-  } catch (e) {
+    } catch (_e) {
     console.log(`  ⚠ Validation warnings (non-blocking)`);
   }
 

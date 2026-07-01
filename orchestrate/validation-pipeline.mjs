@@ -53,7 +53,7 @@ function runLevel(level) {
           return { name: info.name, passed: true, output: e.stderr || e.stdout || 'Validation found issues' };
         }
 
-      case 4:
+      case 4: {
         // Design audit: theme-change hook checks CSS variable consistency
         const themeHook = resolve(projectRoot, 'hooks', 'theme-change.mjs');
         if (existsSync(themeHook)) {
@@ -65,8 +65,9 @@ function runLevel(level) {
           }
         }
         return { name: info.name, passed: true, output: 'Theme audit skipped — hook not found' };
+      }
 
-      case 5:
+      case 5: {
         // SEO audit via Playwright
         const seoSpec = resolve(projectRoot, 'tests', 'e2e', 'seo.spec.js');
         if (existsSync(seoSpec)) {
@@ -78,8 +79,9 @@ function runLevel(level) {
           }
         }
         return { name: info.name, passed: true, output: 'SEO audit skipped — spec not found' };
+      }
 
-      case 6:
+      case 6: {
         // A11y scan via Playwright + axe-core
         const a11ySpec = resolve(projectRoot, 'tests', 'e2e', 'a11y.spec.js');
         if (existsSync(a11ySpec)) {
@@ -91,8 +93,9 @@ function runLevel(level) {
           }
         }
         return { name: info.name, passed: true, output: 'A11y audit skipped — spec not found' };
+      }
 
-      case 7:
+      case 7: {
         // Full E2E test suite
         try {
           output = execSync('npx playwright test', { cwd: projectRoot, encoding: 'utf-8', timeout: 300000, stdio: 'pipe' }).trim();
@@ -100,6 +103,7 @@ function runLevel(level) {
         } catch (e) {
           return { name: info.name, passed: true, output: e.stderr || e.stdout || 'E2E tests found failures' };
         }
+      }
 
       default:
         return { name: info.name, passed: false, output: `Unimplemented: ${level}` };
@@ -115,7 +119,7 @@ function runLevel(level) {
  * @param {Record<string, any>} [context={}]
  * @returns {Promise<{passed: string[], failed: string[], skipped: string[], summary: string}>}
  */
-export async function runValidations(levels, context = {}) {
+export async function runValidations(levels, _context = {}) {
   const toRun = levels.includes('all')
     ? [1, 2, 3, 4, 5, 6, 7]
     : [...new Set(levels.filter((l) => typeof l === 'number' && l >= 1 && l <= 7))].sort((a, b) => a - b);

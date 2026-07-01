@@ -21,7 +21,7 @@ export default [
     },
     rules: {
       "no-console": "warn",
-      "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
+      "no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_", "caughtErrorsIgnorePattern": "^_" }],
       "no-debugger": "error",
       "prefer-const": "error",
       "no-var": "error"

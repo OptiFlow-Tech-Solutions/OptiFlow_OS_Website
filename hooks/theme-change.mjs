@@ -82,7 +82,7 @@ for (const c of designColors) {
 }
 
 let mismatches = 0;
-for (const { role, token, hex } of uniqueColors) {
+for (const { token, hex } of uniqueColors) {
   const result = cssUsesVarFor(cssRaw, hex);
   if (result.ok) {
     console.log(`  ✓ ${token} (${hex}) → ${result.variable}`);

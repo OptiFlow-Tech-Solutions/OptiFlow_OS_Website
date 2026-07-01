@@ -19,7 +19,7 @@ function rebuild(label) {
     try {
       console.log(`\n[${label}] Rebuilding...`);
       execSync(`node "${ASSEMBLE}"`, { cwd: ROOT, stdio: 'inherit' });
-    } catch (e) {
+    } catch (_e) {
       console.error('Build failed, waiting for changes...');
     }
   }, 200);

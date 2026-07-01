@@ -8,13 +8,12 @@
 
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 import { logEvent } from './audit-log.mjs';
 import { runTask } from './task-runner.mjs';
 import { emit } from './event-bus.mjs';
 
-const { projectRoot, hooksDir } = resolvePaths();
+const { projectRoot } = resolvePaths();
 
 /**
  * @typedef {{id: string, type: string, command: string, task: string,

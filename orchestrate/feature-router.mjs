@@ -10,7 +10,7 @@
  */
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
-import { resolve, join, relative } from 'node:path';
+import { resolve } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 import { parseAllSpecs } from './spec-parser.mjs';
@@ -97,12 +97,6 @@ function discoverSpecs(feature) {
   if (!existsSync(specsDir)) return [];
 
   const nameLower = feature.name.toLowerCase();
-  const prefixes = ['PAGE', 'LEAD', 'LEGAL', 'API', 'QA', 'SYS', 'OPS'];
-  const prefix = extractPrefix(feature.id);
-
-  const allSpecs = readdirSync(specsDir, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name);
 
   // Keyword-based matching
   const keywordMap = {

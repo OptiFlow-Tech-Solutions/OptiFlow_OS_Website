@@ -176,7 +176,7 @@ export function analyzeTask(taskDescription) {
  * @param {string[]} requiredRoles
  * @returns {number}
  */
-export function scoreSkill(skill, requiredDomains, requiredRoles) {
+export function scoreSkill(skill, requiredDomains, _requiredRoles) {
   let score = 0;
   const skillDomains = skill.domains || [];
 

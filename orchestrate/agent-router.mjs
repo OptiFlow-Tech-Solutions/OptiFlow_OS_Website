@@ -4,7 +4,7 @@
  * @module orchestrate/agent-router
  */
 
-import { analyzeTask, findBestAgents } from './capability-analyzer.mjs';
+import { analyzeTask } from './capability-analyzer.mjs';
 import { findAgentsByRole } from './capability-registry.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 

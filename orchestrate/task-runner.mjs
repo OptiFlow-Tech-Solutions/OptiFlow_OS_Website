@@ -87,11 +87,11 @@ const EXECUTORS = {
   },
 
   /** Validation check (runs a command, fails on non-zero exit) */
-  check: async (step, context) => runCommand(step.command),
+  check: async (step, _context) => runCommand(step.command),
 
   /** Quality gate (emits event for gate execution) */
-  gate: async (step, context) => {
-    emit('gate:check', { gate: step.command, context });
+  gate: async (step, _context) => {
+    emit('gate:check', { gate: step.command, context: _context });
     return { status: 'done', output: `Gate checked: ${step.command}`, duration: 0 };
   },
 

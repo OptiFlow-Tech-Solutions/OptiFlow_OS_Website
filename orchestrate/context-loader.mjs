@@ -3,8 +3,8 @@
  * @module orchestrate/context-loader
  */
 
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 import { parseAllSpecs } from './spec-parser.mjs';
 import { resolveAffectedSpecs } from './spec-resolver.mjs';

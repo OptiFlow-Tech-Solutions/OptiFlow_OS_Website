@@ -44,14 +44,10 @@ const pages = getAllPages();
 
 // 1. Check all internal links
 console.log('\n─ Link Check ─');
-const pageSet = new Set(pages.map(p => {
-  const rel = '/' + path.relative(DIST, p).replace(/\\/g, '/').replace(/\/index\.html$/, '') + '/';
-  return rel.replace('//', '/');
-}));
+getAllPages(); // ponytail: triggers page discovery
 
 for (const page of pages) {
   const html = fs.readFileSync(page, 'utf-8');
-  const relDir = path.dirname(page);
   const links = html.match(/href="([^"]+)"/g) || [];
   for (const match of links) {
     const href = match.slice(6, -1);
@@ -232,7 +228,7 @@ try {
 
 // 6. Check canonical data consistency
 console.log('\n─ Data Consistency ─');
-const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.json'), 'utf-8'));
+const _site = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.json'), 'utf-8'));
 for (const page of pages) {
   const html = fs.readFileSync(page, 'utf-8');
   if (html.includes('+91 98765 43210')) log('error', `Wrong phone number in ${path.relative(DIST, page)}`);

@@ -27,7 +27,7 @@ const GLOBAL_PRE = Object.freeze(['pre-build']);
  * @param {Record<string, any>} [context]
  * @returns {{preHooks: string[], postHooks: string[]}}
  */
-export function routeHooks(phase, context = {}) {
+export function routeHooks(phase, _context = {}) {
   const phaseDef = PHASE_HOOKS[phase] || { pre: [], post: [] };
   const pre = [...new Set([...GLOBAL_PRE, ...phaseDef.pre])];
   const post = [...new Set(phaseDef.post)];

@@ -5,7 +5,7 @@
  * @module orchestrate/skill-router
  */
 
-import { analyzeTask, findBestSkills } from './capability-analyzer.mjs';
+import { findBestSkills } from './capability-analyzer.mjs';
 import { findSkillsByDomain } from './capability-registry.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 

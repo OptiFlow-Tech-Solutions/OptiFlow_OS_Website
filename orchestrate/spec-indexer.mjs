@@ -5,8 +5,8 @@
  * @module orchestrate/spec-indexer
  */
 
-import { readFileSync, existsSync, readdirSync } from 'fs';
-import { resolve, join } from 'path';
+import { readFileSync, existsSync } from 'fs';
+import { resolve } from 'path';
 import { resolvePaths } from './config-resolver.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 import { parseAllSpecs } from './spec-parser.mjs';
@@ -81,7 +81,7 @@ export function listSpecNames() {
 
 // ── Feature to Spec Resolution ──────────────────
 
-let _featureIndex = null;
+const _featureIndex = null;
 const FEATURE_CACHE_KEY = 'feature-spec-index';
 const FEATURE_CACHE_TTL = 600000;
 

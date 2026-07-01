@@ -12,7 +12,6 @@ const ROOT = path.resolve(HERE, '..');
 const SRC = path.join(ROOT, 'src');
 const ASSETS = path.join(ROOT, 'assets');
 const DIST = path.join(ROOT, 'dist');
-const DESIGN_SRC = path.join(ROOT, 'OptiFlow-OS-—-Enterprise-DESIGN.md-Specification-(v5.0)');
 
 const SRC_MAP = {
   'index.html': 'home.html',

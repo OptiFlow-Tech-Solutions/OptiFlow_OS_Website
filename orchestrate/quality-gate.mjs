@@ -137,7 +137,7 @@ export function runGate(gateName) {
  */
 export async function runGates(gateNames, context = {}) {
   const passedGates = [];
-  let failedGate = null;
+  let failedGate;
 
   for (const name of gateNames) {
     logEvent({ type: 'gate', gate: name, phase: 'start' });
