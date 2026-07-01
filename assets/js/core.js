@@ -180,6 +180,100 @@
     document.documentElement.classList.toggle('page-hidden', document.hidden);
   });
 
+  /* ─── UTM Capture ─── */
+  function getUTMParams() {
+    var params = new URLSearchParams(window.location.search);
+    var utm = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function(key) {
+      if (params.has(key)) utm[key] = params.get(key);
+    });
+    return utm;
+  }
+
+  /* ─── Form Data Collector ─── */
+  function collectFormData(form) {
+    var data = {};
+    form.querySelectorAll('input, select, textarea').forEach(function(el) {
+      if (!el.name) return;
+      if ((el.type === 'radio' || el.type === 'checkbox') && !el.checked) return;
+      data[el.name] = el.value;
+    });
+    var utm = getUTMParams();
+    Object.keys(utm).forEach(function(k) { data[k] = utm[k]; });
+    return data;
+  }
+
+  /* ─── Shared Form Submission ─── */
+  function submitForm(form) {
+    if (!form) return;
+    form.classList.remove('form-error');
+    form.classList.add('form-submitting');
+
+    var isNetlify = form.hasAttribute('data-netlify');
+    var endpoint = form.getAttribute('data-endpoint');
+
+    if (!isNetlify && !endpoint) {
+      form.classList.remove('form-submitting');
+      form.classList.add('form-error');
+      var msgEl = form.querySelector('.form-error-msg');
+      if (msgEl) msgEl.textContent = 'No submission endpoint configured.';
+      return;
+    }
+
+    var data = collectFormData(form);
+
+    if (form.dataset.selectedDate) data.selected_date = form.dataset.selectedDate;
+    if (form.dataset.selectedSlot) data.selected_slot = form.dataset.selectedSlot;
+
+    var options = { method: 'POST' };
+
+    if (isNetlify) {
+      var body = new URLSearchParams();
+      Object.keys(data).forEach(function(k) { body.append(k, data[k]); });
+      body.append('form-name', form.getAttribute('name') || '');
+      options.headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+      options.body = body.toString();
+    } else {
+      options.headers = { 'Content-Type': 'application/json' };
+      options.body = JSON.stringify(data);
+    }
+
+    fetch(endpoint || '/', options)
+      .then(function(res) {
+        if (res.ok) {
+          form.classList.remove('form-submitting');
+          form.classList.add('form-success');
+        } else {
+          return res.text().then(function(text) { throw new Error(text || 'Submission failed. Please try again.'); });
+        }
+      })
+      .catch(function(err) {
+        form.classList.remove('form-submitting');
+        form.classList.add('form-error');
+        var msgEl = form.querySelector('.form-error-msg');
+        if (msgEl) msgEl.textContent = err.message || 'Network error. Please check your connection and try again.';
+      });
+  }
+
+  /* ─── Global form submission binding ─── */
+  document.querySelectorAll('form[data-endpoint], form[data-netlify]').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (typeof window.validateForm === 'function') {
+        if (!window.validateForm(this)) return;
+      }
+      submitForm(this);
+    });
+  });
+
+  /* ─── Form retry button handler ─── */
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.form-error-retry')) {
+      var form = e.target.closest('form');
+      if (form) submitForm(form);
+    }
+  });
+
   /* ─── Smooth scroll for hash links ─── */
   document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {

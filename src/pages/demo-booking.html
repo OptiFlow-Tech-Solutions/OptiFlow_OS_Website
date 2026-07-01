@@ -98,15 +98,9 @@
     .form-group input:user-valid, .form-group select:user-valid { border-color: var(--green); }
     .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); opacity: 0.6; }
     [data-theme="dark"] .form-group input::placeholder, [data-theme="dark"] .form-group textarea::placeholder { color: oklch(65% 0.01 240); opacity: 0.5; }
-    .form-msg { font-size: 12px; color: oklch(55% 0.16 25); min-height: 16px; margin-top: 2px; }
     .form-submit { margin-top: 28px; }
     .form-submit .btn { width: 100%; justify-content: center; padding: 16px 32px; font-size: 17px; }
-    .form-success { display: none; text-align: center; padding: 60px 20px; }
-    .form-success.show { display: block; }
-    .form-success .success-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--green-soft); color: var(--green); display: grid; place-items: center; margin: 0 auto 20px; }
-    .form-success .success-icon svg { width: 28px; height: 28px; }
     .form-fields { transition: opacity 0.3s, transform 0.3s; }
-    .form-fields.hidden { opacity: 0; transform: translateY(10px); pointer-events: none; }
 
     /* ─── Calendar ─── */
     .cal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-lg); }
@@ -368,32 +362,36 @@
           Limited demo slots available this week. Book now to secure your preferred time.
         </div>
         <div class="form-card reveal">
-          <div class="form-fields" id="formFields">
-            <div class="form-grid">
-              <div class="form-group"><label for="name">Full Name <span class="req">*</span></label><input type="text" id="name" placeholder="Your full name" required /></div>
-              <div class="form-group"><label for="company">Company Name <span class="req">*</span></label><input type="text" id="company" placeholder="Your company name" required /></div>
-              <div class="form-group"><label for="mobile">Mobile Number <span class="req">*</span></label><input type="tel" id="mobile" placeholder="+91 00000 00000" required /></div>
-              <div class="form-group"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" placeholder="you@company.com" required /></div>
-              <div class="form-group"><label for="teamSize">Team Size <span class="req">*</span></label>
-                <select id="teamSize" required><option value="">Select team size</option><option>1—10</option><option>11—25</option><option>26—50</option><option>51—100</option><option>101—250</option><option>250+</option></select>
+          <form id="bookForm" name="demo-booking" data-netlify="true">
+            <div class="form-fields">
+              <div class="form-grid">
+                <div class="form-group"><label for="name">Full Name <span class="req">*</span></label><input type="text" id="name" name="name" placeholder="Your full name" required /></div>
+                <div class="form-group"><label for="company">Company Name <span class="req">*</span></label><input type="text" id="company" name="company" placeholder="Your company name" required /></div>
+                <div class="form-group"><label for="mobile">Mobile Number <span class="req">*</span></label><input type="tel" id="mobile" name="mobile" placeholder="+91 00000 00000" required /></div>
+                <div class="form-group"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" name="email" placeholder="you@company.com" required /></div>
+                <div class="form-group"><label for="teamSize">Team Size <span class="req">*</span></label>
+                  <select id="teamSize" name="team_size" required><option value="">Select team size</option><option>1—10</option><option>11—25</option><option>26—50</option><option>51—100</option><option>101—250</option><option>250+</option></select>
+                </div>
+                <div class="form-group"><label for="industry">Industry <span class="req">*</span></label>
+                  <select id="industry" name="industry" required><option value="">Select your industry</option><option>Textile</option><option>Manufacturing</option><option>Trading</option><option>Warehousing</option><option>Distribution</option><option>Logistics</option><option>Service</option><option>Other</option></select>
+                </div>
               </div>
-              <div class="form-group"><label for="industry">Industry <span class="req">*</span></label>
-                <select id="industry" required><option value="">Select your industry</option><option>Textile</option><option>Manufacturing</option><option>Trading</option><option>Warehousing</option><option>Distribution</option><option>Logistics</option><option>Service</option><option>Other</option></select>
+              <div class="form-group" style="margin-top:16px;">
+                <label for="challenges">Current Operational Challenges <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+                <textarea id="challenges" name="challenges" rows="3" placeholder="Tell us about your biggest operational pain points — WhatsApp dependency, missed tasks, attendance tracking, reporting gaps, etc."></textarea>
+              </div>
+              <div class="form-error-msg"></div>
+              <div class="form-submit">
+                <button type="submit" class="btn btn-primary btn-lg btn-glow">Book Free Demo</button>
+                <button type="button" class="btn btn-primary btn-lg form-error-retry">Try Again</button>
               </div>
             </div>
-            <div class="form-group" style="margin-top:16px;">
-              <label for="challenges">Current Operational Challenges <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
-              <textarea id="challenges" rows="3" placeholder="Tell us about your biggest operational pain points — WhatsApp dependency, missed tasks, attendance tracking, reporting gaps, etc."></textarea>
+            <div class="form-success-msg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <h4>Demo Request Received</h4>
+              <p>We'll contact you within one business day to schedule your personalized demo. Check your email for confirmation.</p>
             </div>
-            <div class="form-submit">
-              <button class="btn btn-primary btn-lg btn-glow" type="button" onclick="submitForm()">Book Free Demo</button>
-            </div>
-          </div>
-          <div class="form-success" id="formSuccess">
-            <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <h3>Details Submitted</h3>
-            <p class="lead" style="max-width:400px;margin:8px auto 0;">Now choose a date and time that works for you. We'll confirm your demo within minutes.</p>
-          </div>
+          </form>
         </div>
       </div>
     </section>
@@ -489,8 +487,6 @@
   <script src="/assets/js/core.js" defer></script>
   <script>
     (function() {
-      // ponytail: counters handled by core.js via data-count attribute
-
       /* --- Sticky CTA visibility --- */
       const stickyCta = document.getElementById('stickyCta');
       const formSection = document.getElementById('book');
@@ -503,9 +499,8 @@
       const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       const TIME_SLOTS = ['9:00 AM','10:00 AM','11:00 AM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'];
 
-      let calYear = 2026, calMonth = 5;
+      let calYear = 2026, calMonth = 6;
       let selectedDate = null, selectedSlot = null;
-      let bookingConfirmed = false;
 
       function renderCalendar() {
         document.getElementById('calMonthTitle').textContent = MONTHS[calMonth] + ' ' + calYear;
@@ -533,6 +528,7 @@
       window.selectDate = function(d) {
         selectedDate = new Date(calYear, calMonth, d); selectedDate.setHours(0,0,0,0);
         selectedSlot = null;
+        document.getElementById('bookForm').dataset.selectedDate = selectedDate.toISOString().split('T')[0];
         renderCalendar();
       };
 
@@ -541,18 +537,7 @@
         const title = document.getElementById('slotTitle');
         const summary = document.getElementById('calSummary');
         const confirm = document.getElementById('calConfirm');
-        const confirmed = document.getElementById('calConfirmed');
 
-        if (bookingConfirmed) {
-          confirmed.classList.add('show');
-          title.textContent = 'Demo Confirmed';
-          container.innerHTML = '';
-          summary.style.display = 'none';
-          confirm.style.display = 'none';
-          return;
-        }
-
-        confirmed.classList.remove('show');
         if (!selectedDate) {
           title.textContent = 'Select a date first';
           container.innerHTML = '<p style="color:var(--muted);font-size:14px;grid-column:1/-1;">Pick a date from the calendar to see available time slots.</p>';
@@ -587,16 +572,16 @@
 
       window.selectSlot = function(slot) {
         selectedSlot = slot;
+        document.getElementById('bookForm').dataset.selectedSlot = slot;
         renderTimeSlots();
       };
 
       window.confirmBooking = function() {
-        bookingConfirmed = true;
-        renderTimeSlots();
+        document.getElementById('calPanels').classList.add('hidden');
+        document.getElementById('calConfirmed').classList.add('show');
       };
 
       window.prevMonth = function() {
-        if (calMonth === 5) return;
         calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
         renderCalendar();
       };
@@ -607,35 +592,22 @@
 
       renderCalendar();
 
-      /* --- Form submission --- */
-      window.submitForm = function() {
-        const fields = ['name','company','mobile','email'];
-        let valid = true;
-        fields.forEach(function(id) {
-          const el = document.getElementById(id);
+      /* --- Form validation (called by core.js before submit) --- */
+      window.validateForm = function(form) {
+        var valid = true;
+        ['name','company','mobile','email'].forEach(function(id) {
+          var el = form.querySelector('#' + id);
           if (!el.value.trim()) { el.classList.add('error'); el.setAttribute('aria-invalid', 'true'); valid = false; }
           else { el.classList.remove('error'); el.removeAttribute('aria-invalid'); }
         });
-        const teamSize = document.getElementById('teamSize').value;
-        const industry = document.getElementById('industry').value;
-        if (!teamSize) { document.getElementById('teamSize').classList.add('error'); document.getElementById('teamSize').setAttribute('aria-invalid', 'true'); valid = false; }
-        else { document.getElementById('teamSize').classList.remove('error'); document.getElementById('teamSize').removeAttribute('aria-invalid'); }
-        if (!industry) { document.getElementById('industry').classList.add('error'); document.getElementById('industry').setAttribute('aria-invalid', 'true'); valid = false; }
-        else { document.getElementById('industry').classList.remove('error'); document.getElementById('industry').removeAttribute('aria-invalid'); }
-
-        if (!valid) return;
-
-        document.getElementById('formFields').classList.add('hidden');
-        document.getElementById('formSuccess').classList.add('show');
-
-        setTimeout(function() {
-          const calSection = document.querySelector('[data-screen-label="06 Calendar"]');
-          if (calSection) calSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 600);
+        var teamSize = form.querySelector('#teamSize');
+        var industry = form.querySelector('#industry');
+        if (!teamSize.value) { teamSize.classList.add('error'); teamSize.setAttribute('aria-invalid', 'true'); valid = false; }
+        else { teamSize.classList.remove('error'); teamSize.removeAttribute('aria-invalid'); }
+        if (!industry.value) { industry.classList.add('error'); industry.setAttribute('aria-invalid', 'true'); valid = false; }
+        else { industry.classList.remove('error'); industry.removeAttribute('aria-invalid'); }
+        return valid;
       };
-
-      // ponytail: FAQ handled by core.js via .faq-question class
-      // ponytail: stagger reveal handled by core.js via .stagger-N classes
     })();
   </script>
 </body>

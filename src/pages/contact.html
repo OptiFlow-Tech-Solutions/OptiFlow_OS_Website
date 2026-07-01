@@ -55,11 +55,9 @@
     .form-error.visible { display: block; }
     .form-note { font-size: 13px; color: var(--muted); margin-top: 16px; text-align: center; }
     .form-submit { margin-top: 28px; text-align: center; }
-    .form-success { display: none; text-align: center; padding: 48px 24px; }
-    .form-success.visible { display: block; }
-    .form-success .success-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--green-soft); display: grid; place-items: center; margin: 0 auto 20px; color: var(--green); }
-    .form-success .success-icon svg { width: 32px; height: 32px; }
-    .form-success h3 { margin-bottom: 8px; }
+    .form-success-msg .success-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--green-soft); display: grid; place-items: center; margin: 0 auto 20px; color: var(--green); }
+    .form-success-msg .success-icon svg { width: 32px; height: 32px; }
+    .form-success-msg h3 { margin-bottom: 8px; }
     .form-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--green-soft); color: var(--green); margin-top: 16px; }
     .form-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulseDot 1.5s ease-in-out infinite; }
     @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
@@ -166,31 +164,31 @@
         </div>
         <div class="form-wrap">
           <div class="glass-card reveal" id="formCard">
-            <form id="contactForm" novalidate>
+            <form id="contactForm" name="contact" data-netlify="true" novalidate>
               <div class="form-grid">
                 <div class="form-field">
                   <label class="form-label" for="name">Full Name <span class="req">*</span></label>
-                  <input type="text" id="name" class="form-input" placeholder="Your full name" required />
+                  <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required />
                   <span class="form-error" data-error="name">Please enter your name</span>
                 </div>
                 <div class="form-field">
                   <label class="form-label" for="company">Company Name <span class="req">*</span></label>
-                  <input type="text" id="company" class="form-input" placeholder="Your company name" required />
+                  <input type="text" id="company" name="company" class="form-input" placeholder="Your company name" required />
                   <span class="form-error" data-error="company">Please enter your company name</span>
                 </div>
                 <div class="form-field">
                   <label class="form-label" for="phone">Mobile Number <span class="req">*</span></label>
-                  <input type="tel" id="phone" class="form-input" placeholder="+91 00000 00000" required />
+                  <input type="tel" id="phone" name="phone" class="form-input" placeholder="+91 00000 00000" required />
                   <span class="form-error" data-error="phone">Please enter a valid mobile number</span>
                 </div>
                 <div class="form-field">
                   <label class="form-label" for="email">Email Address <span class="req">*</span></label>
-                  <input type="email" id="email" class="form-input" placeholder="you@company.com" required />
+                  <input type="email" id="email" name="email" class="form-input" placeholder="you@company.com" required />
                   <span class="form-error" data-error="email">Please enter a valid email address</span>
                 </div>
                 <div class="form-field">
                   <label class="form-label" for="teamsize">Team Size</label>
-                  <select id="teamsize" class="form-select">
+                  <select id="teamsize" name="team_size" class="form-select">
                     <option value="">Select team size</option>
                     <option>1 — 10</option>
                     <option>11 — 25</option>
@@ -202,7 +200,7 @@
                 </div>
                 <div class="form-field">
                   <label class="form-label" for="industry">Industry</label>
-                  <select id="industry" class="form-select">
+                  <select id="industry" name="industry" class="form-select">
                     <option value="">Select your industry</option>
                     <option>Textile</option>
                     <option>Manufacturing</option>
@@ -216,15 +214,17 @@
                 </div>
                 <div class="form-field full">
                   <label class="form-label" for="challenges">Current Operational Challenges</label>
-                  <textarea id="challenges" class="form-textarea" placeholder="Tell us about your current operations — what's working, what's not, and what you'd like to improve. This helps us prepare a relevant demo for you."></textarea>
+                  <textarea id="challenges" name="challenges" class="form-textarea" placeholder="Tell us about your current operations — what's working, what's not, and what you'd like to improve. This helps us prepare a relevant demo for you."></textarea>
                 </div>
               </div>
+              <div class="form-error-msg"></div>
               <div class="form-submit">
                 <button type="submit" class="btn btn-primary btn-lg btn-glow">Send Enquiry</button>
+                <button type="button" class="btn btn-primary btn-lg form-error-retry">Try Again</button>
                 <p class="form-note">We'll get back to you within one business day. No spam, no pressure.</p>
               </div>
             </form>
-            <div class="form-success" id="formSuccess">
+            <div class="form-success-msg" style="display:none;">
               <div class="success-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
@@ -442,15 +442,11 @@
 
   <script>
     (function() {
-      var form = document.getElementById('contactForm');
-      var formCard = document.getElementById('formCard');
-      var formSuccess = document.getElementById('formSuccess');
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
+      window.validateForm = function(form) {
         var valid = true;
         ['name', 'company', 'phone', 'email'].forEach(function(id) {
-          var input = document.getElementById(id);
-          var err = document.querySelector('[data-error="' + id + '"]');
+          var input = form.querySelector('#' + id);
+          var err = form.querySelector('[data-error="' + id + '"]');
           if (!input.value.trim()) {
             input.classList.add('error');
             input.setAttribute('aria-invalid', 'true');
@@ -462,32 +458,24 @@
             if (err) err.classList.remove('visible');
           }
         });
-        var email = document.getElementById('email');
-        var emailErr = document.querySelector('[data-error="email"]');
+        var email = form.querySelector('#email');
+        var emailErr = form.querySelector('[data-error="email"]');
         if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
           email.classList.add('error');
           email.setAttribute('aria-invalid', 'true');
           if (emailErr) { emailErr.textContent = 'Please enter a valid email'; emailErr.classList.add('visible'); }
           valid = false;
-        } else if (email.value.trim()) {
-          email.removeAttribute('aria-invalid');
         }
-        var phone = document.getElementById('phone');
-        var phoneErr = document.querySelector('[data-error="phone"]');
+        var phone = form.querySelector('#phone');
+        var phoneErr = form.querySelector('[data-error="phone"]');
         if (phone.value.trim() && !/^\+?\d{7,15}$/.test(phone.value.trim().replace(/[\s-]/g, ''))) {
           phone.classList.add('error');
           phone.setAttribute('aria-invalid', 'true');
           if (phoneErr) { phoneErr.textContent = 'Please enter a valid mobile number'; phoneErr.classList.add('visible'); }
           valid = false;
-        } else if (phone.value.trim()) {
-          phone.removeAttribute('aria-invalid');
         }
-        if (valid) {
-          form.style.display = 'none';
-          formSuccess.classList.add('visible');
-          formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      });
+        return valid;
+      };
     })();
   </script>
 </body>
