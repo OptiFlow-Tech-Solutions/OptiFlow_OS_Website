@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Admin — OptiFlow OS</title>
-  <meta name="description" content="{{PAGE_DESCRIPTION}}" />
+  <meta name="description" content="OptiFlow OS Admin Dashboard — Secure internal monitoring platform for activity tracking, audit logs, and email delivery oversight across all OptiFlow systems." />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any" />
   <link rel="stylesheet" href="/assets/css/core.css" />
 </head>
@@ -39,6 +40,8 @@
           <h1>Dashboard</h1>
           <button class="btn btn-secondary" onclick="adminLogout()">Sign Out</button>
         </div>
+
+        <!-- Stats Grid -->
         <div class="admin-stats-grid" id="adminStatsGrid">
           <div class="admin-stat-card"><span class="admin-stat-num" id="statTotal">--</span><span class="admin-stat-label">Total Submissions</span></div>
           <div class="admin-stat-card"><span class="admin-stat-num" id="statToday">--</span><span class="admin-stat-label">Today</span></div>
@@ -46,26 +49,72 @@
           <div class="admin-stat-card"><span class="admin-stat-num" id="statDemo">--</span><span class="admin-stat-label">Demos</span></div>
           <div class="admin-stat-card"><span class="admin-stat-num" id="statNewsletter">--</span><span class="admin-stat-label">Newsletter</span></div>
           <div class="admin-stat-card"><span class="admin-stat-num" id="statSubscribers">--</span><span class="admin-stat-label">Subscribers</span></div>
+          <div class="admin-stat-card"><span class="admin-stat-num" id="statEmailsSent">--</span><span class="admin-stat-label">Emails (7d)</span></div>
+          <div class="admin-stat-card"><span class="admin-stat-num" id="statEmailsFailed">--</span><span class="admin-stat-label">Failed (7d)</span></div>
+          <div class="admin-stat-card"><span class="admin-stat-num" id="statRateLimited">--</span><span class="admin-stat-label">Rate Limited</span></div>
         </div>
-        <div class="admin-filter-bar">
-          <input type="text" id="submissionSearch" class="admin-search-input" placeholder="Search submissions..." />
-          <select id="formTypeFilter" class="admin-filter-select">
-            <option value="">All Forms</option>
-            <option value="contact">Contact</option>
-            <option value="demo-booking">Demo Booking</option>
-            <option value="newsletter">Newsletter</option>
-          </select>
-          <button class="btn btn-secondary" onclick="exportSubmissions('csv')" style="margin-left:8px">Export CSV</button>
-          <button class="btn btn-secondary" onclick="exportSubmissions('json')" style="margin-left:4px">Export JSON</button>
+
+        <!-- Tab Bar -->
+        <div class="admin-tabs" role="tablist" aria-label="Dashboard sections">
+          <button class="admin-tab active" role="tab" aria-selected="true" data-tab="submissions" onclick="switchTab('submissions')">Submissions</button>
+          <button class="admin-tab" role="tab" aria-selected="false" data-tab="audit" onclick="switchTab('audit')">Audit Log</button>
+          <button class="admin-tab" role="tab" aria-selected="false" data-tab="email" onclick="switchTab('email')">Email Delivery</button>
         </div>
-        <div class="admin-submission-list" id="submissionList">
-          <div class="admin-empty">Loading submissions...</div>
+
+        <!-- Submissions Tab -->
+        <div class="admin-tab-panel active" role="tabpanel" id="tab-submissions">
+          <div class="admin-filter-bar">
+            <input type="text" id="submissionSearch" class="admin-search-input" placeholder="Search submissions..." />
+            <select id="formTypeFilter" class="admin-filter-select">
+              <option value="">All Forms</option>
+              <option value="contact">Contact</option>
+              <option value="demo-booking">Demo Booking</option>
+              <option value="newsletter">Newsletter</option>
+            </select>
+            <button class="btn btn-secondary" onclick="exportSubmissions('csv')" style="margin-left:8px">Export CSV</button>
+            <button class="btn btn-secondary" onclick="exportSubmissions('json')" style="margin-left:4px">Export JSON</button>
+          </div>
+          <div class="admin-submission-list" id="submissionList">
+            <div class="admin-empty">Loading submissions...</div>
+          </div>
+          <div class="admin-pagination" id="adminPagination" style="display:none;">
+            <span id="pageInfo">Page 1 of 1</span>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-secondary btn-sm" id="btnPrev" onclick="goToPage('prev')">Previous</button>
+              <button class="btn btn-secondary btn-sm" id="btnNext" onclick="goToPage('next')">Next</button>
+            </div>
+          </div>
         </div>
-        <div class="admin-pagination" id="adminPagination" style="display:none;">
-          <span id="pageInfo">Page 1 of 1</span>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-secondary btn-sm" id="btnPrev" onclick="goToPage('prev')">Previous</button>
-            <button class="btn btn-secondary btn-sm" id="btnNext" onclick="goToPage('next')">Next</button>
+
+        <!-- Audit Log Tab -->
+        <div class="admin-tab-panel" role="tabpanel" id="tab-audit">
+          <div class="admin-audit-list" id="auditList">
+            <div class="admin-empty">Loading audit log...</div>
+          </div>
+          <div class="admin-pagination" id="auditPagination" style="display:none;">
+            <span id="auditPageInfo">Page 1 of 1</span>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-secondary btn-sm" id="auditBtnPrev" onclick="goToAuditPage('prev')">Previous</button>
+              <button class="btn btn-secondary btn-sm" id="auditBtnNext" onclick="goToAuditPage('next')">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Delivery Tab -->
+        <div class="admin-tab-panel" role="tabpanel" id="tab-email">
+          <div class="admin-email-summary" id="emailSummary">
+            <div class="admin-email-stat"><span class="admin-stat-num" id="emailSentCount">--</span><span class="admin-stat-label">Sent This Week</span></div>
+            <div class="admin-email-stat"><span class="admin-stat-num" id="emailFailedCount">--</span><span class="admin-stat-label">Failed This Week</span></div>
+          </div>
+          <div class="admin-email-list" id="emailList">
+            <div class="admin-empty">Loading email logs...</div>
+          </div>
+          <div class="admin-pagination" id="emailPagination" style="display:none;">
+            <span id="emailPageInfo">Page 1 of 1</span>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-secondary btn-sm" id="emailBtnPrev" onclick="goToEmailPage('prev')">Previous</button>
+              <button class="btn btn-secondary btn-sm" id="emailBtnNext" onclick="goToEmailPage('next')">Next</button>
+            </div>
           </div>
         </div>
       </div>

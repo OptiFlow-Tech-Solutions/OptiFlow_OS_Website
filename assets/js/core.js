@@ -322,7 +322,24 @@
     var currentPage = 1;
     var totalPages = 1;
     var perPage = 20;
+    var auditPage = 1;
+    var auditTotalPages = 1;
+    var emailPage = 1;
+    var emailTotalPages = 1;
     var refreshInterval = null;
+    var activeTab = 'submissions';
+
+    window.switchTab = function(tab) {
+      activeTab = tab;
+      document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      document.querySelectorAll('.admin-tab-panel').forEach(function(p) { p.classList.remove('active'); });
+      var tabBtn = document.querySelector('.admin-tab[data-tab="' + tab + '"]');
+      if (tabBtn) { tabBtn.classList.add('active'); tabBtn.setAttribute('aria-selected', 'true'); }
+      var panel = document.getElementById('tab-' + tab);
+      if (panel) panel.classList.add('active');
+      if (tab === 'audit') loadAuditLog();
+      if (tab === 'email') loadEmailLog();
+    };
 
     window.adminLogin = async function() {
       hideError();
@@ -344,6 +361,9 @@
     window.adminLogout = function() {
       localStorage.removeItem(TOKEN_KEY);
       if (refreshInterval) { clearInterval(refreshInterval); refreshInterval = null; }
+      activeTab = 'submissions';
+      auditPage = 1;
+      emailPage = 1;
       if (loginEl) loginEl.classList.add('visible');
       if (dashEl) dashEl.classList.remove('visible');
     };
@@ -361,6 +381,9 @@
           document.getElementById('statDemo').textContent = (s.byForm && s.byForm['demo-booking']) || 0;
           document.getElementById('statNewsletter').textContent = (s.byForm && s.byForm.newsletter) || 0;
           document.getElementById('statSubscribers').textContent = s.subscribers || 0;
+          document.getElementById('statEmailsSent').textContent = s.emailsSent || 0;
+          document.getElementById('statEmailsFailed').textContent = s.emailsFailed || 0;
+          document.getElementById('statRateLimited').textContent = s.rateLimited || 0;
         }
       } catch (e) { /* stats optional, ignore errors */ }
     }
@@ -436,6 +459,111 @@
         }
       } catch (e) {
         listEl.innerHTML = '<div class="admin-empty">Error loading submissions.</div>';
+      }
+    }
+
+    window.goToAuditPage = function(dir) {
+      if (dir === 'prev' && auditPage > 1) { auditPage--; loadAuditLog(); }
+      if (dir === 'next' && auditPage < auditTotalPages) { auditPage++; loadAuditLog(); }
+    };
+
+    window.goToEmailPage = function(dir) {
+      if (dir === 'prev' && emailPage > 1) { emailPage--; loadEmailLog(); }
+      if (dir === 'next' && emailPage < emailTotalPages) { emailPage++; loadEmailLog(); }
+    };
+
+    async function loadAuditLog() {
+      var token = localStorage.getItem(TOKEN_KEY);
+      var listEl = document.getElementById('auditList');
+      if (!listEl) return;
+      try {
+        var res = await fetch('/api/admin/audit?page=' + auditPage + '&per_page=20', { headers: { 'Authorization': 'Bearer ' + token } });
+        var data = await res.json();
+        if (data.success) {
+          var pag = data.pagination || {};
+          auditTotalPages = pag.pages || 1;
+          document.getElementById('auditPageInfo').textContent = 'Page ' + (pag.page || 1) + ' of ' + auditTotalPages + ' (' + (pag.total || 0) + ' total)';
+          document.getElementById('auditBtnPrev').disabled = auditPage <= 1;
+          document.getElementById('auditBtnNext').disabled = auditPage >= auditTotalPages;
+          document.getElementById('auditPagination').style.display = auditTotalPages > 1 ? 'flex' : 'none';
+          var entries = data.entries || [];
+          if (entries.length === 0) {
+            listEl.innerHTML = '<div class="admin-empty">No audit entries yet.</div>';
+            return;
+          }
+          listEl.innerHTML = entries.map(function(e) {
+            var cls = e.action === 'admin_login_failed' ? ' admin-audit-fail' : (e.action === 'admin_login' ? ' admin-audit-success' : '');
+            var label = (e.action || '').replace(/_/g, ' ');
+            var detail = '';
+            if (e.detail) {
+              var detailKeys = Object.keys(e.detail).filter(function(k) { return e.detail[k]; });
+              detail = detailKeys.map(function(k) { return k + ': ' + e.detail[k]; }).join(', ');
+            }
+            if (!detail && e.resource) detail = e.resource;
+            return '<div class="admin-audit-row"><span class="admin-audit-action' + cls + '">' + label + '</span><span class="admin-audit-detail">' + (detail || '') + '</span><span class="admin-audit-time">' + (e.timestamp || '') + '</span></div>';
+          }).join('');
+        } else {
+          listEl.innerHTML = '<div class="admin-empty">Unable to load audit log.</div>';
+        }
+      } catch (e) {
+        listEl.innerHTML = '<div class="admin-empty">Error loading audit log.</div>';
+      }
+    }
+
+    async function loadEmailLog() {
+      var token = localStorage.getItem(TOKEN_KEY);
+      var listEl = document.getElementById('emailList');
+      if (!listEl) return;
+      try {
+        var res = await fetch('/api/admin/submissions?page=' + emailPage + '&per_page=20', { headers: { 'Authorization': 'Bearer ' + token } });
+        var data = await res.json();
+
+        var sentW = 0;
+        var failedW = 0;
+        var emailEntries = [];
+        try {
+          var statsRes = await fetch('/api/admin/stats', { headers: { 'Authorization': 'Bearer ' + token } });
+          var statsData = await statsRes.json();
+          if (statsData.success && statsData.stats) {
+            sentW = statsData.stats.emailsSent || 0;
+            failedW = statsData.stats.emailsFailed || 0;
+          }
+        } catch (e) { /* ignore */ }
+
+        document.getElementById('emailSentCount').textContent = sentW;
+        document.getElementById('emailFailedCount').textContent = failedW;
+
+        if (data.success && data.submissions) {
+          emailEntries = data.submissions.map(function(s) {
+            return {
+              timestamp: s.timestamp,
+              type: s.formName || 'unknown',
+              to: (s.fields && s.fields.email) || 'n/a',
+              success: s.emailSent,
+            };
+          });
+        }
+
+        var pag = data.pagination || {};
+        emailTotalPages = pag.pages || 1;
+        document.getElementById('emailPageInfo').textContent = 'Page ' + (pag.page || 1) + ' of ' + emailTotalPages + ' (' + (pag.total || 0) + ' total)';
+        document.getElementById('emailBtnPrev').disabled = emailPage <= 1;
+        document.getElementById('emailBtnNext').disabled = emailPage >= emailTotalPages;
+        document.getElementById('emailPagination').style.display = emailTotalPages > 1 ? 'flex' : 'none';
+
+        if (emailEntries.length === 0) {
+          listEl.innerHTML = '<div class="admin-empty">No email logs yet.</div>';
+          return;
+        }
+
+        listEl.innerHTML = emailEntries.map(function(e) {
+          var typeLabel = e.type.charAt(0).toUpperCase() + e.type.slice(1).replace('-', ' ');
+          var statusCls = e.success ? 'success' : 'fail';
+          var statusLabel = e.success ? 'Sent' : 'Failed';
+          return '<div class="admin-email-row"><span class="admin-email-type">' + typeLabel + '</span><span class="admin-email-to">' + e.to + '</span><span class="admin-email-status ' + statusCls + '">' + statusLabel + '</span><span class="admin-email-time">' + (e.timestamp || '') + '</span></div>';
+        }).join('');
+      } catch (e) {
+        listEl.innerHTML = '<div class="admin-empty">Error loading email logs.</div>';
       }
     }
 

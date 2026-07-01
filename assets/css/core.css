@@ -363,6 +363,36 @@ form.form-error .btn[type="submit"] { display: none; }
 [data-theme="dark"] .section-dark .comparison-table th { background: rgba(255,255,255,.06); }
 [data-theme="dark"] .section-dark .comparison-table td { color: rgba(255,255,255,.85); border-bottom-color: rgba(255,255,255,.12); }
 
+/* ─── Admin Tabs ─── */
+.admin-tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 2px solid var(--border); }
+.admin-tab { padding: 12px 20px; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; color: var(--muted); font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+.admin-tab:hover { color: var(--fg); }
+.admin-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.admin-tab:focus-visible { outline: 2px solid var(--teal); outline-offset: -2px; border-radius: var(--radius) var(--radius) 0 0; }
+.admin-tab-panel { display: none; }
+.admin-tab-panel.active { display: block; }
+
+/* ─── Admin Audit Table ─── */
+.admin-audit-list { display: flex; flex-direction: column; gap: 8px; }
+.admin-audit-row { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; padding: 14px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; }
+.admin-audit-action { font-weight: 600; color: var(--fg); }
+.admin-audit-action.admin-audit-fail { color: oklch(50% 0.14 25); }
+.admin-audit-action.admin-audit-success { color: var(--green); }
+.admin-audit-detail { color: var(--muted); font-size: 12px; }
+.admin-audit-time { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+/* ─── Admin Email Stats ─── */
+.admin-email-summary { display: flex; gap: 16px; margin-bottom: 20px; }
+.admin-email-stat { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; }
+.admin-email-list { display: flex; flex-direction: column; gap: 8px; }
+.admin-email-row { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; padding: 14px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; }
+.admin-email-type { font-weight: 600; color: var(--accent); }
+.admin-email-to { color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+.admin-email-status { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 12px; }
+.admin-email-status.success { background: color-mix(in oklch, var(--green) 15%, transparent); color: var(--green); }
+.admin-email-status.fail { background: color-mix(in oklch, oklch(60% 0.15 25) 15%, transparent); color: oklch(50% 0.14 25); }
+.admin-email-time { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+
 /* ─── Admin Components ─── */
 .admin-body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
 .admin-login { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 400px; }
@@ -382,7 +412,7 @@ form.form-error .btn[type="submit"] { display: none; }
 .admin-dashboard.visible { display: block; }
 .admin-dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
 .admin-dash-header h1 { font-size: 24px; }
-.admin-stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
+.admin-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
 .admin-stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; }
 .admin-stat-num { display: block; font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--teal); }
 .admin-stat-label { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -411,8 +441,11 @@ form.form-error .btn[type="submit"] { display: none; }
 @media (max-width: 480px) {
   .admin-login-card { padding: 28px; }
   .admin-login-card::before { margin: -28px -28px 24px -28px; width: calc(100% + 56px); }
-  .admin-stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .admin-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .admin-filter-bar { flex-direction: column; }
+  .admin-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .admin-audit-row, .admin-email-row { grid-template-columns: 1fr; gap: 4px; }
+  .admin-email-summary { flex-direction: column; }
 }
 
 /* ─── Testimonials ─── */

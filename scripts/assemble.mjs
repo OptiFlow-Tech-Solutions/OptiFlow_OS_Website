@@ -105,6 +105,7 @@ function buildPage(pageInfo) {
     '{{PAGE_TITLE}}': pageInfo.title,
     '{{PAGE_DESCRIPTION}}': pageInfo.description,
     '{{PAGE_URL}}': pageUrl,
+    '{{PUBLISHED_DATE}}': new Date().toISOString(),
   };
 
   for (const [key, value] of Object.entries(reps)) {
@@ -127,14 +128,15 @@ function buildPage(pageInfo) {
     `<meta property="og:title" content="${pageInfo.title}">`,
     `<meta property="og:description" content="${pageInfo.description}">`,
     `<meta property="og:url" content="${pageUrl}">`,
+    `<meta property="og:image" content="https://${site.domain}/assets/img/${site.logo}">`,
     '<meta property="og:site_name" content="OptiFlow OS">',
     '<meta property="og:locale" content="en_IN">',
     '<meta property="og:image:width" content="512">',
     '<meta property="og:image:height" content="512">',
-    '<meta name="twitter:image" content="/assets/img/OptiFlow.Logo.png">',
+    '<meta name="twitter:image" content="https://${site.domain}/assets/img/${site.logo}">',
     '<meta name="twitter:image:alt" content="OptiFlow OS Logo">',
-    '<meta name="robots" content="' + (pageInfo.noindex ? 'noindex, nofollow' : 'index, follow') + '">',
-  ].join('\n  ');
+    `<meta name="robots" content="${pageInfo.noindex ? 'noindex, nofollow' : 'index, follow'}">`,
+  ].filter(Boolean).join('\n  ');
 
   html = html.replace(
     '<meta name="viewport"',
@@ -314,10 +316,13 @@ function generateSitemap() {
       ? ''
       : page.file.replace('/index.html', '/').replace('.html', '/');
     const priority = page.file === 'index.html' ? '0.9' : '0.7';
+    let changefreq = 'weekly';
+    if (page.file === 'index.html') changefreq = 'daily';
+    if (page.file.includes('privacy-policy') || page.file.includes('terms')) changefreq = 'monthly';
     xml += '  <url>\n';
     xml += `    <loc>https://${site.domain}/${urlPath}</loc>\n`;
     xml += `    <lastmod>${today}</lastmod>\n`;
-    xml += '    <changefreq>weekly</changefreq>\n';
+    xml += `    <changefreq>${changefreq}</changefreq>\n`;
     xml += `    <priority>${priority}</priority>\n`;
     xml += '  </url>\n';
   }
@@ -336,6 +341,7 @@ function generateManifest() {
   const manifest = {
     name: 'OptiFlow OS',
     short_name: 'OptiFlow',
+    description: 'Business Execution Operating System for Indian MSMEs',
     start_url: '/',
     display: 'standalone',
     theme_color: '#0a1628',
