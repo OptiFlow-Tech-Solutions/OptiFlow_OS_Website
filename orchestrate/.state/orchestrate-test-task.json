@@ -1,0 +1,349 @@
+{
+  "version": "4.0",
+  "command": "auto",
+  "changeName": "test-task",
+  "size": "standard",
+  "branch": "main",
+  "timestamp": "2026-07-02T07:06:53.020Z",
+  "context": {
+    "runId": "mr35vsgr-caaf91a7",
+    "changeName": "test-task",
+    "taskDescription": "test task",
+    "branch": "main",
+    "timestamp": "2026-07-02T07:06:53.019Z",
+    "affectedSpecs": [
+      {
+        "specName": "orchestration-engine",
+        "requirements": [
+          "Auto-Discovery",
+          "Spec-Driven Routing",
+          "Pipeline Execution",
+          "Validation Pipeline",
+          "Quality Gates",
+          "Traceability",
+          "Phase Detection",
+          "Command Auto-Orchestration"
+        ],
+        "confidence": 0.7,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "accessibility",
+          "seo",
+          "content",
+          "quality",
+          "security"
+        ]
+      },
+      {
+        "specName": "accessibility",
+        "requirements": [
+          "WCAG 2.2 Level AA Compliance",
+          "Skip-to-Content Link",
+          "Visible Focus Indicators",
+          "Minimum Contrast Ratio",
+          "Semantic HTML Landmarks",
+          "ARIA Labels",
+          "Reduced Motion",
+          "Keyboard Navigation",
+          "Calendar Keyboard Accessibility",
+          "Form Validation Accessibility",
+          "Animation Pause on Visibility Change",
+          "E2E Accessibility Testing"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "accessibility",
+          "content",
+          "quality",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "build-pipeline",
+        "requirements": [
+          "Page Assembly",
+          "SEO Meta Injection",
+          "BreadcrumbList Structured Data Injection",
+          "Article Structured Data on Newsletter",
+          "Placeholder Variable Replacement",
+          "Partial Injection",
+          "Asset Copying",
+          "Validation",
+          "Validation Exit Code",
+          "Clean URLs",
+          "CI/CD Pipeline",
+          "Pipeline Configuration",
+          "Development Server",
+          "Test Command",
+          "Post-Merge Hook",
+          "Pre-Push Hook",
+          "Preconnect Resource Hints Injection"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "accessibility",
+          "seo",
+          "content",
+          "quality",
+          "security",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "code-quality-pipeline",
+        "requirements": [
+          "GitHub Actions CI Workflow",
+          "Dependency Vulnerability Scanning",
+          "ESLint Scope Coverage",
+          "Pre-Commit Hook Automation",
+          "Pipeline Configs for Orchestration",
+          "Pre-Existing HTML Validation Fixes"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "frontend",
+          "build",
+          "accessibility",
+          "seo",
+          "quality",
+          "security"
+        ]
+      },
+      {
+        "specName": "competitive-positioning-page",
+        "requirements": [
+          "Page Structure",
+          "Competitor Quadrant Grid",
+          "Feature Comparison Matrix",
+          "Cost Comparison Section",
+          "Why OptiFlow Stands Out Section",
+          "SEO Metadata",
+          "Dark Mode Support",
+          "Cross-Links from Existing Pages",
+          "Performance Standards"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "accessibility",
+          "seo",
+          "content",
+          "quality",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "email-notifications",
+        "requirements": [
+          "Email Dispatch Endpoint",
+          "Subscriber Welcome Email",
+          "HTML Email Templates",
+          "Email Notification Logging",
+          "Request Validation",
+          "Graceful Degradation",
+          "Notification Log Schema"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "design",
+          "frontend",
+          "content",
+          "quality"
+        ]
+      },
+      {
+        "specName": "feature-showcase-page",
+        "requirements": [
+          "Feature Showcase Page Renders",
+          "Showcase Sections",
+          "Problem → Fix → Outcome Flow",
+          "Dual-Device Visuals",
+          "Sticky Sub-Navigation",
+          "Feature Showcase Metadata",
+          "Full Dark Mode Support",
+          "No Duplicated Core Logic"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "seo",
+          "quality",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "git-hooks",
+        "requirements": [
+          "Shared hook utilities",
+          "Commit message format enforcement",
+          "Branch name convention enforcement",
+          "Post-merge dependency drift detection",
+          "Pre-push validation gate",
+          "Hook lifecycle integration"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "design",
+          "frontend",
+          "build",
+          "seo",
+          "content",
+          "quality",
+          "dark-mode"
+        ]
+      },
+      {
+        "specName": "platform-monitoring",
+        "requirements": [
+          "Dependency Vulnerability Monitoring"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "quality",
+          "security"
+        ]
+      },
+      {
+        "specName": "testing-suite",
+        "requirements": [
+          "E2E Test Coverage",
+          "Browser Coverage",
+          "CI Integration",
+          "Accessibility Gate",
+          "Test Independence"
+        ],
+        "confidence": 0.35,
+        "domains": [
+          "design",
+          "frontend",
+          "accessibility",
+          "seo",
+          "quality"
+        ]
+      }
+    ],
+    "capabilities": [
+      "orchestration-engine",
+      "accessibility",
+      "build-pipeline",
+      "code-quality-pipeline",
+      "competitive-positioning-page",
+      "email-notifications",
+      "feature-showcase-page",
+      "git-hooks",
+      "platform-monitoring",
+      "testing-suite"
+    ],
+    "phases": "explore",
+    "tier": "standard",
+    "affectedDomains": [
+      "design",
+      "frontend",
+      "build",
+      "accessibility",
+      "seo",
+      "content",
+      "quality",
+      "security",
+      "dark-mode"
+    ]
+  },
+  "capabilities": {
+    "skills": [
+      "design-system",
+      "make-interfaces-feel-better",
+      "frontend-design-direction",
+      "design-system-master",
+      "ui-ux-pro-max",
+      "frontend-design",
+      "frontend-patterns",
+      "frontend-a11y",
+      "component-architecture",
+      "motion-master",
+      "build-error-resolver",
+      "performance-optimization",
+      "accessibility",
+      "accessibility-pro",
+      "seo",
+      "article-writing",
+      "brand-voice",
+      "tdd-workflow",
+      "verification-loop",
+      "eval-harness",
+      "security-review"
+    ],
+    "agents": {
+      "primary": "frontend-design-direction",
+      "support": [
+        "tdd-guide",
+        "build-error-resolver",
+        "frontend-a11y",
+        "seo-specialist",
+        "content-writer",
+        "code-reviewer",
+        "security-reviewer"
+      ]
+    },
+    "mcpServers": [
+      "context7",
+      "parallel-search",
+      "magic",
+      "chrome-devtools",
+      "playwright",
+      "cloudflare-docs"
+    ],
+    "hooks": {
+      "pre": [
+        "pre-build"
+      ],
+      "post": []
+    },
+    "commands": [
+      "/opsx:explore"
+    ]
+  },
+  "phases": [
+    "explore",
+    "propose",
+    "apply",
+    "verify",
+    "archive"
+  ],
+  "validationLevels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "qualityGates": [],
+  "pagesToRebuild": [
+    "home.html",
+    "problem-solutions.html",
+    "product-overview.html",
+    "features.html",
+    "why-optiflow.html",
+    "pricing.html",
+    "blog.html",
+    "faq.html",
+    "contact.html",
+    "demo-booking.html",
+    "privacy-policy.html",
+    "terms.html"
+  ],
+  "buildCommand": "npm run build && npm run validate"
+}

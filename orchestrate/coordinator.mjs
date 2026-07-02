@@ -29,7 +29,7 @@ import { emit } from './event-bus.mjs';
 import { resolvePaths } from './config-resolver.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { reconstructContext, getFeature, listFeatures, summarizeFeature } from './feature-router.mjs';
+import { reconstructContext, getFeature, listFeatures, summarizeFeature, resolveFeatureFromTask } from './feature-router.mjs';
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
@@ -199,10 +199,21 @@ export function orchestrate(taskDescription, changedFiles = []) {
 
 /**
  * Plan and execute. The one-stop entry point.
+ * V6: When opts.auto is true (default), runs the full auto pipeline.
+ * Falls back to legacy orchestration when auto: false.
  * @param {string} taskDescription
- * @param {{execute?: boolean}} [opts]
+ * @param {{execute?: boolean, auto?: boolean, skipVisual?: boolean, dryRun?: boolean}} [opts]
  */
 export async function run(taskDescription, opts = {}) {
+  if (opts.auto !== false) {
+    try {
+      const { autoFullPipeline } = await import('./auto-pipeline.mjs');
+      return autoFullPipeline(taskDescription, opts);
+    } catch (e) {
+      console.log(`Auto pipeline unavailable: ${e.message}. Falling back to legacy mode.`);
+    }
+  }
+
   const slug = slugify(taskDescription);
   return orchestrateOpenSpec('auto', slug, taskDescription, {
     ...opts,
@@ -474,7 +485,7 @@ export function featureList() {
 
 /**
  * Run the full OpenSpec pipeline for a feature.
- * Equivalent to: /opsx:explore → /opsx:propose → /opsx:apply → /opsx:verify → /opsx:archive
+ * Equivalent to: /opsx:explore -> /opsx:propose -> /opsx:apply -> /opsx:verify -> /opsx:archive
  * but auto-populated from the feature registry.
  *
  * @param {string} featureId
@@ -495,4 +506,15 @@ export async function featureFullPipeline(featureId, opts = {}) {
     autoApprove: opts.autoApprove,
     featureContext: ctx,
   });
+}
+
+// ═══════════════════════════════════════════
+// V6 Re-exports
+// ═══════════════════════════════════════════
+
+export { resolveFeatureFromTask };
+
+export async function autoFullPipeline(taskDescription, opts = {}) {
+  const mod = await import('./auto-pipeline.mjs');
+  return mod.autoFullPipeline(taskDescription, opts);
 }

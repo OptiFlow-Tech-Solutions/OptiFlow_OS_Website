@@ -52,7 +52,7 @@ export function resolvePaths() {
   function findDesignDir() {
     try {
       const entry = readdirSync(projectRoot, { withFileTypes: true })
-        .find((e) => e.isDirectory() && e.name.startsWith('OptiFlow-OS'));
+        .find((e) => e.isDirectory() && (e.name.startsWith('DESIGN') || e.name.startsWith('OptiFlow-OS')));
       return entry ? join(projectRoot, entry.name) : null;
     } catch { return null; }
   }

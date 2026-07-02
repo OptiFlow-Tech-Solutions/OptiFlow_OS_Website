@@ -9,6 +9,7 @@ import { resolvePaths } from './config-resolver.mjs';
 import { parseAllSpecs } from './spec-parser.mjs';
 import { resolveAffectedSpecs } from './spec-resolver.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
+import { getBranch } from './project-scanner.mjs';
 
 const { projectRoot, siteJsonPath, designDir } = resolvePaths();
 
@@ -82,4 +83,55 @@ export function getContextSummary(context) {
   ];
   console.log(lines.join(' '));
   return lines.join(' ');
+}
+
+/**
+ * V6: Load full project context for /opsx-auto mode.
+ * Loads everything: site.json, DESIGN.md, all 23 specs, all 28 features,
+ * resolves affected specs, and gathers project metadata.
+ *
+ * @param {string} taskDescription
+ * @returns {{ site: object|null, design: string|null, features: object|null, specs: object[], affected: object[], branch: string, paths: object }}
+ */
+export function loadFullContext(taskDescription) {
+  const cacheKey = `full-context:${taskDescription.slice(0, 80)}`;
+  const cached = cacheGet(cacheKey);
+  if (cached) return cached;
+
+  let site = null;
+  try { site = JSON.parse(readFileSync(siteJsonPath, 'utf-8')); } catch { /* missing */ }
+
+  let design = null;
+  try {
+    const designPath = resolve(designDir, 'DESIGN.md');
+    if (existsSync(designPath)) design = readFileSync(designPath, 'utf-8');
+  } catch { /* missing */ }
+
+  let features = null;
+  try {
+    const featuresPath = resolve(projectRoot, 'features', 'features.json');
+    if (existsSync(featuresPath)) features = JSON.parse(readFileSync(featuresPath, 'utf-8'));
+  } catch { /* missing */ }
+
+  let specs = [];
+  try { specs = parseAllSpecs(); } catch { /* missing */ }
+
+  let affected = [];
+  try { affected = resolveAffectedSpecs(taskDescription, specs); } catch { /* missing */ }
+
+  let branch = 'unknown';
+  try { branch = getBranch(); } catch { /* missing */ }
+
+  const result = {
+    site,
+    design,
+    features,
+    specs,
+    affected,
+    branch,
+    paths: { projectRoot, siteJsonPath, designDir },
+  };
+
+  cacheSet(cacheKey, result, { ttl: 300000 });
+  return result;
 }

@@ -124,6 +124,20 @@ export function runGate(gateName) {
         return { name: gateName, passed: null, output: 'Human approval required' };
       }
 
+      case 'GATE_VISUAL': {
+        // V6: Visual verification gate — checks E2E visual regressions
+        const visualSpec = resolve(projectRoot, 'tests', 'e2e', 'responsive.spec.js');
+        if (!existsSync(visualSpec)) return { name: gateName, passed: true, output: 'No visual tests configured — passing' };
+        try {
+          const output = execSync('npx playwright test tests/e2e/responsive.spec.js', {
+            cwd: projectRoot, encoding: 'utf-8', timeout: 300000, stdio: 'pipe',
+          }).trim();
+          return { name: gateName, passed: true, output: output || 'Visual regression passed' };
+        } catch (e) {
+          return { name: gateName, passed: false, output: e.stderr || e.stdout || e.message };
+        }
+      }
+
       default:
         return { name: gateName, passed: false, output: `Unknown gate: ${gateName}` };
     }
@@ -178,7 +192,7 @@ export function gatesForPhase(phase) {
     case 'apply': return ['GATE_BUILD', 'GATE_VALIDATE', 'GATE_TEST'];
     case 'verify': return ['GATE_BUILD', 'GATE_VALIDATE', 'GATE_TEST', 'GATE_A11Y', 'GATE_PERF'];
     case 'archive': return ['GATE_SECURITY', 'GATE_HUMAN'];
-    case 'auto': return ['GATE_BUILD', 'GATE_VALIDATE', 'GATE_TEST'];
+    case 'auto': return ['GATE_BUILD', 'GATE_VALIDATE', 'GATE_TEST', 'GATE_A11Y', 'GATE_PERF', 'GATE_VISUAL'];
     default: return [];
   }
 }

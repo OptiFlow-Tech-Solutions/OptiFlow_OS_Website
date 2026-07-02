@@ -291,3 +291,240 @@ export function featuresByPrefix(prefix) {
 export function mapToSpec(feature) {
   return discoverSpecs(feature);
 }
+
+// ── V6: Natural language → Feature ID resolution ──
+
+/** Extended keyword map for /opsx-auto task→feature resolution */
+const TASK_FEATURE_MAP = Object.freeze({
+  'home page': ['PAGE-001'],
+  'home': ['PAGE-001'],
+  'homepage': ['PAGE-001'],
+  'landing page': ['PAGE-001'],
+  'hero section': ['PAGE-001'],
+  'hero': ['PAGE-001'],
+  'cta': ['PAGE-001'],
+
+  'problem': ['PAGE-002'],
+  'solutions': ['PAGE-002'],
+  'problem and solutions': ['PAGE-002'],
+  'problem & solutions': ['PAGE-002'],
+
+  'product overview': ['PAGE-003'],
+  'product': ['PAGE-003'],
+  'product page': ['PAGE-003'],
+  'platform overview': ['PAGE-003'],
+  'inventory': ['PAGE-003'],
+  'module': ['PAGE-003'],
+
+  'feature showcase': ['PAGE-004'],
+  'features': ['PAGE-004'],
+  'feature list': ['PAGE-004'],
+
+  'competitive positioning': ['PAGE-005'],
+  'competitive': ['PAGE-005'],
+  'comparison': ['PAGE-005'],
+  'why choose': ['PAGE-005'],
+
+  'pricing': ['PAGE-006'],
+  'pricing page': ['PAGE-006'],
+  'pricing & plans': ['PAGE-006'],
+  'plans': ['PAGE-006'],
+  'subscription': ['PAGE-006'],
+  'pricing table': ['PAGE-006'],
+
+  'newsletter subscription': ['PAGE-007'],
+  'newsletter': ['PAGE-007'],
+  'newsletter & content': ['PAGE-007'],
+  'content': ['PAGE-007'],
+  'blog': ['PAGE-007'],
+
+  'faq': ['PAGE-008'],
+  'faq & self-service': ['PAGE-008'],
+  'faq page': ['PAGE-008'],
+  'self-service': ['PAGE-008'],
+  'help page': ['PAGE-008'],
+
+  'demo booking': ['LEAD-001'],
+  'demo': ['LEAD-001'],
+  'booking': ['LEAD-001'],
+  'schedule demo': ['LEAD-001'],
+  'book demo': ['LEAD-001'],
+  'appointment': ['LEAD-001'],
+  'demo page': ['LEAD-001'],
+
+  'contact': ['LEAD-002'],
+  'contact & support': ['LEAD-002'],
+  'support': ['LEAD-002'],
+  'contact page': ['LEAD-002'],
+  'contact form': ['LEAD-002'],
+
+  'privacy policy': ['LEGAL-001'],
+  'privacy': ['LEGAL-001'],
+  'privacy page': ['LEGAL-001'],
+
+  'terms': ['LEGAL-002'],
+  'terms & conditions': ['LEGAL-002'],
+  'terms and conditions': ['LEGAL-002'],
+  'tos': ['LEGAL-002'],
+
+  'form processing': ['API-001'],
+  'form api': ['API-001'],
+  'form submission': ['API-001'],
+  'contact api': ['API-001'],
+
+  'admin authentication': ['API-002'],
+  'admin auth': ['API-002'],
+  'admin login': ['API-002'],
+  'authentication': ['API-002'],
+
+  'admin dashboard': ['API-003'],
+  'admin panel': ['API-003'],
+  'admin page': ['API-003'],
+  'admin': ['API-003'],
+
+  'email notifications': ['API-004'],
+  'email': ['API-004'],
+  'notifications': ['API-004'],
+  'email api': ['API-004'],
+  'send email': ['API-004'],
+
+  'database': ['API-005'],
+  'data management': ['API-005'],
+  'kv store': ['API-005'],
+  'storage': ['API-005'],
+
+  'monitoring': ['API-006'],
+  'observability': ['API-006'],
+  'health check': ['API-006'],
+  'logging': ['API-006'],
+
+  'accessibility': ['QA-001'],
+  'a11y': ['QA-001'],
+  'wcag': ['QA-001'],
+  'accessibility compliance': ['QA-001'],
+
+  'testing': ['QA-002'],
+  'test suite': ['QA-002'],
+  'e2e tests': ['QA-002'],
+  'playwright': ['QA-002'],
+
+  'code quality': ['QA-003'],
+  'performance': ['QA-003'],
+  'optimization': ['QA-003'],
+  'code quality & performance': ['QA-003'],
+  'speed': ['QA-003'],
+  'responsive': ['QA-003'],
+  'layout': ['QA-003'],
+
+  'orchestration engine': ['OPS-001'],
+  'orchestration': ['OPS-001'],
+  'orchestrate': ['OPS-001'],
+
+  'git hooks': ['OPS-002'],
+  'hooks': ['OPS-002'],
+  'automation': ['OPS-002'],
+  'git hooks & automation': ['OPS-002'],
+
+  'dark mode support': ['SYS-001'],
+  'dark mode': ['SYS-001'],
+  'design system': ['SYS-001'],
+  'theming': ['SYS-001'],
+  'design system & theming': ['SYS-001'],
+
+  'navigation': ['SYS-002'],
+  'site navigation': ['SYS-002'],
+  'nav bar': ['SYS-002'],
+  'site navigation & structure': ['SYS-002'],
+  'structure': ['SYS-002'],
+
+  'interactive': ['SYS-003'],
+  'interactive runtime': ['SYS-003'],
+  'javascript runtime': ['SYS-003'],
+
+  'build pipeline': ['SYS-004'],
+  'build & deployment': ['SYS-004'],
+  'build & deployment pipeline': ['SYS-004'],
+  'deployment': ['SYS-004'],
+  'build': ['SYS-004'],
+
+  'seo optimization': ['SYS-005'],
+  'seo': ['SYS-005'],
+  'seo & metadata': ['SYS-005'],
+  'metadata': ['SYS-005'],
+  'sitemap': ['SYS-005'],
+  'meta tags': ['SYS-005'],
+});
+
+/**
+ * Reverse-map a natural language task description to a Feature ID.
+ * Uses extended keyword matching with scoring heuristics.
+ *
+ * @param {string} taskDescription
+ * @returns {{ featureId: string, featureName: string, confidence: number }}
+ */
+export function resolveFeatureFromTask(taskDescription) {
+  const lower = taskDescription.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+
+  let bestMatch = null;
+  let bestScore = 0;
+
+  for (const [key, ids] of Object.entries(TASK_FEATURE_MAP)) {
+    const score = scoreKeywordMatch(lower, key);
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = { key, ids };
+    }
+  }
+
+  if (bestMatch && bestScore > 0) {
+    const featureId = bestMatch.ids[0];
+    const feature = getFeature(featureId);
+    if (feature) {
+      return {
+        featureId: feature.id,
+        featureName: feature.name,
+        confidence: Math.min(1, bestScore),
+      };
+    }
+  }
+
+  // Fallback: scan all feature names
+  const registry = loadFeatureRegistry();
+  for (const f of registry.features) {
+    const score = scoreKeywordMatch(lower, f.name.toLowerCase());
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = { ids: [f.id], key: f.name };
+    }
+  }
+
+  if (bestMatch && bestScore > 0) {
+    return {
+      featureId: bestMatch.ids[0],
+      featureName: bestMatch.key,
+      confidence: Math.min(1, bestScore * 0.7),
+    };
+  }
+
+  // Absolute fallback: home page
+  return { featureId: 'PAGE-001', featureName: 'Home Page', confidence: 0.1 };
+}
+
+/**
+ * Score how well a keyword matches the task description.
+ * @param {string} taskLower
+ * @param {string} keyword
+ * @returns {number}
+ */
+function scoreKeywordMatch(taskLower, keyword) {
+  if (taskLower === keyword) return 1.0;
+  if (taskLower.includes(keyword)) return 0.8 + (keyword.split(' ').length * 0.05);
+  if (keyword.includes(taskLower)) return 0.6 + (taskLower.split(' ').length * 0.05);
+
+  const taskTokens = new Set(taskLower.split(' ').filter(Boolean));
+  const kwTokens = keyword.split(' ').filter(Boolean);
+  const matched = kwTokens.filter((t) => taskTokens.has(t));
+  if (kwTokens.length === 0) return 0;
+
+  return (matched.length / kwTokens.length) + (matched.length * 0.01);
+}
