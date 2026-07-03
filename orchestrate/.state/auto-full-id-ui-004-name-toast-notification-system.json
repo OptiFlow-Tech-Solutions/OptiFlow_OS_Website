@@ -1,0 +1,128 @@
+{
+  "version": "7.0",
+  "command": "auto",
+  "executionId": "id-ui-004-name-toast-notification-system-1783101502096",
+  "changeName": "id-ui-004-name-toast-notification-system",
+  "branch": "main",
+  "task": "id: UI-004, name: Toast & Notification System",
+  "status": "issues-found",
+  "duration": 22657.0675,
+  "project": {
+    "name": "OptiFlow OS",
+    "framework": "static-site",
+    "architecture": "pages-based",
+    "totalFiles": 27,
+    "totalLines": 11206,
+    "todos": 0,
+    "fixmes": 0,
+    "partialFeatures": 30
+  },
+  "analysis": {
+    "intents": [],
+    "domains": [
+      "frontend",
+      "design"
+    ],
+    "confidence": 0
+  },
+  "capabilities": {
+    "skills": [
+      "coding-standards",
+      "social-graph-ranker",
+      "cpp-coding-standards",
+      "openclaw-persona-forge",
+      "strategic-compact",
+      "team-builder",
+      "dmux-workflows",
+      "flutter-dart-code-review",
+      "frontend-a11y",
+      "openspec-auto",
+      "prisma-patterns",
+      "motion-patterns"
+    ],
+    "agents": {
+      "primary": "tdd-guide",
+      "support": [
+        "frontend-design-direction",
+        "security-reviewer"
+      ]
+    },
+    "mcpServers": [
+      "context7",
+      "parallel-search",
+      "chrome-devtools",
+      "playwright",
+      "magic"
+    ],
+    "hooks": {
+      "preHooks": [
+        "pre-build"
+      ],
+      "postHooks": []
+    },
+    "gates": [
+      "GATE_BUILD",
+      "GATE_VALIDATE",
+      "GATE_TEST",
+      "GATE_A11Y",
+      "GATE_PERF",
+      "GATE_VISUAL"
+    ]
+  },
+  "lifecycle": [
+    {
+      "name": "DEEP_SCAN",
+      "status": "complete",
+      "duration": 995
+    },
+    {
+      "name": "SKILL_DISCOVERY",
+      "status": "complete",
+      "duration": 169
+    },
+    {
+      "name": "OPSX_EXPLORE",
+      "status": "complete",
+      "duration": 111
+    },
+    {
+      "name": "OPSX_PROPOSE",
+      "status": "complete",
+      "duration": 88
+    },
+    {
+      "name": "OPSX_SYNC",
+      "status": "complete",
+      "duration": 25
+    },
+    {
+      "name": "OPSX_APPLY",
+      "status": "complete",
+      "duration": 506
+    },
+    {
+      "name": "VALIDATE",
+      "status": "failed",
+      "duration": 20402
+    },
+    {
+      "name": "OPSX_ARCHIVE",
+      "status": "complete",
+      "duration": 111
+    }
+  ],
+  "validation": {
+    "passed": false,
+    "failures": [
+      "Lint: \nassets/css/core.css\n  \u001b[2m307:1\u001b[22m  \u001b[31m\u001b[31m✖\u001b[39m  Expected empty line before rule  \u001b[2mrule-empty-line-before\u001b[22",
+      "Tests: Error: Cannot find package '@playwright/test' imported from D:\\OptiFlow_OS_Website\\tests\\e2e\\playwright.config.js\n    at",
+      "Gate: GATE_A11Y"
+    ]
+  },
+  "phaseContext": {
+    "featureId": "SYS-001",
+    "featureName": "Design System & Theming",
+    "skillCount": 12
+  },
+  "timestamp": "2026-07-03T17:58:44.511Z"
+}

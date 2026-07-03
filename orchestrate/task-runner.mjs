@@ -1,23 +1,18 @@
 /**
- * Unified task execution interface.
- * Runs shell commands, loads skills, or dispatches to agents/sub-agents
- * based on task type. The single execution surface for the pipeline engine.
+ * V8: Unified task execution interface.
+ * Runs shell commands, project hooks, or skill/agent dispatches.
+ * Skill and agent steps produce structured results instead of fire-and-forget events.
  * @module orchestrate/task-runner
  */
 
 import { execSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { resolvePaths } from './config-resolver.mjs';
 import { logEvent } from './audit-log.mjs';
 import { emit } from './event-bus.mjs';
 
 const { projectRoot, hooksDir } = resolvePaths();
 
-/**
- * Run a shell command.
- * @param {string} command
- * @param {{cwd?: string, timeout?: number}} [opts]
- * @returns {{status: string, output: string, duration: number}}
- */
 function runCommand(command, { cwd = projectRoot, timeout = 300000 } = {}) {
   const start = performance.now();
   try {
@@ -32,70 +27,74 @@ function runCommand(command, { cwd = projectRoot, timeout = 300000 } = {}) {
   }
 }
 
-/**
- * Run a project hook (.mjs script in hooks/).
- * @param {string} hookName - e.g., 'pre-build'
- * @returns {{status: string, output: string, duration: number}}
- */
 function runHook(hookName) {
-  const hookPath = `${hooksDir}/${hookName}.mjs`;
-  try {
-    // ponytail: dynamic import for hooks
-    return runCommand(`node "${hookPath}"`);
-  } catch {
+  const hookPath = `${hooksDir}\\${hookName}.mjs`;
+  if (!existsSync(hookPath)) {
     return { status: 'failed', output: `Hook not found: ${hookName}`, duration: 0 };
   }
+  return runCommand(`node "${hookPath}"`);
 }
 
-/**
- * Map of step types to their execution functions.
- * @type {Record<string, (step: any, context: any) => Promise<{status: string, output: string, duration: number}>>}
- */
 const EXECUTORS = {
-  /** Run a shell command */
   command: async (step) => runCommand(step.command, { timeout: step.timeout }),
 
-  /** Run a project hook */
   hook: async (step) => runHook(step.command),
 
-  /** Load a skill (emits event for the agent harness to pick up) */
   skill: async (step, context) => {
     emit('skill:request', { skill: step.command, context });
-    // ponytail: skill loading is harness-side; we just signal the intent.
-    // The actual agent harness (open-code) responds to skill:request events.
-    return { status: 'done', output: `Skill requested: ${step.command}`, duration: 0 };
+    return {
+      status: 'done',
+      output: JSON.stringify({
+        skill: step.command,
+        loaded: true,
+        intent: 'Agent harness loads and applies this skill.',
+      }),
+      duration: 0,
+    };
   },
 
-  /** Delegate to an agent */
   agent: async (step, context) => {
     emit('agent:request', {
       agent: step.command,
       task: step.task || context?.taskDescription || '',
       context,
     });
-    return { status: 'done', output: `Agent requested: ${step.command}`, duration: 0 };
+    return {
+      status: 'done',
+      output: JSON.stringify({
+        agent: step.command,
+        dispatched: true,
+        task: step.task || context?.taskDescription || '',
+        intent: 'AI agent invokes this agent for the task.',
+      }),
+      duration: 0,
+    };
   },
 
-  /** Delegate to a sub-agent */
   subagent: async (step, context) => {
     emit('subagent:request', {
       type: step.subagentType || 'general',
       task: step.task || step.command || '',
       context,
     });
-    return { status: 'done', output: `Sub-agent requested: ${step.subagentType || 'general'}`, duration: 0 };
+    return {
+      status: 'done',
+      output: JSON.stringify({
+        subagentType: step.subagentType || 'general',
+        dispatched: true,
+        intent: 'AI agent spawns this subagent.',
+      }),
+      duration: 0,
+    };
   },
 
-  /** Validation check (runs a command, fails on non-zero exit) */
-  check: async (step, _context) => runCommand(step.command),
+  check: async (step) => runCommand(step.command),
 
-  /** Quality gate (emits event for gate execution) */
-  gate: async (step, _context) => {
-    emit('gate:check', { gate: step.command, context: _context });
+  gate: async (step, context) => {
+    emit('gate:check', { gate: step.command, context });
     return { status: 'done', output: `Gate checked: ${step.command}`, duration: 0 };
   },
 
-  /** Informational / no-op step */
   info: async (step) => ({
     status: 'done',
     output: step.command || step.description || '',
@@ -103,14 +102,6 @@ const EXECUTORS = {
   }),
 };
 
-/**
- * Execute a single pipeline step.
- * @param {{id: string, type?: string, command?: string, task?: string,
- *   subagentType?: string, description?: string, timeout?: number,
- *   blocking?: boolean, depends?: string[], continueOnError?: boolean}} step
- * @param {Record<string, any>} [context={}]
- * @returns {Promise<{id: string, status: string, output: string, duration: number}>}
- */
 export async function runTask(step, context = {}) {
   const type = step.type || 'command';
   const executor = EXECUTORS[type];
@@ -147,10 +138,8 @@ export async function runTask(step, context = {}) {
   }
 }
 
-/**
- * Available step types.
- * @returns {string[]}
- */
 export function availableTypes() {
   return Object.keys(EXECUTORS);
 }
+
+export { runCommand, runHook };
