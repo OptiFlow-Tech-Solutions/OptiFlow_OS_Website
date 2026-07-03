@@ -132,7 +132,7 @@ function buildPage(pageInfo) {
     '<meta property="og:locale" content="en_IN">',
     '<meta property="og:image:width" content="512">',
     '<meta property="og:image:height" content="512">',
-    '<meta name="twitter:image" content="https://${site.domain}/assets/img/${site.logo}">',
+    `<meta name="twitter:image" content="https://${site.domain}/assets/img/${site.logo}">`,
     '<meta name="twitter:image:alt" content="OptiFlow OS Logo">',
     `<meta name="robots" content="${pageInfo.noindex ? 'noindex, nofollow' : 'index, follow'}">`,
   ].filter(Boolean).join('\n  ');
@@ -141,6 +141,10 @@ function buildPage(pageInfo) {
     '<meta name="viewport"',
     `${seoMetas}\n  <meta name="viewport"`
   );
+
+  if (process.env.OPTIFLOW_LIVE_RELOAD) {
+    html = html.replace('</head>', '<script>let _lt=0,_init=!1;setInterval(()=>{fetch("/rebuild.txt?"+Date.now()).then(r=>r.text()).then(v=>{let n=+v.trim();if(!_init){_lt=n;_init=!0;return}if(n>_lt){_lt=n;location.reload()}}).catch(()=>{})},800)</script>\n</head>');
+  }
 
   const destDir = pageFile === 'index.html'
     ? DIST

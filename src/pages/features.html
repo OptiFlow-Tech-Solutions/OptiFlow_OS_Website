@@ -614,18 +614,15 @@
     for (const e of entries) {
       if (e.isIntersecting) {
         setActiveTab(e.target.id);
-        const tab = document.querySelector('.feature-tab[data-target="' + e.target.id + '"]');
-        if (tab) tab.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
       }
     }
-  }, { rootMargin: '-40% 0px -55% 0px' });
+  }, { rootMargin: '-30% 0px -50% 0px' });
 
   featureSections.forEach(s => sectionObserver.observe(s));
 
-  const navObserver = new IntersectionObserver(([e]) => {
-    fnav.classList.toggle('stuck', e.intersectionRatio < 1);
-  }, { threshold: [1] });
-  navObserver.observe(fnav);
+  window.addEventListener('scroll', () => {
+    fnav.classList.toggle('stuck', window.scrollY > 10);
+  }, { passive: true });
 </script>
 </body>
 </html>

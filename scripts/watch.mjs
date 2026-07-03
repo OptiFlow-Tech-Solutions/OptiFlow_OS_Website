@@ -18,7 +18,8 @@ function rebuild(label) {
   timer = setTimeout(() => {
     try {
       console.log(`\n[${label}] Rebuilding...`);
-      execSync(`node "${ASSEMBLE}"`, { cwd: ROOT, stdio: 'inherit' });
+      execSync(`node "${ASSEMBLE}"`, { cwd: ROOT, stdio: 'inherit', env: { ...process.env, OPTIFLOW_LIVE_RELOAD: '1' } });
+      fs.writeFileSync(path.join(ROOT, 'dist', 'rebuild.txt'), String(Date.now()));
     } catch (_e) {
       console.error('Build failed, waiting for changes...');
     }

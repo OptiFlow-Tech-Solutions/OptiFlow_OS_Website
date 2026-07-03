@@ -66,14 +66,22 @@ process.exit(getErrors() > 0 ? 1 : 0);
 function findDesignPngs() {
   const pngs = [];
   const designRoot = fs.readdirSync(ROOT).find(d => d.startsWith('OptiFlow-OS'));
-  if (!designRoot) return pngs;
-  const base = path.join(ROOT, designRoot);
-  (function walk(dir) {
-    if (!fs.existsSync(dir)) return;
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      if (entry.isDirectory()) walk(path.join(dir, entry.name));
-      else if (entry.name.toLowerCase().endsWith('.png')) pngs.push(entry.name);
+  if (designRoot) {
+    const base = path.join(ROOT, designRoot);
+    (function walk(dir) {
+      if (!fs.existsSync(dir)) return;
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        if (entry.isDirectory()) walk(path.join(dir, entry.name));
+        else if (entry.name.toLowerCase().endsWith('.png')) pngs.push(entry.name);
+      }
+    }(base));
+  }
+  // ponytail: also check DESIGN.md/logos/
+  const logosDir = path.join(ROOT, 'DESIGN.md', 'logos');
+  if (fs.existsSync(logosDir)) {
+    for (const f of fs.readdirSync(logosDir)) {
+      if (f.toLowerCase().endsWith('.png')) pngs.push(f);
     }
-  }(base));
+  }
   return pngs;
 }

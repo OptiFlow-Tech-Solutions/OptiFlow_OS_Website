@@ -9,7 +9,7 @@
   "location": "Surat, India",
   "year": 2026,
   "domain": "optiflow.in",
-  "logo": "mqrk6wlm-OptiFlow.Logo.png",
+  "logo": "OptiFlow.Logo.png",
   "pages": [
     { "file": "index.html", "title": "OptiFlow OS — Business Operating System for Indian MSMEs", "description": "OptiFlow OS is the Business Operating System for Indian MSMEs — replace WhatsApp and Excel with one platform. Book a free demo.", "active": "Home" },
     { "file": "problem-solutions/index.html", "title": "Problems & Solutions — OptiFlow OS", "description": "See how OptiFlow OS solves the 6 biggest operational challenges Indian MSMEs face daily — from WhatsApp chaos to zero accountability.", "active": "Solutions" },

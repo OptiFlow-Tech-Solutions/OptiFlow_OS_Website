@@ -46,5 +46,8 @@ export function findDesignMd() {
       if (fs.existsSync(fp)) return fp;
     }
   }
+  // ponytail: DESIGN.md might be a directory at project root
+  const alt = path.join(ROOT, 'DESIGN.md', 'DESIGN.md');
+  if (fs.existsSync(alt)) return alt;
   return null;
 }

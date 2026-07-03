@@ -595,4 +595,37 @@
       }
     });
   });
+
+  /* ─── Page Transitions ───
+     ponytail: fade-in on load, fade-out on internal-link click.
+     Skips if reduced-motion, external links, hash-only, downloads, new-tab, mailto/tel.
+     Graceful: if JS fails, default navigation still works. */
+  (function() {
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Enter: add class after DOM ready so browser paints the enter animation */
+    if (!prefersReduced) {
+      document.documentElement.classList.add('page-enter-active');
+    }
+
+    function isInternalLink(a) {
+      if (!a.href || a.protocol === 'mailto:' || a.protocol === 'tel:') return false;
+      if (a.target === '_blank' || a.hasAttribute('download')) return false;
+      if (a.getAttribute('href') === '#') return false;
+      if (a.getAttribute('href') && a.getAttribute('href').startsWith('#')) return false;
+      try { return new URL(a.href).origin === window.location.origin; }
+      catch (_) { return false; }
+    }
+
+    /* Exit: intercept internal link clicks, play exit animation, then navigate */
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a || !isInternalLink(a)) return;
+      if (prefersReduced) return; /* let default navigation proceed */
+      e.preventDefault();
+      var href = a.href;
+      document.documentElement.classList.add('page-exit-active');
+      setTimeout(function() { window.location = href; }, 280);
+    });
+  })();
 })();

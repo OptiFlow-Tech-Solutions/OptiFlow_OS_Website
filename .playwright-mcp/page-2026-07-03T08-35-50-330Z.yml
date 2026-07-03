@@ -1,0 +1,644 @@
+- generic [active] [ref=f73e1]:
+  - link "Skip to content" [ref=f73e2] [cursor=pointer]:
+    - /url: "#content"
+  - navigation "Main navigation" [ref=f73e3]:
+    - generic [ref=f73e4]:
+      - link "OptiFlow OptiFlow" [ref=f73e5] [cursor=pointer]:
+        - /url: /
+        - img "OptiFlow" [ref=f73e6]
+        - text: OptiFlow
+      - navigation [ref=f73e7]:
+        - link "Home" [ref=f73e8] [cursor=pointer]:
+          - /url: /
+        - link "Solutions" [ref=f73e9] [cursor=pointer]:
+          - /url: /problem-solutions/
+        - link "Product" [ref=f73e10] [cursor=pointer]:
+          - /url: /product-overview/
+        - link "Features" [ref=f73e11] [cursor=pointer]:
+          - /url: /features/
+        - link "Why OptiFlow" [ref=f73e12] [cursor=pointer]:
+          - /url: /why-optiflow/
+        - link "Pricing" [ref=f73e13] [cursor=pointer]:
+          - /url: /pricing/
+        - generic [ref=f73e15]:
+          - text: Resources
+          - img [ref=f73e16]
+        - link "Contact" [ref=f73e18] [cursor=pointer]:
+          - /url: /contact/
+      - generic [ref=f73e19]:
+        - button "Toggle theme" [ref=f73e20] [cursor=pointer]:
+          - img [ref=f73e21]
+        - link "Book Demo" [ref=f73e27] [cursor=pointer]:
+          - /url: /demo-booking/
+  - generic [ref=f73e28]:
+    - link "Home" [ref=f73e29] [cursor=pointer]:
+      - /url: /
+    - link "Solutions" [ref=f73e30] [cursor=pointer]:
+      - /url: /problem-solutions/
+    - link "Product" [ref=f73e31] [cursor=pointer]:
+      - /url: /product-overview/
+    - link "Features" [ref=f73e32] [cursor=pointer]:
+      - /url: /features/
+    - link "Why OptiFlow" [ref=f73e33] [cursor=pointer]:
+      - /url: /why-optiflow/
+    - link "Pricing" [ref=f73e34] [cursor=pointer]:
+      - /url: /pricing/
+    - generic [ref=f73e35]:
+      - text: Resources
+      - generic [ref=f73e36]:
+        - link "Newsletter" [ref=f73e37] [cursor=pointer]:
+          - /url: /newsletter/
+        - link "FAQ" [ref=f73e38] [cursor=pointer]:
+          - /url: /faq/
+        - link "Competitive Positioning" [ref=f73e39] [cursor=pointer]:
+          - /url: /competitive-positioning/
+    - link "Contact" [ref=f73e40] [cursor=pointer]:
+      - /url: /contact/
+    - link "Book Demo" [ref=f73e42] [cursor=pointer]:
+      - /url: /demo-booking/
+  - main [ref=f73e43]:
+    - generic [ref=f73e46]:
+      - generic [ref=f73e47]:
+        - generic [ref=f73e48]:
+          - img [ref=f73e49]
+          - text: Stop Losing Time on Manual Processes
+        - heading "Dai" [level=1] [ref=f73e51]:
+          - text: Dai
+          - generic [ref=f73e52]: "|"
+        - paragraph [ref=f73e53]: OptiFlow OS replaces scattered messages and spreadsheets with a single operating system — giving you complete visibility, reliable accountability, and the operational efficiency to scale your business without adding headcount.
+        - generic [ref=f73e54]:
+          - link "Book Your Demo — It's Free" [ref=f73e55] [cursor=pointer]:
+            - /url: /demo-booking/
+          - link "See OptiFlow In Action" [ref=f73e56] [cursor=pointer]:
+            - /url: /product-overview/
+        - generic [ref=f73e57]:
+          - generic [ref=f73e58]:
+            - img [ref=f73e59]
+            - text: Zero IT Team Needed
+          - generic [ref=f73e61]:
+            - img [ref=f73e62]
+            - text: Results In Days, Not Months
+          - generic [ref=f73e64]:
+            - img [ref=f73e65]
+            - text: Built For Indian Businesses
+          - generic [ref=f73e67]:
+            - img [ref=f73e68]
+            - text: Trusted Across 7 Industries
+      - generic [ref=f73e71]:
+        - heading "OptiFlow Dashboard — Today" [level=4] [ref=f73e73]
+        - generic [ref=f73e78]:
+          - generic [ref=f73e79]:
+            - generic [ref=f73e80]: Active Tasks
+            - generic [ref=f73e81]: 1,247
+            - generic [ref=f73e82]: ↑ 12% vs last month
+          - generic [ref=f73e83]:
+            - generic [ref=f73e84]: Team Members
+            - generic [ref=f73e85]: "86"
+            - generic [ref=f73e86]: ↑ 4% growth
+          - generic [ref=f73e87]:
+            - generic [ref=f73e88]: Completion Rate
+            - generic [ref=f73e89]: 94%
+            - generic [ref=f73e90]: ↑ 8% improvement
+          - generic [ref=f73e91]:
+            - generic [ref=f73e92]: On-Time Delivery
+            - generic [ref=f73e93]: 97%
+            - generic [ref=f73e94]: ↑ 2% gain
+        - img [ref=f73e96]
+        - generic [ref=f73e99]:
+          - generic [ref=f73e100]: Task
+          - generic [ref=f73e101]: Assignee
+          - generic [ref=f73e102]: Due
+          - generic [ref=f73e103]: Status
+        - generic [ref=f73e104]:
+          - generic [ref=f73e105]: "Quality check — Batch #412"
+          - generic [ref=f73e106]: Rajesh K.
+          - generic [ref=f73e107]: Today
+          - generic [ref=f73e108]: Active
+        - generic [ref=f73e109]:
+          - generic [ref=f73e110]: Client follow-up — Apex Textiles
+          - generic [ref=f73e111]: Priya M.
+          - generic [ref=f73e112]: Tomorrow
+          - generic [ref=f73e113]: Pending
+        - generic [ref=f73e114]:
+          - generic [ref=f73e115]: SOP update — Warehouse
+          - generic [ref=f73e116]: Amit S.
+          - generic [ref=f73e117]: Jun 26
+          - generic [ref=f73e118]: Active
+        - generic [ref=f73e119]:
+          - generic [ref=f73e120]: Tasks Completed Today
+          - generic [ref=f73e121]: "24"
+        - generic [ref=f73e122]:
+          - generic [ref=f73e123]: On-Time Rate
+          - generic [ref=f73e124]: 96%
+        - generic [ref=f73e125]:
+          - generic [ref=f73e126]: Pending Actions
+          - generic [ref=f73e127]: "3"
+    - generic [ref=f73e129]:
+      - generic [ref=f73e130]:
+        - generic [ref=f73e131]:
+          - generic [ref=f73e132]: 10,000+
+          - generic [ref=f73e133]: Tasks Managed Daily
+        - generic [ref=f73e134]:
+          - generic [ref=f73e135]: 500+
+          - generic [ref=f73e136]: Businesses Onboarded
+        - generic [ref=f73e137]:
+          - generic [ref=f73e138]: 95%
+          - generic [ref=f73e139]: On-Time Completion
+        - generic [ref=f73e140]:
+          - generic [ref=f73e141]: 4.8/5
+          - generic [ref=f73e142]: Customer Rating
+      - generic [ref=f73e144]:
+        - generic [ref=f73e145]: Vertex Manufacturing
+        - generic [ref=f73e146]: Apex Textiles
+        - generic [ref=f73e147]: SwiftLog Logistics
+        - generic [ref=f73e148]: Prime Distributors
+        - generic [ref=f73e149]: Craft Exports
+        - generic [ref=f73e150]: Sparsh Services
+        - generic [ref=f73e151]: Vertex Manufacturing
+        - generic [ref=f73e152]: Apex Textiles
+        - generic [ref=f73e153]: SwiftLog Logistics
+        - generic [ref=f73e154]: Prime Distributors
+        - generic [ref=f73e155]: Craft Exports
+        - generic [ref=f73e156]: Sparsh Services
+    - generic [ref=f73e158]:
+      - generic [ref=f73e159]:
+        - paragraph [ref=f73e160]: The Problem
+        - heading "Growth Stops When Operations Depend On One Person" [level=2] [ref=f73e161]
+        - paragraph [ref=f73e162]: As your business grows, WhatsApp and Excel become liabilities — not tools. Without systems, every new order, employee, and client adds chaos instead of capacity.
+      - generic [ref=f73e163]:
+        - generic [ref=f73e164]:
+          - img [ref=f73e166]
+          - heading "Tasks Get Missed" [level=3] [ref=f73e168]
+          - paragraph [ref=f73e169]: Critical work vanishes into message threads. No one knows what's pending, who owns it, or when it was due.
+          - generic [ref=f73e170]: Lost Revenue · Delayed Deliveries
+          - generic [ref=f73e171]: "Fix this: recover ₹5–12L/year in missed billing"
+        - generic [ref=f73e172]:
+          - img [ref=f73e174]
+          - heading "No Accountability" [level=3] [ref=f73e176]
+          - paragraph [ref=f73e177]: Without clear ownership, work bounces between people. Blame replaces responsibility when things go wrong.
+          - generic [ref=f73e178]: Missed Deadlines · Blame Games
+          - generic [ref=f73e179]: "Fix this: 40% fewer missed commitments"
+        - generic [ref=f73e180]:
+          - img [ref=f73e182]
+          - heading "WhatsApp Chaos" [level=3] [ref=f73e184]
+          - paragraph [ref=f73e185]: Work buried in 20+ groups. Instructions get lost, updates get missed, and nothing is searchable.
+          - generic [ref=f73e186]: Duplicated Effort · Confusion
+          - generic [ref=f73e187]: "Fix this: save 2–4 hours/manager daily"
+        - generic [ref=f73e188]:
+          - img [ref=f73e190]
+          - heading "Excel Dependency" [level=3] [ref=f73e192]
+          - paragraph [ref=f73e193]: Spreadsheets live on one person's laptop. They break, get overwritten, and can't be accessed remotely.
+          - generic [ref=f73e194]: Data Loss · Version Conflicts
+          - generic [ref=f73e195]: "Fix this: one source of truth, always accessible"
+        - generic [ref=f73e196]:
+          - img [ref=f73e198]
+          - heading "No Visibility" [level=3] [ref=f73e201]
+          - paragraph [ref=f73e202]: You discover problems at month-end — not in real time. Decisions are based on gut feel, not data.
+          - generic [ref=f73e203]: Slow Decisions · Blind Spots
+          - generic [ref=f73e204]: "Fix this: spot bottlenecks before they cost you"
+        - generic [ref=f73e205]:
+          - img [ref=f73e207]
+          - heading "Delayed Follow-Ups" [level=3] [ref=f73e210]
+          - paragraph [ref=f73e211]: Client queries, vendor payments, internal approvals — all slip through when there's no tracking.
+          - generic [ref=f73e212]: Lost Clients · Late Payments
+          - generic [ref=f73e213]: "Fix this: eliminate 70% of follow-up delays"
+    - generic [ref=f73e215]:
+      - generic [ref=f73e216]:
+        - heading "Every Day Without A System, Money Leaks" [level=2] [ref=f73e217]
+        - paragraph [ref=f73e218]: The real cost isn't software — it's the revenue, productivity, and growth you lose every day you operate without structure.
+      - generic [ref=f73e219]:
+        - generic [ref=f73e221]:
+          - heading "Revenue Leakage" [level=3] [ref=f73e222]
+          - paragraph [ref=f73e223]: Delayed invoicing, unbilled work, missed payment follow-ups
+          - generic [ref=f73e224]: ₹8–15L/yr
+        - generic [ref=f73e226]:
+          - heading "Productivity Drain" [level=3] [ref=f73e227]
+          - paragraph [ref=f73e228]: 2–4 hrs/day wasted on chasing status updates
+          - generic [ref=f73e229]: ₹12–20L/yr
+        - generic [ref=f73e231]:
+          - heading "Delivery Penalties" [level=3] [ref=f73e232]
+          - paragraph [ref=f73e233]: Late orders, client escalations, lost repeat business
+          - generic [ref=f73e234]: ₹5–10L/yr
+        - generic [ref=f73e236]:
+          - heading "Key-Person Risk" [level=3] [ref=f73e237]
+          - paragraph [ref=f73e238]: Operations depend on 2–3 people — losing one halts everything
+          - generic [ref=f73e239]: ₹10–25L/yr
+        - generic [ref=f73e241]:
+          - heading "Founder Burnout" [level=3] [ref=f73e242]
+          - paragraph [ref=f73e243]: You're the bottleneck. Every problem escalates to you.
+          - generic [ref=f73e244]: Growth Ceiling
+    - generic [ref=f73e246]:
+      - generic [ref=f73e247]:
+        - heading "From Operational Chaos To Predictable Growth" [level=2] [ref=f73e248]
+        - paragraph [ref=f73e249]: OptiFlow OS replaces disconnected tools with one unified platform — so your business runs on processes, not people.
+      - generic [ref=f73e250]:
+        - generic [ref=f73e251]: Scattered WhatsApp · Excel · Memory
+        - generic [ref=f73e252]: ↓
+        - generic [ref=f73e253]: OptiFlow OS — Unified Operations
+        - generic [ref=f73e254]: ↓
+        - generic [ref=f73e255]: Predictable · Accountable · Scalable
+        - generic [ref=f73e256]:
+          - generic [ref=f73e257]: Tasks
+          - generic [ref=f73e258]: Attendance
+          - generic [ref=f73e259]: SOPs
+          - generic [ref=f73e260]: Reports
+          - generic [ref=f73e261]: Teams
+          - generic [ref=f73e262]: Checklists
+          - generic [ref=f73e263]: Leaves
+          - generic [ref=f73e264]: Analytics
+        - paragraph [ref=f73e265]: One platform. Eight integrated modules. Zero chaos.
+    - generic [ref=f73e267]:
+      - generic [ref=f73e268]:
+        - heading "Every Module Delivers Measurable Business Value" [level=2] [ref=f73e269]
+        - paragraph [ref=f73e270]: Not just features — each module is designed to solve a specific operational challenge and produce a clear business outcome.
+      - generic [ref=f73e271]:
+        - generic [ref=f73e272]:
+          - img [ref=f73e274]
+          - heading "Task Management" [level=3] [ref=f73e276]
+          - paragraph [ref=f73e277]: Every task has an owner, deadline, and status. No ambiguity. No lost work.
+          - generic [ref=f73e278]: "Outcome: zero missed deliverables"
+        - generic [ref=f73e279]:
+          - img [ref=f73e281]
+          - heading "Worklists" [level=3] [ref=f73e283]
+          - paragraph [ref=f73e284]: Tasks, checklists, approvals, and meetings in one unified list. Zero context switching.
+          - generic [ref=f73e285]: "Outcome: 30% faster task completion"
+        - generic [ref=f73e286]:
+          - img [ref=f73e288]
+          - heading "Attendance" [level=3] [ref=f73e290]
+          - paragraph [ref=f73e291]: GPS, selfie, office, and IP-based attendance. Real-time workforce visibility.
+          - generic [ref=f73e292]: "Outcome: accurate payroll, zero disputes"
+        - generic [ref=f73e293]:
+          - img [ref=f73e295]
+          - heading "SOP Library" [level=3] [ref=f73e298]
+          - paragraph [ref=f73e299]: Document, version-control, and deploy standard operating procedures across departments.
+          - generic [ref=f73e300]: "Outcome: 80% fewer quality escapes"
+        - generic [ref=f73e301]:
+          - img [ref=f73e303]
+          - heading "Reports & Analytics" [level=3] [ref=f73e305]
+          - paragraph [ref=f73e306]: Task, attendance, department, and audit reports — live, exportable, and decision-ready.
+          - generic [ref=f73e307]: "Outcome: data-driven decisions, not gut feel"
+        - generic [ref=f73e308]:
+          - img [ref=f73e310]
+          - heading "Leave Management" [level=3] [ref=f73e312]
+          - paragraph [ref=f73e313]: Leave requests with buddy replacement, auto-task reassignment, and calendar view.
+          - generic [ref=f73e314]: "Outcome: zero work stoppage from absenteeism"
+        - generic [ref=f73e315]:
+          - img [ref=f73e317]
+          - heading "Team Management" [level=3] [ref=f73e322]
+          - paragraph [ref=f73e323]: Branch, department, and role-based user management with granular permissions.
+          - generic [ref=f73e324]: "Outcome: right person, right access, right work"
+        - generic [ref=f73e325]:
+          - img [ref=f73e327]
+          - heading "Helpdesk" [level=3] [ref=f73e330]
+          - paragraph [ref=f73e331]: Internal support ticketing with routing, priority levels, and resolution tracking.
+          - generic [ref=f73e332]: "Outcome: zero lost requests, faster resolutions"
+    - generic [ref=f73e334]:
+      - generic [ref=f73e335]:
+        - heading "Go From Chaos To Clarity In Four Steps" [level=2] [ref=f73e336]
+        - paragraph [ref=f73e337]: OptiFlow is designed for speed — your team starts using it within days, not weeks.
+      - generic [ref=f73e338]:
+        - generic [ref=f73e339]:
+          - generic [ref=f73e340]: "01"
+          - heading "Create Process" [level=3] [ref=f73e341]
+          - paragraph [ref=f73e342]: "Define the workflow: what, who, when, and how verification works."
+          - generic [ref=f73e343]: Clarity in under 60 seconds
+        - generic [ref=f73e344]:
+          - generic [ref=f73e345]: "02"
+          - heading "Assign Doer" [level=3] [ref=f73e346]
+          - paragraph [ref=f73e347]: Delegate work with clear ownership. No ambiguity. No "I thought someone else..."
+          - generic [ref=f73e348]: Accountability from day one
+        - generic [ref=f73e349]:
+          - generic [ref=f73e350]: "03"
+          - heading "Track Work" [level=3] [ref=f73e351]
+          - paragraph [ref=f73e352]: Monitor progress in real time. See every task, every department, every stage.
+          - generic [ref=f73e353]: Full visibility, zero follow-ups
+        - generic [ref=f73e354]:
+          - generic [ref=f73e355]: "04"
+          - heading "Generate Reports" [level=3] [ref=f73e356]
+          - paragraph [ref=f73e357]: Automated reports for owners, managers, and auditors. One click, always ready.
+          - generic [ref=f73e358]: Data-driven decisions, not gut feel
+    - generic [ref=f73e360]:
+      - generic [ref=f73e361]:
+        - heading "Built For The Way MSMEs Actually Operate" [level=2] [ref=f73e362]
+        - paragraph [ref=f73e363]: Every feature was designed after studying how textile, manufacturing, trading, and distribution businesses really work — not how software companies think they should work.
+      - generic [ref=f73e364]:
+        - generic [ref=f73e365]:
+          - img [ref=f73e367]
+          - heading "Delegation" [level=3] [ref=f73e369]
+          - paragraph [ref=f73e370]: WWHWE framework — every task has What, Who, How, When, and Evidence.
+          - generic [ref=f73e371]: Save 3 hrs/day on status follow-ups
+        - generic [ref=f73e372]:
+          - img [ref=f73e374]
+          - heading "Attendance" [level=3] [ref=f73e376]
+          - paragraph [ref=f73e377]: GPS, selfie, office IP, and shift-based attendance with payroll-ready reports.
+          - generic [ref=f73e378]: Eliminate 100% of attendance disputes
+        - generic [ref=f73e379]:
+          - img [ref=f73e381]
+          - heading "SOPs" [level=3] [ref=f73e383]
+          - paragraph [ref=f73e384]: Version-controlled SOP library with department-level access and acknowledgement tracking.
+          - generic [ref=f73e385]: 80% reduction in process deviations
+        - generic [ref=f73e386]:
+          - img [ref=f73e388]
+          - heading "Dashboard" [level=3] [ref=f73e390]
+          - paragraph [ref=f73e391]: Real-time KPI dashboard with task completion, attendance, and department performance.
+          - generic [ref=f73e392]: Spot problems in minutes, not weeks
+        - generic [ref=f73e393]:
+          - img [ref=f73e395]
+          - heading "Helpdesk" [level=3] [ref=f73e397]
+          - paragraph [ref=f73e398]: Internal ticketing with department routing, priority levels, and resolution time-tracking.
+          - generic [ref=f73e399]: 50% faster issue resolution
+        - generic [ref=f73e400]:
+          - img [ref=f73e402]
+          - heading "Analytics" [level=3] [ref=f73e404]
+          - paragraph [ref=f73e405]: Department-level analytics with trend detection, comparisons, and exportable reports.
+          - generic [ref=f73e406]: Better decisions, faster growth
+        - generic [ref=f73e407]:
+          - img [ref=f73e409]
+          - heading "Leave" [level=3] [ref=f73e414]
+          - paragraph [ref=f73e415]: Buddy replacement, auto-task reassignment, leave calendar, and approval workflow.
+          - generic [ref=f73e416]: Zero work stoppage when people are away
+        - generic [ref=f73e417]:
+          - img [ref=f73e419]
+          - heading "Audit Logs" [level=3] [ref=f73e421]
+          - paragraph [ref=f73e422]: Full activity trail — every task, approval, and change timestamped and attributable.
+          - generic [ref=f73e423]: 100% audit-ready, zero panic
+    - generic [ref=f73e425]:
+      - generic [ref=f73e426]:
+        - heading "Built For Seven Industries. Proven In All Of Them." [level=2] [ref=f73e427]
+        - paragraph [ref=f73e428]: OptiFlow is not generic software. It's designed around how textile units, factories, trading firms, warehouses, distribution networks, logistics operators, and service companies actually work.
+      - generic [ref=f73e429]:
+        - generic [ref=f73e430]:
+          - img [ref=f73e432]
+          - heading "Textile" [level=3] [ref=f73e434]
+          - paragraph [ref=f73e435]: "Challenge: QC checklists skipped, dye batch variance, shift handover gaps."
+          - generic [ref=f73e436]: "Solution: SOP library + shift-wise checklists + real-time compliance dashboard."
+        - generic [ref=f73e437]:
+          - img [ref=f73e439]
+          - heading "Manufacturing" [level=3] [ref=f73e441]
+          - paragraph [ref=f73e442]: "Challenge: Machine maintenance missed, purchase approvals delayed, production delays invisible."
+          - generic [ref=f73e443]: "Solution: WWHWE tasks + approval workflow + live production KPI dashboard."
+        - generic [ref=f73e444]:
+          - img [ref=f73e446]
+          - heading "Trading" [level=3] [ref=f73e448]
+          - paragraph [ref=f73e449]: "Challenge: Sales follow-ups forgotten, client commitments missed, invoice tracking scattered."
+          - generic [ref=f73e450]: "Solution: Task automation + deadline alerts + payment tracking workflow."
+        - generic [ref=f73e451]:
+          - img [ref=f73e453]
+          - heading "Warehousing" [level=3] [ref=f73e456]
+          - paragraph [ref=f73e457]: "Challenge: Dispatch pick-lists outdated, inventory visibility low, stock mismatch errors."
+          - generic [ref=f73e458]: "Solution: Checklist management + real-time task tracking + audit-ready reports."
+        - generic [ref=f73e459]:
+          - img [ref=f73e461]
+          - heading "Distribution" [level=3] [ref=f73e464]
+          - paragraph [ref=f73e465]: "Challenge: Multi-location visibility absent, field team accountability gaps, delivery delays."
+          - generic [ref=f73e466]: "Solution: GPS attendance + multi-branch reporting + automated task delegation."
+        - generic [ref=f73e467]:
+          - img [ref=f73e469]
+          - heading "Logistics" [level=3] [ref=f73e472]
+          - paragraph [ref=f73e473]: "Challenge: Driver attendance, vehicle checklist compliance, delivery confirmation delays."
+          - generic [ref=f73e474]: "Solution: Selfie attendance + daily checklists + mobile task confirmation."
+        - generic [ref=f73e475]:
+          - img [ref=f73e477]
+          - heading "Services" [level=3] [ref=f73e482]
+          - paragraph [ref=f73e483]: "Challenge: Team utilization invisible, client project progress untracked, billing delayed."
+          - generic [ref=f73e484]: "Solution: Worklist management + time tracking + automated reporting."
+    - generic [ref=f73e486]:
+      - generic [ref=f73e487]:
+        - heading "Why Businesses Choose OptiFlow Over The Status Quo" [level=2] [ref=f73e488]
+        - paragraph [ref=f73e489]: The choice isn't between OptiFlow and another tool. It's between systems that scale and chaos that compounds.
+      - table [ref=f73e491]:
+        - rowgroup [ref=f73e492]:
+          - row "Capability Traditional OptiFlow OS" [ref=f73e493]:
+            - columnheader "Capability" [ref=f73e494]
+            - columnheader "Traditional" [ref=f73e495]
+            - columnheader "OptiFlow OS" [ref=f73e496]
+        - rowgroup [ref=f73e497]:
+          - row "Task Ownership Verbal / WhatsApp — lost Clear owner + deadline + evidence" [ref=f73e498]:
+            - cell "Task Ownership" [ref=f73e499]
+            - cell "Verbal / WhatsApp — lost" [ref=f73e500]
+            - cell "Clear owner + deadline + evidence" [ref=f73e501]:
+              - img [ref=f73e503]
+              - text: Clear owner + deadline + evidence
+          - row "Accountability Blame culture, no audit trail WWHWE + verification workflow" [ref=f73e505]:
+            - cell "Accountability" [ref=f73e506]
+            - cell "Blame culture, no audit trail" [ref=f73e507]
+            - cell "WWHWE + verification workflow" [ref=f73e508]:
+              - img [ref=f73e510]
+              - text: WWHWE + verification workflow
+          - row "Visibility Month-end discovery Real-time dashboard, every device" [ref=f73e512]:
+            - cell "Visibility" [ref=f73e513]
+            - cell "Month-end discovery" [ref=f73e514]
+            - cell "Real-time dashboard, every device" [ref=f73e515]:
+              - img [ref=f73e517]
+              - text: Real-time dashboard, every device
+          - row "Attendance Registers / WhatsApp photos GPS + selfie + IP, payroll-ready" [ref=f73e519]:
+            - cell "Attendance" [ref=f73e520]
+            - cell "Registers / WhatsApp photos" [ref=f73e521]
+            - cell "GPS + selfie + IP, payroll-ready" [ref=f73e522]:
+              - img [ref=f73e524]
+              - text: GPS + selfie + IP, payroll-ready
+          - row "Approvals Chased in person or on call In-app workflow, instant notification" [ref=f73e526]:
+            - cell "Approvals" [ref=f73e527]
+            - cell "Chased in person or on call" [ref=f73e528]
+            - cell "In-app workflow, instant notification" [ref=f73e529]:
+              - img [ref=f73e531]
+              - text: In-app workflow, instant notification
+          - row "Reporting One person's Excel, once a month Automated, live, exportable" [ref=f73e533]:
+            - cell "Reporting" [ref=f73e534]
+            - cell "One person's Excel, once a month" [ref=f73e535]
+            - cell "Automated, live, exportable" [ref=f73e536]:
+              - img [ref=f73e538]
+              - text: Automated, live, exportable
+          - row "SOPs In someone's head Version-controlled SOP library" [ref=f73e540]:
+            - cell "SOPs" [ref=f73e541]
+            - cell "In someone's head" [ref=f73e542]
+            - cell "Version-controlled SOP library" [ref=f73e543]:
+              - img [ref=f73e545]
+              - text: Version-controlled SOP library
+          - row "Scalability More people = more chaos Processes scale, not dependency" [ref=f73e547]:
+            - cell "Scalability" [ref=f73e548]
+            - cell "More people = more chaos" [ref=f73e549]
+            - cell "Processes scale, not dependency" [ref=f73e550]:
+              - img [ref=f73e552]
+              - text: Processes scale, not dependency
+          - row "MSME Fit Enterprise software, MSME price Built for MSMEs from day one" [ref=f73e554]:
+            - cell "MSME Fit" [ref=f73e555]
+            - cell "Enterprise software, MSME price" [ref=f73e556]
+            - cell "Built for MSMEs from day one" [ref=f73e557]:
+              - img [ref=f73e559]
+              - text: Built for MSMEs from day one
+    - generic [ref=f73e562]:
+      - generic [ref=f73e563]:
+        - heading "Real Results From Real Businesses" [level=2] [ref=f73e564]
+        - paragraph [ref=f73e565]: Hear from MSME owners who transformed their operations with OptiFlow.
+      - generic [ref=f73e566]:
+        - generic [ref=f73e567]:
+          - generic [ref=f73e568]: "\"Before OptiFlow, I was spending 3 hours every evening just following up. Now I open the dashboard and see everything. My team completes 92% of tasks on time without me chasing.\""
+          - generic [ref=f73e569]:
+            - img [ref=f73e571]
+            - generic [ref=f73e574]:
+              - generic [ref=f73e575]: Amit Kumar
+              - generic [ref=f73e576]: MD, Vertex Manufacturing
+          - generic [ref=f73e577]: "Result: 80% fewer follow-ups. Saved 3 hrs/day."
+        - generic [ref=f73e578]:
+          - generic [ref=f73e579]: "\"We had 47 employees across two shifts. Attendance reconciliation took 4 hours every month-end. With OptiFlow, it's real-time. Payroll disputes dropped to zero.\""
+          - generic [ref=f73e580]:
+            - img [ref=f73e582]
+            - generic [ref=f73e585]:
+              - generic [ref=f73e586]: Neha Sharma
+              - generic [ref=f73e587]: HR Head, Apex Textiles
+          - generic [ref=f73e588]: "Result: Payroll accuracy 100%. Zero disputes."
+        - generic [ref=f73e589]:
+          - generic [ref=f73e590]: "\"We run 3 warehouses across Gujarat and Maharashtra. Before OptiFlow, I had no visibility beyond phone calls. Now every dispatch, every checklist, every SOP is tracked in one place.\""
+          - generic [ref=f73e591]:
+            - img [ref=f73e593]
+            - generic [ref=f73e596]:
+              - generic [ref=f73e597]: Rajesh Patel
+              - generic [ref=f73e598]: Owner, SwiftLog Logistics
+          - generic [ref=f73e599]: "Result: 40% faster dispatch. 100% multi-location visibility."
+      - generic [ref=f73e600]:
+        - generic [ref=f73e601]:
+          - generic [ref=f73e602]: 80%
+          - generic [ref=f73e603]: Fewer Follow-Ups
+        - generic [ref=f73e604]:
+          - generic [ref=f73e605]: 95%
+          - generic [ref=f73e606]: Accountability Score
+        - generic [ref=f73e607]:
+          - generic [ref=f73e608]: 92%
+          - generic [ref=f73e609]: On-Time Completion
+        - generic [ref=f73e610]:
+          - generic [ref=f73e611]: 100%
+          - generic [ref=f73e612]: Audit Readiness
+    - generic [ref=f73e614]:
+      - heading "Ready To Build A Process-Driven Business?" [level=2] [ref=f73e616]
+      - paragraph [ref=f73e617]: See how OptiFlow helps MSMEs improve visibility, accountability, execution, and growth — with one operating system.
+      - generic [ref=f73e618]:
+        - link "Book Free Demo" [ref=f73e619] [cursor=pointer]:
+          - /url: /demo-booking/
+        - link "Watch Product Tour" [ref=f73e620] [cursor=pointer]:
+          - /url: /product-overview/
+      - generic [ref=f73e621]:
+        - generic [ref=f73e622]:
+          - img [ref=f73e623]
+          - text: Fast Deployment
+        - generic [ref=f73e625]:
+          - img [ref=f73e626]
+          - text: MSME Focused
+        - generic [ref=f73e628]:
+          - img [ref=f73e629]
+          - text: Dedicated Support
+        - generic [ref=f73e631]:
+          - img [ref=f73e632]
+          - text: Easy Adoption
+    - generic [ref=f73e635]:
+      - heading "Frequently Asked Questions" [level=2] [ref=f73e637]
+      - generic [ref=f73e638]:
+        - generic [ref=f73e639]:
+          - button "What is OptiFlow OS?" [ref=f73e640] [cursor=pointer]:
+            - generic [ref=f73e641]: What is OptiFlow OS?
+            - img [ref=f73e643]
+          - paragraph [ref=f73e645]: OptiFlow OS is a Business Operating System built for MSMEs. It replaces WhatsApp, Excel, and manual tracking with one platform that manages tasks, attendance, SOPs, leave, reports, and accountability — giving owners complete visibility from a single dashboard.
+        - generic [ref=f73e646]:
+          - button "How quickly can we go live?" [ref=f73e647] [cursor=pointer]:
+            - generic [ref=f73e648]: How quickly can we go live?
+            - img [ref=f73e650]
+          - paragraph [ref=f73e652]: Most businesses go live in 2-4 weeks. The platform is designed for fast adoption — no IT team needed, no complex setup. We provide guided onboarding and training for your team.
+        - generic [ref=f73e653]:
+          - button "Can it really replace WhatsApp and Excel?" [ref=f73e654] [cursor=pointer]:
+            - generic [ref=f73e655]: Can it really replace WhatsApp and Excel?
+            - img [ref=f73e657]
+          - paragraph [ref=f73e659]: Yes. Every task, attendance record, checklist, and approval moves out of WhatsApp groups and spreadsheets into OptiFlow — where it's searchable, trackable, and auditable. Our customers report saving 2-4 hours per manager per day.
+        - generic [ref=f73e660]:
+          - button "Do you charge per user?" [ref=f73e661] [cursor=pointer]:
+            - generic [ref=f73e662]: Do you charge per user?
+            - img [ref=f73e664]
+          - paragraph [ref=f73e666]: No. OptiFlow has simple, fixed annual pricing based on team size — not per-user charges. No hidden costs, no surprise invoices. Cloud hosting and product updates are included.
+        - generic [ref=f73e667]:
+          - button "Is our business data secure?" [ref=f73e668] [cursor=pointer]:
+            - generic [ref=f73e669]: Is our business data secure?
+            - img [ref=f73e671]
+          - paragraph [ref=f73e673]: Absolutely. Data is encrypted in transit and at rest, hosted on secure cloud infrastructure in India. Role-based access ensures every user sees only what they should. Full audit logs track every action.
+      - link "View All FAQs" [ref=f73e675] [cursor=pointer]:
+        - /url: /faq/
+  - contentinfo [ref=f73e676]:
+    - generic [ref=f73e677]:
+      - generic [ref=f73e678]:
+        - generic [ref=f73e679]:
+          - link "OptiFlow OptiFlow" [ref=f73e680] [cursor=pointer]:
+            - /url: /
+            - img "OptiFlow" [ref=f73e681]
+            - text: OptiFlow
+          - paragraph [ref=f73e682]: The Business Operating System for Indian MSMEs. Move from people-dependent operations to process-driven growth.
+        - generic [ref=f73e683]:
+          - heading "Product" [level=4] [ref=f73e684]
+          - list [ref=f73e685]:
+            - listitem [ref=f73e686]:
+              - link "Overview" [ref=f73e687] [cursor=pointer]:
+                - /url: /product-overview/
+            - listitem [ref=f73e688]:
+              - link "Features" [ref=f73e689] [cursor=pointer]:
+                - /url: /features/
+            - listitem [ref=f73e690]:
+              - link "Pricing" [ref=f73e691] [cursor=pointer]:
+                - /url: /pricing/
+            - listitem [ref=f73e692]:
+              - link "Book Demo" [ref=f73e693] [cursor=pointer]:
+                - /url: /demo-booking/
+        - generic [ref=f73e694]:
+          - heading "Solutions" [level=4] [ref=f73e695]
+          - list [ref=f73e696]:
+            - listitem [ref=f73e697]:
+              - link "Problem & Solutions" [ref=f73e698] [cursor=pointer]:
+                - /url: /problem-solutions/
+            - listitem [ref=f73e699]:
+              - link "Why OptiFlow" [ref=f73e700] [cursor=pointer]:
+                - /url: /why-optiflow/
+        - generic [ref=f73e701]:
+          - heading "Resources" [level=4] [ref=f73e702]
+          - list [ref=f73e703]:
+            - listitem [ref=f73e704]:
+              - link "Newsletter" [ref=f73e705] [cursor=pointer]:
+                - /url: /newsletter/
+            - listitem [ref=f73e706]:
+              - link "FAQ" [ref=f73e707] [cursor=pointer]:
+                - /url: /faq/
+            - listitem [ref=f73e708]:
+              - link "Competitive Positioning" [ref=f73e709] [cursor=pointer]:
+                - /url: /competitive-positioning/
+            - listitem [ref=f73e710]:
+              - link "Privacy Policy" [ref=f73e711] [cursor=pointer]:
+                - /url: /privacy-policy/
+            - listitem [ref=f73e712]:
+              - link "Terms & Conditions" [ref=f73e713] [cursor=pointer]:
+                - /url: /terms/
+        - generic [ref=f73e714]:
+          - heading "Contact" [level=4] [ref=f73e715]
+          - list [ref=f73e716]:
+            - listitem [ref=f73e717]:
+              - link "+91 7874677836" [ref=f73e718] [cursor=pointer]:
+                - /url: tel:+917874677836
+            - listitem [ref=f73e719]:
+              - link "info@optiflow.co.in" [ref=f73e720] [cursor=pointer]:
+                - /url: mailto:info@optiflow.co.in
+            - listitem [ref=f73e721]: Surat, India
+      - generic [ref=f73e722]:
+        - generic [ref=f73e723]: © 2026 OptiFlow Tech Solutions. Built for Indian MSMEs.
+        - button "Toggle theme" [ref=f73e724] [cursor=pointer]:
+          - img [ref=f73e725]
+  - link "Book Demo →":
+    - /url: /demo-booking/
+    - text: Book Demo
+    - generic: →
+  - link "Chat on WhatsApp" [ref=f73e731] [cursor=pointer]:
+    - /url: https://wa.me/+917874677836
+    - img [ref=f73e732]
+  - button "Scroll to top":
+    - img
+  - generic:
+    - generic:
+      - button "Close": ×
+      - generic: Before you go
+      - heading "See How Much Time Your Business Could Save" [level=2]
+      - paragraph: Book a free 15-minute demo and see OptiFlow working with real business scenarios — tailored to your industry.
+      - link "Book Your Free Demo":
+        - /url: /demo-booking/
