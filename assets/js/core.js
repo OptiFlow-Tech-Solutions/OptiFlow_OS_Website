@@ -294,6 +294,39 @@
     }
   });
 
+  /* ═══ SKELETON LOADING UTILITY ═══
+     ponytail: inject/remove skeleton placeholders during async loads.
+     Types: 'text', 'card', 'list', 'table-row'. */
+  window.showSkeleton = function(container, type, count) {
+    if (!container) return;
+    count = count || 5;
+    var html = '';
+    for (var i = 0; i < count; i++) {
+      if (type === 'card') {
+        html += '<div class="skeleton skeleton-card"><div class="skeleton-card-inner"><div class="skeleton skeleton-heading"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div></div></div>';
+      } else if (type === 'list' || type === 'table-row') {
+        html += '<div class="skeleton skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div><div class="skeleton skeleton-text xs"></div></div>';
+      } else {
+        html += '<div class="skeleton skeleton-text" style="width:' + (i === count - 1 ? 40 : 90) + '%"></div>';
+      }
+    }
+    container.dataset.origHtml = container.innerHTML;
+    container.innerHTML = html;
+  };
+  window.hideSkeleton = function(container) {
+    if (!container) return;
+    container.innerHTML = container.dataset.origHtml || '';
+    delete container.dataset.origHtml;
+  };
+
+  /* ─── Empty State Helper ─── */
+  var emptyIconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>';
+  window.emptyState = function(title, desc, iconSvg) {
+    iconSvg = iconSvg || emptyIconSvg;
+    var descHtml = desc ? '<p>' + desc + '</p>' : '';
+    return '<div class="empty-state"><div class="empty-state-icon">' + iconSvg + '</div><h3>' + title + '</h3>' + descHtml + '</div>';
+  };
+
   /* ─── Admin Authentication ─── */
   if (window.location.pathname.startsWith('/admin')) {
     const TOKEN_KEY = 'optiflow-admin-token';
@@ -428,6 +461,7 @@
       var token = localStorage.getItem(TOKEN_KEY);
       var listEl = document.getElementById('submissionList');
       if (!listEl) return;
+      showSkeleton(listEl, 'card', 5);
       try {
         var formFilter = document.getElementById('formTypeFilter').value;
         var url = '/api/admin/submissions?page=' + currentPage + '&per_page=' + perPage;
@@ -447,7 +481,7 @@
             document.getElementById('adminPagination').style.display = 'none';
           }
           if (data.submissions.length === 0) {
-            listEl.innerHTML = '<div class="admin-empty">No submissions yet.</div>';
+            listEl.innerHTML = emptyState('No submissions yet.', 'New submissions will appear here.');
             return;
           }
           listEl.innerHTML = data.submissions.map(function(s) {
@@ -455,10 +489,10 @@
             return '<div class="admin-submission-item" data-form-name="' + (s.formName || '') + '" onclick="this.classList.toggle(\'expanded\')"><div class="sub-header"><span class="sub-toggle sub-form">' + (s.formName || 'Unknown') + '</span><span class="sub-date">' + (s.timestamp || '') + '</span></div><div class="sub-fields">' + (fieldsHtml || 'No field data') + '</div></div>';
           }).join('');
         } else {
-          listEl.innerHTML = '<div class="admin-empty">Unable to load submissions.</div>';
+          listEl.innerHTML = emptyState('Unable to load', 'Please check your connection and try again.');
         }
       } catch (e) {
-        listEl.innerHTML = '<div class="admin-empty">Error loading submissions.</div>';
+        listEl.innerHTML = emptyState('Error loading submissions', 'A network or server error occurred. Try again later.');
       }
     }
 
@@ -476,6 +510,7 @@
       var token = localStorage.getItem(TOKEN_KEY);
       var listEl = document.getElementById('auditList');
       if (!listEl) return;
+      showSkeleton(listEl, 'list', 6);
       try {
         var res = await fetch('/api/admin/audit?page=' + auditPage + '&per_page=20', { headers: { 'Authorization': 'Bearer ' + token } });
         var data = await res.json();
@@ -488,7 +523,7 @@
           document.getElementById('auditPagination').style.display = auditTotalPages > 1 ? 'flex' : 'none';
           var entries = data.entries || [];
           if (entries.length === 0) {
-            listEl.innerHTML = '<div class="admin-empty">No audit entries yet.</div>';
+            listEl.innerHTML = emptyState('No audit entries yet.', 'Activity log entries will appear here.');
             return;
           }
           listEl.innerHTML = entries.map(function(e) {
@@ -503,10 +538,10 @@
             return '<div class="admin-audit-row"><span class="admin-audit-action' + cls + '">' + label + '</span><span class="admin-audit-detail">' + (detail || '') + '</span><span class="admin-audit-time">' + (e.timestamp || '') + '</span></div>';
           }).join('');
         } else {
-          listEl.innerHTML = '<div class="admin-empty">Unable to load audit log.</div>';
+          listEl.innerHTML = emptyState('Unable to load', 'Please check your connection and try again.');
         }
       } catch (e) {
-        listEl.innerHTML = '<div class="admin-empty">Error loading audit log.</div>';
+        listEl.innerHTML = emptyState('Error loading audit log', 'A network or server error occurred. Try again later.');
       }
     }
 
@@ -514,6 +549,7 @@
       var token = localStorage.getItem(TOKEN_KEY);
       var listEl = document.getElementById('emailList');
       if (!listEl) return;
+      showSkeleton(listEl, 'list', 6);
       try {
         var res = await fetch('/api/admin/submissions?page=' + emailPage + '&per_page=20', { headers: { 'Authorization': 'Bearer ' + token } });
         var data = await res.json();
@@ -552,7 +588,7 @@
         document.getElementById('emailPagination').style.display = emailTotalPages > 1 ? 'flex' : 'none';
 
         if (emailEntries.length === 0) {
-          listEl.innerHTML = '<div class="admin-empty">No email logs yet.</div>';
+          listEl.innerHTML = emptyState('No email logs yet.', 'Email delivery records will appear here.');
           return;
         }
 
@@ -563,7 +599,7 @@
           return '<div class="admin-email-row"><span class="admin-email-type">' + typeLabel + '</span><span class="admin-email-to">' + e.to + '</span><span class="admin-email-status ' + statusCls + '">' + statusLabel + '</span><span class="admin-email-time">' + (e.timestamp || '') + '</span></div>';
         }).join('');
       } catch (e) {
-        listEl.innerHTML = '<div class="admin-empty">Error loading email logs.</div>';
+        listEl.innerHTML = emptyState('Error loading email logs', 'A network or server error occurred. Try again later.');
       }
     }
 

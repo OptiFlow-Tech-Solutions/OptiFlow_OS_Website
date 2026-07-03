@@ -75,7 +75,9 @@
             <button class="btn btn-secondary" onclick="exportSubmissions('json')" style="margin-left:4px">Export JSON</button>
           </div>
           <div class="admin-submission-list" id="submissionList">
-            <div class="admin-empty">Loading submissions...</div>
+            <div class="skeleton skeleton-card"><div class="skeleton-card-inner"><div class="skeleton skeleton-heading"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div></div></div>
+            <div class="skeleton skeleton-card"><div class="skeleton-card-inner"><div class="skeleton skeleton-heading"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div></div></div>
+            <div class="skeleton skeleton-card"><div class="skeleton-card-inner"><div class="skeleton skeleton-heading"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div></div></div>
           </div>
           <div class="admin-pagination" id="adminPagination" style="display:none;">
             <span id="pageInfo">Page 1 of 1</span>
@@ -89,7 +91,11 @@
         <!-- Audit Log Tab -->
         <div class="admin-tab-panel" role="tabpanel" id="tab-audit">
           <div class="admin-audit-list" id="auditList">
-            <div class="admin-empty">Loading audit log...</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div class="skeleton skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div><div class="skeleton skeleton-text xs"></div></div>
+              <div class="skeleton skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div><div class="skeleton skeleton-text xs"></div></div>
+              <div class="skeleton skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div><div class="skeleton skeleton-text xs"></div></div>
+            </div>
           </div>
           <div class="admin-pagination" id="auditPagination" style="display:none;">
             <span id="auditPageInfo">Page 1 of 1</span>
@@ -107,7 +113,11 @@
             <div class="admin-email-stat"><span class="admin-stat-num" id="emailFailedCount">--</span><span class="admin-stat-label">Failed This Week</span></div>
           </div>
           <div class="admin-email-list" id="emailList">
-            <div class="admin-empty">Loading email logs...</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div class="skeleton skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div><div class="skeleton skeleton-text xs"></div></div>
+              <div class="skeleton skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div><div class="skeleton skeleton-text xs"></div></div>
+              <div class="skeleton skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text sm"></div><div class="skeleton skeleton-text xs"></div></div>
+            </div>
           </div>
           <div class="admin-pagination" id="emailPagination" style="display:none;">
             <span id="emailPageInfo">Page 1 of 1</span>

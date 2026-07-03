@@ -123,6 +123,14 @@
     .trust-logo { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--muted); letter-spacing: -0.02em; white-space: nowrap; }
     @keyframes logoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
+    /* ─── Category filter bar ─── */
+    .cat-filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+    .cat-filter { padding: 8px 18px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 13px; font-weight: 500; cursor: pointer; transition: color 0.2s, background 0.2s, border-color 0.2s; font-family: inherit; }
+    .cat-filter:hover { color: var(--fg); border-color: var(--accent); }
+    .cat-filter.active { background: var(--accent); color: white; border-color: var(--accent); font-weight: 600; }
+    [data-theme="dark"] .cat-filter { background: var(--surface); }
+    [data-theme="dark"] .cat-filter.active { background: var(--accent); }
+
     /* ─── Misc utilities ─── */
     .btn-sm { padding: 8px 16px; font-size: 13px; border-radius: 8px; }
     .btn-outline { border: 1px solid var(--border); color: var(--fg); background: transparent; font-size: 13px; padding: 8px 16px; border-radius: 999px; transition: color 0.2s, background 0.2s; }
@@ -328,14 +336,23 @@
     </section>
 
     <!-- SECTION 04: LATEST ARTICLES -->
-    <section class="section" data-screen-label="04 Latest">
+    <section class="section" data-screen-label="04 Latest" id="articles">
       <div class="container">
         <div class="section-header reveal">
           <h2>Latest Articles</h2>
           <p class="lead">Fresh perspectives on operations, accountability, and business growth for MSMEs.</p>
         </div>
-        <div class="grid-3 stagger-3">
-          <article class="article-card">
+        <div class="cat-filter-bar reveal" id="filterBar">
+          <button class="cat-filter active" data-cat="all">All</button>
+          <button class="cat-filter" data-cat="operations">Operations</button>
+          <button class="cat-filter" data-cat="manufacturing">Manufacturing</button>
+          <button class="cat-filter" data-cat="hr-teams">HR &amp; Teams</button>
+          <button class="cat-filter" data-cat="productivity">Productivity</button>
+          <button class="cat-filter" data-cat="business-systems">Business Systems</button>
+          <button class="cat-filter" data-cat="leadership">Leadership</button>
+        </div>
+        <div class="grid-3 stagger-3" id="articleGrid">
+          <article class="article-card" data-cat="operations">
             <div class="ac-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h4M8 12h8M8 16h6"/></svg></div>
             <div class="ac-body">
               <div class="ac-cat">Operations</div>
@@ -344,7 +361,7 @@
               <div class="ac-meta"><span class="meta">Priya Sharma</span><span class="meta">—</span><span class="meta">8 min read</span><span class="meta">—</span><span class="meta">Jun 22</span></div>
             </div>
           </article>
-          <article class="article-card">
+          <article class="article-card" data-cat="manufacturing">
             <div class="ac-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><path d="M2 20h20M6 16V8l3-3h6l3 3v8M10 16v-4h4v4M8 16h8"/></svg></div>
             <div class="ac-body">
               <div class="ac-cat">Manufacturing</div>
@@ -353,7 +370,7 @@
               <div class="ac-meta"><span class="meta">Amit Patel</span><span class="meta">—</span><span class="meta">10 min read</span><span class="meta">—</span><span class="meta">Jun 18</span></div>
             </div>
           </article>
-          <article class="article-card">
+          <article class="article-card" data-cat="hr-teams">
             <div class="ac-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M3 20v-2a4 4 0 014-4h4a4 4 0 014 4v2M15 14h2a4 4 0 014 4v2"/></svg></div>
             <div class="ac-body">
               <div class="ac-cat">HR &amp; Teams</div>
@@ -362,7 +379,7 @@
               <div class="ac-meta"><span class="meta">Neha Gupta</span><span class="meta">—</span><span class="meta">7 min read</span><span class="meta">—</span><span class="meta">Jun 14</span></div>
             </div>
           </article>
-          <article class="article-card">
+          <article class="article-card" data-cat="productivity">
             <div class="ac-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="17" y="4" width="4" height="16" rx="1"/></svg></div>
             <div class="ac-body">
               <div class="ac-cat">Productivity</div>
@@ -371,7 +388,7 @@
               <div class="ac-meta"><span class="meta">Vikram Rao</span><span class="meta">—</span><span class="meta">11 min read</span><span class="meta">—</span><span class="meta">Jun 10</span></div>
             </div>
           </article>
-          <article class="article-card">
+          <article class="article-card" data-cat="business-systems">
             <div class="ac-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
             <div class="ac-body">
               <div class="ac-cat">Business Systems</div>
@@ -380,7 +397,7 @@
               <div class="ac-meta"><span class="meta">Kavita Menon</span><span class="meta">—</span><span class="meta">9 min read</span><span class="meta">—</span><span class="meta">Jun 6</span></div>
             </div>
           </article>
-          <article class="article-card">
+          <article class="article-card" data-cat="leadership">
             <div class="ac-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><polyline points="3 17 9 11 13 13 21 5"/><polyline points="17 5 21 5 21 9"/><line x1="3" y1="21" x2="21" y2="21"/></svg></div>
             <div class="ac-body">
               <div class="ac-cat">Leadership</div>
@@ -389,6 +406,12 @@
               <div class="ac-meta"><span class="meta">Rajesh Nair</span><span class="meta">—</span><span class="meta">14 min read</span><span class="meta">—</span><span class="meta">Jun 2</span></div>
             </div>
           </article>
+        </div>
+        <div class="empty-state" id="articleEmpty" style="display:none">
+          <div class="empty-state-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+          <h3>No articles found</h3>
+          <p>No articles match the selected category filter. Try a different topic or view all articles.</p>
+          <button class="btn btn-sm btn-primary" id="clearFilter">View All Articles</button>
         </div>
       </div>
     </section>
@@ -584,7 +607,38 @@
   <!-- INCLUDE: footer -->
 
   <script src="/assets/js/core.js" defer></script>
+  <script>
+    (function() {
+      var filterBar = document.getElementById('filterBar');
+      var grid = document.getElementById('articleGrid');
+      var emptyEl = document.getElementById('articleEmpty');
+      var clearBtn = document.getElementById('clearFilter');
+      if (!filterBar || !grid) return;
 
-  <!-- ponytail: stagger handled by core.js -->
-</body>
+      var cards = [].slice.call(grid.querySelectorAll('.article-card'));
+      var filters = filterBar.querySelectorAll('.cat-filter');
+
+      function filterArticles(cat) {
+        filters.forEach(function(f) { f.classList.toggle('active', f.dataset.cat === cat); });
+        var visible = 0;
+        cards.forEach(function(card) {
+          var match = cat === 'all' || card.dataset.cat === cat;
+          card.style.display = match ? '' : 'none';
+          if (match) visible++;
+        });
+        emptyEl.style.display = visible === 0 ? '' : 'none';
+        grid.style.display = visible === 0 ? 'none' : '';
+      }
+
+      filterBar.addEventListener('click', function(e) {
+        var btn = e.target.closest('.cat-filter');
+        if (!btn) return;
+        filterArticles(btn.dataset.cat);
+      });
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function() { filterArticles('all'); });
+      }
+    })();
+  </script>
 </html>
