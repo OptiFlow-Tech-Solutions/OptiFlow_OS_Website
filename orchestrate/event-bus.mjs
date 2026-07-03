@@ -10,8 +10,12 @@ export function registerDefaults(logFn) {
   const handler = (data) => logFn(data);
   bus.on('auto:pipeline:start', handler);
   bus.on('auto:pipeline:end', handler);
+  bus.on('auto:pipeline:phase', handler);
   bus.on('opsx:start', handler);
   bus.on('opsx:complete', handler);
-  bus.on('gate:failed', handler);
+  bus.on('pipeline:start', handler);
+  bus.on('pipeline:end', handler);
+  bus.on('pipeline:phase', handler);
   bus.on('pipeline:failed', handler);
+  bus.on('gate:check', handler);
 }

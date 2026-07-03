@@ -1,6 +1,7 @@
 /**
- * V4 Multi-level validation pipeline (L1-L7).
- * All levels run real, validated commands. No stubs.
+ * V5 Multi-level validation pipeline (L1-L7) with auto-fix + retry.
+ * All levels run real, validated commands. Auto-fix attempts common fixes
+ * and retries up to MAX_FIX_RETRIES before reporting failure.
  * @module orchestrate/validation-pipeline
  */
 
@@ -12,7 +13,9 @@ import { logEvent } from './audit-log.mjs';
 
 const { projectRoot } = resolvePaths();
 
-const LEVELS = Object.freeze({
+const MAX_FIX_RETRIES = 3;
+
+export const LEVELS = Object.freeze({
   1: { name: 'L1 (Lint)', desc: 'HTML + JS + CSS linting' },
   2: { name: 'L2 (Build)', desc: 'Full build from source' },
   3: { name: 'L3 (Data)', desc: 'Link check + data consistency' },
@@ -191,4 +194,53 @@ export function levelForBranch(branch) {
   if (branch === 'develop') return [1, 2, 3];
   if (branch.startsWith('feature/')) return [1, 2];
   return [1, 2, 3, 4, 5, 6, 7];
+}
+
+/**
+ * Attempt to auto-fix common validation failures and retry.
+ * @param {number[]} levels - validation levels to run
+ * @param {object} [context]
+ * @returns {Promise<{passed: string[], failed: string[], retries: number}>}
+ */
+export async function autoFixAndRetry(levels, context = {}) {
+  const targetLevels = levels.includes('all')
+    ? [1, 2, 3, 4, 5, 6, 7]
+    : [...new Set(levels.filter((l) => typeof l === 'number' && l >= 1 && l <= 7))].sort((a, b) => a - b);
+
+  let passed = [];
+  let failed = [];
+  let retries = 0;
+
+  for (let attempt = 0; attempt <= MAX_FIX_RETRIES; attempt++) {
+    retries = attempt;
+    const result = await runValidations(targetLevels, context);
+
+    if (result.failed.length === 0) {
+      passed = result.passed;
+      failed = [];
+      return { passed, failed, retries };
+    }
+
+    // Auto-fix L1 (lint) — run lint with --fix
+    if (result.failed.includes('L1 (Lint)')) {
+      try {
+        execSync('npx html-validate --fix "dist/**/*.html" 2>/dev/null || npx eslint . --fix 2>/dev/null', {
+          cwd: projectRoot, encoding: 'utf-8', timeout: 60000, stdio: 'pipe',
+        });
+      } catch { /* fix may not apply */ }
+    }
+
+    // Auto-fix L2 (build) — rebuild
+    if (result.failed.includes('L2 (Build)')) {
+      try {
+        execSync('node scripts/assemble.mjs', {
+          cwd: projectRoot, encoding: 'utf-8', timeout: 120000, stdio: 'pipe',
+        });
+      } catch { /* build failure may need manual fix */ }
+    }
+
+    logEvent({ type: 'auto-fix', attempt: attempt + 1, failedLevels: result.failed, passedLevels: result.passed });
+  }
+
+  return { passed: [], failed, retries: MAX_FIX_RETRIES };
 }

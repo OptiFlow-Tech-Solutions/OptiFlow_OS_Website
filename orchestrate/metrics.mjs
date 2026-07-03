@@ -1,10 +1,15 @@
 /**
  * Performance metrics collection for orchestration pipelines.
+ * Includes export functions for audit logging and final reports.
  * @module orchestrate/metrics
  */
 
+import { logEvent } from './audit-log.mjs';
+
 /** @type {Record<string, {values: number[], min: number, max: number, sum: number}>} */
 const metrics = {};
+
+let _timeOrigin = performance.now();
 
 /**
  * Start a named timer. Returns a stop function that records the elapsed ms.
@@ -51,4 +56,31 @@ export function summary() {
     };
   }
   return out;
+}
+
+/**
+ * Export metrics to the audit log and return a plain summary object.
+ * Call at pipeline finish to capture execution telemetry.
+ * @returns {{totalDuration: number, phases: object, detail: object}}
+ */
+export function exportMetrics(executionId = '') {
+  const s = summary();
+  const totalDuration = performance.now() - _timeOrigin;
+
+  logEvent({
+    type: 'metrics-export',
+    executionId,
+    totalDuration,
+    phases: s,
+  });
+
+  return { totalDuration, phases: s };
+}
+
+/**
+ * Reset all metrics (for a new pipeline run).
+ */
+export function reset() {
+  for (const key of Object.keys(metrics)) delete metrics[key];
+  _timeOrigin = performance.now();
 }

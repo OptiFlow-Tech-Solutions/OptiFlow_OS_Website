@@ -116,71 +116,76 @@ async function runPropose(changeName, changeDir, context = {}) {
 
   const skillList = skills.length ? skills.map((s) => `- ${s}`).join('\n') : '- (no specific skills matched)';
 
-  // Real proposal content
-  const proposal = [
-    `# ${changeName}`,
-    '',
-    '## Summary',
-    context.description || 'TBD',
-    '',
-    '## Scope',
-    ...domains.map((d) => `- ${d}`),
-    '',
-    '## Affected Specs',
-    affectedList,
-    '',
-    '## Recommended Skills',
-    skillList,
-    '',
-    `## Metadata`,
-    `- Generated: ${new Date().toISOString()}`,
-    `- Domains: ${domains.join(', ')}`,
-    `- Affected spec count: ${affected.length}`,
-  ].join('\n');
+  // Only write artifacts if they don't already exist (AI may have written them first)
+  const proposalPath = join(changeDir, 'proposal.md');
+  const designPath = join(changeDir, 'design.md');
+  const tasksPath = join(changeDir, 'tasks.md');
 
-  writeFileSync(join(changeDir, 'proposal.md'), proposal);
+  if (!existsSync(proposalPath)) {
+    const proposal = [
+      `# ${changeName}`,
+      '',
+      '## Summary',
+      context.description || 'TBD',
+      '',
+      '## Scope',
+      ...domains.map((d) => `- ${d}`),
+      '',
+      '## Affected Specs',
+      affectedList,
+      '',
+      '## Recommended Skills',
+      skillList,
+      '',
+      `## Metadata`,
+      `- Generated: ${new Date().toISOString()}`,
+      `- Domains: ${domains.join(', ')}`,
+      `- Affected spec count: ${affected.length}`,
+    ].join('\n');
+    writeFileSync(proposalPath, proposal);
+  }
 
-  // Real design doc
-  const designDoc = [
-    `# Design: ${changeName}`,
-    '',
-    '## Architecture',
-    `- Project: static-site (HTML/CSS/JS)`,
-    `- Design system: OptiFlow OS Enterprise DESIGN.md v5.0`,
-    '',
-    '## Decisions',
-    '- Follow existing page template patterns from src/pages/',
-    '- Use CSS variables from core.css for all styling',
-    '- Include nav and footer via <!-- INCLUDE: nav --> and <!-- INCLUDE: footer -->',
-    '- Page-specific styles in <style> block in <head>',
-    '- Never hardcode company info — use {{PHONE}}, {{EMAIL}}, {{YEAR}} placeholders',
-    '',
-    '## Affected Specs',
-    ...affected.map((a) => `- ${a.specName}: ${a.requirements.slice(0, 2).join('; ')}`),
-    '',
-    `## Generated: ${new Date().toISOString()}`,
-  ].join('\n');
+  if (!existsSync(designPath)) {
+    const designDoc = [
+      `# Design: ${changeName}`,
+      '',
+      '## Architecture',
+      `- Project: static-site (HTML/CSS/JS)`,
+      `- Design system: OptiFlow OS Enterprise DESIGN.md v5.0`,
+      '',
+      '## Decisions',
+      '- Follow existing page template patterns from src/pages/',
+      '- Use CSS variables from core.css for all styling',
+      '- Include nav and footer via <!-- INCLUDE: nav --> and <!-- INCLUDE: footer -->',
+      '- Page-specific styles in <style> block in <head>',
+      '- Never hardcode company info — use {{PHONE}}, {{EMAIL}}, {{YEAR}} placeholders',
+      '',
+      '## Affected Specs',
+      ...affected.map((a) => `- ${a.specName}: ${a.requirements.slice(0, 2).join('; ')}`),
+      '',
+      `## Generated: ${new Date().toISOString()}`,
+    ].join('\n');
+    writeFileSync(designPath, designDoc);
+  }
 
-  writeFileSync(join(changeDir, 'design.md'), designDoc);
-
-  // Real tasks
-  const tasks = [
-    `# Tasks: ${changeName}`,
-    '',
-    '- [ ] Review affected specs and design decisions',
-    ...affected.flatMap((a) =>
-      a.requirements.slice(0, 4).map((r) => `- [ ] Implement: ${r}`)
-    ),
-    '- [ ] Build and validate (`npm run build && npm run validate`)',
-    '- [ ] Verify against DESIGN.md design system',
-    '- [ ] Run accessibility checks',
-    '- [ ] Run SEO audit',
-    '- [ ] Archive and trace',
-    '',
-    `## Generated: ${new Date().toISOString()}`,
-  ].join('\n');
-
-  writeFileSync(join(changeDir, 'tasks.md'), tasks);
+  if (!existsSync(tasksPath)) {
+    const tasks = [
+      `# Tasks: ${changeName}`,
+      '',
+      '- [ ] Review affected specs and design decisions',
+      ...affected.flatMap((a) =>
+        a.requirements.slice(0, 4).map((r) => `- [ ] Implement: ${r}`)
+      ),
+      '- [ ] Build and validate (`npm run build && npm run validate`)',
+      '- [ ] Verify against DESIGN.md design system',
+      '- [ ] Run accessibility checks',
+      '- [ ] Run SEO audit',
+      '- [ ] Archive and trace',
+      '',
+      `## Generated: ${new Date().toISOString()}`,
+    ].join('\n');
+    writeFileSync(tasksPath, tasks);
+  }
 
   // Run the propose pipeline
   const pipelinePath = resolve(PIPELINE_DIR, 'propose.yaml');
@@ -192,14 +197,13 @@ async function runPropose(changeName, changeDir, context = {}) {
     } catch { /* pipeline optional */ }
   }
 
-  console.log(`     Created: proposal.md, design.md, tasks.md`);
   console.log(`     Affected specs: ${affected.length} | Skills: ${skills.length}`);
 
   await emit('opsx:complete', { command: 'propose', changeName, result: { affected, skills } });
   return {
-    proposalPath: join(changeDir, 'proposal.md'),
-    designPath: join(changeDir, 'design.md'),
-    tasksPath: join(changeDir, 'tasks.md'),
+    proposalPath,
+    designPath,
+    tasksPath,
     specsDir: join(changeDir, 'specs'),
     affected,
     skills,
@@ -270,6 +274,8 @@ async function runVerify(changeName, context = {}) {
 async function runArchive(changeName, context = {}) {
   console.log(`[Archive] Archiving: ${changeName}`);
 
+  const changeRoot = resolve(projectRoot, 'openspec', 'changes', changeName);
+
   // Sync specs to main
   const archiveSyncResult = syncToMain(changeName);
 
@@ -280,7 +286,15 @@ async function runArchive(changeName, context = {}) {
 
   // Generate traceability
   let traceResult = null;
-  try { traceResult = generateTrace(changeName, 'HEAD'); } catch { /* optional */ }
+  try {
+    traceResult = generateTrace(changeName, 'HEAD');
+    // Write traceability to disk
+    if (traceResult && changeRoot) {
+      const tracePath = resolve(changeRoot, 'traceability.md');
+      const traceMd = formatTraceMarkdown(traceResult);
+      writeFileSync(tracePath, traceMd, 'utf-8');
+    }
+  } catch { /* optional */ }
 
   // Run archive pipeline
   const pipelinePath = resolve(PIPELINE_DIR, 'archive.yaml');
@@ -292,11 +306,77 @@ async function runArchive(changeName, context = {}) {
     } catch { /* pipeline optional */ }
   }
 
+  // Verify archive output artifacts
+  if (existsSync(changeRoot)) {
+    const artifacts = ['proposal.md', 'design.md', 'tasks.md', 'traceability.md'];
+    for (const a of artifacts) {
+      if (!existsSync(resolve(changeRoot, a))) {
+        console.log(`     ⚠ Missing artifact: ${a}`);
+      }
+    }
+  }
+
+  // Generate archive index (master list of all archived changes)
+  try { writeArchiveIndex(); } catch { /* optional */ }
+
   console.log(`     Synced: ${archiveSyncResult.synced.length} spec(s)`);
   console.log(`     Traced: ${traceResult ? 'yes' : 'no'} | Docs: ${docResult ? 'synced' : 'skipped'}`);
 
   await emit('opsx:complete', { command: 'archive', changeName, syncResult: archiveSyncResult, traceResult, docResult, pipelineResult });
   return { syncResult: archiveSyncResult, traceResult, docResult, pipelineResult };
+}
+
+function formatTraceMarkdown(traceResult) {
+  const lines = ['# Traceability Report', '', `Generated: ${new Date().toISOString()}`, ''];
+  for (const spec of (traceResult.specs || [])) {
+    lines.push(`## ${spec.file}`, '');
+    for (const req of (spec.requirements || [])) {
+      lines.push(`### ${req.requirement}`, '');
+      lines.push(`- **Task:** ${req.tasks || 'N/A'}`, `- **Commit:** ${req.commit || 'N/A'}`, `- **Files:** ${(req.files || []).join(', ') || 'N/A'}`, '');
+    }
+  }
+  return lines.join('\n');
+}
+
+// ponytail: master archive index — one JSON file listing every archived change
+function writeArchiveIndex() {
+  const archiveDir = resolve(ROOT, 'openspec', 'changes', 'archive');
+  const index = [];
+  try {
+    for (const entry of readdirSync(archiveDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const changeRoot = resolve(archiveDir, entry.name);
+      const proposalPath = resolve(changeRoot, 'proposal.md');
+      const tasksPath = resolve(changeRoot, 'tasks.md');
+      const hasProposal = existsSync(proposalPath);
+      const hasTasks = existsSync(tasksPath);
+      let summary = '';
+      let doneCount = 0;
+      let totalCount = 0;
+      if (hasProposal) {
+        const content = readFileSync(proposalPath, 'utf-8');
+        const summaryMatch = content.match(/^##\s*Summary\s*\n(.*)/m);
+        if (summaryMatch) summary = summaryMatch[1].trim().slice(0, 200);
+      }
+      if (hasTasks) {
+        const content = readFileSync(tasksPath, 'utf-8');
+        totalCount = (content.match(/^-\s*\[[ x]\]/gm) || []).length;
+        doneCount = (content.match(/^-\s*\[x\]/gm) || []).length;
+      }
+      index.push({
+        name: entry.name,
+        date: entry.name.split('-').slice(0, 3).join('-') || 'unknown',
+        summary,
+        tasks: { done: doneCount, total: totalCount },
+        artifacts: { proposal: hasProposal, tasks: hasTasks },
+      });
+    }
+    const indexPath = resolve(archiveDir, 'index.json');
+    writeFileSync(indexPath, JSON.stringify(index.sort((a, b) => b.date.localeCompare(a.date)), null, 2), 'utf-8');
+    console.log(`     Archive index: ${index.length} entry(s)`);
+  } catch (e) {
+    console.log(`     Archive index skipped: ${e.message}`);
+  }
 }
 
 async function runFeatureRoute(featureId, context = {}) {

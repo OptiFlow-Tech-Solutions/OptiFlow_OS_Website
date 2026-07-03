@@ -7,9 +7,12 @@
 import { execSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { resolvePaths } from './config-resolver.mjs';
 
-const ROOT = resolve(import.meta.dirname || '.', '..');
+const { projectRoot, globalHooksDir } = resolvePaths();
+const ROOT = projectRoot;
 const PROJECT_HOOKS_DIR = resolve(ROOT, 'hooks');
+const GLOBAL_HOOKS_DIR = globalHooksDir;
 
 /**
  * Execute a single hook by name.

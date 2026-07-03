@@ -334,12 +334,36 @@ export function analyzeTask(taskDescription) {
     }
   }
 
+  // Fallback keyword detection when taxonomy has no match
+  if (matchCount === 0) {
+    const keywordDomains = [
+      { words: ['toast', 'notification', 'alert', 'popup', 'modal', 'dialog', 'banner', 'snackbar'], domains: ['design', 'frontend'] },
+      { words: ['skeleton', 'loading', 'shimmer', 'spinner', 'placeholder'], domains: ['design', 'frontend'] },
+      { words: ['form', 'input', 'submit', 'validation', 'select', 'checkbox'], domains: ['frontend'] },
+      { words: ['animation', 'transition', 'keyframe', 'scroll', 'reveal', 'stagger'], domains: ['frontend', 'design'] },
+      { words: ['cookie', 'gdpr', 'privacy', 'consent', 'compliance'], domains: ['frontend', 'security'] },
+      { words: ['image', 'svg', 'icon', 'graphic', 'illustration'], domains: ['design'] },
+      { words: ['pwa', 'service.worker', 'offline', 'cache', 'installable'], domains: ['frontend', 'performance'] },
+      { words: ['search', 'filter', 'sort', 'query', 'autocomplete'], domains: ['frontend'] },
+      { words: ['error', 'recovery', 'fallback', 'boundary', 'retry'], domains: ['frontend', 'quality'] },
+      { words: ['ui-0', 'ui component', 'ux'], domains: ['design', 'frontend'] },
+    ];
+    for (const kw of keywordDomains) {
+      if (kw.words.some((w) => lower.includes(w))) {
+        kw.domains.forEach((d) => domains.add(d));
+        matchCount++;
+      }
+    }
+    intents.push('general-ui');
+    roles.add('implementation');
+  }
+
   const result = {
     intents,
     domains: [...domains],
     roles: [...roles],
     skills: [...skills],
-    confidence: matchCount ? Math.min(1, totalConfidence / TAXONOMY.length) : 0,
+    confidence: matchCount ? Math.min(1, matchCount / Math.max(TAXONOMY.length, 1)) : 0,
   };
 
   cacheSet(cacheKey, result, { ttl: 300000 });

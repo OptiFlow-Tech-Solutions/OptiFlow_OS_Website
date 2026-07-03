@@ -153,6 +153,21 @@ export function flush() {
   saveDisk();
 }
 
+/**
+ * Create a namespaced cache proxy. All keys are automatically prefixed.
+ * @param {string} ns - namespace prefix (e.g. 'spec', 'skill', 'pipeline')
+ * @returns {{get: (key: string) => any, set: (key: string, value: any, opts?: object) => void, del: (key: string) => void, prefix: string}}
+ */
+export function namespace(ns) {
+  const prefix = `${ns}:`;
+  return {
+    prefix,
+    get(key) { return get(prefix + key); },
+    set(key, value, opts) { return set(prefix + key, value, opts); },
+    del(key) { return del(prefix + key); },
+  };
+}
+
 // ponytail: simple hash for collision-free cache keys
 
 /**

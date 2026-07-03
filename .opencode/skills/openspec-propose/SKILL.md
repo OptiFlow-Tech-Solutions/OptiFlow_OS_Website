@@ -5,8 +5,8 @@ license: MIT
 compatibility: Requires openspec CLI.
 metadata:
   author: openspec
-  version: "1.0"
-  generatedBy: "1.4.1"
+  version: "2.0"
+  generatedBy: "2.0.0"
 ---
 
 Propose a new change - create the change and generate all artifacts in one step.
@@ -21,6 +21,23 @@ When ready to implement, run /opsx-apply
 ---
 
 **Input**: The user's request should include a change name (kebab-case) OR a description of what they want to build.
+
+**Autonomous Mode:** When invoked by `/opsx-auto`, the changeName and task description
+are provided from the pipeline context. Write artifacts directly — do NOT run
+`openspec new change` or `openspec instructions`. The pipeline already set up
+the change directory. Create:
+
+1. `openspec/changes/{changeName}/proposal.md` — what, why, scope, affected specs, recommended skills
+2. `openspec/changes/{changeName}/design.md` — architecture decisions, design system compliance, component plan
+3. `openspec/changes/{changeName}/tasks.md` — concrete, ordered checklist items (max 2hr each)
+4. `openspec/changes/{changeName}/specs/*.md` — delta specs for affected capabilities
+
+Follow the project's DESIGN.md rules when writing design.md. Reference existing
+page templates from `src/pages/`. Use the feature registry from `features/features.json`
+when relevant. After writing, proceed directly to implementation — no pause needed.
+
+**Standalone Mode:** When invoked directly by the user (not from /opsx-auto), follow
+the steps below.
 
 **Steps**
 

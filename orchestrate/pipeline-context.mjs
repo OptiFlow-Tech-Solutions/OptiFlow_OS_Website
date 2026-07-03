@@ -1,14 +1,30 @@
 /**
- * V8: Shared execution context for the orchestration pipeline.
- * One immutable context object flows through every phase.
+ * V11: Shared execution context for the autonomous orchestration pipeline.
+ * One context object flows through every phase and iteration.
  * The AI agent reads from it to know what to do; phases write results back.
+ * Supports goal-oriented execution loops with checkpoint/recovery.
  * @module orchestrate/pipeline-context
  */
+
+export const GOAL_STATES = Object.freeze({
+  INIT: 'INIT',
+  ANALYZING: 'ANALYZING',
+  EXPLORING: 'EXPLORING',
+  PROPOSING: 'PROPOSING',
+  IMPLEMENTING: 'IMPLEMENTING',
+  VALIDATING: 'VALIDATING',
+  ARCHIVING: 'ARCHIVING',
+  COMPLETE: 'COMPLETE',
+  FAILED: 'FAILED',
+});
+
+export const ITERATION_LIMIT = 20;
 
 import { randomBytes } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
+import { measureProgress } from './progress-tracker.mjs';
 
 const { projectRoot, stateDir } = resolvePaths();
 
@@ -45,6 +61,12 @@ export class PipelineContext {
     this.warnings = [];
     this.completedAt = null;
     this.totalDuration = 0;
+
+    // V11: Goal-oriented execution
+    this.goalState = GOAL_STATES.INIT;
+    this.iterationCount = 0;
+    this.targetDescription = taskDescription;
+    this.checkpoints = [];
   }
 
   get currentPhase() {
@@ -108,6 +130,49 @@ export class PipelineContext {
     this.persist();
   }
 
+  advanceGoalState(newState) {
+    const valid = Object.values(GOAL_STATES).includes(newState);
+    if (valid) {
+      this.goalState = newState;
+      if (newState === GOAL_STATES.COMPLETE || newState === GOAL_STATES.FAILED) {
+        this.finalize(newState === GOAL_STATES.COMPLETE ? 'done' : 'failed');
+      }
+    }
+    this.persist();
+    return this.goalState;
+  }
+
+  isGoalMet() {
+    try {
+      const { completionPct, blockers } = measureProgress(this);
+      return completionPct >= 90 && blockers.length === 0;
+    } catch {
+      // ponytail: fallback — check phases only
+      const required = ['OPSX_EXPLORE', 'OPSX_PROPOSE', 'OPSX_APPLY', 'OPSX_ARCHIVE'];
+      return required.every((id) => this.phases.some((p) => p.id === id && p.status === 'complete'));
+    }
+  }
+
+  addCheckpoint(label) {
+    const cp = {
+      label,
+      phase: this.goalState,
+      iteration: this.iterationCount,
+      timestamp: new Date().toISOString(),
+      errors: [...this.errors],
+    };
+    this.checkpoints.push(cp);
+    this.persist();
+    return cp;
+  }
+
+  canContinue() {
+    if (this.iterationCount >= ITERATION_LIMIT) return false;
+    if (this.goalState === GOAL_STATES.FAILED) return false;
+    if (this.goalState === GOAL_STATES.COMPLETE) return false;
+    return true;
+  }
+
   /**
    * Persist the full context to disk for resume/recovery.
    */
@@ -136,6 +201,7 @@ export class PipelineContext {
         autoApprove: raw.autoApprove,
       });
       Object.assign(ctx, raw);
+      Object.setPrototypeOf(ctx, PipelineContext.prototype);
       return ctx;
     } catch { return null; }
   }
@@ -164,6 +230,10 @@ export class PipelineContext {
       phases: this.phases,
       errors: this.errors,
       warnings: this.warnings,
+      goalState: this.goalState,
+      iterationCount: this.iterationCount,
+      targetDescription: this.targetDescription,
+      checkpoints: this.checkpoints,
     };
   }
 

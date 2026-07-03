@@ -1,26 +1,32 @@
 /**
- * V8: /opsx-auto State-Machine Orchestration Engine.
+ * V11: /opsx-auto Autonomous Orchestration Engine.
  *
- * This is a LIBRARY — the AI agent drives it. The agent calls methods
- * between phases to track state, get context, and run non-AI tasks.
+ * Infrastructure layer for the AI agent. The AI agent drives execution
+ * using the goal-oriented loop; this module provides context, discovery,
+ * validation, build, file I/O, state persistence, and recovery.
  *
  * Architecture:
- *   PipelineContext (shared state) → Phase methods (do real work) → Report
+ *   AI Agent (intelligence) → PipelineContext (shared state) → Phase methods (infrastructure)
  *
- * Phases the AI must execute sequentially:
- *   1. DEEP_SCAN       — analyzeProject() + loadFullContextWithAnalysis()
- *   2. SKILL_DISCOVERY — discoverSkills() + routeAgents()
- *   3. OPSX_EXPLORE    — runOpsxCommand('explore') — AI reads specs/features/pages
- *   4. OPSX_PROPOSE    — runOpsxCommand('propose') — AI writes proposal + design + tasks
- *   5. OPSX_SYNC       — runOpsxCommand('sync') — auto-merge delta specs
- *   6. OPSX_APPLY      — runOpsxCommand('apply') — AI implements tasks
- *   7. VALIDATE        — build + lint + tests + quality gates
- *   8. OPSX_ARCHIVE    — runOpsxCommand('archive') — spec sync + trace + doc sync
+ * Phases the AI agent orchestrates:
+ *   1. INIT            — initPipeline() builds execution context
+ *   2. DEEP_SCAN       — analyzeProject() + loadFullContextWithAnalysis()
+ *   3. SKILL_DISCOVERY — discoverSkills() + routeAgents()
+ *   4. OPSX_EXPLORE    — AI reads specs/features/pages, understands codebase
+ *   5. OPSX_PROPOSE    — AI writes proposal.md, design.md, tasks.md directly
+ *   6. OPSX_SYNC       — runOpsxCommand('sync') auto-merges delta specs
+ *   7. OPSX_APPLY      — AI implements tasks, then runs build pipeline
+ *   8. VALIDATE        — build + lint + tests + quality gates
+ *   9. OPSX_ARCHIVE    — spec sync + trace + doc sync + artifact check
+ *
+ * Goal-Oriented Loop (driven by the AI agent):
+ *   Initialize → Analyze → Plan → Execute → Validate
+ *     → { goal met? → Archive → Done | iterate }
  *
  * @module orchestrate/auto-pipeline
  */
 
-import { PipelineContext, slugify } from './pipeline-context.mjs';
+import { PipelineContext, slugify, GOAL_STATES, ITERATION_LIMIT } from './pipeline-context.mjs';
 import { analyzeProject } from './project-analyzer.mjs';
 import { loadFullContextWithAnalysis } from './context-loader.mjs';
 import { discoverSkills, getDiscoveredSkillMetadata } from './skill-discovery.mjs';
@@ -33,14 +39,22 @@ import { gatesForPhase, runGates } from './quality-gate.mjs';
 import { resolveFeatureFromTask } from './feature-router.mjs';
 import { runOpsxCommand } from './opsx-commands.mjs';
 import { getBranch } from './project-scanner.mjs';
-import { savePipelineState, writeExecutionSummary } from './state-manager.mjs';
-import { startTimer, record } from './metrics.mjs';
+import { savePipelineState, writeExecutionSummary, writeRecoveryGuidance } from './state-manager.mjs';
+import { startTimer, record, exportMetrics } from './metrics.mjs';
 import { logEvent } from './audit-log.mjs';
 import { emit, registerDefaults } from './event-bus.mjs';
-import { execSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { executeLifecycle } from './hook-engine.mjs';
+import { enableAutoApprove, disableAutoApprove } from './human-gate.mjs';
+import { build as runBuild, validate as runValidateCmd, lint as runLint, test as runTest } from './command-runner.mjs';
+import { runValidations } from './validation-pipeline.mjs';
+import { resolveDependencies } from './dependency-resolver.mjs';
+import { measureProgress, progressSummary } from './progress-tracker.mjs';
+import { recordPattern } from './skill-evolution.mjs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { verifyAll, startDevServer, stopDevServer } from './visual-verify.mjs';
 import { resolvePaths } from './config-resolver.mjs';
+import { buildRegistry } from './capability-registry.mjs';
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
@@ -80,11 +94,14 @@ export function initPipeline(taskDescription, opts = {}) {
   const timer = startTimer('init-pipeline');
   const ctx = new PipelineContext(taskDescription, opts);
   ctx.branch = getBranch();
+  ctx.advanceGoalState(GOAL_STATES.INIT);
   ctx.persist();
+
+  if (ctx.autoApprove) enableAutoApprove();
 
   console.log('');
   console.log('═'.repeat(62));
-  console.log(`  /opsx-auto — Master Orchestration`);
+  console.log(`  /opsx-auto — Autonomous Spec-Driven Orchestration v11`);
   console.log(`  Task: "${taskDescription.slice(0, 70)}"`);
   console.log(`  Execution: ${ctx.executionId}`);
   console.log(`  Branch: ${ctx.branch}`);
@@ -135,6 +152,9 @@ export function runDeepScan(ctx) {
 
     ctx.affectedSpecs = full.affected || [];
 
+    ctx.advanceGoalState(GOAL_STATES.ANALYZING);
+    ctx.addCheckpoint('repository-analyzed');
+
     ctx.completePhase('DEEP_SCAN', {
       project: ctx.project,
       featureId: ctx.featureId,
@@ -170,7 +190,7 @@ export function runSkillDiscovery(ctx) {
     const domains = analysis.domains.length ? analysis.domains : ['frontend', 'design'];
 
     let discoveredSkills = [];
-    try { discoveredSkills = discoverSkills(ctx.task, domains, 12); } catch { /* fall through */ }
+    try { discoveredSkills = discoverSkills(ctx.task, domains, 12, ctx.project); } catch { /* fall through */ }
 
     const agentRoute = routeAgents(domains, 'standard', ctx.branch, ctx.task);
     const mcpRoute = routeMCP(ctx.task, domains, 'auto');
@@ -203,6 +223,9 @@ export function runSkillDiscovery(ctx) {
     ctx.failPhase('SKILL_DISCOVERY', e);
     console.log(`     [WARN] Skill discovery partial: ${e.message}`);
   }
+
+  // ── Evolve: record pattern for skill evolution ──
+  try { recordPattern(ctx.task, domains, discoveredSkills, true); } catch { /* best-effort */ }
 
   record('skill-discovery', timer());
   ctx.persist();
@@ -256,10 +279,25 @@ export async function runPropose(ctx) {
   const timer = startTimer('propose');
 
   try {
+    // V11: AI agent writes proposal/design/tasks directly via Edit/Write tools.
+    // The JS runtime invokes the propose pipeline for structural validation only.
+    // If artifacts already exist (re-entry), skip regeneration.
+    const changeDir = resolve(ROOT, 'openspec', 'changes', ctx.changeName);
+    const proposalExists = existsSync(resolve(changeDir, 'proposal.md'));
+    const designExists = existsSync(resolve(changeDir, 'design.md'));
+    const tasksExist = existsSync(resolve(changeDir, 'tasks.md'));
+
+    if (proposalExists && designExists && tasksExist) {
+      console.log('     Artifacts already exist — preserving existing content.');
+    }
+
     const result = await runOpsxCommand('propose', ctx.changeName, {
       description: ctx.task,
       autoApprove: ctx.autoApprove,
     });
+
+    ctx.advanceGoalState(GOAL_STATES.PROPOSING);
+    ctx.addCheckpoint('proposal-created');
 
     ctx.completePhase('OPSX_PROPOSE', {
       proposalPath: result.proposalPath,
@@ -332,15 +370,38 @@ export async function runApply(ctx) {
   const timer = startTimer('apply');
 
   try {
+    // Resolve what needs rebuilding from affected specs
+    const affected = ctx.phaseResults?.OPSX_PROPOSE?.affected || [];
+    if (affected.length > 0) {
+      try {
+        const filePaths = affected
+          .filter((a) => typeof a === 'string')
+          .map((a) => String(a));
+        if (filePaths.length > 0) {
+          const { pagesToRebuild, reason } = resolveDependencies(filePaths);
+          console.log(`     Rebuilding ${pagesToRebuild.length} page(s): ${reason}`);
+        }
+      } catch { /* dependency resolution is advisory only */ }
+    }
+
     const result = await runOpsxCommand('apply', ctx.changeName, {
       description: ctx.task,
       autoApprove: ctx.autoApprove,
     });
 
+    ctx.advanceGoalState(GOAL_STATES.IMPLEMENTING);
+    ctx.addCheckpoint('implementation-complete');
+
     ctx.completePhase('OPSX_APPLY', {
       batches: result.batches?.length || 0,
       pipelineSuccess: result.pipelineResult?.success || false,
     });
+
+    // ── Evolve: record successful implementation pattern ──
+    try {
+      const analysis = analyzeTask(ctx.task);
+      recordPattern(ctx.task, analysis.domains, ctx.skills || [], true);
+    } catch { /* best-effort */ }
 
     logEvent({ type: 'auto-pipeline', phase: 'apply', batches: result.batches?.length || 0 });
   } catch (e) {
@@ -373,31 +434,31 @@ export async function runValidate(ctx) {
   // Build
   try {
     console.log('     Building...');
-    execSync('node scripts/assemble.mjs', {
-      cwd: ROOT, encoding: 'utf-8', timeout: 60000, stdio: 'pipe',
-    });
-    console.log('     ✓ Build passed');
-  } catch (e) {
-    failures.push(`Build: ${e.message?.slice(0, 120)}`);
-    console.log(`     ✗ Build failed: ${e.message?.slice(0, 80)}`);
-  }
+    const buildResult = runBuild();
+    if (buildResult.ok) {
+      console.log('     ✓ Build passed');
+    } else {
+      failures.push(`Build: ${buildResult.stderr?.slice(0, 120)}`);
+      console.log(`     ✗ Build failed: ${buildResult.stderr?.slice(0, 80)}`);
+    }
+  } catch { /* covered by runBuild */ }
 
   // Validate
   try {
     console.log('     Validating...');
-    execSync('node scripts/validate.mjs', {
-      cwd: ROOT, encoding: 'utf-8', timeout: 30000, stdio: 'pipe',
-    });
-    console.log('     ✓ Validate passed');
-  } catch (e) {
-    const msg = (e.stderr || e.stdout || e.message || '').slice(0, 200);
-    if (msg.includes('error') || msg.includes('ERROR')) {
-      failures.push(`Validate: ${msg.slice(0, 120)}`);
-      console.log(`     ✗ Validate failed`);
+    const validateResult = runValidateCmd();
+    if (validateResult.ok) {
+      console.log('     ✓ Validate passed');
     } else {
-      console.log('     ⚠ Validate warnings (non-blocking)');
+      const msg = (validateResult.stderr || validateResult.stdout || '').slice(0, 200);
+      if (msg.includes('error') || msg.includes('ERROR')) {
+        failures.push(`Validate: ${msg.slice(0, 120)}`);
+        console.log(`     ✗ Validate failed`);
+      } else {
+        console.log('     ⚠ Validate warnings (non-blocking)');
+      }
     }
-  }
+  } catch { /* covered by runValidateCmd */ }
 
   // Lint (if available)
   let lintRan = false;
@@ -405,23 +466,19 @@ export async function runValidate(ctx) {
     const pkgPath = resolve(ROOT, 'package.json');
     if (existsSync(pkgPath)) {
       const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
-      const lintCmd = pkg.scripts?.['lint:all']
-        ? 'npm run lint:all'
-        : pkg.scripts?.lint
-          ? 'npm run lint'
-          : null;
-      if (lintCmd) {
+      const hasLint = pkg.scripts?.['lint:all'] || pkg.scripts?.lint;
+      if (hasLint) {
         lintRan = true;
-        execSync(lintCmd, { cwd: ROOT, encoding: 'utf-8', timeout: 30000, stdio: 'pipe' });
-        console.log('     ✓ Lint passed');
+        const lintResult = runLint();
+        if (lintResult.ok) {
+          console.log('     ✓ Lint passed');
+        } else {
+          failures.push(`Lint: ${(lintResult.stderr || '').slice(0, 120)}`);
+          console.log('     ✗ Lint failed');
+        }
       }
     }
-  } catch (e) {
-    if (lintRan) {
-      failures.push(`Lint: ${(e.stderr || e.message || '').slice(0, 120)}`);
-      console.log('     ✗ Lint failed');
-    }
-  }
+  } catch { /* lint unavailable */ }
 
   // Tests (if available)
   let testsRan = false;
@@ -431,16 +488,16 @@ export async function runValidate(ctx) {
       const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
       if (pkg.scripts?.test) {
         testsRan = true;
-        execSync('npm test', { cwd: ROOT, encoding: 'utf-8', timeout: 60000, stdio: 'pipe' });
-        console.log('     ✓ Tests passed');
+        const testResult = runTest();
+        if (testResult.ok) {
+          console.log('     ✓ Tests passed');
+        } else {
+          failures.push(`Tests: ${(testResult.stderr || '').slice(0, 120)}`);
+          console.log('     ✗ Tests failed');
+        }
       }
     }
-  } catch (e) {
-    if (testsRan) {
-      failures.push(`Tests: ${(e.stderr || e.message || '').slice(0, 120)}`);
-      console.log('     ✗ Tests failed');
-    }
-  }
+  } catch { /* tests unavailable */ }
 
   // Quality gates
   try {
@@ -456,10 +513,47 @@ export async function runValidate(ctx) {
     console.log(`     ⚠ Gates unavailable: ${e.message?.slice(0, 80)}`);
   }
 
+  // L1-L7 validation pipeline (deeper checks)
+  try {
+    console.log('     Running L1-L7 validation pipeline...');
+    const levels = [1, 2, 3, 4, 5];
+    if (ctx.branch === 'main') levels.push(6, 7);
+    const vResult = await runValidations(levels);
+    if (vResult.failed.length > 0) {
+      failures.push(`Validation L${vResult.failed.join(', L')}`);
+    }
+    console.log(`     ✓ L1-L7: ${vResult.passed.length} passed, ${vResult.failed.length} failed, ${vResult.skipped.length} skipped`);
+  } catch (e) {
+    console.log(`     ⚠ L1-L7 pipeline unavailable: ${e.message?.slice(0, 80)}`);
+  }
+
+  // Visual verification (starts dev server, runs page checks)
+  try {
+    console.log('     Running visual verification...');
+    const distExists = existsSync(resolve(ROOT, 'dist', 'index.html'));
+    if (distExists) {
+      const server = await startDevServer(3000);
+      if (server.started) {
+        const pages = (ctx.affectedSpecs || []).length > 0 ? ['/'] : ['/'];
+        const vResult = await verifyAll(pages, 3000, 2);
+        await stopDevServer();
+        if (vResult.finalPassed) {
+          console.log('     ✓ Visual verification passed');
+        } else {
+          console.log(`     ⚠ Visual verification: ${vResult.totalIssues} issue(s) across ${vResult.iterations} iteration(s)`);
+        }
+      }
+    }
+  } catch (e) {
+    console.log(`     ⚠ Visual verification unavailable: ${e.message?.slice(0, 80)}`);
+  }
+
   const passed = failures.length === 0;
-  ctx.validation = { passed, failures };
+    ctx.validation = { passed, failures };
 
   if (passed) {
+    ctx.advanceGoalState(GOAL_STATES.VALIDATING);
+    ctx.addCheckpoint('validation-passed');
     ctx.completePhase('VALIDATE', { passed: true, failures: [] });
   } else {
     ctx.failPhase('VALIDATE', failures.join('; '), { passed: false, failures });
@@ -486,6 +580,9 @@ export async function runArchive(ctx) {
       autoApprove: ctx.autoApprove,
     });
 
+    ctx.advanceGoalState(GOAL_STATES.ARCHIVING);
+    ctx.addCheckpoint('archive-complete');
+
     ctx.completePhase('OPSX_ARCHIVE', {
       synced: result.syncResult?.synced?.length || 0,
       traced: !!result.traceResult,
@@ -504,6 +601,45 @@ export async function runArchive(ctx) {
 }
 
 /**
+ * Post-archive verification: checks all 14 completion criteria.
+ * Outputs a verification report and returns pass/fail.
+ * @param {PipelineContext} ctx
+ * @returns {{allPassed: boolean, checks: Array<{label: string, passed: boolean}>}}
+ */
+function verifyCompletion(ctx) {
+  const changeRoot = resolve(ROOT, 'openspec', 'changes', ctx.changeName);
+  const stateRoot = resolve(ROOT, 'orchestrate', '.state');
+
+  const checks = [
+    { label: 'Repository analyzed',          passed: !!(ctx.project && ctx.project.name !== 'unknown') },
+    { label: 'Task understood',              passed: !!(ctx.task && ctx.phases.length > 0) },
+    { label: 'Skills loaded',                passed: !!(ctx.skills && ctx.skills.length > 0) },
+    { label: 'Agents selected',              passed: !!(ctx.agents && ctx.agents.primaryAgent) },
+    { label: 'Explore completed',            passed: ctx.phases.some((p) => p.id === 'OPSX_EXPLORE' && p.status === 'complete') },
+    { label: 'Proposal completed',           passed: existsSync(resolve(changeRoot, 'proposal.md')) && ctx.phases.some((p) => p.id === 'OPSX_PROPOSE' && p.status === 'complete') },
+    { label: 'Sync completed',               passed: ctx.phases.some((p) => p.id === 'OPSX_SYNC' && (p.status === 'complete' || p.status === 'skipped')) },
+    { label: 'Apply completed',              passed: ctx.phases.some((p) => p.id === 'OPSX_APPLY' && p.status === 'complete') },
+    { label: 'Validation completed',         passed: ctx.phases.some((p) => p.id === 'VALIDATE' && (p.status === 'complete' || p.status === 'failed')) },
+    { label: 'Archive completed',            passed: ctx.phases.some((p) => p.id === 'OPSX_ARCHIVE' && p.status === 'complete') },
+    { label: 'Proposal artifact exists',     passed: existsSync(resolve(changeRoot, 'proposal.md')) },
+    { label: 'Design artifact exists',       passed: existsSync(resolve(changeRoot, 'design.md')) },
+    { label: 'Tasks artifact exists',        passed: existsSync(resolve(changeRoot, 'tasks.md')) },
+    { label: 'Execution log exists',         passed: existsSync(resolve(stateRoot, `${ctx.executionId}-context.json`)) },
+  ];
+
+  const allPassed = checks.every((c) => c.passed);
+  const failedChecks = checks.filter((c) => !c.passed);
+
+  console.log('');
+  console.log('  ── Post-Archive Verification ──');
+  checks.forEach((c) => console.log(`    ${c.passed ? '\u2713' : '\u2717'} ${c.label}`));
+  console.log(`  Result: ${allPassed ? 'ALL PASSED' : `${failedChecks.length} FAILED`}`);
+
+  ctx.verification = { allPassed, checks: checks.map((c) => ({ label: c.label, passed: c.passed })) };
+  return ctx.verification;
+}
+
+/**
  * Finalize the pipeline and produce the completion report.
  * Must be called after all phases.
  *
@@ -514,27 +650,63 @@ export function finishPipeline(ctx) {
   const passed = ctx.phases.filter((p) => p.status === 'complete').length;
   const failed = ctx.phases.filter((p) => p.status === 'failed').length;
   const total = ctx.phases.length;
-  const status = failed > 0 ? 'issues-found' : 'done';
+  const goalMet = ctx.isGoalMet();
+
+  if (goalMet) ctx.advanceGoalState(GOAL_STATES.COMPLETE);
+  else if (failed > 0 && !ctx.canContinue()) ctx.advanceGoalState(GOAL_STATES.FAILED);
+
+  const status = ctx.goalState === GOAL_STATES.COMPLETE ? 'done'
+    : ctx.goalState === GOAL_STATES.FAILED ? 'failed' : 'issues-found';
 
   ctx.finalize(status);
   savePipelineState(ctx);
   writeExecutionSummary(ctx);
 
-  console.log('');
-  console.log('─'.repeat(62));
-  console.log(`  Status: ${status === 'done' ? 'COMPLETE' : 'PARTIAL'}`);
-  console.log(`  Phases: ${passed} passed, ${failed} failed / ${total} total`);
-  console.log(`  Duration: ${(ctx.totalDuration / 1000).toFixed(1)}s`);
-  console.log('═'.repeat(62));
-  console.log('');
-
-  logEvent({ type: 'auto-pipeline', phase: 'complete', task: ctx.task, status, duration: ctx.totalDuration });
-
+  // ── Compose final report ──
   const report = ctx.summary();
   report.project = ctx.project;
   report.agents = ctx.agents ? { primary: ctx.agents.primaryAgent, support: ctx.agents.supportAgents } : {};
   report.validation = ctx.validation;
   report.timestamp = new Date().toISOString();
+  report.goalState = ctx.goalState;
+  report.iterationCount = ctx.iterationCount;
+
+  // ── Export telemetry ──
+  report.metrics = exportMetrics(ctx.executionId);
+
+  // ── Progress measurement ──
+  const progress = measureProgress(ctx);
+  console.log(progressSummary(ctx));
+
+  // ── Post-archive verification ──
+  verifyCompletion(ctx);
+
+  // ── Recovery guidance on failure ──
+  if (failed > 0 || ctx.goalState === GOAL_STATES.FAILED) {
+    const recovery = writeRecoveryGuidance(ctx);
+    if (recovery.recoveryFile) {
+      console.log('');
+      console.log('  ── Recovery Guide ──');
+      console.log(`  Saved to: ${recovery.recoveryFile}`);
+      if (recovery.commands.length) {
+        console.log('  Suggested fix commands:');
+        recovery.commands.forEach((c) => console.log(`    ${c}`));
+      }
+    }
+  }
+
+  console.log('');
+  console.log('─'.repeat(62));
+  const stateLabel = ctx.goalState === GOAL_STATES.COMPLETE ? 'GOAL ACHIEVED'
+    : ctx.goalState === GOAL_STATES.FAILED ? 'FAILED' : 'PARTIAL (iterate to continue)';
+  console.log(`  Status: ${stateLabel}`);
+  console.log(`  Iterations: ${ctx.iterationCount}`);
+  console.log(`  Phases: ${passed} passed, ${failed} failed / ${total} total`);
+  console.log(`  Duration: ${(ctx.totalDuration / 1000).toFixed(1)}s`);
+  console.log('═'.repeat(62));
+  console.log('');
+
+  logEvent({ type: 'auto-pipeline', phase: 'complete', task: ctx.task, status, duration: ctx.totalDuration, iterations: ctx.iterationCount, goalState: ctx.goalState });
 
   return report;
 }
@@ -612,27 +784,160 @@ export function getPhaseInstructions(ctx, phaseId) {
 }
 
 /**
- * Legacy: Run the complete pipeline autonomously (for CLI use).
- * @deprecated Use the state-machine API methods above. The AI agent drives execution.
+ * Phase map: which phases are fatal and which are optional.
+ * Fatal = if this phase fails, the pipeline stops.
+ */
+const PHASE_IS_FATAL = {
+  DEEP_SCAN: false,
+  SKILL_DISCOVERY: false,
+  OPSX_EXPLORE: false,
+  OPSX_PROPOSE: true,
+  OPSX_SYNC: false,
+  OPSX_APPLY: true,
+  VALIDATE: false,
+  OPSX_ARCHIVE: false,
+};
+
+/**
+ * Autonomous full pipeline runner — chains ALL phases sequentially
+ * without stopping. Returns when all phases complete or a fatal phase fails.
+ * Uses hook-engine lifecycle events, emits progress, and persists state.
+ *
+ * @param {string} taskDescription
+ * @param {object} [opts]
+ * @returns {Promise<PipelineContext>}
  */
 export async function autoFullPipeline(taskDescription, opts = {}) {
   const ctx = initPipeline(taskDescription, opts);
+
+  // Initialize the capability registry (agents, skills, MCPs, hooks, commands)
+  try { await buildRegistry(); } catch { /* registry optional — fallback routes exist */ }
+
   if (opts.dryRun) {
     runDeepScan(ctx);
     runSkillDiscovery(ctx);
+    ctx.advanceGoalState(GOAL_STATES.COMPLETE);
+    ctx.finalize('dry-run');
     finishPipeline(ctx);
-    return ctx.summary();
+    return ctx;
   }
 
-  runDeepScan(ctx);
-  runSkillDiscovery(ctx);
-  await runExplore(ctx);
-  await runPropose(ctx);
-  await runSync(ctx);
-  await runApply(ctx);
-  await runValidate(ctx);
-  await runArchive(ctx);
+  emit('auto:pipeline:start', { task: taskDescription, executionId: ctx.executionId });
+
+  // ── Phase runner helper (V11: iteration-aware) ──
+  const runPhase = async (phaseFn, phaseId) => {
+    const idx = ctx.phases.length + 1;
+    const total = 8;
+    const label = PHASE_ORDER.find((p) => p.id === phaseId)?.label || phaseId;
+    const phaseSlug = phaseId.toLowerCase().replace('opsx_', '');
+    console.log(`\n[${idx}/${total}] ${label}  [iteration ${ctx.iterationCount}]`);
+    console.log('  Running...');
+
+    ctx.iterationCount++;
+
+    try {
+      executeLifecycle(`pre-${phaseSlug}`, { task: taskDescription, executionId: ctx.executionId });
+    } catch { /* hook failure should not block */ }
+
+    emit('auto:pipeline:phase', { phase: phaseId, label, status: 'running', iteration: ctx.iterationCount });
+
+    let err = null;
+    try {
+      await phaseFn(ctx);
+    } catch (e) {
+      err = e;
+    }
+
+    try {
+      executeLifecycle(`post-${phaseSlug}`, { task: taskDescription, executionId: ctx.executionId });
+    } catch { /* hook failure should not block */ }
+
+    const phase = ctx.phases.find((p) => p.id === phaseId);
+    const status = phase?.status || 'unknown';
+    emit('auto:pipeline:phase', { phase: phaseId, label, status, iteration: ctx.iterationCount });
+    if (status === 'complete') {
+      const dur = phase?.duration ? ` (${(phase.duration / 1000).toFixed(1)}s)` : '';
+      console.log(`  \u2713 Completed${dur}`);
+    } else if (status === 'failed') {
+      console.log(`  \u2717 Failed: ${phase?.error || 'unknown error'}`);
+      if (PHASE_IS_FATAL[phaseId]) {
+        console.log('  [FATAL] Pipeline cannot continue.');
+        throw err || new Error(`Fatal phase ${phaseId} failed`);
+      }
+      console.log('  [WARN] Non-fatal — continuing.');
+    }
+
+    // V11: Safety cap — stop if iteration limit reached
+    if (ctx.iterationCount >= ITERATION_LIMIT) {
+      console.log(`  [LIMIT] Iteration limit (${ITERATION_LIMIT}) reached.`);
+      ctx.advanceGoalState(GOAL_STATES.FAILED);
+      throw new Error(`Iteration limit of ${ITERATION_LIMIT} reached`);
+    }
+  };
+
+  try {
+    await runPhase(() => runDeepScan(ctx), 'DEEP_SCAN');
+    await runPhase(() => runSkillDiscovery(ctx), 'SKILL_DISCOVERY');
+    await runPhase(runExplore, 'OPSX_EXPLORE');
+    await runPhase(runPropose, 'OPSX_PROPOSE');
+    await runPhase(runSync, 'OPSX_SYNC');
+    await runPhase(runApply, 'OPSX_APPLY');
+    await runPhase(runValidate, 'VALIDATE');
+    await runPhase(runArchive, 'OPSX_ARCHIVE');
+  } catch (e) {
+    logEvent({ type: 'auto-pipeline', phase: 'error', error: e.message, executionId: ctx.executionId, iteration: ctx.iterationCount });
+  }
+
+  emit('auto:pipeline:end', { status: ctx.status, executionId: ctx.executionId, goalState: ctx.goalState });
   return finishPipeline(ctx);
 }
 
-export { SAFETY_RULES, PHASE_ORDER, PipelineContext, slugify };
+export { SAFETY_RULES, PHASE_ORDER, PipelineContext, slugify, GOAL_STATES, ITERATION_LIMIT };
+
+/**
+ * Check if a phase has completed successfully.
+ * @param {PipelineContext} ctx
+ * @param {string} phaseId
+ * @returns {boolean}
+ */
+export function isPhaseComplete(ctx, phaseId) {
+  return ctx.phases.some((p) => p.id === phaseId && p.status === 'complete');
+}
+
+/**
+ * Check if a phase has failed.
+ * @param {PipelineContext} ctx
+ * @param {string} phaseId
+ * @returns {boolean}
+ */
+export function isPhaseFailed(ctx, phaseId) {
+  return ctx.phases.some((p) => p.id === phaseId && p.status === 'failed');
+}
+
+/**
+ * Resume a previously persisted pipeline execution from a checkpoint.
+ * The AI agent calls this to continue a paused or interrupted run.
+ *
+ * @param {string} executionId
+ * @returns {PipelineContext|null}
+ */
+export function resumePipeline(executionId) {
+  const ctx = PipelineContext.load(executionId);
+  if (!ctx) {
+    console.log(`No pipeline state found for execution: ${executionId}`);
+    return null;
+  }
+
+  console.log('');
+  console.log('═'.repeat(62));
+  console.log(`  /opsx-auto — RESUMING`);
+  console.log(`  Execution: ${ctx.executionId}`);
+  console.log(`  Goal state: ${ctx.goalState}`);
+  console.log(`  Iterations: ${ctx.iterationCount}`);
+  console.log(`  Completed phases: ${ctx.phases.filter((p) => p.status === 'complete').length}`);
+  console.log('═'.repeat(62));
+  console.log('');
+
+  logEvent({ type: 'auto-pipeline', phase: 'resume', executionId, goalState: ctx.goalState });
+  return ctx;
+}

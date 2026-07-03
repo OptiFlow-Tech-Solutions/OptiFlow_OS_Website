@@ -127,3 +127,58 @@ export function writeExecutionSummary(context) {
     require('fs').appendFileSync(summaryPath, JSON.stringify(entry) + '\n', 'utf-8');
   } catch { /* non-critical */ }
 }
+
+/**
+ * Generate recovery guidance when the pipeline has failed phases.
+ * Writes a human-readable recovery file and returns commands to run.
+ * @param {object} ctx — PipelineContext-like object with phases, executionId
+ * @returns {{ recoveryFile: string, commands: string[] }}
+ */
+export function writeRecoveryGuidance(ctx) {
+  ensureDir();
+  const recoveryPath = resolve(stateDir, `${ctx.executionId}-recovery.md`);
+  const failedPhases = (ctx.phases || []).filter((p) => p.status === 'failed');
+  if (!failedPhases.length) return { recoveryFile: '', commands: [] };
+
+  const lines = [
+    `# Recovery Guide — ${ctx.executionId}`,
+    `**Task:** ${ctx.task}`,
+    `**Failed at:** ${new Date().toISOString()}`,
+    '',
+    '## Failed Phases',
+    ...failedPhases.map((p) => `- **${p.id}**: ${p.error || 'unknown error'}`),
+    '',
+    '## Recovery Steps',
+    '',
+    '```js',
+    `import { PipelineContext } from './orchestrate/auto-pipeline.mjs';`,
+    `const ctx = PipelineContext.load("${ctx.executionId}");`,
+    `if (!ctx) throw new Error("Context not found. Cannot resume.");`,
+    `// Phases completed: ${(ctx.phases || []).filter((p) => p.status === 'complete').length}`,
+    `// Next phase to run: ${ctx.nextPhaseId || 'UNKNOWN'}`,
+    '// Fix the underlying issue, then resume with:',
+    `// Re-run the failed phases or the remaining pipeline`,
+    '```',
+    '',
+    '## Suggested Commands',
+    '',
+    ...getFailureSuggestions(failedPhases),
+  ];
+
+  try {
+    writeFileSync(recoveryPath, lines.join('\n'), 'utf-8');
+  } catch { /* non-critical */ }
+
+  return { recoveryFile: recoveryPath, commands: getFailureSuggestions(failedPhases) };
+}
+
+function getFailureSuggestions(failedPhases) {
+  const suggestions = [];
+  for (const p of failedPhases) {
+    if (p.error && p.error.includes('Cannot find package')) suggestions.push('$ npm install @playwright/test');
+    if (p.error && p.error.includes('lint')) suggestions.push('$ npm run lint -- --fix');
+    if (p.id === 'VALIDATE') suggestions.push('$ npm run build && npm run validate');
+    if (p.id === 'OPSX_APPLY') suggestions.push('Check openspec/changes/<name>/tasks.md for unresolved tasks');
+  }
+  return suggestions;
+}

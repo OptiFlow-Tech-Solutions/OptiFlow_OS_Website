@@ -1,0 +1,45 @@
+{
+  "executionId": "test-task-1783107126343",
+  "task": "Test task",
+  "changeName": "test-task",
+  "dryRun": false,
+  "skipBuild": false,
+  "autoApprove": true,
+  "startedAt": "2026-07-03T19:32:06.343Z",
+  "completedAt": null,
+  "totalDuration": 0,
+  "branch": "unknown",
+  "status": "pending",
+  "project": {
+    "name": "unknown",
+    "framework": "unknown",
+    "architecture": "unknown",
+    "totalFiles": 0,
+    "totalLines": 0
+  },
+  "skills": [],
+  "agents": null,
+  "featureId": null,
+  "featureName": null,
+  "affectedSpecs": [],
+  "validation": {
+    "passed": false,
+    "failures": []
+  },
+  "phaseResults": {},
+  "phases": [],
+  "errors": [],
+  "warnings": [],
+  "goalState": "ANALYZING",
+  "iterationCount": 0,
+  "targetDescription": "Test task",
+  "checkpoints": [
+    {
+      "label": "test",
+      "phase": "ANALYZING",
+      "iteration": 0,
+      "timestamp": "2026-07-03T19:32:06.347Z",
+      "errors": []
+    }
+  ]
+}

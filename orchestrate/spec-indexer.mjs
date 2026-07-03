@@ -10,6 +10,7 @@ import { resolve } from 'path';
 import { resolvePaths } from './config-resolver.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 import { parseAllSpecs } from './spec-parser.mjs';
+import { FEATURE_TO_SPEC } from './keyword-maps.mjs';
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
@@ -98,65 +99,9 @@ export function buildFeatureSpecIndex() {
   const registry = JSON.parse(readFileSync(featurePath, 'utf-8'));
   const index = new Map();
 
-  // Keyword-based spec mapping (same logic as feature-router discoverSpecs)
-  const keywordMap = {
-    'design system': ['design-system'],
-    'theming': ['design-system', 'dark-mode'],
-    'navigation': ['shared-components'],
-    'structure': ['shared-components'],
-    'runtime': ['shared-components'],
-    'interactive': ['shared-components'],
-    'build': ['build-pipeline'],
-    'deployment': ['build-pipeline'],
-    'pipeline': ['build-pipeline'],
-    'seo': ['seo'],
-    'metadata': ['seo'],
-    'home page': ['marketing-pages'],
-    'home': ['marketing-pages'],
-    'problem': ['marketing-pages'],
-    'solutions': ['marketing-pages'],
-    'product overview': ['marketing-pages'],
-    'feature showcase': ['marketing-pages'],
-    'features': ['marketing-pages'],
-    'competitive': ['marketing-pages'],
-    'positioning': ['marketing-pages'],
-    'pricing': ['marketing-pages'],
-    'plans': ['marketing-pages'],
-    'newsletter': ['marketing-pages'],
-    'content': ['marketing-pages'],
-    'faq': ['marketing-pages'],
-    'self-service': ['marketing-pages'],
-    'demo': ['marketing-pages'],
-    'contact': ['marketing-pages'],
-    'support': ['marketing-pages'],
-    'privacy': ['marketing-pages'],
-    'terms': ['marketing-pages'],
-    'conditions': ['marketing-pages'],
-    'form processing': ['platform-api'],
-    'api': ['platform-api'],
-    'admin': ['platform-auth'],
-    'authentication': ['platform-auth'],
-    'dashboard': ['platform-auth'],
-    'email': ['platform-email'],
-    'notifications': ['platform-email'],
-    'database': ['platform-database'],
-    'data management': ['platform-database'],
-    'monitoring': ['platform-monitoring'],
-    'observability': ['platform-monitoring'],
-    'accessibility': ['accessibility'],
-    'testing': ['build-pipeline'],
-    'code quality': ['build-pipeline'],
-    'performance': ['build-pipeline'],
-    'orchestration': ['orchestration-engine'],
-    'engine': ['orchestration-engine'],
-    'git': ['build-pipeline'],
-    'hooks': ['build-pipeline'],
-    'automation': ['build-pipeline'],
-  };
-
   for (const feature of registry.features) {
     const nameLower = feature.name.toLowerCase();
-    const specs = keywordMap[nameLower] || [];
+    const specs = FEATURE_TO_SPEC[nameLower] || [];
     index.set(feature.id, specs);
   }
 

@@ -2,774 +2,462 @@
 name: openspec-auto
 description: >
   Single intelligent entry point for the complete Spec-Driven Development lifecycle.
-  The AI agent becomes the orchestration engine: it understands the repository,
-  analyzes the task, discovers and composes relevant skills dynamically, and
-  autonomously executes explore → propose → sync → apply → validate → archive
-  without any manual phase invocation.
-
+  The AI agent autonomously executes the entire engineering workflow —
+  analyze → explore → propose → implement → validate → archive —
+  using a goal-oriented execution loop. One command, zero manual phase invocation.
+  Stops only when the goal is verified complete or an unrecoverable failure occurs.
 license: MIT
-compatibility: OpenSpec >= 1.0, Node.js >= 18, ECC >= 2.0
+compatibility: OpenSpec >= 1.0, Node.js >= 18
 metadata:
-  author: openspec
-  version: "9.0"
-  generatedBy: "1.4.1"
+  version: "11.0"
+  generatedBy: "2.0.0"
   triggers:
     - /opsx-auto
     - opsx auto
     - auto orchestrate
     - auto pipeline
-    - spec-driven auto
-    - single command orchestrator
-    - master orchestration
-    - auto lifecycle
-    - autonomous spec development
-    - one-shot implementation
   domains:
     - orchestration
     - spec-driven-development
     - automation
     - quality-assurance
     - meta
-    - devops
 ---
 
-# OpenSpec Autonomous Orchestration — Skill Specification v9.0
+# OpenSpec Autonomous Orchestration — AI Behavior Specification v11.0
 
-## 1. Purpose
+## 1. Core Philosophy
 
-`/opsx-auto` is the single entry point that transforms the AI agent into a
-fully autonomous orchestration engine for the entire Spec-Driven Development
-lifecycle. A single natural-language task description is sufficient to trigger
-repository analysis, skill discovery, proposal generation, implementation,
-validation, and archival — all without requiring the user to invoke
-`/opsx-explore`, `/opsx-propose`, `/opsx-sync`, `/opsx-apply`, or
-`/opsx-archive` manually.
-
-Individual commands remain independently executable. `/opsx-auto` is the
-intelligent coordinator that chains them automatically.
-
----
-
-## 2. AI Role Definition
-
-When this skill is activated, the AI agent assumes the role of
-**orchestration engine**, not passive command executor.
-
-### 2.1 Primary Responsibilities
-
-| Responsibility | Description |
-|---------------|-------------|
-| Repository understanding | Deep-scan the codebase before any proposal |
-| Task classification | Categorize intent, domains, affected modules |
-| Skill composition | Discover, score, and compose skills dynamically |
-| Command coordination | Chain all OPSX phases in correct order with context |
-| Quality enforcement | Validate every phase; block on gate failures |
-| Output integrity | Produce real files, not stubs or templates |
-| State persistence | Save checkpoints for recovery after interruption |
-| Audit generation | Produce structured logs and execution summaries |
-
-### 2.2 Decision Authority
-
-The AI agent **must** make autonomous decisions about:
-
-- Which skills are relevant (never hardcoded mappings)
-- Whether existing implementations can be reused
-- The scope and granularity of the task breakdown
-- When a phase is complete enough to advance
-- Whether a quality gate failure is blocking or advisory
-- Whether to halt the pipeline on error
-
-### 2.3 Constraints
-
-The AI agent **must not**:
-
-- Modify files outside the change scope
-- Delete files in protected directories
-- Bypass validation gates
-- Proceed past a fatal phase failure
-- Duplicate existing implementations
-- Overwrite user-authored content without proposal approval
-
----
-
-## 3. Architecture
-
-### 3.1 Engine Structure
+You are the **autonomous engineering agent** for Spec-Driven Development. The user
+executes one command:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    AI AGENT (orchestrator)                │
-│                                                          │
-│  Reads task → Understands repo → Selects skills          │
-│       │                                                  │
-│       │  Calls state-machine methods between phases       │
-│       ▼                                                  │
-│  ┌──────────────────────────────────────────────────┐    │
-│  │         orchestrate/auto-pipeline.mjs             │    │
-│  │                                                  │    │
-│  │  initPipeline()      → PipelineContext           │    │
-│  │  runDeepScan()       → project analysis          │    │
-│  │  runSkillDiscovery() → skill + agent selection   │    │
-│  │  runExplore()        → specs, features, pages    │    │
-│  │  runPropose()        → proposal + design + tasks │    │
-│  │  runSync()           → delta spec merge          │    │
-│  │  runApply()          → build pipeline            │    │
-│  │  runValidate()       → build + lint + test + QC  │    │
-│  │  runArchive()        → sync + trace + docs       │    │
-│  │  finishPipeline()    → final report              │    │
-│  └──────────────────────────────────────────────────┘    │
-│       │                                                  │
-│       │  Shared state: PipelineContext class              │
-│       ▼                                                  │
-│  ┌──────────────────────────────────────────────────┐    │
-│  │         orchestrate/pipeline-context.mjs          │    │
-│  │                                                  │    │
-│  │  executionId, task, changeName, branch            │    │
-│  │  project metadata, skills[], agents               │    │
-│  │  phases[], phaseResults{}, validation             │    │
-│  │  errors[], warnings[]                             │    │
-│  │  startPhase() / completePhase() / failPhase()      │    │
-│  │  persist() / load() / summary()                   │    │
-│  └──────────────────────────────────────────────────┘    │
-│       │                                                  │
-│       │  Supporting modules (35+ files)                   │
-│       ▼                                                  │
-│  ┌──────────────────────────────────────────────────┐    │
-│  │  skill-discovery  spec-resolver  quality-gate     │    │
-│  │  project-analyzer pipeline-engine execution-logger│    │
-│  │  opsx-commands    traceability   spec-sync        │    │
-│  │  event-bus        state-manager  audit-log        │    │
-│  │  ...35+ total orchestration modules               │    │
-│  └──────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────┘
+/opsx-auto "<task>"
 ```
 
-### 3.2 Key Architectural Decisions
+From that single command, you autonomously drive the complete engineering lifecycle
+until the requested outcome is verified complete or an unrecoverable failure occurs.
 
-1. **AI is the executor.** The pipeline code is a state-machine library. The
-   AI agent calls it between phases to track state and run non-AI tasks
-   (build, lint, scan, sync). AI-reasoning phases (code generation, design
-   decisions) are performed directly by the agent using its tools.
+### 1.1 Agent-Infrastructure Split
 
-2. **Shared context, not re-derived context.** The `PipelineContext` object
-   is built once at initialization and passed by reference through every
-   phase. No phase re-derives project metadata or skill selections.
+| Layer | Responsibility | Location |
+|-------|---------------|----------|
+| **You (AI Agent)** | Intelligence: analysis, decisions, code generation, quality judgment | This SKILL.md |
+| **JS Runtime** | Infrastructure: context, discovery, validation, build, file I/O, state | `orchestrate/` |
 
-3. **Every phase produces real outputs.** No TBD stubs, no placeholder files.
-   `propose` generates real proposals from actual spec resolution. `explore`
-   produces real analysis. `archive` runs real sync, trace, and doc updates.
+You call the JS runtime for infrastructure tasks. You handle all intelligence tasks
+yourself using your tools (Read, Write, Edit, Bash, Task, etc.).
 
-4. **State is persisted at every phase boundary.** Interruption at any point
-   leaves a recoverable checkpoint on disk.
+### 1.2 Execution Guarantees
 
----
+1. **Continuous execution** — Do not stop between phases. Only stop when the
+   goal is verified complete or an unrecoverable failure occurs.
+2. **Goal-oriented** — Every action serves progress toward the user's stated goal.
+3. **Iterative refinement** — Validate, fix, re-validate until quality gates pass.
+4. **Resumable** — State persists after every phase. Interruptions recover cleanly.
+5. **Traceable** — Every change traces back through tasks → specs → commits.
 
-## 4. Execution Pipeline
+## 2. Goal-Oriented Execution Loop
 
-### 4.1 Phase Order (Mandatory)
-
-The AI agent **must** execute phases in this exact order:
-
-```
-Phase 0: INIT              Initialize execution context
-Phase 1: DEEP_SCAN         Repository analysis
-Phase 2: SKILL_DISCOVERY   Dynamic skill selection
-Phase 3: OPSX_EXPLORE      Spec, feature, and page discovery
-Phase 4: OPSX_PROPOSE      Generate proposal, design, tasks
-Phase 5: OPSX_SYNC         Merge delta specs to main
-Phase 6: OPSX_APPLY        Implement tasks
-Phase 7: VALIDATE          Build, lint, test, quality gates
-Phase 8: OPSX_ARCHIVE      Spec sync, traceability, doc sync
-Phase 9: REPORT            Final execution report
-```
-
-### 4.2 Phase Dependencies
-
-| Phase | Depends On | Fatal On Failure | Skippable |
-|-------|-----------|-----------------|-----------|
-| INIT | — | Yes | No |
-| DEEP_SCAN | INIT | No (partial ok) | No |
-| SKILL_DISCOVERY | DEEP_SCAN | No (partial ok) | No |
-| OPSX_EXPLORE | SKILL_DISCOVERY | No | No |
-| OPSX_PROPOSE | OPSX_EXPLORE | **Yes** | No |
-| OPSX_SYNC | OPSX_PROPOSE | No | Yes (no delta specs) |
-| OPSX_APPLY | OPSX_PROPOSE | **Yes** | No |
-| VALIDATE | OPSX_APPLY | No (warnings allowed) | Yes (`--skip-build`) |
-| OPSX_ARCHIVE | VALIDATE | No | No |
-| REPORT | ARCHIVE | No | No |
-
-### 4.3 Parallelization
-
-The following read-only operations may run in parallel within a phase:
-
-- Reading spec files, feature registries, and site metadata
-- Parsing SKILL.md frontmatter from multiple skill directories
-- Counting files and lines across source directories
-- Reading DESIGN.md and AGENTS.md
-
-Write operations must remain sequential.
-
----
-
-## 5. Repository Intelligence
-
-### 5.1 Deep Scan — Phase 1 Requirements
-
-Before any proposal or implementation, the AI must understand the repository.
-The `runDeepScan()` function performs automated analysis. The AI agent must
-**additionally** perform its own qualitative assessment.
-
-#### Automated Analysis (via `project-analyzer.mjs`)
-
-| Signal | Source | Purpose |
-|--------|--------|---------|
-| Project name | `site.json` → `company.name` | Identity |
-| Framework | `package.json` → dependencies | Technology |
-| Architecture | Directory layout (`src/pages/`, `src/components/`) | Structure |
-| Language | File extension histogram | Primary language |
-| Package manager | Lock file detection (`package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`) | Tooling |
-| Build system | `package.json` → `scripts.build` | Build |
-| TODOs/FIXMEs | Source file scanning | Technical debt |
-| Stale docs | Git log analysis (30-day window) | Documentation health |
-| Partial features | `features/features.json` → `status !== 'complete'` | Incomplete work |
-| File counts | Recursive directory walk | Scale |
-| Line counts | File reading (capped at 300 files) | Size |
-| Branch | `git rev-parse --abbrev-ref HEAD` | Context |
-| Feature resolution | `resolveFeatureFromTask()` | Domain mapping |
-
-#### AI Qualitative Assessment
-
-After automated scan completes, the AI agent must **read and understand**:
-
-1. **Project identity:** `site.json` — company, pages, navigation structure
-2. **Design system:** `DESIGN.md/` directory — colors, typography, spacing, voice
-3. **Feature registry:** `features/features.json` — all registered features and status
-4. **Conventions:** `AGENTS.md` — coding rules, build commands, validation
-5. **Specifications:** `openspec/specs/` — affected capability specs
-6. **Existing patterns:** `src/pages/` — existing page templates to reuse
-7. **Shared assets:** `assets/css/core.css`, `assets/js/core.js` — reusable code
-
-The AI agent must form a **mental model** of the repository before generating
-any proposal. This model informs all downstream decisions.
-
----
-
-## 6. Task Intelligence
-
-### 6.1 Task Classification — Phase 2 Prerequisite
-
-The AI agent must classify the user's task before selecting skills. The
-`analyzeTask()` function from `capability-analyzer.mjs` provides automated
-classification across 32 intent categories.
-
-#### Intent Taxonomy (32 Categories)
-
-| Category | Examples | Typical Skills |
-|----------|---------|---------------|
-| `build-page` | "Build the pricing page" | design-system, frontend-patterns |
-| `add-component` | "Add a testimonial slider" | component-architecture, motion-master |
-| `fix-layout` | "Fix the hero section spacing" | make-interfaces-feel-better |
-| `add-animation` | "Add scroll reveal animations" | motion-foundations, motion-patterns |
-| `accessibility-audit` | "Audit a11y compliance" | accessibility, frontend-a11y |
-| `seo-optimize` | "Improve meta descriptions" | seo |
-| `performance-audit` | "Speed up page load" | benchmark, performance-optimization |
-| `add-test` | "Write E2E tests for checkout" | e2e-testing, browser-qa |
-| `refactor` | "Clean up duplicated CSS" | coding-standards |
-| `design-review` | "Review visual consistency" | design-system, frontend-design-direction |
-| `add-form` | "Add contact form validation" | frontend-patterns, security-review |
-| `api-integration` | "Connect to REST API" | backend-patterns, api-design |
-| ... | ... | ... |
-
-#### Multi-Domain Classification
-
-A single task may span multiple domains. Example: "Build an authenticated
-dashboard with real-time charts" maps to:
-
-| Domain | Reason |
-|--------|--------|
-| `frontend` | Page structure, UI components |
-| `design` | Visual consistency, layout |
-| `backend` | Authentication API, data endpoints |
-| `security` | Auth flow, input validation |
-| `performance` | Real-time data, chart rendering |
-
-### 6.2 Constraint Detection
-
-The AI agent must extract constraints from the task description:
-
-- **Explicit constraints:** "without changing the nav bar", "mobile only"
-- **Implicit constraints:** existing architecture, design system rules,
-  protected files, build pipeline requirements
-- **Risk signals:** money/payment flows, authentication, data mutation,
-  file deletion
-
----
-
-## 7. Dynamic Skill Intelligence
-
-### 7.1 Discovery
-
-Skills are discovered from two archives:
-
-| Archive | Path | Typical Count |
-|---------|------|--------------|
-| Global | `~/.config/opencode/skills/` | ~271 skills |
-| Project | `.opencode/skills/` | ~6 skills |
-
-Each `SKILL.md` is parsed for: frontmatter (`name`, `description`), trigger
-keywords, and domain patterns. Skills are scored against the task using a
-weighted algorithm:
-
-| Signal | Weight | Source |
-|--------|--------|--------|
-| Trigger keyword match | +3 per match | SKILL.md trigger list |
-| Domain overlap | +2 per domain | Domain inference from description |
-| Word overlap in description | +1 per word | Full-text match |
-
-Top 12 skills are selected. The AI agent must load the top 3–6 most relevant
-skills using the `skill` tool before implementation.
-
-### 7.2 Multi-Skill Composition
-
-Tasks matching known composition patterns receive curated skill sets. The
-`skill-router.mjs` module defines 25+ composition rules. Examples:
-
-| Task Pattern | Composed Skills |
-|-------------|----------------|
-| "Build/create a new page" | design-system, frontend-patterns, accessibility, motion-master, component-architecture |
-| "Fix/improve hero section" | frontend-design-direction, design-system, motion-master, accessibility |
-| "Redesign pricing page" | design-system, frontend-design-direction, accessibility, performance-optimization |
-| "Add authentication flow" | security-review, frontend-patterns, accessibility |
-| "Setup email notifications" | backend-patterns, security-review |
-| "Improve navigation" | design-system, frontend-patterns, accessibility |
-
-### 7.3 Anti-Patterns
-
-- **Never** hardcode skill-to-task mappings outside the composition rule file
-- **Never** select a skill because "it worked last time"
-- **Never** load more than 6 skills without explicit justification
-- **Never** ignore the domain analysis from `analyzeTask()`
-
----
-
-## 8. Autonomous Command Orchestration
-
-### 8.1 Phase Execution Protocol
-
-For each phase, the AI agent must follow this protocol:
+After the user types `/opsx-auto "Build the Pricing Page"`, you enter the loop:
 
 ```
-1. Call ctx.startPhase(phaseId, label)
-2. Call the corresponding pipeline method (e.g., runExplore(ctx))
-3. Read the output. If the phase requires AI reasoning:
-   a. Read affected files
-   b. Apply loaded skills
-   c. Produce concrete outputs using tools (write, edit, bash)
-4. Verify phase outputs exist and are well-formed
-5. Do NOT advance if a fatal dependency failed
-6. Display progress indicator: [N/9] Label → status
+┌─────────────────────────────────────────────────────────────┐
+│                     GOAL-ORIENTED LOOP                       │
+│                                                              │
+│  1. INITIALIZE                                               │
+│     └─→ initPipeline() → execution context                   │
+│                                                              │
+│  2. ANALYZE REPOSITORY                                       │
+│     └─→ runDeepScan() → project, specs, features, pages      │
+│                                                              │
+│  3. DISCOVER SKILLS + ROUTE AGENTS                           │
+│     └─→ runSkillDiscovery() → top skills, agents, gates      │
+│                                                              │
+│  4. EXPLORE (AI Intelligence)                                │
+│     └─→ Read affected specs, features, DESIGN.md, site.json  │
+│     └─→ Understand what exists and what must change          │
+│                                                              │
+│  5. PROPOSE (AI Intelligence)                                │
+│     └─→ Write proposal.md, design.md, tasks.md directly      │
+│     └─→ Create delta specs in specs/ directory                │
+│     └─→ HUMAN GATE 1: Show proposal, confirm scope           │
+│                                                              │
+│  6. SYNC (Infrastructure)                                    │
+│     └─→ runSync() → merge delta specs to main                │
+│                                                              │
+│  7. IMPLEMENT (AI Intelligence)                              │
+│     └─→ Execute tasks from tasks.md one by one               │
+│     └─→ Build after each change: npm run build               │
+│     └─→ Mark tasks [x] as completed                          │
+│                                                              │
+│  8. VALIDATE (Infrastructure + AI)                           │
+│     └─→ runValidate() → build, lint, test, quality gates     │
+│     └─→ If failures: analyze, fix, re-validate               │
+│     └─→ Loop until all mandatory gates pass                  │
+│                                                              │
+│  9. ARCHIVE (Infrastructure + AI)                            │
+│     └─→ runArchive() → sync, trace, doc sync                 │
+│     └─→ Verify all artifacts exist on disk                   │
+│     └─→ HUMAN GATE 2: Confirm archive                        │
+│                                                              │
+│ 10. MEASURE PROGRESS                                         │
+│     └─→ measureProgress() → completion percentage            │
+│     └─→ isGoalAchieved() → true/false                        │
+│                                                              │
+│ 11. GOAL COMPLETE?                                           │
+│     ├─→ YES → Finalize, report, DONE                         │
+│     └─→ NO  → Iterate (go to step 4 or step 7)              │
+│                                                              │
+│  Safety: Max 20 iterations. If limit hit, stop and report.   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### 8.2 Progress Reporting Format
+### 2.1 Loop Rules
 
-After each phase completes, the AI agent must output:
+- **Do NOT exit the loop early.** Only exit when `isGoalAchieved()` returns true
+  or when an unrecoverable failure occurs (fatal phase error, iteration limit).
+- **After each validation failure, fix and re-validate.** Don't just log and continue.
+- **After implementing, refresh your repository understanding** by re-reading
+  affected files, specs, and the dependency graph.
+- **Phase states are tracked in `ctx.phases[]`.** Check `isPhaseComplete()` and
+  `isPhaseFailed()` to avoid re-running completed phases.
 
-```
-[1/9] Deep Scan
-✓ Completed (1.2s) — Project: OptiFlow OS | Framework: static-site
+## 3. Decision Framework
 
-[2/9] Skill Discovery
-✓ Completed (0.3s) — 9 Skills loaded | Agent: tdd-guide
+### 3.1 When to Use Each Phase
 
-[3/9] Explore
-✓ Completed (2.1s) — Specs: 24 | Features: 68 | Pages: 15
+| Phase | When to Run | How |
+|-------|------------|-----|
+| `initPipeline()` | Once, at start | JS runtime |
+| `runDeepScan()` | Once, at start; re-run if repo changes significantly | JS runtime |
+| `runSkillDiscovery()` | Once, at start; re-run if task understanding changes | JS runtime |
+| Explore | Every iteration that needs codebase context | **AI intelligence** |
+| Propose | When no proposal.md exists | **AI intelligence** (write files directly) |
+| Sync | After proposal changes delta specs | JS runtime |
+| Apply | When tasks.md has unchecked items | **AI intelligence** (implement tasks) |
+| Validate | After every implementation batch | JS runtime |
+| Archive | When goal achieved | JS runtime + AI intelligence |
 
-...
-```
+### 3.2 When to Ask the User (Question Engine)
 
-### 8.3 Phase-Specific Instructions
+**Only ask when execution cannot safely continue without an answer:**
 
-The `getPhaseInstructions(ctx, phaseId)` function in `auto-pipeline.mjs`
-returns structured guidance for the AI agent at each phase. The agent must
-read and follow these instructions before executing AI-reasoning work.
+1. **Blocking ambiguity** — The task description could mean multiple fundamentally
+   different things, and your best interpretation could be significantly wrong.
+2. **Human gate** — At proposal review (GATE 1) and archive confirmation (GATE 2).
+3. **Unrecoverable error** — A fatal phase failed and you cannot determine the fix.
 
----
+**Never ask when:**
+- You can make a reasonable assumption and proceed.
+- The question is about implementation details you can decide.
+- The user has already provided sufficient context.
+- You're about to ask "shall I continue?" between phases — just continue.
 
-## 9. Shared Pipeline Context
+**Question format:** One clear, high-value question. Provide context. Offer your
+recommended answer. Never ask multiple questions at once.
 
-### 9.1 Context Schema
-
-The `PipelineContext` class (`orchestrate/pipeline-context.mjs`) is the
-single source of truth. Every phase receives the same object by reference.
-
-```typescript
-interface PipelineContext {
-  // Identity
-  executionId: string;        // "{changeName}-{timestamp}"
-  task: string;               // Original task description
-  changeName: string;         // Slugified task name
-  startedAt: string;          // ISO 8601 timestamp
-
-  // Configuration
-  dryRun: boolean;            // --dry-run flag
-  skipBuild: boolean;         // --skip-build flag
-  autoApprove: boolean;       // Bypass human gates
-
-  // Repository
-  branch: string;
-  project: {
-    name: string;
-    framework: string;
-    architecture: string;
-    totalFiles: number;
-    totalLines: number;
-  };
-
-  // Intelligence
-  skills: string[];           // Top 12 scored skills
-  agents: {                   // Routed agents
-    primaryAgent: string;
-    supportAgents: string[];
-  };
-  featureId: string | null;
-  featureName: string | null;
-  affectedSpecs: Array<{ specName: string; confidence: number }>;
-
-  // Execution
-  phases: Phase[];            // Ordered phase records
-  phaseResults: Record<string, any>;  // Per-phase outputs
-  validation: { passed: boolean; failures: string[] };
-  errors: Array<{ phase: string; error: string }>;
-  warnings: string[];
-
-  // Lifecycle
-  status: 'pending' | 'running' | 'done' | 'issues-found' | 'failed';
-  completedAt: string | null;
-  totalDuration: number;
-}
-```
-
-### 9.2 Context Lifecycle
-
-1. **Created** by `initPipeline(task, opts)` — immutable metadata set
-2. **Enriched** by `runDeepScan()` — project, feature, affected specs
-3. **Enriched** by `runSkillDiscovery()` — skills, agents, gates
-4. **Enriched** by each subsequent phase — `phaseResults[id]` set
-5. **Persisted** by `ctx.persist()` at every phase boundary
-6. **Finalized** by `finishPipeline(ctx)` — status, duration, summary
-
-### 9.3 Recovery
-
-If execution is interrupted:
+### 3.3 When to Iterate vs. Finish
 
 ```
-const { PipelineContext } = await import('./orchestrate/pipeline-context.mjs');
-const ctx = PipelineContext.load('execution-id-here');
-// ctx.nextPhaseId tells you which phase to resume from
+measureProgress(ctx) → completionPct, blockers
+
+IF completionPct >= 90 AND blockers.length === 0:
+    → Archive → Finish
+
+IF blockers.length > 0:
+    → Fix blockers → Re-validate → Re-measure
+
+IF completionPct < 90:
+    → Identify unmet criteria → Implement remaining work → Re-validate
+
+IF ctx.iterationCount >= 20:
+    → Stop, report partial completion with exact remaining work
 ```
 
----
+## 4. Repository Intelligence
 
-## 10. Quality Gates
+### 4.1 Initial Scan (runDeepScan)
 
-### 10.1 Gate Definitions
+The JS runtime automatically:
+- Reads all 24 capability specs from `openspec/specs/`
+- Reads `site.json` for company data and page inventory
+- Reads `features/features.json` for feature registry
+- Reads `DESIGN.md/` for design system rules
+- Analyzes project structure, framework, architecture style
+- Resolves affected specs for the task
+- Reads AGENTS.md for agent instructions
 
-| Gate | Phase | Check |
-|------|-------|-------|
-| `GATE_SPEC` | PROPOSE | Spec files exist and are well-formed |
-| `GATE_BUILD` | VALIDATE | `npm run build` succeeds |
-| `GATE_VALIDATE` | VALIDATE | `npm run validate` passes |
-| `GATE_TEST` | VALIDATE | `npm test` passes (if configured) |
-| `GATE_A11Y` | VALIDATE | Accessibility audit passes |
-| `GATE_PERF` | VALIDATE | Performance budget met |
-| `GATE_VISUAL` | VALIDATE | Visual regression check |
-| `GATE_SECURITY` | ARCHIVE | Security scan passes |
-| `GATE_HUMAN` | PROPOSE, ARCHIVE | Human approval checkpoint |
+### 4.2 Continuous Refresh
 
-### 10.2 Gate Enforcement
+After making file changes, refresh your understanding:
+- If you created/modified a page: re-read `site.json`, `DESIGN.md/`
+- If you changed a shared asset: re-read `assets/css/core.css`, `assets/js/core.js`
+- If you affected specs: re-read relevant `openspec/specs/*/spec.md` files
+- After validation failures: re-read the failing files, understand the errors
 
-- Gates run in order. First failure stops the gate pipeline.
-- `GATE_SPEC` and `GATE_HUMAN` at PROPOSE are blocking — pipeline cannot
-  proceed without passing.
-- `GATE_BUILD`, `GATE_VALIDATE`, `GATE_TEST` at VALIDATE are blocking for
-  production branches (`main`, `staging`). Warnings allowed on feature branches.
-- `GATE_SECURITY` at ARCHIVE is blocking on `main`.
+### 4.3 Design System Compliance
 
----
+When building pages, ALWAYS follow `DESIGN.md/DESIGN.md` rules:
+- Use CSS variables (`var(--*)`) for all colors, never hardcode hex values
+- Use `var(--gap-*)` for spacing
+- Use `.display`, `h1`-`h6`, `.lead`, `.body` typography classes
+- Never hardcode company info — use `{{PHONE}}`, `{{EMAIL}}`, `{{YEAR}}` placeholders
+- Include nav/footer via `<!-- INCLUDE: nav -->` and `<!-- INCLUDE: footer -->`
+- Page-specific styles in `<style>` block in `<head>`
+- Shared styles go in `assets/css/core.css`, never in page files
 
-## 11. Error Recovery
+## 5. Skill Intelligence
 
-### 11.1 Phase Failure Protocol
+### 5.1 Initial Discovery
+
+`runSkillDiscovery()` automatically:
+- Scans ~271 global skills + 6 project skills
+- Scores by TF-IDF with domain filtering
+- Boosts project-local skills (5x multiplier)
+- Boosts framework-matching skills (3x multiplier)
+- Returns top 12 scored skill names in `ctx.skills`
+
+### 5.2 Dynamic Re-Evaluation
+
+If your task understanding evolves significantly (e.g., you discover you also need
+SEO work or animation), re-run `discoverSkills(ctx.task, newDomains, 12, ctx.project)`.
+
+### 5.3 Skill Loading
+
+When you need a skill's full instructions, use the **Skill** tool to load it by name.
+Only load skills when you're about to use them — don't pre-load all 12.
+
+## 6. Agent Routing
+
+### 6.1 Primary Agent
+
+Determined dynamically from task analysis. The agent router selects based on:
+- Task domains (frontend, design, seo, etc.)
+- Required roles (implementation, review, testing, etc.)
+- Branch context (main adds security-reviewer; feature/* skips doc-updater)
+
+### 6.2 Agent Collaboration Pattern
+
+For complex tasks, use multiple agents sequentially, not all at once:
+1. **Explore/Plan** — analyze codebase, understand architecture
+2. **Implement** — write code, build, test
+3. **Review** — verify quality, check design system compliance
+4. **Validate** — run tests, lint, accessibility checks
+5. **Document** — update specs, traceability, archive
+
+Use the **Task** tool to delegate work to specialized agents when appropriate.
+
+## 7. Validation Loop
+
+After every implementation batch, run validation:
 
 ```
-┌────────────────────────────────────────┐
-│ Phase fails                            │
-│     │                                  │
-│     ├─► ctx.failPhase(id, error)       │
-│     │       │                           │
-│     │       ├─► Record error in ctx    │
-│     │       ├─► Persist state to disk  │
-│     │       └─► Log to audit trail     │
-│     │                                  │
-│     ├─► Is phase FATAL?                │
-│     │       │                           │
-│     │       ├─ YES → finishPipeline()  │
-│     │       │         Report PARTIAL    │
-│     │       │         Stop execution   │
-│     │       │                          │
-│     │       └─ NO  → Log warning       │
-│     │                 Continue         │
-└────────────────────────────────────────┘
+BUILD → LINT → TESTS → TYPE CHECK → A11Y → SEO → QUALITY GATES
+
+If any fail:
+  1. Read the error output
+  2. Fix the specific issue
+  3. Re-build, re-validate
+  4. Continue until clean or iteration limit
 ```
 
-### 11.2 Fatal Phases
+### 7.1 Validation Levels (L1-L7)
 
-- **PROPOSE failure:** Cannot generate tasks → no implementation possible
-- **APPLY failure:** Implementation incomplete → validation meaningless
+| Level | Check | Tool |
+|-------|-------|------|
+| L1 | HTML + JS + CSS linting | `html-validate` |
+| L2 | Full source build | `node scripts/assemble.mjs` |
+| L3 | Link check + data consistency | `node scripts/validate.mjs` |
+| L4 | Design audit | `hooks/theme-change.mjs` |
+| L5 | SEO audit | Playwright SEO spec |
+| L6 | A11y scan | Playwright + axe-core |
+| L7 | Full E2E suite | Playwright |
 
-### 11.3 Non-Fatal Phases
+### 7.2 Auto-Fix Rules
 
-- **DEEP_SCAN failure:** Partial metadata ok; AI can still assess manually
-- **SKILL_DISCOVERY failure:** Fall back to routing rules; fewer skills loaded
-- **EXPLORE failure:** AI can read files directly; scan output advisory
-- **SYNC failure:** Delta specs may not exist; non-blocking
-- **ARCHIVE failure:** Trace/docs may be partial; non-blocking
+When safe, auto-fix common issues instead of asking:
+- Lint errors → run `npm run lint -- --fix`
+- Missing CSS variable → replace hardcoded color with nearest `var(--*)`
+- Missing nav/footer includes → add `<!-- INCLUDE: nav -->` and `<!-- INCLUDE: footer -->`
+- Placeholder mismatch → replace with `{{PHONE}}`, `{{EMAIL}}`, `{{YEAR}}`
 
-### 11.4 Resume After Interruption
+If auto-fix is not safe, report the issue and fix it directly.
+
+## 8. Archive Lifecycle
+
+Archive is not just a terminal phase. Maintain these continuously:
+
+| Artifact | Purpose | Updated When |
+|----------|---------|-------------|
+| `proposal.md` | What and why | After scope changes |
+| `design.md` | How | After design decisions |
+| `tasks.md` | Implementation steps | After each task completion |
+| `traceability.md` | Spec → task → commit chain | On archive |
+| `specs/` | Delta specs | When requirements change |
+
+### 8.1 Archive Verification
+
+Before declaring completion, verify every artifact:
+```
+proposal.md    exists  ✓
+design.md      exists  ✓
+tasks.md       exists  ✓
+traceability.md exists ✓
+All tasks [x]  checked ✓
+Build passes   ✓
+```
+
+## 9. Human Gates
+
+Only two human gates interrupt autonomous execution:
+
+### GATE 1: Proposal Review
+**When:** After you've written proposal.md, design.md, tasks.md.
+**What:** Show a brief summary (1-3 lines). Ask if the scope looks right.
+**If approved:** Continue to implementation.
+**If not:** Adjust based on feedback, re-show.
+
+### GATE 2: Archive Confirmation
+**When:** After all tasks complete and validation passes.
+**What:** Show completion summary. Ask to confirm archive.
+**If approved:** Run archive, produce final report.
+**If not:** Report what remains to be done.
+
+## 10. Recovery
+
+### 10.1 Checkpoint Recovery
+
+State persists after every phase to `orchestrate/.state/{executionId}-context.json`.
+To resume after interruption:
+
+```
+Read orchestrate/.state/{executionId}-context.json
+Resume from ctx.nextPhaseId
+```
+
+Or via the JS runtime:
+```js
+const ctx = resumePipeline(executionId);
+// ctx.phases shows statuses; ctx.nextPhaseId shows what's next
+```
+
+### 10.2 Execution ID
+
+The execution ID is printed at start: `task-slug-{timestamp}`. Use this for
+state lookup and audit trail correlation.
+
+## 11. Observability
+
+### 11.1 Progress Display
+
+After each phase, display:
+```
+[3/8] Explore — ✓ Completed (0.3s)
+```
+
+After each validation cycle:
+```
+─── Progress: 75% ───
+  ✓ Proposal artifact exists
+  ✓ Design artifact exists
+  ✓ Tasks artifact exists
+  ○ 3/7 tasks complete (43%)
+  ○ Build validation pending
+```
+
+### 11.2 Final Report
+
+When complete, display:
+```
+─── Goal Achieved ───
+  Task: Build Pricing Page
+  Iterations: 2
+  Phases: 8/8 complete
+  Duration: 12.4s
+  Artifacts: proposal.md, design.md, tasks.md, traceability.md
+  Archive: openspec/changes/build-pricing-page/
+```
+
+### 11.3 Audit Trail
+
+Every action is logged to `orchestrate/.audit.jsonl` with timestamps.
+Query: `queryEvents({ type: 'auto-pipeline' })`
+
+## 12. Usage Modes
+
+```
+/opsx-auto "Build the Pricing Page"           # Full autonomous pipeline
+/opsx-auto "Fix the hero section overflow"     # Targeted fix
+/opsx-auto --dry-run "Add newsletter flow"     # Plan only (stop after skill discovery)
+/opsx-auto --skip-build "Improve navigation"   # Skip validation phase
+```
+
+## 13. Module Reference
+
+### AI Agent Calls (You Call These)
+
+| Function | Purpose | Module |
+|----------|---------|--------|
+| `initPipeline(task, opts)` | Create execution context | `auto-pipeline.mjs` |
+| `runDeepScan(ctx)` | Analyze repository | `auto-pipeline.mjs` |
+| `runSkillDiscovery(ctx)` | Discover skills + route agents | `auto-pipeline.mjs` |
+| `runSync(ctx)` | Merge delta specs | `auto-pipeline.mjs` |
+| `runValidate(ctx)` | Build + lint + test + gates | `auto-pipeline.mjs` |
+| `runArchive(ctx)` | Sync + trace + docs | `auto-pipeline.mjs` |
+| `finishPipeline(ctx)` | Verify + report | `auto-pipeline.mjs` |
+| `resumePipeline(id)` | Load persisted state | `auto-pipeline.mjs` |
+| `isPhaseComplete(ctx, id)` | Check phase status | `auto-pipeline.mjs` |
+| `isPhaseFailed(ctx, id)` | Check phase failure | `auto-pipeline.mjs` |
+| `getPhaseInstructions(ctx, id)` | AI prompt for phase | `auto-pipeline.mjs` |
+| `measureProgress(ctx)` | Goal completion % | `progress-tracker.mjs` |
+| `isGoalAchieved(ctx)` | True if done | `progress-tracker.mjs` |
+| `progressSummary(ctx)` | Human-readable progress | `progress-tracker.mjs` |
+
+### Available Imports
 
 ```js
-// Recovery procedure:
-// 1. Load persisted context
-const ctx = PipelineContext.load(executionId);
-if (!ctx) throw new Error('No state to recover');
+const {
+  initPipeline, runDeepScan, runSkillDiscovery,
+  runExplore, runPropose, runSync, runApply,
+  runValidate, runArchive, finishPipeline,
+  getPhaseInstructions, resumePipeline,
+  isPhaseComplete, isPhaseFailed,
+  PipelineContext, GOAL_STATES, ITERATION_LIMIT,
+} = await import('./orchestrate/auto-pipeline.mjs');
 
-// 2. Find the last completed phase
-const completedPhases = ctx.phases.filter(p => p.status === 'complete');
-
-// 3. Resume from next phase
-const nextPhase = ctx.nextPhaseId;
-// Re-run from nextPhase onward
+const { measureProgress, isGoalAchieved, progressSummary }
+  = await import('./orchestrate/progress-tracker.mjs');
 ```
 
----
+## 14. Extension Points
 
-## 12. Safety
+| Extension | File | Mechanism |
+|-----------|------|-----------|
+| New phase | `auto-pipeline.mjs` | Add method + PHASE_ORDER entry + PHASE_IS_FATAL |
+| New validation level | `validation-pipeline.mjs` | Add case to `runLevel()` |
+| New quality gate | `quality-gate.mjs` | Add case to `runGate()` |
+| New intent | `capability-analyzer.mjs` | Add entry to TAXONOMY array |
+| New pipeline config | `pipeline-config/*.yaml` | Create YAML, reference from phase |
+| New hook | `hooks/` directory | Create `.mjs` matching lifecycle event |
+| New progress signal | `progress-tracker.mjs` | Add check to `measureProgress()` |
 
-### 12.1 File System Safety
+## 15. References
 
-| Rule | Enforcement |
-|------|------------|
-| Max 200 files changed per execution | Checked by `SAFETY_RULES.maxFilesChanged` |
-| Protected directories never deleted | `.git`, `node_modules`, `dist`, `orchestrate/.state`, `orchestrate/.cache` |
-| Critical files never deleted | `site.json`, `package.json`, `AGENTS.md` |
-| Backup before overwrite | `spec-sync.mjs` creates `.bak` files |
-| Dry-run mode available | `--dry-run` flag prevents all writes |
-
-### 12.2 Operational Safety
-
-- **Never** proceed past a failed fatal phase
-- **Never** modify files the proposal didn't identify
-- **Never** delete a spec without human confirmation
-- **Never** execute destructive git operations (force push, hard reset)
-- **Always** preserve the ability to roll back via git
-
----
-
-## 13. Observability
-
-### 13.1 Telemetry Captured
-
-Every execution records:
-
-| Metric | Source | Storage |
-|--------|--------|---------|
-| Execution duration | `metrics.mjs` → `startTimer()` | Console + JSON log |
-| Per-phase timing | `ctx.phases[].duration` | Context JSON |
-| Skills selected | `ctx.skills` | Context JSON |
-| Agents routed | `ctx.agents` | Context JSON |
-| Files modified | `git diff --name-only` | Audit log |
-| Build status | `execSync` output | Context JSON |
-| Validation results | `validate.mjs` output | Context JSON |
-| Errors and warnings | `ctx.errors`, `ctx.warnings` | Context JSON |
-| Specs synced | `syncToMain()` result | Context JSON |
-| Traceability | `generateTrace()` result | Audit log |
-
-### 13.2 Output Artifacts
-
-| Artifact | Path | Format |
-|----------|------|--------|
-| Execution context | `orchestrate/.state/{id}-context.json` | JSON |
-| Phase log | `orchestrate/.state/{id}-log.json` | JSON |
-| Execution summary | `orchestrate/.state/execution-summary.jsonl` | JSONL (append) |
-| Audit trail | `orchestrate/.audit.jsonl` | JSONL (append) |
-| Pipeline state | `orchestrate/.state/pipeline-{id}.json` | JSON |
-| Proposal | `openspec/changes/{name}/proposal.md` | Markdown |
-| Design | `openspec/changes/{name}/design.md` | Markdown |
-| Tasks | `openspec/changes/{name}/tasks.md` | Markdown |
-| Delta specs | `openspec/changes/{name}/specs/*.md` | Markdown |
-
----
-
-## 14. Branch-Aware Behavior
-
-| Branch | Behavior |
-|--------|----------|
-| `main` | Full quality gates (including `GATE_SECURITY`). Security reviewer required. Doc updates mandatory. |
-| `staging` | E2E runner included. `GATE_PERF` enforced. |
-| `develop` | Standard pipeline. Code reviewer primary agent. |
-| `feature/*` | Lightweight pipeline. Doc updates skipped. `GATE_HUMAN` bypassed. |
-| `hotfix/*` | Accelerated pipeline. Only `GATE_BUILD` + `GATE_VALIDATE`. |
-
----
-
-## 15. Extensibility
-
-### 15.1 Adding a New Phase
-
-1. Add the phase ID to `PHASE_ORDER` in `auto-pipeline.mjs`
-2. Implement a `run{PhaseName}(ctx)` method following the existing pattern:
-   - Call `ctx.startPhase(id, label)`
-   - Execute phase logic
-   - Call `ctx.completePhase(id, output)` or `ctx.failPhase(id, error)`
-   - Call `ctx.persist()`
-3. Add phase-specific instructions to `getPhaseInstructions()`
-4. Update this SKILL.md with the new phase documentation
-
-### 15.2 Adding a New Skill Provider
-
-1. Add the directory path to `skill-discovery.mjs` → `scanSkillsDir()` calls
-2. Ensure SKILL.md files in the new directory follow the frontmatter format
-3. Update `inferDomains()` in `skill-discovery.mjs` if new domain keywords
-   are needed
-
-### 15.3 Adding a Quality Gate
-
-1. Implement the gate check in `quality-gate.mjs` → `runGate()` switch
-2. Add the gate to the appropriate phase in `gatesForPhase()`
-3. Document the gate in Section 10 of this SKILL.md
-
-### 15.4 Integration Points
-
-| Extension Point | Module | Mechanism |
-|----------------|--------|-----------|
-| New command | `opsx-commands.mjs` | Add case to `runOpsxCommand()` switch |
-| New phase pipeline | `pipeline-config/*.yaml` | Create YAML config, add to `PHASE_PIPELINE_MAP` |
-| New event listener | `event-bus.mjs` | Register with `on('event', handler)` |
-| New hook | `hooks/` directory | Create `.mjs` file, register in `hook-router.mjs` |
-| New capability | `capability-analyzer.mjs` | Add intent pattern to taxonomy |
-
----
-
-## 16. Performance
-
-### 16.1 Optimization Rules
-
-| Rule | Implementation |
-|------|---------------|
-| Cache immutable metadata | `cache-manager.mjs` — 5-min TTL with SHA-256 keys |
-| Reuse parsed skill data | `skill-discovery.mjs` — results cached by task hash |
-| Lazy-load heavy resources | `lazy-loader.mjs` — on-demand capability loading |
-| Parallelize read-only analysis | File reads, spec parsing, SKILL.md parsing |
-| Avoid duplicate scans | `PipelineContext` tracks what's been loaded |
-| Limit file scanning depth | `project-analyzer.mjs` — max 10 levels, 300 files |
-
-### 16.2 Benchmarks
-
-| Repository Size | Deep Scan | Skill Discovery | Full Pipeline (dry) |
-|----------------|-----------|----------------|---------------------|
-| ~30 files (this project) | < 0.5s | < 0.4s | < 2s |
-| ~300 files | < 2s | < 1s | < 5s |
-| ~3000 files | < 10s | < 3s | < 30s |
-
----
-
-## 17. Usage Examples
-
-### 17.1 Build a New Page
-
-```
-/opsx-auto "Build the Pricing Page"
-```
-
-**Pipeline trace:**
-1. Deep scan → Project: OptiFlow OS, Framework: static-site
-2. Skills → design-system, frontend-patterns, accessibility, motion-master
-3. Explore → 24 specs, 68 features, 15 existing pages
-4. Propose → Creates pricing page proposal with pricing table, FAQ accordion, CTA
-5. Sync → No delta specs (new page)
-6. Apply → AI writes `src/pages/pricing.html`, adds to `site.json`
-7. Validate → Build passes, validate passes, 0 errors
-8. Archive → Traceability matrix generated, docs synced
-9. Report → COMPLETE, 8/8 phases passed, 15.3s
-
-### 17.2 Fix a Layout Issue
-
-```
-/opsx-auto "Fix the hero section overflow on mobile"
-```
-
-**Pipeline trace:**
-1. Deep scan → Feature: PAGE-001 | Home Page
-2. Skills → make-interfaces-feel-better, design-system-master, coding-standards
-3. Explore → Affected specs: design-system, shared-components
-4. Propose → Scope: CSS fix only, no new files
-5. Sync → No delta specs
-6. Apply → AI edits `assets/css/core.css` hero section media query
-7. Validate → Build passes, validate passes
-8. Archive → Trace: 1 commit, 1 file changed
-9. Report → COMPLETE, 4.2s
-
-### 17.3 Dry Run (Planning Only)
-
-```
-/opsx-auto --dry-run "Add newsletter subscription flow"
-```
-
-**Pipeline trace:**
-1. Deep scan → Analysis complete
-2. Skills → 9 skills identified, agent routed
-3. **Pipeline stops here** — no files created, no changes made
-4. Report → Plan saved to `orchestrate/.state/`
-
----
-
-## 18. Specification Governance
-
-### 18.1 Version Policy
-
-- **Major version** (9.x → 10.0): Phase order changes, context schema breaking
-  changes, new mandatory phases
-- **Minor version** (9.0 → 9.1): New gates, new composition rules, improved
-  scoring algorithms
-- **Patch version** (9.0.0 → 9.0.1): Bug fixes, documentation clarifications
-
-### 18.2 Compliance
-
-Implementations claiming `/opsx-auto` compatibility must:
-
-- Execute all 9 phases in order (INIT through REPORT)
-- Use `PipelineContext` as the shared execution state
-- Persist state at every phase boundary
-- Never produce stub/TBD outputs in PROPOSE
-- Run real build and validation in VALIDATE
-- Produce all output artifacts listed in Section 13.2
-
----
-
-## 19. References
-
-| Document | Path | Purpose |
-|----------|------|---------|
-| Command definition | `.opencode/commands/opsx-auto.md` | AI-executable step-by-step instructions |
-| State machine | `orchestrate/auto-pipeline.mjs` | Phase methods and context management |
-| Context class | `orchestrate/pipeline-context.mjs` | `PipelineContext` implementation |
-| Skill discovery | `orchestrate/skill-discovery.mjs` | Global + project skill scanning |
-| Capability analyzer | `orchestrate/capability-analyzer.mjs` | 32-intent task taxonomy |
-| Spec resolver | `orchestrate/spec-resolver.mjs` | Affected spec resolution |
-| Quality gates | `orchestrate/quality-gate.mjs` | Gate implementations and routing |
-| Pipeline engine | `orchestrate/pipeline-engine.mjs` | YAML pipeline executor with DAG |
-| Project analyzer | `orchestrate/project-analyzer.mjs` | Deep repository analysis |
-| OPSX commands | `orchestrate/opsx-commands.mjs` | Real OpenSpec command implementations |
-| Design system | `DESIGN.md/` | Design tokens and rules |
-| Feature registry | `features/features.json` | 68 registered features |
-| Site config | `site.json` | Company data, pages, navigation |
+| Document | Path |
+|----------|------|
+| Command definition | `.opencode/commands/opsx-auto.md` |
+| State machine | `orchestrate/auto-pipeline.mjs` |
+| Context class | `orchestrate/pipeline-context.mjs` |
+| Progress tracker | `orchestrate/progress-tracker.mjs` |
+| OPSX commands | `orchestrate/opsx-commands.mjs` |
+| Skill discovery | `orchestrate/skill-discovery.mjs` |
+| Capability analyzer | `orchestrate/capability-analyzer.mjs` |
+| Spec resolver | `orchestrate/spec-resolver.mjs` |
+| Quality gates | `orchestrate/quality-gate.mjs` |
+| Validation pipeline | `orchestrate/validation-pipeline.mjs` |
+| State manager | `orchestrate/state-manager.mjs` |
+| Event bus | `orchestrate/event-bus.mjs` |
+| Design system | `DESIGN.md/` |
+| Feature registry | `features/features.json` |
+| Site config | `site.json` |

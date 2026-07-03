@@ -111,3 +111,43 @@ export function routeAgents(affectedDomains, tier = 'standard', branch = 'main',
 export function agentForPhase(phase) {
   return PHASE_AGENTS[phase] || 'explore';
 }
+
+/**
+ * Compose a multi-agent execution chain for complex tasks.
+ * Returns agents in execution order: primary → reviewer → security → docs.
+ * @param {string} taskDescription
+ * @param {string[]} [domains=[]]
+ * @param {string} [branch='main']
+ * @returns {{primaryAgent: string, chain: string[], supportAgents: string[]}}
+ */
+export function composeAgentChain(taskDescription, domains = [], branch = 'main') {
+  const route = routeAgents(domains, 'standard', branch, taskDescription);
+  const chain = [route.primaryAgent];
+
+  // For any non-trivial task, add a reviewer
+  if (domains.length > 0) {
+    chain.push('code-reviewer');
+  }
+
+  // Security-sensitive domains → add security reviewer
+  if (domains.includes('security') || domains.includes('backend')) {
+    chain.push('security-reviewer');
+  }
+
+  // Branch awareness
+  if (branch === 'main' || branch === 'staging') {
+    chain.push('doc-updater');
+  }
+
+  // Large tasks get an architect
+  const lower = taskDescription.toLowerCase();
+  if (/architect|refactor|redesign|restructure|large|complex/.test(lower)) {
+    chain.unshift('planner');
+  }
+
+  return {
+    primaryAgent: route.primaryAgent,
+    chain: [...new Set(chain)],
+    supportAgents: route.supportAgents,
+  };
+}

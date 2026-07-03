@@ -5,13 +5,32 @@ license: MIT
 compatibility: Requires openspec CLI.
 metadata:
   author: openspec
-  version: "1.0"
-  generatedBy: "1.4.1"
+  version: "2.0"
+  generatedBy: "2.0.0"
 ---
 
 Implement tasks from an OpenSpec change.
 
 **Input**: Optionally specify a change name. If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+
+**Autonomous Mode:** When invoked by `/opsx-auto`, the change context is already
+loaded. The pipeline has already created proposal.md, design.md, and tasks.md.
+Your job:
+
+1. Read tasks.md to understand all remaining work
+2. Work through each `- [ ]` item sequentially
+3. Follow DESIGN.md rules exactly: CSS variables, placeholders, includes, typography
+4. Build after each file change: `npm run build && npm run validate`
+5. Mark each task `- [x]` as completed
+6. Continue until ALL tasks are `- [x]` or a blocker is encountered
+7. If blocked: fix the issue, re-build, continue. Only pause for genuine ambiguity.
+8. Report progress after each task: "✓ Task 3/7 complete"
+9. When all tasks done: do NOT suggest archive — the autonomous pipeline handles it.
+
+Do NOT stop between tasks. Do NOT ask "shall I continue?" Just keep going until
+all tasks are complete or an unrecoverable blocker occurs.
+
+**Standalone Mode:** When invoked directly by the user, follow the steps below.
 
 **Steps**
 

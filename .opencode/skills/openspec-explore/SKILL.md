@@ -5,8 +5,8 @@ license: MIT
 compatibility: Requires openspec CLI.
 metadata:
   author: openspec
-  version: "1.0"
-  generatedBy: "1.4.1"
+  version: "2.0"
+  generatedBy: "2.0.0"
 ---
 
 Enter explore mode. Think deeply. Visualize freely. Follow the conversation wherever it goes.
@@ -14,6 +14,13 @@ Enter explore mode. Think deeply. Visualize freely. Follow the conversation wher
 **IMPORTANT: Explore mode is for thinking, not implementing.** You may read files, search code, and investigate the codebase, but you must NEVER write code or implement features. If the user asks you to implement something, remind them to exit explore mode first and create a change proposal. You MAY create OpenSpec artifacts (proposals, designs, specs) if the user asks—that's capturing thinking, not implementing.
 
 **This is a stance, not a workflow.** There are no fixed steps, no required sequence, no mandatory outputs. You're a thinking partner helping the user explore.
+
+**Autonomous Mode:** When invoked by `/opsx-auto`, explore with purpose:
+- Focus on understanding what exists and what must change for the given task
+- Read ALL affected specs, features, pages, and the design system
+- Produce a structured summary: what exists, what's affected, what's the gap
+- Do NOT ask clarifying questions unless the task is genuinely ambiguous
+- Move efficiently — the autonomous pipeline continues after explore
 
 ---
 

@@ -1,6 +1,6 @@
 /**
- * V8: Orchestration coordinator — unified entry point.
- * Re-exports the state-machine API from auto-pipeline.mjs for the AI agent,
+ * V11: Orchestration coordinator — unified entry point.
+ * Re-exports the autonomous orchestration API from auto-pipeline.mjs,
  * plus maintains backward compatibility for CLI use.
  * @module orchestrate/coordinator
  */
@@ -8,7 +8,7 @@
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// ── Re-export the V8 state-machine API ──
+// ── Re-export the V11 autonomous orchestration API ──
 export {
   initPipeline,
   runDeepScan,
@@ -22,10 +22,15 @@ export {
   finishPipeline,
   getPhaseInstructions,
   autoFullPipeline,
+  resumePipeline,
+  isPhaseComplete,
+  isPhaseFailed,
   PipelineContext,
   slugify,
   SAFETY_RULES,
   PHASE_ORDER,
+  GOAL_STATES,
+  ITERATION_LIMIT,
 } from './auto-pipeline.mjs';
 
 export { resolveFeatureFromTask } from './feature-router.mjs';

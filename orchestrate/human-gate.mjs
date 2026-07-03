@@ -9,13 +9,28 @@ import { resolve } from 'node:path';
 const ROOT = resolve(import.meta.dirname || '.', '..');
 const GATES_DIR = resolve(ROOT, 'orchestrate', '.gates');
 
+let autoApprove = false;
+
 /**
- * Create an approval gate. Writes a JSON file and polls it for a human decision.
+ * Enable automatic approval — all gates pass without polling.
+ */
+export function enableAutoApprove() { autoApprove = true; }
+export function disableAutoApprove() { autoApprove = false; }
+export function isAutoApproving() { return autoApprove; }
+
+/**
+ * Create an approval gate. When auto-approve is enabled, returns true immediately.
+ * Otherwise writes a JSON file and polls it for a human decision.
  * @param {string} question - The question to present
  * @param {{timeout?: number}} [opts]
  * @returns {Promise<boolean>}
  */
 export function createGate(question, { timeout = 60000 } = {}) {
+  if (autoApprove) {
+    console.log(`[AUTO-APPROVE] Gate: ${question} — automatically approved.`);
+    return Promise.resolve(true);
+  }
+
   if (!existsSync(GATES_DIR)) mkdirSync(GATES_DIR, { recursive: true });
 
   const gateId = `gate-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
