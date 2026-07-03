@@ -7,6 +7,7 @@
 
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
 
 const CACHE_DIR = resolve(import.meta.dirname || '.', '.cache');
 const DISK_CACHE_FILE = resolve(CACHE_DIR, 'cache-store.json');
@@ -150,4 +151,15 @@ export function getStats() {
  */
 export function flush() {
   saveDisk();
+}
+
+// ponytail: simple hash for collision-free cache keys
+
+/**
+ * Hash a string for use as a deterministic, collision-safe cache key suffix.
+ * @param {string} input
+ * @returns {string} 8-char hex hash
+ */
+export function hashKey(input) {
+  return createHash('sha256').update(input).digest('hex').slice(0, 8);
 }

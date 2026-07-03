@@ -2,6 +2,8 @@
 description: Propose a new change - create it and generate all artifacts in one step
 ---
 
+<!-- canonical: .opencode/skills/openspec-propose/SKILL.md -->
+
 Propose a new change - create the change and generate all artifacts in one step.
 
 I'll create a change with artifacts:

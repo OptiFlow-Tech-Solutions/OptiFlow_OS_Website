@@ -49,8 +49,9 @@ function runLevel(level) {
           output = execSync('node scripts/validate.mjs', { cwd: projectRoot, encoding: 'utf-8', timeout: 60000, stdio: 'pipe' }).trim();
           return { name: info.name, passed: true, output };
         } catch (e) {
-          // validate.mjs exits non-zero on errors — that's expected
-          return { name: info.name, passed: true, output: e.stderr || e.stdout || 'Validation found issues' };
+          const msg = e.stderr || e.stdout || '';
+          if (msg.includes('error')) return { name: info.name, passed: false, output: msg };
+          return { name: info.name, passed: true, output: msg || 'Validation found warnings' };
         }
 
       case 4: {
@@ -75,7 +76,7 @@ function runLevel(level) {
             output = execSync('npx playwright test tests/e2e/seo.spec.js', { cwd: projectRoot, encoding: 'utf-8', timeout: 120000, stdio: 'pipe' }).trim();
             return { name: info.name, passed: true, output };
           } catch (e) {
-            return { name: info.name, passed: true, output: e.stderr || e.stdout || 'SEO tests found issues' };
+            return { name: info.name, passed: false, output: e.stderr || e.stdout || 'SEO tests failed' };
           }
         }
         return { name: info.name, passed: true, output: 'SEO audit skipped — spec not found' };
@@ -89,7 +90,7 @@ function runLevel(level) {
             output = execSync('npx playwright test tests/e2e/a11y.spec.js', { cwd: projectRoot, encoding: 'utf-8', timeout: 300000, stdio: 'pipe' }).trim();
             return { name: info.name, passed: true, output };
           } catch (e) {
-            return { name: info.name, passed: true, output: e.stderr || e.stdout || 'A11y tests found violations' };
+            return { name: info.name, passed: false, output: e.stderr || e.stdout || 'A11y tests failed' };
           }
         }
         return { name: info.name, passed: true, output: 'A11y audit skipped — spec not found' };
@@ -101,7 +102,7 @@ function runLevel(level) {
           output = execSync('npx playwright test', { cwd: projectRoot, encoding: 'utf-8', timeout: 300000, stdio: 'pipe' }).trim();
           return { name: info.name, passed: true, output };
         } catch (e) {
-          return { name: info.name, passed: true, output: e.stderr || e.stdout || 'E2E tests found failures' };
+          return { name: info.name, passed: false, output: e.stderr || e.stdout || 'E2E tests failed' };
         }
       }
 

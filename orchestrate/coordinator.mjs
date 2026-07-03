@@ -33,15 +33,18 @@ import { reconstructContext, getFeature, listFeatures, summarizeFeature, resolve
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
-const OPENSPEC_PHASES = ['explore', 'propose', 'apply', 'verify', 'archive'];
+const OPENSPEC_PHASES = ['explore', 'propose', 'sync', 'apply', 'verify', 'archive'];
 
 /** @type {Map<string, string>} */
 const PHASE_PIPELINE_MAP = new Map([
   ['explore', 'explore'],
   ['propose', 'propose'],
+  ['sync', 'sync'],
   ['apply', 'apply'],
   ['verify', 'verify'],
   ['archive', 'archive'],
+  ['audit', 'audit'],
+  ['security', 'security'],
   ['auto', 'build'],
 ]);
 
@@ -60,6 +63,8 @@ function selectPipeline(phase) {
 
 /**
  * V4 orchestration plan — builds and optionally executes.
+ * @deprecated Use `autoFullPipeline()` from auto-pipeline.mjs (V7) instead.
+ * This path is maintained for backward compatibility only.
  * @param {'explore'|'propose'|'apply'|'verify'|'archive'|'auto'} command
  * @param {string} changeName
  * @param {string} taskDescription

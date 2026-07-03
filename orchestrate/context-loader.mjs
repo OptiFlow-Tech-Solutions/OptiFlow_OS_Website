@@ -8,8 +8,9 @@ import { resolve } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 import { parseAllSpecs } from './spec-parser.mjs';
 import { resolveAffectedSpecs } from './spec-resolver.mjs';
-import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
+import { get as cacheGet, set as cacheSet, hashKey } from './cache-manager.mjs';
 import { getBranch } from './project-scanner.mjs';
+import { analyzeProject } from './project-analyzer.mjs';
 
 const { projectRoot, siteJsonPath, designDir } = resolvePaths();
 
@@ -36,17 +37,10 @@ export function loadContext(specNames = []) {
 }
 
 /**
- * Ordered context loading list.
- */
-export function contextLoadingOrder() {
-  return ALWAYS_LOAD.map(({ key, path, type }) => ({ key, path, type }));
-}
-
-/**
  * Load all context content into memory.
  */
 export function loadAllContext(taskDescription) {
-  const cacheKey = `context:${taskDescription.slice(0, 80)}`;
+  const cacheKey = `context:${hashKey(taskDescription)}`;
   const cached = cacheGet(cacheKey);
   if (cached) return cached;
 
@@ -71,21 +65,6 @@ export function loadAllContext(taskDescription) {
 }
 
 /**
- * Print context summary.
- */
-export function getContextSummary(context) {
-  const specReq = context.specs.reduce((s, sp) => s + sp.requirementCount, 0);
-  const specScen = context.specs.reduce((s, sp) => s + sp.scenarioCount, 0);
-  const lines = [
-    `Loaded: site.json (${context.data.site_lines || '?'} lines),`,
-    `DESIGN.md (${context.data.design_lines || '?'} lines),`,
-    `${context.specs.length} specs (${specReq} requirements, ${specScen} scenarios)`,
-  ];
-  console.log(lines.join(' '));
-  return lines.join(' ');
-}
-
-/**
  * V6: Load full project context for /opsx-auto mode.
  * Loads everything: site.json, DESIGN.md, all 23 specs, all 28 features,
  * resolves affected specs, and gathers project metadata.
@@ -94,7 +73,7 @@ export function getContextSummary(context) {
  * @returns {{ site: object|null, design: string|null, features: object|null, specs: object[], affected: object[], branch: string, paths: object }}
  */
 export function loadFullContext(taskDescription) {
-  const cacheKey = `full-context:${taskDescription.slice(0, 80)}`;
+  const cacheKey = `full-context:${hashKey(taskDescription)}`;
   const cached = cacheGet(cacheKey);
   if (cached) return cached;
 
@@ -134,4 +113,19 @@ export function loadFullContext(taskDescription) {
 
   cacheSet(cacheKey, result, { ttl: 300000 });
   return result;
+}
+
+/**
+ * V6: Extended context loading with deep project analysis.
+ * Combines loadFullContext with analyzeProject for full repository understanding.
+ *
+ * @param {string} taskDescription
+ * @returns {{ site: object|null, design: string|null, features: object|null, specs: object[], affected: object[], branch: string, paths: object, projectAnalysis: object }}
+ */
+export function loadFullContextWithAnalysis(taskDescription) {
+  const context = loadFullContext(taskDescription);
+  let projectAnalysis = null;
+  try { projectAnalysis = analyzeProject(); } catch { /* non-critical */ }
+
+  return { ...context, projectAnalysis };
 }

@@ -10,7 +10,6 @@ import { resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname || '.', '..');
 const PROJECT_HOOKS_DIR = resolve(ROOT, 'hooks');
-const GLOBAL_HOOKS_DIR = resolve('C:\\Users\\Deel\\.config\\opencode\\hooks');
 
 /**
  * Execute a single hook by name.

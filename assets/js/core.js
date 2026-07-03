@@ -327,6 +327,67 @@
     return '<div class="empty-state"><div class="empty-state-icon">' + iconSvg + '</div><h3>' + title + '</h3>' + descHtml + '</div>';
   };
 
+  /* ═══ TOAST NOTIFICATIONS ═══
+     ponytail: global showToast() — create container lazily, auto-dismiss,
+     manual close, accessible (role=alert). */
+  var ICONS = {
+    success: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+    error: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+    warning: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    info: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+  };
+  var CLOSE_ICON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+  var toastContainer = null;
+  function ensureToastContainer() {
+    if (toastContainer) return toastContainer;
+    toastContainer = document.createElement('div');
+    toastContainer.className = 'toast-container';
+    toastContainer.setAttribute('aria-live', 'polite');
+    toastContainer.setAttribute('aria-label', 'Notifications');
+    document.body.appendChild(toastContainer);
+    return toastContainer;
+  }
+
+  /**
+   * showToast(message, type, duration)
+   * type: 'success' | 'error' | 'warning' | 'info' (default: 'info')
+   * duration: ms (default: 5000, 0 = no auto-dismiss)
+   */
+  window.showToast = function(message, type, duration) {
+    type = type || 'info';
+    duration = duration !== undefined ? duration : 5000;
+    var container = ensureToastContainer();
+
+    var toast = document.createElement('div');
+    toast.className = 'toast toast-' + type;
+    toast.setAttribute('role', 'alert');
+
+    var icon = ICONS[type] || ICONS.info;
+    toast.innerHTML = icon + '<div class="toast-body"><div class="toast-message">' + message + '</div></div><button class="toast-close" aria-label="Dismiss notification">' + CLOSE_ICON + '</button>';
+
+    var closeBtn = toast.querySelector('.toast-close');
+    var removed = false;
+
+    function removeToast() {
+      if (removed) return;
+      removed = true;
+      toast.classList.add('toast-removing');
+      setTimeout(function() {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 260);
+    }
+
+    closeBtn.addEventListener('click', removeToast);
+
+    if (duration > 0) {
+      setTimeout(removeToast, duration);
+    }
+
+    container.appendChild(toast);
+    return toast;
+  };
+
   /* ─── Admin Authentication ─── */
   if (window.location.pathname.startsWith('/admin')) {
     const TOKEN_KEY = 'optiflow-admin-token';

@@ -1,0 +1,76 @@
+{
+  "executionId": "test-orchestration-pipeline-1783098122195",
+  "task": "Test orchestration pipeline",
+  "changeName": "test-orchestration-pipeline",
+  "startedAt": "2026-07-03T17:02:02.195Z",
+  "phases": [
+    {
+      "name": "DEEP_SCAN",
+      "status": "complete",
+      "startedAt": "2026-07-03T17:02:02.200Z",
+      "details": {
+        "task": "Test orchestration pipeline",
+        "branch": "main"
+      },
+      "completedAt": "2026-07-03T17:02:03.017Z",
+      "duration": 817,
+      "projectName": "OptiFlow OS Website",
+      "framework": "static-site",
+      "totalFiles": 27,
+      "totalLines": 11206,
+      "todoCount": 0,
+      "fixmeCount": 0
+    },
+    {
+      "name": "SKILL_DISCOVERY",
+      "status": "complete",
+      "startedAt": "2026-07-03T17:02:03.026Z",
+      "details": {},
+      "completedAt": "2026-07-03T17:02:03.186Z",
+      "duration": 160,
+      "intents": [
+        "write-tests"
+      ],
+      "domains": [
+        "quality",
+        "testing"
+      ],
+      "skillCount": 12,
+      "skills": [
+        "plan-orchestrate",
+        "django-celery",
+        "social-graph-ranker",
+        "strategic-compact",
+        "flutter-dart-code-review",
+        "git-workflow",
+        "branch-aware-workflows",
+        "dmux-workflows",
+        "hexagonal-architecture",
+        "orch-pipeline",
+        "ai-regression-testing",
+        "angular-developer"
+      ],
+      "primaryAgent": "code-reviewer",
+      "supportAgents": [
+        "security-reviewer"
+      ],
+      "mcpServers": [
+        "context7",
+        "parallel-search",
+        "playwright",
+        "chrome-devtools"
+      ],
+      "gates": [
+        "GATE_BUILD",
+        "GATE_VALIDATE",
+        "GATE_TEST",
+        "GATE_A11Y",
+        "GATE_PERF",
+        "GATE_VISUAL"
+      ]
+    }
+  ],
+  "status": "planned",
+  "completedAt": "2026-07-03T17:02:03.194Z",
+  "totalDuration": 999
+}

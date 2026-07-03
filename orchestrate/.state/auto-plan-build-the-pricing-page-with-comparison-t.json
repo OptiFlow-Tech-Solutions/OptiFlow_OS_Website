@@ -1,0 +1,85 @@
+{
+  "version": "7.0",
+  "command": "auto",
+  "executionId": "build-the-pricing-page-with-comparison-t-1783100029569",
+  "changeName": "build-the-pricing-page-with-comparison-t",
+  "branch": "main",
+  "timestamp": "2026-07-03T17:33:50.345Z",
+  "analysis": {
+    "intents": [
+      "create-page",
+      "pricing-page"
+    ],
+    "domains": [
+      "frontend",
+      "design",
+      "seo"
+    ],
+    "roles": [
+      "implementation"
+    ],
+    "skills": [
+      "design-system",
+      "frontend-patterns",
+      "ui-ux-pro-max",
+      "frontend-design",
+      "design-system-master",
+      "accessibility-pro",
+      "performance-optimization"
+    ],
+    "confidence": 0.04878048780487805
+  },
+  "project": {
+    "name": "OptiFlow OS Website",
+    "framework": "static-site",
+    "architecture": "pages-based"
+  },
+  "capabilities": {
+    "skills": [
+      "ui-ux-pro-max",
+      "frontend-design",
+      "design-system-master",
+      "accessibility-pro",
+      "performance-optimization",
+      "plan-orchestrate",
+      "social-graph-ranker",
+      "flutter-dart-code-review",
+      "strategic-compact",
+      "motion-advanced",
+      "vite-patterns",
+      "dmux-workflows"
+    ],
+    "agents": {
+      "primaryAgent": "tdd-guide",
+      "supportAgents": [
+        "frontend-design-direction",
+        "seo-specialist",
+        "security-reviewer"
+      ],
+      "skipAgents": []
+    },
+    "mcpServers": [
+      "context7",
+      "parallel-search",
+      "chrome-devtools",
+      "playwright",
+      "magic",
+      "cloudflare-docs"
+    ],
+    "hooks": {
+      "preHooks": [
+        "pre-build"
+      ],
+      "postHooks": []
+    },
+    "commands": [],
+    "gates": [
+      "GATE_BUILD",
+      "GATE_VALIDATE",
+      "GATE_TEST",
+      "GATE_A11Y",
+      "GATE_PERF",
+      "GATE_VISUAL"
+    ]
+  }
+}

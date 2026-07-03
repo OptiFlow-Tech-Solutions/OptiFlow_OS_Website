@@ -85,15 +85,29 @@ export async function runOpsxCommand(command, changeName, context = {}) {
       return { pipelineResult, validationResult, qualityGates };
     }
 
+    case 'sync': {
+      console.log(`[Sync] Syncing specs to main: ${changeName}`);
+      const deltaDir = resolve(ROOT, 'openspec', 'changes', changeName, 'specs');
+      if (!existsSync(deltaDir)) {
+        console.log('     No delta specs to sync.');
+        await emit('opsx:complete', { command, changeName, synced: 0 });
+        return { synced: [], message: 'No delta specs found' };
+      }
+      const syncResult = syncToMain(changeName, { dryRun: false, backup: true });
+      console.log(`     Synced ${syncResult.synced.length} spec(s): ${syncResult.synced.map((s) => s.spec).join(', ') || 'none'}`);
+      await emit('opsx:complete', { command, changeName, syncResult });
+      return { syncResult };
+    }
+
     case 'archive': {
       console.log(`[Archive] Archiving: ${changeName}`);
-      const syncResult = syncToMain(changeName);
-      syncDocs(changeName, syncResult.synced.map((s) => s.spec));
+      const archiveSyncResult = syncToMain(changeName);
+      syncDocs(changeName, archiveSyncResult.synced.map((s) => s.spec));
       const traceResult = generateTrace(changeName, 'HEAD');
       const pipeline = loadPipeline(pipelinePath);
       const pipelineResult = await executePipeline(pipeline, { changeName, ...context });
-      await emit('opsx:complete', { command, changeName, syncResult, traceResult, pipelineResult });
-      return { syncResult, traceResult, pipelineResult };
+      await emit('opsx:complete', { command, changeName, syncResult: archiveSyncResult, traceResult, pipelineResult });
+      return { syncResult: archiveSyncResult, traceResult, pipelineResult };
     }
 
     case 'feature': {
@@ -126,7 +140,7 @@ export async function runOpsxCommand(command, changeName, context = {}) {
  * @returns {Promise<object>}
  */
 export async function runFullPipeline(changeName, taskDescription, opts = {}) {
-  const steps = ['explore', 'propose', 'apply', 'verify', 'archive'];
+  const steps = ['explore', 'propose', 'sync', 'apply', 'verify', 'archive'];
   const humanGates = new Set(['propose', 'archive']);
   const results = [];
 

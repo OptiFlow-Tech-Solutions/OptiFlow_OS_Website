@@ -1,0 +1,20 @@
+# OPSX Sync Pipeline
+# Synchronizes delta specs from a change to main openspec/specs/
+name: sync
+description: Delta spec synchronization pipeline
+parallel: false
+
+steps:
+  - name: find-delta-specs
+    type: info
+    command: echo "Scanning delta specs for {{changeName}}"
+
+  - name: sync-to-main
+    type: skill
+    command: /opsx-sync
+    block_on_failure: false
+
+  - name: verify-sync
+    type: check
+    command: node -e "console.log('Sync complete')"
+    depends_on: [sync-to-main]

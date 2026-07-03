@@ -1,6 +1,7 @@
 /**
  * V4 Spec sync — intelligent delta-to-main synchronization.
  * Supports conflict detection, backup before sync, and dry-run mode.
+ * V7: Deduplicates requirement sections on repeated syncs.
  * @module orchestrate/spec-sync
  */
 
@@ -17,6 +18,41 @@ function detectAction(content) {
   if (/^##\s*ADDED/im.test(content)) return 'ADDED';
   if (/^##\s*REMOVED/im.test(content)) return 'REMOVED';
   return 'MODIFIED';
+}
+
+// ponytail: split content into requirement blocks keyed by "### Requirement: <name>"
+function parseRequirements(content) {
+  const map = new Map();
+  const blocks = content.split(/(?=###\s+Requirement:)/);
+  for (const block of blocks) {
+    const match = block.match(/^###\s+Requirement:\s*(.+)/m);
+    if (match) map.set(match[1].trim(), block.trim());
+  }
+  return map;
+}
+
+function mergeRequirements(existing, delta, opts = {}) {
+  const existingReqs = parseRequirements(existing);
+  const deltaReqs = parseRequirements(delta);
+  const allNames = new Set([...existingReqs.keys(), ...deltaReqs.keys()]);
+  const blocks = [];
+  for (const name of allNames) {
+    if (deltaReqs.has(name)) {
+      blocks.push(deltaReqs.get(name));
+    } else if (existingReqs.has(name)) {
+      blocks.push(existingReqs.get(name));
+    }
+  }
+  const trimmed = blocks.join('\n\n').trim();
+  if (!trimmed) return '';
+  const purposeMatch = existing.match(/^##\s*Purpose[\s\S]*?(?=###\s+Requirement:)/m);
+  const newDeltaMatch = delta.match(/^##\s*Purpose[\s\S]*?(?=###\s+Requirement:)/m);
+  const purposeBlock = newDeltaMatch
+    ? newDeltaMatch[0].trim()
+    : purposeMatch
+      ? purposeMatch[0].trim()
+      : '## Purpose\n\nTBD\n';
+  return `${purposeBlock}\n\n${trimmed}\n`;
 }
 
 /**
@@ -59,7 +95,8 @@ export function syncToMain(changeName, opts = {}) {
       }
       if (!dryRun) {
         mkdirSync(destDir, { recursive: true });
-        writeFileSync(dest, (existing + '\n\n' + content.split(/^##\s*(?:ADDED|REMOVED)/im)[0]).trim() + '\n');
+        const merged = mergeRequirements(existing, content);
+        writeFileSync(dest, merged);
       }
       synced.push({ action, spec: specName, details: `Merged into openspec/specs/${specName}/spec.md` });
     } else if (action === 'REMOVED') {

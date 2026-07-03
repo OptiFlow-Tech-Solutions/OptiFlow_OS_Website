@@ -1,0 +1,77 @@
+{
+  "version": "7.0",
+  "command": "auto",
+  "executionId": "build-competitive-positioning-page-1783101058205",
+  "changeName": "build-competitive-positioning-page",
+  "branch": "main",
+  "timestamp": "2026-07-03T17:50:58.862Z",
+  "analysis": {
+    "intents": [
+      "create-page"
+    ],
+    "domains": [
+      "frontend",
+      "design"
+    ],
+    "roles": [
+      "implementation"
+    ],
+    "skills": [
+      "design-system",
+      "frontend-patterns"
+    ],
+    "confidence": 0.024390243902439025
+  },
+  "project": {
+    "name": "OptiFlow OS",
+    "framework": "static-site",
+    "architecture": "pages-based"
+  },
+  "capabilities": {
+    "skills": [
+      "design-system",
+      "frontend-patterns",
+      "plan-orchestrate",
+      "social-graph-ranker",
+      "strategic-compact",
+      "flutter-dart-code-review",
+      "motion-advanced",
+      "dmux-workflows",
+      "frontend-design-direction",
+      "visual-regression",
+      "agent-sort",
+      "agentic-os"
+    ],
+    "agents": {
+      "primaryAgent": "tdd-guide",
+      "supportAgents": [
+        "frontend-design-direction",
+        "security-reviewer"
+      ],
+      "skipAgents": []
+    },
+    "mcpServers": [
+      "context7",
+      "parallel-search",
+      "chrome-devtools",
+      "playwright",
+      "magic",
+      "cloudflare-docs"
+    ],
+    "hooks": {
+      "preHooks": [
+        "pre-build"
+      ],
+      "postHooks": []
+    },
+    "commands": [],
+    "gates": [
+      "GATE_BUILD",
+      "GATE_VALIDATE",
+      "GATE_TEST",
+      "GATE_A11Y",
+      "GATE_PERF",
+      "GATE_VISUAL"
+    ]
+  }
+}

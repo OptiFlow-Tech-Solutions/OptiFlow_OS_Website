@@ -7,7 +7,7 @@
 
 import { findBestSkills } from './capability-analyzer.mjs';
 import { findSkillsByDomain } from './capability-registry.mjs';
-import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
+import { get as cacheGet, set as cacheSet, hashKey } from './cache-manager.mjs';
 
 const DEFAULT_SKILLS = Object.freeze(['coding-standards']);
 
@@ -146,7 +146,7 @@ export function routeBySpecs(affectedSpecs) {
  * @returns {string[]}
  */
 export function routeTask(taskDescription) {
-  const cacheKey = `skill-route:${taskDescription.slice(0, 80)}`;
+  const cacheKey = `skill-route:${hashKey(taskDescription)}`;
   const cached = cacheGet(cacheKey);
   if (cached) return cached;
 

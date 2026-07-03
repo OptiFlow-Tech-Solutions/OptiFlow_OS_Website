@@ -5,7 +5,7 @@
  */
 
 import { listCapabilities } from './capability-registry.mjs';
-import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
+import { get as cacheGet, set as cacheSet, hashKey } from './cache-manager.mjs';
 
 /**
  * Capability taxonomy — maps task intents to required capabilities.
@@ -309,7 +309,7 @@ const TAXONOMY = [
  * @returns {{intents: string[], domains: string[], roles: string[], skills: string[], confidence: number}}
  */
 export function analyzeTask(taskDescription) {
-  const cacheKey = `task-analysis:${taskDescription.slice(0, 80)}`;
+  const cacheKey = `task-analysis:${hashKey(taskDescription)}`;
   const cached = cacheGet(cacheKey);
   if (cached) return cached;
 

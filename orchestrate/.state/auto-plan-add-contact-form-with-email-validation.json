@@ -1,0 +1,75 @@
+{
+  "version": "7.0",
+  "command": "auto",
+  "executionId": "add-contact-form-with-email-validation-1783100542659",
+  "changeName": "add-contact-form-with-email-validation",
+  "branch": "main",
+  "timestamp": "2026-07-03T17:42:23.961Z",
+  "analysis": {
+    "intents": [
+      "add-component"
+    ],
+    "domains": [
+      "design",
+      "frontend"
+    ],
+    "roles": [
+      "implementation"
+    ],
+    "skills": [
+      "design-system"
+    ],
+    "confidence": 0.024390243902439025
+  },
+  "project": {
+    "name": "OptiFlow OS",
+    "framework": "static-site",
+    "architecture": "pages-based"
+  },
+  "capabilities": {
+    "skills": [
+      "design-system",
+      "kotlin-patterns",
+      "social-graph-ranker",
+      "frontend-a11y",
+      "prisma-patterns",
+      "flutter-dart-code-review",
+      "react-performance",
+      "react-testing",
+      "strategic-compact",
+      "motion-advanced",
+      "demo-flow-optimizer",
+      "django-celery"
+    ],
+    "agents": {
+      "primaryAgent": "frontend-design-direction",
+      "supportAgents": [
+        "tdd-guide",
+        "security-reviewer"
+      ],
+      "skipAgents": []
+    },
+    "mcpServers": [
+      "context7",
+      "parallel-search",
+      "magic",
+      "chrome-devtools",
+      "playwright"
+    ],
+    "hooks": {
+      "preHooks": [
+        "pre-build"
+      ],
+      "postHooks": []
+    },
+    "commands": [],
+    "gates": [
+      "GATE_BUILD",
+      "GATE_VALIDATE",
+      "GATE_TEST",
+      "GATE_A11Y",
+      "GATE_PERF",
+      "GATE_VISUAL"
+    ]
+  }
+}
