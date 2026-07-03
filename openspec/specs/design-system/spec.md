@@ -93,11 +93,42 @@ The system SHALL provide transition duration and easing tokens for consistent mo
 - **WHEN** a component references `--transition-fast`, `--transition-base`, or `--transition-slow`
 - **THEN** the correct duration (150ms, 250ms, 350ms) SHALL be applied
 
-#### Scenario: Easing token available
+#### Scenario: Easing curve tokens available
 
 - **GIVEN** `core.css` is loaded
-- **WHEN** a component references `var(--ease-out)`
-- **THEN** the standard ease-out cubic-bezier curve SHALL be applied
+- **WHEN** a component references `var(--ease-out)`, `var(--ease-in)`, `var(--ease-in-out)`, or `var(--ease-spring)`
+- **THEN** the correct cubic-bezier curve SHALL be applied
+- **AND** `--ease-out` SHALL be used for entrances
+- **AND** `--ease-in` SHALL be used for exits
+- **AND** `--ease-in-out` SHALL be used for symmetric transitions
+- **AND** `--ease-spring` SHALL be used for bouncy entrances
+
+#### Scenario: Motion distance token available
+
+- **GIVEN** `core.css` is loaded
+- **WHEN** `.reveal`, `.reveal-left`, or `.reveal-right` elements animate
+- **THEN** transform distance SHALL use `var(--motion-distance, 28px)`
+
+### Requirement: Scroll Reveal Variants
+
+The system SHALL provide directional and scale reveal variants.
+
+#### Scenario: Directional reveal variants
+
+- **GIVEN** `core.css` is loaded
+- **WHEN** an element has `.reveal-left`, `.reveal-right`, or `.reveal-scale`
+- **THEN** each SHALL have independent opacity and transform transitions using `var(--ease-out)`
+- **AND** `.reveal-left` SHALL enter from the left
+- **AND** `.reveal-right` SHALL enter from the right
+- **AND** `.reveal-scale` SHALL enter via scale-up animation
+- **AND** all variants SHALL be observed by the IntersectionObserver in core.js
+
+#### Scenario: GPU-accelerated reveals
+
+- **GIVEN** any `.reveal` or reveal-variant element
+- **WHEN** the page renders
+- **THEN** the element SHALL have `will-change: opacity, transform`
+- **AND** the compositor SHALL promote the element to a GPU layer before the transition fires
 
 ### Requirement: Noise Texture
 

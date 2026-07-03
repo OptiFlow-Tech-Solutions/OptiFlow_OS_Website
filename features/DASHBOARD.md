@@ -3,16 +3,16 @@
 | Stat | Value |
 |------|-------|
 | Total Features | 76 |
-| Complete | 28 |
-| Pending | 48 |
+| Complete | 29 |
+| Pending | 47 |
 | Prefixes | SYS, PAGE, LEAD, LEGAL, API, UI, PERF, SEC, TEST, DOCS, CONTENT, QA, OPS |
 
 ## Status Breakdown
 
 | Status | Count |
 |--------|-------|
-| Complete | 28 |
-| Pending | 48 |
+| Complete | 29 |
+| Pending | 47 |
 
 ## Prefix Breakdown
 

@@ -68,7 +68,7 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(function(el) {
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
     revealObserver.observe(el);
   });
 
@@ -78,7 +78,7 @@
     if (!match) return;
     var count = parseInt(match[1]);
     var baseDelay = 80;
-    var children = parent.querySelectorAll(':scope > .reveal, :scope > *');
+    var children = parent.querySelectorAll(':scope > .reveal, :scope > .reveal-left, :scope > .reveal-right, :scope > .reveal-scale, :scope > *');
     children.forEach(function(child, i) {
       if (i >= count * 2) return;
       child.style.transitionDelay = (i * baseDelay) + 'ms';
@@ -86,7 +86,7 @@
   });
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.reveal, [class*="stagger-"] > *').forEach(function(el) {
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, [class*="stagger-"] > *').forEach(function(el) {
       el.style.transition = 'none';
       el.style.transitionDelay = '0ms';
       el.classList.add('visible');

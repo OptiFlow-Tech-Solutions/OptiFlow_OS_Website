@@ -51,6 +51,10 @@
   --transition-base: 250ms;
   --transition-slow: 350ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.64, 0, 0.78, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --motion-distance: 28px;
   --shadow-card: 0 1px 3px rgba(15,23,42,.04), 0 4px 12px rgba(15,23,42,.06), 0 10px 24px rgba(15,23,42,.07);
   --shadow-card-hover: 0 1px 3px rgba(15,23,42,.06), 0 8px 18px rgba(15,23,42,.08), 0 18px 42px rgba(15,23,42,.10);
   --shadow-elevated: 0 2px 6px rgba(15,23,42,.05), 0 8px 20px rgba(15,23,42,.08), 0 20px 48px rgba(15,23,42,.10);
@@ -254,9 +258,16 @@ h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing
 
 /* ═══ SCROLL REVEAL — unified motion system ═══
    ponytail: CSS-based stagger delays; core.js adds them dynamically.
-   These static fallbacks exist for JS-disabled browsers. */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+   These static fallbacks exist for JS-disabled browsers.
+   will-change hints compositor for GPU-accelerated reveals. */
+.reveal { opacity: 0; transform: translateY(var(--motion-distance, 28px)); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); will-change: opacity, transform; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(calc(-1 * var(--motion-distance, 28px))); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); will-change: opacity, transform; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(var(--motion-distance, 28px)); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); will-change: opacity, transform; }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.94); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); will-change: opacity, transform; }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
@@ -280,6 +291,7 @@ h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing
 .stagger-5 > *:nth-child(3) { transition-delay: 0.12s; }
 .stagger-5 > *:nth-child(4) { transition-delay: 0.18s; }
 .stagger-5 > *:nth-child(5) { transition-delay: 0.24s; }
+@starting-style { .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 0; } }
 
 /* ─── FAQ ─── */
 .faq-list { max-width: 800px; margin: 0 auto; }
