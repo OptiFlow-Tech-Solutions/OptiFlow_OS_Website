@@ -24,20 +24,131 @@
     .trust-badges span { font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
     .trust-badges svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--green); }
 
-    /* ─── Hero visual: cost comparison chart ─── */
+    /* ─── Hero visual: Premium Enterprise ROI Dashboard ─── */
     .pricing-visual { position: relative; z-index: 1; }
-    .cost-chart { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 20px 20px 16px; box-shadow: var(--shadow-card); }
-    .cch-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); text-align: center; margin-bottom: 14px; }
-    .cch-rows { display: flex; flex-direction: column; gap: 10px; }
-    .cch-row { display: flex; align-items: center; gap: 4px; }
-    .cch-trad-wrap { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 4px; min-width: 0; }
-    .cch-opti-wrap { flex: 1; display: flex; align-items: center; gap: 4px; min-width: 0; }
-    .cch-bar { height: 18px; border-radius: 3px; transition: width 1s cubic-bezier(0.22,1,0.36,1); flex-shrink: 0; }
-    .cch-trad { background: linear-gradient(90deg, #dc2626, #f97316); }
-    .cch-opti { background: linear-gradient(90deg, #54B89A, #99D271); }
-    .cch-val { font-size: 10px; font-weight: 600; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-    .cch-label { font-size: 11px; font-weight: 700; color: color-mix(in oklch, var(--fg) 60%, transparent); min-width: 24px; text-align: center; flex-shrink: 0; }
-    .cch-save { font-size: 10px; font-weight: 700; color: var(--green); white-space: nowrap; min-width: 50px; text-align: right; flex-shrink: 0; }
+    .roi-dashboard {
+      background: linear-gradient(180deg, var(--surface), color-mix(in oklch, var(--fg) 1%, var(--surface)));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.04);
+      overflow: hidden;
+    }
+    .rd-header { padding: 20px 24px; background: linear-gradient(135deg, color-mix(in oklch, var(--accent) 5%, transparent), color-mix(in oklch, var(--teal) 4%, transparent)); border-bottom: 1px solid var(--border); }
+    .rd-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--teal); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .rd-eyebrow::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .rd-savings { font-family: var(--font-display); font-size: 36px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: var(--green); margin-bottom: 2px; }
+    .rd-savings-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .rd-body { padding: 16px 20px; }
+    .rd-section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px; }
+    .rd-compare { display: flex; flex-direction: column; gap: 0; }
+
+    /* Row */
+    .rd-row { display: flex; align-items: center; gap: 0; padding: 3px 0; border-radius: var(--radius); transition: background .15s, box-shadow .15s; position: relative; }
+    .rd-row:hover { background: color-mix(in oklch, var(--fg) 3%, transparent); box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .rd-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius); }
+    .rd-row-head { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; padding: 4px 0 8px; display: flex; align-items: center; }
+    .rd-row-label { flex: 0 0 44px; font-size: 12px; font-weight: 600; color: var(--fg); text-align: center; }
+    .rd-row-body { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+
+    /* Bar tracks */
+    .rd-bar-track {
+      width: 100%; height: 18px;
+      background: #EEF2F7;
+      border: 1px solid rgba(255,255,255,.5);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
+      border-radius: 999px;
+      overflow: visible;
+      position: relative;
+    }
+
+    /* Bar fills */
+    .rd-bar-fill {
+      height: 100%; border-radius: 999px;
+      position: absolute; left: 0; top: 0;
+      transition: width 1s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 1px 2px rgba(0,0,0,.08);
+    }
+    .rd-bar-fill::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 45%;
+      background: linear-gradient(180deg, rgba(255,255,255,.25), transparent);
+      border-radius: 999px 999px 0 0; pointer-events: none;
+    }
+    .rd-row:hover .rd-bar-fill { filter: brightness(1.08); }
+
+    /* Traditional SaaS — warm orange gradient */
+    .rd-bar-fill.traditional { background: linear-gradient(180deg, #FFB347 0%, #FF8A00 50%, #F97316 100%); }
+    .rd-bar-fill.traditional .rd-bar-val {
+      background: rgba(0,0,0,.45); color: #fff;
+      padding: 2px 8px; border-radius: 999px;
+      font-size: 10px; font-weight: 600; white-space: nowrap;
+      position: absolute; top: 50%; transform: translateY(-50%);
+    }
+
+    /* OptiFlow OS — brand green gradient */
+    .rd-bar-fill.optiflow { background: linear-gradient(180deg, #84CC16 0%, #65A30D 50%, #4D9A0A 100%); }
+    .rd-bar-fill.optiflow .rd-bar-val {
+      background: rgba(0,0,0,.45); color: #fff;
+      padding: 2px 8px; border-radius: 999px;
+      font-size: 10px; font-weight: 600; white-space: nowrap;
+      position: absolute; top: 50%; transform: translateY(-50%);
+    }
+
+    /* Savings badge */
+    .rd-save-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding-left: 44px; font-size: 10px; font-weight: 500; color: var(--green);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity .4s ease .3s, transform .4s ease .3s;
+    }
+    .rd-save-badge.visible { opacity: 1; transform: translateY(0); }
+    .save-arrow { font-size: 12px; line-height: 1; }
+    .save-pct {
+      background: var(--green-soft); color: var(--green);
+      padding: 1px 6px; border-radius: 999px;
+      font-size: 10px; font-weight: 700;
+    }
+
+    /* Tooltip */
+    .rd-tooltip {
+      position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
+      background: var(--fg); color: var(--bg);
+      font-size: 10px; font-weight: 500; white-space: nowrap;
+      padding: 5px 10px; border-radius: 6px;
+      pointer-events: none; opacity: 0;
+      transition: opacity .12s ease, transform .12s ease;
+      z-index: 10;
+    }
+    .rd-tooltip::after {
+      content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent;
+      border-top: 5px solid var(--fg);
+    }
+    .rd-row:hover .rd-tooltip, .rd-row:focus-visible .rd-tooltip { opacity: 1; }
+
+    /* Connector line */
+    .rd-connector {
+      position: absolute; left: 0; top: 50%; height: 1px;
+      background: var(--green); opacity: 0; pointer-events: none;
+      transition: opacity .15s ease; z-index: 2;
+    }
+    .rd-row:hover .rd-connector { opacity: .35; }
+
+    .rd-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .rd-stat { text-align: center; }
+    .rd-stat-val { font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--accent); }
+    .rd-stat-val.green { color: var(--green); }
+    .rd-stat-val.teal { color: var(--teal); }
+    .rd-stat-lbl { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+    /* Prefers reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .rd-bar-fill { transition: none; }
+      .rd-save-badge { transition: none; opacity: 1; transform: none; }
+      .rd-tooltip { transition: none; }
+      .rd-connector { transition: none; }
+    }
 
     @keyframes floatUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
@@ -48,13 +159,13 @@
     .hero-content .hero-cta { animation-delay: 0.32s; }
     .hero-content .trust-badges { animation-delay: 0.46s; }
     @keyframes heroReveal { to { opacity: 1; transform: translateY(0); } }
-    .pricing-visual .cost-chart { opacity: 0; transform: translateY(16px); animation: heroReveal 0.65s cubic-bezier(0.22,0.61,0.36,1) forwards; animation-delay: 0.2s; }
-    .pricing-visual .cch-row { opacity: 0; animation: heroReveal 0.5s cubic-bezier(0.22,0.61,0.36,1) forwards; }
-    .pricing-visual .cch-row:nth-child(1) { animation-delay: 0.3s; }
-    .pricing-visual .cch-row:nth-child(2) { animation-delay: 0.38s; }
-    .pricing-visual .cch-row:nth-child(3) { animation-delay: 0.46s; }
-    .pricing-visual .cch-row:nth-child(4) { animation-delay: 0.54s; }
-    .pricing-visual .cch-row:nth-child(5) { animation-delay: 0.62s; }
+    .pricing-visual .roi-dashboard { opacity: 0; transform: translateY(16px); animation: heroReveal 0.65s cubic-bezier(0.22,0.61,0.36,1) forwards; animation-delay: 0.2s; }
+    .pricing-visual .rd-row { opacity: 0; animation: heroReveal 0.5s cubic-bezier(0.22,0.61,0.36,1) forwards; }
+    .pricing-visual .rd-row:nth-child(1) { animation-delay: 0.3s; }
+    .pricing-visual .rd-row:nth-child(2) { animation-delay: 0.38s; }
+    .pricing-visual .rd-row:nth-child(3) { animation-delay: 0.46s; }
+    .pricing-visual .rd-row:nth-child(4) { animation-delay: 0.54s; }
+    .pricing-visual .rd-row:nth-child(5) { animation-delay: 0.62s; }
 
     /* ─── Pricing cards ─── */
     .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); align-items: start; }
@@ -189,9 +300,14 @@
     [data-theme="dark"] .btn-secondary { background: var(--surface); color: var(--fg); border-color: var(--border); }
     [data-theme="dark"] .pricing-card.featured { box-shadow: 0 0 0 2px var(--teal), 0 24px 64px color-mix(in oklch, var(--teal) 16%, transparent); }
     [data-theme="dark"] .roi-calc { background: color-mix(in oklch, var(--fg) 4%, transparent); }
-    [data-theme="dark"] .cost-chart { background: color-mix(in oklch, var(--fg) 4%, transparent); }
-    [data-theme="dark"] .cch-trad { background: linear-gradient(90deg, #b91c1c, #ea580c); }
-    [data-theme="dark"] .cch-val { color: var(--muted); }
+    [data-theme="dark"] .roi-dashboard { background: linear-gradient(180deg, color-mix(in oklch, var(--fg) 3%, transparent), color-mix(in oklch, var(--fg) 2%, transparent)); }
+    [data-theme="dark"] .rd-bar-track { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.08); box-shadow: inset 0 1px 3px rgba(0,0,0,.2); }
+    [data-theme="dark"] .rd-bar-fill.traditional { background: linear-gradient(180deg, rgba(255,179,71,.7) 0%, rgba(255,138,0,.8) 50%, rgba(249,115,22,.85) 100%); }
+    [data-theme="dark"] .rd-bar-fill.optiflow { background: linear-gradient(180deg, rgba(132,204,22,.7) 0%, rgba(101,163,13,.8) 50%, rgba(77,154,10,.85) 100%); }
+    [data-theme="dark"] .rd-tooltip { background: var(--border); color: var(--fg); }
+    [data-theme="dark"] .rd-tooltip::after { border-top-color: var(--border); }
+    [data-theme="dark"] .rd-row:hover { background: color-mix(in oklch, var(--fg) 4%, transparent); box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+    [data-theme="dark"] .rd-save-badge .save-pct { background: color-mix(in oklch, var(--green) 12%, transparent); }
     [data-theme="dark"] .imp-step { background: color-mix(in oklch, var(--fg) 4%, transparent); }
     [data-theme="dark"] .faq-item { border-color: var(--border); }
     [data-theme="dark"] .trust-bar-row { border-color: var(--border); }
@@ -223,12 +339,16 @@
       .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; }
       .pricing-card.featured { order: -1; }
       .hero-visual { display: none; }
-      .cost-chart { padding: 16px 14px 12px; }
-      .cch-row { gap: 3px; }
-      .cch-bar { height: 16px; }
-      .cch-val { font-size: 9px; }
-      .cch-label { font-size: 10px; min-width: 20px; }
-      .cch-save { font-size: 9px; min-width: 42px; }
+      .roi-dashboard { font-size: 14px; }
+      .rd-header { padding: 16px; }
+      .rd-body { padding: 12px 16px; }
+      .rd-savings { font-size: 30px; }
+      .rd-row-label { flex: 0 0 38px; font-size: 11px; }
+      .rd-row-head .rd-row-body { font-size: 9px; }
+      .rd-bar-track { height: 16px; }
+      .rd-bar-fill.traditional .rd-bar-val,
+      .rd-bar-fill.optiflow .rd-bar-val { font-size: 9px; padding: 1px 6px; }
+      .rd-save-badge { padding-left: 38px; font-size: 9px; }
       .imp-timeline { grid-template-columns: 1fr; gap: var(--gap-sm); }
       .pc-grid { grid-template-columns: 1fr; }
       .imp-step::after { display: none; }
@@ -244,13 +364,6 @@
       .roi-calc { padding: 24px; }
       .pc-save-amount { font-size: 28px; }
       .pc-bd-lime { font-size: 20px; }
-      .cost-chart { padding: 12px 10px; }
-      .cch-title { font-size: 10px; margin-bottom: 10px; }
-      .cch-rows { gap: 8px; }
-      .cch-bar { height: 14px; }
-      .cch-val { font-size: 8px; }
-      .cch-label { font-size: 9px; min-width: 16px; }
-      .cch-save { min-width: 36px; font-size: 8px; }
       .comp-head { grid-template-columns: 110px 1fr 1fr 1fr; }
       .comp-head > * { padding: 0 6px; font-size: 10px; }
       .comp-row { grid-template-columns: 110px 1fr 1fr 1fr; }
@@ -286,41 +399,105 @@
       </div>
     </div>
     <div class="pricing-visual">
-      <div class="cost-chart">
-        <div class="cch-title">Cost Comparison: Traditional SaaS vs OptiFlow</div>
-        <div class="cch-rows">
-          <div class="cch-row">
-            <div class="cch-trad-wrap"><span class="cch-val">₹1.44L/yr</span><span class="cch-bar cch-trad" style="width:75%"></span></div>
-            <span class="cch-label">10</span>
-            <div class="cch-opti-wrap"><span class="cch-bar cch-opti" style="width:25%"></span><span class="cch-val">₹49K/yr</span></div>
-            <span class="cch-save">+95K/yr</span>
+      <div class="roi-dashboard" role="region" aria-label="Pricing comparison chart">
+        <div class="rd-header">
+          <div class="rd-eyebrow">Live Savings Analysis</div>
+          <div class="rd-savings">Up to 95%</div>
+          <div class="rd-savings-label">Cost reduction vs traditional per-user SaaS pricing</div>
+        </div>
+        <div class="rd-body">
+          <div class="rd-section-title">Cost by Team Size (Annual)</div>
+          <div class="rd-compare" role="table" aria-label="Cost comparison by team size">
+            <div class="rd-row-head" role="row">
+              <span class="rd-row-label" role="columnheader">Team</span>
+              <span class="rd-row-body" style="font-size:10px;padding:0 6px" role="columnheader">Traditional SaaS  ·  OptiFlow OS</span>
+            </div>
+            <div class="rd-row" role="row" data-trad="₹1.44L/year" data-opti="₹49K/year" data-save="66%" tabindex="0" aria-label="10 users: Traditional SaaS ₹1.44L, OptiFlow OS ₹49K, save 66%">
+              <span class="rd-row-label" role="rowheader">10</span>
+              <div class="rd-row-body">
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill traditional" data-value="144000"><span class="rd-bar-val">₹1.44L</span></div>
+                </div>
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill optiflow" data-value="49000"><span class="rd-bar-val">₹49K</span></div>
+                </div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save ₹95K <span class="save-pct">66%</span></div>
+              </div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> ₹1.44L/yr &nbsp;·&nbsp; <b>OptiFlow OS</b> ₹49K/yr &nbsp;·&nbsp; <b>Save</b> 66%</div>
+              <div class="rd-connector"></div>
+            </div>
+            <div class="rd-row" role="row" data-trad="₹3.60L/year" data-opti="₹49K/year" data-save="86%" tabindex="0" aria-label="25 users: Traditional SaaS ₹3.60L, OptiFlow OS ₹49K, save 86%">
+              <span class="rd-row-label" role="rowheader">25</span>
+              <div class="rd-row-body">
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill traditional" data-value="360000"><span class="rd-bar-val">₹3.60L</span></div>
+                </div>
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill optiflow" data-value="49000"><span class="rd-bar-val">₹49K</span></div>
+                </div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save ₹3.11L <span class="save-pct">86%</span></div>
+              </div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> ₹3.60L/yr &nbsp;·&nbsp; <b>OptiFlow OS</b> ₹49K/yr &nbsp;·&nbsp; <b>Save</b> 86%</div>
+              <div class="rd-connector"></div>
+            </div>
+            <div class="rd-row" role="row" data-trad="₹7.20L/year" data-opti="₹79K/year" data-save="89%" tabindex="0" aria-label="50 users: Traditional SaaS ₹7.20L, OptiFlow OS ₹79K, save 89%">
+              <span class="rd-row-label" role="rowheader">50</span>
+              <div class="rd-row-body">
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill traditional" data-value="720000"><span class="rd-bar-val">₹7.20L</span></div>
+                </div>
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill optiflow" data-value="79000"><span class="rd-bar-val">₹79K</span></div>
+                </div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save ₹6.41L <span class="save-pct">89%</span></div>
+              </div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> ₹7.20L/yr &nbsp;·&nbsp; <b>OptiFlow OS</b> ₹79K/yr &nbsp;·&nbsp; <b>Save</b> 89%</div>
+              <div class="rd-connector"></div>
+            </div>
+            <div class="rd-row" role="row" data-trad="₹14.4L/year" data-opti="₹1.49L/year" data-save="90%" tabindex="0" aria-label="100 users: Traditional SaaS ₹14.4L, OptiFlow OS ₹1.49L, save 90%">
+              <span class="rd-row-label" role="rowheader">100</span>
+              <div class="rd-row-body">
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill traditional" data-value="1440000"><span class="rd-bar-val">₹14.4L</span></div>
+                </div>
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill optiflow" data-value="149000"><span class="rd-bar-val">₹1.49L</span></div>
+                </div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save ₹12.9L <span class="save-pct">90%</span></div>
+              </div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> ₹14.4L/yr &nbsp;·&nbsp; <b>OptiFlow OS</b> ₹1.49L/yr &nbsp;·&nbsp; <b>Save</b> 90%</div>
+              <div class="rd-connector"></div>
+            </div>
+            <div class="rd-row" role="row" data-trad="₹28.8L/year" data-opti="₹1.49L/year" data-save="95%" tabindex="0" aria-label="200 users: Traditional SaaS ₹28.8L, OptiFlow OS ₹1.49L, save 95%">
+              <span class="rd-row-label" role="rowheader">200</span>
+              <div class="rd-row-body">
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill traditional" data-value="2880000"><span class="rd-bar-val">₹28.8L</span></div>
+                </div>
+                <div class="rd-bar-track">
+                  <div class="rd-bar-fill optiflow" data-value="149000"><span class="rd-bar-val">₹1.49L</span></div>
+                </div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save ₹27.3L <span class="save-pct">95%</span></div>
+              </div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> ₹28.8L/yr &nbsp;·&nbsp; <b>OptiFlow OS</b> ₹1.49L/yr &nbsp;·&nbsp; <b>Save</b> 95%</div>
+              <div class="rd-connector"></div>
+            </div>
           </div>
-          <div class="cch-row">
-            <div class="cch-trad-wrap"><span class="cch-val">₹3.60L/yr</span><span class="cch-bar cch-trad" style="width:88%"></span></div>
-            <span class="cch-label">25</span>
-            <div class="cch-opti-wrap"><span class="cch-bar cch-opti" style="width:12%"></span><span class="cch-val">₹49K/yr</span></div>
-            <span class="cch-save">+3.11L/yr</span>
-          </div>
-          <div class="cch-row">
-            <div class="cch-trad-wrap"><span class="cch-val">₹7.20L/yr</span><span class="cch-bar cch-trad" style="width:90%"></span></div>
-            <span class="cch-label">50</span>
-            <div class="cch-opti-wrap"><span class="cch-bar cch-opti" style="width:10%"></span><span class="cch-val">₹79K/yr</span></div>
-            <span class="cch-save">+6.41L/yr</span>
-          </div>
-          <div class="cch-row">
-            <div class="cch-trad-wrap"><span class="cch-val">₹14.4L/yr</span><span class="cch-bar cch-trad" style="width:91%"></span></div>
-            <span class="cch-label">100</span>
-            <div class="cch-opti-wrap"><span class="cch-bar cch-opti" style="width:9%"></span><span class="cch-val">₹1.49L/yr</span></div>
-            <span class="cch-save">+12.9L/yr</span>
-          </div>
-          <div class="cch-row">
-            <div class="cch-trad-wrap"><span class="cch-val">₹28.8L/yr</span><span class="cch-bar cch-trad" style="width:95%"></span></div>
-            <span class="cch-label">200</span>
-            <div class="cch-opti-wrap"><span class="cch-bar cch-opti" style="width:5%"></span><span class="cch-val">₹1.49L/yr</span></div>
-            <span class="cch-save">+27.3L/yr</span>
+          <div class="rd-summary">
+            <div class="rd-stat">
+              <div class="rd-stat-val">No Per-User</div>
+              <div class="rd-stat-lbl">Charges</div>
+            </div>
+            <div class="rd-stat">
+              <div class="rd-stat-val green">Fixed Annual</div>
+              <div class="rd-stat-lbl">Pricing</div>
+            </div>
+            <div class="rd-stat">
+              <div class="rd-stat-val teal">Cloud Hosting</div>
+              <div class="rd-stat-lbl">Included</div>
+            </div>
           </div>
         </div>
-        <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--muted)"><a href="/competitive-positioning/" style="color:var(--accent);font-weight:600">See full competitive comparison &#8594;</a></p>
       </div>
     </div>
   </div>
@@ -761,6 +938,96 @@
     var effectivePerUser = Math.round(optiTotal / teamSize / 12);
     document.getElementById('pcMatrixEffective').textContent = '\u20B9' + effectivePerUser.toLocaleString('en-IN') + '/mo';
   }
+
+  /* --- Hero bar chart: proportional scaling + label positioning + hover connector --- */
+  (function(){
+    var MIN_WIDTH_PCT = 4;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var bars = document.querySelectorAll('.rd-bar-fill[data-value]');
+    var rows = document.querySelectorAll('.rd-row[role="row"]');
+    var dashboard = document.querySelector('.roi-dashboard');
+    var animated = false;
+
+    function scaleBars() {
+      var maxVal = 0;
+      bars.forEach(function(b) { maxVal = Math.max(maxVal, parseInt(b.getAttribute('data-value')) || 0); });
+      if (maxVal <= 0) return;
+      bars.forEach(function(b) {
+        var v = parseInt(b.getAttribute('data-value')) || 0;
+        var pct = Math.max(MIN_WIDTH_PCT, (v / maxVal) * 100);
+        b.style.width = pct + '%';
+        var label = b.querySelector('.rd-bar-val');
+        if (!label) return;
+        if (pct < 15) {
+          label.style.right = '-6px';
+          label.style.transform = 'translate(100%, -50%)';
+        } else {
+          label.style.right = '6px';
+          label.style.transform = 'translate(0, -50%)';
+        }
+      });
+    }
+
+    function positionConnectors() {
+      rows.forEach(function(row) {
+        var conn = row.querySelector('.rd-connector');
+        if (!conn) return;
+        var fills = row.querySelectorAll('.rd-bar-fill');
+        var trad = fills[0], opti = fills[1];
+        if (!trad || !opti) return;
+        var tradRight = trad.getBoundingClientRect().left + trad.getBoundingClientRect().width;
+        var optiRight = opti.getBoundingClientRect().left + opti.getBoundingClientRect().width;
+        var rowRect = row.getBoundingClientRect();
+        var start = Math.min(tradRight, optiRight) - rowRect.left;
+        var end = Math.max(tradRight, optiRight) - rowRect.left;
+        conn.style.left = start + 'px';
+        conn.style.width = Math.max(0, end - start) + 'px';
+        conn.style.top = '50%';
+      });
+    }
+
+    /* Entrance animation */
+    function revealBars() {
+      if (animated && !prefersReduced) return;
+      animated = true;
+      scaleBars();
+      positionConnectors();
+
+      if (prefersReduced) {
+        document.querySelectorAll('.rd-save-badge').forEach(function(s) { s.classList.add('visible'); });
+        return;
+      }
+
+      /* Staggered bar widths appear via CSS transition on width */
+      /* Savings badges fade up with staggered delay */
+      document.querySelectorAll('.rd-save-badge').forEach(function(s, i) {
+        setTimeout(function() { s.classList.add('visible'); }, 300 + i * 80);
+      });
+    }
+
+    scaleBars();
+    window.addEventListener('resize', function() { scaleBars(); positionConnectors(); });
+
+    /* Hover connector positioning */
+    rows.forEach(function(row) {
+      row.addEventListener('mouseenter', function() { positionConnectors(); });
+      row.addEventListener('focusin', function() { positionConnectors(); });
+    });
+
+    /* IntersectionObserver: reveal on scroll */
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { revealBars(); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.3 });
+    if (dashboard) observer.observe(dashboard);
+
+    /* Also try immediate reveal if already visible */
+    if (dashboard) {
+      var rect = dashboard.getBoundingClientRect();
+      if (rect.top < window.innerHeight) revealBars();
+    }
+  })();
 
   var pcSliders = document.querySelectorAll('#pcTeamSize, #pcPerUserCost');
   pcSliders.forEach(function(slider) {

@@ -1,0 +1,698 @@
+- generic [active] [ref=f7e1]:
+  - link "Skip to content" [ref=f7e2] [cursor=pointer]:
+    - /url: "#content"
+  - navigation "Main navigation" [ref=f7e3]:
+    - generic [ref=f7e4]:
+      - link "OptiFlow OptiFlow" [ref=f7e5] [cursor=pointer]:
+        - /url: /
+        - img "OptiFlow" [ref=f7e6]
+        - text: OptiFlow
+      - navigation [ref=f7e7]:
+        - link "Home" [ref=f7e8] [cursor=pointer]:
+          - /url: /
+        - link "Solutions" [ref=f7e9] [cursor=pointer]:
+          - /url: /problem-solutions/
+        - link "Product" [ref=f7e10] [cursor=pointer]:
+          - /url: /product-overview/
+        - link "Features" [ref=f7e11] [cursor=pointer]:
+          - /url: /features/
+        - link "Why OptiFlow" [ref=f7e12] [cursor=pointer]:
+          - /url: /why-optiflow/
+        - link "Pricing" [ref=f7e13] [cursor=pointer]:
+          - /url: /pricing/
+        - generic [ref=f7e15]:
+          - text: Resources
+          - img [ref=f7e16]
+        - link "Contact" [ref=f7e18] [cursor=pointer]:
+          - /url: /contact/
+      - generic [ref=f7e19]:
+        - button "Toggle theme" [ref=f7e20] [cursor=pointer]:
+          - img [ref=f7e21]
+        - link "Book Demo" [ref=f7e27] [cursor=pointer]:
+          - /url: /demo-booking/
+  - generic [ref=f7e28]:
+    - link "Home" [ref=f7e29] [cursor=pointer]:
+      - /url: /
+    - link "Solutions" [ref=f7e30] [cursor=pointer]:
+      - /url: /problem-solutions/
+    - link "Product" [ref=f7e31] [cursor=pointer]:
+      - /url: /product-overview/
+    - link "Features" [ref=f7e32] [cursor=pointer]:
+      - /url: /features/
+    - link "Why OptiFlow" [ref=f7e33] [cursor=pointer]:
+      - /url: /why-optiflow/
+    - link "Pricing" [ref=f7e34] [cursor=pointer]:
+      - /url: /pricing/
+    - generic [ref=f7e35]:
+      - text: Resources
+      - generic [ref=f7e36]:
+        - link "Newsletter" [ref=f7e37] [cursor=pointer]:
+          - /url: /newsletter/
+        - link "FAQ" [ref=f7e38] [cursor=pointer]:
+          - /url: /faq/
+        - link "Competitive Positioning" [ref=f7e39] [cursor=pointer]:
+          - /url: /competitive-positioning/
+    - link "Contact" [ref=f7e40] [cursor=pointer]:
+      - /url: /contact/
+    - link "Book Demo" [ref=f7e42] [cursor=pointer]:
+      - /url: /demo-booking/
+  - main [ref=f7e43]:
+    - generic [ref=f7e45]:
+      - generic [ref=f7e46]:
+        - heading "Simple, Predictable Pricing. No Per-User Charges." [level=1] [ref=f7e47]
+        - paragraph [ref=f7e48]: One annual investment covers your entire team. Cloud hosting, product updates, and support included. No hidden fees — just a predictable path to operational excellence.
+        - generic [ref=f7e49]:
+          - button "Compare Plans" [ref=f7e50] [cursor=pointer]
+          - link "Book Demo" [ref=f7e51] [cursor=pointer]:
+            - /url: /demo-booking/
+        - generic [ref=f7e52]:
+          - generic [ref=f7e53]:
+            - img [ref=f7e54]
+            - text: No Per-User Charges
+          - generic [ref=f7e56]:
+            - img [ref=f7e57]
+            - text: Cloud Hosting Included
+          - generic [ref=f7e59]:
+            - img [ref=f7e60]
+            - text: Support Included
+          - generic [ref=f7e62]:
+            - img [ref=f7e63]
+            - text: Fixed Annual Pricing
+      - region "Pricing comparison chart" [ref=f7e66]:
+        - generic [ref=f7e67]:
+          - generic [ref=f7e68]: Live Savings Analysis
+          - generic [ref=f7e69]: Up to 95%
+          - generic [ref=f7e70]: Cost reduction vs traditional per-user SaaS pricing
+        - generic [ref=f7e71]:
+          - generic [ref=f7e72]: Cost by Team Size (Annual)
+          - table "Cost comparison by team size" [ref=f7e73]:
+            - row "Team Traditional SaaS · OptiFlow OS" [ref=f7e74]:
+              - columnheader "Team" [ref=f7e75]
+              - columnheader "Traditional SaaS · OptiFlow OS" [ref=f7e76]
+            - 'row "10 users: Traditional SaaS ₹1.44L, OptiFlow OS ₹49K, save 66%" [ref=f7e77]':
+              - rowheader "10" [ref=f7e78]
+              - generic [ref=f7e79]:
+                - generic [ref=f7e82]: ₹1.44L
+                - generic [ref=f7e85]: ₹49K
+                - generic [ref=f7e86]:
+                  - generic [ref=f7e87]: ↓
+                  - text: Save ₹95K
+                  - generic [ref=f7e88]: 66%
+              - generic: Traditional SaaS ₹1.44L/yr · OptiFlow OS ₹49K/yr · Save 66%
+            - 'row "25 users: Traditional SaaS ₹3.60L, OptiFlow OS ₹49K, save 86%" [ref=f7e89]':
+              - rowheader "25" [ref=f7e90]
+              - generic [ref=f7e91]:
+                - generic [ref=f7e94]: ₹3.60L
+                - generic [ref=f7e97]: ₹49K
+                - generic [ref=f7e98]:
+                  - generic [ref=f7e99]: ↓
+                  - text: Save ₹3.11L
+                  - generic [ref=f7e100]: 86%
+              - generic: Traditional SaaS ₹3.60L/yr · OptiFlow OS ₹49K/yr · Save 86%
+            - 'row "50 users: Traditional SaaS ₹7.20L, OptiFlow OS ₹79K, save 89%" [ref=f7e101]':
+              - rowheader "50" [ref=f7e102]
+              - generic [ref=f7e103]:
+                - generic [ref=f7e106]: ₹7.20L
+                - generic [ref=f7e109]: ₹79K
+                - generic [ref=f7e110]:
+                  - generic [ref=f7e111]: ↓
+                  - text: Save ₹6.41L
+                  - generic [ref=f7e112]: 89%
+              - generic: Traditional SaaS ₹7.20L/yr · OptiFlow OS ₹79K/yr · Save 89%
+            - 'row "100 users: Traditional SaaS ₹14.4L, OptiFlow OS ₹1.49L, save 90%" [ref=f7e113]':
+              - rowheader "100" [ref=f7e114]
+              - generic [ref=f7e115]:
+                - generic [ref=f7e118]: ₹14.4L
+                - generic [ref=f7e121]: ₹1.49L
+                - generic [ref=f7e122]:
+                  - generic [ref=f7e123]: ↓
+                  - text: Save ₹12.9L
+                  - generic [ref=f7e124]: 90%
+              - generic: Traditional SaaS ₹14.4L/yr · OptiFlow OS ₹1.49L/yr · Save 90%
+            - 'row "200 users: Traditional SaaS ₹28.8L, OptiFlow OS ₹1.49L, save 95%" [ref=f7e125]':
+              - rowheader "200" [ref=f7e126]
+              - generic [ref=f7e127]:
+                - generic [ref=f7e130]: ₹28.8L
+                - generic [ref=f7e133]: ₹1.49L
+                - generic [ref=f7e134]:
+                  - generic [ref=f7e135]: ↓
+                  - text: Save ₹27.3L
+                  - generic [ref=f7e136]: 95%
+              - generic: Traditional SaaS ₹28.8L/yr · OptiFlow OS ₹1.49L/yr · Save 95%
+          - generic [ref=f7e137]:
+            - generic [ref=f7e138]:
+              - generic [ref=f7e139]: No Per-User
+              - generic [ref=f7e140]: Charges
+            - generic [ref=f7e141]:
+              - generic [ref=f7e142]: Fixed Annual
+              - generic [ref=f7e143]: Pricing
+            - generic [ref=f7e144]:
+              - generic [ref=f7e145]: Cloud Hosting
+              - generic [ref=f7e146]: Included
+    - generic [ref=f7e148]:
+      - generic [ref=f7e149]:
+        - heading "Built Around Business Value, Not User Counts" [level=2] [ref=f7e150]
+        - paragraph [ref=f7e151]: "Most SaaS tools charge per user — the bigger your team, the higher the bill. OptiFlow was designed differently: one fixed annual investment that covers your entire team so you can scale without surprise costs."
+      - generic [ref=f7e152]:
+        - generic [ref=f7e153]:
+          - img [ref=f7e154]
+          - heading "Unlimited Users" [level=4] [ref=f7e159]
+          - paragraph [ref=f7e160]: No per-user fees. Grow your team without growing your bill.
+        - generic [ref=f7e161]:
+          - img [ref=f7e162]
+          - heading "Predictable Budgeting" [level=4] [ref=f7e164]
+          - paragraph [ref=f7e165]: One annual payment. Zero surprises. Plan with confidence.
+        - generic [ref=f7e166]:
+          - img [ref=f7e167]
+          - heading "Cloud Hosting Included" [level=4] [ref=f7e169]
+          - paragraph [ref=f7e170]: No separate infrastructure costs. Always up to date.
+        - generic [ref=f7e171]:
+          - img [ref=f7e172]
+          - heading "Updates Included" [level=4] [ref=f7e175]
+          - paragraph [ref=f7e176]: Every product update is automatically available.
+    - generic [ref=f7e179]:
+      - generic [ref=f7e180]:
+        - generic [ref=f7e181]: "0"
+        - generic [ref=f7e182]: Businesses Running On OptiFlow
+      - generic [ref=f7e183]:
+        - generic [ref=f7e184]: "0"
+        - generic [ref=f7e185]: Team Members Managed Daily
+      - generic [ref=f7e186]:
+        - generic [ref=f7e187]: "0"
+        - generic [ref=f7e188]: Tasks Processed
+      - generic [ref=f7e189]:
+        - generic [ref=f7e190]: "0"
+        - generic [ref=f7e191]: Departments Managed
+    - generic [ref=f7e193]:
+      - generic [ref=f7e194]:
+        - paragraph [ref=f7e195]: PRICING PLANS
+        - heading "Choose the plan built for your scale" [level=2] [ref=f7e196]
+        - paragraph [ref=f7e197]: Annual pricing. One-time implementation. Everything included.
+      - generic [ref=f7e198]:
+        - generic [ref=f7e199]:
+          - heading "Starter" [level=3] [ref=f7e200]
+          - paragraph [ref=f7e201]: Up to 25 team members
+          - generic [ref=f7e202]: ₹49,000 /year
+          - paragraph [ref=f7e203]:
+            - text: +
+            - generic [ref=f7e204]: ₹25,000
+            - text: one-time implementation
+          - paragraph [ref=f7e205]: Business Value
+          - list [ref=f7e206]:
+            - listitem [ref=f7e207]:
+              - img [ref=f7e208]
+              - text: Bring operations into one system
+            - listitem [ref=f7e210]:
+              - img [ref=f7e211]
+              - text: Reduce follow-ups by 60-80%
+            - listitem [ref=f7e213]:
+              - img [ref=f7e214]
+              - text: Standardize work processes
+            - listitem [ref=f7e216]:
+              - img [ref=f7e217]
+              - text: Better attendance tracking
+            - listitem [ref=f7e219]:
+              - img [ref=f7e220]
+              - text: Save 15-20 management hrs/month
+          - separator [ref=f7e222]
+          - paragraph [ref=f7e223]: Core Modules
+          - list [ref=f7e224]:
+            - listitem [ref=f7e225]: Task Management, Worklists, Checklists
+            - listitem [ref=f7e226]: Attendance, Leave Management
+            - listitem [ref=f7e227]: SOP Management, Training, Helpdesk
+            - listitem [ref=f7e228]: Reports, Cloud Hosting, Standard Support
+          - link "Book Free Demo" [ref=f7e229] [cursor=pointer]:
+            - /url: /demo-booking/
+        - generic [ref=f7e230]:
+          - generic [ref=f7e231]: Most Popular
+          - heading "Growth" [level=3] [ref=f7e232]
+          - paragraph [ref=f7e233]: 26 to 100 team members
+          - generic [ref=f7e234]: ₹79,000 /year
+          - paragraph [ref=f7e235]:
+            - text: +
+            - generic [ref=f7e236]: ₹40,000
+            - text: one-time implementation
+          - paragraph [ref=f7e237]: Business Value
+          - list [ref=f7e238]:
+            - listitem [ref=f7e239]:
+              - img [ref=f7e240]
+              - text: Cross-team coordination
+            - listitem [ref=f7e242]:
+              - img [ref=f7e243]
+              - text: Reduce owner dependency by 70%
+            - listitem [ref=f7e245]:
+              - img [ref=f7e246]
+              - text: Multi-department visibility
+            - listitem [ref=f7e248]:
+              - img [ref=f7e249]
+              - text: Automated approval workflows
+            - listitem [ref=f7e251]:
+              - img [ref=f7e252]
+              - text: Save 40-60 management hrs/month
+          - separator [ref=f7e254]
+          - paragraph [ref=f7e255]: Everything in Starter +
+          - list [ref=f7e256]:
+            - listitem [ref=f7e257]: Advanced Reporting, Approval Management
+            - listitem [ref=f7e258]: Multi-Department Workflows
+            - listitem [ref=f7e259]: Process Automation, Priority Support
+          - link "Book Free Demo" [ref=f7e260] [cursor=pointer]:
+            - /url: /demo-booking/
+        - generic [ref=f7e261]:
+          - heading "Scale" [level=3] [ref=f7e262]
+          - paragraph [ref=f7e263]: 100+ team members
+          - generic [ref=f7e264]: ₹1,49,000 /year
+          - paragraph [ref=f7e265]:
+            - text: +
+            - generic [ref=f7e266]: ₹75,000
+            - text: one-time implementation
+          - paragraph [ref=f7e267]: Business Value
+          - list [ref=f7e268]:
+            - listitem [ref=f7e269]:
+              - img [ref=f7e270]
+              - text: Complete organizational visibility
+            - listitem [ref=f7e272]:
+              - img [ref=f7e273]
+              - text: Multi-location standardization
+            - listitem [ref=f7e275]:
+              - img [ref=f7e276]
+              - text: Data-driven decision making
+            - listitem [ref=f7e278]:
+              - img [ref=f7e279]
+              - text: Reduced operational risk
+            - listitem [ref=f7e281]:
+              - img [ref=f7e282]
+              - text: Save 80-120 management hrs/month
+          - separator [ref=f7e284]
+          - paragraph [ref=f7e285]: Everything in Growth +
+          - list [ref=f7e286]:
+            - listitem [ref=f7e287]: Multi-Location Operations
+            - listitem [ref=f7e288]: Advanced Analytics, Dedicated Success Support
+            - listitem [ref=f7e289]: Priority Implementation, Business Process Optimization
+          - link "Book Free Demo" [ref=f7e290] [cursor=pointer]:
+            - /url: /demo-booking/
+    - generic [ref=f7e292]:
+      - heading "Compare Plans Side By Side" [level=2] [ref=f7e294]
+      - generic [ref=f7e295]:
+        - generic [ref=f7e296]:
+          - generic [ref=f7e297]: Capability
+          - generic [ref=f7e298]: Starter
+          - generic [ref=f7e299]: Growth
+          - generic [ref=f7e300]: Scale
+        - generic [ref=f7e301]: Core Platform
+        - generic [ref=f7e302]:
+          - generic [ref=f7e303]: Task Management
+          - generic [ref=f7e304]:
+            - img [ref=f7e305]
+            - text: Included
+          - generic [ref=f7e307]:
+            - img [ref=f7e308]
+            - text: Included
+          - generic [ref=f7e310]:
+            - img [ref=f7e311]
+            - text: Included
+        - generic [ref=f7e313]:
+          - generic [ref=f7e314]: Worklists
+          - generic [ref=f7e315]:
+            - img [ref=f7e316]
+            - text: Included
+          - generic [ref=f7e318]:
+            - img [ref=f7e319]
+            - text: Included
+          - generic [ref=f7e321]:
+            - img [ref=f7e322]
+            - text: Included
+        - generic [ref=f7e324]:
+          - generic [ref=f7e325]: Checklist Management
+          - generic [ref=f7e326]:
+            - img [ref=f7e327]
+            - text: Included
+          - generic [ref=f7e329]:
+            - img [ref=f7e330]
+            - text: Included
+          - generic [ref=f7e332]:
+            - img [ref=f7e333]
+            - text: Included
+        - generic [ref=f7e335]:
+          - generic [ref=f7e336]: Attendance
+          - generic [ref=f7e337]:
+            - img [ref=f7e338]
+            - text: Included
+          - generic [ref=f7e340]:
+            - img [ref=f7e341]
+            - text: Included
+          - generic [ref=f7e343]:
+            - img [ref=f7e344]
+            - text: Included
+        - generic [ref=f7e346]:
+          - generic [ref=f7e347]: Leave Management
+          - generic [ref=f7e348]:
+            - img [ref=f7e349]
+            - text: Included
+          - generic [ref=f7e351]:
+            - img [ref=f7e352]
+            - text: Included
+          - generic [ref=f7e354]:
+            - img [ref=f7e355]
+            - text: Included
+        - generic [ref=f7e357]:
+          - generic [ref=f7e358]: SOP Management
+          - generic [ref=f7e359]:
+            - img [ref=f7e360]
+            - text: Included
+          - generic [ref=f7e362]:
+            - img [ref=f7e363]
+            - text: Included
+          - generic [ref=f7e365]:
+            - img [ref=f7e366]
+            - text: Included
+        - generic [ref=f7e368]:
+          - generic [ref=f7e369]: Training
+          - generic [ref=f7e370]:
+            - img [ref=f7e371]
+            - text: Included
+          - generic [ref=f7e373]:
+            - img [ref=f7e374]
+            - text: Included
+          - generic [ref=f7e376]:
+            - img [ref=f7e377]
+            - text: Included
+        - generic [ref=f7e379]:
+          - generic [ref=f7e380]: Helpdesk
+          - generic [ref=f7e381]:
+            - img [ref=f7e382]
+            - text: Included
+          - generic [ref=f7e384]:
+            - img [ref=f7e385]
+            - text: Included
+          - generic [ref=f7e387]:
+            - img [ref=f7e388]
+            - text: Included
+        - generic [ref=f7e390]:
+          - generic [ref=f7e391]: Reports
+          - generic [ref=f7e392]:
+            - img [ref=f7e393]
+            - text: Basic
+          - generic [ref=f7e395]:
+            - img [ref=f7e396]
+            - text: Advanced
+          - generic [ref=f7e398]:
+            - img [ref=f7e399]
+            - text: Advanced
+        - generic [ref=f7e401]: Automation & Scale
+        - generic [ref=f7e402]:
+          - generic [ref=f7e403]: Approval Workflows
+          - generic [ref=f7e404]: —
+          - generic [ref=f7e405]:
+            - img [ref=f7e406]
+            - text: Included
+          - generic [ref=f7e408]:
+            - img [ref=f7e409]
+            - text: Included
+        - generic [ref=f7e411]:
+          - generic [ref=f7e412]: Process Automation
+          - generic [ref=f7e413]: —
+          - generic [ref=f7e414]:
+            - img [ref=f7e415]
+            - text: Included
+          - generic [ref=f7e417]:
+            - img [ref=f7e418]
+            - text: Included
+        - generic [ref=f7e420]:
+          - generic [ref=f7e421]: Multi-Location
+          - generic [ref=f7e422]: —
+          - generic [ref=f7e423]: —
+          - generic [ref=f7e424]:
+            - img [ref=f7e425]
+            - text: Included
+        - generic [ref=f7e427]:
+          - generic [ref=f7e428]: Advanced Analytics
+          - generic [ref=f7e429]: —
+          - generic [ref=f7e430]: —
+          - generic [ref=f7e431]:
+            - img [ref=f7e432]
+            - text: Included
+        - generic [ref=f7e434]: Support
+        - generic [ref=f7e435]:
+          - generic [ref=f7e436]: Priority Support
+          - generic [ref=f7e437]: —
+          - generic [ref=f7e438]:
+            - img [ref=f7e439]
+            - text: Included
+          - generic [ref=f7e441]:
+            - img [ref=f7e442]
+            - text: Included
+        - generic [ref=f7e444]:
+          - generic [ref=f7e445]: Dedicated Success Manager
+          - generic [ref=f7e446]: —
+          - generic [ref=f7e447]: —
+          - generic [ref=f7e448]:
+            - img [ref=f7e449]
+            - text: Included
+    - generic [ref=f7e452]:
+      - generic [ref=f7e453]:
+        - heading "See How Much You Save With OptiFlow" [level=2] [ref=f7e454]
+        - paragraph [ref=f7e455]: Adjust team size and typical per-user SaaS cost to compare traditional pricing against OptiFlow's fixed annual plans.
+      - generic [ref=f7e457]:
+        - generic [ref=f7e458]:
+          - generic [ref=f7e459]:
+            - generic [ref=f7e460]: Team Size
+            - slider [ref=f7e461]: "50"
+            - generic [ref=f7e462]:
+              - generic [ref=f7e463]: "5"
+              - generic [ref=f7e464]: 50 employees
+              - generic [ref=f7e465]: "200"
+          - generic [ref=f7e466]:
+            - generic [ref=f7e467]: Per-User Monthly SaaS Cost (₹)
+            - slider [ref=f7e468]: "999"
+            - generic [ref=f7e469]:
+              - generic [ref=f7e470]: ₹199
+              - generic [ref=f7e471]: ₹999/user/mo
+              - generic [ref=f7e472]: ₹5,000
+          - generic [ref=f7e473]:
+            - img [ref=f7e474]
+            - generic [ref=f7e476]:
+              - generic [ref=f7e477]: Growth
+              - generic [ref=f7e478]: ₹79,000/yr · 26-100 users
+        - generic [ref=f7e479]:
+          - generic [ref=f7e480]:
+            - generic [ref=f7e481]:
+              - generic [ref=f7e482]: Traditional SaaS (Annual)
+              - generic [ref=f7e483]: ₹5,99,400
+            - generic [ref=f7e484]:
+              - generic [ref=f7e485]: OptiFlow (Annual + Setup)
+              - generic [ref=f7e486]: ₹1,19,000
+          - generic [ref=f7e488]:
+            - generic [ref=f7e489]:
+              - generic [ref=f7e490]: You Save
+              - generic [ref=f7e491]: ₹4,80,400
+            - generic [ref=f7e492]:
+              - generic [ref=f7e493]: Cost Reduction
+              - generic [ref=f7e494]: 80%
+        - generic [ref=f7e495]:
+          - generic [ref=f7e496]:
+            - img [ref=f7e498]
+            - generic [ref=f7e501]: ₹4.8L
+            - generic [ref=f7e502]: Annual Savings
+            - generic [ref=f7e503]: vs traditional per-user pricing
+          - generic [ref=f7e504]:
+            - generic [ref=f7e505]:
+              - generic [ref=f7e506]: Team
+              - generic [ref=f7e507]: "50"
+            - generic [ref=f7e508]:
+              - generic [ref=f7e509]: Per-User
+              - generic [ref=f7e510]: ₹999/mo
+            - generic [ref=f7e511]:
+              - generic [ref=f7e512]: Plan
+              - generic [ref=f7e513]: Growth
+            - generic [ref=f7e514]:
+              - generic [ref=f7e515]: Effective/User
+              - generic [ref=f7e516]: ₹198/mo
+    - generic [ref=f7e518]:
+      - generic [ref=f7e519]:
+        - heading "Implementation & Onboarding" [level=2] [ref=f7e520]
+        - paragraph [ref=f7e521]: A structured rollout designed for MSMEs — discovery to go-live in weeks, not months.
+      - generic [ref=f7e522]:
+        - generic [ref=f7e523]:
+          - generic [ref=f7e524]: "1"
+          - heading "Discovery" [level=4] [ref=f7e525]
+          - paragraph [ref=f7e526]: Understand your operations, workflows, and pain points
+        - generic [ref=f7e527]:
+          - generic [ref=f7e528]: "2"
+          - heading "Setup" [level=4] [ref=f7e529]
+          - paragraph [ref=f7e530]: System configuration, user profiles, department structure
+        - generic [ref=f7e531]:
+          - generic [ref=f7e532]: "3"
+          - heading "Configuration" [level=4] [ref=f7e533]
+          - paragraph [ref=f7e534]: Custom workflows, SOPs, checklists, approval chains
+        - generic [ref=f7e535]:
+          - generic [ref=f7e536]: "4"
+          - heading "Training" [level=4] [ref=f7e537]
+          - paragraph [ref=f7e538]: Role-based training for admins, managers, and team members
+        - generic [ref=f7e539]:
+          - generic [ref=f7e540]: "5"
+          - heading "Go Live" [level=4] [ref=f7e541]
+          - paragraph [ref=f7e542]: Launch with on-ground support and post-go-live check-ins
+      - generic [ref=f7e543]:
+        - generic [ref=f7e544]:
+          - generic [ref=f7e545]: 2-4
+          - paragraph [ref=f7e546]: Weeks to go live
+        - generic [ref=f7e547]:
+          - generic [ref=f7e548]: 90%+
+          - paragraph [ref=f7e549]: Adoption within first month
+        - generic [ref=f7e550]:
+          - generic [ref=f7e551]: Dedicated
+          - paragraph [ref=f7e552]: Implementation support throughout
+    - generic [ref=f7e554]:
+      - generic [ref=f7e555]:
+        - heading "Built-In Security. Included With Every Plan." [level=2] [ref=f7e556]
+        - paragraph [ref=f7e557]: Role-based access, audit logs, secure infrastructure — the same security enterprises demand, designed for MSME simplicity.
+      - generic [ref=f7e558]:
+        - generic [ref=f7e559]:
+          - img [ref=f7e560]
+          - heading "Role-Based Access" [level=3] [ref=f7e563]
+          - paragraph [ref=f7e564]: Admin, Captain, Doer — each role sees only what they need.
+        - generic [ref=f7e565]:
+          - img [ref=f7e566]
+          - heading "Complete Audit Logs" [level=3] [ref=f7e569]
+          - paragraph [ref=f7e570]: Every action tracked, timestamped, and attributable — audit-ready always.
+        - generic [ref=f7e571]:
+          - img [ref=f7e572]
+          - heading "Secure Infrastructure" [level=3] [ref=f7e574]
+          - paragraph [ref=f7e575]: Encrypted data, secure authentication, cloud infrastructure with enterprise-grade protection.
+    - generic [ref=f7e577]:
+      - heading "Frequently Asked Questions" [level=2] [ref=f7e579]
+      - generic [ref=f7e580]:
+        - generic [ref=f7e581]:
+          - button "Are there any hidden charges?" [ref=f7e582] [cursor=pointer]:
+            - text: Are there any hidden charges?
+            - img [ref=f7e583]
+          - generic:
+            - generic: No hidden charges. The annual subscription, one-time implementation, and any add-on modules are clearly communicated before you sign up. What you see is what you pay.
+        - generic [ref=f7e585]:
+          - button "Do you charge per user?" [ref=f7e586] [cursor=pointer]:
+            - text: Do you charge per user?
+            - img [ref=f7e587]
+          - generic:
+            - generic: No. OptiFlow charges by plan tier (team size range), not per individual user. You can add team members within your plan's capacity at no extra cost.
+        - generic [ref=f7e589]:
+          - button "What is included in implementation?" [ref=f7e590] [cursor=pointer]:
+            - text: What is included in implementation?
+            - img [ref=f7e591]
+          - generic:
+            - generic: Implementation includes system setup, data migration assistance, department configuration, role-based training, workflow setup, and go-live support with post-launch check-ins.
+        - generic [ref=f7e593]:
+          - button "Can we upgrade plans later?" [ref=f7e594] [cursor=pointer]:
+            - text: Can we upgrade plans later?
+            - img [ref=f7e595]
+          - generic:
+            - generic: Yes. You can upgrade (or downgrade) at any time. When upgrading mid-year, you only pay the difference. Your data, workflows, and history stay intact.
+        - generic [ref=f7e597]:
+          - button "How long does implementation take?" [ref=f7e598] [cursor=pointer]:
+            - text: How long does implementation take?
+            - img [ref=f7e599]
+          - generic:
+            - generic: "Implementation typically takes 2—4 weeks depending on team size and process complexity. We follow a structured 5-phase rollout: Discovery → Setup → Configuration → Training → Go Live."
+        - generic [ref=f7e601]:
+          - button "Is cloud hosting included?" [ref=f7e602] [cursor=pointer]:
+            - text: Is cloud hosting included?
+            - img [ref=f7e603]
+          - generic:
+            - generic: Yes. Cloud hosting, product updates, security patches, and standard support are all included in your annual subscription. No separate infrastructure costs.
+        - generic [ref=f7e605]:
+          - button "Can multiple branches use the system?" [ref=f7e606] [cursor=pointer]:
+            - text: Can multiple branches use the system?
+            - img [ref=f7e607]
+          - generic:
+            - generic: Yes. The Scale plan supports multi-location operations with centralized visibility. The Growth plan supports multiple departments. Each branch or department can have its own structure, users, and reports — all visible to leadership.
+    - generic [ref=f7e611]:
+      - heading "Build a Structured, Accountable, Scalable Operation" [level=2] [ref=f7e612]
+      - paragraph [ref=f7e613]: See how OptiFlow can help your business improve visibility, accountability, execution, and growth — starting at ₹49,000/year.
+      - generic [ref=f7e614]:
+        - link "Book Free Demo" [ref=f7e615] [cursor=pointer]:
+          - /url: /demo-booking/
+        - link "Talk To An Expert" [ref=f7e616] [cursor=pointer]:
+          - /url: /contact/
+      - generic [ref=f7e617]:
+        - generic [ref=f7e618]:
+          - img [ref=f7e619]
+          - text: No Hidden Costs
+        - generic [ref=f7e621]:
+          - img [ref=f7e622]
+          - text: Fixed Annual Pricing
+        - generic [ref=f7e624]:
+          - img [ref=f7e625]
+          - text: Cloud Hosting Included
+        - generic [ref=f7e627]:
+          - img [ref=f7e628]
+          - text: MSME Focused
+  - contentinfo [ref=f7e630]:
+    - generic [ref=f7e631]:
+      - generic [ref=f7e632]:
+        - generic [ref=f7e633]:
+          - link "OptiFlow OptiFlow" [ref=f7e634] [cursor=pointer]:
+            - /url: /
+            - img "OptiFlow" [ref=f7e635]
+            - text: OptiFlow
+          - paragraph [ref=f7e636]: The Business Operating System for Indian MSMEs. Move from people-dependent operations to process-driven growth.
+        - generic [ref=f7e637]:
+          - heading "Product" [level=4] [ref=f7e638]
+          - list [ref=f7e639]:
+            - listitem [ref=f7e640]:
+              - link "Overview" [ref=f7e641] [cursor=pointer]:
+                - /url: /product-overview/
+            - listitem [ref=f7e642]:
+              - link "Features" [ref=f7e643] [cursor=pointer]:
+                - /url: /features/
+            - listitem [ref=f7e644]:
+              - link "Pricing" [ref=f7e645] [cursor=pointer]:
+                - /url: /pricing/
+            - listitem [ref=f7e646]:
+              - link "Book Demo" [ref=f7e647] [cursor=pointer]:
+                - /url: /demo-booking/
+        - generic [ref=f7e648]:
+          - heading "Solutions" [level=4] [ref=f7e649]
+          - list [ref=f7e650]:
+            - listitem [ref=f7e651]:
+              - link "Problem & Solutions" [ref=f7e652] [cursor=pointer]:
+                - /url: /problem-solutions/
+            - listitem [ref=f7e653]:
+              - link "Why OptiFlow" [ref=f7e654] [cursor=pointer]:
+                - /url: /why-optiflow/
+        - generic [ref=f7e655]:
+          - heading "Resources" [level=4] [ref=f7e656]
+          - list [ref=f7e657]:
+            - listitem [ref=f7e658]:
+              - link "Newsletter" [ref=f7e659] [cursor=pointer]:
+                - /url: /newsletter/
+            - listitem [ref=f7e660]:
+              - link "FAQ" [ref=f7e661] [cursor=pointer]:
+                - /url: /faq/
+            - listitem [ref=f7e662]:
+              - link "Competitive Positioning" [ref=f7e663] [cursor=pointer]:
+                - /url: /competitive-positioning/
+            - listitem [ref=f7e664]:
+              - link "Privacy Policy" [ref=f7e665] [cursor=pointer]:
+                - /url: /privacy-policy/
+            - listitem [ref=f7e666]:
+              - link "Terms & Conditions" [ref=f7e667] [cursor=pointer]:
+                - /url: /terms/
+        - generic [ref=f7e668]:
+          - heading "Contact" [level=4] [ref=f7e669]
+          - list [ref=f7e670]:
+            - listitem [ref=f7e671]:
+              - link "+91 7874677836" [ref=f7e672] [cursor=pointer]:
+                - /url: tel:+917874677836
+            - listitem [ref=f7e673]:
+              - link "info@optiflow.co.in" [ref=f7e674] [cursor=pointer]:
+                - /url: mailto:info@optiflow.co.in
+            - listitem [ref=f7e675]: Surat, India
+      - generic [ref=f7e676]:
+        - generic [ref=f7e677]: © 2026 OptiFlow Tech Solutions. Built for Indian MSMEs.
+        - button "Toggle theme" [ref=f7e678] [cursor=pointer]:
+          - img [ref=f7e679]
+  - link "Book Demo →":
+    - /url: /demo-booking/
+    - text: Book Demo
+    - generic: →
+  - button "Scroll to top":
+    - img
