@@ -14,3 +14,6 @@ No manual traceability matrix is maintained. Run `/opsx:feature <ID>` and the en
 - `orchestrate/pipeline-config/` — pipeline definitions
 - `hooks/` — git hook scripts
 - `site.json` — canonical site data
+- `features/features.json` — flat feature inventory (76 features)
+- `features/VSI.md` — master vertical slice index
+- `features/DASHBOARD.md` — project status overview

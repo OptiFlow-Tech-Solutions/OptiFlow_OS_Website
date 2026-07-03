@@ -4,7 +4,7 @@
 
 ---
 
-## Features
+## Completed (28 features)
 
 | ID | Name |
 |----|------|
@@ -39,9 +39,64 @@
 
 ---
 
+## Pending — Awaiting Implementation (48 features)
+
+| ID | Name |
+|----|------|
+| UI-001 | Motion & Animation System Enhancement |
+| UI-002 | Page Transition Animations |
+| UI-003 | Skeleton Loading & Empty States |
+| UI-004 | Toast & Notification System |
+| UI-005 | Cookie Consent & Privacy Compliance |
+| UI-006 | Image Optimization Pipeline |
+| UI-007 | Service Worker & PWA Enhancement |
+| UI-008 | Interactive Product Demo Mockups |
+| UI-009 | Site Search Functionality |
+| UI-010 | Error Boundary & Recovery System |
+| UI-011 | Hero Section Motion Enhancement |
+| UI-012 | Scroll-Triggered Animation System |
+| UI-013 | Card & Component Interaction Polish |
+| UI-014 | Content Freshness & Last Updated Display |
+| PERF-001 | Critical CSS Extraction |
+| PERF-002 | Asset Caching & CDN Strategy |
+| PERF-003 | Font Self-Hosting & Subsetting |
+| PERF-004 | Lighthouse CI Pipeline Integration |
+| SEC-001 | CSRF Protection |
+| SEC-002 | Input Sanitization & XSS Prevention |
+| SEC-003 | SRI Hash Injection |
+| SEC-004 | CSP Reporting Endpoint |
+| TEST-001 | Unit Testing Framework |
+| TEST-002 | API Integration Tests |
+| TEST-003 | Visual Regression Testing Pipeline |
+| TEST-004 | Accessibility Manual Audit Suite |
+| TEST-005 | Performance Profiling Suite |
+| DOCS-001 | API Documentation Generation |
+| DOCS-002 | Architecture Decision Records |
+| DOCS-003 | Changelog Automation |
+| DOCS-004 | Deployment Runbook |
+| DOCS-005 | Component Catalog Documentation |
+| CONTENT-001 | Newsletter Content Pipeline |
+| CONTENT-002 | Case Studies & Customer Stories |
+| CONTENT-003 | Product Roadmap & Release Notes Page |
+| CONTENT-004 | Blog Engine & Content Management |
+| API-007 | API Documentation & OpenAPI Spec |
+| API-008 | Rate Limiting Enhancement |
+| API-009 | Demo Booking Calendar Integration |
+| API-010 | Payment & Subscription Processing |
+| API-011 | User Authentication & Customer Accounts |
+| API-012 | Webhook Notification System |
+| API-013 | Structured Logging & Log Aggregation |
+| API-014 | KV-to-Relational Data Migration Strategy |
+| OPS-003 | Monitoring & Alerting Pipeline |
+| OPS-004 | Backup & Disaster Recovery Strategy |
+| OPS-005 | OpenSpec Coverage Reporting |
+| OPS-006 | Orchestration Engine Documentation |
+
+---
+
 ## Usage
 
 ```bash
 /opsx:feature SYS-001       # Auto-orchestrate: specs → tasks → implement → test → validate
-/opsx:feature PAGE-001      # One command builds the entire Home Page vertical slice
+/opsx:feature UI-001        # All 48 pending features await implementation via OpenSpec
 ```
