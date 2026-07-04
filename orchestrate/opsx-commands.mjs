@@ -7,7 +7,7 @@
 import { readFileSync, existsSync, mkdirSync, writeFileSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
-import { loadFullContext, loadFullContextWithAnalysis } from './context-loader.mjs';
+import { loadFullContext } from './context-loader.mjs';
 import { parseAllSpecs } from './spec-parser.mjs';
 import { resolveAffectedSpecs } from './spec-resolver.mjs';
 import { syncToMain, validateSync } from './spec-sync.mjs';
@@ -379,7 +379,7 @@ function writeArchiveIndex() {
   }
 }
 
-async function runFeatureRoute(featureId, context = {}) {
+async function runFeatureRoute(featureId, _context = {}) {
   console.log(`[Feature] Auto-orchestrating from Feature ID: ${featureId}`);
   try {
     const { reconstructContext, summarizeFeature } = await import('./feature-router.mjs');

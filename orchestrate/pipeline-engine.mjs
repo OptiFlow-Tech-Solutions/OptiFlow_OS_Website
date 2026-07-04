@@ -3,6 +3,7 @@
  * Supports step types: command, hook, skill, agent, subagent, check, gate, info.
  * Agent/skill/subagent steps signal intent via event bus for the harness to pick up.
  * Shell commands execute directly.
+ * V12: Circuit breaker + concurrency limiter.
  * @module orchestrate/pipeline-engine
  */
 
@@ -14,6 +15,30 @@ import { runTask } from './task-runner.mjs';
 import { emit } from './event-bus.mjs';
 
 const { projectRoot } = resolvePaths();
+
+// V12: Circuit breaker — max consecutive failures before opening
+const MAX_CONSECUTIVE_FAILURES = 3;
+// V12: Concurrency limiter — max parallel non-blocking steps
+const MAX_PARALLEL_STEPS = 4;
+
+// ponytail: in-memory circuit state, reset on pipeline restart
+const circuitState = new Map();
+
+function isCircuitOpen(stepId) {
+  const state = circuitState.get(stepId);
+  if (!state) return false;
+  return state.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES;
+}
+
+function recordCircuitResult(stepId, success) {
+  const state = circuitState.get(stepId) || { consecutiveFailures: 0 };
+  if (success) {
+    state.consecutiveFailures = 0;
+  } else {
+    state.consecutiveFailures++;
+  }
+  circuitState.set(stepId, state);
+}
 
 /**
  * @typedef {{id: string, type: string, command: string, task: string,
@@ -197,26 +222,49 @@ export async function executePipeline(pipeline, context = {}) {
     // Run blocking steps sequentially
     if (blockers.length > 0) {
       for (const step of blockers) {
+        if (isCircuitOpen(step.id)) {
+          const result = { id: step.id, status: 'skipped', output: 'Circuit open — skipped', duration: 0 };
+          resultsMap.set(result.id, result);
+          continue;
+        }
         const result = await runTask(step, context);
         resultsMap.set(result.id, result);
+        recordCircuitResult(step.id, result.status !== 'failed');
         await emit('pipeline:step', { step: step.id, status: result.status, duration: result.duration });
         if (result.status === 'failed' && !step.continueOnError) failedIds.add(result.id);
       }
     }
 
-    // Run non-blocking steps in parallel
+    // Run non-blocking steps in parallel (V12: with concurrency cap)
     if (nonBlockers.length > 0) {
-      const parallelResults = await Promise.all(
-        nonBlockers.map(async (step) => {
-          const result = await runTask(step, context);
-          resultsMap.set(result.id, result);
-          await emit('pipeline:step', { step: step.id, status: result.status, duration: result.duration });
-          return result;
-        }),
-      );
-      for (const result of parallelResults) {
-        const step = stepMap.get(result.id);
-        if (result.status === 'failed' && step && !step.continueOnError) failedIds.add(result.id);
+      const toRun = nonBlockers.filter((s) => {
+        if (isCircuitOpen(s.id)) {
+          resultsMap.set(s.id, { id: s.id, status: 'skipped', output: 'Circuit open — skipped', duration: 0 });
+          return false;
+        }
+        return true;
+      });
+
+      // V12: Concurrency limiter — process in batches of MAX_PARALLEL_STEPS
+      const batches = [];
+      for (let i = 0; i < toRun.length; i += MAX_PARALLEL_STEPS) {
+        batches.push(toRun.slice(i, i + MAX_PARALLEL_STEPS));
+      }
+
+      for (const batch of batches) {
+        const parallelResults = await Promise.all(
+          batch.map(async (step) => {
+            const result = await runTask(step, context);
+            resultsMap.set(result.id, result);
+            recordCircuitResult(step.id, result.status !== 'failed');
+            await emit('pipeline:step', { step: step.id, status: result.status, duration: result.duration });
+            return result;
+          }),
+        );
+        for (const result of parallelResults) {
+          const step = stepMap.get(result.id);
+          if (result.status === 'failed' && step && !step.continueOnError) failedIds.add(result.id);
+        }
       }
     }
   }
@@ -243,4 +291,9 @@ export async function executePipeline(pipeline, context = {}) {
   await emit('pipeline:end', { pipeline: pipeline.name, success, results, totalDuration });
 
   return { results, success, totalDuration };
+}
+
+// V12: Reset all circuit breakers on pipeline restart
+export function resetAllCircuits() {
+  circuitState.clear();
 }

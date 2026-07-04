@@ -7,7 +7,38 @@ metadata:
   author: openspec
   version: "2.0"
   generatedBy: "2.0.0"
+  triggers:
+    - /opsx-explore
+    - opsx explore
+    - explore mode
+    - think through
+    - investigate
+  domains:
+    - exploration
+    - analysis
+    - spec-driven-development
+    - meta
 ---
+
+## Purpose
+
+Explore mode is a **thinking stance** for the AI agent. It enables deep investigation
+of problems, codebase architecture, design alternatives, and requirements before
+committing to implementation. It produces clarity, not code.
+
+## Prerequisites
+
+- `openspec/` directory with `changes/` and `specs/` for context awareness
+- Access to `openspec list --json` and `openspec status --json` CLI commands
+
+## Related Skills
+
+| Skill | Role | When Used |
+|-------|------|-----------|
+| `openspec-propose` | Create artifacts from insights | After exploration crystallizes |
+| `openspec-auto` | Autonomous orchestration | When explore is run as Phase 4 |
+| `openspec-apply` | Implement tasks | After proposal is approved |
+| `openspec-verify` | Verify implementation | Before archive |
 
 Enter explore mode. Think deeply. Visualize freely. Follow the conversation wherever it goes.
 
@@ -282,6 +313,31 @@ But this summary is optional. Sometimes the thinking IS the value.
 
 ---
 
+## Explore → Propose Handoff
+
+When exploration has crystallized and it's time to propose, ensure you have gathered:
+
+1. **Affected specs** — Which `openspec/specs/<capability>/spec.md` files are impacted?
+2. **Affected features** — Which feature IDs from `features/features.json` are relevant?
+3. **Affected pages** — Which `src/pages/*.html` files will change?
+4. **Design constraints** — Which DESIGN.md rules apply?
+5. **Scope boundary** — What is explicitly in scope and out of scope?
+
+Pass these to `openspec-propose` so it can write a focused proposal without re-exploring.
+
+### Autonomous Mode Exit Criteria
+
+When invoked by `/opsx-auto`, exit exploration when:
+- All affected specs have been read and understood
+- The gap between current state and desired state is clear
+- You can state in one sentence what must change and why
+- No remaining unknowns would block proposal writing
+
+If unclear after reading all affected files, ask exactly one clarifying question.
+Otherwise, move directly to the proposal phase.
+
+---
+
 ## Guardrails
 
 - **Don't implement** - Never write code or implement features. Creating OpenSpec artifacts is fine, writing application code is not.
@@ -292,3 +348,18 @@ But this summary is optional. Sometimes the thinking IS the value.
 - **Do visualize** - A good diagram is worth many paragraphs
 - **Do explore the codebase** - Ground discussions in reality
 - **Do question assumptions** - Including the user's and your own
+
+## Anti-Patterns
+
+- **DO NOT** implement code during exploration — this is thinking time, not building time
+- **DO NOT** force a conclusion — exploration can end without a decision; clarity has its own value
+- **DO NOT** auto-capture insights — offer to save, but always let the user decide
+- **DO NOT** ask interrogative question chains — surface multiple directions, let the user follow what resonates
+- **DO NOT** skip reading the codebase — grounded exploration beats theoretical exploration every time
+
+## Changelog
+
+| Version | Date | Changes |
+|---------|------|---------|
+| v2.0 | 2026-07 | Added metadata (triggers, domains), Prerequisites, Related Skills, Explore-Propose handoff, autonomous exit criteria, Anti-Patterns. |
+| v1.0 | 2026-06 | Initial explore mode with stance-based philosophy, 4 entry-point scenarios, capture decisions table. |

@@ -1,5 +1,5 @@
 ---
-name: openspec-apply-change
+name: openspec-apply
 description: Implement tasks from an OpenSpec change. Use when the user wants to start implementing, continue implementation, or work through tasks.
 license: MIT
 compatibility: Requires openspec CLI.
@@ -7,7 +7,40 @@ metadata:
   author: openspec
   version: "2.0"
   generatedBy: "2.0.0"
+  triggers:
+    - /opsx-apply
+    - opsx apply
+    - implement tasks
+    - apply change
+    - start implementation
+  domains:
+    - implementation
+    - spec-driven-development
+    - quality-assurance
+    - meta
 ---
+
+## Purpose
+
+Implement the tasks defined in an OpenSpec change's `tasks.md`. This skill handles
+both autonomous execution (driven by `/opsx-auto`) and standalone use where the
+user directs implementation manually.
+
+## Prerequisites
+
+- `openspec/` change directory with `tasks.md` containing checkbox items
+- `proposal.md` and `design.md` artifacts for context
+- `npm run build && npm run validate` available for verification
+- V12: Task loop includes retry limits (3 per task) and stagnation detection
+
+## Related Skills
+
+| Skill | Role | When Used |
+|-------|------|-----------|
+| `openspec-propose` | Create tasks.md | Before apply — defines what to implement |
+| `openspec-auto` | Autonomous orchestration | When apply is run as Phase 7 |
+| `openspec-verify` | Verify completed work | After all tasks done |
+| `openspec-archive` | Archive completed change | After verification |
 
 Implement tasks from an OpenSpec change.
 
@@ -29,6 +62,13 @@ Your job:
 
 Do NOT stop between tasks. Do NOT ask "shall I continue?" Just keep going until
 all tasks are complete or an unrecoverable blocker occurs.
+
+**Retry Limits (V12):**
+- Each individual task may be retried up to **3 times** if it fails.
+- If a task fails 3 times with the same error, mark it as blocked and pause.
+- If 3 consecutive tasks each fail identically (no task makes forward progress),
+  the loop is stalled — pause and report stagnation.
+- Record the retry count per task; a different error on the same task resets the counter.
 
 **Standalone Mode:** When invoked directly by the user, follow the steps below.
 
@@ -95,10 +135,22 @@ all tasks are complete or an unrecoverable blocker occurs.
    - Mark task complete in the tasks file: `- [ ]` → `- [x]`
    - Continue to next task
 
+   **Retry per task (V12):**
+   - If a task fails, retry up to **3 times** before marking it blocked.
+   - Track retry count per task; a different error resets the counter.
+   - On 3rd failure with the same root error: mark `- [!]` (blocked) and pause.
+
+   **Stagnation detection (V12):**
+   - If 3 consecutive tasks fail without any task being marked complete,
+     the loop has stalled — pause and report stagnation.
+   - A successful task completion resets the stagnation counter.
+
    **Pause if:**
    - Task is unclear → ask for clarification
    - Implementation reveals a design issue → suggest updating artifacts
    - Error or blocker encountered → report and wait for guidance
+   - Task failed 3 times with same error → mark blocked, pause
+   - 3 consecutive tasks failed with no progress → report stagnation, pause
    - User interrupts
 
 7. **On completion or pause, show status**
@@ -160,6 +212,17 @@ All tasks complete! Ready to archive this change.
 What would you like to do?
 ```
 
+- **When to escalate**: After max retries or stagnation — pause and wait for human guidance
+
+**Error Classification (V12):**
+
+| Error Type | Example | Action |
+|-----------|---------|--------|
+| **Recoverable** | Build error (missing tag) | Fix, rebuild, retry |
+| **Design error** | Approach is wrong for the requirement | Pause, update design.md, get approval |
+| **Dependency error** | Blocked by incomplete upstream task | Skip, flag dependency, continue with others |
+| **Environment error** | npm not found, disk full | Pause immediately, report, do not retry |
+
 **Guardrails**
 - Keep going through tasks until done or blocked
 - Always read context files before starting (from the apply instructions output)
@@ -169,6 +232,8 @@ What would you like to do?
 - Update task checkbox immediately after completing each task
 - Pause on errors, blockers, or unclear requirements - don't guess
 - Use contextFiles from CLI output, don't assume specific file names
+- Max 3 retries per task with the same root error before marking blocked
+- Track stagnation: 3 consecutive task failures without progress = pause
 
 **Fluid Workflow Integration**
 
@@ -176,3 +241,18 @@ This skill supports the "actions on a change" model:
 
 - **Can be invoked anytime**: Before all artifacts are done (if tasks exist), after partial implementation, interleaved with other actions
 - **Allows artifact updates**: If implementation reveals design issues, suggest updating artifacts - not phase-locked, work fluidly
+
+## Anti-Patterns
+
+- **DO NOT** skip building after changes — unverified changes accumulate silently
+- **DO NOT** treat all errors equally — classify before retrying (recoverable vs design vs environment)
+- **DO NOT** continue after 3 consecutive task failures without progress — pause and report stagnation
+- **DO NOT** implement tasks before reading context files from the apply instructions output
+- **DO NOT** mark tasks complete without verifying — check `npm run build && npm run validate` first
+
+## Changelog
+
+| Version | Date | Changes |
+|---------|------|---------|
+| v2.0 | 2026-07 | Added metadata (triggers, domains), V12 retry limits + stagnation detection, error classification, Anti-Patterns. |
+| v1.0 | 2026-06 | Initial apply with autonomous/standalone modes, task loop, fluid workflow integration. |

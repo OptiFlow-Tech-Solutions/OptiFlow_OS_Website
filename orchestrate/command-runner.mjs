@@ -5,7 +5,6 @@
  */
 
 import { execSync } from 'node:child_process';
-import { resolve } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 
 const { projectRoot: ROOT } = resolvePaths();

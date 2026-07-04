@@ -7,7 +7,39 @@ metadata:
   author: openspec
   version: "2.0"
   generatedBy: "2.0.0"
+  triggers:
+    - /opsx-propose
+    - opsx propose
+    - create proposal
+    - generate artifacts
+  domains:
+    - planning
+    - spec-driven-development
+    - design
+    - meta
 ---
+
+## Purpose
+
+Propose a new OpenSpec change with all required artifacts generated in one step.
+This skill creates the change directory, generates proposal.md, design.md, tasks.md,
+and delta specs — everything needed before implementation begins.
+
+## Prerequisites
+
+- `openspec` CLI installed and configured
+- Exploration phase completed (via `/opsx-explore` or `/opsx-auto`)
+- Understanding of which specs, features, and pages are affected
+- `openspec new change` command available
+
+## Related Skills
+
+| Skill | Role | When Used |
+|-------|------|-----------|
+| `openspec-explore` | Pre-proposal understanding | Before proposing — defines scope |
+| `openspec-auto` | Autonomous orchestration | When propose is run as Phase 5 |
+| `openspec-sync` | Merge delta specs | After proposal creates deltas |
+| `openspec-apply` | Implement tasks | After proposal is approved |
 
 Propose a new change - create the change and generate all artifacts in one step.
 
@@ -88,12 +120,13 @@ the steps below.
       - Apply `context` and `rules` as constraints - but do NOT copy them into the file
       - Show brief progress: "Created <artifact-id>"
 
-   b. **Continue until all `applyRequires` artifacts are complete**
-      - After creating each artifact, re-run `openspec status --change "<name>" --json`
-      - Check if every artifact ID in `applyRequires` has `status: "done"` in the artifacts array
-      - Stop when all `applyRequires` artifacts are done
+    b. **Continue until all `applyRequires` artifacts are complete**
+       - After creating each artifact, re-run `openspec status --change "<name>" --json`
+       - Check if every artifact ID in `applyRequires` has `status: "done"` in the artifacts array
+       - Stop when all `applyRequires` artifacts are done
+       - **V12: If any artifact fails to generate after 3 attempts, pause and report.**
 
-   c. **If an artifact requires user input** (unclear context):
+    c. **If an artifact requires user input** (unclear context):
       - Use **AskUserQuestion tool** to clarify
       - Then continue with creation
 
@@ -126,3 +159,18 @@ After completing all artifacts, summarize:
 - If context is critically unclear, ask the user - but prefer making reasonable decisions to keep momentum
 - If a change with that name already exists, ask if user wants to continue it or create a new one
 - Verify each artifact file exists after writing before proceeding to next
+
+## Anti-Patterns
+
+- **DO NOT** skip reading dependency artifacts before creating a new one
+- **DO NOT** copy `<context>` or `<rules>` blocks into artifact files — they are for you only
+- **DO NOT** skip the `openspec instructions` step — it provides the schema driving artifact structure
+- **DO NOT** create artifacts before running `openspec new change` (in standalone mode)
+- **DO NOT** assume repo-local paths — always use `planningHome`, `changeRoot`, and `artifactPaths` from status JSON
+
+## Changelog
+
+| Version | Date | Changes |
+|---------|------|---------|
+| v2.0 | 2026-07 | Added metadata (triggers, domains), Prerequisites, Related Skills, retry limit on artifact creation, Anti-Patterns. |
+| v1.0 | 2026-06 | Initial propose with artifact generation pipeline, artifact creation guidelines. |

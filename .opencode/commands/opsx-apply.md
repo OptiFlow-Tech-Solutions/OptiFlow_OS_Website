@@ -2,7 +2,7 @@
 description: Implement tasks from an OpenSpec change (Experimental)
 ---
 
-<!-- canonical: .opencode/skills/openspec-apply-change/SKILL.md -->
+<!-- canonical: .opencode/skills/openspec-apply/SKILL.md -->
 
 Implement tasks from an OpenSpec change.
 

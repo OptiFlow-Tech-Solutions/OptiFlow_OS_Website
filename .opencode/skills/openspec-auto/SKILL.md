@@ -9,7 +9,7 @@ description: >
 license: MIT
 compatibility: OpenSpec >= 1.0, Node.js >= 18
 metadata:
-  version: "11.0"
+  version: "12.0"
   generatedBy: "2.0.0"
   triggers:
     - /opsx-auto
@@ -24,7 +24,37 @@ metadata:
     - meta
 ---
 
-# OpenSpec Autonomous Orchestration — AI Behavior Specification v11.0
+# OpenSpec Autonomous Orchestration — AI Behavior Specification v12.0
+
+## Purpose
+
+Single intelligent entry point for the complete Spec-Driven Development lifecycle.
+The AI agent autonomously executes the entire engineering workflow from a single
+command, driving all phases sequentially until the goal is verified complete or
+an unrecoverable failure occurs.
+
+## Prerequisites
+
+- `openspec/` directory with `specs/` and `changes/` structure
+- `orchestrate/` runtime modules (auto-pipeline.mjs, state-manager.mjs, etc.)
+- `site.json` with company data and page inventory
+- `DESIGN.md/` with design system rules
+- `features/features.json` feature registry
+- Node.js >= 18
+
+## Related Skills
+
+| Skill | Role | When Used |
+|-------|------|-----------|
+| `openspec-explore` | Codebase understanding | Phase 4 (EXPLORE) |
+| `openspec-propose` | Artifact generation | Phase 5 (PROPOSE) |
+| `openspec-sync` | Delta spec merging | Phase 6 (SYNC) |
+| `openspec-apply` | Task implementation | Phase 7 (APPLY) |
+| `openspec-verify` | Standalone verification | Outside auto pipeline |
+| `openspec-archive` | Change archival | Phase 9 (ARCHIVE) |
+
+This skill is the **orchestrator** — it invokes the others via the JS runtime
+or delegates to the AI agent for intelligence tasks.
 
 ## 1. Core Philosophy
 
@@ -63,7 +93,7 @@ After the user types `/opsx-auto "Build the Pricing Page"`, you enter the loop:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     GOAL-ORIENTED LOOP                       │
+│                     GOAL-ORIENTED LOOP V12                   │
 │                                                              │
 │  1. INITIALIZE                                               │
 │     └─→ initPipeline() → execution context                   │
@@ -116,12 +146,17 @@ After the user types `/opsx-auto "Build the Pricing Page"`, you enter the loop:
 ### 2.1 Loop Rules
 
 - **Do NOT exit the loop early.** Only exit when `isGoalAchieved()` returns true
-  or when an unrecoverable failure occurs (fatal phase error, iteration limit).
+  or when an unrecoverable failure occurs (fatal phase error, iteration limit, staleness).
 - **After each validation failure, fix and re-validate.** Don't just log and continue.
 - **After implementing, refresh your repository understanding** by re-reading
   affected files, specs, and the dependency graph.
 - **Phase states are tracked in `ctx.phases[]`.** Check `isPhaseComplete()` and
   `isPhaseFailed()` to avoid re-running completed phases.
+- **V12 Staleness detection:** If 3 consecutive iterations show no progress change,
+  the pipeline stops automatically to prevent infinite loops.
+- **V12 Circuit breaker:** Steps that fail 3 times consecutively are skipped to
+  prevent cascading failures.
+- Use `/opsx:verify` standalone to check a change independently of the auto pipeline.
 
 ## 3. Decision Framework
 
@@ -137,6 +172,7 @@ After the user types `/opsx-auto "Build the Pricing Page"`, you enter the loop:
 | Sync | After proposal changes delta specs | JS runtime |
 | Apply | When tasks.md has unchecked items | **AI intelligence** (implement tasks) |
 | Validate | After every implementation batch | JS runtime |
+| Verify | Standalone: before archive, after partial implementation | **AI intelligence** (run checks) |
 | Archive | When goal achieved | JS runtime + AI intelligence |
 
 ### 3.2 When to Ask the User (Question Engine)
@@ -196,7 +232,10 @@ After making file changes, refresh your understanding:
 - If you affected specs: re-read relevant `openspec/specs/*/spec.md` files
 - After validation failures: re-read the failing files, understand the errors
 
-### 4.3 Design System Compliance
+### 4.3 Design System Compliance (Project Override)
+
+> **PROJECT OVERRIDE:** This section contains OptiFlow OS-specific rules.
+> Replace with your project's design system conventions.
 
 When building pages, ALWAYS follow `DESIGN.md/DESIGN.md` rules:
 - Use CSS variables (`var(--*)`) for all colors, never hardcode hex values
@@ -308,7 +347,44 @@ All tasks [x]  checked ✓
 Build passes   ✓
 ```
 
-## 9. Human Gates
+## 9. V12 Safety Mechanisms
+
+### 9.1 Staleness Detection
+
+If 3 consecutive iterations show **no progress change** (same `completionPct`),
+the pipeline automatically stops. Output:
+
+```
+[STALE] No progress for 3 iterations (75%). Pipeline stalled.
+```
+
+**What this means for you:** If you're in the goal loop and the same validation
+keeps failing in the same way, fix the root cause — don't re-run. The system
+will stop you after 3 identical failures.
+
+### 9.2 Circuit Breaker
+
+Pipeline steps that fail **3 times consecutively** are skipped. Output:
+
+```
+[OPEN] Circuit open for step "build" — skipping
+```
+
+**What this means for you:** If a step keeps failing with the same error,
+the pipeline skips it to prevent cascading failures. Fix the underlying
+issue, then restart the pipeline (circuit state resets on `initPipeline()`).
+
+### 9.3 Iteration Limit
+
+Hard cap at **20 iterations**. Reaching this limit produces a partial completion
+report with exact remaining work.
+
+### 9.4 Degraded Mode
+
+Non-fatal phase failures allow remaining phases to continue. Fatal phases
+(PROPOSE, APPLY) halt the pipeline with a partial report and recovery guidance.
+
+## 10. Human Gates
 
 Only two human gates interrupt autonomous execution:
 
@@ -324,7 +400,7 @@ Only two human gates interrupt autonomous execution:
 **If approved:** Run archive, produce final report.
 **If not:** Report what remains to be done.
 
-## 10. Recovery
+## 11. Recovery
 
 ### 10.1 Checkpoint Recovery
 
@@ -347,7 +423,7 @@ const ctx = resumePipeline(executionId);
 The execution ID is printed at start: `task-slug-{timestamp}`. Use this for
 state lookup and audit trail correlation.
 
-## 11. Observability
+## 12. Observability
 
 ### 11.1 Progress Display
 
@@ -384,7 +460,7 @@ When complete, display:
 Every action is logged to `orchestrate/.audit.jsonl` with timestamps.
 Query: `queryEvents({ type: 'auto-pipeline' })`
 
-## 12. Usage Modes
+## 13. Usage Modes
 
 ```
 /opsx-auto "Build the Pricing Page"           # Full autonomous pipeline
@@ -393,7 +469,7 @@ Query: `queryEvents({ type: 'auto-pipeline' })`
 /opsx-auto --skip-build "Improve navigation"   # Skip validation phase
 ```
 
-## 13. Module Reference
+## 14. Module Reference
 
 ### AI Agent Calls (You Call These)
 
@@ -430,7 +506,7 @@ const { measureProgress, isGoalAchieved, progressSummary }
   = await import('./orchestrate/progress-tracker.mjs');
 ```
 
-## 14. Extension Points
+## 15. Extension Points
 
 | Extension | File | Mechanism |
 |-----------|------|-----------|
@@ -442,11 +518,13 @@ const { measureProgress, isGoalAchieved, progressSummary }
 | New hook | `hooks/` directory | Create `.mjs` matching lifecycle event |
 | New progress signal | `progress-tracker.mjs` | Add check to `measureProgress()` |
 
-## 15. References
+## 16. References
 
 | Document | Path |
 |----------|------|
 | Command definition | `.opencode/commands/opsx-auto.md` |
+| Verify command | `.opencode/commands/opsx-verify.md` |
+| Verify skill | `.opencode/skills/openspec-verify/SKILL.md` |
 | State machine | `orchestrate/auto-pipeline.mjs` |
 | Context class | `orchestrate/pipeline-context.mjs` |
 | Progress tracker | `orchestrate/progress-tracker.mjs` |
@@ -461,3 +539,19 @@ const { measureProgress, isGoalAchieved, progressSummary }
 | Design system | `DESIGN.md/` |
 | Feature registry | `features/features.json` |
 | Site config | `site.json` |
+
+## 17. Anti-Patterns
+
+- **DO NOT** skip phases — the pipeline validates at every stage; skipping creates untestable gaps
+- **DO NOT** re-run completed phases without checking `isPhaseComplete()` first
+- **DO NOT** ignore staleness warnings — if validation fails the same way 3 times, fix the root cause
+- **DO NOT** manually archive without verification — use the pipeline's `verifyCompletion()` check
+- **DO NOT** ask "shall I continue?" between phases — the pipeline is autonomous by design
+- **DO NOT** override `SAFETY_RULES.protectedDirs` — these protect the repository from accidental damage
+
+## 18. Changelog
+
+| Version | Date | Changes |
+|---------|------|---------|
+| v12.0 | 2026-07-04 | Added staleness detection (3-iteration stall), circuit breaker (3 consecutive failures), degraded mode, concurrency limiter. |
+| v11.0 | 2026-06 | Initial V11 autonomous orchestration engine. Goal-oriented loop, phase runner, checkpoint/resume, human gates. |

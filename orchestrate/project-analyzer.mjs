@@ -4,14 +4,14 @@
  * @module orchestrate/project-analyzer
  */
 
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { resolve, join, extname } from 'node:path';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join, extname } from 'node:path';
 import { execSync } from 'node:child_process';
 import { resolvePaths } from './config-resolver.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 
 const {
-  projectRoot, srcDir, assetsDir, hooksDir, commandsDir,
+  projectRoot, srcDir, assetsDir, hooksDir,
 } = resolvePaths();
 const ROOT = projectRoot;
 
@@ -149,7 +149,7 @@ function findMarkers() {
       const lines = readFileSync(file, 'utf-8').split('\n');
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i].trim();
-        if (/^(?!\/\/\s*ponytail:)/ && /TODO/i.test(line)) {
+        if (/TODO/i.test(line) && !/^\/\/\s*ponytail:/.test(line)) {
           todos.push(`${file}:${i + 1} — ${line.slice(0, 100)}`);
         }
         if (/FIXME/i.test(line)) {

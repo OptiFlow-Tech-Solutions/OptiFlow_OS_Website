@@ -19,14 +19,14 @@ export const GOAL_STATES = Object.freeze({
 });
 
 export const ITERATION_LIMIT = 20;
+export const MAX_STALE_ITERATIONS = 3;
 
-import { randomBytes } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 import { measureProgress } from './progress-tracker.mjs';
 
-const { projectRoot, stateDir } = resolvePaths();
+const { stateDir } = resolvePaths();
 
 export class PipelineContext {
   /**
@@ -67,6 +67,10 @@ export class PipelineContext {
     this.iterationCount = 0;
     this.targetDescription = taskDescription;
     this.checkpoints = [];
+
+    // V12: Staleness detection
+    this.lastProgressPct = -1;
+    this.staleIterationCount = 0;
   }
 
   get currentPhase() {
@@ -170,7 +174,27 @@ export class PipelineContext {
     if (this.iterationCount >= ITERATION_LIMIT) return false;
     if (this.goalState === GOAL_STATES.FAILED) return false;
     if (this.goalState === GOAL_STATES.COMPLETE) return false;
+    if (this.staleIterationCount >= MAX_STALE_ITERATIONS) return false;
     return true;
+  }
+
+  /**
+   * Check for staleness by comparing current progress with the last snapshot.
+   * Returns true if progress has stalled (same percentage for MAX_STALE_ITERATIONS).
+   */
+  checkStaleness() {
+    try {
+      const { completionPct } = measureProgress(this);
+      if (completionPct === this.lastProgressPct) {
+        this.staleIterationCount++;
+      } else {
+        this.staleIterationCount = 0;
+        this.lastProgressPct = completionPct;
+      }
+    } catch {
+      this.staleIterationCount++;
+    }
+    return this.staleIterationCount >= MAX_STALE_ITERATIONS;
   }
 
   /**
@@ -234,6 +258,8 @@ export class PipelineContext {
       iterationCount: this.iterationCount,
       targetDescription: this.targetDescription,
       checkpoints: this.checkpoints,
+      lastProgressPct: this.lastProgressPct,
+      staleIterationCount: this.staleIterationCount,
     };
   }
 

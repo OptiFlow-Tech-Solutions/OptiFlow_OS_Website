@@ -2,7 +2,7 @@
 description: Sync delta specs from a change to main specs
 ---
 
-<!-- canonical: .opencode/skills/openspec-sync-specs/SKILL.md -->
+<!-- canonical: .opencode/skills/openspec-sync/SKILL.md -->
 
 Sync delta specs from a change to main specs.
 

@@ -4,8 +4,8 @@
  * @module orchestrate/global-repo-scanner
  */
 
-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { resolvePaths, globalRepoExists } from './config-resolver.mjs';
 import { get as cacheGet, set as cacheSet } from './cache-manager.mjs';
 

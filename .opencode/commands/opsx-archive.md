@@ -2,7 +2,7 @@
 description: Archive a completed change in the experimental workflow
 ---
 
-<!-- canonical: .opencode/skills/openspec-archive-change/SKILL.md -->
+<!-- canonical: .opencode/skills/openspec-archive/SKILL.md -->
 
 Archive a completed change in the experimental workflow.
 

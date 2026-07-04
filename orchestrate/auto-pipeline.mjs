@@ -29,7 +29,7 @@
 import { PipelineContext, slugify, GOAL_STATES, ITERATION_LIMIT } from './pipeline-context.mjs';
 import { analyzeProject } from './project-analyzer.mjs';
 import { loadFullContextWithAnalysis } from './context-loader.mjs';
-import { discoverSkills, getDiscoveredSkillMetadata } from './skill-discovery.mjs';
+import { discoverSkills } from './skill-discovery.mjs';
 import { analyzeTask } from './capability-analyzer.mjs';
 import { routeAgents } from './agent-router.mjs';
 import { routeMCP } from './mcp-router.mjs';
@@ -44,17 +44,18 @@ import { startTimer, record, exportMetrics } from './metrics.mjs';
 import { logEvent } from './audit-log.mjs';
 import { emit, registerDefaults } from './event-bus.mjs';
 import { executeLifecycle } from './hook-engine.mjs';
-import { enableAutoApprove, disableAutoApprove } from './human-gate.mjs';
+import { enableAutoApprove } from './human-gate.mjs';
 import { build as runBuild, validate as runValidateCmd, lint as runLint, test as runTest } from './command-runner.mjs';
 import { runValidations } from './validation-pipeline.mjs';
 import { resolveDependencies } from './dependency-resolver.mjs';
 import { measureProgress, progressSummary } from './progress-tracker.mjs';
 import { recordPattern } from './skill-evolution.mjs';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { verifyAll, startDevServer, stopDevServer } from './visual-verify.mjs';
 import { resolvePaths } from './config-resolver.mjs';
 import { buildRegistry } from './capability-registry.mjs';
+import { resetAllCircuits } from './pipeline-engine.mjs';
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
@@ -92,6 +93,7 @@ const SAFETY_RULES = {
  */
 export function initPipeline(taskDescription, opts = {}) {
   const timer = startTimer('init-pipeline');
+  resetAllCircuits(); // V12: Fresh circuit state per pipeline
   const ctx = new PipelineContext(taskDescription, opts);
   ctx.branch = getBranch();
   ctx.advanceGoalState(GOAL_STATES.INIT);
@@ -122,7 +124,7 @@ export function initPipeline(taskDescription, opts = {}) {
  * @returns {PipelineContext}
  */
 export function runDeepScan(ctx) {
-  const phase = ctx.startPhase('DEEP_SCAN', 'Deep Scan');
+  const _phase = ctx.startPhase('DEEP_SCAN', 'Deep Scan');
   const timer = startTimer('deep-scan');
 
   try {
@@ -182,7 +184,7 @@ export function runDeepScan(ctx) {
  * @returns {PipelineContext}
  */
 export function runSkillDiscovery(ctx) {
-  const phase = ctx.startPhase('SKILL_DISCOVERY', 'Skill Discovery');
+  const _phase = ctx.startPhase('SKILL_DISCOVERY', 'Skill Discovery');
   const timer = startTimer('skill-discovery');
 
   try {
@@ -194,8 +196,8 @@ export function runSkillDiscovery(ctx) {
 
     const agentRoute = routeAgents(domains, 'standard', ctx.branch, ctx.task);
     const mcpRoute = routeMCP(ctx.task, domains, 'auto');
-    const hooks = routeHooks('auto');
-    const commands = routeCommands('auto', { changeName: ctx.changeName });
+    const _hooks = routeHooks('auto');
+    const _commands = routeCommands('auto', { changeName: ctx.changeName });
     const gates = gatesForPhase('auto');
 
     ctx.skills = discoveredSkills;
@@ -219,13 +221,13 @@ export function runSkillDiscovery(ctx) {
     });
 
     logEvent({ type: 'auto-pipeline', phase: 'skill-discovery', skills: discoveredSkills.length, agent: agentRoute.primaryAgent });
+
+    // ── Evolve: record pattern for skill evolution ──
+    try { recordPattern(ctx.task, domains, discoveredSkills, true); } catch { /* best-effort */ }
   } catch (e) {
     ctx.failPhase('SKILL_DISCOVERY', e);
     console.log(`     [WARN] Skill discovery partial: ${e.message}`);
   }
-
-  // ── Evolve: record pattern for skill evolution ──
-  try { recordPattern(ctx.task, domains, discoveredSkills, true); } catch { /* best-effort */ }
 
   record('skill-discovery', timer());
   ctx.persist();
@@ -240,7 +242,7 @@ export function runSkillDiscovery(ctx) {
  * @returns {Promise<PipelineContext>}
  */
 export async function runExplore(ctx) {
-  const phase = ctx.startPhase('OPSX_EXPLORE', 'Explore');
+  const _phase = ctx.startPhase('OPSX_EXPLORE', 'Explore');
   const timer = startTimer('explore');
 
   try {
@@ -275,7 +277,7 @@ export async function runExplore(ctx) {
  * @returns {Promise<PipelineContext>}
  */
 export async function runPropose(ctx) {
-  const phase = ctx.startPhase('OPSX_PROPOSE', 'Propose');
+  const _phase = ctx.startPhase('OPSX_PROPOSE', 'Propose');
   const timer = startTimer('propose');
 
   try {
@@ -325,7 +327,7 @@ export async function runPropose(ctx) {
  * @returns {Promise<PipelineContext>}
  */
 export async function runSync(ctx) {
-  const phase = ctx.startPhase('OPSX_SYNC', 'Sync');
+  const _phase = ctx.startPhase('OPSX_SYNC', 'Sync');
 
   const deltaDir = resolve(ROOT, 'openspec', 'changes', ctx.changeName, 'specs');
   if (!existsSync(deltaDir)) {
@@ -366,7 +368,7 @@ export async function runSync(ctx) {
  * @returns {Promise<PipelineContext>}
  */
 export async function runApply(ctx) {
-  const phase = ctx.startPhase('OPSX_APPLY', 'Apply');
+  const _phase = ctx.startPhase('OPSX_APPLY', 'Apply');
   const timer = startTimer('apply');
 
   try {
@@ -427,7 +429,7 @@ export async function runValidate(ctx) {
     return ctx;
   }
 
-  const phase = ctx.startPhase('VALIDATE', 'Validate');
+  const _phase = ctx.startPhase('VALIDATE', 'Validate');
   const timer = startTimer('validate');
   const failures = [];
 
@@ -461,14 +463,12 @@ export async function runValidate(ctx) {
   } catch { /* covered by runValidateCmd */ }
 
   // Lint (if available)
-  let lintRan = false;
   try {
     const pkgPath = resolve(ROOT, 'package.json');
     if (existsSync(pkgPath)) {
       const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
       const hasLint = pkg.scripts?.['lint:all'] || pkg.scripts?.lint;
       if (hasLint) {
-        lintRan = true;
         const lintResult = runLint();
         if (lintResult.ok) {
           console.log('     ✓ Lint passed');
@@ -481,13 +481,11 @@ export async function runValidate(ctx) {
   } catch { /* lint unavailable */ }
 
   // Tests (if available)
-  let testsRan = false;
   try {
     const pkgPath = resolve(ROOT, 'package.json');
     if (existsSync(pkgPath)) {
       const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
       if (pkg.scripts?.test) {
-        testsRan = true;
         const testResult = runTest();
         if (testResult.ok) {
           console.log('     ✓ Tests passed');
@@ -571,7 +569,7 @@ export async function runValidate(ctx) {
  * @returns {Promise<PipelineContext>}
  */
 export async function runArchive(ctx) {
-  const phase = ctx.startPhase('OPSX_ARCHIVE', 'Archive');
+  const _phase = ctx.startPhase('OPSX_ARCHIVE', 'Archive');
   const timer = startTimer('archive');
 
   try {
@@ -675,7 +673,7 @@ export function finishPipeline(ctx) {
   report.metrics = exportMetrics(ctx.executionId);
 
   // ── Progress measurement ──
-  const progress = measureProgress(ctx);
+  measureProgress(ctx);
   console.log(progressSummary(ctx));
 
   // ── Post-archive verification ──
@@ -872,6 +870,14 @@ export async function autoFullPipeline(taskDescription, opts = {}) {
       console.log(`  [LIMIT] Iteration limit (${ITERATION_LIMIT}) reached.`);
       ctx.advanceGoalState(GOAL_STATES.FAILED);
       throw new Error(`Iteration limit of ${ITERATION_LIMIT} reached`);
+    }
+
+    // V12: Staleness detection — stop if no progress across iterations
+    const isStale = ctx.checkStaleness();
+    if (isStale) {
+      console.log(`  [STALE] No progress for ${ctx.staleIterationCount} iterations (${ctx.lastProgressPct}%).`);
+      ctx.advanceGoalState(GOAL_STATES.FAILED);
+      throw new Error(`Pipeline stalled — no progress for ${ctx.staleIterationCount} iterations at ${ctx.lastProgressPct}%`);
     }
   };
 

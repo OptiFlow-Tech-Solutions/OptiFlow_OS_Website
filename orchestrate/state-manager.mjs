@@ -4,7 +4,7 @@
  * @module orchestrate/state-manager
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync, readdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync, readdirSync, statSync, appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 
@@ -124,7 +124,7 @@ export function writeExecutionSummary(context) {
     timestamp: context.completedAt || new Date().toISOString(),
   };
   try {
-    require('fs').appendFileSync(summaryPath, JSON.stringify(entry) + '\n', 'utf-8');
+    appendFileSync(summaryPath, JSON.stringify(entry) + '\n', 'utf-8');
   } catch { /* non-critical */ }
 }
 
@@ -181,4 +181,45 @@ function getFailureSuggestions(failedPhases) {
     if (p.id === 'OPSX_APPLY') suggestions.push('Check openspec/changes/<name>/tasks.md for unresolved tasks');
   }
   return suggestions;
+}
+
+// V12: TTL-based state cleanup
+const STATE_TTL = {
+  completed: 7 * 24 * 60 * 60 * 1000, // 7 days for completed
+  failed: 30 * 24 * 60 * 60 * 1000,   // 30 days for failed
+  orphaned: 14 * 24 * 60 * 60 * 1000, // 14 days for phase checkpoints with no parent
+};
+
+/**
+ * Clean up expired state files. Safe to run periodically.
+ * @returns {{ deleted: string[], kept: string[] }}
+ */
+export function cleanupExpiredStates() {
+  ensureDir();
+  const now = Date.now();
+  const deleted = [];
+  const kept = [];
+
+  const files = readdirSync(stateDir).filter((f) => f.endsWith('.json') || f.endsWith('.jsonl'));
+  for (const file of files) {
+    const fp = resolve(stateDir, file);
+    try {
+      const stat = statSync(fp);
+      const age = now - stat.mtimeMs;
+      let ttl = STATE_TTL.orphaned;
+
+      if (file.startsWith('pipeline-')) ttl = STATE_TTL.completed;
+      else if (file.includes('recovery')) ttl = STATE_TTL.failed;
+      else if (file.startsWith('phase-')) ttl = STATE_TTL.orphaned;
+
+      if (age > ttl) {
+        unlinkSync(fp);
+        deleted.push(file);
+      } else {
+        kept.push(file);
+      }
+    } catch { kept.push(file); }
+  }
+
+  return { deleted, kept };
 }

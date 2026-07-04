@@ -60,43 +60,43 @@ function runLevel(level) {
       case 4: {
         // Design audit: theme-change hook checks CSS variable consistency
         const themeHook = resolve(projectRoot, 'hooks', 'theme-change.mjs');
-        if (existsSync(themeHook)) {
-          try {
-            output = execSync(`node "${themeHook}"`, { cwd: projectRoot, encoding: 'utf-8', timeout: 60000, stdio: 'pipe' }).trim();
-            return { name: info.name, passed: true, output };
-          } catch (e) {
-            return { name: info.name, passed: true, output: e.stderr || e.stdout || 'Theme audit found mismatches' };
-          }
+        if (!existsSync(themeHook)) {
+          return { name: info.name, passed: true, output: 'Not configured — hooks/theme-change.mjs missing', skipped: true };
         }
-        return { name: info.name, passed: true, output: 'Theme audit skipped — hook not found' };
+        try {
+          output = execSync(`node "${themeHook}"`, { cwd: projectRoot, encoding: 'utf-8', timeout: 60000, stdio: 'pipe' }).trim();
+          return { name: info.name, passed: true, output };
+        } catch (e) {
+          return { name: info.name, passed: true, output: e.stderr || e.stdout || 'Theme audit found mismatches' };
+        }
       }
 
       case 5: {
         // SEO audit via Playwright
         const seoSpec = resolve(projectRoot, 'tests', 'e2e', 'seo.spec.js');
-        if (existsSync(seoSpec)) {
-          try {
-            output = execSync('npx playwright test tests/e2e/seo.spec.js', { cwd: projectRoot, encoding: 'utf-8', timeout: 120000, stdio: 'pipe' }).trim();
-            return { name: info.name, passed: true, output };
-          } catch (e) {
-            return { name: info.name, passed: false, output: e.stderr || e.stdout || 'SEO tests failed' };
-          }
+        if (!existsSync(seoSpec)) {
+          return { name: info.name, passed: true, output: 'Not configured — tests/e2e/seo.spec.js missing', skipped: true };
         }
-        return { name: info.name, passed: true, output: 'SEO audit skipped — spec not found' };
+        try {
+          output = execSync('npx playwright test tests/e2e/seo.spec.js', { cwd: projectRoot, encoding: 'utf-8', timeout: 120000, stdio: 'pipe' }).trim();
+          return { name: info.name, passed: true, output };
+        } catch (e) {
+          return { name: info.name, passed: false, output: e.stderr || e.stdout || 'SEO tests failed' };
+        }
       }
 
       case 6: {
         // A11y scan via Playwright + axe-core
         const a11ySpec = resolve(projectRoot, 'tests', 'e2e', 'a11y.spec.js');
-        if (existsSync(a11ySpec)) {
-          try {
-            output = execSync('npx playwright test tests/e2e/a11y.spec.js', { cwd: projectRoot, encoding: 'utf-8', timeout: 300000, stdio: 'pipe' }).trim();
-            return { name: info.name, passed: true, output };
-          } catch (e) {
-            return { name: info.name, passed: false, output: e.stderr || e.stdout || 'A11y tests failed' };
-          }
+        if (!existsSync(a11ySpec)) {
+          return { name: info.name, passed: true, output: 'Not configured — tests/e2e/a11y.spec.js missing', skipped: true };
         }
-        return { name: info.name, passed: true, output: 'A11y audit skipped — spec not found' };
+        try {
+          output = execSync('npx playwright test tests/e2e/a11y.spec.js', { cwd: projectRoot, encoding: 'utf-8', timeout: 300000, stdio: 'pipe' }).trim();
+          return { name: info.name, passed: true, output };
+        } catch (e) {
+          return { name: info.name, passed: false, output: e.stderr || e.stdout || 'A11y tests failed' };
+        }
       }
 
       case 7: {
@@ -207,12 +207,10 @@ export async function autoFixAndRetry(levels, context = {}) {
     ? [1, 2, 3, 4, 5, 6, 7]
     : [...new Set(levels.filter((l) => typeof l === 'number' && l >= 1 && l <= 7))].sort((a, b) => a - b);
 
-  let passed = [];
-  let failed = [];
-  let retries = 0;
+  let passed, failed;
 
   for (let attempt = 0; attempt <= MAX_FIX_RETRIES; attempt++) {
-    retries = attempt;
+    const retries = attempt;
     const result = await runValidations(targetLevels, context);
 
     if (result.failed.length === 0) {

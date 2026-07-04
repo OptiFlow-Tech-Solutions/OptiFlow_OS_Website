@@ -7,7 +7,7 @@
  */
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { join } from 'node:path';
 import { resolvePaths, globalResourceExists } from './config-resolver.mjs';
 import { get as cacheGet, set as cacheSet, hashKey } from './cache-manager.mjs';
 
@@ -146,7 +146,7 @@ function scoreSkill(skill, taskLower, domains, idfMap) {
  * Words that appear in many skills get lower weight.
  */
 function buildIdfMap(allSkills) {
-  const docCount = allSkills.length || 1;
+  const _docCount = allSkills.length || 1; // ponytail: TF-IDF denominator, reserved for V7
   const freq = {};
   for (const s of allSkills) {
     const words = new Set(s.description.toLowerCase().split(/\s+/).filter((w) => w.length > 3));

@@ -1,13 +1,45 @@
 ---
-name: openspec-archive-change
+name: openspec-archive
 description: Archive a completed change in the experimental workflow. Use when the user wants to finalize and archive a change after implementation is complete.
 license: MIT
 compatibility: Requires openspec CLI.
 metadata:
   author: openspec
-  version: "1.0"
-  generatedBy: "1.4.1"
+  version: "2.0"
+  generatedBy: "2.0.0"
+  triggers:
+    - /opsx-archive
+    - opsx archive
+    - archive change
+    - finalize change
+  domains:
+    - orchestration
+    - spec-driven-development
+    - lifecycle
+    - meta
 ---
+
+## Purpose
+
+Archive a completed OpenSpec change — move it from the active `changes/` directory
+to `archive/YYYY-MM-DD-<name>/`, preserving the full change record with artifacts,
+specs, and traceability.
+
+## Prerequisites
+
+- An active change in `openspec/changes/` with artifacts (proposal.md, design.md, tasks.md)
+- Implementation verified (via `/opsx-verify` or manual validation)
+- `openspec status --change "<name>" --json` available
+- No conflicting archive target (same date + name)
+
+## Related Skills
+
+| Skill | Role | When Used |
+|-------|------|-----------|
+| `openspec-verify` | Pre-archive verification | Before archiving — confirms readiness |
+| `openspec-sync` | Final spec sync | During archive — assessed before moving |
+| `openspec-auto` | Autonomous orchestration | When archive is run as Phase 9 |
+| `openspec-apply` | Implementation | Before archive — must be complete |
 
 Archive a completed change in the experimental workflow.
 
@@ -115,3 +147,34 @@ All artifacts complete. All tasks complete.
 - Show clear summary of what happened
 - If sync is requested, use openspec-sync-specs approach (agent-driven)
 - If delta specs exist, always run the sync assessment and show the combined summary before prompting
+
+### Autonomous Mode
+
+When invoked by `/opsx-auto`, the archive phase:
+1. Has already passed all validation gates
+2. Runs sync assessment automatically
+3. May skip human confirmation if `autoApprove` is enabled
+4. Produces a verification report via `verifyCompletion()` before finalizing
+
+### Post-Archive Verification
+
+After archiving, verify:
+- The change directory no longer exists under `openspec/changes/`
+- The archive directory exists under `openspec/changes/archive/YYYY-MM-DD-<name>/`
+- `traceability.md` was generated (if applicable)
+- Feature registry status is updated (if `features/features.json` has the feature)
+
+## Anti-Patterns
+
+- **DO NOT** archive without verifying implementation first — run `/opsx-verify` before archiving
+- **DO NOT** archive with uncommitted changes — use `git status` to check
+- **DO NOT** force archive when delta specs are unsynced — always offer sync first
+- **DO NOT** archive without checking for target collision — same date + name = error
+- **DO NOT** skip the artifact completion check — warn if artifacts are incomplete
+
+## Changelog
+
+| Version | Date | Changes |
+|---------|------|---------|
+| v2.0 | 2026-07 | Added metadata consistency, Prerequisites, Related Skills, Autonomous Mode section, post-archive verification, Anti-Patterns. |
+| v1.0 | 2026-06 | Initial archive with sync assessment, date-named archives, warning system, collision handling. |

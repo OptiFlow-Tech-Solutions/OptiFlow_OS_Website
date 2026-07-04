@@ -1,5 +1,11 @@
 # `/opsx:feature <Feature ID>` — Feature-Based Auto-Orchestration
 
+> **DEPRECATED (2026-07-04):** This command has been superseded by `/opsx-auto`.
+> Use `/opsx-auto "Task description"` for autonomous orchestration. The feature
+> registry (`features/features.json`) contains 69 features; this document's
+> 28-feature inventory is stale. See `orchestrate/feature-router.mjs` for
+> runtime feature resolution.
+
 ## VSA Single-Command Orchestration
 
 Given only a **Feature ID** (e.g., `PAGE-001`) or **Feature Name** (e.g., `Home Page`), the orchestration engine automatically reconstructs the entire implementation context by scanning the project. No human ever needs to re-explain the project's requirements for a feature.

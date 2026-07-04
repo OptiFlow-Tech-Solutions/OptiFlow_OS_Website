@@ -319,7 +319,6 @@ export function analyzeTask(taskDescription) {
   const roles = new Set();
   const skills = new Set();
 
-  let totalConfidence = 0;
   let matchCount = 0;
 
   for (const entry of TAXONOMY) {
@@ -329,7 +328,6 @@ export function analyzeTask(taskDescription) {
       entry.domains.forEach((d) => domains.add(d));
       entry.roles.forEach((r) => roles.add(r));
       entry.skills.forEach((s) => skills.add(s));
-      totalConfidence += 1;
       matchCount++;
     }
   }

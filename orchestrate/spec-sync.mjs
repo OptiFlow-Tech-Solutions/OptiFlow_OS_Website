@@ -31,7 +31,7 @@ function parseRequirements(content) {
   return map;
 }
 
-function mergeRequirements(existing, delta, opts = {}) {
+function mergeRequirements(existing, delta, _opts = {}) {
   const existingReqs = parseRequirements(existing);
   const deltaReqs = parseRequirements(delta);
   const allNames = new Set([...existingReqs.keys(), ...deltaReqs.keys()]);

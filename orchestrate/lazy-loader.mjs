@@ -5,7 +5,7 @@
  */
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
-import { join, sep } from 'node:path';
+import { join } from 'node:path';
 import { get as cacheGet, set as cacheSet, del as cacheDel } from './cache-manager.mjs';
 import { getCapability } from './capability-registry.mjs';
 

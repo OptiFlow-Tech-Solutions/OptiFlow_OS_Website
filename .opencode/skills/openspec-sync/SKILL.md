@@ -1,13 +1,44 @@
 ---
-name: openspec-sync-specs
+name: openspec-sync
 description: Sync delta specs from a change to main specs. Use when the user wants to update main specs with changes from a delta spec, without archiving the change.
 license: MIT
 compatibility: Requires openspec CLI.
 metadata:
   author: openspec
-  version: "1.0"
-  generatedBy: "1.4.1"
+  version: "2.0"
+  generatedBy: "2.0.0"
+  triggers:
+    - /opsx-sync
+    - opsx sync
+    - sync specs
+    - sync delta
+    - merge specs
+  domains:
+    - orchestration
+    - spec-driven-development
+    - synchronization
+    - meta
 ---
+
+## Purpose
+
+Sync delta specs from a change to main specs. This is an **agent-driven** operation —
+read delta specs and directly edit main specs to apply changes using intelligent
+partial-merge logic.
+
+## Prerequisites
+
+- An active change with delta specs under `specs/` directory
+- Main specs at `openspec/specs/<capability>/spec.md` (may not exist — created as needed)
+- `openspec status --change "<name>" --json` available
+
+## Related Skills
+
+| Skill | Role | When Used |
+|-------|------|-----------|
+| `openspec-propose` | Create delta specs | Before sync — deltas must exist |
+| `openspec-auto` | Autonomous orchestration | When sync is run as Phase 6 |
+| `openspec-archive` | Archive after sync | After implementation and sync |
 
 Sync delta specs from a change to main specs.
 
@@ -145,3 +176,28 @@ Main specs are now updated. The change remains active - archive when implementat
 - If something is unclear, ask for clarification
 - Show what you're changing as you go
 - The operation should be idempotent - running twice should give same result
+
+### Conflict Resolution
+
+If the main spec has been modified **after** the delta spec was written (e.g., by
+another synced change), a conflict may arise. Follow this strategy:
+
+1. **Detect**: Compare the delta spec's target requirement with the current main spec content. If the main spec has diverged (different scenarios, wording, or structure), flag a potential conflict.
+2. **Resolve additively**: For ADDED requirements, if the requirement name already exists but the content differs, treat as MODIFIED — merge the new scenarios into the existing requirement.
+3. **Resolve conservatively**: For MODIFIED requirements, if the target section in main has changed significantly, warn the user: "Main spec for <capability> has diverged since this delta was written. Show both versions before merging."
+4. **Never silently overwrite**: If unsure whether the existing content is intentional, ask before replacing.
+
+## Anti-Patterns
+
+- **DO NOT** overwrite main spec content not mentioned in the delta — partial updates only
+- **DO NOT** skip reading the main spec before applying changes — you need current state
+- **DO NOT** assume the delta format — validate sections (ADDED/MODIFIED/REMOVED/RENAMED) exist
+- **DO NOT** sync without user selection when multiple changes exist — always let user choose
+- **DO NOT** proceed if workspace-planning mode is detected — stop and explain
+
+## Changelog
+
+| Version | Date | Changes |
+|---------|------|---------|
+| v2.0 | 2026-07 | Added metadata consistency, Prerequisites, Related Skills, conflict resolution strategy, Anti-Patterns. |
+| v1.0 | 2026-06 | Initial sync with intelligent merging, delta spec format reference, idempotency guardrail. |
