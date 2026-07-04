@@ -106,7 +106,16 @@ export function measureProgress(ctx) {
   }
   totalSignals++;
 
-  // 8. Apply completed
+  // 8. Sync completed (or skipped)
+  if (ctx.phases?.some((p) => p.id === 'OPSX_SYNC' && (p.status === 'complete' || p.status === 'skipped'))) {
+    met.push('Sync phase complete');
+    metSignals++;
+  } else {
+    unmet.push('Sync phase pending');
+  }
+  totalSignals++;
+
+  // 9. Apply completed
   if (ctx.phases?.some((p) => p.id === 'OPSX_APPLY' && p.status === 'complete')) {
     met.push('Apply phase complete');
     metSignals++;
@@ -115,7 +124,25 @@ export function measureProgress(ctx) {
   }
   totalSignals++;
 
-  // 9. Archive completed
+  // 10. Validate completed (or skipped)
+  if (ctx.phases?.some((p) => p.id === 'VALIDATE' && (p.status === 'complete' || p.status === 'failed'))) {
+    met.push('Validate phase complete');
+    metSignals++;
+  } else {
+    unmet.push('Validate phase pending');
+  }
+  totalSignals++;
+
+  // 11. Verify completed
+  if (ctx.phases?.some((p) => p.id === 'OPSX_VERIFY' && p.status === 'complete')) {
+    met.push('Verify phase complete');
+    metSignals++;
+  } else {
+    unmet.push('Verify phase pending');
+  }
+  totalSignals++;
+
+  // 12. Archive completed
   if (ctx.phases?.some((p) => p.id === 'OPSX_ARCHIVE' && p.status === 'complete')) {
     met.push('Archive phase complete');
     metSignals++;
@@ -124,7 +151,7 @@ export function measureProgress(ctx) {
   }
   totalSignals++;
 
-  // 10. No active errors in fatal phases
+  // 13. No active errors in fatal phases
   const fatalPhases = ctx.errors?.filter((e) => ['OPSX_PROPOSE', 'OPSX_APPLY'].includes(e.phase));
   totalSignals++;
   if (!fatalPhases?.length) {

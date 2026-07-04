@@ -1,0 +1,23 @@
+{
+  "ui-005 cookie consent  privacy compliance": {
+    "pattern": "UI-005: Cookie Consent & Privacy Compliance",
+    "domains": [
+      "design",
+      "content"
+    ],
+    "skills": [
+      "content-calendar",
+      "newsletter-pipeline",
+      "openspec-verify",
+      "article-writing",
+      "content-engine",
+      "design-system",
+      "liquid-glass-design",
+      "make-interfaces-feel-better"
+    ],
+    "success": true,
+    "count": 1,
+    "firstSeen": "2026-07-04T09:20:59.446Z",
+    "lastSeen": "2026-07-04T09:20:59.446Z"
+  }
+}

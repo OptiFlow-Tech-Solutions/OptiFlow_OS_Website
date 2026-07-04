@@ -66,14 +66,88 @@ export function recordPattern(taskDescription, domains = [], skillsUsed = [], su
 }
 
 /**
- * Check if any pattern is ready to become a skill (seen 3+ times).
- * @returns {Array<{pattern: string, domains: string[], skills: string[], count: number}>}
+ * Get patterns that have crossed the evolutions threshold (3+ uses).
+ * @returns {Array<{key: string, pattern: object}>}
  */
 export function getEvolvablePatterns() {
   loadPatterns();
-  return Object.values(patterns)
-    .filter((p) => p.count >= PATTERN_THRESHOLD && p.success)
-    .sort((a, b) => b.count - a.count);
+  return Object.entries(patterns)
+    .filter(([, p]) => p.count >= PATTERN_THRESHOLD)
+    .map(([key, pattern]) => ({ key, pattern }));
+}
+
+/**
+ * Get a skill success boost map for scoring.
+ * Skills used successfully in past patterns get a boost multiplier (1.0–1.5).
+ * Compiled from successful pattern history with recency weighting.
+ * @returns {Record<string, number>}
+ */
+export function getSkillSuccessBoost() {
+  loadPatterns();
+  const boost = {};
+  for (const [, p] of Object.entries(patterns)) {
+    if (!p.success) continue;
+    const recency = Math.min(1, p.count / PATTERN_THRESHOLD);
+    for (const skill of (p.skills || [])) {
+      boost[skill] = Math.max(boost[skill] || 1.0, 1.0 + recency * 0.5);
+    }
+  }
+  return boost;
+}
+
+// ── Agent performance tracking ──
+/** @type {Record<string, {agentId: string, phaseId: string, success: boolean, count: number}>} */
+let agentStats = {};
+const AGENT_STATS_PATH = resolve(__dir, '.state', 'agent-stats.json');
+
+function loadAgentStats() {
+  if (existsSync(AGENT_STATS_PATH)) {
+    try { agentStats = JSON.parse(readFileSync(AGENT_STATS_PATH, 'utf-8')); } catch { agentStats = {}; }
+  }
+}
+
+function saveAgentStats() {
+  const dir = dirname(AGENT_STATS_PATH);
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+  writeFileSync(AGENT_STATS_PATH, JSON.stringify(agentStats, null, 2), 'utf-8');
+}
+
+/**
+ * Record agent phase execution result for performance learning.
+ * @param {string} agentId
+ * @param {string} phaseId
+ * @param {boolean} success
+ */
+export function recordAgentResult(agentId, phaseId, success = true) {
+  loadAgentStats();
+  const key = `${agentId}:${phaseId}`;
+  if (agentStats[key]) {
+    agentStats[key].count++;
+    agentStats[key].success = agentStats[key].success && success;
+  } else {
+    agentStats[key] = { agentId, phaseId, success, count: 1 };
+  }
+  saveAgentStats();
+}
+
+/**
+ * Get agent success rates per phase for composition biasing.
+ * Returns a map of agentId → {successRate, count} for the given phase.
+ * @param {string} phaseId
+ * @returns {Record<string, {successRate: number, count: number}>}
+ */
+export function getAgentPhaseRates(phaseId) {
+  loadAgentStats();
+  const rates = {};
+  for (const [, stats] of Object.entries(agentStats)) {
+    if (stats.phaseId === phaseId) {
+      rates[stats.agentId] = {
+        successRate: stats.count > 0 ? (stats.success ? 1 : 0) : 0.5,
+        count: stats.count,
+      };
+    }
+  }
+  return rates;
 }
 
 /**

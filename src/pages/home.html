@@ -9,7 +9,7 @@
   <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any">
   <link rel="stylesheet" href="/assets/css/core.css">
   <style>
-    /* ─── Hero ─── */
+    /* â”€â”€â”€ Hero â”€â”€â”€ */
     .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; background: #F8FAFC; box-shadow: inset 0 -1px 0 rgba(15,23,42,.06); }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(39,141,159,.04) 0%, transparent 70%); pointer-events: none; z-index: 0; }
     .hero .noise-overlay { display: none; }
@@ -38,7 +38,7 @@
     [data-theme="dark"] .hero .btn-secondary { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.20); color: white; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     [data-theme="dark"] .hero .btn-secondary:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.35); }
 
-    /* ─── Hero entry reveal ─── */
+    /* â”€â”€â”€ Hero entry reveal â”€â”€â”€ */
     .hero-content .eyebrow, .hero-content h1, .hero-content .lead, .hero-content .hero-cta > *, .hero-content .hero-trust > * { opacity: 0; transform: translateY(16px); animation: heroReveal 0.65s cubic-bezier(0.22,0.61,0.36,1) forwards; }
     .hero-content .eyebrow { animation-delay: 0.05s; }
     .hero-content h1 { animation-delay: 0.12s; }
@@ -51,18 +51,18 @@
     .hero-content .hero-trust > *:nth-child(4) { animation-delay: 0.58s; }
     @keyframes heroReveal { to { opacity: 1; transform: translateY(0); } }
 
-    /* ─── Hook badge ─── */
+    /* â”€â”€â”€ Hook badge â”€â”€â”€ */
     .hook-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--fg-soft); color: var(--fg); font-size: 13px; font-weight: 600; margin-bottom: 20px; border: 1px solid var(--border); }
     [data-theme="dark"] .hook-badge { background: rgba(255,255,255,.10); color: rgba(255,255,255,.90); border: 1px solid rgba(255,255,255,.15); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
     .hook-badge svg { width: 14px; height: 14px; color: var(--green); }
     [data-theme="dark"] .hook-badge svg { color: var(--lime); }
 
-    /* ─── Mouse glow ─── */
+    /* â”€â”€â”€ Mouse glow â”€â”€â”€ */
     .mouse-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(27,77,129,.15) 0%, rgba(39,141,159,.08) 35%, rgba(84,184,154,.04) 55%, transparent 70%); pointer-events: none; transform: translate(-50%,-50%); z-index: 1; opacity: 0; transition: opacity 0.4s ease; }
     .mouse-glow.active { opacity: 1; }
     [data-theme="dark"] .mouse-glow { background: radial-gradient(circle, rgba(39,141,159,.22) 0%, rgba(27,77,129,.10) 40%, transparent 65%); }
 
-    /* ─── Dashboard mockup ─── */
+    /* â”€â”€â”€ Dashboard mockup â”€â”€â”€ */
     .dashboard-mockup { position: relative; background: rgba(255,255,255,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.50); border-radius: var(--radius-xl); padding: 20px; box-shadow: var(--shadow-elevated), 0 0 0 1px rgba(255,255,255,.20) inset; transform: translateY(0); }
     [data-theme="dark"] .dashboard-mockup { background: rgba(15,23,42,.75); border-color: rgba(255,255,255,.10); }
     .dashboard-mockup.parallax { will-change: transform; }
@@ -95,7 +95,7 @@
     [data-theme="dark"] .dash-status.active { color: oklch(72% 0.12 145); }
     [data-theme="dark"] .dash-status.pending { color: oklch(72% 0.10 85); }
 
-    /* ─── Floating widgets ─── */
+    /* â”€â”€â”€ Floating widgets â”€â”€â”€ */
     .floating-widget { position: absolute; background: rgba(255,255,255,.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.50); border-radius: var(--radius); padding: 12px 16px; box-shadow: var(--shadow-elevated); font-size: 13px; animation: floatWidget 4s ease-in-out infinite; z-index: 3; }
     [data-theme="dark"] .floating-widget { background: rgba(15,23,42,.80); border-color: rgba(255,255,255,.10); }
     .floating-widget.w1 { top: -18px; right: -24px; animation-delay: 0s; }
@@ -106,7 +106,7 @@
     .fw-value { font-family: var(--font-mono); font-weight: 700; font-size: 16px; color: #0F172A; }
     [data-theme="dark"] .fw-value { color: var(--fg); }
 
-    /* ─── Trust bar ─── */
+    /* â”€â”€â”€ Trust bar â”€â”€â”€ */
     .trust-bar { padding-block: 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); overflow: hidden; }
     .trust-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); text-align: center; margin-bottom: 24px; }
     .trust-metric-value { font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--accent); }
@@ -116,7 +116,7 @@
     .trust-logo { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--muted); letter-spacing: -0.02em; white-space: nowrap; }
     @keyframes logoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* ─── Problem cards ─── */
+    /* â”€â”€â”€ Problem cards â”€â”€â”€ */
     .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); }
     .problem-card { padding: 32px; }
     .problem-icon { width: 44px; height: 44px; display: grid; place-items: center; background: oklch(96% 0.01 230); border-radius: var(--radius); margin-bottom: 20px; color: var(--accent); box-shadow: 0 2px 6px rgba(27,77,129,.08); }
@@ -132,14 +132,14 @@
     [data-theme="dark"] .problem-card:hover .problem-icon { background: rgba(255,255,255,.12); color: var(--teal); }
     [data-theme="dark"] .problem-card .problem-roi { color: var(--lime); }
 
-    /* ─── Impact grid ─── */
+    /* â”€â”€â”€ Impact grid â”€â”€â”€ */
     .impact-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-md); }
     .impact-card { text-align: center; padding: 24px 16px; }
     .impact-card h3 { color: white; }
     .impact-card p { font-size: 13px; color: rgba(255,255,255,.55); }
     .impact-cost { margin-top: 12px; font-family: var(--font-mono); font-size: 14px; color: var(--lime); font-weight: 600; }
 
-    /* ─── Solution visual ─── */
+    /* â”€â”€â”€ Solution visual â”€â”€â”€ */
     .solution-visual { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-top: 48px; }
     .solution-stage { padding: 20px 40px; border-radius: var(--radius-lg); font-weight: 600; font-size: 18px; text-align: center; }
     .solution-stage.chaos { background: rgba(200,80,30,.08); color: oklch(40% 0.10 25); border: 1px solid rgba(200,80,30,.15); box-shadow: 0 2px 8px rgba(200,80,30,.06); }
@@ -152,7 +152,7 @@
     .solution-module { padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; font-weight: 500; box-shadow: 0 1px 3px rgba(15,23,42,.04); transition: color 0.2s, background 0.2s, box-shadow 0.2s; }
     .solution-module:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-card); }
 
-    /* ─── Module cards ─── */
+    /* â”€â”€â”€ Module cards â”€â”€â”€ */
     .module-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); }
     .module-card { text-align: center; padding: 32px 20px; }
     .module-icon { width: 52px; height: 52px; display: grid; place-items: center; background: linear-gradient(135deg, var(--accent-soft), var(--teal-soft)); border-radius: var(--radius-lg); margin: 0 auto 16px; color: var(--teal); box-shadow: 0 2px 8px rgba(39,141,159,.10); }
@@ -165,7 +165,7 @@
     [data-theme="dark"] .module-icon { background: rgba(39,141,159,.12); color: var(--teal); }
     [data-theme="dark"] .module-card .module-benefit { color: var(--lime); }
 
-    /* ─── Steps ─── */
+    /* â”€â”€â”€ Steps â”€â”€â”€ */
     .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); position: relative; }
     .steps::before { content: ''; position: absolute; top: 32px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal), var(--green), var(--lime)); border-radius: 2px; box-shadow: 0 1px 4px rgba(27,77,129,.15); }
     .step { text-align: center; position: relative; }
@@ -179,7 +179,7 @@
     [data-theme="dark"] .step-number { border-color: var(--lime); color: var(--lime); }
     [data-theme="dark"] .step:hover .step-number { background: var(--lime); color: var(--fg); }
 
-    /* ─── Feature grid ─── */
+    /* â”€â”€â”€ Feature grid â”€â”€â”€ */
     .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); }
     .feature-item { padding: 24px; }
     .feature-item .feature-mark { width: 40px; height: 40px; display: grid; place-items: center; background: var(--accent-soft); border-radius: var(--radius); margin-bottom: 16px; color: var(--accent); box-shadow: 0 1px 4px rgba(27,77,129,.08); }
@@ -191,7 +191,7 @@
     [data-theme="dark"] .feature-item .feature-mark { color: var(--lime); background: rgba(39,141,159,.12); }
     [data-theme="dark"] .feature-item .feature-roi { color: var(--lime); }
 
-    /* ─── Industry grid ─── */
+    /* â”€â”€â”€ Industry grid â”€â”€â”€ */
     .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); }
     .industry-card { padding: 28px; text-align: center; }
     .industry-icon { width: 56px; height: 56px; display: grid; place-items: center; background: linear-gradient(135deg, var(--accent-soft), var(--teal-soft)); border-radius: var(--radius-lg); margin: 0 auto 16px; color: var(--accent); box-shadow: 0 2px 8px rgba(27,77,129,.08); }
@@ -204,28 +204,28 @@
     [data-theme="dark"] .industry-card .ind-solution { color: var(--lime); }
     [data-theme="dark"] .industry-icon { background: rgba(39,141,159,.12); color: var(--lime); }
 
-    /* ─── Comparison table extras ─── */
+    /* â”€â”€â”€ Comparison table extras â”€â”€â”€ */
     .comparison-table .traditional { color: var(--muted); font-size: 13px; }
     .comparison-table .optiflow-col { color: var(--fg); font-weight: 500; font-size: 13px; }
     [data-theme="dark"] .section-dark .comparison-table .traditional { color: rgba(255,255,255,.50); }
     [data-theme="dark"] .section-dark .comparison-table .optiflow-col { color: rgba(255,255,255,.92); }
 
-    /* ─── Testimonial extras ─── */
+    /* â”€â”€â”€ Testimonial extras â”€â”€â”€ */
     .testimonial-avatar::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 60%); pointer-events: none; }
     .testimonial-outcome { font-size: 12px; color: var(--green); font-weight: 500; margin-top: 12px; }
 
-    /* ─── Card tilt ─── */
+    /* â”€â”€â”€ Card tilt â”€â”€â”€ */
     .card-tilt { perspective: 800px; }
     .card-tilt > .card { transform-style: preserve-3d; will-change: transform; }
 
-    /* ─── WhatsApp float ─── */
+    /* â”€â”€â”€ WhatsApp float â”€â”€â”€ */
     .whatsapp-float { position: fixed; bottom: 88px; right: 32px; z-index: 198; width: 52px; height: 52px; border-radius: 50%; background: #25D366; color: white; display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow-elevated); transition: transform 0.25s ease, box-shadow 0.25s ease; text-decoration: none; }
     .whatsapp-float:hover { transform: scale(1.08); box-shadow: var(--shadow-button-hover); }
     .whatsapp-float:active { transform: scale(0.94); }
     .whatsapp-float svg { width: 26px; height: 26px; }
     @media (max-width: 480px) { .whatsapp-float { bottom: 72px; right: 20px; } }
 
-    /* ─── Exit-intent popup ─── */
+    /* â”€â”€â”€ Exit-intent popup â”€â”€â”€ */
     .exit-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(15,23,42,.50); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
     .exit-overlay.active { opacity: 1; pointer-events: auto; }
     .exit-card { background: var(--surface); border-radius: var(--radius-xl); padding: 40px; max-width: 480px; width: calc(100% - 64px); text-align: center; box-shadow: var(--shadow-elevated); position: relative; animation: exitFadeIn 0.4s cubic-bezier(0.22, 0.61, 0.36, 1); }
@@ -237,7 +237,7 @@
     .exit-close:hover { background: var(--border); }
     [data-theme="dark"] .exit-overlay { background: rgba(15,23,42,.70); }
 
-    /* ─── Responsive: page-specific overrides ─── */
+    /* â”€â”€â”€ Responsive: page-specific overrides â”€â”€â”€ */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 40px; }
@@ -268,7 +268,7 @@
 
   <main id="content" role="main">
 
-    <!-- S01: HERO — Deep gradient + glass dashboard -->
+    <!-- S01: HERO â€” Deep gradient + glass dashboard -->
     <section class="section hero" data-screen-label="01 Hero">
       <div class="noise-overlay"></div>
       <div class="mouse-glow" id="mouseGlow"></div>
@@ -280,9 +280,9 @@
               Stop Losing Time on Manual Processes
             </div>
             <h1 class="reveal reveal-delay-1"><span id="typewriterText" aria-live="polite" style="color: rgb(239, 68, 68);">Daily Operations Feel Out Of Control?</span><span class="tw-cursor" aria-hidden="true">|</span></h1>
-            <p class="lead reveal reveal-delay-2">OptiFlow OS replaces scattered messages and spreadsheets with a single operating system — giving you complete visibility, reliable accountability, and the operational efficiency to scale your business without adding headcount.</p>
+            <p class="lead reveal reveal-delay-2">OptiFlow OS replaces scattered messages and spreadsheets with a single operating system â€” giving you complete visibility, reliable accountability, and the operational efficiency to scale your business without adding headcount.</p>
             <div class="hero-cta reveal reveal-delay-3">
-              <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow">Book Your Demo — It's Free</a>
+              <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow">Book Your Demo â€” It's Free</a>
               <a href="/product-overview/" class="btn btn-secondary btn-lg">See OptiFlow In Action</a>
             </div>
             <div class="hero-trust reveal reveal-delay-3">
@@ -294,12 +294,12 @@
           </div>
           <div class="reveal reveal-delay-2" id="dashWrap">
             <div class="dashboard-mockup parallax" id="dashboard">
-              <div class="dash-header"><h4>OptiFlow Dashboard — Today</h4><div class="dash-dots"><span></span><span></span><span></span></div></div>
+              <div class="dash-header"><h4>OptiFlow Dashboard â€” Today</h4><div class="dash-dots"><span></span><span></span><span></span></div></div>
               <div class="dash-kpis">
-                <div class="dash-kpi"><div class="dash-kpi-label">Active Tasks</div><div class="dash-kpi-value num">1,247</div><div class="dash-kpi-change">↑ 12% vs last month</div></div>
-                <div class="dash-kpi"><div class="dash-kpi-label">Team Members</div><div class="dash-kpi-value num">86</div><div class="dash-kpi-change">↑ 4% growth</div></div>
-                <div class="dash-kpi"><div class="dash-kpi-label">Completion Rate</div><div class="dash-kpi-value num" style="color:var(--green)">94%</div><div class="dash-kpi-change">↑ 8% improvement</div></div>
-                <div class="dash-kpi"><div class="dash-kpi-label">On-Time Delivery</div><div class="dash-kpi-value num" style="color:var(--green)">97%</div><div class="dash-kpi-change">↑ 2% gain</div></div>
+                <div class="dash-kpi"><div class="dash-kpi-label">Active Tasks</div><div class="dash-kpi-value num">1,247</div><div class="dash-kpi-change">â†‘ 12% vs last month</div></div>
+                <div class="dash-kpi"><div class="dash-kpi-label">Team Members</div><div class="dash-kpi-value num">86</div><div class="dash-kpi-change">â†‘ 4% growth</div></div>
+                <div class="dash-kpi"><div class="dash-kpi-label">Completion Rate</div><div class="dash-kpi-value num" style="color:var(--green)">94%</div><div class="dash-kpi-change">â†‘ 8% improvement</div></div>
+                <div class="dash-kpi"><div class="dash-kpi-label">On-Time Delivery</div><div class="dash-kpi-value num" style="color:var(--green)">97%</div><div class="dash-kpi-change">â†‘ 2% gain</div></div>
               </div>
               <div class="dash-chart">
                 <svg viewBox="0 0 440 100" preserveAspectRatio="none" style="width:100%;height:80px">
@@ -309,9 +309,9 @@
                 </svg>
               </div>
               <div class="dash-table-row header"><span>Task</span><span>Assignee</span><span>Due</span><span>Status</span></div>
-              <div class="dash-table-row"><span>Quality check — Batch #412</span><span>Rajesh K.</span><span class="num">Today</span><span class="dash-status active">Active</span></div>
-              <div class="dash-table-row"><span>Client follow-up — Apex Textiles</span><span>Priya M.</span><span class="num">Tomorrow</span><span class="dash-status pending">Pending</span></div>
-              <div class="dash-table-row"><span>SOP update — Warehouse</span><span>Amit S.</span><span class="num">Jun 26</span><span class="dash-status active">Active</span></div>
+              <div class="dash-table-row"><span>Quality check â€” Batch #412</span><span>Rajesh K.</span><span class="num">Today</span><span class="dash-status active">Active</span></div>
+              <div class="dash-table-row"><span>Client follow-up â€” Apex Textiles</span><span>Priya M.</span><span class="num">Tomorrow</span><span class="dash-status pending">Pending</span></div>
+              <div class="dash-table-row"><span>SOP update â€” Warehouse</span><span>Amit S.</span><span class="num">Jun 26</span><span class="dash-status active">Active</span></div>
               <div class="floating-widget w1"><div class="fw-label">Tasks Completed Today</div><div class="fw-value num">24</div></div>
               <div class="floating-widget w2"><div class="fw-label">On-Time Rate</div><div class="fw-value num" style="color:var(--green)">96%</div></div>
               <div class="floating-widget w3"><div class="fw-label">Pending Actions</div><div class="fw-value num" style="color:var(--teal)">3</div></div>
@@ -353,32 +353,32 @@
         <div class="section-header reveal">
           <p class="eyebrow">The Problem</p>
           <h2>Growth Stops When Operations Depend On One Person</h2>
-          <p class="lead">As your business grows, WhatsApp and Excel become liabilities — not tools. Without systems, every new order, employee, and client adds chaos instead of capacity.</p>
+          <p class="lead">As your business grows, WhatsApp and Excel become liabilities â€” not tools. Without systems, every new order, employee, and client adds chaos instead of capacity.</p>
         </div>
         <div class="problem-grid stagger-3">
-          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path></svg></div><h3>Tasks Get Missed</h3><p class="problem-desc">Critical work vanishes into message threads. No one knows what's pending, who owns it, or when it was due.</p><span class="problem-impact">Lost Revenue · Delayed Deliveries</span><div class="problem-roi">Fix this: recover ₹5–12L/year in missed billing</div></div>
-          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg></div><h3>No Accountability</h3><p class="problem-desc">Without clear ownership, work bounces between people. Blame replaces responsibility when things go wrong.</p><span class="problem-impact">Missed Deadlines · Blame Games</span><div class="problem-roi">Fix this: 40% fewer missed commitments</div></div>
-          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg></div><h3>WhatsApp Chaos</h3><p class="problem-desc">Work buried in 20+ groups. Instructions get lost, updates get missed, and nothing is searchable.</p><span class="problem-impact">Duplicated Effort · Confusion</span><div class="problem-roi">Fix this: save 2–4 hours/manager daily</div></div>
-          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div><h3>Excel Dependency</h3><p class="problem-desc">Spreadsheets live on one person's laptop. They break, get overwritten, and can't be accessed remotely.</p><span class="problem-impact">Data Loss · Version Conflicts</span><div class="problem-roi">Fix this: one source of truth, always accessible</div></div>
-          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div><h3>No Visibility</h3><p class="problem-desc">You discover problems at month-end — not in real time. Decisions are based on gut feel, not data.</p><span class="problem-impact">Slow Decisions · Blind Spots</span><div class="problem-roi">Fix this: spot bottlenecks before they cost you</div></div>
-          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><h3>Delayed Follow-Ups</h3><p class="problem-desc">Client queries, vendor payments, internal approvals — all slip through when there's no tracking.</p><span class="problem-impact">Lost Clients · Late Payments</span><div class="problem-roi">Fix this: eliminate 70% of follow-up delays</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path></svg></div><h3>Tasks Get Missed</h3><p class="problem-desc">Critical work vanishes into message threads. No one knows what's pending, who owns it, or when it was due.</p><span class="problem-impact">Lost Revenue Â· Delayed Deliveries</span><div class="problem-roi">Fix this: recover â‚¹5â€“12L/year in missed billing</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg></div><h3>No Accountability</h3><p class="problem-desc">Without clear ownership, work bounces between people. Blame replaces responsibility when things go wrong.</p><span class="problem-impact">Missed Deadlines Â· Blame Games</span><div class="problem-roi">Fix this: 40% fewer missed commitments</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg></div><h3>WhatsApp Chaos</h3><p class="problem-desc">Work buried in 20+ groups. Instructions get lost, updates get missed, and nothing is searchable.</p><span class="problem-impact">Duplicated Effort Â· Confusion</span><div class="problem-roi">Fix this: save 2â€“4 hours/manager daily</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div><h3>Excel Dependency</h3><p class="problem-desc">Spreadsheets live on one person's laptop. They break, get overwritten, and can't be accessed remotely.</p><span class="problem-impact">Data Loss Â· Version Conflicts</span><div class="problem-roi">Fix this: one source of truth, always accessible</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div><h3>No Visibility</h3><p class="problem-desc">You discover problems at month-end â€” not in real time. Decisions are based on gut feel, not data.</p><span class="problem-impact">Slow Decisions Â· Blind Spots</span><div class="problem-roi">Fix this: spot bottlenecks before they cost you</div></div>
+          <div class="card problem-card reveal"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><h3>Delayed Follow-Ups</h3><p class="problem-desc">Client queries, vendor payments, internal approvals â€” all slip through when there's no tracking.</p><span class="problem-impact">Lost Clients Â· Late Payments</span><div class="problem-roi">Fix this: eliminate 70% of follow-up delays</div></div>
         </div>
       </div>
     </section>
 
-    <!-- S04: COST OF INACTION — Dark premium section with noise -->
+    <!-- S04: COST OF INACTION â€” Dark premium section with noise -->
     <section class="section section-dark" data-screen-label="04 Cost of Inaction">
       <div class="noise-overlay"></div>
       <div class="container">
         <div class="section-header reveal" style="margin:0 auto 56px;text-align:center;max-width:600px">
           <h2>Every Day Without A System, Money Leaks</h2>
-          <p class="lead">The real cost isn't software — it's the revenue, productivity, and growth you lose every day you operate without structure.</p>
+          <p class="lead">The real cost isn't software â€” it's the revenue, productivity, and growth you lose every day you operate without structure.</p>
         </div>
         <div class="impact-grid stagger-5">
-          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Revenue Leakage</h3><p>Delayed invoicing, unbilled work, missed payment follow-ups</p><div class="impact-cost num">₹8–15L/yr</div></div></div>
-          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Productivity Drain</h3><p>2–4 hrs/day wasted on chasing status updates</p><div class="impact-cost num">₹12–20L/yr</div></div></div>
-          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Delivery Penalties</h3><p>Late orders, client escalations, lost repeat business</p><div class="impact-cost num">₹5–10L/yr</div></div></div>
-          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Key-Person Risk</h3><p>Operations depend on 2–3 people — losing one halts everything</p><div class="impact-cost num">₹10–25L/yr</div></div></div>
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Revenue Leakage</h3><p>Delayed invoicing, unbilled work, missed payment follow-ups</p><div class="impact-cost num">â‚¹8â€“15L/yr</div></div></div>
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Productivity Drain</h3><p>2â€“4 hrs/day wasted on chasing status updates</p><div class="impact-cost num">â‚¹12â€“20L/yr</div></div></div>
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Delivery Penalties</h3><p>Late orders, client escalations, lost repeat business</p><div class="impact-cost num">â‚¹5â€“10L/yr</div></div></div>
+          <div class="card impact-card reveal card-tilt"><div class="card"><h3>Key-Person Risk</h3><p>Operations depend on 2â€“3 people â€” losing one halts everything</p><div class="impact-cost num">â‚¹10â€“25L/yr</div></div></div>
           <div class="card impact-card reveal card-tilt"><div class="card"><h3>Founder Burnout</h3><p>You're the bottleneck. Every problem escalates to you.</p><div class="impact-cost num">Growth Ceiling</div></div></div>
         </div>
       </div>
@@ -389,14 +389,14 @@
       <div class="container">
         <div class="section-header reveal">
           <h2>From Operational Chaos To Predictable Growth</h2>
-          <p class="lead">OptiFlow OS replaces disconnected tools with one unified platform — so your business runs on processes, not people.</p>
+          <p class="lead">OptiFlow OS replaces disconnected tools with one unified platform â€” so your business runs on processes, not people.</p>
         </div>
         <div class="solution-visual reveal">
-          <div class="solution-stage chaos">Scattered WhatsApp · Excel · Memory</div>
-          <div class="solution-arrow" style="font-size:20px;color:var(--muted)">↓</div>
-          <div class="solution-stage optiflow">OptiFlow OS — Unified Operations</div>
-          <div class="solution-arrow" style="font-size:20px;color:var(--green)">↓</div>
-          <div class="solution-stage excellence">Predictable · Accountable · Scalable</div>
+          <div class="solution-stage chaos">Scattered WhatsApp Â· Excel Â· Memory</div>
+          <div class="solution-arrow" style="font-size:20px;color:var(--muted)">â†“</div>
+          <div class="solution-stage optiflow">OptiFlow OS â€” Unified Operations</div>
+          <div class="solution-arrow" style="font-size:20px;color:var(--green)">â†“</div>
+          <div class="solution-stage excellence">Predictable Â· Accountable Â· Scalable</div>
           <div class="solution-modules">
             <span class="solution-module">Tasks</span><span class="solution-module">Attendance</span><span class="solution-module">SOPs</span><span class="solution-module">Reports</span><span class="solution-module">Teams</span><span class="solution-module">Checklists</span><span class="solution-module">Leaves</span><span class="solution-module">Analytics</span>
           </div>
@@ -408,13 +408,13 @@
     <!-- S06: PRODUCT SNAPSHOT -->
     <section class="section" data-screen-label="06 Product Snapshot" style="background:var(--surface)">
       <div class="container">
-        <div class="section-header reveal"><h2>Every Module Delivers Measurable Business Value</h2><p class="lead">Not just features — each module is designed to solve a specific operational challenge and produce a clear business outcome.</p></div>
+        <div class="section-header reveal"><h2>Every Module Delivers Measurable Business Value</h2><p class="lead">Not just features â€” each module is designed to solve a specific operational challenge and produce a clear business outcome.</p></div>
         <div class="module-grid stagger-4">
           <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg></div><h3>Task Management</h3><p class="module-desc">Every task has an owner, deadline, and status. No ambiguity. No lost work.</p><div class="module-benefit">Outcome: zero missed deliverables</div></div>
           <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></div><h3>Worklists</h3><p class="module-desc">Tasks, checklists, approvals, and meetings in one unified list. Zero context switching.</p><div class="module-benefit">Outcome: 30% faster task completion</div></div>
           <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><h3>Attendance</h3><p class="module-desc">GPS, selfie, office, and IP-based attendance. Real-time workforce visibility.</p><div class="module-benefit">Outcome: accurate payroll, zero disputes</div></div>
           <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div><h3>SOP Library</h3><p class="module-desc">Document, version-control, and deploy standard operating procedures across departments.</p><div class="module-benefit">Outcome: 80% fewer quality escapes</div></div>
-          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div><h3>Reports &amp; Analytics</h3><p class="module-desc">Task, attendance, department, and audit reports — live, exportable, and decision-ready.</p><div class="module-benefit">Outcome: data-driven decisions, not gut feel</div></div>
+          <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div><h3>Reports &amp; Analytics</h3><p class="module-desc">Task, attendance, department, and audit reports â€” live, exportable, and decision-ready.</p><div class="module-benefit">Outcome: data-driven decisions, not gut feel</div></div>
           <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3>Leave Management</h3><p class="module-desc">Leave requests with buddy replacement, auto-task reassignment, and calendar view.</p><div class="module-benefit">Outcome: zero work stoppage from absenteeism</div></div>
           <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg></div><h3>Team Management</h3><p class="module-desc">Branch, department, and role-based user management with granular permissions.</p><div class="module-benefit">Outcome: right person, right access, right work</div></div>
           <div class="card module-card reveal"><div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg></div><h3>Helpdesk</h3><p class="module-desc">Internal support ticketing with routing, priority levels, and resolution tracking.</p><div class="module-benefit">Outcome: zero lost requests, faster resolutions</div></div>
@@ -425,7 +425,7 @@
     <!-- S07: HOW IT WORKS -->
     <section class="section" data-screen-label="07 How It Works">
       <div class="container">
-        <div class="section-header reveal"><h2>Go From Chaos To Clarity In Four Steps</h2><p class="lead">OptiFlow is designed for speed — your team starts using it within days, not weeks.</p></div>
+        <div class="section-header reveal"><h2>Go From Chaos To Clarity In Four Steps</h2><p class="lead">OptiFlow is designed for speed â€” your team starts using it within days, not weeks.</p></div>
         <div class="steps stagger-4">
           <div class="step reveal"><div class="step-number">01</div><h3>Create Process</h3><p>Define the workflow: what, who, when, and how verification works.</p><div class="step-outcome">Clarity in under 60 seconds</div></div>
           <div class="step reveal"><div class="step-number">02</div><h3>Assign Doer</h3><p>Delegate work with clear ownership. No ambiguity. No "I thought someone else..."</p><div class="step-outcome">Accountability from day one</div></div>
@@ -438,16 +438,16 @@
     <!-- S08: FEATURES -->
     <section class="section" data-screen-label="08 Features" style="background:var(--surface)">
       <div class="container">
-        <div class="section-header reveal"><h2>Built For The Way MSMEs Actually Operate</h2><p class="lead">Every feature was designed after studying how textile, manufacturing, trading, and distribution businesses really work — not how software companies think they should work.</p></div>
+        <div class="section-header reveal"><h2>Built For The Way MSMEs Actually Operate</h2><p class="lead">Every feature was designed after studying how textile, manufacturing, trading, and distribution businesses really work â€” not how software companies think they should work.</p></div>
         <div class="feature-grid stagger-4">
-          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"></path></svg></div><h3>Delegation</h3><p class="feature-desc">WWHWE framework — every task has What, Who, How, When, and Evidence.</p><div class="feature-roi">Save 3 hrs/day on status follow-ups</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"></path></svg></div><h3>Delegation</h3><p class="feature-desc">WWHWE framework â€” every task has What, Who, How, When, and Evidence.</p><div class="feature-roi">Save 3 hrs/day on status follow-ups</div></div>
           <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div><h3>Attendance</h3><p class="feature-desc">GPS, selfie, office IP, and shift-based attendance with payroll-ready reports.</p><div class="feature-roi">Eliminate 100% of attendance disputes</div></div>
           <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"></path></svg></div><h3>SOPs</h3><p class="feature-desc">Version-controlled SOP library with department-level access and acknowledgement tracking.</p><div class="feature-roi">80% reduction in process deviations</div></div>
           <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg></div><h3>Dashboard</h3><p class="feature-desc">Real-time KPI dashboard with task completion, attendance, and department performance.</p><div class="feature-roi">Spot problems in minutes, not weeks</div></div>
           <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div><h3>Helpdesk</h3><p class="feature-desc">Internal ticketing with department routing, priority levels, and resolution time-tracking.</p><div class="feature-roi">50% faster issue resolution</div></div>
           <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div><h3>Analytics</h3><p class="feature-desc">Department-level analytics with trend detection, comparisons, and exportable reports.</p><div class="feature-roi">Better decisions, faster growth</div></div>
           <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg></div><h3>Leave</h3><p class="feature-desc">Buddy replacement, auto-task reassignment, leave calendar, and approval workflow.</p><div class="feature-roi">Zero work stoppage when people are away</div></div>
-          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3>Audit Logs</h3><p class="feature-desc">Full activity trail — every task, approval, and change timestamped and attributable.</p><div class="feature-roi">100% audit-ready, zero panic</div></div>
+          <div class="card feature-item reveal"><div class="feature-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3>Audit Logs</h3><p class="feature-desc">Full activity trail â€” every task, approval, and change timestamped and attributable.</p><div class="feature-roi">100% audit-ready, zero panic</div></div>
         </div>
       </div>
     </section>
@@ -477,7 +477,7 @@
           <table class="comparison-table">
             <thead><tr><th>Capability</th><th class="traditional">Traditional</th><th class="optiflow-col">OptiFlow OS</th></tr></thead>
             <tbody>
-            <tr><td>Task Ownership</td><td class="traditional">Verbal / WhatsApp — lost</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Clear owner + deadline + evidence</td></tr>
+            <tr><td>Task Ownership</td><td class="traditional">Verbal / WhatsApp â€” lost</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Clear owner + deadline + evidence</td></tr>
             <tr><td>Accountability</td><td class="traditional">Blame culture, no audit trail</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> WWHWE + verification workflow</td></tr>
             <tr><td>Visibility</td><td class="traditional">Month-end discovery</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> Real-time dashboard, every device</td></tr>
             <tr><td>Attendance</td><td class="traditional">Registers / WhatsApp photos</td><td class="optiflow-col"><span class="check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#54B89A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> GPS + selfie + IP, payroll-ready</td></tr>
@@ -515,7 +515,7 @@
       <div class="noise-overlay"></div>
       <div class="container" style="position:relative;z-index:1">
         <div class="reveal"><h2>Ready To Build A Process-Driven Business?</h2></div>
-        <p class="lead reveal reveal-delay-1">See how OptiFlow helps MSMEs improve visibility, accountability, execution, and growth — with one operating system.</p>
+        <p class="lead reveal reveal-delay-1">See how OptiFlow helps MSMEs improve visibility, accountability, execution, and growth â€” with one operating system.</p>
         <div class="reveal reveal-delay-2" style="display:flex;gap:var(--gap-sm);justify-content:center;flex-wrap:wrap;margin-top:8px">
           <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow">Book Free Demo</a>
           <a href="/product-overview/" class="btn btn-secondary btn-lg">Watch Product Tour</a>
@@ -534,10 +534,10 @@
       <div class="container">
         <div class="section-header reveal"><h2>Frequently Asked Questions</h2></div>
         <div class="faq-list">
-          <div class="faq-item reveal"><button class="faq-question"><span>What is OptiFlow OS?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>OptiFlow OS is a Business Operating System built for MSMEs. It replaces WhatsApp, Excel, and manual tracking with one platform that manages tasks, attendance, SOPs, leave, reports, and accountability — giving owners complete visibility from a single dashboard.</p></div></div></div>
-          <div class="faq-item reveal"><button class="faq-question"><span>How quickly can we go live?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>Most businesses go live in 2-4 weeks. The platform is designed for fast adoption — no IT team needed, no complex setup. We provide guided onboarding and training for your team.</p></div></div></div>
-          <div class="faq-item reveal"><button class="faq-question"><span>Can it really replace WhatsApp and Excel?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>Yes. Every task, attendance record, checklist, and approval moves out of WhatsApp groups and spreadsheets into OptiFlow — where it's searchable, trackable, and auditable. Our customers report saving 2-4 hours per manager per day.</p></div></div></div>
-          <div class="faq-item reveal"><button class="faq-question"><span>Do you charge per user?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>No. OptiFlow has simple, fixed annual pricing based on team size — not per-user charges. No hidden costs, no surprise invoices. Cloud hosting and product updates are included.</p></div></div></div>
+          <div class="faq-item reveal"><button class="faq-question"><span>What is OptiFlow OS?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>OptiFlow OS is a Business Operating System built for MSMEs. It replaces WhatsApp, Excel, and manual tracking with one platform that manages tasks, attendance, SOPs, leave, reports, and accountability â€” giving owners complete visibility from a single dashboard.</p></div></div></div>
+          <div class="faq-item reveal"><button class="faq-question"><span>How quickly can we go live?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>Most businesses go live in 2-4 weeks. The platform is designed for fast adoption â€” no IT team needed, no complex setup. We provide guided onboarding and training for your team.</p></div></div></div>
+          <div class="faq-item reveal"><button class="faq-question"><span>Can it really replace WhatsApp and Excel?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>Yes. Every task, attendance record, checklist, and approval moves out of WhatsApp groups and spreadsheets into OptiFlow â€” where it's searchable, trackable, and auditable. Our customers report saving 2-4 hours per manager per day.</p></div></div></div>
+          <div class="faq-item reveal"><button class="faq-question"><span>Do you charge per user?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>No. OptiFlow has simple, fixed annual pricing based on team size â€” not per-user charges. No hidden costs, no surprise invoices. Cloud hosting and product updates are included.</p></div></div></div>
           <div class="faq-item reveal"><button class="faq-question"><span>Is our business data secure?</span><span class="faq-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span></button><div class="faq-answer"><div><p>Absolutely. Data is encrypted in transit and at rest, hosted on secure cloud infrastructure in India. Role-based access ensures every user sees only what they should. Full audit logs track every action.</p></div></div></div>
         </div>
         <div style="text-align:center;margin-top:32px"><a href="/faq/" class="btn btn-secondary">View All FAQs</a></div>
@@ -552,7 +552,7 @@
 
   <script>
     (function() {
-      // Mouse glow follower (hero) — throttled via rAF
+      // Mouse glow follower (hero) â€” throttled via rAF
       var mg = document.getElementById('mouseGlow');
       if (mg) {
         var ticking = false, lastX, lastY;
@@ -566,7 +566,7 @@
 
   <script>
     (function() {
-      // 3D card tilt — throttled
+      // 3D card tilt â€” throttled
       var ticking = false;
       document.querySelectorAll('.card-tilt > .card').forEach(function(card) {
         card.parentElement.addEventListener('mousemove', function(e) {
@@ -587,7 +587,7 @@
 
   <script>
     (function() {
-      // Dashboard parallax — throttled
+      // Dashboard parallax â€” throttled
       var dashEl = document.getElementById('dashboard');
       if (dashEl) {
         var ticking = false;
@@ -607,7 +607,7 @@
 
   <script>
     (function() {
-      // Typewriter animation — pauses on tab blur
+      // Typewriter animation â€” pauses on tab blur
       var el = document.getElementById('typewriterText');
       if (!el) return;
       var phrases = ['Daily Operations Feel Out Of Control?', 'Important Tasks Keep Getting Missed?', 'No One Takes Full Ownership?', 'No Clear Visibility Into Daily Operations?', 'Your Business Can\'t Run Without You?'];
@@ -650,7 +650,7 @@
       <button class="exit-close" onclick="document.getElementById('exitOverlay').classList.remove('active')" aria-label="Close">&times;</button>
       <span class="eyebrow" style="display:block;margin-bottom:8px">Before you go</span>
       <h2>See How Much Time Your Business Could Save</h2>
-      <p class="lead">Book a free 15-minute demo and see OptiFlow working with real business scenarios — tailored to your industry.</p>
+      <p class="lead">Book a free 15-minute demo and see OptiFlow working with real business scenarios â€” tailored to your industry.</p>
       <a href="/demo-booking/" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">Book Your Free Demo</a>
     </div>
   </div>
@@ -673,4 +673,6 @@
     })();
   </script>
 
+
+  <!-- INCLUDE: cookie-consent -->
 </body></html>

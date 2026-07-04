@@ -11,7 +11,7 @@
   <style>
     .section { content-visibility: auto; contain-intrinsic-size: 500px; }
 
-    /* ─── Hero ─── */
+    /* â”€â”€â”€ Hero â”€â”€â”€ */
     .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
     .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 8%, transparent) 0%, transparent 70%); pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; }
@@ -47,7 +47,7 @@
     .float-anim { animation: floatDash 5s ease-in-out infinite; }
     @keyframes floatDash { 0%, 100% { transform: translateY(0) scale(1) rotate(0deg); } 50% { transform: translateY(-10px) scale(1.01) rotate(-0.5deg); } }
 
-    /* ─── Transform Flow ─── */
+    /* â”€â”€â”€ Transform Flow â”€â”€â”€ */
     .transform-flow { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 32px 0; }
     .transform-stage { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; min-width: 180px; flex: 1; max-width: 260px; transition: transform 0.3s ease; }
     .transform-stage:hover { transform: translateY(-3px); box-shadow: 0 8px 32px color-mix(in oklch, var(--fg) 5%, transparent); }
@@ -60,7 +60,7 @@
     .transform-tag { display: inline-flex; gap: 6px; align-items: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
     .transform-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--fg); opacity: 0.25; }
 
-    /* ─── Architecture Diagram ─── */
+    /* â”€â”€â”€ Architecture Diagram â”€â”€â”€ */
     .arch-diagram { position: relative; display: flex; align-items: center; justify-content: center; min-height: 420px; margin: 40px 0; }
     .arch-hub { position: relative; z-index: 2; width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px; text-align: center; line-height: 1.2; box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 35%, transparent); animation: hubPulse 3s ease-in-out infinite; }
     @keyframes hubPulse { 0%, 100% { box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 35%, transparent); } 50% { box-shadow: 0 8px 48px color-mix(in oklch, var(--accent) 55%, transparent); } }
@@ -73,7 +73,7 @@
     .arch-tooltip .tt-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
     .arch-tooltip .tt-benefit { font-size: 12px; color: var(--green); margin-top: 6px; font-weight: 500; }
 
-    /* ─── Core Modules ─── */
+    /* â”€â”€â”€ Core Modules â”€â”€â”€ */
     .module-spotlight { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-md); }
     .module-card { display: flex; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; cursor: default; }
     .module-card:hover { border-color: color-mix(in oklch, var(--teal) 30%, var(--border)); box-shadow: 0 8px 28px color-mix(in oklch, var(--fg) 5%, transparent); transform: translateY(-2px); }
@@ -92,7 +92,7 @@
     .show-all-btn svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
     .show-all-btn.open svg { transform: rotate(180deg); }
 
-    /* ─── Panels ─── */
+    /* â”€â”€â”€ Panels â”€â”€â”€ */
     .panel-layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-xl); align-items: center; }
     .panel-features { display: flex; flex-direction: column; gap: var(--gap-sm); }
     .panel-feat { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent); font-size: 14px; }
@@ -106,7 +106,7 @@
     .panel-benefit .pb-icon { font-size: 28px; margin-bottom: 8px; }
     .panel-benefit h5 { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
 
-    /* ─── Workflow ├ ── */
+    /* â”€â”€â”€ Workflow â”œ â”€â”€ */
     .workflow-flow { display: flex; align-items: flex-start; justify-content: center; gap: 12px; margin: 40px 0; flex-wrap: wrap; }
     .workflow-step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 20px; text-align: center; min-width: 160px; flex: 1; max-width: 200px; transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
     .workflow-step:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 32px color-mix(in oklch, var(--fg) 6%, transparent); }
@@ -122,7 +122,7 @@
     .workflow-connector { display: flex; align-items: center; color: var(--border); flex-shrink: 0; padding-top: 42px; }
     .workflow-connector svg { width: 24px; height: 24px; }
 
-    /* ─── Reporting ─── */
+    /* â”€â”€â”€ Reporting â”€â”€â”€ */
     .report-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); margin-bottom: var(--gap-lg); }
     .report-kpi { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 16px; }
     .report-kpi .rkpi-val { font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--accent); }
@@ -132,7 +132,7 @@
     .report-item:hover { background: color-mix(in oklch, var(--teal) 8%, var(--bg)); }
     .report-item svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
 
-    /* ─── Security ─── */
+    /* â”€â”€â”€ Security â”€â”€â”€ */
     .perm-matrix { overflow-x: auto; margin: 32px 0; }
     .perm-matrix table { width: 100%; border-collapse: collapse; font-size: 13px; }
     .perm-matrix th, .perm-matrix td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
@@ -148,7 +148,7 @@
     .sec-feat h4 { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
     .sec-feat p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
 
-    /* ─── CTA Section ─── */
+    /* â”€â”€â”€ CTA Section â”€â”€â”€ */
     .cta-section { background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--accent) 50%, var(--teal)), var(--teal)); color: #fff; text-align: center; padding-block: clamp(64px, 10vw, 100px); position: relative; overflow: hidden; }
     .cta-section::before { content: ''; position: absolute; inset: 0; background: url('/assets/img/OptiFlow.Logo.png') center / 300px no-repeat; opacity: 0.04; }
     .cta-section .container { position: relative; z-index: 2; }
@@ -161,7 +161,7 @@
     .cta-trust { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 13px; color: color-mix(in srgb, #fff 70%, transparent); }
     .cta-trust-item { display: flex; align-items: center; gap: 6px; }
 
-    /* ─── Animations ─── */
+    /* â”€â”€â”€ Animations â”€â”€â”€ */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -173,7 +173,7 @@
     .stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
     .stagger.visible > * { opacity: 1; transform: translateY(0); }
 
-    /* ─── Sticky CTA ─── */
+    /* â”€â”€â”€ Sticky CTA â”€â”€â”€ */
     .sticky-cta { position: fixed; bottom: 24px; right: 24px; z-index: 200; display: inline-flex; align-items: center; gap: 6px; padding: 14px 22px; background: linear-gradient(135deg, #1B4D81, #278D9F); color: white; border-radius: 50px; font-weight: 600; font-size: 14px; text-decoration: none; box-shadow: var(--shadow-elevated); transform: translateY(100px); opacity: 0; transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1); }
     .sticky-cta.visible { opacity: 1; transform: translateY(0); }
     .sticky-cta:hover { box-shadow: var(--shadow-button-hover); transform: translateY(-2px); }
@@ -182,7 +182,7 @@
     .scroll-top:hover { box-shadow: var(--shadow-button-hover); transform: translateY(-2px); }
     .scroll-top:active { transform: translateY(0) scale(0.95); }
 
-    /* ═══════════════════ Dark Mode ═══════════════════ */
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Dark Mode â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
     [data-theme="dark"] .breadcrumb .current { color: var(--fg); }
     [data-theme="dark"] .arch-connections line { stroke: oklch(42% 0.012 250); }
     [data-theme="dark"] .arch-node { background: var(--surface); border-color: oklch(42% 0.012 250); color: var(--fg); }
@@ -219,7 +219,7 @@
     [data-theme="dark"] .cta-section { background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--accent) 50%, var(--teal)), var(--teal)); }
     [data-theme="dark"] .cta-section .btn-primary { background: oklch(95% 0.002 240); color: var(--accent); }
 
-    /* ═══════════════════ Responsive ═══════════════════ */
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Responsive â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
       .panel-layout { grid-template-columns: 1fr; gap: 32px; }
@@ -292,7 +292,7 @@
                 <div class="dash-widget">
                   <h4>Attendance</h4>
                   <div class="w-val">47 / 52</div>
-                  <div style="font-size:11px;color:var(--green);margin-top:4px;">3 on leave — 2 late</div>
+                  <div style="font-size:11px;color:var(--green);margin-top:4px;">3 on leave â€” 2 late</div>
                 </div>
                 <div class="dash-widget">
                   <h4>Tasks Done Today</h4>
@@ -357,7 +357,7 @@
       <div class="container">
         <div class="section-header reveal">
           <h2>Building The Operating System For Growing Businesses</h2>
-          <p class="lead">A single platform that gives every business — regardless of size — the same operational discipline as the world's best-run companies.</p>
+          <p class="lead">A single platform that gives every business â€” regardless of size â€” the same operational discipline as the world's best-run companies.</p>
         </div>
         <div class="grid-3 stagger reveal" style="margin-top:32px">
           <div class="card">
@@ -368,17 +368,17 @@
           <div class="card">
             <div style="font-size:28px;margin-bottom:12px">&#9650;</div>
             <h3>Operational Excellence</h3>
-            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Standardise how work gets done. SOPs, checklists, and workflows ensure consistency — even when key people are absent.</p>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Standardise how work gets done. SOPs, checklists, and workflows ensure consistency â€” even when key people are absent.</p>
           </div>
           <div class="card">
             <div style="font-size:28px;margin-bottom:12px">&#8593;</div>
             <h3>Business Scalability</h3>
-            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Growing from 20 to 200 employees without adding management layers. The system scales — not the chaos.</p>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Growing from 20 to 200 employees without adding management layers. The system scales â€” not the chaos.</p>
           </div>
           <div class="card">
             <div style="font-size:28px;margin-bottom:12px">&#9881;</div>
             <h3>Process-Driven Culture</h3>
-            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Shift from "who do I ask?" to "what does the system say?" Build a culture where processes — not people — run operations.</p>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Shift from "who do I ask?" to "what does the system say?" Build a culture where processes â€” not people â€” run operations.</p>
           </div>
           <div class="card">
             <div style="font-size:28px;margin-bottom:12px">&#9776;</div>
@@ -515,17 +515,17 @@
       <div class="container">
         <div class="section-header reveal">
           <h2>Complete Business Visibility For Owners & Admins</h2>
-          <p class="lead">See everything. Control everything. Measure everything — from one dashboard built for business owners.</p>
+          <p class="lead">See everything. Control everything. Measure everything â€” from one dashboard built for business owners.</p>
         </div>
         <div class="panel-layout reveal">
           <div class="panel-features">
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> User Management — Add, remove, and manage every employee.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Role Management — Define Admin, Captain, and Doer access levels.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Branch & Department Structure — Multi-location, multi-department.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Attendance Monitoring — Real-time presence across all locations.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Executive Reports — Task, attendance, and performance reports.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Audit Trails — Every action logged, timestamped, searchable.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> System Configuration — Customise workflows to your business.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> User Management â€” Add, remove, and manage every employee.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Role Management â€” Define Admin, Captain, and Doer access levels.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Branch & Department Structure â€” Multi-location, multi-department.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Attendance Monitoring â€” Real-time presence across all locations.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Executive Reports â€” Task, attendance, and performance reports.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Audit Trails â€” Every action logged, timestamped, searchable.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> System Configuration â€” Customise workflows to your business.</div>
           </div>
           <div class="panel-visual">
             <h4>Admin Dashboard Preview</h4>
@@ -540,8 +540,8 @@
         </div>
         <div class="panel-benefits reveal">
           <div class="panel-benefit"><div class="pb-icon">&#9650;</div><h5>See Everything</h5><p style="font-size:13px;color:var(--muted);margin:0;">Real-time visibility across all departments, branches, and teams from a single dashboard.</p></div>
-          <div class="panel-benefit"><div class="pb-icon">&#9881;</div><h5>Control Everything</h5><p style="font-size:13px;color:var(--muted);margin:0;">Define roles, permissions, and workflows. The system enforces your business rules — not the other way around.</p></div>
-          <div class="panel-benefit"><div class="pb-icon">&#9776;</div><h5>Measure Everything</h5><p style="font-size:13px;color:var(--muted);margin:0;">Task completion, attendance trends, department performance, audit trails — every metric in one place.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#9881;</div><h5>Control Everything</h5><p style="font-size:13px;color:var(--muted);margin:0;">Define roles, permissions, and workflows. The system enforces your business rules â€” not the other way around.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#9776;</div><h5>Measure Everything</h5><p style="font-size:13px;color:var(--muted);margin:0;">Task completion, attendance trends, department performance, audit trails â€” every metric in one place.</p></div>
         </div>
       </div>
     </section>
@@ -551,16 +551,16 @@
       <div class="container">
         <div class="section-header reveal">
           <h2>Manage Teams With Clarity</h2>
-          <p class="lead">Built for managers, supervisors, and team leads who need to delegate, verify, and report — without chasing people.</p>
+          <p class="lead">Built for managers, supervisors, and team leads who need to delegate, verify, and report â€” without chasing people.</p>
         </div>
         <div class="panel-layout reveal" style="direction:rtl;">
           <div class="panel-features" style="direction:ltr;">
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Task Delegation — Assign work with one click. Set priority, deadline, verifier.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Verification Queue — Review and approve completed work with photo proof.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Team Reports — See who's performing, who's struggling, what's stuck.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Checklist Monitoring — Track daily checklist completion across your team.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Leave Approvals — Approve or reject leave requests. Auto-deduct from attendance.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Performance Visibility — Task completion rates and attendance patterns per employee.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Task Delegation â€” Assign work with one click. Set priority, deadline, verifier.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Verification Queue â€” Review and approve completed work with photo proof.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Team Reports â€” See who's performing, who's struggling, what's stuck.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Checklist Monitoring â€” Track daily checklist completion across your team.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Leave Approvals â€” Approve or reject leave requests. Auto-deduct from attendance.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Performance Visibility â€” Task completion rates and attendance patterns per employee.</div>
           </div>
           <div class="panel-visual" style="direction:ltr;">
             <h4>Captain Dashboard Preview</h4>
@@ -574,7 +574,7 @@
           </div>
         </div>
         <div class="panel-benefits reveal">
-          <div class="panel-benefit"><div class="pb-icon">&#8651;</div><h5>Less Follow-Up</h5><p style="font-size:13px;color:var(--muted);margin:0;">The system auto-reminds, auto-escalates, and auto-tracks. Managers verify outcomes — not chase status.</p></div>
+          <div class="panel-benefit"><div class="pb-icon">&#8651;</div><h5>Less Follow-Up</h5><p style="font-size:13px;color:var(--muted);margin:0;">The system auto-reminds, auto-escalates, and auto-tracks. Managers verify outcomes â€” not chase status.</p></div>
           <div class="panel-benefit"><div class="pb-icon">&#9650;</div><h5>More Accountability</h5><p style="font-size:13px;color:var(--muted);margin:0;">Every task has an owner and deadline. Every completion needs verification. No ambiguity.</p></div>
           <div class="panel-benefit"><div class="pb-icon">&#9889;</div><h5>Faster Execution</h5><p style="font-size:13px;color:var(--muted);margin:0;">Assign work in seconds. Track progress in real-time. Remove bottlenecks before they become delays.</p></div>
         </div>
@@ -590,12 +590,12 @@
         </div>
         <div class="panel-layout reveal">
           <div class="panel-features">
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> My Task Center — Today's tasks, upcoming deadlines, overdue items.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Attendance — Check in/out with location. View monthly summary.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Checklists — Complete daily production, quality, and safety checklists.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Leave Requests — Apply for leave. Track balance and approval status.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Training — Complete assigned SOP training modules and quizzes.</div>
-            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Meetings — View schedule, confirm attendance, access meeting notes.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> My Task Center â€” Today's tasks, upcoming deadlines, overdue items.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Attendance â€” Check in/out with location. View monthly summary.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Checklists â€” Complete daily production, quality, and safety checklists.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Leave Requests â€” Apply for leave. Track balance and approval status.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Training â€” Complete assigned SOP training modules and quizzes.</div>
+            <div class="panel-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Meetings â€” View schedule, confirm attendance, access meeting notes.</div>
           </div>
           <div class="panel-visual">
             <h4>Doer Workspace Preview</h4>
@@ -609,7 +609,7 @@
             <div class="vis-row"><span>Overdue</span><span>1</span></div>
             <div class="vis-row"><span>Attendance Status</span><span style="color:var(--green)">Present</span></div>
             <div class="vis-row"><span>Leave Balance</span><span>12 days</span></div>
-            <div class="vis-row"><span style="display:flex;align-items:center;gap:6px;">&#9889; Next Deadline <span style="color:var(--accent);font-weight:600;">QC Report — 4:30 PM</span></span></div>
+            <div class="vis-row"><span style="display:flex;align-items:center;gap:6px;">&#9889; Next Deadline <span style="color:var(--accent);font-weight:600;">QC Report â€” 4:30 PM</span></span></div>
           </div>
         </div>
         <div class="panel-benefits reveal">
@@ -721,7 +721,7 @@
       <div class="container">
         <div class="section-header reveal">
           <h2>Enterprise Security. MSME Simplicity.</h2>
-          <p class="lead">Role-based access, audit trails, and data protection — built for business owners who need control without complexity.</p>
+          <p class="lead">Role-based access, audit trails, and data protection â€” built for business owners who need control without complexity.</p>
         </div>
         <div class="perm-matrix reveal">
           <table>
@@ -731,12 +731,12 @@
             <tbody>
               <tr><td>Task Management</td><td><span class="perm-badge limited">My Tasks</span></td><td><span class="perm-badge full">Team + Assign</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
               <tr><td>Attendance</td><td><span class="perm-badge limited">Check In/Out</span></td><td><span class="perm-badge full">Team View</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
-              <tr><td>Reports</td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge limited">Team Only</span></td><td><span class="perm-badge full">All Reports</span></td></tr>
+              <tr><td>Reports</td><td><span class="perm-badge none">â€”</span></td><td><span class="perm-badge limited">Team Only</span></td><td><span class="perm-badge full">All Reports</span></td></tr>
               <tr><td>SOP Library</td><td><span class="perm-badge limited">View</span></td><td><span class="perm-badge limited">View + Assign</span></td><td><span class="perm-badge full">Create + Edit</span></td></tr>
               <tr><td>Leave Management</td><td><span class="perm-badge limited">Apply</span></td><td><span class="perm-badge full">Approve</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
               <tr><td>Checklists</td><td><span class="perm-badge limited">Complete</span></td><td><span class="perm-badge full">Assign + Verify</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
-              <tr><td>Audit Logs</td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
-              <tr><td>System Config</td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge none">—</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
+              <tr><td>Audit Logs</td><td><span class="perm-badge none">â€”</span></td><td><span class="perm-badge none">â€”</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
+              <tr><td>System Config</td><td><span class="perm-badge none">â€”</span></td><td><span class="perm-badge none">â€”</span></td><td><span class="perm-badge full">Full Access</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -744,12 +744,12 @@
           <div class="sec-feat">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             <h4>Role-Based Access</h4>
-            <p>Three roles — Admin, Captain, Doer — with granular module-level permissions that match real business hierarchy.</p>
+            <p>Three roles â€” Admin, Captain, Doer â€” with granular module-level permissions that match real business hierarchy.</p>
           </div>
           <div class="sec-feat">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             <h4>Audit Trails</h4>
-            <p>Every action — task creation, modification, deletion, verification — is logged with timestamp, user, and IP address.</p>
+            <p>Every action â€” task creation, modification, deletion, verification â€” is logged with timestamp, user, and IP address.</p>
           </div>
           <div class="sec-feat">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -764,7 +764,7 @@
     <section class="cta-section" data-screen-label="12 CTA">
       <div class="container">
         <h2>Ready To See OptiFlow In Action?</h2>
-        <p class="lead">Discover how OptiFlow helps MSMEs build systems, improve accountability, and scale operations — without adding management layers.</p>
+        <p class="lead">Discover how OptiFlow helps MSMEs build systems, improve accountability, and scale operations â€” without adding management layers.</p>
         <div class="cta-btns">
           <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow">Book Free Demo</a>
           <a href="/product-overview/" class="btn btn-secondary btn-lg">Watch Product Tour</a>
@@ -857,4 +857,6 @@
   </script>
 
   <!-- ponytail: reveal + stagger handled by core.js -->
+
+  <!-- INCLUDE: cookie-consent -->
 </body></html>

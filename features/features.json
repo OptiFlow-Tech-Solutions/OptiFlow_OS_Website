@@ -1,80 +1,3362 @@
 {
-  "version": "3.0.0",
+  "version": "5.0.0",
   "project": "OptiFlow OS Website",
-  "schema": "flat-vertical-slice",
+  "schema": "ai-native-vertical-slice",
   "statuses": {
     "complete": "Implemented and available in production",
-    "pending": "Has an active OpenSpec change in progress",
+    "in-progress": "Has an active OpenSpec change in progress",
     "planned": "On the roadmap but not yet started"
   },
   "features": [
-    { "id": "SYS-001", "name": "Design System & Theming", "status": "complete" },
-    { "id": "SYS-002", "name": "Site Navigation & Structure", "status": "complete" },
-    { "id": "SYS-003", "name": "Interactive Runtime", "status": "complete" },
-    { "id": "SYS-004", "name": "Build & Deployment Pipeline", "status": "complete" },
-    { "id": "SYS-005", "name": "SEO & Metadata", "status": "complete" },
-    { "id": "PAGE-001", "name": "Home Page", "status": "complete" },
-    { "id": "PAGE-002", "name": "Problem & Solutions", "status": "complete" },
-    { "id": "PAGE-003", "name": "Product Overview", "status": "complete" },
-    { "id": "PAGE-004", "name": "Feature Showcase", "status": "complete" },
-    { "id": "PAGE-005", "name": "Competitive Positioning", "status": "complete" },
-    { "id": "PAGE-006", "name": "Pricing & Plans", "status": "complete" },
-    { "id": "PAGE-007", "name": "Newsletter & Content", "status": "complete" },
-    { "id": "PAGE-008", "name": "FAQ & Self-Service", "status": "complete" },
-    { "id": "LEAD-001", "name": "Demo Booking", "status": "complete" },
-    { "id": "LEAD-002", "name": "Contact & Support", "status": "complete" },
-    { "id": "LEGAL-001", "name": "Privacy Policy", "status": "complete" },
-    { "id": "LEGAL-002", "name": "Terms & Conditions", "status": "complete" },
-    { "id": "API-001", "name": "Form Processing API", "status": "complete" },
-    { "id": "API-002", "name": "Admin Authentication", "status": "complete" },
-    { "id": "API-003", "name": "Admin Dashboard", "status": "complete" },
-    { "id": "API-004", "name": "Email Notifications", "status": "complete" },
-    { "id": "API-005", "name": "Database & Data Management", "status": "complete" },
-    { "id": "API-006", "name": "Monitoring & Observability", "status": "complete" },
-    { "id": "QA-001", "name": "Accessibility Compliance", "status": "complete" },
-    { "id": "QA-002", "name": "Testing Suite", "status": "complete" },
-    { "id": "QA-003", "name": "Code Quality & Performance", "status": "complete" },
-    { "id": "OPS-001", "name": "Orchestration Engine", "status": "complete" },
-    { "id": "OPS-002", "name": "Git Hooks & Automation", "status": "complete" },
-    { "id": "UI-001", "name": "Motion & Animation System Enhancement", "status": "complete" },
-    { "id": "UI-002", "name": "Page Transition Animations", "status": "complete" },
-    { "id": "UI-003", "name": "Skeleton Loading & Empty States", "status": "complete" },
-    { "id": "UI-004", "name": "Toast & Notification System", "status": "complete" },
-    { "id": "UI-005", "name": "Cookie Consent & Privacy Compliance", "status": "pending" },
-    { "id": "UI-006", "name": "Image Optimization Pipeline", "status": "planned" },
-    { "id": "UI-007", "name": "Service Worker & PWA Enhancement", "status": "planned" },
-    { "id": "UI-008", "name": "Interactive Product Demo Mockups", "status": "planned" },
-    { "id": "UI-009", "name": "Site Search Functionality", "status": "planned" },
-    { "id": "UI-010", "name": "Error Boundary & Recovery System", "status": "planned" },
-    { "id": "UI-011", "name": "Hero Section Motion Enhancement", "status": "planned" },
-    { "id": "UI-012", "name": "Scroll-Triggered Animation System", "status": "planned" },
-    { "id": "UI-013", "name": "Card & Component Interaction Polish", "status": "planned" },
-    { "id": "UI-014", "name": "Content Freshness & Last Updated Display", "status": "planned" },
-    { "id": "PERF-001", "name": "Critical CSS Extraction", "status": "planned" },
-    { "id": "PERF-002", "name": "Asset Caching & CDN Strategy", "status": "planned" },
-    { "id": "PERF-003", "name": "Font Self-Hosting & Subsetting", "status": "planned" },
-    { "id": "PERF-004", "name": "Lighthouse CI Pipeline Integration", "status": "planned" },
-    { "id": "SEC-001", "name": "CSRF Protection", "status": "planned" },
-    { "id": "SEC-002", "name": "Input Sanitization & XSS Prevention", "status": "planned" },
-    { "id": "SEC-003", "name": "SRI Hash Injection", "status": "planned" },
-    { "id": "SEC-004", "name": "CSP Reporting Endpoint", "status": "planned" },
-    { "id": "TEST-001", "name": "Unit Testing Framework", "status": "planned" },
-    { "id": "TEST-002", "name": "API Integration Tests", "status": "planned" },
-    { "id": "TEST-003", "name": "Visual Regression Testing Pipeline", "status": "planned" },
-    { "id": "TEST-004", "name": "Accessibility Manual Audit Suite", "status": "planned" },
-    { "id": "TEST-005", "name": "Performance Profiling Suite", "status": "planned" },
-    { "id": "DOCS-001", "name": "API Documentation Generation", "status": "planned" },
-    { "id": "DOCS-002", "name": "Architecture Decision Records", "status": "planned" },
-    { "id": "DOCS-003", "name": "Changelog Automation", "status": "planned" },
-    { "id": "DOCS-004", "name": "Deployment Runbook", "status": "planned" },
-    { "id": "DOCS-005", "name": "Component Catalog Documentation", "status": "planned" },
-    { "id": "CONTENT-001", "name": "Newsletter Content Pipeline", "status": "planned" },
-    { "id": "CONTENT-002", "name": "Case Studies & Customer Stories", "status": "planned" },
-    { "id": "CONTENT-003", "name": "Product Roadmap & Release Notes Page", "status": "planned" },
-    { "id": "CONTENT-004", "name": "Blog Engine & Content Management", "status": "planned" },
-    { "id": "OPS-003", "name": "Monitoring & Alerting Pipeline", "status": "planned" },
-    { "id": "OPS-004", "name": "Backup & Disaster Recovery Strategy", "status": "planned" },
-    { "id": "OPS-005", "name": "OpenSpec Coverage Reporting", "status": "planned" },
-    { "id": "OPS-006", "name": "Orchestration Engine Documentation", "status": "planned" }
-  ]
+    {
+      "id": "SYS-001",
+      "name": "Design System & Theming",
+      "status": "complete",
+      "category": "system",
+      "priority": "P0",
+      "description": "Core design system with CSS variables, typography, spacing grid, light/dark themes",
+      "dependencies": [],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "platform-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "design-system-build",
+        "domains": [
+          "design",
+          "frontend"
+        ],
+        "skills": [
+          "design-system",
+          "make-interfaces-feel-better"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "SYS-002",
+      "name": "Site Navigation & Structure",
+      "status": "complete",
+      "category": "system",
+      "priority": "P0",
+      "description": "Global navigation bar, footer, page structure, and site map",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "platform-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "nav-improve",
+        "domains": [
+          "frontend",
+          "accessibility"
+        ],
+        "skills": [
+          "frontend-patterns",
+          "accessibility"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "SYS-003",
+      "name": "Interactive Runtime",
+      "status": "complete",
+      "category": "system",
+      "priority": "P0",
+      "description": "Client-side JavaScript runtime for interactivity, dark mode toggle, mobile menu",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "platform-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "ux-improve",
+        "domains": [
+          "frontend",
+          "design"
+        ],
+        "skills": [
+          "frontend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "SYS-004",
+      "name": "Build & Deployment Pipeline",
+      "status": "complete",
+      "category": "system",
+      "priority": "P0",
+      "description": "Node.js build pipeline, validation, linting, and deployment to Cloudflare/Netlify",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "platform-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "deploy",
+        "domains": [
+          "build",
+          "deployment"
+        ],
+        "skills": [
+          "deployment-patterns",
+          "build-error-resolver"
+        ],
+        "primaryAgent": "build-error-resolver",
+        "validation": [
+          1,
+          2,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "SYS-005",
+      "name": "SEO & Metadata",
+      "status": "complete",
+      "category": "system",
+      "priority": "P1",
+      "description": "SEO optimization including meta tags, structured data, sitemap, OpenGraph, canonical URLs",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "platform-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "seo-optimization",
+        "domains": [
+          "seo",
+          "frontend"
+        ],
+        "skills": [
+          "seo",
+          "seo-audit"
+        ],
+        "primaryAgent": "seo-specialist",
+        "validation": [
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PAGE-001",
+      "name": "Home Page",
+      "status": "complete",
+      "category": "page",
+      "priority": "P0",
+      "description": "Hero section, value proposition, modules overview, CTA for demo booking",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "frontend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "landing-page",
+        "domains": [
+          "design",
+          "frontend",
+          "seo"
+        ],
+        "skills": [
+          "frontend-design-direction",
+          "design-system",
+          "seo"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PAGE-002",
+      "name": "Problem & Solutions",
+      "status": "complete",
+      "category": "page",
+      "priority": "P1",
+      "description": "6 operational challenges and OptiFlow OS solutions with visual comparisons",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "frontend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "landing-page",
+        "domains": [
+          "design",
+          "frontend",
+          "seo"
+        ],
+        "skills": [
+          "frontend-design-direction",
+          "design-system",
+          "seo"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PAGE-003",
+      "name": "Product Overview",
+      "status": "complete",
+      "category": "page",
+      "priority": "P0",
+      "description": "Complete module showcase — task management, attendance, SOPs, reporting, and more",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "frontend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "landing-page",
+        "domains": [
+          "design",
+          "frontend",
+          "seo"
+        ],
+        "skills": [
+          "frontend-design-direction",
+          "design-system",
+          "seo"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PAGE-004",
+      "name": "Feature Showcase",
+      "status": "complete",
+      "category": "page",
+      "priority": "P1",
+      "description": "Before/after feature transformations with quantified business outcomes",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "frontend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "landing-page",
+        "domains": [
+          "design",
+          "frontend",
+          "seo"
+        ],
+        "skills": [
+          "frontend-design-direction",
+          "design-system",
+          "seo"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PAGE-005",
+      "name": "Competitive Positioning",
+      "status": "complete",
+      "category": "page",
+      "priority": "P1",
+      "description": "Feature-by-feature comparison against WhatsApp, Excel, generic tools, and traditional ERPs",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "frontend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "landing-page",
+        "domains": [
+          "design",
+          "frontend",
+          "seo"
+        ],
+        "skills": [
+          "frontend-design-direction",
+          "design-system",
+          "seo"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PAGE-006",
+      "name": "Pricing & Plans",
+      "status": "complete",
+      "category": "page",
+      "priority": "P0",
+      "description": "Starter, Growth, Scale plans with interactive pricing table and comparison",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "frontend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "pricing-page",
+        "domains": [
+          "design",
+          "frontend",
+          "seo"
+        ],
+        "skills": [
+          "frontend-design-direction",
+          "design-system",
+          "seo"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PAGE-007",
+      "name": "Newsletter & Content",
+      "status": "complete",
+      "category": "page",
+      "priority": "P2",
+      "description": "Newsletter archive, content hub, subscription form",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "frontend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "content-add",
+        "domains": [
+          "content",
+          "frontend"
+        ],
+        "skills": [
+          "article-writing",
+          "brand-voice",
+          "newsletter-pipeline"
+        ],
+        "primaryAgent": "content-writer",
+        "validation": [
+          1,
+          3,
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PAGE-008",
+      "name": "FAQ & Self-Service",
+      "status": "complete",
+      "category": "page",
+      "priority": "P1",
+      "description": "FAQ accordion, video tutorials, troubleshooting guide, guided setup",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "frontend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "faq-page",
+        "domains": [
+          "frontend",
+          "seo"
+        ],
+        "skills": [
+          "frontend-patterns",
+          "seo"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          3,
+          5
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "LEAD-001",
+      "name": "Demo Booking",
+      "status": "complete",
+      "category": "lead",
+      "priority": "P0",
+      "description": "Multi-step demo booking form with calendar selection, qualification questions, confirmation",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002",
+        "API-001"
+      ],
+      "complexity": "L",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "demobooking-page",
+        "domains": [
+          "design",
+          "frontend"
+        ],
+        "skills": [
+          "frontend-design-direction",
+          "demo-flow-optimizer",
+          "design-system"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          2,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "LEAD-002",
+      "name": "Contact & Support",
+      "status": "complete",
+      "category": "lead",
+      "priority": "P1",
+      "description": "Contact form with subject selection, support ticket routing, auto-response",
+      "dependencies": [
+        "SYS-001",
+        "SYS-002",
+        "API-001"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "form-build",
+        "domains": [
+          "frontend",
+          "api"
+        ],
+        "skills": [
+          "frontend-patterns",
+          "accessibility"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          2,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "LEGAL-001",
+      "name": "Privacy Policy",
+      "status": "complete",
+      "category": "legal",
+      "priority": "P0",
+      "description": "GDPR and Indian DPDP Act 2023 compliant privacy policy page",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "content-add",
+        "domains": [
+          "frontend",
+          "content"
+        ],
+        "skills": [
+          "frontend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "LEGAL-002",
+      "name": "Terms & Conditions",
+      "status": "complete",
+      "category": "legal",
+      "priority": "P0",
+      "description": "Platform usage terms, payment terms, data ownership, governing law",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "content-add",
+        "domains": [
+          "frontend",
+          "content"
+        ],
+        "skills": [
+          "frontend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "API-001",
+      "name": "Form Processing API",
+      "status": "complete",
+      "category": "api",
+      "priority": "P0",
+      "description": "Serverless form submission handling, validation, rate limiting, storage",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "L",
+      "risk": "medium",
+      "owner": "backend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "form-build",
+        "domains": [
+          "backend",
+          "api",
+          "security"
+        ],
+        "skills": [
+          "backend-patterns",
+          "api-design",
+          "security-review"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST",
+          "GATE_SECURITY"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "API-002",
+      "name": "Admin Authentication",
+      "status": "complete",
+      "category": "api",
+      "priority": "P1",
+      "description": "Admin login, session management, role-based access control",
+      "dependencies": [
+        "SYS-004",
+        "API-005"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "backend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "auth-flow",
+        "domains": [
+          "backend",
+          "security"
+        ],
+        "skills": [
+          "security-review",
+          "backend-patterns"
+        ],
+        "primaryAgent": "security-reviewer",
+        "validation": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST",
+          "GATE_SECURITY"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "API-003",
+      "name": "Admin Dashboard",
+      "status": "complete",
+      "category": "api",
+      "priority": "P1",
+      "description": "Internal admin panel for lead management, form submissions, activity monitoring",
+      "dependencies": [
+        "SYS-004",
+        "API-002",
+        "API-005"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "backend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "dashboard-build",
+        "domains": [
+          "frontend",
+          "backend",
+          "data"
+        ],
+        "skills": [
+          "dashboard-builder",
+          "frontend-patterns",
+          "backend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "API-004",
+      "name": "Email Notifications",
+      "status": "complete",
+      "category": "api",
+      "priority": "P1",
+      "description": "Automated email notifications for demo bookings, contact forms, newsletter",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "backend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "email-setup",
+        "domains": [
+          "backend",
+          "api"
+        ],
+        "skills": [
+          "backend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "API-005",
+      "name": "Database & Data Management",
+      "status": "complete",
+      "category": "api",
+      "priority": "P0",
+      "description": "KV store management, data persistence, backup, migration strategy",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "L",
+      "risk": "medium",
+      "owner": "backend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "architecture-plan",
+        "domains": [
+          "backend",
+          "data"
+        ],
+        "skills": [
+          "backend-patterns",
+          "data-throughput-accelerator"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "API-006",
+      "name": "Monitoring & Observability",
+      "status": "complete",
+      "category": "api",
+      "priority": "P2",
+      "description": "Health checks, logging, error tracking, platform telemetry",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "backend-team",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "dashboard-build",
+        "domains": [
+          "backend",
+          "infrastructure"
+        ],
+        "skills": [
+          "dashboard-builder",
+          "backend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "QA-001",
+      "name": "Accessibility Compliance",
+      "status": "complete",
+      "category": "quality",
+      "priority": "P0",
+      "description": "WCAG 2.2 AA compliance, ARIA labels, keyboard navigation, contrast ratios",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "L",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "improve-accessibility",
+        "domains": [
+          "accessibility"
+        ],
+        "skills": [
+          "accessibility",
+          "frontend-a11y"
+        ],
+        "primaryAgent": "frontend-a11y",
+        "validation": [
+          1,
+          2,
+          6
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "QA-002",
+      "name": "Testing Suite",
+      "status": "complete",
+      "category": "quality",
+      "priority": "P1",
+      "description": "Playwright E2E tests, visual regression tests, SEO tests, a11y tests",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "write-tests",
+        "domains": [
+          "testing",
+          "quality"
+        ],
+        "skills": [
+          "e2e-testing",
+          "browser-qa",
+          "tdd-workflow"
+        ],
+        "primaryAgent": "e2e-runner",
+        "validation": [
+          7
+        ],
+        "gates": [
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "QA-003",
+      "name": "Code Quality & Performance",
+      "status": "complete",
+      "category": "quality",
+      "priority": "P1",
+      "description": "ESLint, Stylelint, HTML validation, Lighthouse CI, performance budgets",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "review-code",
+        "domains": [
+          "quality",
+          "performance"
+        ],
+        "skills": [
+          "coding-standards",
+          "benchmark"
+        ],
+        "primaryAgent": "code-reviewer",
+        "validation": [
+          1,
+          2,
+          4,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST",
+          "GATE_A11Y",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "OPS-001",
+      "name": "Orchestration Engine",
+      "status": "complete",
+      "category": "operations",
+      "priority": "P0",
+      "description": "V13 autonomous orchestration engine with goal-oriented loop, agent contracts, shared memory",
+      "dependencies": [],
+      "complexity": "L",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "architecture-plan",
+        "domains": [
+          "architecture",
+          "automation"
+        ],
+        "skills": [
+          "orchestration-patterns",
+          "autonomous-loops"
+        ],
+        "primaryAgent": "planner",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_SPEC",
+          "GATE_BUILD"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "OPS-002",
+      "name": "Git Hooks & Automation",
+      "status": "complete",
+      "category": "operations",
+      "priority": "P1",
+      "description": "Pre-commit, pre-push, pre-build, post-build, post-merge, theme-change hooks",
+      "dependencies": [
+        "OPS-001"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "deploy",
+        "domains": [
+          "deployment",
+          "automation"
+        ],
+        "skills": [
+          "deployment-patterns",
+          "git-workflow"
+        ],
+        "primaryAgent": "build-error-resolver",
+        "validation": [
+          1,
+          2,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-001",
+      "name": "Motion & Animation System Enhancement",
+      "status": "complete",
+      "category": "ui",
+      "priority": "P2",
+      "description": "Motion foundation tokens, spring presets, device adaptation, accessibility enforcement",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "animation",
+        "domains": [
+          "frontend",
+          "design",
+          "animation"
+        ],
+        "skills": [
+          "motion-foundations",
+          "motion-patterns",
+          "motion-ui"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-002",
+      "name": "Page Transition Animations",
+      "status": "complete",
+      "category": "ui",
+      "priority": "P2",
+      "description": "Smooth page transitions, exit animations, scroll-triggered reveals",
+      "dependencies": [
+        "SYS-001",
+        "UI-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "animation",
+        "domains": [
+          "frontend",
+          "design",
+          "animation"
+        ],
+        "skills": [
+          "motion-foundations",
+          "motion-patterns",
+          "motion-ui"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-003",
+      "name": "Skeleton Loading & Empty States",
+      "status": "complete",
+      "category": "ui",
+      "priority": "P2",
+      "description": "Skeleton loading screens, shimmer effects, empty state illustrations",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "ux-improve",
+        "domains": [
+          "design",
+          "frontend"
+        ],
+        "skills": [
+          "design-system"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-004",
+      "name": "Toast & Notification System",
+      "status": "complete",
+      "category": "ui",
+      "priority": "P2",
+      "description": "Toast notifications, status alerts, snackbar messages with dismiss and actions",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "ux-improve",
+        "domains": [
+          "design",
+          "frontend"
+        ],
+        "skills": [
+          "design-system",
+          "frontend-patterns"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-005",
+      "name": "Cookie Consent & Privacy Compliance",
+      "status": "complete",
+      "category": "ui",
+      "priority": "P1",
+      "description": "GDPR-compliant cookie consent banner, preference management, privacy controls",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-01",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "brand-audit",
+        "domains": [
+          "frontend",
+          "security"
+        ],
+        "skills": [
+          "frontend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          3,
+          6
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-006",
+      "name": "Image Optimization Pipeline",
+      "status": "complete",
+      "category": "ui",
+      "priority": "P3",
+      "description": "Responsive images, WebP/AVIF conversion, lazy loading, CDN delivery",
+      "dependencies": [
+        "SYS-004",
+        "PERF-002"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "v1.0",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "perf-optimize-deep",
+        "domains": [
+          "performance",
+          "frontend",
+          "build"
+        ],
+        "skills": [
+          "benchmark",
+          "react-performance"
+        ],
+        "primaryAgent": "performance-optimizer",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-007",
+      "name": "Service Worker & PWA Enhancement",
+      "status": "planned",
+      "category": "ui",
+      "priority": "P3",
+      "description": "Offline support, installable PWA, cache strategies, push notifications",
+      "dependencies": [
+        "SYS-004",
+        "PERF-002"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "deploy",
+        "domains": [
+          "frontend",
+          "performance",
+          "build"
+        ],
+        "skills": [
+          "deployment-patterns",
+          "frontend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-008",
+      "name": "Interactive Product Demo Mockups",
+      "status": "planned",
+      "category": "ui",
+      "priority": "P4",
+      "description": "Animated product mockups showing OptiFlow OS interface in action",
+      "dependencies": [
+        "SYS-001",
+        "UI-001"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "animation",
+        "domains": [
+          "design",
+          "frontend",
+          "animation"
+        ],
+        "skills": [
+          "motion-foundations",
+          "frontend-design-direction"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-009",
+      "name": "Site Search Functionality",
+      "status": "planned",
+      "category": "ui",
+      "priority": "P3",
+      "description": "Full-text site search with autocomplete, filters, and result highlighting",
+      "dependencies": [
+        "SYS-003",
+        "API-005"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "api-build",
+        "domains": [
+          "frontend",
+          "backend"
+        ],
+        "skills": [
+          "frontend-patterns",
+          "backend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          2,
+          3,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-010",
+      "name": "Error Boundary & Recovery System",
+      "status": "planned",
+      "category": "ui",
+      "priority": "P3",
+      "description": "Graceful error handling, fallback UI, recovery actions, error reporting",
+      "dependencies": [
+        "SYS-003"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "fix-bug",
+        "domains": [
+          "frontend",
+          "quality"
+        ],
+        "skills": [
+          "frontend-patterns",
+          "coding-standards"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-011",
+      "name": "Hero Section Motion Enhancement",
+      "status": "planned",
+      "category": "ui",
+      "priority": "P4",
+      "description": "Advanced hero animations, parallax effects, particle systems, gradient morphing",
+      "dependencies": [
+        "SYS-001",
+        "UI-001"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "animation",
+        "domains": [
+          "design",
+          "frontend",
+          "animation"
+        ],
+        "skills": [
+          "motion-advanced",
+          "motion-foundations"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-012",
+      "name": "Scroll-Triggered Animation System",
+      "status": "planned",
+      "category": "ui",
+      "priority": "P3",
+      "description": "Intersection Observer-based scroll animations, reveal sequences, progress indicators",
+      "dependencies": [
+        "SYS-003",
+        "UI-001"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "animation",
+        "domains": [
+          "frontend",
+          "design",
+          "animation"
+        ],
+        "skills": [
+          "motion-patterns",
+          "motion-foundations"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-013",
+      "name": "Card & Component Interaction Polish",
+      "status": "planned",
+      "category": "ui",
+      "priority": "P4",
+      "description": "Micro-interactions, hover states, focus rings, press feedback for all components",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "ux-improve",
+        "domains": [
+          "design",
+          "frontend"
+        ],
+        "skills": [
+          "make-interfaces-feel-better",
+          "design-system"
+        ],
+        "primaryAgent": "frontend-design-direction",
+        "validation": [
+          1,
+          4
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "UI-014",
+      "name": "Content Freshness & Last Updated Display",
+      "status": "planned",
+      "category": "ui",
+      "priority": "P4",
+      "description": "Dynamic last-updated timestamps, content freshness indicators, version badges",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "deploy",
+        "domains": [
+          "frontend",
+          "build"
+        ],
+        "skills": [
+          "frontend-patterns"
+        ],
+        "primaryAgent": "tdd-guide",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PERF-001",
+      "name": "Critical CSS Extraction",
+      "status": "planned",
+      "category": "performance",
+      "priority": "P2",
+      "description": "Extract above-the-fold CSS, inline critical styles, defer non-critical CSS",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "perf-optimize-deep",
+        "domains": [
+          "performance",
+          "frontend",
+          "build"
+        ],
+        "skills": [
+          "benchmark",
+          "react-performance"
+        ],
+        "primaryAgent": "performance-optimizer",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PERF-002",
+      "name": "Asset Caching & CDN Strategy",
+      "status": "planned",
+      "category": "performance",
+      "priority": "P2",
+      "description": "Cache-Control headers, CDN configuration, asset versioning, cache invalidation",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "deploy",
+        "domains": [
+          "deployment",
+          "performance"
+        ],
+        "skills": [
+          "deployment-patterns",
+          "performance-audit"
+        ],
+        "primaryAgent": "deployment-coordinator",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PERF-003",
+      "name": "Font Self-Hosting & Subsetting",
+      "status": "planned",
+      "category": "performance",
+      "priority": "P2",
+      "description": "Self-host Inter+JetBrains Mono, subset to latin, preload critical weights",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "perf-optimize-deep",
+        "domains": [
+          "performance",
+          "frontend"
+        ],
+        "skills": [
+          "benchmark"
+        ],
+        "primaryAgent": "performance-optimizer",
+        "validation": [
+          1,
+          2
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "PERF-004",
+      "name": "Lighthouse CI Pipeline Integration",
+      "status": "planned",
+      "category": "performance",
+      "priority": "P2",
+      "description": "Automated Lighthouse audits, performance budgets, trend tracking, CI gating",
+      "dependencies": [
+        "SYS-004",
+        "QA-003"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "perf-optimize-deep",
+        "domains": [
+          "performance",
+          "build",
+          "quality"
+        ],
+        "skills": [
+          "performance-audit",
+          "benchmark"
+        ],
+        "primaryAgent": "performance-optimizer",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "SEC-001",
+      "name": "CSRF Protection",
+      "status": "planned",
+      "category": "security",
+      "priority": "P1",
+      "description": "CSRF token generation, validation middleware, same-site cookie enforcement",
+      "dependencies": [
+        "API-001"
+      ],
+      "complexity": "M",
+      "risk": "high",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "security-review",
+        "domains": [
+          "security",
+          "backend"
+        ],
+        "skills": [
+          "security-review",
+          "backend-patterns"
+        ],
+        "primaryAgent": "security-reviewer",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_SECURITY"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "SEC-002",
+      "name": "Input Sanitization & XSS Prevention",
+      "status": "planned",
+      "category": "security",
+      "priority": "P1",
+      "description": "Input validation, output encoding, Content-Security-Policy headers, XSS filters",
+      "dependencies": [
+        "API-001"
+      ],
+      "complexity": "M",
+      "risk": "high",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "security-review",
+        "domains": [
+          "security",
+          "frontend",
+          "backend"
+        ],
+        "skills": [
+          "security-review",
+          "frontend-patterns",
+          "backend-patterns"
+        ],
+        "primaryAgent": "security-reviewer",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_SECURITY"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "SEC-003",
+      "name": "SRI Hash Injection",
+      "status": "planned",
+      "category": "security",
+      "priority": "P2",
+      "description": "Subresource Integrity hashes for all external scripts and stylesheets",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "high",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "security-review",
+        "domains": [
+          "security",
+          "build"
+        ],
+        "skills": [
+          "security-review"
+        ],
+        "primaryAgent": "security-reviewer",
+        "validation": [
+          1,
+          2
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_SECURITY"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "SEC-004",
+      "name": "CSP Reporting Endpoint",
+      "status": "planned",
+      "category": "security",
+      "priority": "P2",
+      "description": "Content-Security-Policy violation reporting, report-uri endpoint, alerting",
+      "dependencies": [
+        "API-006"
+      ],
+      "complexity": "M",
+      "risk": "high",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "security-review",
+        "domains": [
+          "security",
+          "api"
+        ],
+        "skills": [
+          "security-review",
+          "backend-patterns"
+        ],
+        "primaryAgent": "security-reviewer",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_SECURITY"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "TEST-001",
+      "name": "Unit Testing Framework",
+      "status": "planned",
+      "category": "testing",
+      "priority": "P1",
+      "description": "Vitest/Jest unit test framework, component tests, utility tests, coverage thresholds",
+      "dependencies": [
+        "QA-002"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "write-tests",
+        "domains": [
+          "testing",
+          "quality"
+        ],
+        "skills": [
+          "tdd-workflow",
+          "test-coverage"
+        ],
+        "primaryAgent": "e2e-runner",
+        "validation": [
+          7
+        ],
+        "gates": [
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "TEST-002",
+      "name": "API Integration Tests",
+      "status": "planned",
+      "category": "testing",
+      "priority": "P2",
+      "description": "API endpoint integration tests, request/response validation, error scenario testing",
+      "dependencies": [
+        "QA-002",
+        "TEST-001"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "write-tests",
+        "domains": [
+          "testing",
+          "backend",
+          "api"
+        ],
+        "skills": [
+          "e2e-testing",
+          "tdd-workflow"
+        ],
+        "primaryAgent": "e2e-runner",
+        "validation": [
+          7
+        ],
+        "gates": [
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "TEST-003",
+      "name": "Visual Regression Testing Pipeline",
+      "status": "planned",
+      "category": "testing",
+      "priority": "P2",
+      "description": "Automated visual diff testing, screenshot baselines, per-breakpoint comparison",
+      "dependencies": [
+        "QA-002"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "write-tests",
+        "domains": [
+          "testing",
+          "quality"
+        ],
+        "skills": [
+          "visual-regression",
+          "browser-qa"
+        ],
+        "primaryAgent": "e2e-runner",
+        "validation": [
+          7
+        ],
+        "gates": [
+          "GATE_TEST",
+          "GATE_VISUAL"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "TEST-004",
+      "name": "Accessibility Manual Audit Suite",
+      "status": "planned",
+      "category": "testing",
+      "priority": "P2",
+      "description": "Manual a11y audit checklist, screen reader testing, keyboard navigation tests",
+      "dependencies": [
+        "QA-001"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "improve-accessibility",
+        "domains": [
+          "testing",
+          "accessibility"
+        ],
+        "skills": [
+          "accessibility",
+          "frontend-a11y"
+        ],
+        "primaryAgent": "frontend-a11y",
+        "validation": [
+          6
+        ],
+        "gates": [
+          "GATE_A11Y"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "TEST-005",
+      "name": "Performance Profiling Suite",
+      "status": "planned",
+      "category": "testing",
+      "priority": "P3",
+      "description": "Runtime performance profiling, memory leak detection, bundle analysis",
+      "dependencies": [
+        "QA-003",
+        "PERF-004"
+      ],
+      "complexity": "S",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "performance",
+        "domains": [
+          "testing",
+          "performance"
+        ],
+        "skills": [
+          "benchmark",
+          "performance-audit"
+        ],
+        "primaryAgent": "performance-optimizer",
+        "validation": [
+          7
+        ],
+        "gates": [
+          "GATE_PERF"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "DOCS-001",
+      "name": "API Documentation Generation",
+      "status": "planned",
+      "category": "docs",
+      "priority": "P3",
+      "description": "Auto-generated API docs from OpenAPI spec, endpoint catalog, usage examples",
+      "dependencies": [
+        "API-001",
+        "API-004"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "api-build",
+        "domains": [
+          "documentation",
+          "api"
+        ],
+        "skills": [
+          "article-writing",
+          "api-design"
+        ],
+        "primaryAgent": "doc-updater",
+        "validation": [],
+        "gates": [
+          "GATE_SPEC"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "DOCS-002",
+      "name": "Architecture Decision Records",
+      "status": "planned",
+      "category": "docs",
+      "priority": "P2",
+      "description": "ADRs for key architectural decisions with context, alternatives, and rationale",
+      "dependencies": [
+        "OPS-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "document",
+        "domains": [
+          "documentation",
+          "architecture"
+        ],
+        "skills": [
+          "architecture-decision-records"
+        ],
+        "primaryAgent": "doc-updater",
+        "validation": [],
+        "gates": [
+          "GATE_SPEC"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "DOCS-003",
+      "name": "Changelog Automation",
+      "status": "planned",
+      "category": "docs",
+      "priority": "P3",
+      "description": "Auto-generated changelog from conventional commits, categorized by type",
+      "dependencies": [
+        "OPS-002"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "document",
+        "domains": [
+          "documentation",
+          "automation"
+        ],
+        "skills": [
+          "article-writing"
+        ],
+        "primaryAgent": "doc-updater",
+        "validation": [],
+        "gates": [
+          "GATE_SPEC"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "DOCS-004",
+      "name": "Deployment Runbook",
+      "status": "planned",
+      "category": "docs",
+      "priority": "P2",
+      "description": "Step-by-step deployment runbook, rollback procedures, environment configuration",
+      "dependencies": [
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "document",
+        "domains": [
+          "documentation",
+          "deployment"
+        ],
+        "skills": [
+          "deployment-patterns",
+          "article-writing"
+        ],
+        "primaryAgent": "doc-updater",
+        "validation": [],
+        "gates": [
+          "GATE_SPEC"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "DOCS-005",
+      "name": "Component Catalog Documentation",
+      "status": "planned",
+      "category": "docs",
+      "priority": "P2",
+      "description": "Visual component catalog with usage examples, props, design tokens, accessibility notes",
+      "dependencies": [
+        "SYS-001"
+      ],
+      "complexity": "M",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "document",
+        "domains": [
+          "documentation",
+          "design"
+        ],
+        "skills": [
+          "design-system",
+          "article-writing"
+        ],
+        "primaryAgent": "doc-updater",
+        "validation": [],
+        "gates": [
+          "GATE_SPEC"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "CONTENT-001",
+      "name": "Newsletter Content Pipeline",
+      "status": "planned",
+      "category": "content",
+      "priority": "P3",
+      "description": "End-to-end newsletter workflow — topic planning, drafting, review, publish, distribute",
+      "dependencies": [
+        "PAGE-007"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "content-add",
+        "domains": [
+          "content",
+          "frontend"
+        ],
+        "skills": [
+          "newsletter-pipeline",
+          "content-engine",
+          "content-calendar"
+        ],
+        "primaryAgent": "content-writer",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "CONTENT-002",
+      "name": "Case Studies & Customer Stories",
+      "status": "planned",
+      "category": "content",
+      "priority": "P3",
+      "description": "Customer success stories, case study templates, quantified results, testimonials",
+      "dependencies": [
+        "PAGE-001",
+        "CONTENT-001"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "content-add",
+        "domains": [
+          "content",
+          "frontend"
+        ],
+        "skills": [
+          "article-writing",
+          "content-engine"
+        ],
+        "primaryAgent": "content-writer",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "CONTENT-003",
+      "name": "Product Roadmap & Release Notes Page",
+      "status": "planned",
+      "category": "content",
+      "priority": "P3",
+      "description": "Public roadmap page, release notes, feature voting, feedback collection",
+      "dependencies": [
+        "PAGE-001",
+        "DOCS-003"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "content-add",
+        "domains": [
+          "content",
+          "frontend",
+          "documentation"
+        ],
+        "skills": [
+          "article-writing",
+          "content-calendar"
+        ],
+        "primaryAgent": "content-writer",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "CONTENT-004",
+      "name": "Blog Engine & Content Management",
+      "status": "planned",
+      "category": "content",
+      "priority": "P4",
+      "description": "Blog platform with categories, tags, search, RSS feed, social sharing",
+      "dependencies": [
+        "PAGE-007",
+        "UI-009"
+      ],
+      "complexity": "S",
+      "risk": "low",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "content-add",
+        "domains": [
+          "content",
+          "frontend",
+          "backend"
+        ],
+        "skills": [
+          "content-engine",
+          "frontend-patterns",
+          "backend-patterns"
+        ],
+        "primaryAgent": "content-writer",
+        "validation": [
+          1,
+          2,
+          3
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "OPS-003",
+      "name": "Monitoring & Alerting Pipeline",
+      "status": "planned",
+      "category": "operations",
+      "priority": "P2",
+      "description": "Uptime monitoring, error alerting, performance thresholds, incident response",
+      "dependencies": [
+        "API-006",
+        "SYS-004"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "deploy",
+        "domains": [
+          "deployment",
+          "infrastructure"
+        ],
+        "skills": [
+          "dashboard-builder",
+          "deployment-patterns"
+        ],
+        "primaryAgent": "deployment-coordinator",
+        "validation": [
+          1,
+          2,
+          7
+        ],
+        "gates": [
+          "GATE_BUILD",
+          "GATE_VALIDATE",
+          "GATE_TEST"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "OPS-004",
+      "name": "Backup & Disaster Recovery Strategy",
+      "status": "planned",
+      "category": "operations",
+      "priority": "P2",
+      "description": "Automated backups, recovery point objectives, disaster recovery runbook",
+      "dependencies": [
+        "API-005"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "deploy",
+        "domains": [
+          "deployment",
+          "infrastructure"
+        ],
+        "skills": [
+          "deployment-patterns"
+        ],
+        "primaryAgent": "deployment-coordinator",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_SPEC",
+          "GATE_BUILD"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "OPS-005",
+      "name": "OpenSpec Coverage Reporting",
+      "status": "planned",
+      "category": "operations",
+      "priority": "P3",
+      "description": "Spec coverage metrics, traceability gap reports, requirement-to-test mapping",
+      "dependencies": [
+        "OPS-001"
+      ],
+      "complexity": "S",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "review-code",
+        "domains": [
+          "quality",
+          "documentation"
+        ],
+        "skills": [
+          "verification-loop",
+          "spec-trace"
+        ],
+        "primaryAgent": "code-reviewer",
+        "validation": [
+          1,
+          3
+        ],
+        "gates": [
+          "GATE_SPEC",
+          "GATE_BUILD"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    },
+    {
+      "id": "OPS-006",
+      "name": "Orchestration Engine Documentation",
+      "status": "planned",
+      "category": "operations",
+      "priority": "P2",
+      "description": "Complete documentation for the V13 orchestration engine, API reference, usage guide",
+      "dependencies": [
+        "OPS-001"
+      ],
+      "complexity": "M",
+      "risk": "medium",
+      "owner": "engineering",
+      "created": "2026-06-01",
+      "updated": "2026-07-04",
+      "release": "planned",
+      "acceptanceCriteria": [],
+      "aiContext": {
+        "intent": "document",
+        "domains": [
+          "documentation",
+          "architecture"
+        ],
+        "skills": [
+          "article-writing",
+          "architecture-decision-records"
+        ],
+        "primaryAgent": "doc-updater",
+        "validation": [],
+        "gates": [
+          "GATE_SPEC"
+        ],
+        "implementationStrategy": "",
+        "testingStrategy": "",
+        "documentationStrategy": ""
+      },
+      "traceability": {
+        "specs": [],
+        "sourceFiles": [],
+        "archiveDir": "",
+        "lastValidated": ""
+      }
+    }
+  ],
+  "repository": {
+    "name": "OptiFlow OS Website",
+    "purpose": "Marketing website for OptiFlow OS — Business Execution Operating System for Indian MSMEs. Replace WhatsApp chaos and Excel silos with one structured platform.",
+    "techStack": "Static HTML/CSS/JS, Node.js build pipeline, Cloudflare Pages + Netlify",
+    "architecture": "Pages-based static site (15 pages) with custom design system, autonomous orchestration engine (48 modules), and spec-driven development",
+    "designSystem": "Custom Enterprise DESIGN.md v5.0, CSS variables only, 8px spacing grid, Inter+JetBrains Mono typography, light/dark themes",
+    "domains": [
+      "marketing",
+      "orchestration",
+      "spec-driven-development",
+      "ai-automation"
+    ],
+    "keyDirectories": {
+      "src/pages": "15 HTML source pages",
+      "src/partials": "3 reusable partials (nav, footer, analytics)",
+      "assets/css": "Design system core CSS (388+ lines)",
+      "assets/js": "Shared JavaScript runtime",
+      "orchestrate": "48-module V13 autonomous orchestration engine",
+      "openspec/specs": "28 capability specifications (BDD format)",
+      "openspec/changes/archive": "32 archived OpenSpec changes",
+      "features": "AI-native feature registry (this directory) — canonical source of truth",
+      "tests/e2e": "Playwright E2E test suite (a11y, SEO, visual regression)",
+      "hooks": "7 git hooks (pre-commit, pre-push, pre-build, post-build, post-merge, theme-change, pre-orchestrate)",
+      "scripts": "Build, validate, and watch scripts",
+      "docs": "Developer documentation",
+      "functions": "Cloudflare Pages Functions (serverless API)"
+    },
+    "engineeringStandards": {
+      "design": "CSS variables only (var(--*)), no hardcoded hex values, 8px spacing grid, Inter+JetBrains Mono fonts, WCAG 2.2 AA contrast ratios, placeholders only for company data ({{PHONE}}, {{EMAIL}}, {{YEAR}})",
+      "code": "ESM modules, no classes unless stateful, immutability preferred, ponytail principle (fewest files, shortest diff), no unnecessary abstractions, security-first (no hardcoded secrets)",
+      "testing": "Playwright E2E tests, axe-core a11y audits, Lighthouse CI performance, 80%+ coverage target, visual regression tests",
+      "build": "node scripts/assemble.mjs assembles src/ -> dist/, pre/post-build hooks run validation, feature integrity checked on every build",
+      "deployment": "Dual-deploy to Cloudflare Pages + Netlify, wrangler.toml + netlify.toml config, manual production promotion"
+    },
+    "aiStandards": {
+      "featureFirst": "Always read features/features.json BEFORE making any code change — features define what exists, what is planned, and how to implement",
+      "designSystemCompliance": "Use CSS variables from core.css, typography classes (.display, h1-h6, .lead, .body), spacing variables (var(--gap-*)), INCLUDE directives for nav/footer, placeholders for company data",
+      "skillDiscovery": "For skill selection, prefer per-feature aiContext over capability-analyzer re-discovery — aiContext is pre-computed and validated",
+      "implementationStrategy": "Read per-feature aiContext.implementationStrategy for implementation guidance before starting",
+      "traceability": "Every commit message MUST reference a Feature ID (e.g., feat(SYS-001): add dark mode toggle). Every implementation MUST trace to a feature",
+      "autonomy": "Use /opsx-auto for full autonomous lifecycle. Use individual /opsx-* commands only for debugging or manual control"
+    }
+  }
 }

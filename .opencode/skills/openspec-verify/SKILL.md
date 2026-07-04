@@ -1,24 +1,50 @@
 ---
 name: openspec-verify
-description: Verify that an implementation matches spec deltas — run build, validation, tests, quality gates, and design compliance checks. Use when the user wants to verify a change before archiving or after implementation.
+description: >
+  Verify that implementation matches spec deltas and passes all quality checks.
+  Runs 8 verification checks: build, validate, lint, tests, task completion,
+  spec delta sync, quality gates (BUILD→VALIDATE→TEST→A11Y→PERF), and design
+  compliance. Produces structured pass/fail report. Runs all checks regardless
+  of failures to collect complete results.
 license: MIT
-compatibility: Requires openspec CLI.
+compatibility: OpenSpec >= 1.0, Node.js >= 18
 metadata:
-  author: openspec
-  version: "2.0"
-  generatedBy: "2.0.0"
+  version: "14.0"
+  enterprise: true
+  generatedBy: "2.1.0"
   triggers:
     - /opsx-verify
     - opsx verify
-    - verify change
-    - validate change
-    - check implementation
+    - verify
+    - validate
+    - check quality
+    - quality check
   domains:
+    - quality
+    - testing
     - verification
-    - quality-assurance
     - validation
-    - spec-driven-development
-    - meta
+    - compliance
+  orchestration:
+    phase: OPSX_VERIFY
+    role: quality-verifier
+    isFatal: false
+    requires: [OPSX_APPLY]
+    handoffTo: OPSX_ARCHIVE
+    retryPolicy: { maxRetries: 3, backoffMs: 1000 }
+  relatedSkills:
+    - openspec-auto
+    - openspec-apply
+    - openspec-archive
+  outputContracts:
+    optional:
+      - verification-report (structured pass/fail)
+      - pipeline-success (boolean)
+      - duration (ms)
+  changelog: |
+    v14.0 (2026-07-04): Enterprise upgrade — enhanced metadata, orchestration contract,
+      expanded triggers and domains, output contracts.
+    v13.0 (2026-07-03): V13 integration — standalone verification gate before archive.
 ---
 
 ## Purpose
@@ -211,8 +237,35 @@ If verification fails, offer specific fix suggestions:
 - **DO NOT** skip the spec sync check when delta specs exist — drift is a real bug
 - **DO NOT** overwrite previous verification reports — save each as `verification-<timestamp>.md`
 
+## V13 Enterprise Integration
+
+### Agent Contract
+
+This skill is managed by the V13 Master Orchestrator (`auto-pipeline-v13.mjs`) via the LIFECYCLE_CONTRACTS in `agent-contracts.mjs`.
+
+**Contract Summary:**
+- **Role:** quality-verifier
+- **Fatal:** No
+- **Prerequisites:** OPSX_APPLY
+- **Produces:** validation-report
+- **Handoff:** OPSX_ARCHIVE
+- **Retry Policy:** 3 retries, 1s backoff
+- **Recovery Strategy:** Run npm run build && npm run validate. Fix specific errors. Re-validate.
+
+### Success Criteria
+- Build, lint, tests, and quality gates all pass
+
+### V13 Runtime Integration
+
+When invoked by `/opsx-auto`, this phase:
+1. Receives shared context from the master orchestrator
+2. Validates prerequisites via `validatePrerequisites()` 
+3. Records findings/decisions/risks to `ctx.sharedMemory`
+4. Hands off to the next phase via contract
+
 ## Changelog
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v13.0 | 2026-07 | V13 enterprise integration: agent contract with LIFECYCLE_CONTRACTS, master orchestrator handoff, shared memory context, retry/recovery policies. |
 | v2.0 | 2026-07 | Initial release. 8 verification checks, structured pass/fail report, recovery guidance, anti-patterns. |

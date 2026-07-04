@@ -3,58 +3,113 @@ name: openspec-auto
 description: >
   Single intelligent entry point for the complete Spec-Driven Development lifecycle.
   The AI agent autonomously executes the entire engineering workflow —
-  analyze → explore → propose → implement → validate → archive —
-  using a goal-oriented execution loop. One command, zero manual phase invocation.
+  repository intelligence → explore → propose → sync → apply → validate → verify → archive —
+  using a goal-oriented execution loop with shared memory, dynamic skill composition,
+  and per-phase agent teams. One command, zero manual phase invocation.
   Stops only when the goal is verified complete or an unrecoverable failure occurs.
 license: MIT
 compatibility: OpenSpec >= 1.0, Node.js >= 18
 metadata:
-  version: "12.0"
-  generatedBy: "2.0.0"
+  version: "14.0"
+  enterprise: true
+  generatedBy: "2.1.0"
   triggers:
     - /opsx-auto
     - opsx auto
     - auto orchestrate
     - auto pipeline
+    - autonomous pipeline
+    - master orchestrator
   domains:
     - orchestration
     - spec-driven-development
     - automation
     - quality-assurance
     - meta
+  orchestration:
+    role: master-orchestrator
+    coordinates: [OPSX_EXPLORE, OPSX_PROPOSE, OPSX_SYNC, OPSX_APPLY, VALIDATE, OPSX_VERIFY, OPSX_ARCHIVE]
+    entryPoint: /opsx-auto
+  relatedSkills:
+    - openspec-explore
+    - openspec-propose
+    - openspec-sync
+    - openspec-apply
+    - openspec-verify
+    - openspec-archive
+  outputContracts:
+    - proposal.md (scope + rationale)
+    - design.md (architecture + decisions)
+    - tasks.md (implementation checklist)
+    - delta-specs (ADDED/MODIFIED/REMOVED requirements)
+    - traceability.md (spec → task → commit → file chain)
+    - audit.jsonl (timestamped event log)
+    - telemetry-summary.json (execution stats)
+  changelog: |
+    v14.0 (2026-07-04): Enterprise upgrade — 13-stage master orchestrator, complete lifecycle
+      integration (explore→propose→sync→apply→validate→verify→archive),
+      dynamic skill intelligence with automatic composition, per-phase agent teams,
+      shared execution context, dependency-aware execution, continuous validation,
+      enterprise telemetry dashboard, improved recovery, backward compatible.
+    v13.0 (2026-07-03): V13 master orchestrator — repository snapshot (parallel analysis),
+      9-role skill composer, per-phase agent composer, iteration controller
+      (enter→analyze→plan→execute→validate→decide), shared memory, enterprise telemetry.
+    v12.0 (2026-07-02): Staleness detection (3-iteration stall), circuit breaker
+      (3 consecutive failures), degraded mode, concurrency limiter.
+    v11.0 (2026-06-30): Initial V11 autonomous orchestration engine.
 ---
 
-# OpenSpec Autonomous Orchestration — AI Behavior Specification v12.0
+# OpenSpec Autonomous Orchestration — AI Behavior Specification v14.0
 
 ## Purpose
 
 Single intelligent entry point for the complete Spec-Driven Development lifecycle.
 The AI agent autonomously executes the entire engineering workflow from a single
-command, driving all phases sequentially until the goal is verified complete or
+command, driving all 13 stages sequentially until the goal is verified complete or
 an unrecoverable failure occurs.
 
 ## Prerequisites
 
 - `openspec/` directory with `specs/` and `changes/` structure
-- `orchestrate/` runtime modules (auto-pipeline.mjs, state-manager.mjs, etc.)
+- `orchestrate/` runtime modules (auto-pipeline-v13.mjs, state-manager.mjs, etc.)
 - `site.json` with company data and page inventory
 - `DESIGN.md/` with design system rules
-- `features/features.json` feature registry
+- `features/features.json` feature registry (optional)
 - Node.js >= 18
 
-## Related Skills
+## Lifecycle Agent Architecture
 
-| Skill | Role | When Used |
-|-------|------|-----------|
-| `openspec-explore` | Codebase understanding | Phase 4 (EXPLORE) |
-| `openspec-propose` | Artifact generation | Phase 5 (PROPOSE) |
-| `openspec-sync` | Delta spec merging | Phase 6 (SYNC) |
-| `openspec-apply` | Task implementation | Phase 7 (APPLY) |
-| `openspec-verify` | Standalone verification | Outside auto pipeline |
-| `openspec-archive` | Change archival | Phase 9 (ARCHIVE) |
-
-This skill is the **orchestrator** — it invokes the others via the JS runtime
-or delegates to the AI agent for intelligence tasks.
+```
+/opsx-auto (Master Orchestrator)
+  │
+  ├─ Explore Agent (OPSX_EXPLORE)
+  │   Role: repository-analyst
+  │   Skill: openspec-explore
+  │
+  ├─ Propose Agent (OPSX_PROPOSE)
+  │   Role: proposal-writer  [FATAL]
+  │   Skill: openspec-propose
+  │
+  ├─ Sync Agent (OPSX_SYNC)
+  │   Role: spec-synchronizer
+  │   Skill: openspec-sync
+  │
+  ├─ Apply Agent (OPSX_APPLY)
+  │   Role: implementer  [FATAL]
+  │   Skill: openspec-apply
+  │
+  ├─ Validate Agent (VALIDATE)
+  │   Role: build-validator
+  │   Runtime: auto-pipeline.mjs
+  │
+  ├─ Verify Agent (OPSX_VERIFY)
+  │   Role: quality-verifier
+  │   Skill: openspec-verify
+  │
+  └─ Archive Agent (OPSX_ARCHIVE)
+      Role: archivist
+      Skill: openspec-archive
+```
 
 ## 1. Core Philosophy
 
@@ -87,76 +142,69 @@ yourself using your tools (Read, Write, Edit, Bash, Task, etc.).
 4. **Resumable** — State persists after every phase. Interruptions recover cleanly.
 5. **Traceable** — Every change traces back through tasks → specs → commits.
 
-## 2. Goal-Oriented Execution Loop
-
-After the user types `/opsx-auto "Build the Pricing Page"`, you enter the loop:
+## 2. Complete Lifecycle (13 Stages)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     GOAL-ORIENTED LOOP V12                   │
+│              ENTERPRISE ORCHESTRATION v14                    │
 │                                                              │
-│  1. INITIALIZE                                               │
-│     └─→ initPipeline() → execution context                   │
+│  STAGE 1-5: INITIALIZATION (Parallel where safe)             │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │ 1. Repository Intelligence                           │    │
+│  │ 2. Task Understanding                                │    │
+│  │ 3. Repository Analysis      ← parallel with 1,2      │    │
+│  │ 4. Skill Discovery           ← parallel with 1,2,3   │    │
+│  │ 5. Agent Composition         ← after 1-4 complete    │    │
+│  └─────────────────────────────────────────────────────┘    │
 │                                                              │
-│  2. ANALYZE REPOSITORY                                       │
-│     └─→ runDeepScan() → project, specs, features, pages      │
+│  STAGE 6-12: LIFECYCLE (Sequential, dependency-aware)       │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │  6. Explore   ─→ 7. Propose  ─→ 8. Sync             │    │
+│  │       │              │              │                │    │
+│  │       └──────────────┴──────────────┘                │    │
+│  │                      ↓                               │    │
+│  │  9. Apply  ─→ 10. Validate  ─→ 11. Verify           │    │
+│  │       │              │              │                │    │
+│  │       └──────────────┴──────────────┘                │    │
+│  │                      ↓                               │    │
+│  │                 12. Archive                           │    │
+│  └─────────────────────────────────────────────────────┘    │
 │                                                              │
-│  3. DISCOVER SKILLS + ROUTE AGENTS                           │
-│     └─→ runSkillDiscovery() → top skills, agents, gates      │
+│  STAGE 13: COMPLETION                                        │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │ 13. Completion Report + Enterprise Telemetry          │    │
+│  └─────────────────────────────────────────────────────┘    │
 │                                                              │
-│  4. EXPLORE (AI Intelligence)                                │
-│     └─→ Read affected specs, features, DESIGN.md, site.json  │
-│     └─→ Understand what exists and what must change          │
-│                                                              │
-│  5. PROPOSE (AI Intelligence)                                │
-│     └─→ Write proposal.md, design.md, tasks.md directly      │
-│     └─→ Create delta specs in specs/ directory                │
-│     └─→ HUMAN GATE 1: Show proposal, confirm scope           │
-│                                                              │
-│  6. SYNC (Infrastructure)                                    │
-│     └─→ runSync() → merge delta specs to main                │
-│                                                              │
-│  7. IMPLEMENT (AI Intelligence)                              │
-│     └─→ Execute tasks from tasks.md one by one               │
-│     └─→ Build after each change: npm run build               │
-│     └─→ Mark tasks [x] as completed                          │
-│                                                              │
-│  8. VALIDATE (Infrastructure + AI)                           │
-│     └─→ runValidate() → build, lint, test, quality gates     │
-│     └─→ If failures: analyze, fix, re-validate               │
-│     └─→ Loop until all mandatory gates pass                  │
-│                                                              │
-│  9. ARCHIVE (Infrastructure + AI)                            │
-│     └─→ runArchive() → sync, trace, doc sync                 │
-│     └─→ Verify all artifacts exist on disk                   │
-│     └─→ HUMAN GATE 2: Confirm archive                        │
-│                                                              │
-│ 10. MEASURE PROGRESS                                         │
-│     └─→ measureProgress() → completion percentage            │
-│     └─→ isGoalAchieved() → true/false                        │
-│                                                              │
-│ 11. GOAL COMPLETE?                                           │
-│     ├─→ YES → Finalize, report, DONE                         │
-│     └─→ NO  → Iterate (go to step 4 or step 7)              │
-│                                                              │
-│  Safety: Max 20 iterations. If limit hit, stop and report.   │
+│  Safety: Max 20 iterations. Staleness detection (3).         │
+│  Circuit breaker (3 consecutive failures).                   │
+│  Shared memory persists across iterations.                   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 2.1 Loop Rules
+### 2.1 Goal-Oriented Loop
+
+After initialization, the system enters a controlled iteration loop:
+
+```
+ANALYZE → planIteration() → which phases should run this iteration?
+PLAN    → validatePrerequisites() → are dependencies satisfied?
+EXECUTE → run phases in priority order → handle errors
+VALIDATE→ measureProgress() → check quality gates
+DECIDE  → goalMet? → archive → finish
+          canContinue? → iterate
+          else → fail with partial report
+```
+
+### 2.2 Loop Rules
 
 - **Do NOT exit the loop early.** Only exit when `isGoalAchieved()` returns true
-  or when an unrecoverable failure occurs (fatal phase error, iteration limit, staleness).
-- **After each validation failure, fix and re-validate.** Don't just log and continue.
-- **After implementing, refresh your repository understanding** by re-reading
-  affected files, specs, and the dependency graph.
-- **Phase states are tracked in `ctx.phases[]`.** Check `isPhaseComplete()` and
-  `isPhaseFailed()` to avoid re-running completed phases.
-- **V12 Staleness detection:** If 3 consecutive iterations show no progress change,
-  the pipeline stops automatically to prevent infinite loops.
-- **V12 Circuit breaker:** Steps that fail 3 times consecutively are skipped to
-  prevent cascading failures.
-- Use `/opsx:verify` standalone to check a change independently of the auto pipeline.
+  or when an unrecoverable failure occurs.
+- **After each validation failure, fix and re-validate.** The iteration controller handles this automatically.
+- **After implementing, refresh your repository understanding** by re-reading affected files.
+- **Phase states are tracked in `ctx.phases[]`.**
+- **V14 Staleness detection:** If 3 consecutive iterations show no progress change, the pipeline stops.
+- **V14 Circuit breaker:** Steps that fail 3 times consecutively are skipped.
+- **V14 Shared memory:** Agents record findings, decisions, risks, assumptions in `ctx.sharedMemory`.
 
 ## 3. Decision Framework
 
@@ -164,18 +212,19 @@ After the user types `/opsx-auto "Build the Pricing Page"`, you enter the loop:
 
 | Phase | When to Run | How |
 |-------|------------|-----|
-| `initPipeline()` | Once, at start | JS runtime |
-| `runDeepScan()` | Once, at start; re-run if repo changes significantly | JS runtime |
-| `runSkillDiscovery()` | Once, at start; re-run if task understanding changes | JS runtime |
+| `initPipelineV13()` | Once, at start | JS runtime |
+| `buildRepositorySnapshot()` | Once, at start; parallel read-only analysis | JS runtime |
+| `composeSkills()` | Once, at start | JS runtime |
+| `composeAgentTeam()` | Once, at start | JS runtime |
 | Explore | Every iteration that needs codebase context | **AI intelligence** |
-| Propose | When no proposal.md exists | **AI intelligence** (write files directly) |
+| Propose | When no proposal.md exists | **AI intelligence** |
 | Sync | After proposal changes delta specs | JS runtime |
-| Apply | When tasks.md has unchecked items | **AI intelligence** (implement tasks) |
+| Apply | When tasks.md has unchecked items | **AI intelligence** |
 | Validate | After every implementation batch | JS runtime |
-| Verify | Standalone: before archive, after partial implementation | **AI intelligence** (run checks) |
+| Verify | Standalone: before archive | **AI intelligence** |
 | Archive | When goal achieved | JS runtime + AI intelligence |
 
-### 3.2 When to Ask the User (Question Engine)
+### 3.2 When to Ask the User
 
 **Only ask when execution cannot safely continue without an answer:**
 
@@ -190,10 +239,7 @@ After the user types `/opsx-auto "Build the Pricing Page"`, you enter the loop:
 - The user has already provided sufficient context.
 - You're about to ask "shall I continue?" between phases — just continue.
 
-**Question format:** One clear, high-value question. Provide context. Offer your
-recommended answer. Never ask multiple questions at once.
-
-### 3.3 When to Iterate vs. Finish
+### 3.3 Iterate vs. Finish
 
 ```
 measureProgress(ctx) → completionPct, blockers
@@ -213,10 +259,10 @@ IF ctx.iterationCount >= 20:
 
 ## 4. Repository Intelligence
 
-### 4.1 Initial Scan (runDeepScan)
+### 4.1 Initial Scan
 
 The JS runtime automatically:
-- Reads all 24 capability specs from `openspec/specs/`
+- Reads all capability specs from `openspec/specs/`
 - Reads `site.json` for company data and page inventory
 - Reads `features/features.json` for feature registry
 - Reads `DESIGN.md/` for design system rules
@@ -246,35 +292,52 @@ When building pages, ALWAYS follow `DESIGN.md/DESIGN.md` rules:
 - Page-specific styles in `<style>` block in `<head>`
 - Shared styles go in `assets/css/core.css`, never in page files
 
-## 5. Skill Intelligence
+## 5. Dynamic Skill Intelligence
 
 ### 5.1 Initial Discovery
 
-`runSkillDiscovery()` automatically:
-- Scans ~271 global skills + 6 project skills
+`buildRepositorySnapshot()` automatically:
+- Scans ~271 global skills + project-local skills in parallel
 - Scores by TF-IDF with domain filtering
 - Boosts project-local skills (5x multiplier)
 - Boosts framework-matching skills (3x multiplier)
-- Returns top 12 scored skill names in `ctx.skills`
+- Returns skill metadata in `ctx.repository.skillMetadata`
 
-### 5.2 Dynamic Re-Evaluation
+### 5.2 Skill Composition by Role
 
-If your task understanding evolves significantly (e.g., you discover you also need
-SEO work or animation), re-run `discoverSkills(ctx.task, newDomains, 12, ctx.project)`.
+`composeSkills()` assigns skills to 9 workflow roles:
+- **repo-analyst** — codebase exploration (EXPLORE phase)
+- **planner** — architecture and approach (EXPLORE phase)
+- **designer** — visual design and accessibility (PROPOSE phase)
+- **spec-writer** — formal specifications (PROPOSE phase)
+- **implementer** — code generation (APPLY phase)
+- **tester** — test execution (VALIDATE phase)
+- **reviewer** — quality/security/accessibility review (VALIDATE phase)
+- **deployer** — deployment and finalization (ARCHIVE phase)
+- **documenter** — documentation and traceability (ARCHIVE phase)
+
+The system selects the best skill per role with deduplication.
 
 ### 5.3 Skill Loading
 
 When you need a skill's full instructions, use the **Skill** tool to load it by name.
-Only load skills when you're about to use them — don't pre-load all 12.
+Only load skills when you're about to use them — don't pre-load all skills.
 
-## 6. Agent Routing
+## 6. Dynamic Agent Composition
 
-### 6.1 Primary Agent
+### 6.1 Per-Phase Agent Teams
 
-Determined dynamically from task analysis. The agent router selects based on:
-- Task domains (frontend, design, seo, etc.)
-- Required roles (implementation, review, testing, etc.)
-- Branch context (main adds security-reviewer; feature/* skips doc-updater)
+`composeAgentTeam(phaseId, ctx)` assigns agents per lifecycle phase:
+- **OPSX_EXPLORE** — planner + architect support
+- **OPSX_PROPOSE** — planner + architect support
+- **OPSX_SYNC** — planner + architect + code-reviewer
+- **OPSX_APPLY** — tdd-guide + code-reviewer support
+- **VALIDATE** — tdd-guide + code-reviewer + security-reviewer
+- **OPSX_VERIFY** — code-reviewer + security-reviewer
+- **OPSX_ARCHIVE** — doc-updater + reviewer support
+
+Selection uses capability-based matching with static domain-phase fallbacks.
+Branch context adds security-reviewer (main) or e2e-runner (staging).
 
 ### 6.2 Agent Collaboration Pattern
 
@@ -285,9 +348,7 @@ For complex tasks, use multiple agents sequentially, not all at once:
 4. **Validate** — run tests, lint, accessibility checks
 5. **Document** — update specs, traceability, archive
 
-Use the **Task** tool to delegate work to specialized agents when appropriate.
-
-## 7. Validation Loop
+## 7. Validation Pipeline
 
 After every implementation batch, run validation:
 
@@ -315,13 +376,11 @@ If any fail:
 
 ### 7.2 Auto-Fix Rules
 
-When safe, auto-fix common issues instead of asking:
+When safe, auto-fix common issues:
 - Lint errors → run `npm run lint -- --fix`
 - Missing CSS variable → replace hardcoded color with nearest `var(--*)`
 - Missing nav/footer includes → add `<!-- INCLUDE: nav -->` and `<!-- INCLUDE: footer -->`
 - Placeholder mismatch → replace with `{{PHONE}}`, `{{EMAIL}}`, `{{YEAR}}`
-
-If auto-fix is not safe, report the issue and fix it directly.
 
 ## 8. Archive Lifecycle
 
@@ -347,37 +406,19 @@ All tasks [x]  checked ✓
 Build passes   ✓
 ```
 
-## 9. V12 Safety Mechanisms
+## 9. Safety Mechanisms
 
 ### 9.1 Staleness Detection
 
-If 3 consecutive iterations show **no progress change** (same `completionPct`),
-the pipeline automatically stops. Output:
-
-```
-[STALE] No progress for 3 iterations (75%). Pipeline stalled.
-```
-
-**What this means for you:** If you're in the goal loop and the same validation
-keeps failing in the same way, fix the root cause — don't re-run. The system
-will stop you after 3 identical failures.
+If 3 consecutive iterations show **no progress change**, the pipeline stops.
 
 ### 9.2 Circuit Breaker
 
-Pipeline steps that fail **3 times consecutively** are skipped. Output:
-
-```
-[OPEN] Circuit open for step "build" — skipping
-```
-
-**What this means for you:** If a step keeps failing with the same error,
-the pipeline skips it to prevent cascading failures. Fix the underlying
-issue, then restart the pipeline (circuit state resets on `initPipeline()`).
+Pipeline steps that fail **3 times consecutively** are skipped to prevent cascading failures.
 
 ### 9.3 Iteration Limit
 
-Hard cap at **20 iterations**. Reaching this limit produces a partial completion
-report with exact remaining work.
+Hard cap at **20 iterations**. Reaching this limit produces a partial completion report.
 
 ### 9.4 Degraded Mode
 
@@ -389,20 +430,16 @@ Non-fatal phase failures allow remaining phases to continue. Fatal phases
 Only two human gates interrupt autonomous execution:
 
 ### GATE 1: Proposal Review
-**When:** After you've written proposal.md, design.md, tasks.md.
+**When:** After explore + propose.
 **What:** Show a brief summary (1-3 lines). Ask if the scope looks right.
-**If approved:** Continue to implementation.
-**If not:** Adjust based on feedback, re-show.
 
 ### GATE 2: Archive Confirmation
 **When:** After all tasks complete and validation passes.
 **What:** Show completion summary. Ask to confirm archive.
-**If approved:** Run archive, produce final report.
-**If not:** Report what remains to be done.
 
 ## 11. Recovery
 
-### 10.1 Checkpoint Recovery
+### 11.1 Checkpoint Recovery
 
 State persists after every phase to `orchestrate/.state/{executionId}-context.json`.
 To resume after interruption:
@@ -414,22 +451,20 @@ Resume from ctx.nextPhaseId
 
 Or via the JS runtime:
 ```js
-const ctx = resumePipeline(executionId);
-// ctx.phases shows statuses; ctx.nextPhaseId shows what's next
+const ctx = resumePipelineV13(executionId);
 ```
 
-### 10.2 Execution ID
+### 11.2 Execution ID
 
-The execution ID is printed at start: `task-slug-{timestamp}`. Use this for
-state lookup and audit trail correlation.
+The execution ID is printed at start: `task-slug-{timestamp}`.
 
 ## 12. Observability
 
-### 11.1 Progress Display
+### 12.1 Progress Display
 
-After each phase, display:
+After each phase:
 ```
-[3/8] Explore — ✓ Completed (0.3s)
+[6/13] Explore — ✓ Completed (0.3s)
 ```
 
 After each validation cycle:
@@ -442,23 +477,21 @@ After each validation cycle:
   ○ Build validation pending
 ```
 
-### 11.2 Final Report
+### 12.2 Final Report
 
-When complete, display:
 ```
 ─── Goal Achieved ───
   Task: Build Pricing Page
   Iterations: 2
-  Phases: 8/8 complete
+  Phases: 13/13 complete
   Duration: 12.4s
   Artifacts: proposal.md, design.md, tasks.md, traceability.md
   Archive: openspec/changes/build-pricing-page/
 ```
 
-### 11.3 Audit Trail
+### 12.3 Audit Trail
 
 Every action is logged to `orchestrate/.audit.jsonl` with timestamps.
-Query: `queryEvents({ type: 'auto-pipeline' })`
 
 ## 13. Usage Modes
 
@@ -467,54 +500,67 @@ Query: `queryEvents({ type: 'auto-pipeline' })`
 /opsx-auto "Fix the hero section overflow"     # Targeted fix
 /opsx-auto --dry-run "Add newsletter flow"     # Plan only (stop after skill discovery)
 /opsx-auto --skip-build "Improve navigation"   # Skip validation phase
+/opsx-auto --plan "Complex redesign"           # Stop after proposal for review
 ```
 
 ## 14. Module Reference
 
-### AI Agent Calls (You Call These)
+### AI Agent Calls
 
 | Function | Purpose | Module |
 |----------|---------|--------|
-| `initPipeline(task, opts)` | Create execution context | `auto-pipeline.mjs` |
-| `runDeepScan(ctx)` | Analyze repository | `auto-pipeline.mjs` |
-| `runSkillDiscovery(ctx)` | Discover skills + route agents | `auto-pipeline.mjs` |
-| `runSync(ctx)` | Merge delta specs | `auto-pipeline.mjs` |
-| `runValidate(ctx)` | Build + lint + test + gates | `auto-pipeline.mjs` |
-| `runArchive(ctx)` | Sync + trace + docs | `auto-pipeline.mjs` |
-| `finishPipeline(ctx)` | Verify + report | `auto-pipeline.mjs` |
-| `resumePipeline(id)` | Load persisted state | `auto-pipeline.mjs` |
-| `isPhaseComplete(ctx, id)` | Check phase status | `auto-pipeline.mjs` |
-| `isPhaseFailed(ctx, id)` | Check phase failure | `auto-pipeline.mjs` |
-| `getPhaseInstructions(ctx, id)` | AI prompt for phase | `auto-pipeline.mjs` |
+| `initPipelineV13(task, opts)` | Create V13 execution context | `auto-pipeline-v13.mjs` |
+| `autoFullPipelineV13(task, opts)` | Full autonomous pipeline | `auto-pipeline-v13.mjs` |
+| `buildRepositorySnapshot(task)` | Parallel repo analysis | `repository-snapshot.mjs` |
+| `composeSkills(metadata, domains, phaseId)` | Role-assigned skills | `skill-composer.mjs` |
+| `composeAgentTeam(phaseId, ctx)` | Phase-assigned agents | `agent-composer.mjs` |
+| `runGoalLoop(ctx, executors)` | Controlled goal loop | `iteration-controller.mjs` |
+| `planIteration(ctx)` | Adaptive phase planning | `execution-strategy.mjs` |
+| `getContract(phaseId)` | Agent lifecycle contract | `agent-contracts.mjs` |
+| `resumePipelineV13(id)` | Load persisted state | `auto-pipeline-v13.mjs` |
 | `measureProgress(ctx)` | Goal completion % | `progress-tracker.mjs` |
 | `isGoalAchieved(ctx)` | True if done | `progress-tracker.mjs` |
-| `progressSummary(ctx)` | Human-readable progress | `progress-tracker.mjs` |
+| `exportTelemetry()` | Enterprise telemetry | `telemetry.mjs` |
 
 ### Available Imports
 
 ```js
 const {
-  initPipeline, runDeepScan, runSkillDiscovery,
-  runExplore, runPropose, runSync, runApply,
-  runValidate, runArchive, finishPipeline,
-  getPhaseInstructions, resumePipeline,
-  isPhaseComplete, isPhaseFailed,
+  initPipelineV13, autoFullPipelineV13, resumePipelineV13,
   PipelineContext, GOAL_STATES, ITERATION_LIMIT,
-} = await import('./orchestrate/auto-pipeline.mjs');
+} = await import('./orchestrate/auto-pipeline-v13.mjs');
+
+const { buildRepositorySnapshot, applySnapshot }
+  = await import('./orchestrate/repository-snapshot.mjs');
+
+const { composeSkills, rolesForPhase }
+  = await import('./orchestrate/skill-composer.mjs');
+
+const { composeAgentTeam, composeAllTeams }
+  = await import('./orchestrate/agent-composer.mjs');
+
+const { runGoalLoop } = await import('./orchestrate/iteration-controller.mjs');
+
+const { planIteration } = await import('./orchestrate/execution-strategy.mjs');
 
 const { measureProgress, isGoalAchieved, progressSummary }
   = await import('./orchestrate/progress-tracker.mjs');
+
+const { exportTelemetry, generateAuditReport }
+  = await import('./orchestrate/telemetry.mjs');
 ```
 
 ## 15. Extension Points
 
 | Extension | File | Mechanism |
 |-----------|------|-----------|
-| New phase | `auto-pipeline.mjs` | Add method + PHASE_ORDER entry + PHASE_IS_FATAL |
+| New phase | `auto-pipeline-v13.mjs` | Add executor to `PHASE_EXECUTORS` |
+| New workflow role | `skill-composer.mjs` | Add entry to `WORKFLOW_ROLES` |
+| New agent contract | `agent-contracts.mjs` | Add entry to `LIFECYCLE_CONTRACTS` |
 | New validation level | `validation-pipeline.mjs` | Add case to `runLevel()` |
 | New quality gate | `quality-gate.mjs` | Add case to `runGate()` |
 | New intent | `capability-analyzer.mjs` | Add entry to TAXONOMY array |
-| New pipeline config | `pipeline-config/*.yaml` | Create YAML, reference from phase |
+| New pipeline config | `pipeline-config/*.yaml` | Create YAML |
 | New hook | `hooks/` directory | Create `.mjs` matching lifecycle event |
 | New progress signal | `progress-tracker.mjs` | Add check to `measureProgress()` |
 
@@ -523,35 +569,37 @@ const { measureProgress, isGoalAchieved, progressSummary }
 | Document | Path |
 |----------|------|
 | Command definition | `.opencode/commands/opsx-auto.md` |
-| Verify command | `.opencode/commands/opsx-verify.md` |
-| Verify skill | `.opencode/skills/openspec-verify/SKILL.md` |
-| State machine | `orchestrate/auto-pipeline.mjs` |
+| State machine (V13) | `orchestrate/auto-pipeline-v13.mjs` |
+| Iteration controller | `orchestrate/iteration-controller.mjs` |
+| Execution strategy | `orchestrate/execution-strategy.mjs` |
+| Repository snapshot | `orchestrate/repository-snapshot.mjs` |
+| Skill composer | `orchestrate/skill-composer.mjs` |
+| Agent composer | `orchestrate/agent-composer.mjs` |
+| Agent contracts | `orchestrate/agent-contracts.mjs` |
 | Context class | `orchestrate/pipeline-context.mjs` |
 | Progress tracker | `orchestrate/progress-tracker.mjs` |
+| Telemetry | `orchestrate/telemetry.mjs` |
 | OPSX commands | `orchestrate/opsx-commands.mjs` |
-| Skill discovery | `orchestrate/skill-discovery.mjs` |
-| Capability analyzer | `orchestrate/capability-analyzer.mjs` |
-| Spec resolver | `orchestrate/spec-resolver.mjs` |
-| Quality gates | `orchestrate/quality-gate.mjs` |
 | Validation pipeline | `orchestrate/validation-pipeline.mjs` |
-| State manager | `orchestrate/state-manager.mjs` |
-| Event bus | `orchestrate/event-bus.mjs` |
 | Design system | `DESIGN.md/` |
 | Feature registry | `features/features.json` |
 | Site config | `site.json` |
 
 ## 17. Anti-Patterns
 
-- **DO NOT** skip phases — the pipeline validates at every stage; skipping creates untestable gaps
-- **DO NOT** re-run completed phases without checking `isPhaseComplete()` first
+- **DO NOT** skip lifecycle stages — the pipeline validates at every stage; skipping creates untestable gaps
+- **DO NOT** re-run completed phases without checking phase status first
 - **DO NOT** ignore staleness warnings — if validation fails the same way 3 times, fix the root cause
 - **DO NOT** manually archive without verification — use the pipeline's `verifyCompletion()` check
 - **DO NOT** ask "shall I continue?" between phases — the pipeline is autonomous by design
-- **DO NOT** override `SAFETY_RULES.protectedDirs` — these protect the repository from accidental damage
+- **DO NOT** override `SAFETY_RULES.protectedDirs` — these protect the repository
+- **DO NOT** load all skills at once — use lazy loading via the Skill tool
 
 ## 18. Changelog
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v12.0 | 2026-07-04 | Added staleness detection (3-iteration stall), circuit breaker (3 consecutive failures), degraded mode, concurrency limiter. |
-| v11.0 | 2026-06 | Initial V11 autonomous orchestration engine. Goal-oriented loop, phase runner, checkpoint/resume, human gates. |
+| v14.0 | 2026-07-04 | Enterprise upgrade: complete 13-stage lifecycle, dynamic skill/agent intelligence, shared execution context, dependency-aware execution, continuous validation, enterprise telemetry, improved metadata. |
+| v13.0 | 2026-07-03 | Master orchestrator: repository snapshot, 9-role skill composer, per-phase agent composer, iteration controller, shared memory. |
+| v12.0 | 2026-07-02 | Staleness detection, circuit breaker, degraded mode, concurrency limiter. |
+| v11.0 | 2026-06-30 | Initial V11 autonomous orchestration engine. |

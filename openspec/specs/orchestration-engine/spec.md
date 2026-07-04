@@ -162,3 +162,154 @@ The user SHALL run a single OpenSpec command; the engine SHALL handle all subord
 - **THEN** the engine SHALL route each task to the specified resource
 - **AND** tasks with no explicit routing SHALL be auto-routed based on affected specs
 - **AND** the engine SHALL run hooks for each file change automatically
+
+---
+
+## V13 Architecture: Next-Generation Master Orchestrator
+
+### Requirement: Master Agent Architecture
+
+The `/opsx-auto` command SHALL function as a single master orchestration agent that coordinates all lifecycle agents (explore, propose, sync, apply, verify, archive) through intelligent orchestration rather than manual phase invocation.
+
+#### Scenario: Single command complete lifecycle
+
+- **GIVEN** the user runs `/opsx-auto "Implement Authentication"`
+- **WHEN** the master agent processes the task
+- **THEN** the engine SHALL automatically build a unified repository intelligence snapshot
+- **AND** the engine SHALL compose skills by workflow role (repo-analyst, designer, implementer, tester, reviewer, deployer)
+- **AND** the engine SHALL compose agent teams per lifecycle phase
+- **AND** the engine SHALL run controlled goal-oriented iterations until verified completion
+- **AND** no manual invocation of `/opsx:explore`, `/opsx:propose`, `/opsx:apply`, `/opsx:verify`, or `/opsx:archive` SHALL be required
+
+### Requirement: Unified Repository Intelligence
+
+The engine SHALL build a single `RepositorySnapshot` aggregating all repository context (project analysis, spec index, feature registry, design system rules, capability registry) through parallel read-only analysis, available to all agents as shared context.
+
+#### Scenario: Parallel intelligence gathering
+
+- **GIVEN** the master agent initializes
+- **WHEN** `buildRepositorySnapshot()` is called
+- **THEN** project analysis, context loading, and capability registry building SHALL execute in parallel
+- **AND** the resulting snapshot SHALL include project metadata (name, framework, architecture, files, lines)
+- **AND** the snapshot SHALL include task analysis (intents, domains, roles, skills, confidence)
+- **AND** the snapshot SHALL include discovered skills with metadata
+- **AND** the snapshot SHALL include agent routing with primary and support agents
+- **AND** all agents SHALL access the same snapshot via `ctx.repository`
+
+### Requirement: Lifecycle Agent Contracts
+
+Each lifecycle agent (explore, propose, sync, apply, validate, archive) SHALL have a formal contract defining its responsibilities, inputs, outputs, prerequisites, timeout, retry policy, and handoff rules.
+
+#### Scenario: Contract enforcement
+
+- **GIVEN** the PROPOSE agent is about to execute
+- **WHEN** the master agent validates prerequisites
+- **THEN** the contract SHALL verify that EXPLORE phase completed successfully
+- **AND** required inputs (task, changeName, affectedSpecs, skills) SHALL be present
+- **AND** if validation fails, the agent SHALL report missing prerequisites
+- **AND** after execution, output validation SHALL verify proposal.md, design.md, and tasks.md exist
+
+### Requirement: Goal-Oriented Iterative Execution
+
+The engine SHALL execute through controlled iterations, each following the pattern: enter → analyze → plan → execute → validate → decide, continuing only while meaningful progress is made and the goal is not yet achieved.
+
+#### Scenario: Iterative progress
+
+- **GIVEN** the pipeline has completed PROPOSE but VALIDATE failed
+- **WHEN** the iteration controller evaluates the next iteration
+- **THEN** the controller SHALL re-plan: skip completed phases, re-run VALIDATE with fixes
+- **AND** the controller SHALL measure progress after each iteration
+- **AND** the controller SHALL stop if 3 consecutive iterations show no progress change
+- **AND** the controller SHALL stop if the hard cap of 20 iterations is reached
+
+### Requirement: Automatic Skill Intelligence
+
+Skills SHALL be automatically selected without manual intervention. The engine SHALL compose skills into workflow roles, selecting the highest-scoring skill per role rather than returning a flat ranked list.
+
+#### Scenario: Skill composition by role
+
+- **GIVEN** a task requires design and implementation work
+- **WHEN** skills are composed
+- **THEN** `composeSkills()` SHALL map each skill to workflow roles (designer, implementer, reviewer, etc.)
+- **AND** the best skill per role SHALL be selected using domain-weighted scoring
+- **AND** each skill SHALL be assigned to at most one role to avoid over-allocation
+- **AND** the primary role SHALL be determined from task domain analysis
+
+### Requirement: Dynamic Agent Composition
+
+The engine SHALL dynamically compose agent teams for each lifecycle phase, assigning the best-matching agent from the capability registry to the primary role and selecting support agents by domain relevance.
+
+#### Scenario: Phase-specific agent teams
+
+- **GIVEN** a task with security implications on the main branch
+- **WHEN** agent teams are composed for each phase
+- **THEN** OPSX_EXPLORE SHALL receive a planner agent
+- **AND** OPSX_PROPOSE SHALL receive a planner agent
+- **AND** OPSX_APPLY SHALL receive a tdd-guide agent with code-reviewer support
+- **AND** VALIDATE SHALL receive a tdd-guide agent with code-reviewer and security-reviewer support
+- **AND** the main branch context SHALL add a security-reviewer to support
+
+### Requirement: Adaptive Phase Planning
+
+The engine SHALL dynamically decide which phases to run each iteration based on task context, phase completion status, and current progress, rather than executing a fixed linear sequence.
+
+#### Scenario: Phase skipping
+
+- **GIVEN** a task that modifies existing pages (no new capabilities)
+- **WHEN** the execution strategy plans the iteration
+- **THEN** OPSX_EXPLORE SHALL skip if recently completed
+- **AND** OPSX_SYNC SHALL skip if no delta specs exist
+- **AND** VALIDATE SHALL skip if --skip-build flag is set
+- **AND** OPSX_ARCHIVE SHALL only run after VALIDATE passes
+
+### Requirement: Shared Memory for Cross-Phase Reasoning
+
+The engine SHALL maintain shared memory across phases, where agents record findings, decisions, risks, and assumptions that subsequent agents can read for context.
+
+#### Scenario: Findings propagation
+
+- **GIVEN** the EXPLORE agent records findings about affected specs
+- **WHEN** the PROPOSE agent executes
+- **THEN** it SHALL read findings from `ctx.sharedMemory.findings`
+- **AND** it SHALL incorporate previous decisions from `ctx.sharedMemory.decisions`
+- **AND** it SHALL consider risks identified by `ctx.sharedMemory.risks`
+- **AND** findings, decisions, risks, and assumptions SHALL persist across state saves
+
+### Requirement: Enterprise Telemetry
+
+The engine SHALL export structured telemetry data including execution history, performance trends, audit reports, and success/failure statistics for enterprise observability.
+
+#### Scenario: Telemetry export
+
+- **GIVEN** multiple pipeline executions have completed
+- **WHEN** `exportTelemetry()` is called
+- **THEN** the engine SHALL aggregate all execution states into a summary JSON
+- **AND** the engine SHALL write per-execution records to a JSONL file
+- **AND** the summary SHALL include success rates, average durations, and agent usage statistics
+- **AND** all telemetry data SHALL be stored in `orchestrate/.telemetry/`
+
+---
+
+## V13 Module Map
+
+| Module | Purpose | Version |
+|--------|---------|---------|
+| `auto-pipeline-v13.mjs` | Master orchestrator with goal-oriented loop | V13 |
+| `iteration-controller.mjs` | Controlled iterative execution (enter→analyze→plan→execute→validate→decide) | V13 |
+| `execution-strategy.mjs` | Adaptive phase planning with dynamic skip/retry decisions | V13 |
+| `repository-snapshot.mjs` | Unified repository intelligence with parallel analysis | V13 |
+| `agent-contracts.mjs` | Formal lifecycle agent contracts with input/output validation | V13 |
+| `skill-composer.mjs` | Role-assigned skill composition (9 workflow roles) | V13 |
+| `agent-composer.mjs` | Phase-assigned agent team composition | V13 |
+| `telemetry.mjs` | Enterprise telemetry export and audit reporting | V13 |
+| `pipeline-context.mjs` | Shared execution context with shared memory | V11→V13 |
+| `auto-pipeline.mjs` | Legacy V12 linear waterfall (maintained for backward compatibility) | V12 |
+| `pipeline-engine.mjs` | DAG-based YAML pipeline executor with circuit breakers | V4 |
+| `state-manager.mjs` | State persistence, checkpoint recovery, TTL cleanup | V8 |
+| `skill-discovery.mjs` | TF-IDF skill discovery and scoring | V6 |
+| `capability-analyzer.mjs` | Task intent detection with 31-intent taxonomy | V5 |
+| `agent-router.mjs` | Capability-aware agent selection | V4 |
+| `quality-gate.mjs` | 8-gate quality enforcement chain | V4 |
+| `validation-pipeline.mjs` | L1-L7 multi-level validation with auto-fix | V5 |
+| `progress-tracker.mjs` | 10-signal goal-oriented progress measurement | V11 |
+| `coordinator.mjs` | Unified entry point (V12 + V13 API) | V13 |

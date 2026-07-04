@@ -1,154 +1,86 @@
 ---
-description: Implement tasks from an OpenSpec change (Experimental)
+description: >
+  Implement tasks from an OpenSpec change. Reads tasks.md, executes each task,
+  builds after changes, marks completion. Supports autonomous and standalone modes.
+version: "14.0"
+enterprise: true
+triggers:
+  - /opsx-apply
+  - opsx apply
+  - implement
+domains:
+  - implementation
+  - development
+  - build
+role: implementer
+orchestratedBy: /opsx-auto
+orchestrationContract: OPSX_APPLY
 ---
 
 <!-- canonical: .opencode/skills/openspec-apply/SKILL.md -->
 
-Implement tasks from an OpenSpec change.
+# `/opsx-apply` — Implementation Agent
 
-**Input**: Optionally specify a change name (e.g., `/opsx-apply add-auth`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+## Role
 
-**Steps**
+**Implementer** — Phase 9 of the 13-stage Enterprise Orchestration lifecycle. **[FATAL PHASE]**
 
-1. **Select the change**
+## Orchestration Status
 
-   If a name is provided, use it. Otherwise:
-   - Infer from conversation context if the user mentioned a change
-   - Auto-select if only one active change exists
-   - If ambiguous, run `openspec list --json` to get available changes and use the **AskUserQuestion tool** to let the user select
+This command is a **coordinated lifecycle agent** under the Master Orchestrator (`/opsx-auto`).
+When `/opsx-auto` runs, this phase executes automatically. If this phase fails, the pipeline stops
+because it is marked as fatal — implementation failures halt the pipeline.
 
-   Always announce: "Using change: <name>" and how to override (e.g., `/opsx-apply <other>`).
+This command remains fully functional as a **standalone operation** for manual use, debugging, and single-phase workflows.
 
-2. **Check status to understand the schema**
-   ```bash
-   openspec status --change "<name>" --json
-   ```
-   Parse the JSON to understand:
-   - `schemaName`: The workflow being used (e.g., "spec-driven")
-   - `planningHome`, `changeRoot`, and `actionContext`: planning scope and edit constraints
-   - Which artifact contains the tasks (typically "tasks" for spec-driven, check status for others)
+## Contract
 
-3. **Get apply instructions**
+| Property | Value |
+|----------|-------|
+| Phase ID | `OPSX_APPLY` |
+| Role | `implementer` |
+| Is Fatal | **Yes** |
+| Requires | `OPSX_PROPOSE` |
+| Produces | implementation, build-output |
+| Handoff To | `VALIDATE` |
+| Retry Policy | 1 retry, 3s backoff |
 
-   ```bash
-   openspec instructions apply --change "<name>" --json
-   ```
-
-   This returns:
-   - `contextFiles`: artifact ID -> array of concrete file paths (varies by schema)
-   - Progress (total, complete, remaining)
-   - Task list with status
-   - Dynamic instruction based on current state
-
-   **Handle states:**
-   - If `state: "blocked"` (missing artifacts): show message, suggest using `/opsx-continue`
-   - If `state: "all_done"`: congratulate, suggest archive
-   - Otherwise: proceed to implementation
-
-   **Workspace guard:** If status JSON reports `actionContext.mode: "workspace-planning"` and `allowedEditRoots` is empty, explain that full workspace apply is not supported in this slice. Treat linked repos and folders as read-only context, ask the user to select an affected area through an explicit implementation workflow, and STOP before editing files.
-
-4. **Read context files**
-
-   Read every file path listed under `contextFiles` from the apply instructions output.
-   The files depend on the schema being used:
-   - **spec-driven**: proposal, specs, design, tasks
-   - Other schemas: follow the contextFiles from CLI output
-
-5. **Show current progress**
-
-   Display:
-   - Schema being used
-   - Progress: "N/M tasks complete"
-   - Remaining tasks overview
-   - Dynamic instruction from CLI
-
-6. **Implement tasks (loop until done or blocked)**
-
-   For each pending task:
-   - Show which task is being worked on
-   - Make the code changes required
-   - Keep changes minimal and focused
-   - Mark task complete in the tasks file: `- [ ]` → `- [x]`
-   - Continue to next task
-
-   **Pause if:**
-   - Task is unclear → ask for clarification
-   - Implementation reveals a design issue → suggest updating artifacts
-   - Error or blocker encountered → report and wait for guidance
-   - User interrupts
-
-7. **On completion or pause, show status**
-
-   Display:
-   - Tasks completed this session
-   - Overall progress: "N/M tasks complete"
-   - If all done: suggest archive
-   - If paused: explain why and wait for guidance
-
-**Output During Implementation**
+## Usage
 
 ```
-## Implementing: <change-name> (schema: <schema-name>)
-
-Working on task 3/7: <task description>
-[...implementation happening...]
-✓ Task complete
-
-Working on task 4/7: <task description>
-[...implementation happening...]
-✓ Task complete
+/opsx-apply add-auth
+/opsx-apply
 ```
 
-**Output On Completion**
+## Behavior
 
-```
-## Implementation Complete
+Implement tasks from an OpenSpec change's `tasks.md`.
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Progress:** 7/7 tasks complete ✓
+## Autonomous Mode (from `/opsx-auto`)
 
-### Completed This Session
-- [x] Task 1
-- [x] Task 2
-...
+- Reads tasks.md directly
+- Works through tasks sequentially
+- Builds after each implementation change
+- Marks tasks as `[x]` after completion
+- Continues until all tasks done or blocked
+- Error classification: recoverable, design error, dependency error, environment error
+- Stagnation detection: 3 consecutive failures → pause
+- Retry limit: 3 retries per task
 
-All tasks complete! You can archive this change with `/opsx-archive`.
-```
+## Standalone Mode
 
-**Output On Pause (Issue Encountered)**
+1. **Select the change** — infer from context or prompt
+2. **Check status**: `openspec status --change "<name>" --json`
+3. **Get apply instructions**: `openspec instructions apply --change "<name>" --json`
+4. **Read context files** from the instructions output
+5. **Implement tasks** in a loop until done or blocked
 
-```
-## Implementation Paused
+## Guardrails
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Progress:** 4/7 tasks complete
-
-### Issue Encountered
-<description of the issue>
-
-**Options:**
-1. <option 1>
-2. <option 2>
-3. Other approach
-
-What would you like to do?
-```
-
-**Guardrails**
 - Keep going through tasks until done or blocked
-- Always read context files before starting (from the apply instructions output)
+- Always read context files before starting
 - If task is ambiguous, pause and ask before implementing
 - If implementation reveals issues, pause and suggest artifact updates
 - Keep code changes minimal and scoped to each task
 - Update task checkbox immediately after completing each task
-- Pause on errors, blockers, or unclear requirements - don't guess
-- Use contextFiles from CLI output, don't assume specific file names
-
-**Fluid Workflow Integration**
-
-This skill supports the "actions on a change" model:
-
-- **Can be invoked anytime**: Before all artifacts are done (if tasks exist), after partial implementation, interleaved with other actions
-- **Allows artifact updates**: If implementation reveals design issues, suggest updating artifacts - not phase-locked, work fluidly
+- Pause on errors, blockers, or unclear requirements — don't guess

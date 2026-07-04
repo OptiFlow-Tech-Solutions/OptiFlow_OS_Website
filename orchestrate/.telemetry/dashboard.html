@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpsX Orchestration Telemetry</title>
+<style>
+:root { --bg:#0a1628; --card:#112240; --text:#e6f1ff; --accent:#54B89A; --warn:#f0a020; --err:#e04040; --muted:#8892b0; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:system-ui,sans-serif; padding:2rem; }
+h1 { color:var(--accent); margin-bottom:1rem; }
+h2 { margin: 1.5rem 0 .5rem; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin-bottom:2rem; }
+.card { background:var(--card); border-radius:8px; padding:1.25rem; border-left:3px solid var(--accent); }
+.card h3 { color:var(--muted); font-size:.8rem; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.5rem; }
+.card .value { font-size:2rem; font-weight:700; }
+.card.warn { border-left-color:var(--warn); }
+.card.err { border-left-color:var(--err); }
+table { width:100%; border-collapse:collapse; background:var(--card); border-radius:8px; overflow:hidden; }
+th { background:rgba(84,184,154,.1); padding:.75rem; text-align:left; font-size:.8rem; color:var(--accent); }
+td { padding:.75rem; border-top:1px solid rgba(230,241,255,.05); font-size:.85rem; }
+.agent-tag { display:inline-block; padding:.15em .5em; border-radius:4px; font-size:.75rem; background:rgba(84,184,154,.15); color:var(--accent); margin-right:.25em; }
+.meta { color:var(--muted); font-size:.8rem; margin-top:1rem; }
+</style>
+</head>
+<body>
+<h1>OpsX Orchestration Telemetry</h1>
+<div id="app">Loading...</div>
+<script>
+(function() {
+  function computeSummary(data) {
+    var done = data.filter(function(e) { return e.status === 'done' || e.goalState === 'COMPLETE'; });
+    var failed = data.filter(function(e) { return e.status === 'failed' || e.goalState === 'FAILED'; });
+    var durations = data.filter(function(e) { return e.totalDuration > 0; }).map(function(e) { return e.totalDuration; });
+    var avgDur = durations.length ? Math.round(durations.reduce(function(a,b) { return a+b; }, 0) / durations.length) : 0;
+    var avgIter = data.length ? Math.round(data.reduce(function(a,b) { return a + (b.iterations || 0); }, 0) / data.length) : 0;
+    var agents = {};
+    data.forEach(function(e) { var a = e.primaryAgent || 'unknown'; agents[a] = (agents[a] || 0) + 1; });
+    return {
+      totalExecutions: data.length, completed: done.length, failed: failed.length,
+      successRate: data.length ? Math.round(done.length / data.length * 100) : 0,
+      avgDurationMs: avgDur, avgIterations: avgIter,
+      topAgents: Object.entries(agents).sort(function(a,b) { return b[1] - a[1]; }).slice(0, 5),
+      generatedAt: new Date().toISOString()
+    };
+  }
+
+  function render(summary, rows) {
+    var recent = (rows || []).slice(0, 15);
+    var rowsHtml = recent.map(function(r) {
+      var task = (r.task || '').substring(0, 50);
+      var status = r.status || r.goalState || '?';
+      var agent = r.primaryAgent || '?';
+      var iter = r.iterations || 0;
+      var dur = ((r.totalDuration || 0) / 1000).toFixed(1) + 's';
+      var val = r.validationPassed === true ? '\u2713' : r.validationPassed === false ? '\u2717' : '\u2014';
+      return '<tr><td>' + task + '</td><td>' + status + '</td><td><span class="agent-tag">' + agent + '</span></td><td>' + iter + '</td><td>' + dur + '</td><td>' + val + '</td></tr>';
+    }).join('');
+
+    var errClass = summary.failed > 0 ? ' class="card err"' : '';
+    return [
+      '<div class="grid">',
+        '<div class="card"><h3>Total Executions</h3><div class="value">' + summary.totalExecutions + '</div></div>',
+        '<div class="card"><h3>Success Rate</h3><div class="value">' + summary.successRate + '%</div></div>',
+        '<div class="card"><h3>Completed</h3><div class="value">' + summary.completed + '</div></div>',
+        '<div class="card"' + errClass + '><h3>Failed</h3><div class="value">' + summary.failed + '</div></div>',
+        '<div class="card"><h3>Avg Duration</h3><div class="value">' + (summary.avgDurationMs / 1000).toFixed(1) + 's</div></div>',
+        '<div class="card"><h3>Avg Iterations</h3><div class="value">' + summary.avgIterations + '</div></div>',
+      '</div>',
+      '<h2>Recent Executions</h2>',
+      '<table>',
+        '<thead><tr><th>Task</th><th>Status</th><th>Agent</th><th>Iterations</th><th>Duration</th><th>Validation</th></tr></thead>',
+        '<tbody>' + rowsHtml + '</tbody>',
+      '</table>',
+      '<div class="meta">Generated: ' + summary.generatedAt + '</div>'
+    ].join('\n');
+  }
+
+  try {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'executions.jsonl', false);
+    xhr.send();
+    var rows = xhr.responseText.trim().split('\n').filter(Boolean).map(JSON.parse);
+    var summary = computeSummary(rows);
+    document.getElementById('app').innerHTML = render(summary, rows);
+  } catch(e) {
+    var summary = computeSummary([]);
+    document.getElementById('app').innerHTML = render(summary, []);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 /* ═══════════════════════════════════════════
-   OptiFlow OS — Shared Hook Utilities
+   OptiFlow OS — Shared Hook Utilities v13.0
    Imported by all hooks in hooks/ directory.
+   V13: Enterprise-standard error tracking,
+   structured logging, and metadata.
    ═══════════════════════════════════════════ */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
+export const VERSION = '13.0';
+export const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '..');
 export const ASSETS = path.join(ROOT, 'assets');
 export const ASSETS_CSS = path.join(ASSETS, 'css');
@@ -16,14 +19,18 @@ export const ASSETS_IMG = path.join(ASSETS, 'img');
 export const SRC_PAGES = path.join(ROOT, 'src', 'pages');
 export const SRC_PARTIALS = path.join(ROOT, 'src', 'partials');
 export const DIST = path.join(ROOT, 'dist');
+export const ORCHESTRATE = path.join(ROOT, 'orchestrate');
 
 let errors = 0;
+let warnings = 0;
 
-export function fail(msg) { console.error(`  ✗ ${msg}`); errors++; }
-export function ok(msg) { console.log(`  ✓ ${msg}`); }
+export function fail(msg) { console.error(`  \u2717 ${msg}`); errors++; }
+export function ok(msg) { console.log(`  \u2713 ${msg}`); }
+export function warn(msg) { console.log(`  \u26A0 ${msg}`); warnings++; }
 
 export function getErrors() { return errors; }
-export function resetErrors() { errors = 0; }
+export function getWarnings() { return warnings; }
+export function resetErrors() { errors = 0; warnings = 0; }
 
 export function readText(fp) {
   try { return fs.readFileSync(fp, 'utf-8'); } catch { return ''; }
@@ -46,8 +53,11 @@ export function findDesignMd() {
       if (fs.existsSync(fp)) return fp;
     }
   }
-  // ponytail: DESIGN.md might be a directory at project root
   const alt = path.join(ROOT, 'DESIGN.md', 'DESIGN.md');
   if (fs.existsSync(alt)) return alt;
   return null;
+}
+
+export function hookBanner(name) {
+  console.log(`\n\u2500 ${name} v${VERSION} \u2500\n`);
 }

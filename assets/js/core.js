@@ -693,6 +693,88 @@
     });
   });
 
+  /* ─── Cookie Consent ─── */
+  (function() {
+    var STORAGE_KEY = 'optiflow-cookie-consent';
+    var banner = document.getElementById('cookieConsentBanner');
+    var modalOverlay = document.getElementById('cookieModalOverlay');
+    if (!banner) return;
+
+    var consent = null;
+    try { consent = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (_) { /* ignore */ }
+
+    if (!consent) {
+      setTimeout(function() { banner.classList.add('visible'); }, 600);
+    }
+
+    window.openCookieModal = function() {
+      if (!modalOverlay) return;
+      var current = null;
+      try { current = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (_) { /* ignore */ }
+      if (current) {
+        var analyticsEl = document.getElementById('cookieAnalytics');
+        var prefsEl = document.getElementById('cookiePreferences');
+        if (analyticsEl) analyticsEl.checked = !!current.analytics;
+        if (prefsEl) prefsEl.checked = !!current.preferences;
+      }
+      modalOverlay.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeCookieModal = function() {
+      if (!modalOverlay) return;
+      modalOverlay.classList.remove('visible');
+      document.body.style.overflow = '';
+    };
+
+    window.acceptAllCookies = function() {
+      var data = { essential: true, analytics: true, preferences: true, acceptedAt: new Date().toISOString() };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (banner) banner.classList.remove('visible');
+      closeCookieModal();
+    };
+
+    window.rejectNonEssential = function() {
+      var data = { essential: true, analytics: false, preferences: false, acceptedAt: new Date().toISOString() };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (banner) banner.classList.remove('visible');
+    };
+
+    window.saveCookiePreferences = function() {
+      var analyticsEl = document.getElementById('cookieAnalytics');
+      var prefsEl = document.getElementById('cookiePreferences');
+      var data = {
+        essential: true,
+        analytics: analyticsEl ? analyticsEl.checked : false,
+        preferences: prefsEl ? prefsEl.checked : false,
+        acceptedAt: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (banner) banner.classList.remove('visible');
+      closeCookieModal();
+    };
+
+    if (modalOverlay) {
+      modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) closeCookieModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('visible')) {
+          closeCookieModal();
+        }
+      });
+    }
+
+    /* "Cookie Settings" footer link triggers */
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('.cookie-settings-link');
+      if (link) {
+        e.preventDefault();
+        openCookieModal();
+      }
+    });
+  })();
+
   /* ─── Page Transitions ───
      ponytail: fade-in on load, fade-out on internal-link click.
      Skips if reduced-motion, external links, hash-only, downloads, new-tab, mailto/tel.

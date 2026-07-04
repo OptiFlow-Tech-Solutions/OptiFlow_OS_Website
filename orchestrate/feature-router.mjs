@@ -63,7 +63,7 @@ export function listFeatures() {
  * return speculative dependencies from the registry.
  */
 function resolveBaseDependencies(prefix, registry) {
-  const order = ['SYS', 'PAGE', 'LEAD', 'LEGAL', 'API', 'QA', 'OPS'];
+  const order = ['SYS', 'PAGE', 'LEAD', 'LEGAL', 'API', 'QA', 'OPS', 'UI', 'SEC', 'PERF', 'TEST', 'DOCS', 'CONTENT'];
   const idx = order.indexOf(prefix);
   if (idx === -1) return [];
   return registry.features.filter((f) => order.indexOf(extractPrefix(f.id)) < idx);
@@ -140,8 +140,8 @@ export async function reconstructContext(featureId, opts = {}) {
   let skills = [];
   try {
     const domains = parsedSpecs.flatMap((s) => s.domains || []);
-    const skillRoute = routeBySpecs(feature.name, [...new Set(domains)]);
-    skills = skillRoute?.skills || [];
+    const skillRoute = routeBySpecs([{ specName: feature.name, domains: [...new Set(domains)] }]);
+    skills = Array.isArray(skillRoute) ? skillRoute : (skillRoute?.skills || []);
   } catch { /* best-effort */ }
 
   // Resolve agents
@@ -392,6 +392,137 @@ const TASK_FEATURE_MAP = Object.freeze({
   'metadata': ['SYS-005'],
   'sitemap': ['SYS-005'],
   'meta tags': ['SYS-005'],
+
+  // ── V5.0: UI, PERF, SEC, TEST, DOCS, CONTENT, OPS expansions ──
+  'motion': ['UI-001'],
+  'animation': ['UI-001'],
+  'motion system': ['UI-001'],
+
+  'page transition': ['UI-002'],
+  'transition animation': ['UI-002'],
+
+  'skeleton loading': ['UI-003'],
+  'skeleton': ['UI-003'],
+  'empty states': ['UI-003'],
+  'loading state': ['UI-003'],
+
+  'toast': ['UI-004'],
+  'toast notification': ['UI-004'],
+  'notification system': ['UI-004'],
+
+  'cookie consent': ['UI-005'],
+  'cookie': ['UI-005'],
+  'privacy compliance': ['UI-005'],
+  'gdpr': ['UI-005'],
+
+  'image optimization': ['UI-006'],
+  'webp': ['UI-006'],
+  'image pipeline': ['UI-006'],
+
+  'service worker': ['UI-007'],
+  'pwa': ['UI-007'],
+  'progressive web': ['UI-007'],
+
+  'interactive demo': ['UI-008'],
+  'product mockup': ['UI-008'],
+
+  'site search': ['UI-009'],
+  'search functionality': ['UI-009'],
+
+  'error boundary': ['UI-010'],
+  'error recovery': ['UI-010'],
+  'recovery system': ['UI-010'],
+
+  'hero motion': ['UI-011'],
+  'hero enhancement': ['UI-011'],
+
+  'scroll animation': ['UI-012'],
+  'scroll trigger': ['UI-012'],
+
+  'card interaction': ['UI-013'],
+  'component polish': ['UI-013'],
+
+  'content freshness': ['UI-014'],
+  'last updated': ['UI-014'],
+
+  'critical css': ['PERF-001'],
+  'css extraction': ['PERF-001'],
+
+  'asset caching': ['PERF-002'],
+  'cdn': ['PERF-002'],
+  'cache strategy': ['PERF-002'],
+
+  'font self-hosting': ['PERF-003'],
+  'font subsetting': ['PERF-003'],
+
+  'lighthouse ci': ['PERF-004'],
+  'lighthouse': ['PERF-004'],
+
+  'csrf': ['SEC-001'],
+  'csrf protection': ['SEC-001'],
+
+  'input sanitization': ['SEC-002'],
+  'xss': ['SEC-002'],
+  'xss prevention': ['SEC-002'],
+
+  'sri hash': ['SEC-003'],
+  'subresource integrity': ['SEC-003'],
+
+  'csp reporting': ['SEC-004'],
+  'content security': ['SEC-004'],
+
+  'unit test': ['TEST-001'],
+  'unit testing': ['TEST-001'],
+
+  'api integration test': ['TEST-002'],
+  'api test': ['TEST-002'],
+
+  'visual regression': ['TEST-003'],
+  'visual test': ['TEST-003'],
+
+  'accessibility audit': ['TEST-004'],
+  'manual audit': ['TEST-004'],
+
+  'performance profiling': ['TEST-005'],
+  'profiling': ['TEST-005'],
+
+  'api doc': ['DOCS-001'],
+  'api documentation': ['DOCS-001'],
+
+  'architecture decision': ['DOCS-002'],
+  'adr': ['DOCS-002'],
+
+  'changelog': ['DOCS-003'],
+  'changelog automation': ['DOCS-003'],
+
+  'deployment runbook': ['DOCS-004'],
+  'runbook': ['DOCS-004'],
+
+  'component catalog': ['DOCS-005'],
+  'storybook': ['DOCS-005'],
+
+  'content pipeline': ['CONTENT-001'],
+
+  'case study': ['CONTENT-002'],
+  'customer story': ['CONTENT-002'],
+
+  'product roadmap': ['CONTENT-003'],
+  'release notes': ['CONTENT-003'],
+
+  'blog': ['CONTENT-004'],
+  'blog engine': ['CONTENT-004'],
+
+  'monitoring pipeline': ['OPS-003'],
+  'alerting': ['OPS-003'],
+
+  'backup': ['OPS-004'],
+  'disaster recovery': ['OPS-004'],
+
+  'coverage reporting': ['OPS-005'],
+  'spec coverage': ['OPS-005'],
+
+  'engine documentation': ['OPS-006'],
+  'orchestration docs': ['OPS-006'],
 });
 
 /**

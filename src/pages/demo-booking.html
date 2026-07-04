@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="stylesheet" href="/assets/css/core.css" />
   <style>
-    /* ─── Dark mode: page-specific components ─── */
+    /* â”€â”€â”€ Dark mode: page-specific components â”€â”€â”€ */
     [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea { background: var(--surface); color: var(--fg); border-color: var(--border); }
     [data-theme="dark"] input:focus, [data-theme="dark"] select:focus, [data-theme="dark"] textarea:focus { border-color: var(--teal); }
     [data-theme="dark"] .time-slot { background: var(--surface); color: var(--fg); border-color: var(--border); }
@@ -23,7 +23,7 @@
 
     .section { content-visibility: auto; contain-intrinsic-size: 500px; }
 
-    /* ─── Hero ─── */
+    /* â”€â”€â”€ Hero â”€â”€â”€ */
     .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
     .hero::before { content: ''; position: absolute; top: -30%; right: -10%; width: 70%; height: 130%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 7%, transparent) 0%, transparent 70%); pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -38,7 +38,7 @@
     .trust-row .chk { color: var(--green); font-size: 16px; }
     .hero-visual { position: relative; }
 
-    /* ─── Dashboard ─── */
+    /* â”€â”€â”€ Dashboard â”€â”€â”€ */
     .dash-main { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 24px; box-shadow: 0 20px 60px color-mix(in oklch, var(--fg) 8%, transparent); animation: floatDashboard 6s ease-in-out infinite; }
     @keyframes floatDashboard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
     .dash-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 12px; }
@@ -59,7 +59,7 @@
     .chart-labels { display: flex; gap: 8px; margin-top: 6px; font-size: 10px; color: var(--muted); }
     .chart-labels span { flex: 1; text-align: center; }
 
-    /* ─── Benefit Cards ─── */
+    /* â”€â”€â”€ Benefit Cards â”€â”€â”€ */
     .benefit-card { display: flex; gap: 16px; align-items: flex-start; }
     .benefit-icon { width: 48px; height: 48px; border-radius: var(--radius); display: grid; place-items: center; flex-shrink: 0; }
     .benefit-icon.blue { background: var(--accent-soft); color: var(--accent); }
@@ -68,7 +68,7 @@
     .benefit-icon svg { width: 22px; height: 22px; }
     .benefit-body h3 { margin-bottom: 4px; }
 
-    /* ─── Timeline ─── */
+    /* â”€â”€â”€ Timeline â”€â”€â”€ */
     .timeline { position: relative; max-width: 900px; margin: 0 auto; }
     .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; left: 32px; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--teal)); }
     .tl-step { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 32px; position: relative; padding-left: 72px; }
@@ -78,7 +78,7 @@
     .tl-duration { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; padding: 10px 18px; border-radius: 100px; background: var(--accent-soft); color: var(--accent); font-family: var(--font-mono); font-size: 13px; font-weight: 600; }
     .tl-duration svg { width: 16px; height: 16px; opacity: 0.7; }
 
-    /* ─── Booking Form ─── */
+    /* â”€â”€â”€ Booking Form â”€â”€â”€ */
     .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; box-shadow: 0 8px 32px color-mix(in oklch, var(--fg) 4%, transparent); position: relative; overflow: hidden; }
     .form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--teal), var(--green)); }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-md) var(--gap-lg); }
@@ -101,7 +101,7 @@
     .form-submit .btn { width: 100%; justify-content: center; padding: 16px 32px; font-size: 17px; }
     .form-fields { transition: opacity 0.3s, transform 0.3s; }
 
-    /* ─── Calendar ─── */
+    /* â”€â”€â”€ Calendar â”€â”€â”€ */
     .cal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-lg); }
     .cal-month { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
     .cal-month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
@@ -133,7 +133,7 @@
     .cal-summary { background: var(--teal-soft); border-radius: var(--radius); padding: 16px; margin-top: 16px; display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 600; color: var(--teal); }
     .cal-summary svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-    /* ─── FAQ Accordion (page-specific) ─── */
+    /* â”€â”€â”€ FAQ Accordion (page-specific) â”€â”€â”€ */
     .faq-q { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 20px 0; text-align: left; font-size: 17px; font-weight: 600; color: var(--fg); transition: color 0.2s; background: none; border: none; cursor: pointer; font-family: inherit; }
     .faq-q:hover { color: var(--teal); }
     .faq-arrow { width: 20px; height: 20px; transition: transform 0.3s ease; flex-shrink: 0; color: var(--muted); }
@@ -141,30 +141,30 @@
     .faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--teal); }
     .faq-answer p { color: var(--muted); font-size: 15px; line-height: 1.7; }
 
-    /* ─── Trust Bar ─── */
+    /* â”€â”€â”€ Trust Bar â”€â”€â”€ */
     .trust-bar { background: var(--surface); border-block: 1px solid var(--border); padding-block: 40px; text-align: center; }
     .trust-metrics { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
     .trust-metric-val { font-family: var(--font-mono); font-size: clamp(28px, 3vw, 40px); font-weight: 700; color: var(--accent); }
     .trust-metric-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
-    /* ─── CTA extras ─── */
+    /* â”€â”€â”€ CTA extras â”€â”€â”€ */
     .cta-inner { position: relative; z-index: 1; }
     .cta-ctas { display: flex; gap: var(--gap-sm); justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
     .cta-trust { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; font-size: 14px; opacity: 0.85; }
     .cta-trust span { display: flex; align-items: center; gap: 6px; }
 
-    /* ─── Footer (page-specific structure) ─── */
+    /* â”€â”€â”€ Footer (page-specific structure) â”€â”€â”€ */
     .foot-head { font-size: 14px; font-weight: 600; color: white; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.04em; }
     .foot-bottom { border-top: 1px solid oklch(30% 0.015 250); margin-top: 40px; padding-top: 20px; font-size: 13px; color: oklch(55% 0.01 240); text-align: center; grid-column: 1 / -1; }
 
-    /* ─── Sticky CTA show ─── */
+    /* â”€â”€â”€ Sticky CTA show â”€â”€â”€ */
     .sticky-cta.show { display: block; }
 
-    /* ─── Exit intent banner ─── */
+    /* â”€â”€â”€ Exit intent banner â”€â”€â”€ */
     .limited-banner { display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: var(--radius); background: var(--accent-soft); border: 1px solid color-mix(in oklch, var(--accent) 20%, var(--border)); font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 32px; max-width: 600px; margin-inline: auto; }
     .limited-banner .blink { width: 8px; height: 8px; border-radius: 50%; background: oklch(55% 0.16 25); animation: pulse 1.5s ease infinite; flex-shrink: 0; }
 
-    /* ─── Stagger (page-specific class) ─── */
+    /* â”€â”€â”€ Stagger (page-specific class) â”€â”€â”€ */
     .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1); }
     .stagger.revealed > *:nth-child(1) { transition-delay: 0.05s; }
     .stagger.revealed > *:nth-child(2) { transition-delay: 0.12s; }
@@ -174,10 +174,10 @@
     .stagger.revealed > *:nth-child(6) { transition-delay: 0.40s; }
     .stagger.revealed > * { opacity: 1; transform: translateY(0); }
 
-    /* ─── Counter ─── */
+    /* â”€â”€â”€ Counter â”€â”€â”€ */
     .count-up { display: inline-block; }
 
-    /* ─── Responsive ─── */
+    /* â”€â”€â”€ Responsive â”€â”€â”€ */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
       .hero-visual { max-width: 500px; margin: 0 auto; }
@@ -217,14 +217,14 @@
   <!-- INCLUDE: nav -->
 
   <main id="content" role="main">
-    <!-- --- S01 — HERO --- -->
+    <!-- --- S01 â€” HERO --- -->
     <section class="hero" data-screen-label="01 Hero">
       <div class="container">
         <div class="hero-grid">
           <div class="hero-content">
             <div class="hero-badge reveal"><span class="dot"></span> LIVE PRODUCT DEMONSTRATION</div>
             <h1 class="reveal">See How OptiFlow Can Transform Your Operations.</h1>
-            <p class="lead reveal">Book a personalized demo and discover how OptiFlow helps MSMEs improve accountability, visibility, execution, and growth — built specifically for businesses like yours.</p>
+            <p class="lead reveal">Book a personalized demo and discover how OptiFlow helps MSMEs improve accountability, visibility, execution, and growth â€” built specifically for businesses like yours.</p>
             <div class="hero-cta reveal">
               <a href="#book" class="btn btn-primary btn-lg btn-glow">Book Your Demo</a>
               <a href="/product-overview/" class="btn btn-secondary btn-lg">Watch Product Tour</a>
@@ -253,7 +253,7 @@
               </div>
               <div class="dash-row" style="margin-top:12px;">
                 <div class="dash-kpi"><div class="dash-kpi-label">SOP Compliance</div><div class="dash-kpi-val count-up" data-count="98">0%</div></div>
-                <div class="dash-kpi"><div class="dash-kpi-label">Monthly Savings</div><div class="dash-kpi-val" style="color:var(--green);">₹2.8L</div></div>
+                <div class="dash-kpi"><div class="dash-kpi-label">Monthly Savings</div><div class="dash-kpi-val" style="color:var(--green);">â‚¹2.8L</div></div>
               </div>
             </div>
           </div>
@@ -261,7 +261,7 @@
       </div>
     </section>
 
-    <!-- --- S02 — WHY BOOK A DEMO --- -->
+    <!-- --- S02 â€” WHY BOOK A DEMO --- -->
     <section class="section" data-screen-label="02 Why Book">
       <div class="container">
         <div class="section-header reveal">
@@ -271,11 +271,11 @@
         <div class="grid-3 stagger">
           <div class="card benefit-card">
             <div class="benefit-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-            <div class="benefit-body"><h3>See The Platform Live</h3><p style="color:var(--muted);font-size:14px;">Watch a real product walkthrough — not a pre-recorded video. See exactly how it works.</p></div>
+            <div class="benefit-body"><h3>See The Platform Live</h3><p style="color:var(--muted);font-size:14px;">Watch a real product walkthrough â€” not a pre-recorded video. See exactly how it works.</p></div>
           </div>
           <div class="card benefit-card">
             <div class="benefit-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
-            <div class="benefit-body"><h3>Get MSME-Specific Recommendations</h3><p style="color:var(--muted);font-size:14px;">See exactly how OptiFlow applies to your industry — textile, manufacturing, trading, and more.</p></div>
+            <div class="benefit-body"><h3>Get MSME-Specific Recommendations</h3><p style="color:var(--muted);font-size:14px;">See exactly how OptiFlow applies to your industry â€” textile, manufacturing, trading, and more.</p></div>
           </div>
           <div class="card benefit-card">
             <div class="benefit-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div>
@@ -309,7 +309,7 @@
       </div>
     </div>
 
-    <!-- --- S03 — WHAT YOU'LL SEE --- -->
+    <!-- --- S03 â€” WHAT YOU'LL SEE --- -->
     <section class="section" data-screen-label="03 What You'll See">
       <div class="container">
         <div class="section-header reveal">
@@ -322,34 +322,34 @@
         </div>
         <div class="timeline">
           <div class="tl-step reveal"><div class="tl-num">1</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Business Discovery</h3><p style="color:var(--muted);font-size:15px;">We learn about your team size, industry, current workflows, and key operational challenges.</p></div></div>
-          <div class="tl-step reveal"><div class="tl-num">2</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Platform Walkthrough</h3><p style="color:var(--muted);font-size:15px;">Guided tour of the core modules — Tasks, Attendance, SOPs, Reports, and more.</p></div></div>
-          <div class="tl-step reveal"><div class="tl-num">3</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Use Case Demonstration</h3><p style="color:var(--muted);font-size:15px;">See real workflows mapped to your industry — production checklists, dispatch tracking, leave management.</p></div></div>
+          <div class="tl-step reveal"><div class="tl-num">2</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Platform Walkthrough</h3><p style="color:var(--muted);font-size:15px;">Guided tour of the core modules â€” Tasks, Attendance, SOPs, Reports, and more.</p></div></div>
+          <div class="tl-step reveal"><div class="tl-num">3</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Use Case Demonstration</h3><p style="color:var(--muted);font-size:15px;">See real workflows mapped to your industry â€” production checklists, dispatch tracking, leave management.</p></div></div>
           <div class="tl-step reveal"><div class="tl-num">4</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Workflow Mapping</h3><p style="color:var(--muted);font-size:15px;">We map your existing processes to OptiFlow's system. You'll see how your daily work flows through the platform.</p></div></div>
-          <div class="tl-step reveal"><div class="tl-num">5</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Questions &amp; Answers</h3><p style="color:var(--muted);font-size:15px;">Open discussion. Ask about pricing, implementation, team training, mobile access — whatever matters to you.</p></div></div>
+          <div class="tl-step reveal"><div class="tl-num">5</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Questions &amp; Answers</h3><p style="color:var(--muted);font-size:15px;">Open discussion. Ask about pricing, implementation, team training, mobile access â€” whatever matters to you.</p></div></div>
           <div class="tl-step reveal"><div class="tl-num">6</div><div><h3 style="font-family:var(--font-display);letter-spacing:-0.01em;">Implementation Roadmap</h3><p style="color:var(--muted);font-size:15px;">Walk away with a clear timeline: setup, team onboarding, go-live date, and success milestones.</p></div></div>
         </div>
       </div>
     </section>
 
-    <!-- --- S04 — DEMO BENEFITS --- -->
+    <!-- --- S04 â€” DEMO BENEFITS --- -->
     <section class="section" data-screen-label="04 Demo Benefits">
       <div class="container">
         <div class="section-header reveal">
           <h2>What You Will Walk Away With</h2>
-          <p class="lead">More than a product tour — a complete operational assessment for your business.</p>
+          <p class="lead">More than a product tour â€” a complete operational assessment for your business.</p>
         </div>
         <div class="grid-3 stagger">
-          <div class="card"><div class="benefit-icon blue" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3 style="margin-bottom:6px;">Operational Gap Analysis</h3><p style="color:var(--muted);font-size:14px;">Identify exactly where your current operations break down — and what to fix first for maximum impact.</p></div>
+          <div class="card"><div class="benefit-icon blue" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3 style="margin-bottom:6px;">Operational Gap Analysis</h3><p style="color:var(--muted);font-size:14px;">Identify exactly where your current operations break down â€” and what to fix first for maximum impact.</p></div>
           <div class="card"><div class="benefit-icon teal" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><h3 style="margin-bottom:6px;">Visibility Framework</h3><p style="color:var(--muted);font-size:14px;">A structured approach to getting real-time visibility across tasks, teams, and departments.</p></div>
-          <div class="card"><div class="benefit-icon green" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div><h3 style="margin-bottom:6px;">Implementation Roadmap</h3><p style="color:var(--muted);font-size:14px;">A clear step-by-step plan: Discovery → Setup → Training → Go Live — tailored to your team size and timeline.</p></div>
-          <div class="card"><div class="benefit-icon blue" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><h3 style="margin-bottom:6px;">Platform Evaluation Guide</h3><p style="color:var(--muted);font-size:14px;">A comparison framework to evaluate OptiFlow against your current tools — WhatsApp, Excel, or other software.</p></div>
+          <div class="card"><div class="benefit-icon green" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div><h3 style="margin-bottom:6px;">Implementation Roadmap</h3><p style="color:var(--muted);font-size:14px;">A clear step-by-step plan: Discovery â†’ Setup â†’ Training â†’ Go Live â€” tailored to your team size and timeline.</p></div>
+          <div class="card"><div class="benefit-icon blue" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><h3 style="margin-bottom:6px;">Platform Evaluation Guide</h3><p style="color:var(--muted);font-size:14px;">A comparison framework to evaluate OptiFlow against your current tools â€” WhatsApp, Excel, or other software.</p></div>
           <div class="card"><div class="benefit-icon teal" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3 style="margin-bottom:6px;">Accountability Framework</h3><p style="color:var(--muted);font-size:14px;">How to move from "I thought he did it" to complete task ownership across your entire team.</p></div>
           <div class="card"><div class="benefit-icon green" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><h3 style="margin-bottom:6px;">Scaling Recommendations</h3><p style="color:var(--muted);font-size:14px;">Practical advice on when to add modules, hire with systems, and scale processes without breaking them.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- --- S05 — BOOKING FORM --- -->
+    <!-- --- S05 â€” BOOKING FORM --- -->
     <section class="section" id="book" data-screen-label="05 Booking Form">
       <div class="container" style="max-width:800px;">
         <div class="section-header reveal">
@@ -370,7 +370,7 @@
                 <div class="form-group"><label for="mobile">Mobile Number <span class="req">*</span></label><input type="tel" id="mobile" name="mobile" placeholder="+91 00000 00000" required /></div>
                 <div class="form-group"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" name="email" placeholder="you@company.com" required /></div>
                 <div class="form-group"><label for="teamSize">Team Size <span class="req">*</span></label>
-                  <select id="teamSize" name="team_size" required><option value="">Select team size</option><option>1—10</option><option>11—25</option><option>26—50</option><option>51—100</option><option>101—250</option><option>250+</option></select>
+                  <select id="teamSize" name="team_size" required><option value="">Select team size</option><option>1â€”10</option><option>11â€”25</option><option>26â€”50</option><option>51â€”100</option><option>101â€”250</option><option>250+</option></select>
                 </div>
                 <div class="form-group"><label for="industry">Industry <span class="req">*</span></label>
                   <select id="industry" name="industry" required><option value="">Select your industry</option><option>Textile</option><option>Manufacturing</option><option>Trading</option><option>Warehousing</option><option>Distribution</option><option>Logistics</option><option>Service</option><option>Other</option></select>
@@ -378,7 +378,7 @@
               </div>
               <div class="form-group" style="margin-top:16px;">
                 <label for="challenges">Current Operational Challenges <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
-                <textarea id="challenges" name="challenges" rows="3" placeholder="Tell us about your biggest operational pain points — WhatsApp dependency, missed tasks, attendance tracking, reporting gaps, etc."></textarea>
+                <textarea id="challenges" name="challenges" rows="3" placeholder="Tell us about your biggest operational pain points â€” WhatsApp dependency, missed tasks, attendance tracking, reporting gaps, etc."></textarea>
               </div>
               <div class="form-error-msg"></div>
               <div class="form-submit">
@@ -396,7 +396,7 @@
       </div>
     </section>
 
-    <!-- --- S06 — CALENDAR SELECTION --- -->
+    <!-- --- S06 â€” CALENDAR SELECTION --- -->
     <section class="section" data-screen-label="06 Calendar">
       <div class="container" style="max-width:800px;">
         <div class="section-header reveal">
@@ -437,26 +437,26 @@
       </div>
     </section>
 
-    <!-- --- S07 — FAQ --- -->
+    <!-- --- S07 â€” FAQ --- -->
     <section class="section" data-screen-label="07 FAQ">
       <div class="container">
         <div class="section-header reveal">
           <h2>Frequently Asked Questions</h2>
         </div>
         <div class="faq-list reveal">
-          <div class="faq-item"><button class="faq-question">Is the demo free? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Yes — completely free. No payment details, no commitment, no pressure. It's a conversation about your operations and how OptiFlow can help.</p></div></div>
-          <div class="faq-item"><button class="faq-question">How long does the demo take? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>30 to 45 minutes. We respect your time — the session is structured and focused. You'll walk away with a clear understanding and a roadmap.</p></div></div>
-          <div class="faq-item"><button class="faq-question">Do I need technical knowledge? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Not at all. OptiFlow is built for business owners and frontline teams — if you can use WhatsApp, you can use OptiFlow. We handle the technical side.</p></div></div>
-          <div class="faq-item"><button class="faq-question">Can the demo be customized for my industry? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Absolutely. The demo is tailored to your sector — whether you run a textile unit, a trading business, a warehouse, or a service operation. We show what matters to you.</p></div></div>
-          <div class="faq-item"><button class="faq-question">Will I see real product screens? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Yes. This is a live walkthrough of the actual OptiFlow platform — not slides, not mockups. You'll see the real dashboard, task center, attendance module, and more.</p></div></div>
-          <div class="faq-item"><button class="faq-question">Can my team join the call? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Yes — invite your operations manager, HR head, or any key team member. Decision-makers and day-to-day operators are both welcome.</p></div></div>
-          <div class="faq-item"><button class="faq-question">How quickly can we get started after the demo? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Most businesses go live within 4 to 7 days. We handle the setup, import your data, train your team, and get you operational — fast.</p></div></div>
+          <div class="faq-item"><button class="faq-question">Is the demo free? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Yes â€” completely free. No payment details, no commitment, no pressure. It's a conversation about your operations and how OptiFlow can help.</p></div></div>
+          <div class="faq-item"><button class="faq-question">How long does the demo take? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>30 to 45 minutes. We respect your time â€” the session is structured and focused. You'll walk away with a clear understanding and a roadmap.</p></div></div>
+          <div class="faq-item"><button class="faq-question">Do I need technical knowledge? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Not at all. OptiFlow is built for business owners and frontline teams â€” if you can use WhatsApp, you can use OptiFlow. We handle the technical side.</p></div></div>
+          <div class="faq-item"><button class="faq-question">Can the demo be customized for my industry? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Absolutely. The demo is tailored to your sector â€” whether you run a textile unit, a trading business, a warehouse, or a service operation. We show what matters to you.</p></div></div>
+          <div class="faq-item"><button class="faq-question">Will I see real product screens? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Yes. This is a live walkthrough of the actual OptiFlow platform â€” not slides, not mockups. You'll see the real dashboard, task center, attendance module, and more.</p></div></div>
+          <div class="faq-item"><button class="faq-question">Can my team join the call? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Yes â€” invite your operations manager, HR head, or any key team member. Decision-makers and day-to-day operators are both welcome.</p></div></div>
+          <div class="faq-item"><button class="faq-question">How quickly can we get started after the demo? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>Most businesses go live within 4 to 7 days. We handle the setup, import your data, train your team, and get you operational â€” fast.</p></div></div>
           <div class="faq-item"><button class="faq-question">What happens after the demo? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>No pressure. You'll receive a summary of what we discussed, a tailored implementation plan, and pricing options. You decide if and when to move forward.</p></div></div>
         </div>
       </div>
     </section>
 
-    <!-- --- S08 — FINAL CTA --- -->
+    <!-- --- S08 â€” FINAL CTA --- -->
     <section class="cta-section" data-screen-label="08 Final CTA">
       <div class="container cta-inner">
         <h2 class="reveal">Ready To See OptiFlow In Action?</h2>
@@ -610,5 +610,7 @@
       };
     })();
   </script>
+
+  <!-- INCLUDE: cookie-consent -->
 </body>
 </html>

@@ -1,22 +1,49 @@
 ---
 name: openspec-archive
-description: Archive a completed change in the experimental workflow. Use when the user wants to finalize and archive a change after implementation is complete.
+description: >
+  Archive a completed OpenSpec change from changes/ to archive/YYYY-MM-DD-<name>/.
+  Syncs delta specs to main, generates traceability (spec→task→commit→file chain),
+  updates documentation, and produces master archive index. Terminal phase of the
+  Enterprise Orchestration lifecycle. Supports autonomous mode with auto-approve.
 license: MIT
-compatibility: Requires openspec CLI.
+compatibility: OpenSpec >= 1.0, Node.js >= 18
 metadata:
-  author: openspec
-  version: "2.0"
-  generatedBy: "2.0.0"
+  version: "14.0"
+  enterprise: true
+  generatedBy: "2.1.0"
   triggers:
     - /opsx-archive
     - opsx archive
-    - archive change
-    - finalize change
+    - archive
+    - finalize
+    - complete change
   domains:
-    - orchestration
-    - spec-driven-development
-    - lifecycle
-    - meta
+    - documentation
+    - finalization
+    - archive
+    - traceability
+  orchestration:
+    phase: OPSX_ARCHIVE
+    role: archivist
+    isFatal: false
+    requires: [VALIDATE]
+    handoffTo: null
+    retryPolicy: { maxRetries: 2, backoffMs: 1000 }
+  relatedSkills:
+    - openspec-auto
+    - openspec-sync
+    - openspec-verify
+  outputContracts:
+    required:
+      - traceability.md
+    optional:
+      - archive-record (change moved to archive/)
+      - docs (updated documentation)
+      - archive-index (master index.json)
+  changelog: |
+    v14.0 (2026-07-04): Enterprise upgrade — enhanced metadata, orchestration contract,
+      expanded triggers and domains, output contracts with required/optional distinction.
+    v13.0 (2026-07-03): V13 integration — autonomous mode with auto-approve and post-archive verification.
 ---
 
 ## Purpose
@@ -172,9 +199,36 @@ After archiving, verify:
 - **DO NOT** archive without checking for target collision — same date + name = error
 - **DO NOT** skip the artifact completion check — warn if artifacts are incomplete
 
+## V13 Enterprise Integration
+
+### Agent Contract
+
+This skill is managed by the V13 Master Orchestrator (`auto-pipeline-v13.mjs`) via the LIFECYCLE_CONTRACTS in `agent-contracts.mjs`.
+
+**Contract Summary:**
+- **Role:** archivist
+- **Fatal:** No
+- **Prerequisites:** VALIDATE
+- **Produces:** archive-record, traceability.md
+- **Handoff:** null (terminal phase)
+- **Retry Policy:** 2 retries, 1s backoff
+- **Recovery Strategy:** Re-run spec sync. Verify all artifacts exist. Regenerate traceability.
+
+### Success Criteria
+- Change moved to archive/ with traceability.md generated
+
+### V13 Runtime Integration
+
+When invoked by `/opsx-auto`, this phase:
+1. Receives shared context from the master orchestrator
+2. Validates prerequisites via `validatePrerequisites()` 
+3. Records findings/decisions/risks to `ctx.sharedMemory`
+4. Hands off to the next phase via contract
+
 ## Changelog
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v13.0 | 2026-07 | V13 enterprise integration: agent contract with LIFECYCLE_CONTRACTS, master orchestrator handoff, shared memory context, retry/recovery policies. |
 | v2.0 | 2026-07 | Added metadata consistency, Prerequisites, Related Skills, Autonomous Mode section, post-archive verification, Anti-Patterns. |
 | v1.0 | 2026-06 | Initial archive with sync assessment, date-named archives, warning system, collision handling. |

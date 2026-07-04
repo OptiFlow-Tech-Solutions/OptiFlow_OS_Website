@@ -35,6 +35,7 @@ export class PipelineContext {
    * @param {boolean} [opts.dryRun]
    * @param {boolean} [opts.skipBuild]
    * @param {boolean} [opts.autoApprove]
+   * @param {boolean} [opts.planOnly]
    */
   constructor(taskDescription, opts = {}) {
     this.executionId = `${slugify(taskDescription)}-${Date.now()}`;
@@ -43,6 +44,7 @@ export class PipelineContext {
     this.dryRun = opts.dryRun || false;
     this.skipBuild = opts.skipBuild || false;
     this.autoApprove = opts.autoApprove !== false;
+    this.planOnly = opts.planOnly || false;
     this.startedAt = new Date().toISOString();
     this.branch = 'unknown';
     this.phases = [];
@@ -71,6 +73,23 @@ export class PipelineContext {
     // V12: Staleness detection
     this.lastProgressPct = -1;
     this.staleIterationCount = 0;
+
+    // V13: Shared memory — agents append structured findings for cross-phase reasoning
+    this.sharedMemory = {
+      findings: [],    // {type, content, confidence, agent, timestamp}
+      decisions: [],   // {decision, rationale, alternatives}
+      risks: [],       // {risk, severity, mitigation}
+      assumptions: [], // {assumption, validated, by}
+    };
+
+    // V13: Repository snapshot — unified repository intelligence
+    this.repository = null;
+
+    // V13: Composed skills by role
+    this.composedSkills = null;
+
+    // V13: Composed agent teams
+    this.agentTeams = null;
   }
 
   get currentPhase() {
@@ -79,8 +98,8 @@ export class PipelineContext {
   }
 
   get nextPhaseId() {
-    const completed = new Set(this.phases.filter((p) => p.status === 'complete').map((p) => p.id));
-    const order = ['DEEP_SCAN', 'SKILL_DISCOVERY', 'OPSX_EXPLORE', 'OPSX_PROPOSE', 'OPSX_SYNC', 'OPSX_APPLY', 'VALIDATE', 'OPSX_ARCHIVE'];
+    const completed = new Set(this.phases.filter((p) => p.status === 'complete' || p.status === 'skipped').map((p) => p.id));
+    const order = ['DEEP_SCAN', 'SKILL_DISCOVERY', 'OPSX_EXPLORE', 'OPSX_PROPOSE', 'OPSX_SYNC', 'OPSX_APPLY', 'VALIDATE', 'OPSX_VERIFY', 'OPSX_ARCHIVE'];
     return order.find((id) => !completed.has(id)) || null;
   }
 
@@ -197,6 +216,87 @@ export class PipelineContext {
     return this.staleIterationCount >= MAX_STALE_ITERATIONS;
   }
 
+  // ── V13: Shared memory methods ──
+
+  /**
+   * Record a finding in shared memory. Agents append structured findings
+   * so subsequent agents can read previous reasoning.
+   */
+  recordFinding(type, content, confidence = 1.0, agent = null) {
+    const finding = {
+      type,
+      content,
+      confidence,
+      agent: agent || 'unknown',
+      timestamp: new Date().toISOString(),
+    };
+    this.sharedMemory.findings.push(finding);
+    this.persist();
+    return finding;
+  }
+
+  /**
+   * Record an architectural decision with rationale.
+   */
+  recordDecision(decision, rationale, alternatives = []) {
+    this.sharedMemory.decisions.push({
+      decision, rationale, alternatives,
+      timestamp: new Date().toISOString(),
+    });
+    this.persist();
+  }
+
+  /**
+   * Record a risk assessment.
+   */
+  recordRisk(risk, severity = 'medium', mitigation = '') {
+    this.sharedMemory.risks.push({ risk, severity, mitigation });
+    this.persist();
+  }
+
+  /**
+   * Record an assumption for later validation.
+   */
+  recordAssumption(assumption, by = null) {
+    this.sharedMemory.assumptions.push({
+      assumption, validated: false, by: by || 'unknown',
+      timestamp: new Date().toISOString(),
+    });
+    this.persist();
+  }
+
+  /**
+   * Mark an assumption as validated.
+   */
+  validateAssumption(index) {
+    if (this.sharedMemory.assumptions[index]) {
+      this.sharedMemory.assumptions[index].validated = true;
+      this.persist();
+    }
+  }
+
+  /**
+   * Get all findings relevant to a specific phase.
+   */
+  findingsForPhase(phaseId) {
+    const relevant = [];
+    for (const f of this.sharedMemory.findings) {
+      if (!f.phase || f.phase === phaseId) relevant.push(f);
+    }
+    // Also include decisions and risks
+    for (const d of this.sharedMemory.decisions) relevant.push({
+      type: 'decision', content: `${d.decision}: ${d.rationale}`,
+      confidence: 1.0, agent: 'unknown', timestamp: d.timestamp,
+    });
+    for (const r of this.sharedMemory.risks) relevant.push({
+      type: 'risk', content: `[${r.severity}] ${r.risk} — ${r.mitigation || 'no mitigation'}`,
+      confidence: 0.8, agent: 'unknown', timestamp: '',
+    });
+    return relevant;
+  }
+
+  // ── End V13 memory methods ──
+
   /**
    * Persist the full context to disk for resume/recovery.
    */
@@ -238,6 +338,7 @@ export class PipelineContext {
       dryRun: this.dryRun,
       skipBuild: this.skipBuild,
       autoApprove: this.autoApprove,
+      planOnly: this.planOnly,
       startedAt: this.startedAt,
       completedAt: this.completedAt,
       totalDuration: this.totalDuration,
@@ -260,6 +361,10 @@ export class PipelineContext {
       checkpoints: this.checkpoints,
       lastProgressPct: this.lastProgressPct,
       staleIterationCount: this.staleIterationCount,
+      sharedMemory: this.sharedMemory,
+      repository: this.repository,
+      composedSkills: this.composedSkills,
+      agentTeams: this.agentTeams,
     };
   }
 

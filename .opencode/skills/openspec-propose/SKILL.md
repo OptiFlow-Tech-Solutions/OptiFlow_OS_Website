@@ -1,22 +1,49 @@
 ---
 name: openspec-propose
-description: Propose a new change with all artifacts generated in one step. Use when the user wants to quickly describe what they want to build and get a complete proposal with design, specs, and tasks ready for implementation.
+description: >
+  Propose a new change with all artifacts generated in one step —
+  proposal.md (what & why), design.md (how), tasks.md (implementation steps),
+  and delta specs (ADDED/MODIFIED/REMOVED requirements). Supports autonomous
+  mode (driven by /opsx-auto) and standalone use. FATAL phase — pipeline stops on failure.
 license: MIT
-compatibility: Requires openspec CLI.
+compatibility: OpenSpec >= 1.0, Node.js >= 18
 metadata:
-  author: openspec
-  version: "2.0"
-  generatedBy: "2.0.0"
+  version: "14.0"
+  enterprise: true
+  generatedBy: "2.1.0"
   triggers:
     - /opsx-propose
     - opsx propose
+    - propose
     - create proposal
-    - generate artifacts
+    - scaffold change
   domains:
     - planning
-    - spec-driven-development
+    - documentation
+    - specification
     - design
-    - meta
+  orchestration:
+    phase: OPSX_PROPOSE
+    role: proposal-writer
+    isFatal: true
+    requires: [OPSX_EXPLORE]
+    handoffTo: OPSX_SYNC
+    retryPolicy: { maxRetries: 1, backoffMs: 2000 }
+  relatedSkills:
+    - openspec-auto
+    - openspec-explore
+    - openspec-sync
+  outputContracts:
+    required:
+      - proposal.md
+      - design.md
+      - tasks.md
+    optional:
+      - delta-specs
+  changelog: |
+    v14.0 (2026-07-04): Enterprise upgrade — enhanced metadata, orchestration contract,
+      expanded triggers and domains, output contracts with required/optional distinction.
+    v13.0 (2026-07-03): V13 integration — autonomous mode with direct artifact writing.
 ---
 
 ## Purpose
@@ -168,9 +195,36 @@ After completing all artifacts, summarize:
 - **DO NOT** create artifacts before running `openspec new change` (in standalone mode)
 - **DO NOT** assume repo-local paths — always use `planningHome`, `changeRoot`, and `artifactPaths` from status JSON
 
+## V13 Enterprise Integration
+
+### Agent Contract
+
+This skill is managed by the V13 Master Orchestrator (`auto-pipeline-v13.mjs`) via the LIFECYCLE_CONTRACTS in `agent-contracts.mjs`.
+
+**Contract Summary:**
+- **Role:** proposal-writer
+- **Fatal:** Yes
+- **Prerequisites:** OPSX_EXPLORE
+- **Produces:** proposal.md, design.md, tasks.md, delta-specs
+- **Handoff:** OPSX_SYNC
+- **Retry Policy:** 1 retry, 2s backoff
+- **Recovery Strategy:** Re-analyze task and regenerate proposal artifacts with corrected scope.
+
+### Success Criteria
+- All three artifacts (proposal.md, design.md, tasks.md) exist and are valid
+
+### V13 Runtime Integration
+
+When invoked by `/opsx-auto`, this phase:
+1. Receives shared context from the master orchestrator
+2. Validates prerequisites via `validatePrerequisites()` 
+3. Records findings/decisions/risks to `ctx.sharedMemory`
+4. Hands off to the next phase via contract
+
 ## Changelog
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v13.0 | 2026-07 | V13 enterprise integration: agent contract with LIFECYCLE_CONTRACTS, master orchestrator handoff, shared memory context, retry/recovery policies. |
 | v2.0 | 2026-07 | Added metadata (triggers, domains), Prerequisites, Related Skills, retry limit on artifact creation, Anti-Patterns. |
 | v1.0 | 2026-06 | Initial propose with artifact generation pipeline, artifact creation guidelines. |

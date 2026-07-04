@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="/assets/css/core.css">
   <style>
-    /* ─── Hero ─── */
+    /* â”€â”€â”€ Hero â”€â”€â”€ */
     .hero { padding-top: calc(var(--nav-h) + 72px); padding-bottom: 72px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: -40%; right: -15%; width: 70%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--accent) 6%, transparent) 0%, color-mix(in oklch, var(--teal) 4%, transparent) 40%, transparent 70%); pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -19,7 +19,7 @@
     .hero-content .lead { margin-bottom: 32px; }
     .hero-cta { display: flex; gap: var(--gap-sm); flex-wrap: wrap; }
 
-    /* ─── Quadrant Grid ─── */
+    /* â”€â”€â”€ Quadrant Grid â”€â”€â”€ */
     .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 0; position: relative; max-width: 900px; margin: 0 auto; }
     .quadrant-card { padding: 36px 28px; border: 1px solid var(--border); position: relative; }
     .quadrant-card:nth-child(1) { border-radius: var(--radius-lg) 0 0 0; border-right-color: var(--border-soft); border-bottom-color: var(--border-soft); }
@@ -30,7 +30,7 @@
     .qc-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
     .qc-weaknesses { list-style: none; padding: 0; margin: 0 0 14px; }
     .qc-weaknesses li { font-size: 13px; color: var(--muted); padding: 4px 0 4px 18px; position: relative; }
-    .qc-weaknesses li::before { content: '×'; position: absolute; left: 0; color: oklch(55% 0.22 25); font-weight: 700; }
+    .qc-weaknesses li::before { content: 'Ã—'; position: absolute; left: 0; color: oklch(55% 0.22 25); font-weight: 700; }
     .qc-advantage { font-size: 13px; font-weight: 600; color: var(--green); border-top: 1px solid var(--border-soft); padding-top: 12px; margin-top: 4px; }
     .quadrant-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, var(--accent), var(--teal)); color: white; padding: 20px 24px; border-radius: 50%; width: 140px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 30%, transparent); z-index: 2; }
     .quadrant-center .qc-name { font-size: 16px; font-weight: 700; line-height: 1.2; }
@@ -41,7 +41,7 @@
     [data-theme="dark"] .quadrant-card .qc-weaknesses li { color: var(--muted); }
     [data-theme="dark"] .quadrant-card .qc-advantage { color: var(--lime); border-top-color: var(--border-soft); }
 
-    /* ─── Feature Matrix ─── */
+    /* â”€â”€â”€ Feature Matrix â”€â”€â”€ */
     .matrix-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-lg); border: 1px solid var(--border); }
     .comparison-table { width: 100%; border-collapse: collapse; font-size: 14px; }
     .comparison-table thead th { background: color-mix(in oklch, var(--bg) 70%, var(--accent) 5%); padding: 14px 16px; text-align: left; font-weight: 700; font-size: 13px; color: var(--fg); border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 1; }
@@ -64,7 +64,7 @@
     [data-theme="dark"] .comparison-table tbody tr:hover td { background: rgba(255,255,255,.04); }
     [data-theme="dark"] .comparison-table tbody tr:hover td:first-child { background: rgba(255,255,255,.04); }
 
-    /* ─── Cost Comparison ─── */
+    /* â”€â”€â”€ Cost Comparison â”€â”€â”€ */
     .cost-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); }
 
     .cost-card {
@@ -153,7 +153,7 @@
       .cost-grid { grid-template-columns: 1fr; }
     }
 
-    /* ─── Stand Out cards ─── */
+    /* â”€â”€â”€ Stand Out cards â”€â”€â”€ */
     .standout-card { text-align: center; padding: 36px 24px; }
     .standout-icon { width: 52px; height: 52px; display: grid; place-items: center; background: color-mix(in oklch, var(--accent) 12%, transparent); border-radius: var(--radius-lg); margin: 0 auto 18px; color: var(--accent); }
     .standout-icon svg { width: 24px; height: 24px; }
@@ -163,7 +163,7 @@
     [data-theme="dark"] .standout-icon { background: rgba(39,141,159,.18); color: var(--teal); }
     [data-theme="dark"] .standout-card h3 { color: var(--fg); }
 
-    /* ─── Mobile ─── */
+    /* â”€â”€â”€ Mobile â”€â”€â”€ */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
     }
@@ -179,19 +179,19 @@
   <!-- INCLUDE: nav -->
   <main id="content">
 
-    <!-- ── Hero ── -->
+    <!-- â”€â”€ Hero â”€â”€ -->
     <section class="hero">
       <div class="container hero-grid reveal">
         <div class="hero-content">
           <h1>How OptiFlow OS compares to the alternatives</h1>
-          <p class="lead">Every MSME grapples with the same question: stick with familiar chaos, try a generic tool, invest in a heavy ERP — or choose something built for operators. Here's the honest comparison.</p>
+          <p class="lead">Every MSME grapples with the same question: stick with familiar chaos, try a generic tool, invest in a heavy ERP â€” or choose something built for operators. Here's the honest comparison.</p>
           <div class="hero-cta">
             <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow">Book a Free Demo</a>
             <a href="/pricing/" class="btn btn-secondary btn-lg">See Pricing</a>
           </div>
         </div>
         <div class="hero-visual">
-          <!-- ponytail: static visual — single svg is cheaper than a JS animation lib -->
+          <!-- ponytail: static visual â€” single svg is cheaper than a JS animation lib -->
           <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px">
             <rect x="40" y="20" width="140" height="80" rx="8" fill="color-mix(in oklch, var(--accent) 15%, transparent)" stroke="var(--accent)" stroke-width="1.5"/>
             <text x="110" y="65" text-anchor="middle" font-family="system-ui" font-size="13" font-weight="700" fill="var(--fg)">OptiFlow OS</text>
@@ -211,12 +211,12 @@
       </div>
     </section>
 
-    <!-- ── Competitor Quadrant ── -->
+    <!-- â”€â”€ Competitor Quadrant â”€â”€ -->
     <section class="section reveal">
       <div class="container">
         <div class="section-header">
           <h2>The Competitive Landscape</h2>
-          <p class="lead" style="max-width:680px;margin:0 auto">MSMEs typically rely on one of four approaches. Each solves part of the problem — none solves it all.</p>
+          <p class="lead" style="max-width:680px;margin:0 auto">MSMEs typically rely on one of four approaches. Each solves part of the problem â€” none solves it all.</p>
         </div>
         <div class="quadrant-grid">
           <div class="quadrant-card reveal">
@@ -225,7 +225,7 @@
             <ul class="qc-weaknesses">
               <li>Messages get buried in group chats</li>
               <li>No single source of truth for tasks</li>
-              <li>Zero accountability — "I told you" culture</li>
+              <li>Zero accountability â€” "I told you" culture</li>
             </ul>
             <div class="qc-advantage">OptiFlow replaces all chats and sheets with one structured platform.</div>
           </div>
@@ -244,7 +244,7 @@
             <div class="qc-title">Traditional ERPs</div>
             <ul class="qc-weaknesses">
               <li>6-12 month implementation timelines</li>
-              <li>₹5-15L+ annual cost, complex to maintain</li>
+              <li>â‚¹5-15L+ annual cost, complex to maintain</li>
               <li>Built for accountants, not floor operators</li>
             </ul>
             <div class="qc-advantage">OptiFlow deploys in days, costs a fraction, and operators actually use it.</div>
@@ -267,7 +267,7 @@
       </div>
     </section>
 
-    <!-- ── Feature Matrix ── -->
+    <!-- â”€â”€ Feature Matrix â”€â”€ -->
     <section class="section reveal">
       <div class="container">
         <div class="section-header">
@@ -296,7 +296,7 @@
               <tr><td>Multi-Location Support</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="partial">Add-on</td><td class="check">&#10003;</td></tr>
               <tr><td>Role-Based Access</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
               <tr><td>Leave Management</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="partial">Add-on</td><td class="check">&#10003;</td></tr>
-              <tr><td>Pricing Model</td><td class="check">Flat annual</td><td class="cross">Hidden cost</td><td class="cross">Per user / mo</td><td class="cross">₹5-15L+ / yr</td></tr>
+              <tr><td>Pricing Model</td><td class="check">Flat annual</td><td class="cross">Hidden cost</td><td class="cross">Per user / mo</td><td class="cross">â‚¹5-15L+ / yr</td></tr>
               <tr><td>Implementation Time</td><td class="check">Days</td><td class="cross">N/A</td><td class="partial">Weeks</td><td class="cross">6-12 months</td></tr>
               <tr><td>Built for Indian MSMEs</td><td class="check">&#10003;</td><td class="partial">Partially</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td></tr>
             </tbody>
@@ -305,33 +305,33 @@
       </div>
     </section>
 
-    <!-- ── Cost Comparison ── -->
+    <!-- â”€â”€ Cost Comparison â”€â”€ -->
     <section class="section section-dark reveal">
       <div class="container">
         <div class="section-header" style="--section-header-fg:var(--fg)">
-          <h2 style="color:white">What You Actually Pay — Annual Cost Comparison</h2>
+          <h2 style="color:white">What You Actually Pay â€” Annual Cost Comparison</h2>
           <p class="lead" style="max-width:640px;margin:0 auto;color:color-mix(in oklch, white 78%, transparent)">Based on a typical 25-employee MSME. Real numbers, no surprises.</p>
         </div>
         <div class="cost-grid stagger-4">
           <div class="cost-card best reveal">
             <span class="cost-badge">Best Value</span>
             <h3>OptiFlow OS</h3>
-            <div class="cost-range">₹15,000 – 45,000</div>
+            <div class="cost-range">â‚¹15,000 â€“ 45,000</div>
             <div class="cost-detail">Flat annual pricing. No per-user charges. Implementation and support included. All modules, unlimited users.</div>
           </div>
           <div class="cost-card reveal">
             <h3>WhatsApp / Excel</h3>
-            <div class="cost-range">₹3 – 8 Lakhs</div>
+            <div class="cost-range">â‚¹3 â€“ 8 Lakhs</div>
             <div class="cost-detail">Hidden cost of owner time, errors, rework, missed follow-ups. Estimated 60-100 hrs/month of management time lost.</div>
           </div>
           <div class="cost-card reveal">
             <h3>Generic SaaS</h3>
-            <div class="cost-range">₹1.5 – 4.5 Lakhs</div>
-            <div class="cost-detail">₹500–1500/user/month × 25 users. Most tools charge per-user, discouraging full team adoption. Add-ons extra.</div>
+            <div class="cost-range">â‚¹1.5 â€“ 4.5 Lakhs</div>
+            <div class="cost-detail">â‚¹500â€“1500/user/month Ã— 25 users. Most tools charge per-user, discouraging full team adoption. Add-ons extra.</div>
           </div>
           <div class="cost-card reveal">
             <h3>Traditional ERP</h3>
-            <div class="cost-range">₹5 – 15 Lakhs</div>
+            <div class="cost-range">â‚¹5 â€“ 15 Lakhs</div>
             <div class="cost-detail">Implementation + license + annual maintenance. 6-12 month deployment. Requires dedicated IT staff to maintain.</div>
           </div>
         </div>
@@ -339,12 +339,12 @@
       </div>
     </section>
 
-    <!-- ── Why OptiFlow Stands Out ── -->
+    <!-- â”€â”€ Why OptiFlow Stands Out â”€â”€ -->
     <section class="section reveal">
       <div class="container">
         <div class="section-header">
           <h2>Why OptiFlow OS Stands Apart</h2>
-          <p class="lead" style="max-width:640px;margin:0 auto">Three things no competitor offers — and why they matter for your business.</p>
+          <p class="lead" style="max-width:640px;margin:0 auto">Three things no competitor offers â€” and why they matter for your business.</p>
         </div>
         <div class="grid-3 stagger-3">
           <div class="card standout-card reveal">
@@ -352,13 +352,13 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             </div>
             <h3>Built for Indian MSMEs</h3>
-            <p>Designed for textile, manufacturing, trading, and logistics operations. Understands Indian workflows — multi-shift attendance, piece-rate tracking, WhatsApp-native communication patterns.</p>
+            <p>Designed for textile, manufacturing, trading, and logistics operations. Understands Indian workflows â€” multi-shift attendance, piece-rate tracking, WhatsApp-native communication patterns.</p>
           </div>
           <div class="card standout-card reveal">
             <div class="standout-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
             </div>
-            <h3>Flat Pricing — No Per-User Tax</h3>
+            <h3>Flat Pricing â€” No Per-User Tax</h3>
             <p>One annual fee covers all modules and all users. Add employees without cost anxiety. Most competitors charge per-user which blocks full adoption in MSMEs.</p>
           </div>
           <div class="card standout-card reveal">
@@ -366,17 +366,17 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <h3>Implementation + Support Included</h3>
-            <p>Go live in days, not months. We configure SOPs, onboard your team, and provide ongoing support — all included. No hidden implementation fees, no consulting invoices.</p>
+            <p>Go live in days, not months. We configure SOPs, onboard your team, and provide ongoing support â€” all included. No hidden implementation fees, no consulting invoices.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── CTA ── -->
+    <!-- â”€â”€ CTA â”€â”€ -->
     <section class="cta-section reveal">
       <div class="container" style="text-align:center">
         <h2 style="color:white;margin-bottom:16px">See the difference yourself</h2>
-        <p style="color:color-mix(in oklch,white,78%,transparent);max-width:560px;margin:0 auto 32px;font-size:18px;line-height:1.6">Book a free personalized demo. We'll show you how OptiFlow OS replaces chaos with clarity — in 30 minutes.</p>
+        <p style="color:color-mix(in oklch,white,78%,transparent);max-width:560px;margin:0 auto 32px;font-size:18px;line-height:1.6">Book a free personalized demo. We'll show you how OptiFlow OS replaces chaos with clarity â€” in 30 minutes.</p>
         <div style="display:flex;gap:var(--gap-sm);justify-content:center;flex-wrap:wrap">
           <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow">Book a Free Demo</a>
           <a href="/contact/" class="btn btn-secondary btn-lg">Talk to Sales</a>
@@ -388,5 +388,7 @@
   <!-- INCLUDE: footer -->
   <!-- INCLUDE: analytics -->
   <script src="/assets/js/core.js"></script>
+
+  <!-- INCLUDE: cookie-consent -->
 </body>
 </html>

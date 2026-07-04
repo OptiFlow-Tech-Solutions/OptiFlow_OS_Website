@@ -1,23 +1,45 @@
 ---
 name: openspec-explore
-description: Enter explore mode - a thinking partner for exploring ideas, investigating problems, and clarifying requirements. Use when the user wants to think through something before or during a change.
+description: >
+  Enter explore mode — a thinking partner for exploring ideas, investigating problems,
+  and clarifying requirements before implementation. Read-only codebase analysis with
+  ASCII diagrams and architecture mapping. Triggered by /opsx-explore or automatically
+  as Phase 6 of the Enterprise Orchestration lifecycle.
 license: MIT
-compatibility: Requires openspec CLI.
+compatibility: OpenSpec >= 1.0, Node.js >= 18
 metadata:
-  author: openspec
-  version: "2.0"
-  generatedBy: "2.0.0"
+  version: "14.0"
+  enterprise: true
+  generatedBy: "2.1.0"
   triggers:
     - /opsx-explore
     - opsx explore
-    - explore mode
-    - think through
+    - explore
     - investigate
+    - think about
   domains:
-    - exploration
     - analysis
-    - spec-driven-development
-    - meta
+    - exploration
+    - planning
+    - architecture
+  orchestration:
+    phase: OPSX_EXPLORE
+    role: repository-analyst
+    isFatal: false
+    requires: []
+    handoffTo: OPSX_PROPOSE
+    retryPolicy: { maxRetries: 2, backoffMs: 1000 }
+  relatedSkills:
+    - openspec-auto
+    - openspec-propose
+  outputContracts:
+    required: []
+    optional:
+      - repository understanding (affected specs, features, pages, dependencies)
+  changelog: |
+    v14.0 (2026-07-04): Enterprise upgrade — enhanced metadata, orchestration contract,
+      expanded triggers and domains, related skills, output contracts.
+    v13.0 (2026-07-03): V13 integration — autonomous mode for /opsx-auto.
 ---
 
 ## Purpose
@@ -357,9 +379,41 @@ Otherwise, move directly to the proposal phase.
 - **DO NOT** ask interrogative question chains — surface multiple directions, let the user follow what resonates
 - **DO NOT** skip reading the codebase — grounded exploration beats theoretical exploration every time
 
+## V13 Enterprise Integration
+
+### Agent Contract
+
+This skill is managed by the V13 Master Orchestrator (`auto-pipeline-v13.mjs`) via the `OPSX_EXPLORE` lifecycle agent contract in `agent-contracts.mjs`.
+
+**Contract Summary:**
+- **Role:** repository-analyst
+- **Fatal:** No (non-fatal failure allows pipeline to continue)
+- **Prerequisites:** None (first phase)
+- **Produces:** repository-understanding
+- **Handoff:** OPSX_PROPOSE
+- **Retry Policy:** 2 retries, 1s backoff
+- **Recovery Strategy:** Re-read specs and context. Update affected specs list.
+
+### V13 Runtime Integration
+
+When invoked by `/opsx-auto`, this phase:
+1. Receives the `RepositorySnapshot` from the master orchestrator (already built in Phase 0)
+2. Reads `ctx.repository.taskAnalysis` for intent/domain analysis
+3. Reads `ctx.affectedSpecs` for pre-computed spec relevance
+4. Records findings to `ctx.sharedMemory` via `ctx.recordFinding()`
+5. Hands off to PROPOSE phase via `ctx.phaseResults`
+
+### Success Criteria
+- All affected specs identified and loaded
+- Feature registry analyzed for related features
+- Design system rules reviewed for constraints
+- Repository findings recorded to shared memory
+- Phase marked complete in `ctx.phases[]`
+
 ## Changelog
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v13.0 | 2026-07 | V13 enterprise integration: agent contract awareness, runtime integration docs, success criteria, shared memory recording. |
 | v2.0 | 2026-07 | Added metadata (triggers, domains), Prerequisites, Related Skills, Explore-Propose handoff, autonomous exit criteria, Anti-Patterns. |
 | v1.0 | 2026-06 | Initial explore mode with stance-based philosophy, 4 entry-point scenarios, capture decisions table. |

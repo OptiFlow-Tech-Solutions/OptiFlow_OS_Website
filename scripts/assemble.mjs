@@ -6,6 +6,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+// ponytail: sharp for WebP/AVIF image optimization. Only loaded when images exist.
+let sharp;
+async function getSharp() {
+  if (!sharp) {
+    try { sharp = (await import('sharp')).default; } catch { return null; }
+  }
+  return sharp;
+}
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
@@ -43,6 +51,7 @@ function readPartial(name) {
 const navRaw = readPartial('nav.html');
 const footerRaw = readPartial('footer.html');
 const analyticsRaw = readPartial('analytics.html');
+const cookieConsentRaw = readPartial('cookie-consent.html');
 
 function resolveNav(activePage) {
   return navRaw.replace(/\{\{ACTIVE_PAGE\s*===\s*'([^']+)'\s*\?\s*'([^']*)'\s*:\s*'([^']*)'\}\}/g, (_, label, yes, no) => {
@@ -83,6 +92,7 @@ function buildPage(pageInfo) {
   html = html.replace(/<!-- INCLUDE:\s*nav\s*-->/g, navHtml);
   html = html.replace(/<!-- INCLUDE:\s*footer\s*-->/g, footerRaw);
   html = html.replace(/<!-- INCLUDE:\s*analytics\s*-->/g, analyticsRaw);
+  html = html.replace(/<!-- INCLUDE:\s*cookie-consent\s*-->/g, cookieConsentRaw);
 
   const urlPath = pageFile === 'index.html'
     ? ''
@@ -263,7 +273,40 @@ function injectJSONLD(pageInfo) {
   return scripts;
 }
 
-function main() {
+async function optimizeImages() {
+  const imgDir = path.join(DIST, 'assets', 'img');
+  if (!fs.existsSync(imgDir)) return;
+
+  const s = await getSharp();
+  if (!s) { console.log('  ⚠ sharp not available, skipping image optimization'); return; }
+
+  const formats = [
+    { ext: 'webp', opts: { quality: 85 } },
+    { ext: 'avif', opts: { quality: 65, effort: 4 } },
+  ];
+
+  const files = fs.readdirSync(imgDir).filter(f => /\.(png|jpe?g)$/i.test(f) && !f.includes('.webp') && !f.includes('.avif'));
+  let count = 0;
+
+  for (const file of files) {
+    const src = path.join(imgDir, file);
+    const base = file.replace(/\.(png|jpe?g)$/i, '');
+    for (const { ext, opts } of formats) {
+      const dest = path.join(imgDir, `${base}.${ext}`);
+      if (fs.existsSync(dest)) continue;
+      try {
+        await s(src)[ext](opts).toFile(dest);
+        count++;
+      } catch (e) {
+        console.log(`  ⚠ Failed to convert ${file} → ${ext}: ${e.message}`);
+      }
+    }
+  }
+
+  if (count > 0) console.log(`  ✓ Optimized ${count} image${count > 1 ? 's' : ''} (WebP + AVIF)`);
+}
+
+async function main() {
   console.log('OptiFlow OS — Building site...\n');
 
   if (fs.existsSync(DIST)) fs.rmSync(DIST, { recursive: true });
@@ -424,4 +467,4 @@ function minifyJS(content) {
   }
 }
 
-main();
+main().then(() => optimizeImages());

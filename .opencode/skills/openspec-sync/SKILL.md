@@ -1,23 +1,46 @@
 ---
 name: openspec-sync
-description: Sync delta specs from a change to main specs. Use when the user wants to update main specs with changes from a delta spec, without archiving the change.
+description: >
+  Sync delta specs from a change to main capability specs using intelligent
+  partial-merge logic. Supports ADDED/MODIFIED/REMOVED/RENAMED requirements
+  with conflict resolution. Agent-driven — reads deltas, edits main specs directly.
+  Skips automatically if no delta specs exist.
 license: MIT
-compatibility: Requires openspec CLI.
+compatibility: OpenSpec >= 1.0, Node.js >= 18
 metadata:
-  author: openspec
-  version: "2.0"
-  generatedBy: "2.0.0"
+  version: "14.0"
+  enterprise: true
+  generatedBy: "2.1.0"
   triggers:
     - /opsx-sync
     - opsx sync
     - sync specs
-    - sync delta
     - merge specs
+    - update main specs
   domains:
-    - orchestration
-    - spec-driven-development
+    - documentation
     - synchronization
-    - meta
+    - maintenance
+    - specification
+  orchestration:
+    phase: OPSX_SYNC
+    role: spec-synchronizer
+    isFatal: false
+    requires: [OPSX_PROPOSE]
+    handoffTo: OPSX_APPLY
+    retryPolicy: { maxRetries: 3, backoffMs: 500 }
+  relatedSkills:
+    - openspec-auto
+    - openspec-propose
+    - openspec-archive
+  outputContracts:
+    optional:
+      - synced-specs (merged delta specs into main)
+      - sync summary (count of synced vs skipped)
+  changelog: |
+    v14.0 (2026-07-04): Enterprise upgrade — enhanced metadata, orchestration contract,
+      expanded triggers and domains, output contracts.
+    v13.0 (2026-07-03): V13 integration — autonomous mode with auto-skip for empty deltas.
 ---
 
 ## Purpose
@@ -195,9 +218,36 @@ another synced change), a conflict may arise. Follow this strategy:
 - **DO NOT** sync without user selection when multiple changes exist — always let user choose
 - **DO NOT** proceed if workspace-planning mode is detected — stop and explain
 
+## V13 Enterprise Integration
+
+### Agent Contract
+
+This skill is managed by the V13 Master Orchestrator (`auto-pipeline-v13.mjs`) via the LIFECYCLE_CONTRACTS in `agent-contracts.mjs`.
+
+**Contract Summary:**
+- **Role:** spec-synchronizer
+- **Fatal:** No
+- **Prerequisites:** OPSX_PROPOSE
+- **Produces:** synced-specs
+- **Handoff:** OPSX_APPLY
+- **Retry Policy:** 3 retries, 500ms backoff
+- **Recovery Strategy:** Check for merge conflicts in delta specs. Re-validate sync metadata.
+
+### Success Criteria
+- Delta specs merged to main without conflicts
+
+### V13 Runtime Integration
+
+When invoked by `/opsx-auto`, this phase:
+1. Receives shared context from the master orchestrator
+2. Validates prerequisites via `validatePrerequisites()` 
+3. Records findings/decisions/risks to `ctx.sharedMemory`
+4. Hands off to the next phase via contract
+
 ## Changelog
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v13.0 | 2026-07 | V13 enterprise integration: agent contract with LIFECYCLE_CONTRACTS, master orchestrator handoff, shared memory context, retry/recovery policies. |
 | v2.0 | 2026-07 | Added metadata consistency, Prerequisites, Related Skills, conflict resolution strategy, Anti-Patterns. |
 | v1.0 | 2026-06 | Initial sync with intelligent merging, delta spec format reference, idempotency guardrail. |
