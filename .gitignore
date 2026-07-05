@@ -1,5 +1,71 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
-.DS_Store
-Thumbs.db
+
+# Environment (keep .env.example for reference)
+.env
+.env.*
+!.env.example
+
+# Logs
 *.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Editor
+*.sublime-workspace
+
+# Testing
+.playwright-mcp/
+playwright-report/
+test-results/
+.nyc_output/
+coverage/
+
+# Lighthouse
+lighthouse-report.*
+.lighthouseci/
+
+# Temp / cache
+*.tmp
+.tmp/
+tmp/
+.cache/
+cache/
+
+# Docker overrides (local only)
+docker-compose.override.yml
+docker-compose.*.local.yml
+
+# OpenCode tooling dependencies (keep config, ignore deps)
+.opencode/node_modules/
+
+# Heapsnapshot / profiling
+*.heapsnapshot
+
+# Netlify (local dev only)
+.netlify/
+
+# Cloudflare (local dev only)
+.wrangler/

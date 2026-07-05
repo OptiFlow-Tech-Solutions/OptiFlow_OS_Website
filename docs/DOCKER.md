@@ -14,13 +14,17 @@ npm run docker:build
 
 ```
 Stage 1: Builder (node:20-alpine)
-  npm ci --ignore-scripts
+  npm ci --ignore-scripts        ← includes sharp for image optimization
   COPY src/ assets/ scripts/ site.json
   RUN node scripts/assemble.mjs  →  dist/
 
-Stage 2: Runtime (nginx:alpine)
+Stage 2: Brotli Builder (nginx:1.27-alpine)
+  Compiles ngx_http_brotli_*_module.so
+
+Stage 3: Runtime (nginx:1.27-alpine)
   COPY nginx.conf → /etc/nginx/conf.d/default.conf
   COPY dist/ → /usr/share/nginx/html
+  COPY brotli modules → /usr/lib/nginx/modules/
   EXPOSE 80
   HEALTHCHECK /health
 ```
@@ -53,21 +57,31 @@ docker compose down
 
 ## Environment
 
-Set at runtime:
+The container uses the following environment variables (configurable via `.env.example`):
 
-```bash
-docker run -p 80:80 \
-  -e NODE_ENV=production \
-  -e API_BASE_URL=https://api.optiflow.in \
-  optiflow-website
-```
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `80` | Container port (compose only) |
+| `DOMAIN` | `optiflow.in` | Domain for Traefik routing labels |
+| `API_BASE_URL` | — | Future backend API URL |
+| `SITE_URL` | `https://optiflow.in` | Public site URL |
 
 ## Image Details
 
-- **Base:** `nginx:alpine` (~12 MB compressed)
+- **Base:** `nginx:1.27-alpine` (~12 MB compressed)
+- **Compression:** Brotli (level 6) + Gzip (level 6, fallback)
 - **User:** `nginx` (non-root, UID 101)
 - **Healthcheck:** `GET /health` every 30s
 - **Port:** 80
+
+## Coolify Deployment
+
+The image is Coolify-compatible with Traefik labels.
+
+1. Create a new application, select **Build Pack: Dockerfile**
+2. Set repository URL
+3. No additional build commands needed
+4. Set `DOMAIN` environment variable to your domain
 
 ## Known Limitations
 

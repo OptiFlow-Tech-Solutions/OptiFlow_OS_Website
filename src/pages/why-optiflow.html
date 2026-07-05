@@ -173,8 +173,8 @@
             <h1 id="whyTypewriter" class="reveal reveal-delay-1" style="margin-top:0;min-height:1.2em;color:#84cc16" aria-live="polite"><span id="twText">Build A Team That Owns Results.</span><span class="tw-cursor"></span></h1>
             <p class="lead reveal reveal-delay-2">Most business software is built for large enterprises and then modified for smaller businesses. OptiFlow was designed from the ground up for the operational realities of Indian MSMEs â€” where WhatsApp, Excel, and manual follow-ups still run the floor.</p>
             <div class="hero-cta reveal reveal-delay-3">
-              <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow magnetic">Book Free Demo</a>
-              <a href="/product-overview/" class="btn btn-secondary btn-lg magnetic">Watch Product Tour</a>
+              <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow">Book Free Demo</a>
+              <a href="/product-overview/" class="btn btn-secondary btn-lg">Watch Product Tour</a>
             </div>
             <div class="hero-trust reveal reveal-delay-3">
               <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> MSME Focused</span>
@@ -538,9 +538,9 @@
         <h2 class="reveal">Ready To Build A Process Driven Business?</h2>
         <p class="lead reveal reveal-delay-1">Discover how OptiFlow helps MSMEs improve accountability, visibility, execution, and growth through one unified operating system â€” built specifically for businesses like yours.</p>
         <div class="reveal reveal-delay-2" style="display:flex;gap:var(--gap-sm);justify-content:center;flex-wrap:wrap">
-          <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow magnetic">Book Free Demo</a>
-          <a href="/product-overview/" class="btn btn-secondary btn-lg magnetic">Watch Product Tour</a>
-          <a href="/competitive-positioning/" class="btn btn-secondary btn-lg magnetic">Compare vs Alternatives</a>
+          <a href="/demo-booking/" class="btn btn-primary btn-lg btn-glow">Book Free Demo</a>
+          <a href="/product-overview/" class="btn btn-secondary btn-lg">Watch Product Tour</a>
+          <a href="/competitive-positioning/" class="btn btn-secondary btn-lg">Compare vs Alternatives</a>
         </div>
         <div style="display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:40px;font-size:14px;opacity:0.9" class="reveal reveal-delay-3">
           <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:inline;vertical-align:middle;margin-right:4px"><path d="M3 8l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> MSME Focused</span>
@@ -569,23 +569,7 @@
       });
       hero.addEventListener('mouseenter', function() { glow.classList.add('active'); });
       hero.addEventListener('mouseleave', function() { glow.classList.remove('active'); });
-    })();
 
-    /* â”€â”€â”€ Magnetic Buttons (throttled) â”€â”€â”€ */
-    (function() {
-      document.querySelectorAll('.magnetic').forEach(function(btn) {
-        var ticking = false, lastX, lastY;
-        btn.addEventListener('mousemove', function(e) {
-          lastX = e.clientX; lastY = e.clientY;
-          if (!ticking) { ticking = true; var self = btn; requestAnimationFrame(function() { var rect = self.getBoundingClientRect(); var x = lastX - rect.left - rect.width / 2; var y = lastY - rect.top - rect.height / 2; self.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)'; ticking = false; }); }
-        });
-        btn.addEventListener('mouseleave', function() {
-          btn.style.transform = 'translate(0px, 0px)';
-          btn.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
-          setTimeout(function() { btn.style.transition = ''; }, 400);
-        });
-      });
-    })();
 
     /* â”€â”€â”€ Why OptiFlow Typewriter (pauses on blur) â”€â”€â”€ */
     (function() {

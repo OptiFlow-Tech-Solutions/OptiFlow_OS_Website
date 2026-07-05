@@ -175,10 +175,7 @@
     }
   });
 
-  /* ─── Visibility change: pause animations ─── */
-  document.addEventListener('visibilitychange', function() {
-    document.documentElement.classList.toggle('page-hidden', document.hidden);
-  });
+
 
   /* ─── UTM Capture ─── */
   function getUTMParams() {
@@ -279,9 +276,6 @@
   document.querySelectorAll('form[data-endpoint], form[data-netlify], form.form-capture').forEach(function(form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      if (typeof window.validateForm === 'function') {
-        if (!window.validateForm(this)) return;
-      }
       submitForm(this);
     });
   });

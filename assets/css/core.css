@@ -147,7 +147,7 @@ h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-lg); }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); }
-.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-md); }
+
 
 .skip-link { position: absolute; top: -100%; left: 16px; padding: 8px 16px; background: var(--accent); color: white; font-weight: 600; border-radius: 6px; z-index: var(--z-skip-link); }
 .skip-link:focus { top: 8px; }
@@ -166,7 +166,7 @@ h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing
 picture .logo-img { height: 32px; width: auto; }
 picture:has(.logo-img) { display: inline-flex; }
 .nav-cta { display: flex; gap: var(--gap-sm); align-items: center; }
-.nav-cta .btn-ghost { padding-inline: 12px; }
+/* .nav-cta .btn-ghost — available for ghost CTA variant */
 
 /* ─── Desktop Navigation ─── */
 .desktop-nav { display: flex; align-items: center; gap: 2px; }
@@ -208,14 +208,7 @@ picture:has(.logo-img) { display: inline-flex; }
 .drawer-overlay { position: fixed; inset: 0; background: rgba(15,23,42,.35); z-index: var(--z-nav); opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
 .drawer-overlay.active { opacity: 1; visibility: visible; }
 
-/* ─── Breadcrumb ─── */
-.breadcrumb { padding: calc(var(--nav-h) + 20px) var(--gutter) 0; max-width: var(--container); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
-.breadcrumb a { color: var(--teal); transition: color 0.15s; }
-.breadcrumb a:hover { color: var(--accent); }
-.breadcrumb .sep { color: var(--border); user-select: none; }
-.breadcrumb .current { color: var(--fg); font-weight: 500; }
-[data-theme="dark"] .breadcrumb a { color: var(--teal); }
-
+/* ─── Breadcrumb — available for future use, currently hidden on all pages ─── */
 /* ─── Buttons ─── */
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius); font-size: 15px; font-weight: 600; white-space: nowrap; position: relative; overflow: hidden; cursor: pointer; border: 0; font-family: inherit; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.25s; }
 .btn-primary { background: linear-gradient(135deg, oklch(33% 0.09 255) 0%, oklch(42% 0.09 238) 50%, oklch(33% 0.09 255) 100%); background-size: 200% 200%; color: white; box-shadow: var(--shadow-button), 0 0 0 1px rgb(27 77 129 / 25%); }
@@ -226,11 +219,8 @@ picture:has(.logo-img) { display: inline-flex; }
 .btn-secondary { background: rgba(255,255,255,.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--fg); border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(15,23,42,.04); }
 .btn-secondary:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); border-color: var(--fg); }
 .btn-secondary:active { transform: translateY(1px); box-shadow: var(--shadow-inset); }
-.btn-ghost { color: var(--muted); background: transparent; }
-.btn-ghost:hover { color: var(--fg); }
 [data-theme="dark"] .btn-secondary { background: var(--surface); color: var(--fg); border-color: var(--border); }
-[data-theme="dark"] .btn-ghost { color: rgba(255,255,255,.78); }
-[data-theme="dark"] .btn-ghost:hover { color: var(--teal); }
+/* .btn-ghost available for transparent button variant — add when needed */
 .btn-lg { padding: 16px 32px; font-size: 16px; border-radius: var(--radius-lg); }
 .btn-glow { position: relative; }
 .btn-glow::before { content: ''; position: absolute; inset: -3px; border-radius: inherit; background: linear-gradient(135deg, var(--accent), var(--teal), var(--green), var(--teal), var(--accent)); background-size: 300% 300%; z-index: -1; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
@@ -241,11 +231,7 @@ picture:has(.logo-img) { display: inline-flex; }
 .card:hover { transform: translateY(-4px) scale(1.01); box-shadow: var(--shadow-card-hover); border-color: color-mix(in oklch, var(--teal) 30%, var(--border)); }
 [data-theme="dark"] .card { box-shadow: var(--shadow-card), 0 0 1px rgba(255,255,255,.06); }
 [data-theme="dark"] .card:hover { box-shadow: var(--shadow-card-hover), 0 0 24px rgba(39,141,159,.12); }
-.glass-card { background: rgba(255,255,255,.70); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.60); box-shadow: var(--shadow-card), 0 0 0 1px rgba(255,255,255,.30) inset; }
-.glass-card:hover { background: rgba(255,255,255,.80); box-shadow: var(--shadow-card-hover), 0 0 0 1px rgba(255,255,255,.40) inset; }
-[data-theme="dark"] .glass-card { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.08); box-shadow: var(--shadow-card); }
-[data-theme="dark"] .glass-card:hover { background: rgba(255,255,255,.09); }
-
+/* .glass-card available for glass-morphism panels — add when needed */
 /* ─── Sticky CTA ─── */
 .sticky-cta { position: fixed; bottom: 24px; right: 24px; z-index: var(--z-sticky); display: flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 999px; background: var(--accent); color: white; font-weight: 600; font-size: 15px; box-shadow: 0 8px 28px rgba(27,77,129,.35); transition: opacity .35s ease, transform .35s ease; opacity: 0; transform: translateY(12px); pointer-events: none; }
 .sticky-cta.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }

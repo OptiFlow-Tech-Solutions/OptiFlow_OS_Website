@@ -1,6 +1,6 @@
 # OptiFlow OS Website
 
-Business Execution Operating System marketing website for Indian MSMEs. 17 static pages with a custom design system, assembled by a Node.js build pipeline.
+Business Execution Operating System marketing website for Indian MSMEs. 14 static pages with a custom design system, assembled by a Node.js build pipeline.
 
 ## Quick Start
 
@@ -41,7 +41,7 @@ docker compose up --build
 ## Directory Structure
 
 ```
-src/pages/          17 HTML source pages
+src/pages/          14 HTML source pages
 src/partials/       nav, footer, analytics, cookie-consent
 assets/css/         core.css — design system
 assets/js/          core.js, search.js, sw.js

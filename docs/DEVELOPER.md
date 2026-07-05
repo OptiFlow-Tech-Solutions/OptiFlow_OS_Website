@@ -14,22 +14,19 @@ npm run dev          # Build + serve locally at http://localhost:3000
 ## Project Overview
 
 **OptiFlow OS** is a Business Execution Operating System marketing website for Indian MSMEs.
-- **12 static HTML pages** with a custom design system
+- **14 static HTML pages** with a custom design system
 - **Custom Node.js build pipeline** — assembles `src/` → `dist/`
-- **Dual-deployed** to Cloudflare Pages + Netlify
-- **Spec-driven development** via OpenSpec
+- **Deployed** to Docker/Coolify, Cloudflare Pages, and Netlify
+- **Build-tooling via OpenSpec workflow** (orchestration engine provided externally)
 
 ## Directory Structure
 
 ```
-├── src/pages/           12 HTML source pages
+├── src/pages/           14 HTML source pages
 ├── src/partials/        3 reusable partials (nav, footer, analytics)
-├── assets/css/          core.css — design system (388+ lines)
+├── assets/css/          core.css — design system
 ├── assets/js/           core.js — shared JavaScript
-├── features/            Feature registry + VSI + traceability + dashboard
-├── openspec/specs/      8 capability specs
-├── orchestrate/         38-module orchestration engine
-├── hooks/               6 git hooks (pre-build, pre-commit, etc.)
+├── hooks/               4 git hooks (pre-commit, pre-build, post-build, utils)
 ├── scripts/             Build, validate, watch scripts
 ├── tests/e2e/           5 Playwright E2E specs
 ├── docs/                Developer documentation
@@ -49,8 +46,7 @@ npm run dev          # Build + serve locally at http://localhost:3000
 2. Use `<!-- INCLUDE: nav -->` and `<!-- INCLUDE: footer -->`
 3. Page-specific styles in `<style>` block (not in core.css)
 4. Add page metadata to `site.json` `pages` array
-5. Register as a new feature in `features/features.json` (flat list, only `id` + `name` required)
-6. Run `npm run build && npm run validate`
+5. Run `npm run build && npm run validate`
 
 ## Modifying Shared Components
 
@@ -114,7 +110,7 @@ npx playwright test seo        # SEO only
 
 - 4 browser projects: chromium-desktop, chromium-mobile, firefox, webkit
 - Axe-core for WCAG 2.2 AA accessibility scanning
-- All 12 pages tested
+- All 14 pages tested
 
 ## Linting
 
@@ -156,14 +152,8 @@ See `docs/DOCKER.md` for full details.
 | File | Purpose |
 |------|---------|
 | `site.json` | Canonical company data, page metadata, nav/footer config |
-| `features/features.json` | Flat feature inventory (28 features) |
-| `features/VSI.md` | Master Vertical Slice Index |
-| `features/TRACEABILITY.md` | Spec → Feature → Task → File chain |
-| `features/DASHBOARD.md` | Visual project status overview |
 | `AGENTS.md` | Agent instructions for AI coding assistants |
-| `openspec/config.yaml` | OpenSpec configuration |
 | `assets/css/core.css` | Design system (all CSS variables) |
 | `assets/js/core.js` | Shared JavaScript runtime |
 | `scripts/assemble.mjs` | Build engine |
 | `scripts/validate.mjs` | Validation engine |
-| `orchestrate/coordinator.mjs` | Orchestration engine entry point |

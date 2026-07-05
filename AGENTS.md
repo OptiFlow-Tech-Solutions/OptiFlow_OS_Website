@@ -58,7 +58,7 @@ spec.md → tasks.md → git commit → changed files
 ## Available commands
 - `/orchestrate "description"` — run full OpenSpec pipeline
 - `/validate-full` — L1-L7 validation
-- `/page-status` — report on all 12 pages
+- `/page-status` — report on all 14 pages
 - `npm run orchestrate` — CLI entry point
 - `npm run specs:list` — list all capability specs
 

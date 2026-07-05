@@ -3,11 +3,28 @@ services:
     build: .
     container_name: optiflow-website
     ports:
-      - "80:80"
+      - "${PORT:-80}:80"
     restart: unless-stopped
+    env_file:
+      - .env.example
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "128M"
+        reservations:
+          cpus: "0.1"
+          memory: "64M"
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost/health"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 15s
+    labels:
+      - "coolify.managed=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.optiflow.rule=Host(`${DOMAIN:-optiflow.in}`)"
+      - "traefik.http.routers.optiflow.entrypoints=websecure"
+      - "traefik.http.routers.optiflow.tls=true"
+      - "traefik.http.services.optiflow.loadbalancer.server.port=80"

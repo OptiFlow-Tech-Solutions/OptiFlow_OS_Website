@@ -1,10 +1,10 @@
-# Stage 1: Build
+# Stage 1: Build website
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci --ignore-scripts --omit=dev
+RUN npm ci --ignore-scripts
 
 COPY site.json ./
 COPY src/ src/
@@ -13,8 +13,27 @@ COPY scripts/ scripts/
 
 RUN node scripts/assemble.mjs
 
-# Stage 2: Runtime
+# Stage 2: Build nginx brotli module
+FROM nginx:1.27-alpine AS brotli-builder
+
+RUN apk add --no-cache --virtual .build-deps \
+    gcc libc-dev make cmake git pcre-dev openssl-dev zlib-dev brotli-dev
+
+RUN git clone --depth=1 --recurse-submodules \
+    https://github.com/google/ngx_brotli /tmp/ngx_brotli \
+    && NGINX_VER=$(nginx -v 2>&1 | cut -d'/' -f2) \
+    && wget -qO- https://nginx.org/download/nginx-${NGINX_VER}.tar.gz | tar xz -C /tmp \
+    && cd /tmp/nginx-${NGINX_VER} \
+    && ./configure --with-compat --add-dynamic-module=/tmp/ngx_brotli \
+    && make modules \
+    && cp objs/ngx_http_brotli_filter_module.so /tmp/ \
+    && cp objs/ngx_http_brotli_static_module.so /tmp/
+
+# Stage 3: Runtime
 FROM nginx:1.27-alpine
+
+COPY --from=brotli-builder /tmp/ngx_http_brotli_filter_module.so /usr/lib/nginx/modules/
+COPY --from=brotli-builder /tmp/ngx_http_brotli_static_module.so /usr/lib/nginx/modules/
 
 RUN apk add --no-cache curl tzdata
 
