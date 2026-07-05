@@ -37,7 +37,8 @@ COPY --from=brotli-builder /tmp/ngx_http_brotli_static_module.so /usr/lib/nginx/
 
 RUN apk add --no-cache curl tzdata
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY site.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx
