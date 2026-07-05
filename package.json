@@ -4,6 +4,10 @@
   "description": "OptiFlow OS Marketing Website — Business Execution OS for Indian MSMEs",
   "type": "module",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "build": "node scripts/assemble.mjs",
     "validate": "node scripts/validate.mjs",
@@ -29,6 +33,10 @@
     "deploy": "node hooks/pre-build.mjs && npm run build && npm run validate",
     "deploy:netlify": "npm run deploy && npx netlify-cli deploy --prod --dir=dist",
     "deploy:cloudflare": "npm run deploy && npx wrangler pages deploy dist --project-name=optiflow-website",
+    "docker:build": "docker build -t optiflow-website .",
+    "docker:run": "docker run -p 80:80 --name optiflow-website optiflow-website",
+    "docker:stop": "docker stop optiflow-website && docker rm optiflow-website",
+    "docker:compose": "docker compose up --build",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -36,6 +44,7 @@
     "@eslint/js": "^10.0.1",
     "eslint": "^10.6.0",
     "html-validate": "^11.5.3",
+    "husky": "^9.1.7",
     "sharp": "^0.35.3",
     "stylelint": "^17.14.0",
     "stylelint-config-standard": "^40.0.0"

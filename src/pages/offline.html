@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>You're Offline — OptiFlow OS</title>
+<meta name="description" content="You are currently offline. Some OptiFlow OS pages may be unavailable until your internet connection is restored. Please check your network and try again." />
+<link rel="stylesheet" href="/assets/css/core.css" />
+<meta name="theme-color" content="#0a1628" />
+<meta name="robots" content="noindex, nofollow" />
+<style>
+  .offline-wrap {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--gap-lg);
+  }
+  .offline-card {
+    max-width: 480px;
+    padding: var(--gap-xl);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    animation: fadeInUp 0.5s var(--ease-out);
+  }
+  .offline-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--gap-md);
+    color: var(--muted);
+  }
+  .offline-card h1 {
+    font-size: var(--fs-h3);
+    margin-bottom: var(--gap-sm);
+  }
+  .offline-card p {
+    color: var(--muted);
+    margin-bottom: var(--gap-lg);
+  }
+  .offline-card button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding: 12px 24px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: var(--fs-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition: box-shadow var(--transition-fast);
+  }
+  .offline-card button:hover {
+    box-shadow: var(--shadow-button-hover);
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body style="background: var(--bg);">
+<div class="offline-wrap">
+  <div class="offline-card">
+    <svg class="offline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1 1l22 22"/>
+      <path d="M16.72 11.06A10.94 10.94 0 0119 12.55"/>
+      <path d="M5 12.55a10.94 10.94 0 015.17-2.39"/>
+      <path d="M10.71 5.05A16 16 0 0122.58 9"/>
+      <path d="M1.42 9a15.91 15.91 0 014.7-2.88"/>
+      <path d="M8.53 16.11a6 6 0 016.95 0"/>
+      <path d="M12 20h.01"/>
+    </svg>
+    <h1>You're Offline</h1>
+    <p>It looks like your internet connection dropped. Check your connection and try again. Previously visited pages may still be available.</p>
+    <button onclick="location.reload()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"/>
+        <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+      </svg>
+      Try Again
+    </button>
+    <p style="font-size: var(--fs-meta); margin-top: var(--gap-md);">
+      PWA cached content available offline
+    </p>
+  </div>
+</div>
+</body>
+</html>

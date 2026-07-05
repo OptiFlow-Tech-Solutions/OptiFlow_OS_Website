@@ -4,8 +4,9 @@
  * @module orchestrate/opsx-commands
  */
 
-import { readFileSync, existsSync, mkdirSync, writeFileSync, readdirSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync, readdirSync, renameSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { execSync } from 'node:child_process';
 import { resolvePaths } from './config-resolver.mjs';
 import { loadFullContext } from './context-loader.mjs';
 import { parseAllSpecs } from './spec-parser.mjs';
@@ -19,6 +20,7 @@ import { executePipeline, loadPipeline } from './pipeline-engine.mjs';
 import { planExecution } from './execution-planner.mjs';
 import { discoverSkills } from './skill-discovery.mjs';
 import { analyzeTask } from './capability-analyzer.mjs';
+import { loadRegistry, registerFeature, updateFeatureStatus } from './feature-engine.mjs';
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
@@ -276,6 +278,18 @@ async function runArchive(changeName, context = {}) {
 
   const changeRoot = resolve(projectRoot, 'openspec', 'changes', changeName);
 
+  if (!existsSync(changeRoot)) {
+    console.log(`     No active change found at ${changeRoot} — nothing to archive.`);
+    await emit('opsx:complete', { command: 'archive', changeName, error: 'no-active-change' });
+    return { syncResult: { synced: [] }, traceResult: null, docResult: null, pipelineResult: { results: [], success: false } };
+  }
+
+  // Get HEAD commit hash for traceability
+  let headCommit = null;
+  try {
+    headCommit = execSync('git rev-parse HEAD', { cwd: ROOT, encoding: 'utf-8', timeout: 5000 }).trim();
+  } catch { /* not a git repo, or git not available */ }
+
   // Sync specs to main
   const archiveSyncResult = syncToMain(changeName);
 
@@ -288,13 +302,63 @@ async function runArchive(changeName, context = {}) {
   let traceResult = null;
   try {
     traceResult = generateTrace(changeName, 'HEAD');
-    // Write traceability to disk
     if (traceResult && changeRoot) {
       const tracePath = resolve(changeRoot, 'traceability.md');
       const traceMd = formatTraceMarkdown(traceResult);
       writeFileSync(tracePath, traceMd, 'utf-8');
     }
   } catch { /* optional */ }
+
+  // Move change directory to archive/
+  const archiveDir = resolve(ROOT, 'openspec', 'changes', 'archive');
+  const date = new Date().toISOString().split('T')[0];
+  const archiveName = `${date}-${changeName}`;
+  const archiveTarget = resolve(archiveDir, archiveName);
+  if (!existsSync(archiveTarget)) {
+    mkdirSync(archiveDir, { recursive: true });
+    renameSync(changeRoot, archiveTarget);
+    console.log(`     Moved to: openspec/changes/archive/${archiveName}/`);
+  } else {
+    console.log(`     Archive target already exists: ${archiveName}`);
+  }
+
+  // Register / update feature in features.json
+  try {
+    const reg = loadRegistry();
+    const existing = reg.features.find((f) =>
+      f.name.toLowerCase() === changeName.replace(/-/g, ' ').toLowerCase()
+      || f.id.toLowerCase().includes(changeName.slice(0, 12))
+    );
+    if (existing) {
+      updateFeatureStatus(existing.id, 'complete');
+      existing.traceability = existing.traceability || {};
+      existing.traceability.archiveDir = archiveName;
+      existing.traceability.lastValidated = date;
+      existing.traceability.specs = syncedSpecs;
+      writeFileSync(
+        resolve(ROOT, 'features', 'features.json'),
+        JSON.stringify(reg, null, 2), 'utf-8',
+      );
+      console.log(`     Feature ${existing.id} updated → complete`);
+    } else {
+      const feature = registerFeature(changeName.replace(/-/g, ' '), 'ui', 'P3', context.description || '');
+      if (feature) {
+        updateFeatureStatus(feature.id, 'complete');
+        const reg2 = loadRegistry();
+        const f = reg2.features.find((x) => x.id === feature.id);
+        if (f) {
+          f.traceability = { specs: syncedSpecs, sourceFiles: [], archiveDir: archiveName, lastValidated: date };
+          writeFileSync(
+            resolve(ROOT, 'features', 'features.json'),
+            JSON.stringify(reg2, null, 2), 'utf-8',
+          );
+        }
+        console.log(`     Feature ${feature.id} registered → complete`);
+      }
+    }
+  } catch (e) {
+    console.log(`     Feature sync skipped: ${e.message}`);
+  }
 
   // Run archive pipeline
   const pipelinePath = resolve(PIPELINE_DIR, 'archive.yaml');
@@ -306,24 +370,15 @@ async function runArchive(changeName, context = {}) {
     } catch { /* pipeline optional */ }
   }
 
-  // Verify archive output artifacts
-  if (existsSync(changeRoot)) {
-    const artifacts = ['proposal.md', 'design.md', 'tasks.md', 'traceability.md'];
-    for (const a of artifacts) {
-      if (!existsSync(resolve(changeRoot, a))) {
-        console.log(`     ⚠ Missing artifact: ${a}`);
-      }
-    }
-  }
-
   // Generate archive index (master list of all archived changes)
-  try { writeArchiveIndex(); } catch { /* optional */ }
+  try { writeArchiveIndex(headCommit, archiveName); } catch { /* optional */ }
 
   console.log(`     Synced: ${archiveSyncResult.synced.length} spec(s)`);
   console.log(`     Traced: ${traceResult ? 'yes' : 'no'} | Docs: ${docResult ? 'synced' : 'skipped'}`);
+  console.log(`     Commit: ${headCommit ? headCommit.slice(0, 8) : 'unknown'}`);
 
-  await emit('opsx:complete', { command: 'archive', changeName, syncResult: archiveSyncResult, traceResult, docResult, pipelineResult });
-  return { syncResult: archiveSyncResult, traceResult, docResult, pipelineResult };
+  await emit('opsx:complete', { command: 'archive', changeName, syncResult: archiveSyncResult, traceResult, docResult, pipelineResult, archiveTarget, commitHash: headCommit });
+  return { syncResult: archiveSyncResult, traceResult, docResult, pipelineResult, archiveTarget, commitHash: headCommit };
 }
 
 function formatTraceMarkdown(traceResult) {
@@ -339,7 +394,7 @@ function formatTraceMarkdown(traceResult) {
 }
 
 // ponytail: master archive index — one JSON file listing every archived change
-function writeArchiveIndex() {
+function writeArchiveIndex(newCommitHash = null, newArchiveName = null) {
   const archiveDir = resolve(ROOT, 'openspec', 'changes', 'archive');
   const index = [];
   try {
@@ -348,8 +403,10 @@ function writeArchiveIndex() {
       const changeRoot = resolve(archiveDir, entry.name);
       const proposalPath = resolve(changeRoot, 'proposal.md');
       const tasksPath = resolve(changeRoot, 'tasks.md');
+      const tracePath = resolve(changeRoot, 'traceability.md');
       const hasProposal = existsSync(proposalPath);
       const hasTasks = existsSync(tasksPath);
+      const hasTrace = existsSync(tracePath);
       let summary = '';
       let doneCount = 0;
       let totalCount = 0;
@@ -363,16 +420,44 @@ function writeArchiveIndex() {
         totalCount = (content.match(/^-\s*\[[ x]\]/gm) || []).length;
         doneCount = (content.match(/^-\s*\[x\]/gm) || []).length;
       }
-      index.push({
+      // ponytail: YYYY-MM-DD prefixed → first 3 segments are the date; legacy names get full name
+      const segments = entry.name.split('-');
+      const parsedDate = /^\d{4}-\d{2}-\d{2}$/.test(segments.slice(0, 3).join('-'))
+        ? segments.slice(0, 3).join('-')
+        : (entry.name.match(/^\d{4}-\d{2}-\d{2}/) || [entry.name])[0];
+
+      const indexEntry = {
         name: entry.name,
-        date: entry.name.split('-').slice(0, 3).join('-') || 'unknown',
+        date: parsedDate,
         summary,
         tasks: { done: doneCount, total: totalCount },
-        artifacts: { proposal: hasProposal, tasks: hasTasks },
-      });
+        artifacts: { proposal: hasProposal, tasks: hasTasks, traceability: hasTrace },
+      };
+
+      // Carry forward existing commit hash if present in current index
+      // ponytail: re-read existing index to preserve commit hashes
+      if (!indexEntry.commit) {
+        indexEntry.commit = (entry.name === newArchiveName && newCommitHash) ? newCommitHash : null;
+      }
+
+      index.push(indexEntry);
     }
-    const indexPath = resolve(archiveDir, 'index.json');
-    writeFileSync(indexPath, JSON.stringify(index.sort((a, b) => b.date.localeCompare(a.date)), null, 2), 'utf-8');
+
+    // Preserve commit hashes from existing index for entries not being regenerated
+    const existingIndexPath = resolve(archiveDir, 'index.json');
+    if (existsSync(existingIndexPath)) {
+      try {
+        const existing = JSON.parse(readFileSync(existingIndexPath, 'utf-8'));
+        for (const oldEntry of existing) {
+          if (oldEntry.commit) {
+            const match = index.find((e) => e.name === oldEntry.name);
+            if (match) match.commit = oldEntry.commit;
+          }
+        }
+      } catch { /* best-effort */ }
+    }
+
+    writeFileSync(existingIndexPath, JSON.stringify(index.sort((a, b) => b.date.localeCompare(a.date)), null, 2), 'utf-8');
     console.log(`     Archive index: ${index.length} entry(s)`);
   } catch (e) {
     console.log(`     Archive index skipped: ${e.message}`);

@@ -48,10 +48,12 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "design-system"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "design-system-core",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -95,10 +97,14 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "marketing-pages",
+          "shared-components"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-06-30-site-nav-structure",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -141,10 +147,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "accessibility",
+          "build-pipeline",
+          "marketing-pages",
+          "shared-components"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-06-30-interactive-runtime",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -190,10 +201,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "code-quality-pipeline"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "sys-004-build-deployment-pipeline",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -238,8 +252,8 @@
       "traceability": {
         "specs": [],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-sys-005",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -291,10 +305,21 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "accessibility",
+          "build-pipeline",
+          "design-system",
+          "marketing-pages",
+          "seo",
+          "shared-components",
+          "competitive-positioning-page",
+          "feature-showcase-page"
+        ],
+        "sourceFiles": [
+          "src/pages/home.html"
+        ],
+        "archiveDir": "page-001-home-page",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -346,10 +371,16 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "marketing-pages",
+          "competitive-positioning-page",
+          "feature-showcase-page"
+        ],
+        "sourceFiles": [
+          "src/pages/problem-solutions.html"
+        ],
+        "archiveDir": "2026-06-30-page-002",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -401,10 +432,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "competitive-positioning-page",
+          "feature-showcase-page"
+        ],
+        "sourceFiles": [
+          "src/pages/product-overview.html"
+        ],
+        "archiveDir": "2026-06-30-page-003",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -456,10 +492,18 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "feature-showcase-page",
+          "marketing-pages",
+          "shared-components",
+          "competitive-positioning-page"
+        ],
+        "sourceFiles": [
+          "src/pages/feature-showcase.html",
+          "src/pages/features.html"
+        ],
+        "archiveDir": "2026-06-30-page-004-feature-showcase",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -511,10 +555,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "competitive-positioning-page",
+          "marketing-pages"
+        ],
+        "sourceFiles": [
+          "src/pages/competitive-positioning.html"
+        ],
+        "archiveDir": "2026-06-30-competitive-positioning",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -566,10 +615,16 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "marketing-pages",
+          "competitive-positioning-page",
+          "feature-showcase-page"
+        ],
+        "sourceFiles": [
+          "src/pages/pricing.html"
+        ],
+        "archiveDir": "2026-06-30-page-006-pricing",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -616,10 +671,16 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "marketing-pages",
+          "competitive-positioning-page",
+          "feature-showcase-page"
+        ],
+        "sourceFiles": [
+          "src/pages/newsletter.html"
+        ],
+        "archiveDir": "2026-06-30-page-007-newsletter-content",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -666,10 +727,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "faq-self-service",
+          "marketing-pages"
+        ],
+        "sourceFiles": [
+          "src/pages/faq.html"
+        ],
+        "archiveDir": "2026-07-01-page-008-faq-self-service",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -718,10 +784,16 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "lead-capture",
+          "marketing-pages",
+          "shared-components"
+        ],
+        "sourceFiles": [
+          "src/pages/demo-booking.html"
+        ],
+        "archiveDir": "2026-07-01-lead-001-demo-booking",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -769,10 +841,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "contact-support",
+          "lead-capture"
+        ],
+        "sourceFiles": [
+          "src/pages/contact.html"
+        ],
+        "archiveDir": "2026-07-01-lead-002",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -815,10 +892,14 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "legal-pages"
+        ],
+        "sourceFiles": [
+          "src/pages/privacy-policy.html"
+        ],
+        "archiveDir": "2026-07-01-legal-001",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -862,9 +943,11 @@
       },
       "traceability": {
         "specs": [],
-        "sourceFiles": [],
+        "sourceFiles": [
+          "src/pages/terms.html"
+        ],
         "archiveDir": "",
-        "lastValidated": ""
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -914,10 +997,16 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "form-processing-api",
+          "lead-capture",
+          "shared-components"
+        ],
+        "sourceFiles": [
+          "functions/api/form-submit.js"
+        ],
+        "archiveDir": "2026-07-01-api-001-form-processing-api",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -966,10 +1055,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "admin-authentication",
+          "form-processing-api"
+        ],
+        "sourceFiles": [
+          "src/pages/admin.html"
+        ],
+        "archiveDir": "2026-07-01-api-002",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1021,10 +1115,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "admin-authentication",
+          "form-processing-api"
+        ],
+        "sourceFiles": [
+          "src/pages/admin.html"
+        ],
+        "archiveDir": "2026-07-01-api-003-admin-dashboard",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1070,10 +1169,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "email-notifications",
+          "form-processing-api"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-api-004-email-notifications",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1120,10 +1222,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "admin-authentication",
+          "database-data-management",
+          "email-notifications",
+          "form-processing-api"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-api-005-database-data-management",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1170,10 +1277,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "platform-monitoring",
+          "form-processing-api"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-api-006",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1218,10 +1328,12 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "accessibility"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-qa-001-accessibility-compliance",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1264,10 +1376,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "testing-suite"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-qa-002",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1316,10 +1431,16 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "code-quality-pipeline",
+          "performance-optimization",
+          "platform-monitoring",
+          "testing-suite"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-qa-003-code-quality-performance",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1363,8 +1484,8 @@
       "traceability": {
         "specs": [],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "ops-001",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1409,10 +1530,14 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "code-quality-pipeline",
+          "git-hooks"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-ops-002-git-hooks-automation",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1459,10 +1584,12 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "design-system"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "ui-001-motion-system",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1510,10 +1637,14 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "design-system",
+          "competitive-positioning-page",
+          "feature-showcase-page"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "ui-002-page-transitions",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1556,10 +1687,12 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "skeleton-loading"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-03-id-ui-003-name-skeleton-loading-empty-st",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1603,10 +1736,12 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "design-system"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "design-system-core",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1651,10 +1786,14 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "cookie-consent"
+        ],
+        "sourceFiles": [
+          "src/pages/privacy-policy.html"
+        ],
+        "archiveDir": "2026-07-04-ui-005-cookie-consent-privacy-compliance",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1702,16 +1841,20 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "code-quality-pipeline",
+          "performance-optimization"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-04-image-optimization-pipeline",
+        "lastValidated": "2026-07-04"
       }
     },
     {
       "id": "UI-007",
       "name": "Service Worker & PWA Enhancement",
-      "status": "planned",
+      "status": "complete",
       "category": "ui",
       "priority": "P3",
       "description": "Offline support, installable PWA, cache strategies, push notifications",
@@ -1724,7 +1867,7 @@
       "owner": "engineering",
       "created": "2026-06-01",
       "updated": "2026-07-04",
-      "release": "planned",
+      "release": "v1.0",
       "acceptanceCriteria": [],
       "aiContext": {
         "intent": "deploy",
@@ -1748,21 +1891,25 @@
           "GATE_VALIDATE",
           "GATE_PERF"
         ],
-        "implementationStrategy": "",
-        "testingStrategy": "",
+        "implementationStrategy": "Native Service Worker API with no dependencies. Cache-first for static assets (CSS/JS/images), network-first for HTML pages. Build pipeline generates version-stamped SW and injects registration into all pages.",
+        "testingStrategy": "Manual PWA audit via Chrome DevTools Lighthouse. SW lifecycle verified via Application panel. Offline mode test via DevTools Network throttling.",
         "documentationStrategy": ""
       },
       "traceability": {
         "specs": [],
-        "sourceFiles": [],
+        "sourceFiles": [
+          "assets/js/sw.js",
+          "src/pages/offline.html",
+          "scripts/assemble.mjs"
+        ],
         "archiveDir": "",
-        "lastValidated": ""
+        "lastValidated": "2026-07-04"
       }
     },
     {
       "id": "UI-008",
       "name": "Interactive Product Demo Mockups",
-      "status": "planned",
+      "status": "complete",
       "category": "ui",
       "priority": "P4",
       "description": "Animated product mockups showing OptiFlow OS interface in action",
@@ -1775,7 +1922,7 @@
       "owner": "engineering",
       "created": "2026-06-01",
       "updated": "2026-07-04",
-      "release": "planned",
+      "release": "v1.0",
       "acceptanceCriteria": [],
       "aiContext": {
         "intent": "animation",
@@ -1797,24 +1944,32 @@
           "GATE_BUILD",
           "GATE_VALIDATE"
         ],
-        "implementationStrategy": "",
-        "testingStrategy": "",
+        "implementationStrategy": "Tabbed interactive demo on product-overview hero dashboard with 4 panels (Dashboard, Tasks, Attendance, Reports). Clickable KPIs cycle through metric variants. Chart bars show tooltips on hover. Status chips toggle pending/done/overdue. Pure CSS+JS, no frameworks.",
+        "testingStrategy": "Manual interaction testing: tab switching, KPI cycling, chip toggling, chart tooltips, dark mode compatibility.",
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "accessibility",
+          "build-pipeline",
+          "marketing-pages",
+          "shared-components"
+        ],
+        "sourceFiles": [
+          "src/pages/demo-booking.html",
+          "src/pages/product-overview.html"
+        ],
+        "archiveDir": "2026-06-30-interactive-runtime",
+        "lastValidated": "2026-07-04"
       }
     },
     {
       "id": "UI-009",
       "name": "Site Search Functionality",
-      "status": "planned",
+      "status": "completed",
       "category": "ui",
       "priority": "P3",
-      "description": "Full-text site search with autocomplete, filters, and result highlighting",
+      "description": "Client-side site search with result highlighting, keyboard navigation (Ctrl+K), and build-time search index",
       "dependencies": [
         "SYS-003",
         "API-005"
@@ -1824,17 +1979,24 @@
       "owner": "engineering",
       "created": "2026-06-01",
       "updated": "2026-07-04",
-      "release": "planned",
-      "acceptanceCriteria": [],
+      "release": "completed",
+      "acceptanceCriteria": [
+        "Search toggle button visible in navigation bar",
+        "Ctrl+K opens search modal overlay",
+        "Search ranks results by title/description/content match",
+        "Query terms highlighted with <mark> tags",
+        "Arrow key navigation and Enter to follow link",
+        "Escape or click-outside closes modal",
+        "search-index.json generated at build time (7.5 KB, 14 pages)",
+        "No new dependencies, no backend required"
+      ],
       "aiContext": {
         "intent": "api-build",
         "domains": [
-          "frontend",
-          "backend"
+          "frontend"
         ],
         "skills": [
-          "frontend-patterns",
-          "backend-patterns"
+          "frontend-patterns"
         ],
         "primaryAgent": "tdd-guide",
         "validation": [
@@ -1848,15 +2010,25 @@
           "GATE_VALIDATE",
           "GATE_TEST"
         ],
-        "implementationStrategy": "",
-        "testingStrategy": "",
-        "documentationStrategy": ""
+        "implementationStrategy": "Client-side search with build-time JSON index. Deviates from original spec (which called for API-005 backend + autocomplete/filters) because 14-page static site doesn't justify KV-powered search.",
+        "testingStrategy": "Manual verification: build passes, validate 0 errors, search-index.json generated, search UI present on all 14 public pages, Ctrl+K shortcut functional, dark mode adapts via CSS variables.",
+        "documentationStrategy": "OpenSpec change artifacts at openspec/changes/ui-009-site-search-functionality/"
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "build-pipeline",
+          "marketing-pages",
+          "shared-components"
+        ],
+        "sourceFiles": [
+          "scripts/generate-search-index.mjs",
+          "assets/js/search.js",
+          "assets/css/core.css",
+          "src/partials/nav.html",
+          "scripts/assemble.mjs"
+        ],
+        "archiveDir": "openspec/changes/ui-009-site-search-functionality",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1900,10 +2072,12 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "design-system"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "design-system-core",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1949,10 +2123,12 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "design-system"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "ui-001-motion-system",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -1998,10 +2174,12 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "design-system"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "design-system-core",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -2288,10 +2466,15 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "build-pipeline",
+          "code-quality-pipeline"
+        ],
+        "sourceFiles": [
+          "src/pages/pricing.html"
+        ],
+        "archiveDir": "sys-004-build-deployment-pipeline",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -2576,10 +2759,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "admin-authentication",
+          "form-processing-api"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-api-002",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -2622,10 +2808,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "code-quality-pipeline"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "sys-004-build-deployment-pipeline",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -2757,10 +2946,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "admin-authentication",
+          "form-processing-api"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "2026-07-01-api-002",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -2884,10 +3076,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "code-quality-pipeline"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "sys-004-build-deployment-pipeline",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -2975,10 +3170,16 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "marketing-pages",
+          "competitive-positioning-page",
+          "feature-showcase-page"
+        ],
+        "sourceFiles": [
+          "src/pages/newsletter.html"
+        ],
+        "archiveDir": "2026-06-30-page-007-newsletter-content",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -3024,9 +3225,11 @@
       },
       "traceability": {
         "specs": [],
-        "sourceFiles": [],
+        "sourceFiles": [
+          "src/pages/feature-showcase.html"
+        ],
         "archiveDir": "",
-        "lastValidated": ""
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -3072,10 +3275,21 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
-        "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "specs": [
+          "accessibility",
+          "build-pipeline",
+          "design-system",
+          "marketing-pages",
+          "seo",
+          "shared-components",
+          "competitive-positioning-page",
+          "feature-showcase-page"
+        ],
+        "sourceFiles": [
+          "src/pages/product-overview.html"
+        ],
+        "archiveDir": "page-001-home-page",
+        "lastValidated": "2026-07-04"
       }
     },
     {
@@ -3173,10 +3387,13 @@
         "documentationStrategy": ""
       },
       "traceability": {
-        "specs": [],
+        "specs": [
+          "build-pipeline",
+          "code-quality-pipeline"
+        ],
         "sourceFiles": [],
-        "archiveDir": "",
-        "lastValidated": ""
+        "archiveDir": "sys-004-build-deployment-pipeline",
+        "lastValidated": "2026-07-04"
       }
     },
     {

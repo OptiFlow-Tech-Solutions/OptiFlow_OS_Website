@@ -1,7 +1,7 @@
 [
   {
     "name": "ui-002-page-transitions",
-    "date": "ui-002-page",
+    "date": "ui-002-page-transitions",
     "summary": "",
     "tasks": {
       "done": 0,
@@ -14,7 +14,7 @@
   },
   {
     "name": "ui-001-motion-system",
-    "date": "ui-001-motion",
+    "date": "ui-001-motion-system",
     "summary": "",
     "tasks": {
       "done": 0,
@@ -27,7 +27,7 @@
   },
   {
     "name": "sys-005-seo-metadata",
-    "date": "sys-005-seo",
+    "date": "sys-005-seo-metadata",
     "summary": "",
     "tasks": {
       "done": 25,
@@ -40,7 +40,7 @@
   },
   {
     "name": "sys-004-build-deployment-pipeline",
-    "date": "sys-004-build",
+    "date": "sys-004-build-deployment-pipeline",
     "summary": "",
     "tasks": {
       "done": 13,
@@ -53,7 +53,7 @@
   },
   {
     "name": "page-001-home-page",
-    "date": "page-001-home",
+    "date": "page-001-home-page",
     "summary": "Audit and validate the OptiFlow OS home page (`index.html`) against all capability specs. The home page already exists as the primary landing page with 13 content sections (Hero, Trust Bar, Problem, C",
     "tasks": {
       "done": 10,
@@ -84,6 +84,32 @@
     "tasks": {
       "done": 9,
       "total": 9
+    },
+    "artifacts": {
+      "proposal": true,
+      "tasks": true
+    }
+  },
+  {
+    "name": "2026-07-04-image-optimization-pipeline",
+    "date": "2026-07-04",
+    "summary": "Add automated image optimization to the build pipeline — WebP/AVIF conversion via sharp, responsive `<picture>` elements, cache-control headers, and CSS utilities.",
+    "tasks": {
+      "done": 8,
+      "total": 8
+    },
+    "artifacts": {
+      "proposal": true,
+      "tasks": true
+    }
+  },
+  {
+    "name": "2026-07-04-ui-005-cookie-consent-privacy-compliance",
+    "date": "2026-07-04",
+    "summary": "",
+    "tasks": {
+      "done": 28,
+      "total": 28
     },
     "artifacts": {
       "proposal": true,

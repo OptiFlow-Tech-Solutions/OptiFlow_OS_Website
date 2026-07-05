@@ -38,6 +38,7 @@ const SRC_MAP = {
   'terms/index.html': 'terms.html',
   'competitive-positioning/index.html': 'competitive-positioning.html',
   'admin/index.html': 'admin.html',
+  'offline/index.html': 'offline.html',
 };
 
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.json'), 'utf-8'));
@@ -93,6 +94,10 @@ function buildPage(pageInfo) {
   html = html.replace(/<!-- INCLUDE:\s*footer\s*-->/g, footerRaw);
   html = html.replace(/<!-- INCLUDE:\s*analytics\s*-->/g, analyticsRaw);
   html = html.replace(/<!-- INCLUDE:\s*cookie-consent\s*-->/g, cookieConsentRaw);
+
+  const swRegistration = `<script>if('serviceWorker' in navigator){var t;navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(function(r){r.addEventListener('updatefound',function(){var w=r.installing;w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller&&!t){t=1;var d=document.createElement('div');d.className='pwa-update-toast';d.setAttribute('role','alert');d.innerHTML='<span>New version available.</span><button onclick="this.parentElement.remove();window.location.reload()" style="cursor:pointer;background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:4px;font-weight:600">Refresh</button>';d.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:var(--accent,oklch(33% 0.09 255));color:#fff;padding:10px 20px;border-radius:8px;display:flex;align-items:center;gap:12px;font-size:14px;box-shadow:0 2px 20px rgba(0,0,0,.25)';document.body.appendChild(d)}})})})}</script>`;
+  const searchScript = '<script src="/assets/js/search.js" defer></script>';
+  html = html.replace('</head>', `${searchScript}\n${swRegistration}\n</head>`);
 
   const urlPath = pageFile === 'index.html'
     ? ''
@@ -349,7 +354,9 @@ async function main() {
   generateSitemap();
   generateRobotsTxt();
   generateManifest();
+  generateServiceWorker();
   injectAllJSONLD();
+  generateSearchIndex();
 }
 
 function generateSitemap() {
@@ -393,14 +400,56 @@ function generateManifest() {
     theme_color: '#0a1628',
     background_color: '#0a1628',
     orientation: 'any',
-    lang: 'en',
+    lang: 'en-IN',
+    dir: 'ltr',
+    scope: '/',
+    id: '/?app=optiflow',
+    categories: ['business', 'productivity'],
+    shortcuts: [
+      {
+        name: 'Book a Demo',
+        short_name: 'Demo',
+        description: 'Book a free personalized demo',
+        url: '/demo-booking/',
+        icons: [{ src: '/assets/img/OptiFlow.Logo.png', sizes: '96x96', type: 'image/png' }],
+      },
+      {
+        name: 'View Pricing',
+        short_name: 'Pricing',
+        description: 'See plans and pricing',
+        url: '/pricing/',
+        icons: [{ src: '/assets/img/OptiFlow.Logo.png', sizes: '96x96', type: 'image/png' }],
+      },
+    ],
     icons: [
+      { src: '/assets/img/OptiFlow.Logo.png', sizes: '48x48', type: 'image/png' },
+      { src: '/assets/img/OptiFlow.Logo.png', sizes: '72x72', type: 'image/png' },
+      { src: '/assets/img/OptiFlow.Logo.png', sizes: '96x96', type: 'image/png' },
+      { src: '/assets/img/OptiFlow.Logo.png', sizes: '144x144', type: 'image/png' },
       { src: '/assets/img/OptiFlow.Logo.png', sizes: '192x192', type: 'image/png' },
       { src: '/assets/img/OptiFlow.Logo.png', sizes: '512x512', type: 'image/png' },
+      { src: '/assets/img/OptiFlow.Logo.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
+      { src: '/assets/img/OptiFlow.Logo.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
   };
   fs.writeFileSync(path.join(DIST, 'manifest.json'), JSON.stringify(manifest, null, 2), 'utf-8');
   console.log('  ✓ manifest.json');
+}
+
+function generateServiceWorker() {
+  const swSrc = path.join(ASSETS, 'js', 'sw.js');
+  if (!fs.existsSync(swSrc)) { console.log('  ⚠ sw.js not found, skipping'); return; }
+  const version = Date.now().toString(36);
+  let sw = fs.readFileSync(swSrc, 'utf-8');
+  sw = sw.replace(/\{\{SW_VERSION\}\}/g, version);
+  fs.writeFileSync(path.join(DIST, 'sw.js'), sw, 'utf-8');
+  console.log('  ✓ sw.js (v' + version + ')');
+}
+
+function generateSearchIndex() {
+  import('./generate-search-index.mjs').catch(function(e) {
+    console.log('  ⚠ search index generation failed: ' + e.message);
+  });
 }
 
 function injectAllJSONLD() {

@@ -25,7 +25,8 @@
     { "file": "privacy-policy/index.html", "title": "Privacy Policy — OptiFlow OS", "description": "OptiFlow OS privacy policy — learn how we collect, use, store, and protect your business and employee data. GDPR and Indian DPDP Act 2023 compliant.", "active": "Resources" },
     { "file": "terms/index.html", "title": "Terms & Conditions — OptiFlow OS", "description": "Terms and conditions for using OptiFlow OS — platform usage rules, customer responsibilities, payment terms, data ownership, and governing law.", "active": "Resources" },
     { "file": "competitive-positioning/index.html", "title": "Competitive Positioning — OptiFlow OS", "description": "See how OptiFlow OS compares against WhatsApp chaos, generic SaaS tools, traditional ERPs, and manual systems. Feature-by-feature comparison for Indian MSMEs.", "active": "Resources" },
-    { "file": "admin/index.html", "title": "Admin Dashboard — OptiFlow OS", "description": "OptiFlow OS internal admin dashboard for managing form submissions, lead data, and monitoring platform activity and performance.", "active": null, "noindex": true }
+    { "file": "admin/index.html", "title": "Admin Dashboard — OptiFlow OS", "description": "OptiFlow OS internal admin dashboard for managing form submissions, lead data, and monitoring platform activity and performance.", "active": null, "noindex": true },
+    { "file": "offline/index.html", "title": "You're Offline — OptiFlow OS", "description": "You are currently offline. Some OptiFlow OS pages may be unavailable until your internet connection is restored. Please check your network and try again.", "active": null, "noindex": true }
   ],
   "nav": {
     "links": [

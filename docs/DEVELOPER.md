@@ -133,11 +133,23 @@ npm run lint:all    # All three
 4. `/opsx:verify` — run L1-L7 validation
 5. `/opsx:archive` — merge delta specs, generate traceability
 
+## Docker
+
+```bash
+docker build -t optiflow-website .   # Build container
+docker run -p 80:80 optiflow-website  # Run locally
+docker compose up --build             # Or with Compose
+```
+
+See `docs/DOCKER.md` for full details.
+
 ## Deployment
 
+- **Docker / Coolify:** Select Dockerfile build pack — see `docs/DEPLOYMENT.md`
 - **Staging:** Push to `staging` → GitHub Actions → Cloudflare Pages preview
 - **Production:** Push to `main` → GitHub Actions → Cloudflare Pages + Netlify
 - **Manual:** `npm run deploy`
+- **AWS ECS / Kubernetes:** Use Docker image — see `docs/DEPLOYMENT.md`
 
 ## Key Files Reference
 

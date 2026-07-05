@@ -47,6 +47,29 @@
     .float-anim { animation: floatDash 5s ease-in-out infinite; }
     @keyframes floatDash { 0%, 100% { transform: translateY(0) scale(1) rotate(0deg); } 50% { transform: translateY(-10px) scale(1.01) rotate(-0.5deg); } }
 
+    /* Interactive Demo Mockups */
+    .demo-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: var(--gap-md); padding: 0 4px; }
+    .demo-tab { padding: 8px 16px; border-radius: var(--radius) var(--radius) 0 0; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: color 0.2s, background 0.2s; border: 1px solid transparent; border-bottom: none; margin-bottom: -1px; }
+    .demo-tab:hover { color: var(--fg); background: var(--accent-soft); }
+    .demo-tab.active { color: var(--accent); background: var(--surface); border-color: var(--border); font-weight: 600; }
+    .demo-panel { display: none; animation: demoFadeIn 0.3s var(--ease-out); }
+    .demo-panel.active { display: block; }
+    @keyframes demoFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .demo-chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .demo-chip.pending { background: color-mix(in oklch, oklch(50% 0.08 80) 12%, transparent); color: oklch(50% 0.08 80); }
+    .demo-chip.done { background: color-mix(in oklch, var(--green) 12%, transparent); color: var(--green); }
+    .demo-chip.overdue { background: color-mix(in oklch, oklch(44% 0.16 20) 12%, transparent); color: oklch(44% 0.16 20); }
+    .demo-click-hint { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; font-style: italic; }
+    .demo-avatar-row { display: flex; align-items: center; gap: var(--gap-sm); }
+    .demo-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-soft); display: grid; place-items: center; font-size: 11px; font-weight: 600; color: var(--accent); flex-shrink: 0; }
+    .demo-att-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-soft); font-size: 13px; }
+    .demo-att-status { padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .demo-att-status.present { background: color-mix(in oklch, var(--green) 10%, transparent); color: var(--green); }
+    .demo-att-status.absent { background: color-mix(in oklch, oklch(44% 0.16 20) 10%, transparent); color: oklch(44% 0.16 20); }
+    .demo-att-status.late { background: color-mix(in oklch, oklch(50% 0.08 80) 10%, transparent); color: oklch(50% 0.08 80); }
+    .demo-att-status.leave { background: color-mix(in oklch, var(--teal) 10%, transparent); color: var(--teal); }
+    .demo-report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
     /* â”€â”€â”€ Transform Flow â”€â”€â”€ */
     .transform-flow { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 32px 0; }
     .transform-stage { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; min-width: 180px; flex: 1; max-width: 260px; transition: transform 0.3s ease; }
@@ -218,6 +241,12 @@
     [data-theme="dark"] .dash-kpi-item { background: color-mix(in oklch, var(--teal) 8%, transparent); }
     [data-theme="dark"] .cta-section { background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--accent) 50%, var(--teal)), var(--teal)); }
     [data-theme="dark"] .cta-section .btn-primary { background: oklch(95% 0.002 240); color: var(--accent); }
+    [data-theme="dark"] .demo-tab.active { background: var(--surface); border-color: var(--border); color: var(--accent); }
+    [data-theme="dark"] .demo-tab:hover { color: var(--fg); background: color-mix(in oklch, var(--accent) 12%, transparent); }
+    [data-theme="dark"] .demo-chip.pending { background: color-mix(in oklch, oklch(65% 0.12 80) 12%, transparent); color: oklch(65% 0.12 80); }
+    [data-theme="dark"] .demo-chip.overdue { background: color-mix(in oklch, oklch(55% 0.16 20) 14%, transparent); color: oklch(55% 0.16 20); }
+    [data-theme="dark"] .demo-att-row { border-bottom-color: var(--border-soft); }
+    [data-theme="dark"] .dash-chart-tooltip { background: var(--surface); border-color: var(--border); color: var(--fg); }
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Responsive â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
     @media (max-width: 1024px) {
@@ -282,6 +311,13 @@
           </div>
           <div class="hero-dashboard">
             <div class="dash-card float-anim">
+              <div class="demo-tabs" id="demoTabs" role="tablist">
+                <button class="demo-tab active" role="tab" data-tab="dashboard" aria-selected="true">Dashboard</button>
+                <button class="demo-tab" role="tab" data-tab="tasks" aria-selected="false">Tasks</button>
+                <button class="demo-tab" role="tab" data-tab="attendance" aria-selected="false">Attendance</button>
+                <button class="demo-tab" role="tab" data-tab="reports" aria-selected="false">Reports</button>
+              </div>
+              <div class="demo-panel active" data-panel="dashboard" role="tabpanel">
               <div class="dash-kpi">
                 <div class="dash-kpi-item"><div class="dash-kpi-val">92%</div><div class="dash-kpi-label">Completion</div></div>
                 <div class="dash-kpi-item"><div class="dash-kpi-val">8.2K</div><div class="dash-kpi-label">Tasks / Mo</div></div>
@@ -310,6 +346,24 @@
                   <div style="font-size:11px;color:var(--muted);margin-top:4px;">Avg wait: 4.2 hrs</div>
                 </div>
               </div>
+              </div><!-- end demo-panel dashboard -->
+              <div class="demo-panel" data-panel="tasks" role="tabpanel">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><span style="font-weight:600;font-size:14px">Task Manager</span><span style="font-size:12px;color:var(--muted)">15 of 23 completed</span></div>
+                <table class="dash-table"><thead><tr><th>Task</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead><tbody><tr><td>Finalise Q3 procurement plan</td><td><div class="demo-avatar-row"><div class="demo-avatar" style="background:color-mix(in oklch, var(--accent) 14%, transparent);color:var(--accent)">AK</div></div></td><td style="font-size:12px;color:var(--muted)">15 Jul</td><td><span class="demo-chip pending" data-toggle="chip">Pending</span></td></tr><tr><td>Approve vendor payments batch</td><td><div class="demo-avatar-row"><div class="demo-avatar" style="background:color-mix(in oklch, var(--teal) 14%, transparent);color:var(--teal)">RS</div></div></td><td style="font-size:12px;color:var(--muted)">14 Jul</td><td><span class="demo-chip done" data-toggle="chip">Done</span></td></tr><tr><td>Monthly inventory reconciliation</td><td><div class="demo-avatar-row"><div class="demo-avatar" style="background:color-mix(in oklch, var(--green) 14%, transparent);color:var(--green)">PD</div></div></td><td style="font-size:12px;color:var(--muted)">13 Jul</td><td><span class="demo-chip overdue" data-toggle="chip">Overdue</span></td></tr><tr><td>Update SOP for packing QC</td><td><div class="demo-avatar-row"><div class="demo-avatar">VK</div></div></td><td style="font-size:12px;color:var(--muted)">16 Jul</td><td><span class="demo-chip pending" data-toggle="chip">Pending</span></td></tr></tbody></table>
+              </div>
+              <div class="demo-panel" data-panel="attendance" role="tabpanel">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><span style="font-weight:600;font-size:14px">Today's Attendance</span><span style="font-size:12px;color:var(--green)">90% present</span></div>
+                <div class="demo-att-row"><div class="demo-avatar-row"><div class="demo-avatar" style="background:color-mix(in oklch, var(--accent) 14%, transparent);color:var(--accent)">AK</div>Amit Kumar</div><span class="demo-att-status present">Present</span></div><div class="demo-att-row"><div class="demo-avatar-row"><div class="demo-avatar" style="background:color-mix(in oklch, var(--teal) 14%, transparent);color:var(--teal)">RS</div>Ravi Sharma</div><span class="demo-att-status present">Present</span></div><div class="demo-att-row"><div class="demo-avatar-row"><div class="demo-avatar" style="background:color-mix(in oklch, var(--green) 14%, transparent);color:var(--green)">PD</div>Priya Desai</div><span class="demo-att-status late">Late (9:45 AM)</span></div><div class="demo-att-row"><div class="demo-avatar-row"><div class="demo-avatar">VK</div>Vikas Kadam</div><span class="demo-att-status absent">Absent</span></div><div class="demo-att-row"><div class="demo-avatar-row"><div class="demo-avatar" style="background:color-mix(in oklch, var(--lime) 14%, transparent);color:var(--green)">MK</div>Meena Kaur</div><span class="demo-att-status leave">On Leave</span></div><div class="demo-att-row"><div class="demo-avatar-row"><div class="demo-avatar" style="background:color-mix(in oklch, var(--accent) 14%, transparent);color:var(--accent)">SK</div>Suresh Kumar</div><span class="demo-att-status present">Present</span></div>
+              </div>
+              <div class="demo-panel" data-panel="reports" role="tabpanel">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><span style="font-weight:600;font-size:14px">Weekly Report</span><span style="font-size:12px;color:var(--muted)">07-13 Jul 2026</span></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-sm);margin-bottom:var(--gap-md)">
+                  <div class="report-kpi" style="margin:0"><div class="rkpi-val">604</div><div class="rkpi-label">Tasks Completed</div></div>
+                  <div class="report-kpi" style="margin:0"><div class="rkpi-val">94%</div><div class="rkpi-label">On-Time Rate</div></div>
+                </div>
+                <div class="demo-report-grid"><div style="padding:10px;background:var(--green-soft);border-radius:var(--radius);font-size:12px"><strong style="color:var(--green)">+12%</strong> Productivity</div><div style="padding:10px;background:var(--teal-soft);border-radius:var(--radius);font-size:12px"><strong style="color:var(--teal)">-8%</strong> Overdue Tasks</div><div style="padding:10px;background:var(--accent-soft);border-radius:var(--radius);font-size:12px"><strong style="color:var(--accent)">98%</strong> SOP Adherence</div><div style="padding:10px;background:color-mix(in oklch, var(--lime) 10%, transparent);border-radius:var(--radius);font-size:12px"><strong style="color:var(--green)">4.2h</strong> Avg Response</div></div>
+              </div>
+              <div class="demo-click-hint">Click tabs above to explore the platform &middot; Click KPIs to cycle metrics &middot; Click status chips to toggle</div>
             </div>
           </div>
         </div>
@@ -782,6 +836,65 @@
   <!-- INCLUDE: footer -->
 
   <script src="/assets/js/core.js" defer></script>
+
+  <script>
+    /* Interactive Demo Mockups */
+    (function() {
+      var tabs = document.querySelectorAll('#demoTabs .demo-tab');
+      var panels = document.querySelectorAll('.demo-panel');
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var panelName = tab.getAttribute('data-tab');
+          tabs.forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          panels.forEach(function(p) { p.classList.remove('active'); });
+          var panel = document.querySelector('.demo-panel[data-panel="' + panelName + '"]');
+          if (panel) panel.classList.add('active');
+        });
+      });
+
+      var kpiSets = {
+        completion: [{ val: '92%', label: 'Completion' }, { val: '88%', label: 'This Week' }, { val: '95%', label: 'Last Month' }],
+        tasks: [{ val: '8.2K', label: 'Tasks / Mo' }, { val: '12.4K', label: 'Peak Month' }, { val: '6.1K', label: 'Avg Month' }],
+        attendance: [{ val: '47', label: 'Present' }, { val: '52', label: 'Total Headcount' }, { val: '90%', label: 'Attendance %' }]
+      };
+      document.querySelectorAll('.demo-clickable').forEach(function(el) {
+        var metric = el.getAttribute('data-metric');
+        var set = kpiSets[metric];
+        if (!set) return;
+        var idx = 0;
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', function() {
+          idx = (idx + 1) % set.length;
+          el.querySelector('.dash-kpi-val').textContent = set[idx].val;
+          el.querySelector('.dash-kpi-label').textContent = set[idx].label;
+        });
+      });
+
+      document.querySelectorAll('.dash-chart-bar').forEach(function(bar) {
+        bar.style.cursor = 'pointer';
+        var tip = bar.querySelector('.dash-chart-tooltip');
+        if (!tip) return;
+        bar.addEventListener('mouseenter', function() { tip.style.display = 'block'; });
+        bar.addEventListener('mouseleave', function() { tip.style.display = 'none'; });
+      });
+
+      document.querySelectorAll('[data-toggle="chip"]').forEach(function(chip) {
+        chip.style.cursor = 'pointer';
+        var states = ['pending', 'done', 'overdue'];
+        var labels = { pending: 'Pending', done: 'Done', overdue: 'Overdue' };
+        var current = states.indexOf(Array.from(chip.classList).find(function(c) { return states.indexOf(c) !== -1; }));
+        chip.addEventListener('click', function() {
+          states.forEach(function(s) { chip.classList.remove(s); });
+          current = (current + 1) % states.length;
+          chip.classList.add(states[current]);
+          chip.textContent = labels[states[current]];
+        });
+      });
+    })();
+  </script>
 
   <script>
     (function() {

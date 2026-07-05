@@ -44,6 +44,8 @@ import { resolvePaths } from './config-resolver.mjs';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { runValidate as runValidateV12 } from './auto-pipeline.mjs';
+import { syncDashboards } from './feature-engine.mjs';
+import { recordExecution } from './history-engine.mjs';
 
 const { projectRoot } = resolvePaths();
 const ROOT = projectRoot;
@@ -183,10 +185,18 @@ async function executeArchive(ctx) {
   ctx.advanceGoalState(GOAL_STATES.ARCHIVING);
   ctx.addCheckpoint('archive-complete');
 
+  // Store commit hash from archive result for history/traceability
+  if (result.commitHash) {
+    ctx.archiveCommitHash = result.commitHash;
+    ctx.archiveTarget = result.archiveTarget;
+  }
+
   ctx.completePhase('OPSX_ARCHIVE', {
     synced: result.syncResult?.synced?.length || 0,
     traced: !!result.traceResult,
     docs: !!result.docResult,
+    commitHash: result.commitHash || null,
+    archiveTarget: result.archiveTarget || null,
   });
 
   logEvent({ type: 'auto-pipeline', phase: 'archive', synced: result.syncResult?.synced?.length || 0 });
@@ -409,6 +419,20 @@ function finishPipelineV13(ctx, loopResult = null) {
 
   // Post-archive verification
   verifyCompletionV13(ctx);
+
+  // Sync feature dashboards (DASHBOARD.md, TRACEABILITY.md, VSI.md)
+  try {
+    syncDashboards();
+    console.log('     Feature dashboards synced.');
+  } catch { /* non-critical */ }
+
+  // Record execution in history engine (openspec/history.json)
+  try {
+    recordExecution(ctx, {
+      commitHash: ctx.archiveCommitHash || null,
+      archiveTarget: ctx.archiveTarget || null,
+    });
+  } catch { /* non-critical */ }
 
   // Recovery guidance on failure
   if (failed > 0 || ctx.goalState === GOAL_STATES.FAILED) {

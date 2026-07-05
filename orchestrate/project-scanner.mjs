@@ -35,11 +35,11 @@ function scanChanges() {
 }
 
 /**
- * Scan project commands/*.md.
+ * Scan project docs/legacy-commands/*.md.
  * @returns {Array<{name: string, path: string}>}
  */
 function scanProjectCommands() {
-  const cmdsDir = join(ROOT, 'commands');
+  const cmdsDir = join(ROOT, 'docs', 'legacy-commands');
   if (!existsSync(cmdsDir)) return [];
   return readdirSync(cmdsDir, { withFileTypes: true })
     .filter((f) => f.isFile() && f.name.endsWith('.md'))

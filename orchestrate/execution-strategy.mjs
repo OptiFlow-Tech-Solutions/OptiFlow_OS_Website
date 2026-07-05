@@ -117,8 +117,8 @@ export function planIteration(ctx) {
   } else if (ctx.skipBuild) {
     decisions.push({ phaseId: 'OPSX_VERIFY', shouldRun: false, priority: 0, reason: 'build skipped (--skip-build)', isFatal: false });
   } else {
-    const canVerify = completePhases.has('OPSX_APPLY') || completePhases.has('VALIDATE');
-    decisions.push({ phaseId: 'OPSX_VERIFY', shouldRun: canVerify, priority: 6, reason: 'depends on apply/validate', isFatal: false });
+    const canVerify = completePhases.has('OPSX_APPLY');
+    decisions.push({ phaseId: 'OPSX_VERIFY', shouldRun: canVerify, priority: 6, reason: 'depends on apply', isFatal: false });
   }
 
   return decisions;
@@ -149,7 +149,7 @@ export function isPhaseBlocked(phaseId, ctx) {
     OPSX_SYNC: ['OPSX_PROPOSE'],
     OPSX_APPLY: ['OPSX_PROPOSE'],
     VALIDATE: ['OPSX_APPLY'],
-    OPSX_VERIFY: ['OPSX_APPLY', 'VALIDATE'],
+    OPSX_VERIFY: ['OPSX_APPLY'],
     OPSX_ARCHIVE: ['VALIDATE', 'OPSX_VERIFY'],
   };
 
