@@ -24,8 +24,11 @@ wrangler.toml
 .opencode/
 commands/
 DESIGN.md/
+OptiFlow-OS-*/
 Dockerfile
 .dockerignore
 docker-compose.yml
 docker-compose.*.yml
 lighthouserc.js
+.playwright-mcp/
+eslint.config.js
