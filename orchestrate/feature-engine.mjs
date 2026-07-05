@@ -15,7 +15,7 @@
  * @module orchestrate/feature-engine
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 import { resolveSpecsForFeature } from './keyword-maps.mjs';
@@ -301,7 +301,6 @@ export function generateMermaidDependencyGraph() {
   const lines = ['graph TD'];
   const added = new Set();
   for (const feature of loadRegistry().features) {
-    const shortId = feature.id;
     for (const depId of (feature.dependencies || [])) {
       const dep = getFeature(depId);
       if (!dep) continue;

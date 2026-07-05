@@ -7,7 +7,7 @@
    ═══════════════════════════════════════════ */
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, ORCHESTRATE, ok, fail, warn, hookBanner, getErrors, getWarnings, readText } from './_utils.mjs';
+import { ROOT, ORCHESTRATE, ok, fail, hookBanner, getErrors, getWarnings } from './_utils.mjs';
 
 hookBanner('Pre-Orchestrate Validation');
 

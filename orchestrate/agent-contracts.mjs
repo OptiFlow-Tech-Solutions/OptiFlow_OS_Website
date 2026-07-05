@@ -148,7 +148,7 @@ export const LIFECYCLE_CONTRACTS = Object.freeze({
     inputs: { required: [], optional: ['implementation'] },
     outputs: { required: [], optional: ['passed', 'failures'] },
     handoffTo: 'OPSX_ARCHIVE',
-    validateInput(ctx) { return { valid: true, missing: [] }; },
+    validateInput(_ctx) { return { valid: true, missing: [] }; },
     validateOutput(ctx) {
       const phase = ctx.phases?.find((p) => p.id === 'VALIDATE');
       const completed = phase && (phase.status === 'complete' || phase.status === 'failed');
@@ -221,7 +221,7 @@ export function validatePrerequisites(phaseId, ctx) {
   return { valid: blockedBy.length === 0, missing: [], blockedBy };
 }
 
-export function buildPhasePlan(ctx) {
+export function buildPhasePlan(_ctx) {
   const order = ['OPSX_EXPLORE', 'OPSX_PROPOSE', 'OPSX_SYNC', 'OPSX_APPLY', 'VALIDATE', 'OPSX_VERIFY', 'OPSX_ARCHIVE'];
   return order.map((phaseId) => {
     const contract = getContract(phaseId);

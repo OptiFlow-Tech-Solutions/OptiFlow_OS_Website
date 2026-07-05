@@ -156,7 +156,7 @@ const expectedChain = {
 };
 
 for (const [ph, next] of Object.entries(expectedChain)) {
-  const handoffRegex = new RegExp(`${ph}[^}]*handoffTo:\\s*${next ? "'" + next + "'" : 'null'}`);
+  const _handoffRegex = new RegExp(`${ph}[^}]*handoffTo:\\s*${next ? "'" + next + "'" : 'null'}`);
   check(`Contract handoff: ${ph} -> ${next || 'TERMINAL'}`, contracts.includes(`handoffTo: ${next ? "'" + next + "'" : 'null'}`));
 }
 

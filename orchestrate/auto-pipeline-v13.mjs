@@ -29,14 +29,14 @@ import { PipelineContext, slugify, GOAL_STATES, ITERATION_LIMIT } from './pipeli
 import { buildRepositorySnapshot, applySnapshot } from './repository-snapshot.mjs';
 import { composeSkills } from './skill-composer.mjs';
 import { composeAgentTeam } from './agent-composer.mjs';
-import { buildPhasePlan, validatePrerequisites, getContract } from './agent-contracts.mjs';
+import { buildPhasePlan } from './agent-contracts.mjs';
 import { runGoalLoop } from './iteration-controller.mjs';
 import { measureProgress, progressSummary, isGoalAchieved } from './progress-tracker.mjs';
 import { runOpsxCommand } from './opsx-commands.mjs';
 import { getBranch } from './project-scanner.mjs';
 import { savePipelineState, writeExecutionSummary, writeRecoveryGuidance } from './state-manager.mjs';
 import { startTimer, record, exportMetrics } from './metrics.mjs';
-import { logEvent, queryEvents } from './audit-log.mjs';
+import { logEvent } from './audit-log.mjs';
 import { emit, registerDefaults } from './event-bus.mjs';
 import { enableAutoApprove } from './human-gate.mjs';
 import { resetAllCircuits } from './pipeline-engine.mjs';

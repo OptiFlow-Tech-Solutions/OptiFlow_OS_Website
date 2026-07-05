@@ -1,6 +1,6 @@
 # Traceability Matrix
 > Auto-generated from features.json + openspec/ + archive/
-> 2026-07-05T15:42:03.344Z
+> 2026-07-05T16:03:59.488Z
 
 Every Feature ID is the canonical source of truth. This matrix is auto-generated.
 

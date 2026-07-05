@@ -7,7 +7,7 @@
  * @module orchestrate/telemetry
  */
 
-import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, appendFileSync } from 'node:fs';
+import { existsSync, writeFileSync, mkdirSync, appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { resolvePaths } from './config-resolver.mjs';
 import { listPipelineStates, loadPipelineState } from './state-manager.mjs';

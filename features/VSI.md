@@ -1,6 +1,6 @@
 # OptiFlow OS — Repository Intelligence (VSI)
 
-> Auto-generated: 2026-07-05T15:42:03.386Z
+> Auto-generated: 2026-07-05T16:03:59.529Z
 > Schema: V5.0 AI-native feature registry
 
 ---

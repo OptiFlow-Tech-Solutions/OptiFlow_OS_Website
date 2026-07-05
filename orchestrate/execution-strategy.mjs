@@ -36,7 +36,6 @@ export function planIteration(ctx) {
     ctx.phases.filter((p) => p.status === 'failed').map((p) => p.id),
   );
 
-  const taskLower = (ctx.task || '').toLowerCase();
   const hasDeltaSpecs = checkDeltaSpecsExist(ctx.changeName);
 
   const decisions = [];

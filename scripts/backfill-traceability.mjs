@@ -7,7 +7,7 @@
  * Usage: node scripts/backfill-traceability.mjs
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -38,7 +38,7 @@ function extractPrefixAndNum(id) {
   return m ? { prefix: m[1], num: parseInt(m[2]) } : null;
 }
 
-function readArchiveSummary(archiveName) {
+function _readArchiveSummary(archiveName) {
   const dir = resolve(ARCHIVE_DIR, archiveName);
   const proposalPath = resolve(dir, 'proposal.md');
   if (!existsSync(proposalPath)) return '';
@@ -63,7 +63,7 @@ function readArchiveSpecs(archiveName) {
   }
 }
 
-function readArchiveTasksProgress(archiveName) {
+function _readArchiveTasksProgress(archiveName) {
   const tasksPath = resolve(ARCHIVE_DIR, archiveName, 'tasks.md');
   if (!existsSync(tasksPath)) return null;
   try {
@@ -95,8 +95,6 @@ function discoverSourceFiles(featureName) {
 }
 
 function discoverSourceFilesWide(featureName) {
-  // Also search assets, scripts, functions
-  const assetsDir = resolve(ROOT, 'assets');
   const searchDirs = ['assets/css', 'assets/js', 'scripts', 'functions/api', 'hooks'];
   const found = [];
   const nameTokens = tokenize(featureName);
@@ -144,7 +142,7 @@ console.log(`Features in registry: ${features.features.length}`);
 console.log(`Archive directories:  ${archiveDirs.length}\n`);
 
 let matched = 0;
-let unmatched = [];
+const unmatched = [];
 
 for (const feature of features.features) {
   if (feature.traceability?.archiveDir && feature.traceability?.specs?.length > 0) {
@@ -168,7 +166,6 @@ for (const feature of features.features) {
       const numStr = String(prefixInfo.num).padStart(3, '0');
       if (archiveName.includes(`${prefixLower}-${numStr}`)) {
         bestMatch = archiveName;
-        bestScore = 1.0;
         break;
       }
     }

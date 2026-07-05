@@ -1,7 +1,7 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { resolve, join, dirname } from 'path';
 
-const __dirname = import.meta.dirname || dirname(new URL(import.meta.url).pathname);
+const __dirname = import.meta.dirname || dirname(new (globalThis.URL)(import.meta.url).pathname);
 const PROJECT_ROOT = resolve(__dirname, '..');
 const GLOBAL_ROOT = resolve(process.env.USERPROFILE, '.config', 'opencode');
 
@@ -120,7 +120,7 @@ if (results.errors.length) {
 }
 
 // ── Final Status ──
-if (results.errors.length === 0 && results.promoted.some(p => true)) {
+if (results.errors.length === 0 && results.promoted.some(_p => true)) {
   console.log('');
   console.log('  RESULT: Global promotion complete — changes synced successfully.');
 } else if (results.errors.length === 0 && results.promoted.length === 0) {

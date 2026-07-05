@@ -158,10 +158,10 @@
 
         <!-- Search bar -->
         <div class="search-wrap reveal reveal-delay-3" id="searchWrap">
-          <input class="search-input" id="searchInput" type="text" placeholder="Search FAQs â€” e.g. 'How long does implementation take?'" autocomplete="off" />
+          <input class="search-input" id="faqSearchInput" type="text" placeholder="Search FAQs â€” e.g. 'How long does implementation take?'" autocomplete="off" />
           <button class="search-btn" id="searchBtn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
         </div>
-        <div class="search-results reveal reveal-delay-3" id="searchResults"></div>
+        <div class="search-results reveal reveal-delay-3" id="faqSearchResults"></div>
 
         <div class="search-suggestions reveal reveal-delay-3">
           <span class="search-suggestion">Implementation time</span>
@@ -426,8 +426,8 @@
 
   <script>
     (function() {
-      var input = document.getElementById('searchInput');
-      var results = document.getElementById('searchResults');
+      var input = document.getElementById('faqSearchInput');
+      var results = document.getElementById('faqSearchResults');
       var allQuestions = Array.from(document.querySelectorAll('.faq-question'));
       function doSearch(q) {
         q = q.toLowerCase().trim();

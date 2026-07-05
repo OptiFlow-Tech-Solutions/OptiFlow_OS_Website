@@ -20,7 +20,7 @@
  * @module orchestrate/iteration-controller
  */
 
-import { measureProgress, progressSummary, isGoalAchieved } from './progress-tracker.mjs';
+import { measureProgress, isGoalAchieved } from './progress-tracker.mjs';
 import { planIteration, isPhaseBlocked } from './execution-strategy.mjs';
 import { validatePrerequisites } from './agent-contracts.mjs';
 import { logEvent } from './audit-log.mjs';

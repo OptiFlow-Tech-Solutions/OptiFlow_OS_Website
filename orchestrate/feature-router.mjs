@@ -509,7 +509,7 @@ const TASK_FEATURE_MAP = Object.freeze({
   'product roadmap': ['CONTENT-003'],
   'release notes': ['CONTENT-003'],
 
-  'blog': ['CONTENT-004'],
+  'blog post': ['CONTENT-004'],
   'blog engine': ['CONTENT-004'],
 
   'monitoring pipeline': ['OPS-003'],
