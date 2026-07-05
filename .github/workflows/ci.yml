@@ -30,7 +30,7 @@ jobs:
         run: npx stylelint "assets/css/**/*.css" --allow-empty-input
 
       - name: Lint JS
-        run: npx eslint "scripts/**/*.mjs" "orchestrate/**/*.mjs" "hooks/**/*.mjs" "functions/**/*.js"
+        run:           npx eslint "scripts/**/*.mjs" "hooks/**/*.mjs" "functions/**/*.js"
 
       - name: Install Playwright browsers
         run: npx playwright install chromium --with-deps

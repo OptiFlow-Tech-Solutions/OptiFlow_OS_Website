@@ -8,7 +8,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
-import { pathToFileURL } from 'node:url';
 import { ROOT, DIST } from './_utils.mjs';
 
 function fmtBytes(bytes) {
@@ -66,16 +65,3 @@ for (const page of pages.sort()) {
 }
 
 console.log('');
-
-// Feature dashboard sync
-try {
-  const featEnginePath = path.join(ROOT, 'orchestrate', 'feature-engine.mjs');
-  if (fs.existsSync(featEnginePath)) {
-    const fileUrl = pathToFileURL(featEnginePath).href;
-    const { syncDashboards } = await import(fileUrl);
-    console.log('\nFeature intelligence dashboards...');
-    syncDashboards();
-  }
-} catch (e) {
-  console.log(`  \u26A0 Feature dashboard sync skipped: ${e.message}`);
-}

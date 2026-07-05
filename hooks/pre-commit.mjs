@@ -90,7 +90,6 @@ const allFiles = [
   ...walkDir(SRC_PAGES, ['.html', '.mjs', '.js', '.css', '.json', '.md']),
   ...walkDir(SRC_PARTIALS, ['.html', '.mjs', '.js', '.css', '.json', '.md']),
   ...walkDir(path.join(ROOT, 'scripts'), ['.mjs']),
-  ...walkDir(path.join(ROOT, 'orchestrate'), ['.mjs']),
   ...walkDir(path.join(ROOT, 'hooks'), ['.mjs']),
   ...walkDir(path.join(ROOT, 'functions'), ['.js']),
 ];

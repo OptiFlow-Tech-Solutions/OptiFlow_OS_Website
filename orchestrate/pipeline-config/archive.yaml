@@ -1,9 +1,0 @@
-name: archive
-description: Archive pipeline
-steps:
-  - id: sync-specs
-    command: node orchestrate/spec-sync.mjs
-    blocking: true
-  - id: update-docs
-    command: node orchestrate/doc-sync.mjs
-    blocking: false

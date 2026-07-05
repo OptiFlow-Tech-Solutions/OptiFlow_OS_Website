@@ -1,9 +1,0 @@
-name: explore
-description: Exploration pipeline
-steps:
-  - id: load-context
-    command: node orchestrate/context-loader.mjs
-    blocking: true
-  - id: scan-specs
-    command: node orchestrate/spec-indexer.mjs
-    blocking: false

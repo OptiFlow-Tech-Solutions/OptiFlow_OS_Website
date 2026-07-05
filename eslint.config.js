@@ -6,7 +6,7 @@ export default [
     ignores: ["dist/**", "node_modules/**", "Web-Prototype/**"]
   },
   {
-    files: ["scripts/**/*.mjs", "orchestrate/**/*.mjs", "hooks/**/*.mjs", "tests/**/*.mjs"],
+    files: ["scripts/**/*.mjs", "hooks/**/*.mjs", "tests/**/*.mjs"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",

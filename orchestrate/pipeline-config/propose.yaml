@@ -1,6 +1,0 @@
-name: propose
-description: Proposal pipeline
-steps:
-  - id: create-artifacts
-    command: echo "Proposal artifacts created by agent"
-    blocking: true

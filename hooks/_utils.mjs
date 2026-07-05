@@ -1,15 +1,13 @@
 #!/usr/bin/env node
 /* ═══════════════════════════════════════════
-   OptiFlow OS — Shared Hook Utilities v13.0
+   OptiFlow OS — Shared Hook Utilities
    Imported by all hooks in hooks/ directory.
-   V13: Enterprise-standard error tracking,
-   structured logging, and metadata.
    ═══════════════════════════════════════════ */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const VERSION = '13.0';
+export const VERSION = '1.0';
 export const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '..');
 export const ASSETS = path.join(ROOT, 'assets');
@@ -19,7 +17,6 @@ export const ASSETS_IMG = path.join(ASSETS, 'img');
 export const SRC_PAGES = path.join(ROOT, 'src', 'pages');
 export const SRC_PARTIALS = path.join(ROOT, 'src', 'partials');
 export const DIST = path.join(ROOT, 'dist');
-export const ORCHESTRATE = path.join(ROOT, 'orchestrate');
 
 let errors = 0;
 let warnings = 0;

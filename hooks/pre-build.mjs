@@ -7,7 +7,6 @@
    ═══════════════════════════════════════════ */
 import fs from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { ROOT, ASSETS, ASSETS_IMG, SRC_PAGES, SRC_PARTIALS, readText, fail, ok, walkDir, findDesignMd, getErrors } from './_utils.mjs';
 
 console.log('\n─ Pre-Build Validation ─\n');
@@ -60,23 +59,6 @@ if (!fs.existsSync(path.join(ASSETS, 'css', 'core.css'))) fail('assets/css/core.
 else ok('assets/css/core.css');
 if (!fs.existsSync(path.join(ASSETS, 'js', 'core.js'))) fail('assets/js/core.js missing');
 else ok('assets/js/core.js');
-
-// 5. Feature integrity check
-console.log('5. Feature integrity');
-try {
-  const featEnginePath = path.join(ROOT, 'orchestrate', 'feature-engine.mjs');
-  if (fs.existsSync(featEnginePath)) {
-    const { validateIntegrity } = await import(pathToFileURL(featEnginePath).href);
-    const result = validateIntegrity();
-    for (const e of result.errors) fail(`[${e.feature}] ${e.message}`);
-    for (const w of result.warnings) console.log(`  \u26A0 ${w.message}`);
-    if (result.errors.length === 0) ok('feature integrity passed');
-  } else {
-    ok('feature-engine not available (skipped)');
-  }
-} catch (e) {
-  console.log(`  \u26A0 Feature integrity check unavailable: ${e.message}`);
-}
 
 console.log(`\n${getErrors()} error(s)`);
 process.exit(getErrors() > 0 ? 1 : 0);
