@@ -16,14 +16,11 @@ npm run dev          # Build + serve locally at http://localhost:3000
 ```bash
 docker build -t optiflow-website .
 docker run -p 80:80 optiflow-website
-
-# Open 
-http://localhost:80
-```
+# open with  http://localhost:80
 
 Or with Docker Compose:
 
-```bash
+```bash  
 docker compose up --build
 ```
 
@@ -81,7 +78,7 @@ Copy `.env.example` to `.env` and adjust:
 NODE_ENV=production
 PORT=80
 API_BASE_URL=http://localhost:3001
-SITE_URL=https://optiflow.in
+SITE_URL=https://os.optiflow.co.in
 ```
 
 ## Development
