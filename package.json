@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "node scripts/assemble.mjs",
-    "start": "serve -s dist -l ${PORT:-3000}",
+    "start": "serve -s dist -l ${PORT:-80}",
     "validate": "node scripts/validate.mjs",
     "check": "npm run lint:all && npm run validate",
     "serve": "npx serve dist",
@@ -31,6 +31,9 @@
     "docker:stop": "docker stop optiflow-website && docker rm optiflow-website",
     "docker:compose": "docker compose up --build",
     "prepare": "husky"
+  },
+  "dependencies": {
+    "serve": "^14.2.6"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

@@ -1,0 +1,11 @@
+# Nixpacks configuration for OptiFlow OS Website
+# Used when deploying via Coolify with Nixpacks build pack
+
+[phases.build]
+cmds = ["npm ci", "npm run build"]
+
+[phases.setup]
+onlyIncludeFiles = ["dist/"]
+
+[start]
+cmd = "npx serve dist -l 80"

@@ -45,5 +45,7 @@ RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx
 
 EXPOSE 80
 
+CMD ["nginx", "-g", "daemon off;"]
+
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
   CMD curl -sf http://localhost/health || exit 1
