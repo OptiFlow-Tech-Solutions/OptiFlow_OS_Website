@@ -175,6 +175,15 @@
     }
   });
 
+  /* ─── Pricing CTA click tracking ─── */
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href="/demo-booking/"]');
+    if (!a) return;
+    if (document.querySelector('.pricing-grid, section.cta-section')) {
+      trackEvent('Click Pricing CTA');
+    }
+  });
+
 
 
   /* ─── UTM Capture ─── */
@@ -185,6 +194,13 @@
       if (params.has(key)) utm[key] = params.get(key);
     });
     return utm;
+  }
+
+  /* ─── Analytics Event Tracking ─── */
+  function trackEvent(name, props) {
+    if (typeof window.plausible === 'function') {
+      window.plausible(name, { props: props || {} });
+    }
   }
 
   /* ─── Form Data Collector ─── */
@@ -259,6 +275,12 @@
           if (res.ok && json.success === true) {
             form.classList.remove('form-submitting');
             form.classList.add('form-success');
+
+            var formName = form.getAttribute('name') || '';
+            var utmParams = getUTMParams();
+            if (formName === 'demo-booking') trackEvent('Submit Demo Booking', utmParams);
+            else if (formName === 'contact') trackEvent('Submit Contact Form', utmParams);
+            else if (formName === 'newsletter') trackEvent('Sign Up Newsletter', utmParams);
           } else {
             throw new Error(json.error || 'Submission failed. Please try again.');
           }

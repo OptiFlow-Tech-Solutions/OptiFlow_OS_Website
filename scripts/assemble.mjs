@@ -153,9 +153,6 @@ function buildPage(pageInfo) {
     `${seoMetas}\n  <meta name="viewport"`
   );
 
-  /* ponytail: auto-inject analytics on every page */
-  html = html.replace('</head>', `${analyticsRaw}\n</head>`);
-
   if (process.env.OPTIFLOW_LIVE_RELOAD) {
     html = html.replace('</head>', '<script>let _lt=0,_init=!1;setInterval(()=>{fetch("/rebuild.txt?"+Date.now()).then(r=>r.text()).then(v=>{let n=+v.trim();if(!_init){_lt=n;_init=!0;return}if(n>_lt){_lt=n;location.reload()}}).catch(()=>{})},800)</script>\n</head>');
   }
