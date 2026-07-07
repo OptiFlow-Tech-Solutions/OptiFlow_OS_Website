@@ -13,13 +13,7 @@ colors:
 
 # OptiFlow OS — Enterprise DESIGN.md Specification (v5.0)
 
-> Category: Brands
-
-> Surface: web
-
-*> **Purpose:** > This DESIGN.md is the single source of truth for the OptiFlow OS Marketing Website and Design System.*
-
-# Brand Description
+## Brand Description
 
 OptiFlow OS is a premium Business Execution Operating System built for Indian MSMEs to simplify daily operations, improve accountability, and enable structured business growth. The brand represents clarity, trust, operational excellence, and continuous improvement, helping businesses replace manual coordination, scattered communication, and spreadsheet-driven management with a single, intelligent execution platform.
 
@@ -108,7 +102,6 @@ OptiFlow OS is not designed to feel like a trendy startup product or an overly t
 - Never use more than **4 font weights** within the interface.
 - Typography should always feel **clean, modern, premium, and enterprise-grade**.
 
-```md
 ## Voice & Tone
 
 ### Adjectives
@@ -248,9 +241,7 @@ Communication should educate before selling, explain before promoting, and alway
 ### Brand Promise
 
 Help Indian MSMEs build structured, accountable, and scalable businesses through one unified Business Execution Operating System that transforms daily operations into consistent, measurable, and sustainable growth.
-```
 
-```md id="k8t4qy"
 ## Imagery
 
 ### Style
@@ -389,4 +380,3 @@ Help Indian MSMEs build structured, accountable, and scalable businesses through
 - Use whitespace to improve readability and focus.
 - Maintain consistent component alignment across breakpoints.
 - Every layout should reinforce clarity, trust, and operational excellence.
-```
