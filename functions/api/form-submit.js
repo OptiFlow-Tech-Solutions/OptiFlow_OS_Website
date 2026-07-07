@@ -22,9 +22,21 @@ export default {
       return json({ success: false, error: 'Method not allowed' }, 405);
     }
 
+    /* SEC-002: CSRF — validate Origin header matches expected domain */
+    const origin = request.headers.get('Origin');
+    const allowedOrigins = [
+      'https://optiflow.in',
+      'https://os.optiflow.co.in',
+      'https://www.optiflow.in',
+    ];
+    if (origin && !allowedOrigins.some(o => origin === o || origin.startsWith(o))) {
+      return json({ success: false, error: 'Origin not allowed' }, 403);
+    }
+
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
 
-    if (rateLimited(ip, env)) {
+    /* SEC-001: KV-backed rate limiting with TTL */
+    if (await rateLimited(ip, env)) {
       return json({ success: false, error: 'Too many requests. Please try again later.' }, 429, { 'Retry-After': '600' });
     }
 
@@ -44,12 +56,18 @@ export default {
       return json({ success: true });
     }
 
-    const errors = validate(formName, fields);
+    /* SEC-003: sanitize all string field values before validation */
+    const sanitizedFields = {};
+    for (const [key, value] of Object.entries(fields)) {
+      sanitizedFields[key] = typeof value === 'string' ? sanitize(value) : value;
+    }
+
+    const errors = validate(formName, sanitizedFields);
     if (errors) {
       return json({ success: false, error: errors.join('; ') }, 422);
     }
 
-    recordRequest(ip);
+    await recordRequest(ip, env);
 
     let emailSent = true;
     try {
@@ -57,7 +75,7 @@ export default {
       const emailRes = await fetch(emailUrl.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: formName, fields, utm: utm || {} }),
+        body: JSON.stringify({ type: formName, fields: sanitizedFields, utm: utm || {} }),
       });
       const emailBody = await emailRes.json();
       if (!emailBody.emailSent) emailSent = false;
@@ -71,8 +89,8 @@ export default {
     const timestamp = new Date().toISOString();
     const datePrefix = timestamp.slice(0, 10);
 
-    const entry = { schema: 'submission.v1', id, timestamp, formName, fields, ip: hashedIp, utm: utm || {}, spam: false, emailSent };
-    log({ timestamp, formName, fieldKeys: Object.keys(fields), ip, utm: utm || {}, spam: false, emailSent });
+    const entry = { schema: 'submission.v1', id, timestamp, formName, fields: sanitizedFields, ip: hashedIp, utm: utm || {}, spam: false, emailSent };
+    log({ timestamp, formName, fieldKeys: Object.keys(sanitizedFields), ip, utm: utm || {}, spam: false, emailSent });
 
     const key = `sub:${datePrefix}:${id}`;
     try {
@@ -126,19 +144,22 @@ async function sha256(text) {
 }
 
 /* ─── Field schemas ─── */
+/* SEC-004: Indian mobile regex: optional +91, then 6-9 followed by 9 digits */
+const PHONE_RE = /^(\+91[\s-]?)?[9876]\d{9}$/;
+
 const SCHEMAS = {
   contact: {
     required: ['name', 'email', 'phone', 'company'],
     rules: {
       email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      phone: /^\+?\d{7,15}$/,
+      phone: PHONE_RE,
     },
   },
   'demo-booking': {
     required: ['name', 'email', 'phone', 'company'],
     rules: {
       email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      phone: /^\+?\d{7,15}$/,
+      phone: PHONE_RE,
     },
   },
   newsletter: {
@@ -169,20 +190,45 @@ function validate(formName, fields) {
   return errors.length > 0 ? errors : null;
 }
 
-/* ─── Rate limiting ─── */
-function recordRequest(ip) {
-  const now = Date.now();
-  globalThis._rateLimit = globalThis._rateLimit || {};
-  globalThis._rateLimit[ip] = globalThis._rateLimit[ip] || [];
-  globalThis._rateLimit[ip].push(now);
-  globalThis._rateLimit[ip] = globalThis._rateLimit[ip].filter(t => now - t < 600000);
+/* ─── SEC-003: Input sanitization ─── */
+function sanitize(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
-function rateLimited(ip) {
-  const now = Date.now();
-  globalThis._rateLimit = globalThis._rateLimit || {};
-  const timestamps = (globalThis._rateLimit[ip] || []).filter(t => now - t < 600000);
-  return timestamps.length >= 5;
+/* ─── SEC-001: KV-backed rate limiting with TTL ─── */
+async function recordRequest(ip, env) {
+  const key = `ratelimit:${ip}`;
+  try {
+    const store = env.RATE_LIMIT || env.SUBMISSIONS;
+    if (!store) return;
+    const existing = await store.get(key);
+    const now = Date.now();
+    const timestamps = existing ? JSON.parse(existing) : [];
+    timestamps.push(now);
+    const cutoff = now - 600000; /* 10-minute window */
+    const recent = timestamps.filter(t => t > cutoff);
+    await store.put(key, JSON.stringify(recent), { expirationTtl: 600 });
+  } catch (_e) { /* rate limit tracking failure is non-blocking */ }
+}
+
+async function rateLimited(ip, env) {
+  const key = `ratelimit:${ip}`;
+  try {
+    const store = env.RATE_LIMIT || env.SUBMISSIONS;
+    if (!store) return false;
+    const existing = await store.get(key);
+    if (!existing) return false;
+    const timestamps = JSON.parse(existing);
+    const now = Date.now();
+    const cutoff = now - 600000;
+    const recent = timestamps.filter(t => t > cutoff);
+    return recent.length >= 5;
+  } catch (_e) { return false; }
 }
 
 /* ─── Logging ─── */

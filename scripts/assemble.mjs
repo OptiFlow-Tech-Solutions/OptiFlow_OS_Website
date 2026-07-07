@@ -37,6 +37,8 @@ const SRC_MAP = {
   'privacy-policy/index.html': 'privacy-policy.html',
   'terms/index.html': 'terms.html',
   'competitive-positioning/index.html': 'competitive-positioning.html',
+  '404.html': '404.html',
+  '500.html': '500.html',
 };
 
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.json'), 'utf-8'));
@@ -150,6 +152,9 @@ function buildPage(pageInfo) {
     '<meta name="viewport"',
     `${seoMetas}\n  <meta name="viewport"`
   );
+
+  /* ponytail: auto-inject analytics on every page */
+  html = html.replace('</head>', `${analyticsRaw}\n</head>`);
 
   if (process.env.OPTIFLOW_LIVE_RELOAD) {
     html = html.replace('</head>', '<script>let _lt=0,_init=!1;setInterval(()=>{fetch("/rebuild.txt?"+Date.now()).then(r=>r.text()).then(v=>{let n=+v.trim();if(!_init){_lt=n;_init=!0;return}if(n>_lt){_lt=n;location.reload()}}).catch(()=>{})},800)</script>\n</head>');

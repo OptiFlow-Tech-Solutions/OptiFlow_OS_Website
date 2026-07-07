@@ -38,11 +38,11 @@
     .form-wrap { max-width: 860px; margin: 0 auto; }
 
     .contact-form-card {
-      background: #fff;
-      border: 1px solid rgba(0,0,0,.06);
-      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
       padding: 40px;
-      box-shadow: 0 1px 3px rgba(15,23,42,.04), 0 4px 12px rgba(15,23,42,.06), 0 10px 30px rgba(15,23,42,.07);
+      box-shadow: var(--shadow-elevated);
     }
 
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -54,7 +54,7 @@
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 8px;
-      color: #111827;
+      color: var(--fg);
       line-height: 1.3;
     }
     .form-label .req { color: oklch(55% 0.20 22); font-weight: 500; margin-left: 2px; }
@@ -67,29 +67,29 @@
       padding: 0 16px;
       font-family: var(--font-body);
       font-size: 15px;
-      background: #F9FAFB;
-      border: 1px solid #E5E7EB;
-      border-radius: 12px;
-      color: #111827;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--fg);
       transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
     }
     .form-input::placeholder,
     .form-textarea::placeholder {
-      color: #9CA3AF;
-      opacity: 1;
+      color: var(--muted);
+      opacity: 0.6;
     }
     .form-input:hover,
     .form-select:hover,
     .form-textarea:hover {
-      border-color: #D1D5DB;
+      border-color: var(--border-strong);
     }
     .form-input:focus,
     .form-select:focus,
     .form-textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 15%, transparent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
       outline: none;
-      background: #fff;
+      background: var(--surface);
     }
     .form-input:user-valid,
     .form-select:user-valid {
@@ -111,7 +111,7 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3.5 5.5l3.5 3.5 3.5-3.5' fill='none' stroke='%239CA3AF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 14px center;
-      background-color: #F9FAFB;
+      background-color: var(--bg);
       padding-right: 40px;
       cursor: pointer;
     }
@@ -131,7 +131,7 @@
     .form-submit .btn {
       min-width: 230px;
       height: 54px;
-      border-radius: 14px;
+      border-radius: var(--radius);
       font-size: 16px;
       font-weight: 600;
       transition: transform 200ms ease, box-shadow 200ms ease;
@@ -139,7 +139,7 @@
 
     .form-note {
       font-size: 14px;
-      color: #6B7280;
+      color: var(--muted);
       margin-top: 20px;
       text-align: center;
       line-height: 1.5;
@@ -154,27 +154,27 @@
 
     /* Dark Theme */
     [data-theme="dark"] .contact-form-card {
-      background: #111827;
-      border-color: rgba(255,255,255,.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      background: var(--surface);
+      border-color: var(--border);
+      box-shadow: var(--shadow-elevated);
     }
-    [data-theme="dark"] .form-label { color: #F9FAFB; }
+    [data-theme="dark"] .form-label { color: var(--fg); }
     [data-theme="dark"] .form-input,
     [data-theme="dark"] .form-select,
     [data-theme="dark"] .form-textarea {
-      background: #1F2937;
-      border-color: rgba(255,255,255,.08);
-      color: #F9FAFB;
+      background: var(--bg);
+      border-color: var(--border);
+      color: var(--fg);
     }
     [data-theme="dark"] .form-input::placeholder,
     [data-theme="dark"] .form-textarea::placeholder {
-      color: #6B7280;
-      opacity: 1;
+      color: var(--muted);
+      opacity: 0.5;
     }
     [data-theme="dark"] .form-input:hover,
     [data-theme="dark"] .form-select:hover,
     [data-theme="dark"] .form-textarea:hover {
-      border-color: rgba(255,255,255,.16);
+      border-color: var(--border-strong);
     }
     [data-theme="dark"] .form-select {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3.5 5.5l3.5 3.5 3.5-3.5' fill='none' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -183,14 +183,14 @@
     [data-theme="dark"] .form-select:focus,
     [data-theme="dark"] .form-textarea:focus {
       border-color: var(--teal);
-      box-shadow: 0 0 0 3px color-mix(in oklch, var(--teal) 20%, transparent);
-      background: #111827;
+      box-shadow: 0 0 0 3px var(--teal-soft);
+      background: var(--surface);
     }
     [data-theme="dark"] .form-input:user-valid,
     [data-theme="dark"] .form-select:user-valid {
       border-color: var(--lime);
     }
-    [data-theme="dark"] .form-note { color: #9CA3AF; }
+    [data-theme="dark"] .form-note { color: var(--muted); }
 
     @media (max-width: 768px) {
       .form-grid { grid-template-columns: 1fr; }
@@ -264,7 +264,7 @@
               LET'S TALK ABOUT YOUR BUSINESS
             </div>
             <h1 class="reveal reveal-delay-1">We're Here To Help You Build Better Systems</h1>
-            <p class="lead reveal reveal-delay-2">Whether you're exploring OptiFlow, evaluating solutions for your MSME, or looking for support, our team is ready to help. No sales pitch â€” just a real conversation about your business operations.</p>
+            <p class="lead reveal reveal-delay-2">Whether you're exploring OptiFlow, evaluating solutions for your MSME, or looking for support, our team is ready to help. No sales pitch &mdash; just a real conversation about your business operations.</p>
             <div class="hero-cta reveal reveal-delay-3">
               <a href="#contact-form" class="btn btn-primary btn-lg btn-glow">Contact Our Team</a>
               <a href="/demo-booking/" class="btn btn-secondary btn-lg">Book Free Demo</a>
@@ -292,7 +292,7 @@
         <div class="section-header reveal">
 
           <h2>Tell Us About Your Business</h2>
-          <p class="lead">Fill in the details below and we'll connect you with the right expert â€” typically within one business day.</p>
+          <p class="lead">Fill in the details below and we'll connect you with the right expert &mdash; typically within one business day.</p>
         </div>
         <div class="form-wrap">
           <div class="contact-form-card reveal" id="formCard">
@@ -323,11 +323,11 @@
                   <label class="form-label" for="teamsize">Team Size</label>
                   <select id="teamsize" name="team_size" class="form-select">
                     <option value="">Select team size</option>
-                    <option>1 â€” 10</option>
-                    <option>11 â€” 25</option>
-                    <option>26 â€” 50</option>
-                    <option>51 â€” 100</option>
-                    <option>101 â€” 250</option>
+                    <option>1 &mdash; 10</option>
+                    <option>11 &mdash; 25</option>
+                    <option>26 &mdash; 50</option>
+                    <option>51 &mdash; 100</option>
+                    <option>101 &mdash; 250</option>
                     <option>250+</option>
                   </select>
                 </div>
@@ -347,7 +347,7 @@
                 </div>
                 <div class="form-field full">
                   <label class="form-label" for="challenges">Current Operational Challenges</label>
-                  <textarea id="challenges" name="challenges" class="form-textarea" placeholder="Tell us about your current operations â€” what's working, what's not, and what you'd like to improve. This helps us prepare a relevant demo for you."></textarea>
+                  <textarea id="challenges" name="challenges" class="form-textarea" placeholder="Tell us about your current operations &mdash; what's working, what's not, and what you'd like to improve. This helps us prepare a relevant demo for you."></textarea>
                 </div>
               </div>
               <div class="form-error-msg"></div>
@@ -385,7 +385,7 @@
             </div>
             <div>
               <h3>Call Us</h3>
-              <p class="chan-detail">{{PHONE}}<br/>Mon â€” Sat, 10 AM â€” 7 PM IST</p>
+              <p class="chan-detail">{{PHONE}}<br/>Mon &mdash; Sat, 10 AM &mdash; 7 PM IST</p>
               <span class="chan-action">Call Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
             </div>
           </div>
@@ -395,7 +395,7 @@
             </div>
             <div>
               <h3>Email Us</h3>
-              <p class="chan-detail">{{EMAIL}}<br/>Response within 4â€”8 business hours</p>
+              <p class="chan-detail">{{EMAIL}}<br/>Response within 4&mdash;8 business hours</p>
               <span class="chan-action">Send Email <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
             </div>
           </div>
@@ -419,7 +419,7 @@
         <div class="section-header reveal">
 
           <h2>Need Help? We're Ready</h2>
-          <p class="lead">Whether it's a technical question, training request, or platform guidance â€” our support team is here.</p>
+          <p class="lead">Whether it's a technical question, training request, or platform guidance &mdash; our support team is here.</p>
         </div>
         <div class="grid-3 stagger-3" style="max-width:900px;margin:0 auto">
           <div class="contact-chan reveal">
@@ -428,7 +428,7 @@
             </div>
             <div>
               <h3>Support Email</h3>
-              <p class="chan-detail">support@optiflow.in<br/>Response within 4â€”8 hours</p>
+              <p class="chan-detail">support@optiflow.in<br/>Response within 4&mdash;8 hours</p>
               <span class="chan-action">Email Support <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:middle;margin-left:4px"><polyline points="5,3 10,7 5,11"/></svg></span>
             </div>
           </div>
@@ -465,11 +465,11 @@
           <p class="lead">We're based in {{LOCATION}}, serving MSMEs across India.</p>
         </div>
         <div class="office-card reveal">
-          <h3>OptiFlow OS â€” Head Office</h3>
+          <h3>OptiFlow OS &mdash; Head Office</h3>
           <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Surat, Gujarat, India</div>
           <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> {{PHONE}}</div>
           <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> {{EMAIL}}</div>
-          <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Mon â€” Sat, 10 AM â€” 7 PM IST</div>
+          <div class="office-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Mon &mdash; Sat, 10 AM &mdash; 7 PM IST</div>
           <div class="office-hours">Open for business</div>
         </div>
       </div>
@@ -493,7 +493,7 @@
           <div class="response-card card reveal">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <h3 style="margin-top:16px;font-size:16px">Support Requests</h3>
-            <div class="response-time">Within 4â€”8 Business Hours</div>
+            <div class="response-time">Within 4&mdash;8 Business Hours</div>
             <p style="font-size:13px;color:var(--muted);margin-top:6px">Technical issues, training, platform help</p>
           </div>
           <div class="response-card card reveal">
@@ -517,7 +517,7 @@
         <div class="trust-metrics">
           <div class="reveal"><div class="trust-metric-value num" data-count="500">0</div><div class="trust-metric-label">Businesses Served</div></div>
           <div class="reveal reveal-delay-1"><div class="trust-metric-value num" data-count="10000">0</div><div class="trust-metric-label">Active Users</div></div>
-          <div class="reveal reveal-delay-2"><div class="trust-metric-value num" data-count="250000">0</div><div class="trust-metric-label">Tasks Managed</div></div>
+          <div class="reveal reveal-delay-2"><div class="trust-metric-value num" data-count="500000">0</div><div class="trust-metric-label">Tasks Managed</div></div>
           <div class="reveal reveal-delay-3"><div class="trust-metric-value num" data-count="1200">0</div><div class="trust-metric-label">Departments Managed</div></div>
         </div>
       </div>
@@ -533,7 +533,7 @@
         <div class="faq-list">
           <div class="faq-item reveal">
             <button class="faq-question">How quickly will someone contact me? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
-            <div class="faq-answer"><p>Sales enquiries receive a response within one business day. Support requests are handled within 4â€”8 business hours. Critical issues are escalated immediately. We take response times seriously â€” most enquiries receive a reply the same day.</p></div>
+            <div class="faq-answer"><p>Sales enquiries receive a response within one business day. Support requests are handled within 4&mdash;8 business hours. Critical issues are escalated immediately. We take response times seriously &mdash; most enquiries receive a reply the same day.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question">Can I schedule a demo directly? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
@@ -541,11 +541,11 @@
           </div>
           <div class="faq-item reveal">
             <button class="faq-question">Do you support businesses outside my industry? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
-            <div class="faq-answer"><p>OptiFlow is purpose-built for operational businesses â€” textile, manufacturing, trading, warehousing, distribution, logistics, and service companies. If your business manages teams, tasks, and processes, OptiFlow can help. Contact us and we'll assess fit during the discovery call.</p></div>
+            <div class="faq-answer"><p>OptiFlow is purpose-built for operational businesses &mdash; textile, manufacturing, trading, warehousing, distribution, logistics, and service companies. If your business manages teams, tasks, and processes, OptiFlow can help. Contact us and we'll assess fit during the discovery call.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question">Do you offer implementation services? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
-            <div class="faq-answer"><p>Yes. Every OptiFlow plan includes guided onboarding: data migration, team training, and workflow configuration. Our implementation specialists ensure your team is productive from Day 1. Most businesses are fully operational within 5â€”10 working days.</p></div>
+            <div class="faq-answer"><p>Yes. Every OptiFlow plan includes guided onboarding: data migration, team training, and workflow configuration. Our implementation specialists ensure your team is productive from Day 1. Most businesses are fully operational within 5&mdash;10 working days.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question">Can my team join the discussions? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
@@ -553,7 +553,7 @@
           </div>
           <div class="faq-item reveal">
             <button class="faq-question">What happens after I submit the enquiry form? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>
-            <div class="faq-answer"><p>Our team reviews your enquiry and matches you with the right product specialist based on your industry and team size. You'll receive a call or email within one business day to understand your needs better and schedule a personalized demo if it makes sense. No pressure, no spam â€” just a real conversation.</p></div>
+            <div class="faq-answer"><p>Our team reviews your enquiry and matches you with the right product specialist based on your industry and team size. You'll receive a call or email within one business day to understand your needs better and schedule a personalized demo if it makes sense. No pressure, no spam &mdash; just a real conversation.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question">Do you provide support after we go live? <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="9" y1="3" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></button>

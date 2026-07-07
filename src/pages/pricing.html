@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="/assets/css/core.css">
   <style>
-    [data-theme="dark"] { --green: oklch(76% 0.14 145); }
+    /* ponytail: removed --green override — uses core.css dark mode green */
 
     /* â”€â”€â”€ Hero â”€â”€â”€ */
     .hero { padding-top: calc(var(--nav-h) + 72px); padding-bottom: 80px; position: relative; overflow: hidden; }
@@ -77,7 +77,7 @@
     }
     .rd-row:hover .rd-bar-fill { filter: brightness(1.08); }
 
-    /* Traditional SaaS â€” warm orange gradient */
+    /* Traditional SaaS &mdash; warm orange gradient */
     .rd-bar-fill.traditional { background: linear-gradient(180deg, #FFB347 0%, #FF8A00 50%, #F97316 100%); }
     .rd-bar-fill.traditional .rd-bar-val {
       background: rgba(0,0,0,.45); color: #fff;
@@ -86,7 +86,7 @@
       position: absolute; top: 50%; transform: translateY(-50%);
     }
 
-    /* OptiFlow OS â€” brand green gradient */
+    /* OptiFlow OS &mdash; brand green gradient */
     .rd-bar-fill.optiflow { background: linear-gradient(180deg, #84CC16 0%, #65A30D 50%, #4D9A0A 100%); }
     .rd-bar-fill.optiflow .rd-bar-val {
       background: rgba(0,0,0,.45); color: #fff;
@@ -386,7 +386,7 @@
     <div class="hero-content">
 
       <h1>Simple, Predictable Pricing. No Per-User Charges.</h1>
-      <p class="lead">One annual investment covers your entire team. Cloud hosting, product updates, and support included. No hidden fees â€” just a predictable path to operational excellence.</p>
+      <p class="lead">One annual investment covers your entire team. Cloud hosting, product updates, and support included. No hidden fees &mdash; just a predictable path to operational excellence.</p>
       <div class="hero-cta">
         <button class="btn btn-primary btn-lg" onclick="document.querySelector('.pricing-grid').scrollIntoView({behavior:'smooth'})">Compare Plans</button>
         <a href="/demo-booking/" class="btn btn-secondary btn-lg">Book Demo</a>
@@ -412,74 +412,74 @@
               <span class="rd-row-label" role="columnheader">Team</span>
               <span class="rd-row-body" style="font-size:10px;padding:0 6px" role="columnheader">Traditional SaaS  Â·  OptiFlow OS</span>
             </div>
-            <div class="rd-row" role="row" data-trad="â‚¹1.44L/year" data-opti="â‚¹49K/year" data-save="66%" tabindex="0" aria-label="10 users: Traditional SaaS â‚¹1.44L, OptiFlow OS â‚¹49K, save 66%">
+            <div class="rd-row" role="row" data-trad="&#8377;1.44L/year" data-opti="&#8377;49K/year" data-save="66%" tabindex="0" aria-label="10 users: Traditional SaaS &#8377;1.44L, OptiFlow OS &#8377;49K, save 66%">
               <span class="rd-row-label" role="rowheader">10</span>
               <div class="rd-row-body">
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill traditional" data-value="144000"><span class="rd-bar-val">â‚¹1.44L</span></div>
+                  <div class="rd-bar-fill traditional" data-value="144000"><span class="rd-bar-val">&#8377;1.44L</span></div>
                 </div>
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill optiflow" data-value="49000"><span class="rd-bar-val">â‚¹49K</span></div>
+                  <div class="rd-bar-fill optiflow" data-value="49000"><span class="rd-bar-val">&#8377;49K</span></div>
                 </div>
-                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save â‚¹95K <span class="save-pct">66%</span></div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;95K <span class="save-pct">66%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> â‚¹1.44L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> â‚¹49K/yr &nbsp;Â·&nbsp; <b>Save</b> 66%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;1.44L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;49K/yr &nbsp;Â·&nbsp; <b>Save</b> 66%</div>
               <div class="rd-connector"></div>
             </div>
-            <div class="rd-row" role="row" data-trad="â‚¹3.60L/year" data-opti="â‚¹49K/year" data-save="86%" tabindex="0" aria-label="25 users: Traditional SaaS â‚¹3.60L, OptiFlow OS â‚¹49K, save 86%">
+            <div class="rd-row" role="row" data-trad="&#8377;3.60L/year" data-opti="&#8377;49K/year" data-save="86%" tabindex="0" aria-label="25 users: Traditional SaaS &#8377;3.60L, OptiFlow OS &#8377;49K, save 86%">
               <span class="rd-row-label" role="rowheader">25</span>
               <div class="rd-row-body">
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill traditional" data-value="360000"><span class="rd-bar-val">â‚¹3.60L</span></div>
+                  <div class="rd-bar-fill traditional" data-value="360000"><span class="rd-bar-val">&#8377;3.60L</span></div>
                 </div>
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill optiflow" data-value="49000"><span class="rd-bar-val">â‚¹49K</span></div>
+                  <div class="rd-bar-fill optiflow" data-value="49000"><span class="rd-bar-val">&#8377;49K</span></div>
                 </div>
-                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save â‚¹3.11L <span class="save-pct">86%</span></div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;3.11L <span class="save-pct">86%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> â‚¹3.60L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> â‚¹49K/yr &nbsp;Â·&nbsp; <b>Save</b> 86%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;3.60L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;49K/yr &nbsp;Â·&nbsp; <b>Save</b> 86%</div>
               <div class="rd-connector"></div>
             </div>
-            <div class="rd-row" role="row" data-trad="â‚¹7.20L/year" data-opti="â‚¹79K/year" data-save="89%" tabindex="0" aria-label="50 users: Traditional SaaS â‚¹7.20L, OptiFlow OS â‚¹79K, save 89%">
+            <div class="rd-row" role="row" data-trad="&#8377;7.20L/year" data-opti="&#8377;79K/year" data-save="89%" tabindex="0" aria-label="50 users: Traditional SaaS &#8377;7.20L, OptiFlow OS &#8377;79K, save 89%">
               <span class="rd-row-label" role="rowheader">50</span>
               <div class="rd-row-body">
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill traditional" data-value="720000"><span class="rd-bar-val">â‚¹7.20L</span></div>
+                  <div class="rd-bar-fill traditional" data-value="720000"><span class="rd-bar-val">&#8377;7.20L</span></div>
                 </div>
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill optiflow" data-value="79000"><span class="rd-bar-val">â‚¹79K</span></div>
+                  <div class="rd-bar-fill optiflow" data-value="79000"><span class="rd-bar-val">&#8377;79K</span></div>
                 </div>
-                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save â‚¹6.41L <span class="save-pct">89%</span></div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;6.41L <span class="save-pct">89%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> â‚¹7.20L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> â‚¹79K/yr &nbsp;Â·&nbsp; <b>Save</b> 89%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;7.20L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;79K/yr &nbsp;Â·&nbsp; <b>Save</b> 89%</div>
               <div class="rd-connector"></div>
             </div>
-            <div class="rd-row" role="row" data-trad="â‚¹14.4L/year" data-opti="â‚¹1.49L/year" data-save="90%" tabindex="0" aria-label="100 users: Traditional SaaS â‚¹14.4L, OptiFlow OS â‚¹1.49L, save 90%">
+            <div class="rd-row" role="row" data-trad="&#8377;14.4L/year" data-opti="&#8377;1.49L/year" data-save="90%" tabindex="0" aria-label="100 users: Traditional SaaS &#8377;14.4L, OptiFlow OS &#8377;1.49L, save 90%">
               <span class="rd-row-label" role="rowheader">100</span>
               <div class="rd-row-body">
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill traditional" data-value="1440000"><span class="rd-bar-val">â‚¹14.4L</span></div>
+                  <div class="rd-bar-fill traditional" data-value="1440000"><span class="rd-bar-val">&#8377;14.4L</span></div>
                 </div>
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill optiflow" data-value="149000"><span class="rd-bar-val">â‚¹1.49L</span></div>
+                  <div class="rd-bar-fill optiflow" data-value="149000"><span class="rd-bar-val">&#8377;1.49L</span></div>
                 </div>
-                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save â‚¹12.9L <span class="save-pct">90%</span></div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;12.9L <span class="save-pct">90%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> â‚¹14.4L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> â‚¹1.49L/yr &nbsp;Â·&nbsp; <b>Save</b> 90%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;14.4L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;1.49L/yr &nbsp;Â·&nbsp; <b>Save</b> 90%</div>
               <div class="rd-connector"></div>
             </div>
-            <div class="rd-row" role="row" data-trad="â‚¹28.8L/year" data-opti="â‚¹1.49L/year" data-save="95%" tabindex="0" aria-label="200 users: Traditional SaaS â‚¹28.8L, OptiFlow OS â‚¹1.49L, save 95%">
+            <div class="rd-row" role="row" data-trad="&#8377;28.8L/year" data-opti="&#8377;1.49L/year" data-save="95%" tabindex="0" aria-label="200 users: Traditional SaaS &#8377;28.8L, OptiFlow OS &#8377;1.49L, save 95%">
               <span class="rd-row-label" role="rowheader">200</span>
               <div class="rd-row-body">
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill traditional" data-value="2880000"><span class="rd-bar-val">â‚¹28.8L</span></div>
+                  <div class="rd-bar-fill traditional" data-value="2880000"><span class="rd-bar-val">&#8377;28.8L</span></div>
                 </div>
                 <div class="rd-bar-track">
-                  <div class="rd-bar-fill optiflow" data-value="149000"><span class="rd-bar-val">â‚¹1.49L</span></div>
+                  <div class="rd-bar-fill optiflow" data-value="149000"><span class="rd-bar-val">&#8377;1.49L</span></div>
                 </div>
-                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save â‚¹27.3L <span class="save-pct">95%</span></div>
+                <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;27.3L <span class="save-pct">95%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> â‚¹28.8L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> â‚¹1.49L/yr &nbsp;Â·&nbsp; <b>Save</b> 95%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;28.8L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;1.49L/yr &nbsp;Â·&nbsp; <b>Save</b> 95%</div>
               <div class="rd-connector"></div>
             </div>
           </div>
@@ -509,7 +509,7 @@
     <div class="section-header reveal">
 
       <h2>Built Around Business Value, Not User Counts</h2>
-      <p class="lead">Most SaaS tools charge per user â€” the bigger your team, the higher the bill. OptiFlow was designed differently: one fixed annual investment that covers your entire team so you can scale without surprise costs.</p>
+      <p class="lead">Most SaaS tools charge per user &mdash; the bigger your team, the higher the bill. OptiFlow was designed differently: one fixed annual investment that covers your entire team so you can scale without surprise costs.</p>
     </div>
     <div class="grid-4 stagger-4 reveal" style="max-width:1000px;margin-inline:auto">
       <div class="card" style="text-align:center">
@@ -548,7 +548,7 @@
       </div>
       <div>
         <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--green);margin-bottom:4px" class="counter" data-count="500000">0</div>
-        <div style="font-size:13px;color:var(--muted);font-weight:500">Tasks Processed</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:500">Tasks Processed (Cumulative)</div>
       </div>
       <div>
         <div style="font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--lime);margin-bottom:4px" class="counter" data-count="1200">0</div>
@@ -573,10 +573,10 @@
         <h3 class="pc-name">Starter</h3>
         <p class="pc-team">Up to 25 team members</p>
         <div class="pc-pricing">
-          <span class="pc-currency">â‚¹</span><span class="pc-price">49,000</span>
+          <span class="pc-currency">&#8377;</span><span class="pc-price">49,000</span>
           <span class="pc-period">/year</span>
         </div>
-        <p class="pc-setup">+ <span class="num">â‚¹25,000</span> one-time implementation</p>
+        <p class="pc-setup">+ <span class="num">&#8377;25,000</span> one-time implementation</p>
         <p class="pc-label">Business Value</p>
         <ul class="pc-features">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Bring operations into one system</li>
@@ -602,10 +602,10 @@
         <h3 class="pc-name" style="color:var(--teal)">Growth</h3>
         <p class="pc-team">26 to 100 team members</p>
         <div class="pc-pricing">
-          <span class="pc-currency">â‚¹</span><span class="pc-price">79,000</span>
+          <span class="pc-currency">&#8377;</span><span class="pc-price">79,000</span>
           <span class="pc-period">/year</span>
         </div>
-        <p class="pc-setup">+ <span class="num">â‚¹40,000</span> one-time implementation</p>
+        <p class="pc-setup">+ <span class="num">&#8377;40,000</span> one-time implementation</p>
         <p class="pc-label">Business Value</p>
         <ul class="pc-features">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Cross-team coordination</li>
@@ -629,10 +629,10 @@
         <h3 class="pc-name">Scale</h3>
         <p class="pc-team">100+ team members</p>
         <div class="pc-pricing">
-          <span class="pc-currency">â‚¹</span><span class="pc-price">1,49,000</span>
+          <span class="pc-currency">&#8377;</span><span class="pc-price">1,49,000</span>
           <span class="pc-period">/year</span>
         </div>
-        <p class="pc-setup">+ <span class="num">â‚¹75,000</span> one-time implementation</p>
+        <p class="pc-setup">+ <span class="num">&#8377;75,000</span> one-time implementation</p>
         <p class="pc-label">Business Value</p>
         <ul class="pc-features">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Complete organizational visibility</li>
@@ -683,15 +683,15 @@
 
       <div class="comp-section-label">Automation &amp; Scale</div>
 
-      <div class="comp-row"><span class="comp-label">Approval Workflows</span><span class="comp-cell no">â€”</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
-      <div class="comp-row"><span class="comp-label">Process Automation</span><span class="comp-cell no">â€”</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
-      <div class="comp-row"><span class="comp-label">Multi-Location</span><span class="comp-cell no">â€”</span><span class="comp-cell no">â€”</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
-      <div class="comp-row"><span class="comp-label">Advanced Analytics</span><span class="comp-cell no">â€”</span><span class="comp-cell no">â€”</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
+      <div class="comp-row"><span class="comp-label">Approval Workflows</span><span class="comp-cell no">&mdash;</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
+      <div class="comp-row"><span class="comp-label">Process Automation</span><span class="comp-cell no">&mdash;</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
+      <div class="comp-row"><span class="comp-label">Multi-Location</span><span class="comp-cell no">&mdash;</span><span class="comp-cell no">&mdash;</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
+      <div class="comp-row"><span class="comp-label">Advanced Analytics</span><span class="comp-cell no">&mdash;</span><span class="comp-cell no">&mdash;</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
 
       <div class="comp-section-label">Support</div>
 
-      <div class="comp-row"><span class="comp-label">Priority Support</span><span class="comp-cell no">â€”</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
-      <div class="comp-row"><span class="comp-label">Dedicated Success Manager</span><span class="comp-cell no">â€”</span><span class="comp-cell no">â€”</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
+      <div class="comp-row"><span class="comp-label">Priority Support</span><span class="comp-cell no">&mdash;</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
+      <div class="comp-row"><span class="comp-label">Dedicated Success Manager</span><span class="comp-cell no">&mdash;</span><span class="comp-cell no">&mdash;</span><span class="comp-cell yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Included</span></div>
     </div>
   </div>
 </section>
@@ -717,19 +717,19 @@
             </div>
           </div>
           <div class="pc-field">
-            <label class="pc-label">Per-User Monthly SaaS Cost (â‚¹)</label>
+            <label class="pc-label">Per-User Monthly SaaS Cost (&#8377;)</label>
             <input type="range" class="pc-slider" min="199" max="5000" value="999" step="50" id="pcPerUserCost">
             <div class="pc-range-row">
-              <span class="pc-range-min">â‚¹199</span>
-              <span class="pc-range-cur">â‚¹<span id="pcPerUserCostVal">999</span>/user/mo</span>
-              <span class="pc-range-max">â‚¹5,000</span>
+              <span class="pc-range-min">&#8377;199</span>
+              <span class="pc-range-cur">&#8377;<span id="pcPerUserCostVal">999</span>/user/mo</span>
+              <span class="pc-range-max">&#8377;5,000</span>
             </div>
           </div>
           <div class="pc-plan-badge">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             <div>
               <div class="pc-plan-name" id="pcPlanName">Growth</div>
-              <div class="pc-plan-detail" id="pcPlanDetail">â‚¹79,000/yr Â· 26-100 users</div>
+              <div class="pc-plan-detail" id="pcPlanDetail">&#8377;79,000/yr Â· 26-100 users</div>
             </div>
           </div>
         </div>
@@ -737,18 +737,18 @@
           <div class="pc-bd-section">
             <div class="pc-bd-row">
               <span class="pc-bd-l">Traditional SaaS (Annual)</span>
-              <span class="pc-bd-v pc-bd-red" id="pcTradCost">â‚¹5,99,400</span>
+              <span class="pc-bd-v pc-bd-red" id="pcTradCost">&#8377;5,99,400</span>
             </div>
             <div class="pc-bd-row">
               <span class="pc-bd-l">OptiFlow (Annual + Setup)</span>
-              <span class="pc-bd-v pc-bd-green" id="pcOptiCost">â‚¹1,19,000</span>
+              <span class="pc-bd-v pc-bd-green" id="pcOptiCost">&#8377;1,19,000</span>
             </div>
           </div>
           <div class="pc-bd-divider"></div>
           <div class="pc-bd-section">
             <div class="pc-bd-row pc-bd-highlight">
               <span class="pc-bd-l">You Save</span>
-              <span class="pc-bd-v pc-bd-lime" id="pcSaveAmount">â‚¹4,80,400</span>
+              <span class="pc-bd-v pc-bd-lime" id="pcSaveAmount">&#8377;4,80,400</span>
             </div>
             <div class="pc-bd-row">
               <span class="pc-bd-l">Cost Reduction</span>
@@ -761,7 +761,7 @@
             <div class="pc-save-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
             </div>
-            <div class="pc-save-amount" id="pcSaveBig">â‚¹4.8L</div>
+            <div class="pc-save-amount" id="pcSaveBig">&#8377;4.8L</div>
             <div class="pc-save-label">Annual Savings</div>
             <div class="pc-save-note">vs traditional per-user pricing</div>
           </div>
@@ -772,7 +772,7 @@
             </div>
             <div class="pc-matrix-row">
               <span class="pc-matrix-key">Per-User</span>
-              <span class="pc-matrix-val" id="pcMatrixPerUser">â‚¹999/mo</span>
+              <span class="pc-matrix-val" id="pcMatrixPerUser">&#8377;999/mo</span>
             </div>
             <div class="pc-matrix-row">
               <span class="pc-matrix-key">Plan</span>
@@ -780,7 +780,7 @@
             </div>
             <div class="pc-matrix-row">
               <span class="pc-matrix-key">Effective/User</span>
-              <span class="pc-matrix-val" id="pcMatrixEffective">â‚¹198/mo</span>
+              <span class="pc-matrix-val" id="pcMatrixEffective">&#8377;198/mo</span>
             </div>
           </div>
         </div>
@@ -795,7 +795,7 @@
     <div class="section-header reveal">
 
       <h2>Implementation &amp; Onboarding</h2>
-      <p class="lead">A structured rollout designed for MSMEs â€” discovery to go-live in weeks, not months.</p>
+      <p class="lead">A structured rollout designed for MSMEs &mdash; discovery to go-live in weeks, not months.</p>
     </div>
     <div class="imp-timeline stagger-5 reveal">
       <div class="imp-step"><div class="imp-step-num">1</div><h4>Discovery</h4><p>Understand your operations, workflows, and pain points</p></div>
@@ -827,18 +827,18 @@
     <div class="section-header reveal">
 
       <h2>Built-In Security. Included With Every Plan.</h2>
-      <p class="lead" style="color:var(--muted)">Role-based access, audit logs, secure infrastructure â€” the same security enterprises demand, designed for MSME simplicity.</p>
+      <p class="lead" style="color:var(--muted)">Role-based access, audit logs, secure infrastructure &mdash; the same security enterprises demand, designed for MSME simplicity.</p>
     </div>
     <div class="grid-3 stagger-3 reveal">
       <div class="card" style="text-align:center">
         <svg style="width:32px;height:32px;margin:0 auto 12px;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         <h3 style="font-size:16px;margin-bottom:6px">Role-Based Access</h3>
-        <p style="font-size:13px;color:var(--muted)">Admin, Captain, Doer â€” each role sees only what they need.</p>
+        <p style="font-size:13px;color:var(--muted)">Admin, Captain, Doer &mdash; each role sees only what they need.</p>
       </div>
       <div class="card" style="text-align:center">
         <svg style="width:32px;height:32px;margin:0 auto 12px;color:var(--teal)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         <h3 style="font-size:16px;margin-bottom:6px">Complete Audit Logs</h3>
-        <p style="font-size:13px;color:var(--muted)">Every action tracked, timestamped, and attributable â€” audit-ready always.</p>
+        <p style="font-size:13px;color:var(--muted)">Every action tracked, timestamped, and attributable &mdash; audit-ready always.</p>
       </div>
       <div class="card" style="text-align:center">
         <svg style="width:32px;height:32px;margin:0 auto 12px;color:var(--green)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -859,9 +859,9 @@
       <div class="faq-item"><button class="faq-question">Do you charge per user? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>No. OptiFlow charges by plan tier (team size range), not per individual user. You can add team members within your plan's capacity at no extra cost.</div></div></div>
       <div class="faq-item"><button class="faq-question">What is included in implementation? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation includes system setup, data migration assistance, department configuration, role-based training, workflow setup, and go-live support with post-launch check-ins.</div></div></div>
       <div class="faq-item"><button class="faq-question">Can we upgrade plans later? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. You can upgrade (or downgrade) at any time. When upgrading mid-year, you only pay the difference. Your data, workflows, and history stay intact.</div></div></div>
-      <div class="faq-item"><button class="faq-question">How long does implementation take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation typically takes 2â€”4 weeks depending on team size and process complexity. We follow a structured 5-phase rollout: Discovery â†’ Setup â†’ Configuration â†’ Training â†’ Go Live.</div></div></div>
+      <div class="faq-item"><button class="faq-question">How long does implementation take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation typically takes 2&mdash;4 weeks depending on team size and process complexity. We follow a structured 5-phase rollout: Discovery â†’ Setup â†’ Configuration â†’ Training â†’ Go Live.</div></div></div>
       <div class="faq-item"><button class="faq-question">Is cloud hosting included? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. Cloud hosting, product updates, security patches, and standard support are all included in your annual subscription. No separate infrastructure costs.</div></div></div>
-      <div class="faq-item"><button class="faq-question">Can multiple branches use the system? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. The Scale plan supports multi-location operations with centralized visibility. The Growth plan supports multiple departments. Each branch or department can have its own structure, users, and reports â€” all visible to leadership.</div></div></div>
+      <div class="faq-item"><button class="faq-question">Can multiple branches use the system? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. The Scale plan supports multi-location operations with centralized visibility. The Growth plan supports multiple departments. Each branch or department can have its own structure, users, and reports &mdash; all visible to leadership.</div></div></div>
     </div>
   </div>
 </section>
@@ -871,7 +871,7 @@
   <div class="container">
     <div class="reveal">
       <h2>Build a Structured, Accountable, Scalable Operation</h2>
-      <p class="lead" style="max-width:560px;margin-inline:auto">See how OptiFlow can help your business improve visibility, accountability, execution, and growth â€” starting at â‚¹49,000/year.</p>
+      <p class="lead" style="max-width:560px;margin-inline:auto">See how OptiFlow can help your business improve visibility, accountability, execution, and growth &mdash; starting at &#8377;49,000/year.</p>
       <div style="display:flex;gap:var(--gap-sm);justify-content:center;flex-wrap:wrap;margin-bottom:36px">
         <a href="/demo-booking/" class="btn btn-primary btn-lg">Book Free Demo</a>
         <a href="/contact/" class="btn btn-secondary btn-lg">Talk To An Expert</a>
@@ -1035,8 +1035,8 @@
   });
   calcPriceCompare();
 
-  /* --- FAQ accordion â€” handled by core.js via .faq-question class --- */
+  /* --- FAQ accordion &mdash; handled by core.js via .faq-question class --- */
 
-  /* --- Sticky CTA + Scroll top â€” handled by core.js --- */
+  /* --- Sticky CTA + Scroll top &mdash; handled by core.js --- */
 </script></body>
 </html>
