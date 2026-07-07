@@ -22,21 +22,21 @@ const ASSETS = path.join(ROOT, 'assets');
 const DIST = path.join(ROOT, 'dist');
 
 const SRC_MAP = {
-  'index.html': 'home.html',
-  'home/index.html': 'home.html',
-  'problem-solutions/index.html': 'problem-solutions.html',
-  'product-overview/index.html': 'product-overview.html',
-  'features/index.html': 'features.html',
-  'feature-showcase/index.html': 'feature-showcase.html',
-  'why-optiflow/index.html': 'why-optiflow.html',
-  'pricing/index.html': 'pricing.html',
-  'newsletter/index.html': 'newsletter.html',
-  'faq/index.html': 'faq.html',
-  'contact/index.html': 'contact.html',
-  'demo-booking/index.html': 'demo-booking.html',
-  'privacy-policy/index.html': 'privacy-policy.html',
-  'terms/index.html': 'terms.html',
-  'competitive-positioning/index.html': 'competitive-positioning.html',
+  'os/index.html': 'home.html',
+  'os/home/index.html': 'home.html',
+  'os/problem-solutions/index.html': 'problem-solutions.html',
+  'os/product-overview/index.html': 'product-overview.html',
+  'os/features/index.html': 'features.html',
+  'os/feature-showcase/index.html': 'feature-showcase.html',
+  'os/why-optiflow/index.html': 'why-optiflow.html',
+  'os/pricing/index.html': 'pricing.html',
+  'os/newsletter/index.html': 'newsletter.html',
+  'os/faq/index.html': 'faq.html',
+  'os/contact/index.html': 'contact.html',
+  'os/demo-booking/index.html': 'demo-booking.html',
+  'os/privacy-policy/index.html': 'privacy-policy.html',
+  'os/terms/index.html': 'terms.html',
+  'os/competitive-positioning/index.html': 'competitive-positioning.html',
   '404.html': '404.html',
   '500.html': '500.html',
 };
@@ -95,8 +95,8 @@ function buildPage(pageInfo) {
 
 
 
-  const urlPath = pageFile === 'index.html'
-    ? ''
+  const urlPath = pageFile === 'os/index.html'
+    ? 'os/'
     : pageFile.replace('/index.html', '/').replace('.html', '/');
   const pageUrl = `https://${site.domain}/${urlPath}`;
 
@@ -157,8 +157,8 @@ function buildPage(pageInfo) {
     html = html.replace('</head>', '<script>let _lt=0,_init=!1;setInterval(()=>{fetch("/rebuild.txt?"+Date.now()).then(r=>r.text()).then(v=>{let n=+v.trim();if(!_init){_lt=n;_init=!0;return}if(n>_lt){_lt=n;location.reload()}}).catch(()=>{})},800)</script>\n</head>');
   }
 
-  const destDir = pageFile === 'index.html'
-    ? DIST
+  const destDir = pageFile === 'os/index.html'
+    ? path.join(DIST, 'os')
     : path.join(DIST, pageFile.replace('/index.html', '').replace('.html', ''));
   fs.mkdirSync(destDir, { recursive: true });
   const destFile = path.join(destDir, 'index.html');
@@ -168,8 +168,8 @@ function buildPage(pageInfo) {
 }
 
 function injectJSONLD(pageInfo) {
-  const urlPath = pageInfo.file === 'index.html'
-    ? ''
+  const urlPath = pageInfo.file === 'os/index.html'
+    ? 'os/'
     : pageInfo.file.replace('/index.html', '/').replace('.html', '/');
   const pageUrl = `https://${site.domain}/${urlPath}`;
   const logoUrl = `https://${site.domain}/assets/img/${site.logo}`;
@@ -181,7 +181,7 @@ function injectJSONLD(pageInfo) {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "${site.name}",
-    "url": "https://${site.domain}",
+    "url": "https://${site.domain}/os",
     "logo": "${logoUrl}",
     "contactPoint": {
       "@type": "ContactPoint",
@@ -194,7 +194,7 @@ function injectJSONLD(pageInfo) {
 
   // ponytail: BreadcrumbList — derive from URL path segments
   {
-    const crumbs = [{ name: 'Home', url: `https://${site.domain}/` }];
+    const crumbs = [{ name: 'Home', url: `https://${site.domain}/os/` }];
     if (urlPath) {
       const segments = urlPath.replace(/\/$/, '').split('/').filter(Boolean);
       let acc = '';
@@ -217,7 +217,7 @@ function injectJSONLD(pageInfo) {
   </script>\n`;
   }
 
-  if (pageInfo.file === 'faq/index.html') {
+  if (pageInfo.file === 'os/faq/index.html') {
     scripts += `  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -233,7 +233,7 @@ function injectJSONLD(pageInfo) {
   </script>\n`;
   }
 
-  if (pageInfo.file === 'index.html') {
+  if (pageInfo.file === 'os/index.html') {
     scripts += `  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -249,7 +249,7 @@ function injectJSONLD(pageInfo) {
   </script>\n`;
   }
 
-  if (pageInfo.file === 'newsletter/index.html') {
+  if (pageInfo.file === 'os/newsletter/index.html') {
     const today = new Date().toISOString().slice(0, 10);
     scripts += `  <script type="application/ld+json">
   {
@@ -318,6 +318,11 @@ async function main() {
   const FUNCTIONS_DIR = path.join(ROOT, 'functions');
   if (fs.existsSync(FUNCTIONS_DIR)) copyDir(FUNCTIONS_DIR, path.join(DIST, 'functions'));
 
+  // Root redirect page: / → /os/ (temporary until corporate site exists)
+  const redirectHtml = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=/os/"><title>OptiFlow OS</title><meta name="description" content="OptiFlow OS — Business Execution Operating System for Indian MSMEs. Redirecting to product site."><link rel="canonical" href="https://optiflow.in/os/"><meta property="og:title" content="OptiFlow OS"><meta property="og:url" content="https://optiflow.in/os/"><meta property="og:site_name" content="OptiFlow OS"><meta property="og:locale" content="en_IN"><meta name="robots" content="noindex, nofollow"><style>body{font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#f8fafc;color:#0f172a}[data-theme=dark]{background:#0a1628;color:rgba(255,255,255,.80)}</style><script>location.replace("/os/")</script></head><body><h1>OptiFlow OS</h1><p>Redirecting to <a href="/os/">product website</a>...</p><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"OptiFlow OS","url":"https://optiflow.in/os"}</script></body></html>\n';
+  fs.writeFileSync(path.join(DIST, 'index.html'), redirectHtml, 'utf-8');
+  console.log('  ✓ Root redirect page (/ → /os/)');
+
   const designRoot = fs.readdirSync(ROOT).find(d => d.startsWith('OptiFlow-OS'));
   if (designRoot) {
     const realDesignSrc = path.join(ROOT, designRoot);
@@ -359,12 +364,12 @@ function generateSitemap() {
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   for (const page of site.pages) {
     if (page.noindex) continue;
-    const urlPath = page.file === 'index.html'
-      ? ''
+    const urlPath = page.file === 'os/index.html'
+      ? 'os/'
       : page.file.replace('/index.html', '/').replace('.html', '/');
-    const priority = page.file === 'index.html' ? '0.9' : '0.7';
+    const priority = page.file === 'os/index.html' ? '0.9' : '0.7';
     let changefreq = 'weekly';
-    if (page.file === 'index.html') changefreq = 'daily';
+    if (page.file === 'os/index.html') changefreq = 'daily';
     if (page.file.includes('privacy-policy') || page.file.includes('terms')) changefreq = 'monthly';
     xml += '  <url>\n';
     xml += `    <loc>https://${site.domain}/${urlPath}</loc>\n`;
@@ -389,29 +394,29 @@ function generateManifest() {
     name: 'OptiFlow OS',
     short_name: 'OptiFlow',
     description: 'Business Execution Operating System for Indian MSMEs',
-    start_url: '/',
+    start_url: '/os/',
     display: 'standalone',
     theme_color: '#0a1628',
     background_color: '#0a1628',
     orientation: 'any',
     lang: 'en-IN',
     dir: 'ltr',
-    scope: '/',
-    id: '/?app=optiflow',
+    scope: '/os/',
+    id: '/os/?app=optiflow',
     categories: ['business', 'productivity'],
     shortcuts: [
       {
         name: 'Book a Demo',
         short_name: 'Demo',
         description: 'Book a free personalized demo',
-        url: '/demo-booking/',
+        url: '/os/demo-booking/',
         icons: [{ src: '/assets/img/OptiFlow.Logo.png', sizes: '96x96', type: 'image/png' }],
       },
       {
         name: 'View Pricing',
         short_name: 'Pricing',
         description: 'See plans and pricing',
-        url: '/pricing/',
+        url: '/os/pricing/',
         icons: [{ src: '/assets/img/OptiFlow.Logo.png', sizes: '96x96', type: 'image/png' }],
       },
     ],
@@ -433,8 +438,8 @@ function generateManifest() {
 function injectAllJSONLD() {
   for (const page of site.pages) {
     const pageFile = page.file;
-    const destDir = pageFile === 'index.html'
-      ? DIST
+    const destDir = pageFile === 'os/index.html'
+      ? path.join(DIST, 'os')
       : path.join(DIST, pageFile.replace('/index.html', '').replace('.html', ''));
     const destFile = path.join(destDir, 'index.html');
     if (!fs.existsSync(destFile)) continue;

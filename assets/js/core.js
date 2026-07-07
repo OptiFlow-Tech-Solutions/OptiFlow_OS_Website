@@ -177,7 +177,7 @@
 
   /* ─── Pricing CTA click tracking ─── */
   document.addEventListener('click', function(e) {
-    var a = e.target.closest('a[href="/demo-booking/"]');
+    var a = e.target.closest('a[href="/os/demo-booking/"]');
     if (!a) return;
     if (document.querySelector('.pricing-grid, section.cta-section')) {
       trackEvent('Click Pricing CTA');

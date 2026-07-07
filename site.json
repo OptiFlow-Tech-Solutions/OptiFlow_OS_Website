@@ -11,63 +11,63 @@
   "domain": "optiflow.in",
   "logo": "OptiFlow.Logo.png",
   "pages": [
-    { "file": "index.html", "title": "OptiFlow OS — Business Operating System for Indian MSMEs", "description": "OptiFlow OS is the Business Operating System for Indian MSMEs — replace WhatsApp and Excel with one platform. Book a free demo.", "active": "Home" },
-    { "file": "problem-solutions/index.html", "title": "Problems & Solutions — OptiFlow OS", "description": "See how OptiFlow OS solves the 6 biggest operational challenges Indian MSMEs face daily — from WhatsApp chaos to zero accountability.", "active": "Solutions" },
-    { "file": "product-overview/index.html", "title": "Product Overview — OptiFlow OS", "description": "Explore every module of OptiFlow OS — the complete Business Execution platform for MSMEs. Task management, attendance, SOPs, reporting, and more.", "active": "Product" },
-    { "file": "features/index.html", "title": "Features — OptiFlow OS", "description": "Detailed feature breakdown of OptiFlow OS — task management, attendance tracking, SOPs, checklists, reports, dashboards, and mobile access.", "active": "Features" },
-    { "file": "feature-showcase/index.html", "title": "Feature Showcase — OptiFlow OS", "description": "See OptiFlow OS in action — real feature transformations with before/after comparisons and quantified business outcomes for Indian MSMEs.", "active": "Showcase" },
-    { "file": "why-optiflow/index.html", "title": "Why OptiFlow — OptiFlow OS", "description": "Why Indian MSMEs choose OptiFlow OS over WhatsApp, Excel, and generic tools. Built for operators with fast ROI, full visibility, and real accountability.", "active": "Why OptiFlow" },
-    { "file": "pricing/index.html", "title": "Pricing & Plans — OptiFlow OS", "description": "Simple, transparent pricing for OptiFlow OS. No per-user charges. Starter, Growth, and Scale plans with predictable annual pricing. See how much you save.", "active": "Pricing" },
-    { "file": "newsletter/index.html", "title": "Newsletter — OptiFlow OS", "description": "Practical strategies, operational frameworks, and business systems designed to help Indian MSMEs scale with accountability and operational excellence.", "active": "Resources" },
-    { "file": "faq/index.html", "title": "FAQ & Self-Service — OptiFlow OS", "description": "Find answers about OptiFlow OS or use self-service tools — video tutorials, troubleshooting guide, and guided setup. Help yourself, fast.", "active": "Resources" },
-    { "file": "contact/index.html", "title": "Contact — OptiFlow OS", "description": "Get in touch with the OptiFlow OS team for demos, sales inquiries, support, or partnership discussions. We respond within one business day.", "active": "Contact" },
-    { "file": "demo-booking/index.html", "title": "Book a Demo — OptiFlow OS", "description": "Book a free personalized demo of OptiFlow OS and see how our Business Operating System transforms your MSME operations with better accountability.", "active": null },
-    { "file": "privacy-policy/index.html", "title": "Privacy Policy — OptiFlow OS", "description": "OptiFlow OS privacy policy — learn how we collect, use, store, and protect your business and employee data. GDPR and Indian DPDP Act 2023 compliant.", "active": "Resources" },
-    { "file": "terms/index.html", "title": "Terms & Conditions — OptiFlow OS", "description": "Terms and conditions for using OptiFlow OS — platform usage rules, customer responsibilities, payment terms, data ownership, and governing law.", "active": "Resources" },
-    { "file": "competitive-positioning/index.html", "title": "Competitive Positioning — OptiFlow OS", "description": "See how OptiFlow OS compares against WhatsApp chaos, generic SaaS tools, traditional ERPs, and manual systems. Feature-by-feature comparison for Indian MSMEs.", "active": "Resources" },
+    { "file": "os/index.html", "title": "OptiFlow OS — Business Operating System for Indian MSMEs", "description": "OptiFlow OS is the Business Operating System for Indian MSMEs — replace WhatsApp and Excel with one platform. Book a free demo.", "active": "Home" },
+    { "file": "os/problem-solutions/index.html", "title": "Problems & Solutions — OptiFlow OS", "description": "See how OptiFlow OS solves the 6 biggest operational challenges Indian MSMEs face daily — from WhatsApp chaos to zero accountability.", "active": "Solutions" },
+    { "file": "os/product-overview/index.html", "title": "Product Overview — OptiFlow OS", "description": "Explore every module of OptiFlow OS — the complete Business Execution platform for MSMEs. Task management, attendance, SOPs, reporting, and more.", "active": "Product" },
+    { "file": "os/features/index.html", "title": "Features — OptiFlow OS", "description": "Detailed feature breakdown of OptiFlow OS — task management, attendance tracking, SOPs, checklists, reports, dashboards, and mobile access.", "active": "Features" },
+    { "file": "os/feature-showcase/index.html", "title": "Feature Showcase — OptiFlow OS", "description": "See OptiFlow OS in action — real feature transformations with before/after comparisons and quantified business outcomes for Indian MSMEs.", "active": "Showcase" },
+    { "file": "os/why-optiflow/index.html", "title": "Why OptiFlow — OptiFlow OS", "description": "Why Indian MSMEs choose OptiFlow OS over WhatsApp, Excel, and generic tools. Built for operators with fast ROI, full visibility, and real accountability.", "active": "Why OptiFlow" },
+    { "file": "os/pricing/index.html", "title": "Pricing & Plans — OptiFlow OS", "description": "Simple, transparent pricing for OptiFlow OS. No per-user charges. Starter, Growth, and Scale plans with predictable annual pricing. See how much you save.", "active": "Pricing" },
+    { "file": "os/newsletter/index.html", "title": "Newsletter — OptiFlow OS", "description": "Practical strategies, operational frameworks, and business systems designed to help Indian MSMEs scale with accountability and operational excellence.", "active": "Resources" },
+    { "file": "os/faq/index.html", "title": "FAQ & Self-Service — OptiFlow OS", "description": "Find answers about OptiFlow OS or use self-service tools — video tutorials, troubleshooting guide, and guided setup. Help yourself, fast.", "active": "Resources" },
+    { "file": "os/contact/index.html", "title": "Contact — OptiFlow OS", "description": "Get in touch with the OptiFlow OS team for demos, sales inquiries, support, or partnership discussions. We respond within one business day.", "active": "Contact" },
+    { "file": "os/demo-booking/index.html", "title": "Book a Demo — OptiFlow OS", "description": "Book a free personalized demo of OptiFlow OS and see how our Business Operating System transforms your MSME operations with better accountability.", "active": null },
+    { "file": "os/privacy-policy/index.html", "title": "Privacy Policy — OptiFlow OS", "description": "OptiFlow OS privacy policy — learn how we collect, use, store, and protect your business and employee data. GDPR and Indian DPDP Act 2023 compliant.", "active": "Resources" },
+    { "file": "os/terms/index.html", "title": "Terms & Conditions — OptiFlow OS", "description": "Terms and conditions for using OptiFlow OS — platform usage rules, customer responsibilities, payment terms, data ownership, and governing law.", "active": "Resources" },
+    { "file": "os/competitive-positioning/index.html", "title": "Competitive Positioning — OptiFlow OS", "description": "See how OptiFlow OS compares against WhatsApp chaos, generic SaaS tools, traditional ERPs, and manual systems. Feature-by-feature comparison for Indian MSMEs.", "active": "Resources" },
     { "file": "404.html", "title": "Page Not Found — OptiFlow OS", "description": "The page you're looking for doesn't exist. Navigate back to explore OptiFlow OS — the Business Execution Operating System for Indian MSMEs.", "active": null, "noindex": true },
     { "file": "500.html", "title": "Server Error — OptiFlow OS", "description": "We are experiencing a temporary technical issue. Our team has been notified and is working to resolve it. Contact OptiFlow OS support for help.", "active": null, "noindex": true }
 
   ],
   "nav": {
     "links": [
-      { "label": "Home", "href": "/" },
-      { "label": "Solutions", "href": "/problem-solutions/" },
-      { "label": "Product", "href": "/product-overview/" },
-      { "label": "Features", "href": "/features/" },
-      { "label": "Showcase", "href": "/feature-showcase/" },
-      { "label": "Why OptiFlow", "href": "/why-optiflow/" },
-      { "label": "Pricing", "href": "/pricing/" },
-      { "label": "Contact", "href": "/contact/" }
+      { "label": "Home", "href": "/os/" },
+      { "label": "Solutions", "href": "/os/problem-solutions/" },
+      { "label": "Product", "href": "/os/product-overview/" },
+      { "label": "Features", "href": "/os/features/" },
+      { "label": "Showcase", "href": "/os/feature-showcase/" },
+      { "label": "Why OptiFlow", "href": "/os/why-optiflow/" },
+      { "label": "Pricing", "href": "/os/pricing/" },
+      { "label": "Contact", "href": "/os/contact/" }
     ],
     "dropdown": {
       "label": "Resources",
       "items": [
-        { "label": "Newsletter", "href": "/newsletter/" },
-        { "label": "FAQ", "href": "/faq/" }
+        { "label": "Newsletter", "href": "/os/newsletter/" },
+        { "label": "FAQ", "href": "/os/faq/" }
       ]
     },
     "cta": [
-      { "label": "Book Demo", "href": "/demo-booking/", "class": "btn-primary btn-glow" }
+      { "label": "Book Demo", "href": "/os/demo-booking/", "class": "btn-primary btn-glow" }
     ]
   },
   "footer": {
     "columns": [
       { "title": "Product", "links": [
-        { "label": "Overview", "href": "/product-overview/" },
-        { "label": "Features", "href": "/features/" },
-        { "label": "Pricing", "href": "/pricing/" },
-        { "label": "Book Demo", "href": "/demo-booking/" }
+        { "label": "Overview", "href": "/os/product-overview/" },
+        { "label": "Features", "href": "/os/features/" },
+        { "label": "Pricing", "href": "/os/pricing/" },
+        { "label": "Book Demo", "href": "/os/demo-booking/" }
       ]},
       { "title": "Solutions", "links": [
-        { "label": "Problem & Solutions", "href": "/problem-solutions/" },
-        { "label": "Why OptiFlow", "href": "/why-optiflow/" }
+        { "label": "Problem & Solutions", "href": "/os/problem-solutions/" },
+        { "label": "Why OptiFlow", "href": "/os/why-optiflow/" }
       ]},
       { "title": "Resources", "links": [
-        { "label": "Newsletter", "href": "/newsletter/" },
-        { "label": "FAQ", "href": "/faq/" },
-        { "label": "Privacy Policy", "href": "/privacy-policy/" },
-        { "label": "Terms & Conditions", "href": "/terms/" }
+        { "label": "Newsletter", "href": "/os/newsletter/" },
+        { "label": "FAQ", "href": "/os/faq/" },
+        { "label": "Privacy Policy", "href": "/os/privacy-policy/" },
+        { "label": "Terms & Conditions", "href": "/os/terms/" }
       ]},
       { "title": "Contact", "links": [
         { "label": "+91 7874677836", "href": "tel:+917874677836" },

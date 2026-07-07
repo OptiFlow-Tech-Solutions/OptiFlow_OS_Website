@@ -9,60 +9,183 @@
 
 [[redirects]]
   from = "/features"
-  to = "/features/"
+  to = "/os/features/"
   status = 301
 
 [[redirects]]
   from = "/pricing"
-  to = "/pricing/"
+  to = "/os/pricing/"
   status = 301
 
 [[redirects]]
   from = "/faq"
-  to = "/faq/"
+  to = "/os/faq/"
   status = 301
 
 [[redirects]]
   from = "/newsletter"
-  to = "/newsletter/"
+  to = "/os/newsletter/"
+  status = 301
+
 [[redirects]]
   from = "/blog"
-  to = "/newsletter/"
+  to = "/os/newsletter/"
   status = 301
 
 [[redirects]]
   from = "/contact"
-  to = "/contact/"
+  to = "/os/contact/"
   status = 301
 
 [[redirects]]
   from = "/demo-booking"
-  to = "/demo-booking/"
+  to = "/os/demo-booking/"
   status = 301
 
 [[redirects]]
   from = "/privacy-policy"
-  to = "/privacy-policy/"
+  to = "/os/privacy-policy/"
   status = 301
 
 [[redirects]]
   from = "/terms"
-  to = "/terms/"
+  to = "/os/terms/"
   status = 301
 
 [[redirects]]
   from = "/product-overview"
-  to = "/product-overview/"
+  to = "/os/product-overview/"
   status = 301
 
 [[redirects]]
   from = "/problem-solutions"
-  to = "/problem-solutions/"
+  to = "/os/problem-solutions/"
   status = 301
 
 [[redirects]]
   from = "/why-optiflow"
-  to = "/why-optiflow/"
+  to = "/os/why-optiflow/"
+  status = 301
+
+[[redirects]]
+  from = "/os/features"
+  to = "/os/features/"
+  status = 301
+
+[[redirects]]
+  from = "/os/pricing"
+  to = "/os/pricing/"
+  status = 301
+
+[[redirects]]
+  from = "/os/faq"
+  to = "/os/faq/"
+  status = 301
+
+[[redirects]]
+  from = "/os/newsletter"
+  to = "/os/newsletter/"
+  status = 301
+
+[[redirects]]
+  from = "/os/contact"
+  to = "/os/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/os/demo-booking"
+  to = "/os/demo-booking/"
+  status = 301
+
+[[redirects]]
+  from = "/os/privacy-policy"
+  to = "/os/privacy-policy/"
+  status = 301
+
+[[redirects]]
+  from = "/os/terms"
+  to = "/os/terms/"
+  status = 301
+
+[[redirects]]
+  from = "/os/product-overview"
+  to = "/os/product-overview/"
+  status = 301
+
+[[redirects]]
+  from = "/os/problem-solutions"
+  to = "/os/problem-solutions/"
+  status = 301
+
+[[redirects]]
+  from = "/os/why-optiflow"
+  to = "/os/why-optiflow/"
+  status = 301
+
+# SEO-preserving redirects from old root paths
+[[redirects]]
+  from = "/pricing/"
+  to = "/os/pricing/"
+  status = 301
+
+[[redirects]]
+  from = "/features/"
+  to = "/os/features/"
+  status = 301
+
+[[redirects]]
+  from = "/faq/"
+  to = "/os/faq/"
+  status = 301
+
+[[redirects]]
+  from = "/newsletter/"
+  to = "/os/newsletter/"
+  status = 301
+
+[[redirects]]
+  from = "/contact/"
+  to = "/os/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/demo-booking/"
+  to = "/os/demo-booking/"
+  status = 301
+
+[[redirects]]
+  from = "/privacy-policy/"
+  to = "/os/privacy-policy/"
+  status = 301
+
+[[redirects]]
+  from = "/terms/"
+  to = "/os/terms/"
+  status = 301
+
+[[redirects]]
+  from = "/product-overview/"
+  to = "/os/product-overview/"
+  status = 301
+
+[[redirects]]
+  from = "/problem-solutions/"
+  to = "/os/problem-solutions/"
+  status = 301
+
+[[redirects]]
+  from = "/why-optiflow/"
+  to = "/os/why-optiflow/"
+  status = 301
+
+[[redirects]]
+  from = "/feature-showcase/"
+  to = "/os/feature-showcase/"
+  status = 301
+
+[[redirects]]
+  from = "/competitive-positioning/"
+  to = "/os/competitive-positioning/"
   status = 301
 
 [[headers]]
