@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
@@ -12,11 +12,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/assets/css/core.css">
   <style>
-    /* â”€â”€â”€ Page-specific: Typewriter â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Typewriter &mdash;&mdash;&mdash; */
     .tw-cursor { display: inline-block; width: 3px; height: 0.8em; background: #84cc16; margin-left: 4px; vertical-align: middle; animation: twBlink 0.8s step-end infinite; }
     @keyframes twBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* â”€â”€â”€ Page-specific: Hero â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Hero &mdash;&mdash;&mdash; */
     .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
     .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 8%, transparent) 0%, transparent 70%); pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -28,11 +28,11 @@
     .hero-trust span { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
     .hero-trust svg { color: var(--green); flex-shrink: 0; }
 
-    /* â”€â”€â”€ Page-specific: Mouse Glow â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Mouse Glow &mdash;&mdash;&mdash; */
     .mouse-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, color-mix(in oklch, var(--accent) 12%, transparent) 0%, transparent 60%); pointer-events: none; transform: translate(-50%, -50%); z-index: 0; opacity: 0; transition: opacity 0.3s; }
     .mouse-glow.active { opacity: 1; }
 
-    /* â”€â”€â”€ Page-specific: Transformation Visual â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Transformation Visual &mdash;&mdash;&mdash; */
     .transform-visual { display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; z-index: 2; }
     .transform-stage { padding: 20px 36px; border-radius: var(--radius-lg); font-weight: 600; font-size: 18px; text-align: center; width: 100%; max-width: 360px; }
     .transform-stage.chaos { background: oklch(90% 0.06 25); color: #0F172A; border: 1px solid oklch(80% 0.08 25); }
@@ -50,7 +50,7 @@
     .tk-value { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
     .tk-label { color: var(--muted); }
 
-    /* â”€â”€â”€ Page-specific: Problem Cards â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Problem Cards &mdash;&mdash;&mdash; */
     .problem-card { padding: 32px; }
     .problem-icon { width: 44px; height: 44px; display: grid; place-items: center; background: oklch(96% 0.01 230); border-radius: var(--radius); margin-bottom: 20px; color: var(--accent); box-shadow: 0 2px 6px rgba(27,77,129,.08); }
     .problem-icon svg { width: 22px; height: 22px; }
@@ -65,14 +65,14 @@
     [data-theme="dark"] .problem-card .problem-roi { color: var(--lime); }
     [data-theme="dark"] .problem-card:hover .problem-icon { background: rgba(255,255,255,.12); color: var(--teal); }
 
-    /* â”€â”€â”€ Page-specific: Designer Cards â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Designer Cards &mdash;&mdash;&mdash; */
     .designer-card { text-align: center; padding: 32px 24px; }
     .designer-icon { width: 56px; height: 56px; display: grid; place-items: center; background: linear-gradient(135deg, color-mix(in oklch, var(--bg) 10%, transparent), color-mix(in oklch, var(--green) 20%, transparent)); border-radius: var(--radius-lg); margin: 0 auto 16px; color: var(--green); }
     .designer-icon svg { width: 26px; height: 26px; }
     .designer-card h3 { margin-bottom: 8px; font-size: 16px; }
     .designer-card p { font-size: 13px; color: color-mix(in oklch, var(--bg) 60%, transparent); line-height: 1.5; }
 
-    /* â”€â”€â”€ Page-specific: Timeline â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Timeline &mdash;&mdash;&mdash; */
     .timeline { position: relative; max-width: 900px; margin: 0 auto; padding: 0; }
     .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: linear-gradient(180deg, var(--accent), var(--teal), var(--green)); transform: translateX(-50%); }
     .timeline-item { display: flex; align-items: center; margin-bottom: 32px; position: relative; }
@@ -83,14 +83,14 @@
     .timeline-content h3 { font-size: 16px; margin-bottom: 4px; }
     .timeline-content p { font-size: 13px; color: var(--muted); }
 
-    /* â”€â”€â”€ Page-specific: ROI Cards â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: ROI Cards &mdash;&mdash;&mdash; */
     .roi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); }
     .roi-card { text-align: center; padding: 32px 20px; }
     .roi-value { font-family: var(--font-mono); font-size: 40px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
     .roi-label { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
     .roi-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
-    /* â”€â”€â”€ Page-specific: Trust Grid â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Trust Grid &mdash;&mdash;&mdash; */
     .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); text-align: center; }
     .trust-item { padding: 28px 16px; }
     .trust-item-icon { width: 48px; height: 48px; display: grid; place-items: center; background: var(--accent-soft); border-radius: var(--radius-lg); margin: 0 auto 16px; color: var(--accent); }
@@ -98,7 +98,7 @@
     .trust-item h3 { font-size: 15px; margin-bottom: 4px; }
     .trust-item p { font-size: 12px; color: var(--muted); }
 
-    /* â”€â”€â”€ Page-specific: Comparison Table Overrides â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Comparison Table Overrides &mdash;&mdash;&mdash; */
     .comparison-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 40px; border-radius: var(--radius-lg); }
     .comparison-table { width: 100%; border-collapse: collapse; min-width: 900px; table-layout: fixed; }
     .comparison-table th, .comparison-table td { padding: 14px 16px; text-align: center; vertical-align: middle; }
@@ -120,7 +120,7 @@
     .section-dark .comparison-table td.check svg { color: var(--green); }
     [data-theme="dark"] .comparison-table .highlight-col { background: color-mix(in oklch, var(--accent) 20%, transparent); }
 
-    /* â”€â”€â”€ Page-specific: Stagger (supplements core.css stagger-N classes) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Stagger (supplements core.css stagger-N classes) &mdash;&mdash;&mdash; */
     .stagger > *:nth-child(1) { transition-delay: 0s; }
     .stagger > *:nth-child(2) { transition-delay: 0.1s; }
     .stagger > *:nth-child(3) { transition-delay: 0.2s; }
@@ -130,7 +130,7 @@
     .stagger > *:nth-child(7) { transition-delay: 0.6s; }
     .stagger > *:nth-child(8) { transition-delay: 0.7s; }
 
-    /* â”€â”€â”€ Page-specific: Responsive â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Page-specific: Responsive &mdash;&mdash;&mdash; */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 40px; }
@@ -557,7 +557,7 @@
 
   <script src="/assets/js/core.js" defer></script>
   <script>
-    /* â”€â”€â”€ Mouse Glow (hero-scoped, throttled) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Mouse Glow (hero-scoped, throttled) &mdash;&mdash;&mdash; */
     (function() {
       var hero = document.querySelector('.hero');
       var glow = document.getElementById('mouseGlow');
@@ -571,7 +571,7 @@
       hero.addEventListener('mouseleave', function() { glow.classList.remove('active'); });
 
 
-    /* â”€â”€â”€ Why OptiFlow Typewriter (pauses on blur) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Why OptiFlow Typewriter (pauses on blur) &mdash;&mdash;&mdash; */
     (function() {
       var el = document.getElementById('twText');
       var cursor = document.querySelector('.tw-cursor');

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="stylesheet" href="/assets/css/core.css" />
   <style>
-    /* â”€â”€â”€ Hero (FAQ) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Hero (FAQ) &mdash;&mdash;&mdash; */
     .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 0; overflow: hidden; position: relative; }
     .hero-content { position: relative; z-index: 2; text-align: center; max-width: 740px; margin: 0 auto; }
     .hero-content h1 { margin-bottom: 16px; }
@@ -19,7 +19,7 @@
     .hero-badges span { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
     .hero-badges svg { color: var(--green); flex-shrink: 0; }
 
-    /* â”€â”€â”€ Search â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Search &mdash;&mdash;&mdash; */
     .search-wrap { max-width: 640px; margin: 0 auto 48px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 6px; display: flex; align-items: center; box-shadow: 0 4px 24px color-mix(in oklch, var(--fg) 5%, transparent); }
     .search-input { flex: 1; border: 0; background: transparent; padding: 14px 18px; font-size: 16px; font-family: var(--font-body); color: var(--fg); outline: none; }
     .search-input::placeholder { color: var(--muted); }
@@ -32,13 +32,13 @@
     .search-suggestion { padding: 6px 14px; background: var(--accent-soft); color: var(--accent); border-radius: 999px; font-size: 13px; cursor: pointer; transition: color 0.2s, background 0.2s; }
     .search-suggestion:hover { background: var(--accent); color: white; }
 
-    /* â”€â”€â”€ Category nav â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Category nav &mdash;&mdash;&mdash; */
     .cat-nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); max-width: max-content; margin: 0 auto; }
     .cat-tab { padding: 10px 24px; border-radius: var(--radius-lg); font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: opacity 0.25s, transform 0.25s; white-space: nowrap; }
     .cat-tab:hover { color: var(--fg); background: var(--bg); }
     .cat-tab.active { background: var(--accent); color: white; }
 
-    /* â”€â”€â”€ Self-Service Toolbar â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Self-Service Toolbar &mdash;&mdash;&mdash; */
     .help-toolbar { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); margin: 60px 0 56px; }
     .help-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
     .help-card:hover { transform: translateY(-3px); box-shadow: var(--card-hover); }
@@ -48,7 +48,7 @@
     .help-card p { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
     .help-card .btn { font-size: 13px; }
 
-    /* â”€â”€â”€ FAQ sections â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; FAQ sections &mdash;&mdash;&mdash; */
     .faq-section { margin-bottom: var(--gap-xl); }
     .faq-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
     .faq-section-icon { width: 40px; height: 40px; display: grid; place-items: center; background: var(--accent-soft); border-radius: var(--radius); color: var(--accent); flex-shrink: 0; }
@@ -56,7 +56,7 @@
     .faq-section-header h2 { font-size: 24px; }
     .faq-section-count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); margin-left: auto; }
 
-    /* â”€â”€â”€ Feedback Buttons â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Feedback Buttons &mdash;&mdash;&mdash; */
     .faq-feedback { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
     .faq-feedback-text { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
     .faq-feedback-btns { display: flex; gap: 8px; }
@@ -66,13 +66,13 @@
     .faq-followup { font-size: 14px; color: var(--fg); margin-top: 10px; padding: 12px 16px; background: var(--bg); border-radius: var(--radius); }
     .faq-followup a { color: var(--accent); font-weight: 600; }
 
-    /* â”€â”€â”€ Related Questions â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Related Questions &mdash;&mdash;&mdash; */
     .faq-related { margin-top: 12px; }
     .faq-related-label { font-size: 12px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
     .faq-related-link { display: block; padding: 6px 0; font-size: 14px; color: var(--accent); cursor: pointer; transition: color 0.15s; }
     .faq-related-link:hover { color: var(--teal); }
 
-    /* â”€â”€â”€ Troubleshooting Widget â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Troubleshooting Widget &mdash;&mdash;&mdash; */
     .troubleshoot-wrap { max-width: 740px; margin: 0 auto; padding: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); }
     .troubleshoot-selects { display: flex; flex-direction: column; gap: var(--gap-sm); }
     .troubleshoot-select { width: 100%; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--fg); font-size: 15px; font-family: var(--font-body); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; }
@@ -83,7 +83,7 @@
     .troubleshoot-resolution p { font-size: 15px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
     .troubleshoot-resolution .btn { margin-top: 4px; }
 
-    /* â”€â”€â”€ Escalation Section â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Escalation Section &mdash;&mdash;&mdash; */
     .escalation-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); margin-top: 32px; }
     .escalation-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
     .escalation-card:hover { transform: translateY(-2px); box-shadow: var(--card-hover); }
@@ -96,7 +96,7 @@
     .micro-cta p { font-size: 14px; color: var(--muted); flex: 1; }
     .micro-cta .btn { flex-shrink: 0; }
 
-    /* â”€â”€â”€ Dark mode overrides â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Dark mode overrides &mdash;&mdash;&mdash; */
     [data-theme="dark"] .search-wrap { background: var(--surface); }
     [data-theme="dark"] .search-input { background: var(--bg); color: var(--fg); border-color: var(--border); }
     [data-theme="dark"] .search-input::placeholder { color: var(--muted); }
@@ -111,7 +111,7 @@
     [data-theme="dark"] .troubleshoot-resolution { background: var(--surface); }
     [data-theme="dark"] .escalation-card { background: var(--surface); }
 
-    /* â”€â”€â”€ Responsive â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Responsive &mdash;&mdash;&mdash; */
     @media (max-width: 1024px) {
       .hero { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 40px; }
     }
@@ -587,7 +587,7 @@
         ],
         attendance: [
           { label: 'GPS attendance not working', resolution: { title: 'GPS Attendance Fix', desc: 'Ensure: (1) Location permission is enabled in your browser, (2) You\'re within the geofence radius set by your Admin, (3) Your device GPS is turned on. Try refreshing and marking again.', cta: '/features/', ctaLabel: 'Attendance Guide' } },
-          { label: 'Leave not getting approved', resolution: { title: 'Leave Approval', desc: 'Leave requests follow an approval chain: Buddy confirmation â†’ Manager approval. Check if your buddy has confirmed. If pending for more than 24 hours, follow up with your manager directly.', cta: '/demo-booking/', ctaLabel: 'See Leave Workflow' } },
+          { label: 'Leave not getting approved', resolution: { title: 'Leave Approval', desc: 'Leave requests follow an approval chain: Buddy confirmation &rarr; Manager approval. Check if your buddy has confirmed. If pending for more than 24 hours, follow up with your manager directly.', cta: '/demo-booking/', ctaLabel: 'See Leave Workflow' } },
           { label: 'Wrong attendance count', resolution: { title: 'Attendance Correction', desc: 'Attendance counts are calculated daily. If your count seems wrong, check: (1) Did you mark both check-in and check-out? (2) Were there any half-day or leave entries? Contact HR for corrections.', cta: '/contact/', ctaLabel: 'Contact Support' } }
         ],
         report: [

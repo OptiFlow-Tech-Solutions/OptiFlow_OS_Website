@@ -8,12 +8,17 @@ Ensure all source HTML files render correctly by replacing broken UTF-8 encoding
 
 ### Requirement: All em dashes render correctly
 
-The system SHALL render em dashes as the proper typographic character `—` in all HTML pages by replacing every broken UTF-8 sequence (`â€"` and `â€"`) with the HTML entity `&mdash;`.
+The system SHALL render em dashes as the proper typographic character by replacing every broken UTF-8 sequence (`â"€`, resulting from `—` U+2014 after UTF-8→Windows-1252→UTF-8 double-encoding) with the HTML entity `&mdash;`. This pattern appears in CSS section comment separators and HTML comments across all `src/pages/*.html` files.
 
-#### Scenario: Em dash in body text
+#### Scenario: Em dash in CSS comments
 
-- **WHEN** a page contains `â€"` or `â€"` in any HTML text content
-- **THEN** those sequences are replaced with `&mdash;`
+- **WHEN** a CSS comment contains `â"€` as a section separator (e.g., `/* â"€â"€â"€ Hero â"€â"€â"€ */`)
+- **THEN** each occurrence of `â"€` is replaced with `&mdash;`, producing `/* &mdash;&mdash;&mdash; Hero &mdash;&mdash;&mdash; */`
+
+#### Scenario: Em dash in HTML comments
+
+- **WHEN** an HTML comment contains `â"€` (e.g., `<!-- â"€â"€ Hero â"€â"€ -->`)
+- **THEN** each occurrence of `â"€` is replaced with `&mdash;`, producing `<!-- &mdash;&mdash; Hero &mdash;&mdash; -->`
 
 #### Scenario: Em dash survives build pipeline
 
@@ -48,13 +53,51 @@ The system SHALL render multiplication signs as `×` by replacing every broken U
 - **WHEN** `npm run build` is executed
 - **THEN** all `&times;` entities in source appear as proper `×` symbols in the assembled `dist/` output
 
+### Requirement: All middle dots render correctly
+
+The system SHALL render middle dots as the HTML entity `&middot;` by replacing every broken UTF-8 sequence (`Â·`, resulting from `·` U+00B7 after UTF-8→Windows-1252→UTF-8 double-encoding) with the HTML entity `&middot;`.
+
+#### Scenario: Middle dot in problem impact labels
+
+- **WHEN** a page contains `Â·` as a visual separator in text content
+- **THEN** the sequence `Â·` is replaced with `&middot;`
+
+#### Scenario: Middle dot survives build pipeline
+
+- **WHEN** `npm run build` is executed
+- **THEN** all `&middot;` entities in source appear as proper middle dots in the assembled `dist/` output
+
+### Requirement: All arrow characters render correctly
+
+The system SHALL render arrow characters by replacing every broken UTF-8 sequence resulting from Unicode arrows (`→` U+2192, `↓` U+2193, `↑` U+2191) after double-encoding with the equivalent HTML entities (`&rarr;`, `&darr;`, `&uarr;`).
+
+#### Scenario: Right arrow replacement
+
+- **WHEN** a page contains `â†'` (corrupted `→`) in text content
+- **THEN** the sequence is replaced with `&rarr;`
+
+#### Scenario: Down arrow replacement
+
+- **WHEN** a page contains `â†"` (corrupted `↓`) in text content
+- **THEN** the sequence is replaced with `&darr;`
+
+#### Scenario: Up arrow replacement
+
+- **WHEN** a page contains `â†'` (corrupted `↑`) in text content
+- **THEN** the sequence is replaced with `&uarr;`
+
+#### Scenario: Arrows survive build pipeline
+
+- **WHEN** `npm run build` is executed
+- **THEN** all arrow HTML entities (`&rarr;`, `&darr;`, `&uarr;`) in source appear as proper Unicode arrow symbols in the assembled `dist/` output
+
 ### Requirement: Zero broken sequences remain after fix
 
-The system SHALL contain zero instances of the broken UTF-8 sequences `â€"`, `â€"`, `â‚¹`, or `Ã—` in any file under `src/`.
+The system SHALL contain zero instances of the broken UTF-8 sequences `â"€`, `Â·`, `â†'`, `â†"`, `â†'`, `â‚¹`, or `Ã—` in any file under `src/pages/`.
 
 #### Scenario: Post-fix validation
 
-- **WHEN** grep is run for `â€|â‚¹|Ã—` across all `src/**/*.html` files
+- **WHEN** grep is run for `â` across all `src/pages/**/*.html` files
 - **THEN** zero matches are returned
 
 ### Requirement: Valid HTML after fix

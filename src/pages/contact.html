@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="stylesheet" href="/assets/css/core.css" />
   <style>
-    /* â”€â”€â”€ Hero (contact) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Hero (contact) &mdash;&mdash;&mdash; */
     .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
     .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 8%, transparent) 0%, transparent 70%); pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -28,13 +28,13 @@
     @keyframes floatContact { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
     .support-float { animation: floatContact 4s ease-in-out infinite; }
 
-    /* â”€â”€â”€ Trust bar â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Trust bar &mdash;&mdash;&mdash; */
     .trust-bar { padding-block: 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); overflow: hidden; }
     .trust-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); text-align: center; }
     .trust-metric-value { font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: var(--accent); }
     .trust-metric-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
-    /* â”€â”€â”€ Contact Form â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Contact Form &mdash;&mdash;&mdash; */
     .form-wrap { max-width: 860px; margin: 0 auto; }
 
     .contact-form-card {
@@ -197,7 +197,7 @@
       .contact-form-card { padding: 28px 20px; }
     }
 
-    /* â”€â”€â”€ Contact Channels â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Contact Channels &mdash;&mdash;&mdash; */
     .contact-chan { display: flex; align-items: flex-start; gap: 16px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); transition: opacity 0.25s, transform 0.25s; }
     .contact-chan:hover { border-color: var(--teal); box-shadow: 0 8px 24px color-mix(in oklch, var(--fg) 4%, transparent); }
     .contact-chan-icon { width: 44px; height: 44px; display: grid; place-items: center; background: var(--accent-soft); border-radius: var(--radius); color: var(--accent); flex-shrink: 0; }
@@ -206,26 +206,26 @@
     .contact-chan .chan-detail { font-size: 14px; color: var(--muted); }
     .contact-chan .chan-action { font-size: 13px; color: var(--teal); font-weight: 600; margin-top: 8px; display: inline-block; }
 
-    /* â”€â”€â”€ Office Card â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Office Card &mdash;&mdash;&mdash; */
     .office-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; max-width: 540px; margin: 0 auto; text-align: center; }
     .office-card h3 { margin-bottom: 16px; }
     .office-detail { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 12px; font-size: 14px; color: var(--muted); }
     .office-detail svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
     .office-hours { display: inline-block; padding: 8px 16px; border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: 13px; font-weight: 600; margin-top: 12px; }
 
-    /* â”€â”€â”€ Response Cards â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Response Cards &mdash;&mdash;&mdash; */
     .response-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md); }
     .response-card { padding: 24px; text-align: center; }
     .response-time { font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--teal); margin-top: 12px; }
 
-    /* â”€â”€â”€ Dark mode overrides â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Dark mode overrides &mdash;&mdash;&mdash; */
     [data-theme="dark"] .dash-kpi { background: color-mix(in oklch, var(--fg) 4%, transparent); }
     [data-theme="dark"] .contact-chan { background: color-mix(in oklch, var(--fg) 4%, transparent); border-color: var(--border); }
     [data-theme="dark"] .contact-chan:hover { border-color: var(--teal); }
     [data-theme="dark"] .response-card { background: var(--surface); border-color: var(--border); }
     [data-theme="dark"] .office-card { background: var(--surface); border-color: var(--border); }
 
-    /* â”€â”€â”€ Responsive â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Responsive &mdash;&mdash;&mdash; */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 40px; }

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,7 @@
   <style>
     /* ponytail: removed --green override — uses core.css dark mode green */
 
-    /* â”€â”€â”€ Hero â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Hero &mdash;&mdash;&mdash; */
     .hero { padding-top: calc(var(--nav-h) + 72px); padding-bottom: 80px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: -40%; right: -15%; width: 70%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--accent) 6%, transparent) 0%, color-mix(in oklch, var(--teal) 4%, transparent) 40%, transparent 70%); pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -24,7 +24,7 @@
     .trust-badges span { font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
     .trust-badges svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--green); }
 
-    /* â”€â”€â”€ Hero visual: Premium Enterprise ROI Dashboard â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Hero visual: Premium Enterprise ROI Dashboard &mdash;&mdash;&mdash; */
     .pricing-visual { position: relative; z-index: 1; }
     .roi-dashboard {
       background: linear-gradient(180deg, var(--surface), color-mix(in oklch, var(--fg) 1%, var(--surface)));
@@ -152,7 +152,7 @@
 
     @keyframes floatUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-    /* â”€â”€â”€ Hero entry reveal â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Hero entry reveal &mdash;&mdash;&mdash; */
     .hero-content > * { opacity: 0; transform: translateY(16px); animation: heroReveal 0.65s cubic-bezier(0.22,0.61,0.36,1) forwards; }
     .hero-content h1 { animation-delay: 0.12s; }
     .hero-content .lead { animation-delay: 0.22s; }
@@ -167,7 +167,7 @@
     .pricing-visual .rd-row:nth-child(4) { animation-delay: 0.54s; }
     .pricing-visual .rd-row:nth-child(5) { animation-delay: 0.62s; }
 
-    /* â”€â”€â”€ Pricing cards â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Pricing cards &mdash;&mdash;&mdash; */
     .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-lg); align-items: start; }
     .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 36px 32px; position: relative; transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
     .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px color-mix(in oklch, var(--fg) 8%, transparent); }
@@ -187,7 +187,7 @@
     .pc-features li svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--green); }
     .pc-divider { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
 
-    /* â”€â”€â”€ Feature comparison â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Feature comparison &mdash;&mdash;&mdash; */
     .comp-wrap { max-width: 960px; margin: 0 auto; }
     .comp-head { display: grid; grid-template-columns: 200px 1fr 1fr 1fr; gap: 0; border-bottom: 2px solid color-mix(in oklch, var(--bg) 50%, transparent); padding-bottom: 16px; margin-bottom: 4px; }
     .comp-head > * { padding: 0 16px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--bg); }
@@ -204,7 +204,7 @@
     .comp-row .comp-cell svg { width: 16px; height: 16px; flex-shrink: 0; }
     .comp-section-label { padding: 20px 0 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); border-bottom: none; }
 
-    /* â”€â”€â”€ ROI Calculator â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; ROI Calculator &mdash;&mdash;&mdash; */
     .roi-calc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; max-width: 960px; margin: 0 auto; }
     .pc-grid { display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 32px; align-items: start; }
     .pc-col { display: flex; flex-direction: column; gap: 20px; }
@@ -241,7 +241,7 @@
     .pc-matrix-key { font-size: 13px; color: var(--muted); }
     .pc-matrix-val { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--fg); }
 
-    /* â”€â”€â”€ Implementation â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Implementation &mdash;&mdash;&mdash; */
     .imp-timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap-md); margin-bottom: 64px; }
     .imp-step { text-align: center; position: relative; padding: 24px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
     .imp-step-num { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); color: white; display: grid; place-items: center; font-weight: 700; font-size: 15px; margin: 0 auto 12px; animation: floatUp 3s ease-in-out infinite; }
@@ -269,7 +269,7 @@
     .imp-metric-value { font-family:var(--font-mono); font-size:28px; font-weight:700; margin-bottom:8px; }
     .imp-metric-label { font-size:13px; color:var(--muted); }
 
-    /* â”€â”€â”€ FAQ (page-specific: different inner structure than core.css) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; FAQ (page-specific: different inner structure than core.css) &mdash;&mdash;&mdash; */
     .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--gap-sm); }
     .faq-item { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; background: var(--surface); }
     .faq-q, .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; transition: color 0.2s; color: var(--fg); font-family: inherit; background: none; border: 0; }
@@ -280,14 +280,14 @@
     .faq-item.open .faq-answer { grid-template-rows: 1fr; }
     .faq-item.open .faq-q svg, .faq-item.open .faq-question svg { transform: rotate(180deg); color: var(--teal); }
 
-    /* â”€â”€â”€ CTA section overrides â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; CTA section overrides &mdash;&mdash;&mdash; */
     .cta-section .btn-primary { background: white; color: var(--accent); box-shadow: var(--shadow-button-hover); }
     .cta-section .btn-primary:hover { box-shadow: var(--shadow-elevated); transform: translateY(-2px); }
     .cta-section .btn-secondary { background: transparent; color: white; border-color: color-mix(in oklch, white 40%, transparent); }
     .cta-section .btn-secondary:hover { border-color: white; }
     .cta-section .trust-badges span { color: color-mix(in oklch, white 85%, transparent); }
 
-    /* â”€â”€â”€ Dark mode page-specific â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Dark mode page-specific &mdash;&mdash;&mdash; */
     [data-theme="dark"] .topnav.scrolled { background: color-mix(in oklch, var(--surface) 92%, transparent); backdrop-filter: blur(20px); }
     [data-theme="dark"] .section-dark {
       /* ponytail: override core.css hardcoded value to use --surface var */
@@ -323,7 +323,7 @@
     [data-theme="dark"] .comp-section-label { color: var(--teal); }
     [data-theme="dark"] .skip-link { background: var(--accent); color: white; }
 
-    /* â”€â”€â”€ Responsive â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Responsive &mdash;&mdash;&mdash; */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
       .hero-content { text-align: center; }
@@ -410,7 +410,7 @@
           <div class="rd-compare" role="table" aria-label="Cost comparison by team size">
             <div class="rd-row-head" role="row">
               <span class="rd-row-label" role="columnheader">Team</span>
-              <span class="rd-row-body" style="font-size:10px;padding:0 6px" role="columnheader">Traditional SaaS  Â·  OptiFlow OS</span>
+              <span class="rd-row-body" style="font-size:10px;padding:0 6px" role="columnheader">Traditional SaaS  &middot;  OptiFlow OS</span>
             </div>
             <div class="rd-row" role="row" data-trad="&#8377;1.44L/year" data-opti="&#8377;49K/year" data-save="66%" tabindex="0" aria-label="10 users: Traditional SaaS &#8377;1.44L, OptiFlow OS &#8377;49K, save 66%">
               <span class="rd-row-label" role="rowheader">10</span>
@@ -423,7 +423,7 @@
                 </div>
                 <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;95K <span class="save-pct">66%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;1.44L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;49K/yr &nbsp;Â·&nbsp; <b>Save</b> 66%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;1.44L/yr &nbsp;&middot;&nbsp; <b>OptiFlow OS</b> &#8377;49K/yr &nbsp;&middot;&nbsp; <b>Save</b> 66%</div>
               <div class="rd-connector"></div>
             </div>
             <div class="rd-row" role="row" data-trad="&#8377;3.60L/year" data-opti="&#8377;49K/year" data-save="86%" tabindex="0" aria-label="25 users: Traditional SaaS &#8377;3.60L, OptiFlow OS &#8377;49K, save 86%">
@@ -437,7 +437,7 @@
                 </div>
                 <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;3.11L <span class="save-pct">86%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;3.60L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;49K/yr &nbsp;Â·&nbsp; <b>Save</b> 86%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;3.60L/yr &nbsp;&middot;&nbsp; <b>OptiFlow OS</b> &#8377;49K/yr &nbsp;&middot;&nbsp; <b>Save</b> 86%</div>
               <div class="rd-connector"></div>
             </div>
             <div class="rd-row" role="row" data-trad="&#8377;7.20L/year" data-opti="&#8377;79K/year" data-save="89%" tabindex="0" aria-label="50 users: Traditional SaaS &#8377;7.20L, OptiFlow OS &#8377;79K, save 89%">
@@ -451,7 +451,7 @@
                 </div>
                 <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;6.41L <span class="save-pct">89%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;7.20L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;79K/yr &nbsp;Â·&nbsp; <b>Save</b> 89%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;7.20L/yr &nbsp;&middot;&nbsp; <b>OptiFlow OS</b> &#8377;79K/yr &nbsp;&middot;&nbsp; <b>Save</b> 89%</div>
               <div class="rd-connector"></div>
             </div>
             <div class="rd-row" role="row" data-trad="&#8377;14.4L/year" data-opti="&#8377;1.49L/year" data-save="90%" tabindex="0" aria-label="100 users: Traditional SaaS &#8377;14.4L, OptiFlow OS &#8377;1.49L, save 90%">
@@ -465,7 +465,7 @@
                 </div>
                 <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;12.9L <span class="save-pct">90%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;14.4L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;1.49L/yr &nbsp;Â·&nbsp; <b>Save</b> 90%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;14.4L/yr &nbsp;&middot;&nbsp; <b>OptiFlow OS</b> &#8377;1.49L/yr &nbsp;&middot;&nbsp; <b>Save</b> 90%</div>
               <div class="rd-connector"></div>
             </div>
             <div class="rd-row" role="row" data-trad="&#8377;28.8L/year" data-opti="&#8377;1.49L/year" data-save="95%" tabindex="0" aria-label="200 users: Traditional SaaS &#8377;28.8L, OptiFlow OS &#8377;1.49L, save 95%">
@@ -479,7 +479,7 @@
                 </div>
                 <div class="rd-save-badge"><span class="save-arrow">&#8595;</span> Save &#8377;27.3L <span class="save-pct">95%</span></div>
               </div>
-              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;28.8L/yr &nbsp;Â·&nbsp; <b>OptiFlow OS</b> &#8377;1.49L/yr &nbsp;Â·&nbsp; <b>Save</b> 95%</div>
+              <div class="rd-tooltip"><b>Traditional SaaS</b> &#8377;28.8L/yr &nbsp;&middot;&nbsp; <b>OptiFlow OS</b> &#8377;1.49L/yr &nbsp;&middot;&nbsp; <b>Save</b> 95%</div>
               <div class="rd-connector"></div>
             </div>
           </div>
@@ -729,7 +729,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             <div>
               <div class="pc-plan-name" id="pcPlanName">Growth</div>
-              <div class="pc-plan-detail" id="pcPlanDetail">&#8377;79,000/yr Â· 26-100 users</div>
+              <div class="pc-plan-detail" id="pcPlanDetail">&#8377;79,000/yr &middot; 26-100 users</div>
             </div>
           </div>
         </div>
@@ -859,7 +859,7 @@
       <div class="faq-item"><button class="faq-question">Do you charge per user? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>No. OptiFlow charges by plan tier (team size range), not per individual user. You can add team members within your plan's capacity at no extra cost.</div></div></div>
       <div class="faq-item"><button class="faq-question">What is included in implementation? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation includes system setup, data migration assistance, department configuration, role-based training, workflow setup, and go-live support with post-launch check-ins.</div></div></div>
       <div class="faq-item"><button class="faq-question">Can we upgrade plans later? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. You can upgrade (or downgrade) at any time. When upgrading mid-year, you only pay the difference. Your data, workflows, and history stay intact.</div></div></div>
-      <div class="faq-item"><button class="faq-question">How long does implementation take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation typically takes 2&mdash;4 weeks depending on team size and process complexity. We follow a structured 5-phase rollout: Discovery â†’ Setup â†’ Configuration â†’ Training â†’ Go Live.</div></div></div>
+      <div class="faq-item"><button class="faq-question">How long does implementation take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Implementation typically takes 2&mdash;4 weeks depending on team size and process complexity. We follow a structured 5-phase rollout: Discovery &rarr; Setup &rarr; Configuration &rarr; Training &rarr; Go Live.</div></div></div>
       <div class="faq-item"><button class="faq-question">Is cloud hosting included? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. Cloud hosting, product updates, security patches, and standard support are all included in your annual subscription. No separate infrastructure costs.</div></div></div>
       <div class="faq-item"><button class="faq-question">Can multiple branches use the system? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-answer"><div>Yes. The Scale plan supports multi-location operations with centralized visibility. The Growth plan supports multiple departments. Each branch or department can have its own structure, users, and reports &mdash; all visible to leadership.</div></div></div>
     </div>
@@ -890,7 +890,7 @@
 
 <!-- INCLUDE: footer -->
 
-<a href="/demo-booking/" class="sticky-cta">Book Demo <span style="font-size:13px">â†’</span></a>
+<a href="/demo-booking/" class="sticky-cta">Book Demo <span style="font-size:13px">&rarr;</span></a>
 
 <button class="scroll-top" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>

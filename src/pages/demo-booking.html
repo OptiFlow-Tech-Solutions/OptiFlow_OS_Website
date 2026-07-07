@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="stylesheet" href="/assets/css/core.css" />
   <style>
-    /* â”€â”€â”€ Dark mode: page-specific components â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Dark mode: page-specific components &mdash;&mdash;&mdash; */
     [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea { background: var(--surface); color: var(--fg); border-color: var(--border); }
     [data-theme="dark"] input:focus, [data-theme="dark"] select:focus, [data-theme="dark"] textarea:focus { border-color: var(--teal); }
     [data-theme="dark"] .time-slot { background: var(--surface); color: var(--fg); border-color: var(--border); }
@@ -23,7 +23,7 @@
 
     .section { content-visibility: auto; contain-intrinsic-size: 500px; }
 
-    /* â”€â”€â”€ Hero â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Hero &mdash;&mdash;&mdash; */
     .hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
     .hero::before { content: ''; position: absolute; top: -30%; right: -10%; width: 70%; height: 130%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 7%, transparent) 0%, transparent 70%); pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -38,7 +38,7 @@
     .trust-row .chk { color: var(--green); font-size: 16px; }
     .hero-visual { position: relative; }
 
-    /* â”€â”€â”€ Dashboard â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Dashboard &mdash;&mdash;&mdash; */
     .dash-main { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 24px; box-shadow: 0 20px 60px color-mix(in oklch, var(--fg) 8%, transparent); animation: floatDashboard 6s ease-in-out infinite; }
     @keyframes floatDashboard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
     .dash-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 12px; }
@@ -59,7 +59,7 @@
     .chart-labels { display: flex; gap: 8px; margin-top: 6px; font-size: 10px; color: var(--muted); }
     .chart-labels span { flex: 1; text-align: center; }
 
-    /* â”€â”€â”€ Benefit Cards â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Benefit Cards &mdash;&mdash;&mdash; */
     .benefit-card { display: flex; gap: 16px; align-items: flex-start; }
     .benefit-icon { width: 48px; height: 48px; border-radius: var(--radius); display: grid; place-items: center; flex-shrink: 0; }
     .benefit-icon.blue { background: var(--accent-soft); color: var(--accent); }
@@ -68,7 +68,7 @@
     .benefit-icon svg { width: 22px; height: 22px; }
     .benefit-body h3 { margin-bottom: 4px; }
 
-    /* â”€â”€â”€ Timeline â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Timeline &mdash;&mdash;&mdash; */
     .timeline { position: relative; max-width: 900px; margin: 0 auto; }
     .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; left: 32px; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--teal)); }
     .tl-step { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 32px; position: relative; padding-left: 72px; }
@@ -78,7 +78,7 @@
     .tl-duration { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; padding: 10px 18px; border-radius: 100px; background: var(--accent-soft); color: var(--accent); font-family: var(--font-mono); font-size: 13px; font-weight: 600; }
     .tl-duration svg { width: 16px; height: 16px; opacity: 0.7; }
 
-    /* â”€â”€â”€ Booking Form â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Booking Form &mdash;&mdash;&mdash; */
     .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; box-shadow: 0 8px 32px color-mix(in oklch, var(--fg) 4%, transparent); position: relative; overflow: hidden; }
     .form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--teal), var(--green)); }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-md) var(--gap-lg); }
@@ -101,7 +101,7 @@
     .form-submit .btn { width: 100%; justify-content: center; padding: 16px 32px; font-size: 17px; }
     .form-fields { transition: opacity 0.3s, transform 0.3s; }
 
-    /* â”€â”€â”€ Calendar â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Calendar &mdash;&mdash;&mdash; */
     .cal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-lg); }
     .cal-month { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
     .cal-month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
@@ -133,7 +133,7 @@
     .cal-summary { background: var(--teal-soft); border-radius: var(--radius); padding: 16px; margin-top: 16px; display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 600; color: var(--teal); }
     .cal-summary svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-    /* â”€â”€â”€ FAQ Accordion (page-specific) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; FAQ Accordion (page-specific) &mdash;&mdash;&mdash; */
     .faq-q { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 20px 0; text-align: left; font-size: 17px; font-weight: 600; color: var(--fg); transition: color 0.2s; background: none; border: none; cursor: pointer; font-family: inherit; }
     .faq-q:hover { color: var(--teal); }
     .faq-arrow { width: 20px; height: 20px; transition: transform 0.3s ease; flex-shrink: 0; color: var(--muted); }
@@ -141,30 +141,30 @@
     .faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--teal); }
     .faq-answer p { color: var(--muted); font-size: 15px; line-height: 1.7; }
 
-    /* â”€â”€â”€ Trust Bar â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Trust Bar &mdash;&mdash;&mdash; */
     .trust-bar { background: var(--surface); border-block: 1px solid var(--border); padding-block: 40px; text-align: center; }
     .trust-metrics { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
     .trust-metric-val { font-family: var(--font-mono); font-size: clamp(28px, 3vw, 40px); font-weight: 700; color: var(--accent); }
     .trust-metric-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
-    /* â”€â”€â”€ CTA extras â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; CTA extras &mdash;&mdash;&mdash; */
     .cta-inner { position: relative; z-index: 1; }
     .cta-ctas { display: flex; gap: var(--gap-sm); justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
     .cta-trust { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; font-size: 14px; opacity: 0.85; }
     .cta-trust span { display: flex; align-items: center; gap: 6px; }
 
-    /* â”€â”€â”€ Footer (page-specific structure) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Footer (page-specific structure) &mdash;&mdash;&mdash; */
     .foot-head { font-size: 14px; font-weight: 600; color: white; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.04em; }
     .foot-bottom { border-top: 1px solid oklch(30% 0.015 250); margin-top: 40px; padding-top: 20px; font-size: 13px; color: oklch(55% 0.01 240); text-align: center; grid-column: 1 / -1; }
 
-    /* â”€â”€â”€ Sticky CTA show â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Sticky CTA show &mdash;&mdash;&mdash; */
     .sticky-cta.show { display: block; }
 
-    /* â”€â”€â”€ Exit intent banner â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Exit intent banner &mdash;&mdash;&mdash; */
     .limited-banner { display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: var(--radius); background: var(--accent-soft); border: 1px solid color-mix(in oklch, var(--accent) 20%, var(--border)); font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 32px; max-width: 600px; margin-inline: auto; }
     .limited-banner .blink { width: 8px; height: 8px; border-radius: 50%; background: oklch(55% 0.16 25); animation: pulse 1.5s ease infinite; flex-shrink: 0; }
 
-    /* â”€â”€â”€ Stagger (page-specific class) â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Stagger (page-specific class) &mdash;&mdash;&mdash; */
     .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1); }
     .stagger.revealed > *:nth-child(1) { transition-delay: 0.05s; }
     .stagger.revealed > *:nth-child(2) { transition-delay: 0.12s; }
@@ -174,10 +174,10 @@
     .stagger.revealed > *:nth-child(6) { transition-delay: 0.40s; }
     .stagger.revealed > * { opacity: 1; transform: translateY(0); }
 
-    /* â”€â”€â”€ Counter â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Counter &mdash;&mdash;&mdash; */
     .count-up { display: inline-block; }
 
-    /* â”€â”€â”€ Responsive â”€â”€â”€ */
+    /* &mdash;&mdash;&mdash; Responsive &mdash;&mdash;&mdash; */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
       .hero-visual { max-width: 500px; margin: 0 auto; }
@@ -341,7 +341,7 @@
         <div class="grid-3 stagger">
           <div class="card"><div class="benefit-icon blue" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3 style="margin-bottom:6px;">Operational Gap Analysis</h3><p style="color:var(--muted);font-size:14px;">Identify exactly where your current operations break down &mdash; and what to fix first for maximum impact.</p></div>
           <div class="card"><div class="benefit-icon teal" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><h3 style="margin-bottom:6px;">Visibility Framework</h3><p style="color:var(--muted);font-size:14px;">A structured approach to getting real-time visibility across tasks, teams, and departments.</p></div>
-          <div class="card"><div class="benefit-icon green" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div><h3 style="margin-bottom:6px;">Implementation Roadmap</h3><p style="color:var(--muted);font-size:14px;">A clear step-by-step plan: Discovery â†’ Setup â†’ Training â†’ Go Live &mdash; tailored to your team size and timeline.</p></div>
+          <div class="card"><div class="benefit-icon green" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div><h3 style="margin-bottom:6px;">Implementation Roadmap</h3><p style="color:var(--muted);font-size:14px;">A clear step-by-step plan: Discovery &rarr; Setup &rarr; Training &rarr; Go Live &mdash; tailored to your team size and timeline.</p></div>
           <div class="card"><div class="benefit-icon blue" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><h3 style="margin-bottom:6px;">Platform Evaluation Guide</h3><p style="color:var(--muted);font-size:14px;">A comparison framework to evaluate OptiFlow against your current tools &mdash; WhatsApp, Excel, or other software.</p></div>
           <div class="card"><div class="benefit-icon teal" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3 style="margin-bottom:6px;">Accountability Framework</h3><p style="color:var(--muted);font-size:14px;">How to move from "I thought he did it" to complete task ownership across your entire team.</p></div>
           <div class="card"><div class="benefit-icon green" style="width:40px;height:40px;margin-bottom:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><h3 style="margin-bottom:6px;">Scaling Recommendations</h3><p style="color:var(--muted);font-size:14px;">Practical advice on when to add modules, hire with systems, and scale processes without breaking them.</p></div>
