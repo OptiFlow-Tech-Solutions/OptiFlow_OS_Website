@@ -235,5 +235,54 @@ for (const page of pages) {
   if (html.includes('Ahmedabad')) log('warn', `Old location in ${path.relative(DIST, page)}`);
 }
 
+// 7. Check source files for hardcoded contact info
+console.log('\n─ Source Contact Hardcoding ─');
+const srcDirs = [
+  path.join(ROOT, 'src', 'pages'),
+  path.join(ROOT, 'src', 'partials'),
+];
+const sourceFiles = [];
+for (const dir of srcDirs) {
+  if (!fs.existsSync(dir)) continue;
+  for (const f of fs.readdirSync(dir, { recursive: !!dir.includes('pages') ? false : true })) {
+    const full = path.join(dir, f);
+    if (fs.statSync(full).isFile() && f.endsWith('.html')) sourceFiles.push(full);
+  }
+  // pages dir has subdirectories
+  if (dir.includes('pages')) {
+    for (const sub of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (sub.isDirectory()) {
+        const subDir = path.join(dir, sub.name);
+        for (const f of fs.readdirSync(subDir)) {
+          if (f.endsWith('.html')) sourceFiles.push(path.join(subDir, f));
+        }
+      }
+    }
+  }
+}
+
+for (const file of sourceFiles) {
+  const html = fs.readFileSync(file, 'utf-8');
+  const relPath = path.relative(ROOT, file);
+
+  // ponytail: match +91 with 10 digits; skip form placeholder patterns like +91 00000 00000
+  const phoneMatches = html.match(/\+91[\s-]?\d{5}[\s-]?\d{5}/g) || [];
+  for (const match of phoneMatches) {
+    if (match.includes('00000')) continue; // skip form input placeholder hints
+    log('error', `Hardcoded phone number in ${relPath}: "${match}" (use {{PHONE}} or {{PHONE_TEL}})`);
+  }
+
+  const emailMatches = html.match(/@optiflow\.co\.in/g) || [];
+  for (const match of emailMatches) {
+    if (!html.includes('{{EMAIL}}')) {
+      log('error', `Hardcoded email domain in ${relPath}: "${match}" (use {{EMAIL}})`);
+    }
+  }
+
+  if (!html.includes('{{LOCATION}}') && html.includes('Surat, India')) {
+    log('error', `Hardcoded location in ${relPath}: "Surat, India" (use {{LOCATION}})`);
+  }
+}
+
 console.log(`\n${errors} error(s), ${warnings} warning(s)`);
 process.exit(errors > 0 ? 1 : 0);
