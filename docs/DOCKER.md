@@ -13,20 +13,22 @@ npm run docker:build
 ### Multi-Stage Architecture
 
 ```
-Stage 1: Builder (node:20-alpine)
+Stage 1: Builder (node:20.18-alpine)
   npm ci --ignore-scripts        ← includes sharp for image optimization
   COPY src/ assets/ scripts/ site.json
   RUN node scripts/assemble.mjs  →  dist/
 
-Stage 2: Brotli Builder (nginx:1.27-alpine)
+Stage 2: Brotli Builder (nginx:1.27.3-alpine)
   Compiles ngx_http_brotli_*_module.so
+  Build deps cleaned after compilation
 
-Stage 3: Runtime (nginx:1.27-alpine)
-  COPY nginx.conf → /etc/nginx/conf.d/default.conf
+Stage 3: Runtime (nginx:1.27.3-alpine)
+  COPY nginx.conf → /etc/nginx/nginx.conf (server block inline)
   COPY dist/ → /usr/share/nginx/html
   COPY brotli modules → /usr/lib/nginx/modules/
   EXPOSE 80
   HEALTHCHECK /health
+  Runs as non-root nginx user
 ```
 
 ## Running
@@ -45,11 +47,11 @@ npm run docker:run
 ## Docker Compose
 
 ```bash
-# Start
+# Standard (with Coolify/Traefik labels)
 docker compose up --build
 
-# Start detached
-docker compose up -d --build
+# Production (no platform labels)
+docker compose -f docker-compose.prod.yml up -d --build
 
 # Stop
 docker compose down
@@ -64,15 +66,28 @@ The container uses the following environment variables (configurable via `.env.e
 | `PORT` | `80` | Container port (compose only) |
 | `DOMAIN` | `optiflow.in` | Domain for Traefik routing labels |
 | `API_BASE_URL` | — | Future backend API URL |
-| `SITE_URL` | `https://optiflow.in` | Public site URL |
+| `SITE_URL` | `https://os.optiflow.co.in` | Public site URL |
 
 ## Image Details
 
-- **Base:** `nginx:1.27-alpine` (~12 MB compressed)
+- **Base:** `nginx:1.27.3-alpine` (pinned version, ~12 MB compressed)
+- **Node:** `node:20.18-alpine` (build stage only, pinned version)
 - **Compression:** Brotli (level 6) + Gzip (level 6, fallback)
 - **User:** `nginx` (non-root, UID 101)
-- **Healthcheck:** `GET /health` every 30s
+- **Healthcheck:** `GET /health` every 30s (start period: 15s)
 - **Port:** 80
+
+## Nginx Configuration
+
+The consolidated `nginx.conf` includes:
+- Brotli + Gzip compression
+- Security headers (HSTS, CSP, X-Frame-Options, Permissions-Policy)
+- Trailing-slash redirect for SEO-friendly URLs
+- Asset caching: 1 year for `/assets/`, 1 day for SEO artifacts
+- No CDN caching for HTML pages
+- SPA-like fallback: `try_files $uri $uri/ $uri/index.html =404`
+- `/health` endpoint (returns 200)
+- `/api/` placeholder (returns 503 until backend connected)
 
 ## Coolify Deployment
 
@@ -87,3 +102,4 @@ The image is Coolify-compatible with Traefik labels.
 
 - Cloudflare Workers API (`functions/api/`) does not run inside Docker. The `/api/*` routes return 503 until a backend is connected.
 - Form submissions on deployed Docker instances should use an external backend. See `.env.example` for `API_BASE_URL`.
+- Nixpacks deployments use gzip-only compression (no Brotli) but are otherwise functionally identical.

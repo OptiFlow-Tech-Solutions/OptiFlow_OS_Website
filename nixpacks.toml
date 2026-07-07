@@ -1,11 +1,17 @@
 # Nixpacks configuration for OptiFlow OS Website
 # Used when deploying via Coolify with Nixpacks build pack
+# Serves via nginx (matching Docker deployment behavior)
+# Note: Brotli is excluded — gzip is the compression for Nixpacks path
 
 [phases.build]
-cmds = ["npm ci", "npm run build"]
+cmds = ["npm ci --ignore-scripts", "npm run build"]
 
 [phases.setup]
 onlyIncludeFiles = ["dist/"]
+nixPkgs = ["nginx"]
 
 [start]
-cmd = "npx serve dist -l 80"
+cmd = "cp dist/* /usr/share/nginx/html/ -r && cp nginx.nixpacks.conf /etc/nginx/nginx.conf && mkdir -p /var/log/nginx /var/cache/nginx && chown -R nginx:nginx /usr/share/nginx/html /var/log/nginx /var/cache/nginx && nginx -g 'daemon off;'"
+
+[variables]
+NIXPACKS_NODE_VERSION = "20"
