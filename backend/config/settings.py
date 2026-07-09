@@ -94,6 +94,11 @@ DEMO_BOOKING_NOTIFY_EMAIL = config(
     default="demo@optiflowtech.com",
 )
 
+ENQUIRY_NOTIFY_EMAIL = config(
+    "ENQUIRY_NOTIFY_EMAIL",
+    default="info@optiflow.co.in",
+)
+
 EMAIL_BACKEND = config(
     "EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
@@ -118,6 +123,13 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "100/hour",
+        "enquiries": "5/hour",
+    },
 }
 
 CORS_ALLOWED_ORIGINS = config(

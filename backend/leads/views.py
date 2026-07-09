@@ -7,11 +7,16 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.db import transaction, IntegrityError
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.response import Response
+from rest_framework.throttling import AnonRateThrottle
 
-from .models import DemoBooking
-from .serializers import DemoBookingSerializer
+
+class EnquiryRateThrottle(AnonRateThrottle):
+    scope = "enquiries"
+
+from .models import DemoBooking, Enquiry
+from .serializers import DemoBookingSerializer, EnquirySerializer
 
 logger = logging.getLogger(__name__)
 
@@ -121,6 +126,110 @@ def _send_admin_email(booking):
         f"  Time: {booking.preferred_time_slot}\n"
         f"  Challenges: {booking.challenges or 'None provided'}\n\n"
         f"Manage: {settings.SITE_URL or ''}/admin/leads/demobooking/{booking.id}/\n"
+    )
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [notify_email],
+        fail_silently=False,
+    )
+
+
+# --- Enquiry views ---
+
+@api_view(["POST"])
+@throttle_classes([EnquiryRateThrottle])
+def create_enquiry(request):
+    if request.data.get("_hp", "").strip():
+        return Response({"id": 0, "message": "Enquiry received"}, status=status.HTTP_201_CREATED)
+
+    serializer = EnquirySerializer(data=request.data)
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        with transaction.atomic():
+            enquiry = serializer.save()
+
+            try:
+                _send_enquiry_customer_email(enquiry)
+            except Exception:
+                logger.exception("Failed to send customer confirmation for enquiry %s", enquiry.id)
+
+            try:
+                _send_enquiry_admin_email(enquiry)
+            except Exception:
+                logger.exception("Failed to send admin notification for enquiry %s", enquiry.id)
+
+    except IntegrityError:
+        return Response(
+            {"error": "A database error occurred. Please try again."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    return Response(EnquirySerializer(enquiry).data, status=status.HTTP_201_CREATED)
+
+
+@api_view(["GET"])
+def list_enquiries(request):
+    from rest_framework.pagination import PageNumberPagination
+
+    paginator = PageNumberPagination()
+    paginator.page_size = 20
+    result_page = paginator.paginate_queryset(Enquiry.objects.none(), request)
+    return paginator.get_paginated_response([])
+
+
+@api_view(["GET", "POST"])
+def enquiry_handler(request):
+    # pass raw HttpRequest to inner @api_view functions to avoid double-wrapping
+    raw = getattr(request, "_request", request)
+    if request.method == "POST":
+        return create_enquiry(raw)
+    return list_enquiries(raw)
+
+
+def _send_enquiry_customer_email(enquiry):
+    subject = "We've received your enquiry — OptiFlow OS"
+    body = (
+        f"Hi {enquiry.name},\n\n"
+        f"Thank you for reaching out to OptiFlow OS!\n\n"
+        f"We've received your enquiry and will respond within one business day.\n\n"
+        f"Here's a summary of your submission:\n"
+        f"  Company: {enquiry.company}\n"
+        f"  Industry: {enquiry.industry}\n"
+        f"  Type: {enquiry.get_type_display()}\n\n"
+        f"If you have any urgent questions, call us at +91 7874677836 "
+        f"or reach us on WhatsApp.\n\n"
+        f"— The OptiFlow OS Team\n"
+    )
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [enquiry.email],
+        fail_silently=False,
+    )
+
+
+def _send_enquiry_admin_email(enquiry):
+    notify_email = getattr(settings, "ENQUIRY_NOTIFY_EMAIL", None)
+    if not notify_email:
+        return
+
+    subject = f"New Enquiry — {enquiry.name} ({enquiry.company})"
+    body = (
+        f"New contact enquiry received:\n\n"
+        f"  Name: {enquiry.name}\n"
+        f"  Company: {enquiry.company}\n"
+        f"  Phone: {enquiry.phone}\n"
+        f"  Email: {enquiry.email}\n"
+        f"  Team Size: {enquiry.team_size}\n"
+        f"  Industry: {enquiry.industry}\n"
+        f"  Type: {enquiry.get_type_display()}\n"
+        f"  Challenges: {enquiry.challenges or 'None provided'}\n\n"
+        f"Manage: {settings.SITE_URL or ''}/admin/leads/enquiry/{enquiry.id}/\n"
     )
     send_mail(
         subject,

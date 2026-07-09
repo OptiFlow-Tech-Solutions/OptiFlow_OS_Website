@@ -75,3 +75,44 @@ class DemoBooking(models.Model):
 
     def __str__(self):
         return f"{self.name} — {self.preferred_date} {self.preferred_time_slot}"
+
+
+class Enquiry(models.Model):
+    TYPE_SALES = "SALES"
+    TYPE_SUPPORT = "SUPPORT"
+    TYPE_PARTNERSHIP = "PARTNERSHIP"
+
+    TYPE_CHOICES = [
+        (TYPE_SALES, "Sales"),
+        (TYPE_SUPPORT, "Support"),
+        (TYPE_PARTNERSHIP, "Partnership"),
+    ]
+
+    STATUS_NEW = "NEW"
+    STATUS_REPLIED = "REPLIED"
+    STATUS_RESOLVED = "RESOLVED"
+
+    STATUS_CHOICES = [
+        (STATUS_NEW, "New"),
+        (STATUS_REPLIED, "Replied"),
+        (STATUS_RESOLVED, "Resolved"),
+    ]
+
+    name = models.CharField(max_length=100)
+    company = models.CharField(max_length=200)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    team_size = models.CharField(max_length=20, choices=DemoBooking.TEAM_SIZE_CHOICES)
+    industry = models.CharField(max_length=50, choices=DemoBooking.INDUSTRY_CHOICES)
+    challenges = models.TextField(blank=True, default="")
+    type = models.CharField(max_length=15, choices=TYPE_CHOICES, default=TYPE_SALES)
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default=STATUS_NEW)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Enquiries"
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.name} ({self.company}) — {self.get_type_display()}"

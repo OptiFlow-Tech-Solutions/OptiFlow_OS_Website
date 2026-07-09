@@ -4,7 +4,7 @@ import re
 from datetime import date, timedelta
 
 from rest_framework import serializers
-from .models import DemoBooking
+from .models import DemoBooking, Enquiry
 
 
 class DemoBookingSerializer(serializers.ModelSerializer):
@@ -99,3 +99,61 @@ class DemoBookingSerializer(serializers.ModelSerializer):
                 })
 
         return data
+
+
+class EnquirySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enquiry
+        fields = [
+            "id", "name", "company", "phone", "email",
+            "team_size", "industry", "challenges",
+            "type", "status", "created_at", "updated_at",
+        ]
+        read_only_fields = ["id", "status", "created_at", "updated_at"]
+
+    def validate_name(self, value):
+        if len(value.strip()) < 3:
+            raise serializers.ValidationError("Name must be at least 3 characters.")
+        if len(value.strip()) > 100:
+            raise serializers.ValidationError("Name must be at most 100 characters.")
+        return value.strip()
+
+    def validate_company(self, value):
+        if len(value.strip()) < 2:
+            raise serializers.ValidationError("Company name must be at least 2 characters.")
+        return value.strip()
+
+    def validate_phone(self, value):
+        value = value.strip()
+        if not re.match(r"^[6-9]\d{9}$", value):
+            raise serializers.ValidationError(
+                "Enter a valid Indian mobile number (10 digits, starting with 6-9)."
+            )
+        return value
+
+    def validate_email(self, value):
+        return value.strip().lower()
+
+    def validate_team_size(self, value):
+        allowed = [choice[0] for choice in Enquiry._meta.get_field("team_size").choices]
+        if value not in allowed:
+            raise serializers.ValidationError(
+                f"Invalid team size. Must be one of: {', '.join(allowed)}"
+            )
+        return value
+
+    def validate_industry(self, value):
+        allowed = [choice[0] for choice in Enquiry._meta.get_field("industry").choices]
+        if value not in allowed:
+            raise serializers.ValidationError(
+                f"Invalid industry. Must be one of: {', '.join(allowed)}"
+            )
+        return value
+
+    def validate_type(self, value):
+        allowed = [choice[0] for choice in Enquiry.TYPE_CHOICES]
+        if value not in allowed:
+            raise serializers.ValidationError(
+                f"Invalid type. Must be one of: {', '.join(allowed)}"
+            )
+        return value
