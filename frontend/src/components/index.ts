@@ -10,3 +10,7 @@ export { default as ScrollTop } from './ScrollTop';
 export { default as StickyCTA } from './StickyCTA';
 export { ThemeProvider, useTheme } from './ThemeProvider';
 export { default as GlobalStyles } from './GlobalStyles';
+export { default as PageLoader } from './PageLoader';
+export { default as MetaHead } from './MetaHead';
+export { default as ScrollRestoration } from './ScrollRestoration';
+export { default as Breadcrumb } from './Breadcrumb';

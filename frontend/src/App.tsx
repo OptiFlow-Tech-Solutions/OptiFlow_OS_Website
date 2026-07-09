@@ -1,15 +1,20 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { PageLayout } from './components';
-import Home from './pages/Home';
+import { Suspense } from 'react';
+import { PageLayout, PageLoader } from './components';
+import routes from './routes';
 
 export default function App() {
   return (
     <BrowserRouter basename="/os">
-      <Routes>
-        <Route element={<PageLayout />}>
-          <Route path="/" element={<Home />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route element={<PageLayout />}>
+            {routes.map(({ path, component: Page }) => (
+              <Route key={path} path={path} element={<Page />} />
+            ))}
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
