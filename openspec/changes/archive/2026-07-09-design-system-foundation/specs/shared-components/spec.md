@@ -1,0 +1,83 @@
+## ADDED Requirements
+
+### Requirement: Input component
+The system SHALL provide an Input component supporting default and error variants, with disabled/readonly states and optional icon.
+
+#### Scenario: Default input renders
+- **WHEN** `<Input placeholder="Enter text" />` is rendered
+- **THEN** an `<input>` element with `var(--border)` border, `var(--radius)` border-radius, and `var(--surface)` background is displayed
+
+#### Scenario: Error input renders
+- **WHEN** `<Input variant="error" />` is rendered
+- **THEN** the input has a red-tinted border matching the `.form-error-msg` color from `core.css`
+
+#### Scenario: Input with icon renders
+- **WHEN** `<Input icon={<SearchIcon />} placeholder="Search..." />` is rendered
+- **THEN** the icon is displayed inside the input on the leading side
+
+#### Scenario: Disabled input renders
+- **WHEN** `<Input disabled />` is rendered
+- **THEN** the input has `cursor: not-allowed`, reduced opacity, and does not accept user input
+
+#### Scenario: Readonly input renders
+- **WHEN** `<Input readOnly value="Cannot edit" />` is rendered
+- **THEN** the input displays the value but is not editable
+
+#### Scenario: Input passes through native attributes
+- **WHEN** `<Input type="email" name="email" required aria-label="Email" />` is rendered
+- **THEN** all native HTML attributes are applied to the underlying `<input>` element
+
+### Requirement: Form state classes are ported
+The system SHALL provide CSS classes for form submission states matching `core.css`: `.form-submitting`, `.form-success`, and `.form-error`.
+
+#### Scenario: Form submitting state
+- **WHEN** a `<form className="form-submitting">` is rendered
+- **THEN** form fields and submit button are dimmed (`opacity: 0.6; pointer-events: none`) and the button shows a spinning loader
+
+#### Scenario: Form success state
+- **WHEN** a `<form className="form-success">` is rendered
+- **THEN** form fields are hidden and a success message with check icon is displayed
+
+#### Scenario: Form error state
+- **WHEN** a `<form className="form-error">` is rendered
+- **THEN** the submit button is hidden, an error message with retry button is displayed, and the error message uses `var(--teal-soft)`-like error colors
+
+### Requirement: Container component
+The system SHALL provide a Container component that wraps content in a max-width centered container with configurable width.
+
+#### Scenario: Default container renders
+- **WHEN** `<Container><p>Content</p></Container>` is rendered
+- **THEN** content is wrapped in a `<div>` with `max-width: var(--container)` (1200px), `margin-inline: auto`, and `padding-inline: var(--gutter)`
+
+#### Scenario: Narrow container renders
+- **WHEN** `<Container width="narrow">Content</Container>` is rendered
+- **THEN** the container has a narrower max-width appropriate for reading (e.g., 800px)
+
+#### Scenario: Container passes className through
+- **WHEN** `<Container className="my-class">Content</Container>` is rendered
+- **THEN** the custom class is merged with the container's base classes
+
+## MODIFIED Requirements
+
+### Requirement: Section component
+The system SHALL provide a Section component with optional background, header block, and container width.
+
+#### Scenario: Default section renders
+- **WHEN** `<Section><p>Content</p></Section>` is rendered
+- **THEN** content is wrapped in `<section>` with vertical padding (`padding-block: clamp(56px, 8vw, var(--gap-2xl))`), scroll-margin-top, and a max-width container. Heading is an `h2` element (not `h1`).
+
+#### Scenario: Section with header renders with h2 heading
+- **WHEN** `<Section heading="Features" lead="What we offer">Content</Section>` is rendered
+- **THEN** a section-header div with `h2` heading (with decorative `::after` gradient underline) and `.lead` paragraph appears above the content. The heading element SHALL be `h2`, not `h1`.
+
+#### Scenario: Section with background
+- **WHEN** `<Section background="surface">Content</Section>` is rendered
+- **THEN** section has `var(--color-surface)` as background
+
+#### Scenario: Section with narrow container
+- **WHEN** `<Section width="narrow">Content</Section>` is rendered
+- **THEN** inner container is narrower than default (800px vs 1200px)
+
+#### Scenario: Section with dark background variant
+- **WHEN** `<Section background="dark">Content</Section>` is rendered
+- **THEN** section has `oklch(12% 0.018 250)` background with white headings, muted lead text, teal eyebrows, and cards with semi-transparent white backgrounds
