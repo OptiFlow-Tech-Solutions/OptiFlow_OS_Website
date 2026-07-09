@@ -13,6 +13,14 @@ Every page in the SPA SHALL render the full content from its static HTML counter
 - **WHEN** user navigates to `/os/`
 - **THEN** all 13 sections are visible with identical text content, heading levels, and card counts as the static HTML
 
+#### Scenario: Problem Solutions page renders all 10 sections
+- **WHEN** user navigates to `/os/problem-solutions`
+- **THEN** all 10 sections render with identical content to `problem-solutions.html`: hero, pain carousel (8 items, 3s rotation), chaos map, trust bar, 6 industry problem cards, WhatsApp mockup (7 messages), cost stats (3), solution flow, people-vs-process (7 rows), before-after (7 rows)
+
+#### Scenario: Why OptiFlow page renders all 10 sections
+- **WHEN** user navigates to `/os/why-optiflow`
+- **THEN** all 10 sections render with identical content to `why-optiflow.html`: hero with typewriter (5 phrases) and mouse glow, 6 problem cards, 3 designer cards, adoption stats, 4-step timeline, 8 ROI counters, comparison table (5-col, 11-row), 3 testimonials, 4 trust elements, CTA
+
 #### Scenario: Pricing page has plan cards
 - **WHEN** user navigates to `/os/pricing`
 - **THEN** pricing page displays plan cards with features, prices, and CTAs
