@@ -1,1 +1,33 @@
 export { default as features } from './features';
+export {
+  primaryModules,
+  secondaryModules,
+  allModules,
+  archNodes,
+  demoTabs,
+  demoDashboardTasks,
+  demoAttendanceRows,
+  kpiCycleData,
+  adminPanel,
+  captainPanel,
+  doerPanel,
+  workflowSteps,
+  reportTypes,
+  visionCards,
+  permissionRows,
+} from './productOverview';
+export type {
+  ModuleData,
+  ArchNodeData,
+  DemoTabPanel,
+  TaskRow,
+  AttendanceRow,
+  PanelData,
+  PanelFeature,
+  DashboardRow,
+  PanelBenefit,
+  WorkflowStep,
+  ReportType,
+  VisionCard,
+  PermissionRow,
+} from './productOverview';
