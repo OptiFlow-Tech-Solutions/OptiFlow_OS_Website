@@ -14,3 +14,6 @@ export { default as PageLoader } from './PageLoader';
 export { default as MetaHead } from './MetaHead';
 export { default as ScrollRestoration } from './ScrollRestoration';
 export { default as Breadcrumb } from './Breadcrumb';
+export { default as BookingForm } from './BookingForm';
+export { default as CalendarWidget } from './CalendarWidget';
+export { default as DashboardMockup } from './sections/DashboardMockup';
