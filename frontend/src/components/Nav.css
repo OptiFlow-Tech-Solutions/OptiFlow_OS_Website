@@ -1,0 +1,356 @@
+/* Nav — scoped under .react-nav to avoid collision with core.css during migration */
+
+.react-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  transition: background 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.35s, box-shadow 0.35s;
+}
+
+.react-nav.scrolled {
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-nav);
+}
+
+[data-theme="dark"] .react-nav.scrolled {
+  background: rgba(15,23,42,.85);
+}
+
+.react-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container);
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.react-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: inherit;
+  text-decoration: none;
+}
+
+.react-nav-logo-img {
+  height: 32px;
+  width: auto;
+  border-radius: 6px;
+}
+
+.react-nav-cta {
+  display: flex;
+  gap: var(--gap-sm);
+  align-items: center;
+}
+
+/* Desktop nav links */
+.react-nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.react-nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.react-nav-link:hover {
+  color: var(--fg);
+  background: var(--fg-soft);
+}
+
+.react-nav-link.active {
+  color: var(--accent);
+  font-weight: 600;
+  position: relative;
+}
+
+.react-nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* Dropdown */
+.react-nav-dropdown {
+  position: relative;
+}
+
+.react-nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 190px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-elevated);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: var(--z-dropdown);
+}
+
+.react-nav-dropdown:hover .react-nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(4px);
+}
+
+.react-nav-dropdown-menu a {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+
+.react-nav-dropdown-menu a:hover {
+  background: var(--fg-soft);
+  color: var(--fg);
+}
+
+[data-theme="dark"] .react-nav-dropdown-menu {
+  background: rgba(15,23,42,.94);
+  border-color: var(--border);
+  box-shadow: var(--shadow-elevated);
+}
+
+[data-theme="dark"] .react-nav-dropdown-menu a {
+  color: var(--muted);
+}
+
+[data-theme="dark"] .react-nav-dropdown-menu a:hover {
+  background: rgba(255,255,255,.06);
+  color: var(--fg);
+}
+
+/* Theme toggle */
+.react-nav-theme-toggle {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.60);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+  margin-right: 4px;
+  color: var(--muted);
+}
+
+.react-nav-theme-toggle:hover {
+  border-color: var(--fg);
+  color: var(--fg);
+  box-shadow: var(--shadow-card);
+}
+
+.react-nav-theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+[data-theme="dark"] .react-nav-theme-toggle {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.70);
+}
+
+[data-theme="dark"] .react-nav-theme-toggle:hover {
+  border-color: var(--teal);
+  color: var(--fg);
+  box-shadow: 0 0 20px rgba(39,141,159,.15);
+}
+
+[data-theme="dark"] .react-nav-theme-toggle .sun-icon,
+[data-theme="light"] .react-nav-theme-toggle .moon-icon {
+  display: none;
+}
+
+[data-theme="dark"] .react-nav-theme-toggle .moon-icon,
+[data-theme="light"] .react-nav-theme-toggle .sun-icon {
+  display: block;
+}
+
+/* Hamburger */
+.react-nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: var(--z-hamburger);
+  border: 0;
+  background: none;
+}
+
+.react-nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--fg);
+  border-radius: 2px;
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.react-nav-hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.react-nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.react-nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile drawer */
+.react-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100vh;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid var(--border);
+  z-index: var(--z-drawer);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  overflow-y: auto;
+  box-shadow: -8px 0 40px rgba(15,23,42,.12);
+}
+
+.react-nav-drawer.open {
+  transform: translateX(-320px);
+}
+
+.react-nav-drawer .react-nav-link {
+  font-size: 16px;
+  padding: 12px 16px;
+}
+
+.react-nav-drawer .react-nav-dropdown-menu {
+  position: static;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  box-shadow: none;
+  border: none;
+  padding: 0 0 0 16px;
+  background: transparent;
+}
+
+.react-nav-drawer .react-nav-dropdown-menu a {
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.react-nav-drawer-cta {
+  flex-direction: column;
+  gap: var(--gap-sm);
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+}
+
+[data-theme="dark"] .react-nav-drawer {
+  background: rgba(15,23,42,.97);
+}
+
+/* Drawer overlay */
+.react-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.35);
+  z-index: var(--z-nav);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.react-nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .react-nav-desktop {
+    display: none;
+  }
+  .react-nav-hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .react-nav-inner {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .react-nav-inner {
+    padding-inline: 16px;
+  }
+  .react-nav-logo {
+    font-size: 16px;
+  }
+  .react-nav-logo-img {
+    height: 28px;
+  }
+  .react-nav-theme-toggle {
+    width: 34px;
+    height: 34px;
+    margin-right: 2px;
+  }
+  .react-nav-cta {
+    gap: 6px;
+  }
+}

@@ -47,3 +47,13 @@
   --shadow-inset: var(--shadow-inset);
   --shadow-nav: var(--shadow-nav);
 }
+
+/* sticky footer layout */
+html, body, #root {
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
