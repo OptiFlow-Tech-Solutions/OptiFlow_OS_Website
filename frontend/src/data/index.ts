@@ -1,4 +1,26 @@
 export { default as features } from './features';
+export { default as showcase } from './showcase';
+export {
+  quadrantEntries,
+  matrixColumns,
+  matrixRows,
+  costCardEntries,
+  standoutEntries,
+} from './competitive';
+export type {
+  ShowcaseEntry,
+  ShowcaseSolution,
+  ShowcaseMetric,
+  ShowcaseCTA,
+} from './showcase';
+export type {
+  QuadrantEntry,
+  MatrixColumn,
+  MatrixCell,
+  MatrixRow,
+  CostCardEntry,
+  StandoutEntry,
+} from './competitive';
 export {
   primaryModules,
   secondaryModules,
