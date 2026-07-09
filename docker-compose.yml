@@ -1,12 +1,11 @@
 services:
   web:
     build: .
-    container_name: optiflow-website
     ports:
       - "${PORT:-80}:80"
     restart: unless-stopped
     env_file:
-      - .env.example
+      - .env
     deploy:
       resources:
         limits:

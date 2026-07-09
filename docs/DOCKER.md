@@ -34,11 +34,11 @@ Stage 3: Runtime (nginx:1.27.3-alpine)
 ## Running
 
 ```bash
-# Run container
-docker run -p 80:80 --name optiflow-website optiflow-website
+# Run (auto-removes on stop)
+docker run -p 80:80 --rm optiflow-website
 
 # Run detached
-docker run -d -p 80:80 --name optiflow-website optiflow-website
+docker run -d -p 80:80 --rm optiflow-website
 
 # With npm script
 npm run docker:run
@@ -46,15 +46,17 @@ npm run docker:run
 
 ## Docker Compose
 
+Compose auto-generates unique container names (`<project>_web_1`). No manual name conflicts.
+
 ```bash
 # Standard (with Coolify/Traefik labels)
-docker compose up --build
+npm run docker:compose
 
 # Production (no platform labels)
-docker compose -f docker-compose.prod.yml up -d --build
+npm run docker:compose:prod
 
-# Stop
-docker compose down
+# Stop and clean up
+npm run docker:stop
 ```
 
 ## Environment

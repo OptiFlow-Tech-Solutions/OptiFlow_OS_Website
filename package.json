@@ -27,9 +27,12 @@
     "deploy:netlify": "npm run deploy && npx netlify-cli deploy --prod --dir=dist",
     "deploy:cloudflare": "npm run deploy && npx wrangler pages deploy dist --project-name=optiflow-website",
     "docker:build": "docker build -t optiflow-website .",
-    "docker:run": "docker run -p 80:80 --name optiflow-website optiflow-website",
-    "docker:stop": "docker stop optiflow-website && docker rm optiflow-website",
-    "docker:compose": "docker compose up --build",
+    "docker:run": "docker run -p 80:80 --rm optiflow-website",
+    "docker:stop": "docker compose down",
+    "docker:compose": "npm run _docker:env && docker compose up --build",
+    "docker:compose:down": "docker compose down --volumes",
+    "docker:compose:prod": "npm run _docker:env && docker compose -f docker-compose.prod.yml up -d --build",
+    "_docker:env": "node -e \"const fs=require('fs');if(!fs.existsSync('.env'))fs.copyFileSync('.env.example','.env')\"",
     "prepare": "husky"
   },
   "dependencies": {

@@ -5,32 +5,42 @@
 ## Quick Start
 
 ```bash
-git clone <repo>
+git clone https://github.com/optiflow-tech/optiflow-website.git
 cd OptiFlow_OS_Website
 npm install
 npm run dev          # Build + serve locally at http://localhost:3000
+
+# Full stack (React + Django):
+cp .env.example .env
+docker compose up --build   # http://localhost:80
 ```
 
 ## Project Overview
 
 **OptiFlow OS** is a Business Execution Operating System marketing website for Indian MSMEs.
-- **14 static HTML pages** with a custom design system
-- **Custom Node.js build pipeline** — assembles `src/` → `dist/`
+- **16 static HTML pages** with a custom design system (legacy — preserved as visual spec)
+- **React SPA** (Vite + TypeScript) — modern frontend (planned)
+- **Django REST API** backe nd — dynamic content management (planned)
+- **PostgreSQL 16** database (planned)
+- **Custom Node.js build pipeline** — assembles `src/` → `dist/` (legacy)
 - **Deployed** to Docker/Coolify, Cloudflare Pages, and Netlify
-- **Build-tooling via OpenSpec workflow** (orchestration engine provided externally)
 
 ## Directory Structure
 
 ```
-├── src/pages/           14 HTML source pages
-├── src/partials/        3 reusable partials (nav, footer, analytics)
-├── assets/css/          core.css — design system
-├── assets/js/           core.js — shared JavaScript
-├── hooks/               4 git hooks (pre-commit, pre-build, post-build, utils)
-├── scripts/             Build, validate, watch scripts
-├── tests/e2e/           5 Playwright E2E specs
-├── docs/                Developer documentation
-└── site.json            Canonical site data (phone, email, pages, nav)
+├── frontend/             React SPA (Vite + TypeScript) — planned
+├── backend/              Django 5 + DRF 3 — planned
+├── src/pages/            16 HTML source pages (legacy, visual spec)
+├── src/partials/         3 reusable partials (nav, footer, analytics)
+├── assets/css/           core.css — design system
+├── assets/js/            core.js — shared JavaScript
+├── hooks/                4 git hooks (pre-commit, pre-build, post-build, utils)
+├── scripts/              Build, validate, watch scripts
+├── tests/e2e/            5 Playwright E2E specs
+├── docs/                 Developer documentation
+├── WEBSITE_FEATURE_INVENTORY.md  Master feature plan (60 features)
+├── AUDIT_REPORT.md       Comprehensive audit report
+└── site.json             Canonical site data (phone, email, pages, nav)
 ```
 
 ## Before Making Changes
@@ -132,9 +142,11 @@ npm run lint:all    # All three
 ## Docker
 
 ```bash
-docker build -t optiflow-website .   # Build container
-docker run -p 80:80 optiflow-website  # Run locally
-docker compose up --build             # Or with Compose
+docker build -t optiflow-website .    # Build container
+docker run -p 80:80 --rm optiflow-website  # Run (auto-removes on stop)
+npm run docker:compose                 # Compose (Coolify/Traefik)
+npm run docker:compose:prod            # Compose (plain Docker host)
+npm run docker:stop                    # Stop and clean up
 ```
 
 See `docs/DOCKER.md` for full details.

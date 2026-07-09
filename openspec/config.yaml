@@ -1,20 +1,72 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  # OptiFlow OS Website — Tech Stack & Conventions
+  
+  ## Current State (Legacy Static Site)
+  - 16 static HTML pages (src/pages/) with custom Node.js ESM build pipeline
+  - Design system: assets/css/core.css (513 lines, Oklch color space, CSS custom properties)
+  - JavaScript: assets/js/core.js (356 lines, vanilla IIFE)
+  - Deployment: Docker (3-stage nginx+Brotli), Nixpacks, Netlify, Cloudflare Pages
+  - Testing: Playwright E2E + a11y, Lighthouse CI
+  - Canonical data: site.json (phone, email, location, pages, nav, footer)
+  
+  ## Target Architecture (Planned)
+  - Frontend: React 19 + Vite 6 + TypeScript 5 + CSS Modules
+  - Backend: Django 5 + DRF 3 (Python 3.12+)
+  - Database: PostgreSQL 16 (Django ORM)
+  - Cache/Queue: Redis 7 + Celery 5
+  - Auth: JWT (Simple JWT) + Django sessions, RBAC
+  - Email: SMTP (Resend/Brevo)
+  - Payment: Razorpay (India-focused)
+  - Search: PostgreSQL full-text search (GIN indexes)
+  - Proxy: Nginx 1.27+ (SPA fallback + API reverse proxy)
+  - Containers: Docker Compose (React + Django + PG + Redis + Nginx)
+  
+  ## Design System
+  - Colors: CSS custom properties (var(--*)), Oklch color space. Never hardcode hex.
+  - Typography: System font stack. Scale: h1 clamp(36px,5.5vw,68px), h2 clamp(28px,3.8vw,46px)
+  - Spacing: 8px base (--gap-xs:8px to --gap-2xl:96px)
+  - Dark mode: [data-theme="dark"] CSS overrides
+  - Animations: IntersectionObserver reveal, stagger delays, counter, reduced-motion support
+  - Components: Button, Card, Input, Modal, FAQ Accordion, Comparison Table, Timeline, etc.
+  
+  ## Conventions
+  - Vertical slice architecture: every feature = UI + API + DB + tests (complete, independent)
+  - Test-driven development: write tests FIRST, 80%+ coverage required
+  - Conventional commits: feat:, fix:, test:, docs:, refactor:, chore:
+  - Branch naming: feature/F-XXX-name, fix/XXX-description
+  - Placeholder system: {{PHONE}}, {{EMAIL}}, {{YEAR}}, {{LOCATION}}, {{WHATSAPP}}, {{COMPANY}}
+  - NEVER hardcode company info — use site settings API
+  - NEVER use inline hex colors — use CSS variables
+  - NEVER redesign — current visual design IS the specification
+  - Spacing: 2-space indent, LF line endings, UTF-8 encoding
+  
+  ## Key Documents
+  - WEBSITE_FEATURE_INVENTORY.md — 60 vertical slice features (single source of truth)
+  - AUDIT_REPORT.md — comprehensive pre-implementation audit
+  - ARCHITECTURE.md — system architecture and design decisions
+  - FEATURE_TRACEABILITY.md — feature-to-artifact traceability matrix
+  - IMPLEMENTATION_GUIDE.md — how to implement each feature
+  - DATABASE.md — PostgreSQL schema documentation
+  - API_REFERENCE.md — REST API endpoint catalog
+  - ROUTES.md — route map (public + admin)
+  - SETUP.md — developer onboarding and setup
+  - ENVIRONMENT.md — environment variable reference
+  - DESIGN.md/DESIGN.md — brand design specification
+  
+  ## Domain
+  - OptiFlow OS: Business Execution Operating System for Indian MSMEs
+  - Primary audience: Indian MSME owners/operators (manufacturing, textile, trading, logistics)
+  - Website purpose: marketing site, demo booking, lead generation, content marketing
+  - Compliance: DPDP Act 2023 (India), GDPR (EU visitors)
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+rules:
+  proposal:
+    - Keep proposals under 500 words
+    - Always include a "Non-goals" section
+    - Link to relevant feature in WEBSITE_FEATURE_INVENTORY.md
+  tasks:
+    - Break tasks into chunks of max 2 hours
+    - Label tasks: [FRONTEND], [BACKEND], [DATABASE], [TEST], [DOCS], [DEVOPS]
+    - Reference exact file paths the task will create/modify
