@@ -21,19 +21,34 @@ cd OptiFlow_OS_Website
 
 # Copy environment file
 cp .env.example .env
-# Edit .env with your values
+# Edit .env with your values (or use defaults for dev)
 
 # Start all services
 docker compose up --build
 ```
 
 Services available at:
-- **Website:** http://localhost:80
-- **React Dev:** http://localhost:5173 (Vite HMR)
-- **Django API:** http://localhost:8000/api/
-- **Django Admin:** http://localhost:8000/admin/
+- **Website:** http://localhost (Nginx, port 80)
+- **React Dev:** http://localhost:5173 (Vite HMR — run `cd frontend && npm run dev` separately)
+- **Django API:** http://localhost/api/health/ (proxied through Nginx)
+- **Django Admin:** http://localhost/admin/
 - **PostgreSQL:** localhost:5432
 - **Redis:** localhost:6379
+
+### Alternative: Frontend-only dev (recommended for UI work)
+
+```bash
+# Terminal 1: Start backend services
+docker compose up -d db redis api
+
+# Terminal 2: Start frontend with hot reload
+cd frontend
+npm install
+npm run dev
+# Visit http://localhost:5173/os/
+```
+
+The Vite dev server proxies `/api/*` to `http://localhost` (Nginx → Django).
 
 ## Quick Start (Frontend Only)
 
@@ -103,22 +118,26 @@ npm run typecheck    # TypeScript check
 
 ### Backend
 ```bash
-cd backend
-pip install -r requirements.txt   # Install dependencies
-python manage.py migrate          # Run migrations
-python manage.py runserver        # Start dev server
-python manage.py test             # Run tests
-python manage.py createsuperuser  # Create admin user
-pytest --cov                      # Test with coverage
+# Management commands via Docker (recommended)
+npm run backend:manage -- migrate
+npm run backend:manage -- createsuperuser
+npm run backend:shell
+
+# Or directly
+docker compose exec api python manage.py migrate
+docker compose exec api python manage.py createsuperuser
+docker compose exec api python manage.py shell
 ```
 
 ### Docker
 ```bash
-docker compose up --build         # Start all services
-docker compose down               # Stop all services
-docker compose down --volumes     # Stop + remove data
-docker compose logs -f backend    # View backend logs
-docker compose exec backend bash  # Shell into backend
+docker compose up -d db redis          # Start database + cache only
+docker compose up -d api               # Start backend (depends on db)
+docker compose up --build              # Start all services with rebuild
+docker compose down                    # Stop all services
+docker compose down --volumes          # Stop + remove all data (fresh start)
+docker compose logs -f api             # View backend logs
+docker compose exec api bash           # Shell into backend container
 ```
 
 ### Legacy Static Site

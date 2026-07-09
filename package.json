@@ -33,6 +33,13 @@
     "docker:compose:down": "docker compose down --volumes",
     "docker:compose:prod": "npm run _docker:env && docker compose -f docker-compose.prod.yml up -d --build",
     "_docker:env": "node -e \"const fs=require('fs');if(!fs.existsSync('.env'))fs.copyFileSync('.env.example','.env')\"",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "backend:manage": "docker compose exec api python manage.py",
+    "backend:shell": "docker compose exec api python manage.py shell",
+    "backend:migrate": "docker compose exec api python manage.py migrate",
+    "backend:createsuperuser": "docker compose exec api python manage.py createsuperuser",
+    "dev:full": "npm run _docker:env && docker compose up -d db redis && cd frontend && npm run dev",
     "prepare": "husky"
   },
   "dependencies": {

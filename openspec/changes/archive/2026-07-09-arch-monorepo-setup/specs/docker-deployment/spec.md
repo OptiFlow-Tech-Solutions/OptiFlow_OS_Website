@@ -1,8 +1,4 @@
-# Docker Deployment
-
-**Purpose:** Ensure the OptiFlow website builds and runs correctly as a multi-service Docker environment. Covers multi-stage builds (static site + React SPA + Nginx), multi-service Compose orchestration (web, api, db, redis), non-root execution, health checks, route serving, layer caching, and pinned base image versions.
-
-## Requirements
+## ADDED Requirements
 
 ### Requirement: Docker Compose includes all services
 The `docker-compose.yml` SHALL define services for `web` (Nginx), `api` (Django/Gunicorn), `db` (PostgreSQL), and `redis` (Redis), replacing the current single-service `web` only configuration.
@@ -36,6 +32,8 @@ The `backend/` directory SHALL contain a `Dockerfile` that builds a Django-ready
 #### Scenario: Backend image is minimal
 - **WHEN** the built backend image size is inspected
 - **THEN** it is under 300MB compressed
+
+## MODIFIED Requirements
 
 ### Requirement: Multi-stage Docker build succeeds
 The Dockerfile SHALL use a multi-stage build that compiles the React SPA (`frontend/dist/`) and the static site (`dist/`) in separate Node.js stages, then copies both outputs plus nginx config into a minimal nginx runtime stage. The final image SHALL be non-root and SHALL expose port 80.
@@ -78,17 +76,3 @@ The Docker web container SHALL serve the React SPA at `/os/*` paths (with SPA cl
 #### Scenario: Static assets are reachable
 - **WHEN** `GET /assets/css/core.css` and `GET /assets/js/core.js` are requested
 - **THEN** each returns HTTP 200
-
-### Requirement: Dockerfile caches build layers
-The Dockerfile SHALL order COPY instructions so that dependencies are installed before source files, maximizing layer cache reuse.
-
-#### Scenario: Dependency layer cached on rebuild
-- **WHEN** only a source file changes and the image is rebuilt
-- **THEN** the `npm ci` layer is retrieved from cache, not re-executed
-
-### Requirement: Pinned base image versions
-The Dockerfile SHALL use exact version tags for base images to prevent silent ABI breakage of compiled Brotli modules.
-
-#### Scenario: Dockerfile uses explicit version
-- **WHEN** the Dockerfile is inspected
-- **THEN** the nginx FROM line specifies a major.minor.patch version (e.g., `nginx:1.27.3-alpine`) rather than a floating tag

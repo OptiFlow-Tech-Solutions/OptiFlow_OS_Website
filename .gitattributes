@@ -1,0 +1,35 @@
+* text=auto
+
+# Shell scripts always LF
+*.sh text eol=lf
+
+# Python always LF
+*.py text eol=lf
+
+# YAML always LF
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Docker files LF
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+
+# Config files LF
+*.toml text eol=lf
+*.cfg text eol=lf
+.env.example text eol=lf
+
+# Markdown LF
+*.md text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+*.woff2 binary
+*.gz binary
+*.br binary

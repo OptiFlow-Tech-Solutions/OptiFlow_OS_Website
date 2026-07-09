@@ -4,8 +4,13 @@ services:
     ports:
       - "${PORT:-80}:80"
     restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
     env_file:
       - .env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     deploy:
       resources:
         limits:
@@ -27,3 +32,78 @@ services:
       - "traefik.http.routers.optiflow.entrypoints=websecure"
       - "traefik.http.routers.optiflow.tls=true"
       - "traefik.http.services.optiflow.loadbalancer.server.port=80"
+
+  api:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - DJANGO_DEBUG=${DJANGO_DEBUG:-true}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:-change-me-in-development}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME:-optiflow_dev}
+      - DB_USER=${DB_USER:-optiflow}
+      - DB_PASSWORD=${DB_PASSWORD:-devpass}
+    volumes:
+      - ./backend:/app
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health/')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    develop:
+      watch:
+        - action: sync
+          path: ./backend
+          target: /app
+          ignore:
+            - __pycache__/
+            - "*.pyc"
+
+  db:
+    image: postgres:16.3-alpine
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${DB_NAME:-optiflow_dev}
+      - POSTGRES_USER=${DB_USER:-optiflow}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-devpass}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-optiflow} -d ${DB_NAME:-optiflow_dev}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    profiles:
+      - full
+
+volumes:
+  postgres_data:
+  redis_data:

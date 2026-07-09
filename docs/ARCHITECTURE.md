@@ -1,6 +1,6 @@
 # OptiFlow OS Website — Architecture Document
 
-**Version:** 1.0.0 | **Date:** 2026-07-09 | **Status:** Pre-Implementation Baseline
+**Version:** 1.1.0 | **Date:** 2026-07-09 | **Status:** In Progress — F-ARCH-001 scaffolded
 
 ## 1. System Architecture
 
@@ -59,39 +59,24 @@ Browser → Nginx (port 80/443)
 
 ```
 OptiFlow_OS_Website/
-├── frontend/                  # React SPA (TO BE CREATED)
+├── frontend/                  # React SPA (CREATED — F-ARCH-001)
 │   ├── src/
-│   │   ├── components/        # Reusable UI components
-│   │   ├── pages/             # Route-level page components
-│   │   ├── hooks/             # Custom React hooks
-│   │   ├── services/          # API client layer
-│   │   ├── styles/            # CSS modules + tokens
-│   │   ├── utils/             # Utility functions
+│   │   ├── pages/             # Placeholder pages
 │   │   ├── App.tsx
 │   │   └── main.tsx
-│   ├── public/
 │   ├── index.html
 │   ├── package.json
 │   ├── vite.config.ts
 │   └── tsconfig.json
-├── backend/                   # Django backend (TO BE CREATED)
+├── backend/                   # Django backend (CREATED — F-ARCH-001)
 │   ├── config/                # Django project settings
 │   │   ├── settings.py
 │   │   ├── urls.py
 │   │   └── wsgi.py
-│   ├── apps/                  # Django applications
-│   │   ├── core/
-│   │   ├── accounts/
-│   │   ├── cms/
-│   │   ├── blog/
-│   │   ├── leads/
-│   │   ├── faq/
-│   │   ├── newsletter/
-│   │   ├── resources/
-│   │   ├── payments/
-│   │   ├── meetings/
-│   │   ├── chatbot/
-│   │   └── ...
+│   ├── core/                  # Health check + shared utilities
+│   ├── cms/                   # CMS app skeleton
+│   ├── blog/                  # Blog app skeleton
+│   ├── leads/                 # Leads app skeleton
 │   ├── manage.py
 │   ├── requirements.txt
 │   └── Dockerfile
