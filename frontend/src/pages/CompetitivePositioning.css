@@ -1,0 +1,21 @@
+/* CompetitivePositioning page-specific styles */
+
+.cp-hero { padding-top: calc(var(--nav-h) + 72px); padding-bottom: 72px; position: relative; overflow: hidden; }
+.cp-hero::before { content: ''; position: absolute; top: -40%; right: -15%; width: 70%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--accent) 6%, transparent) 0%, color-mix(in oklch, var(--teal) 4%, transparent) 40%, transparent 70%); pointer-events: none; }
+.cp-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.cp-hero-content { position: relative; z-index: 2; }
+.cp-hero-content h1 { margin-bottom: 20px; }
+.cp-hero-content .lead { margin-bottom: 32px; }
+.cp-hero-cta { display: flex; gap: var(--gap-sm); flex-wrap: wrap; }
+.cp-standout-icon { width: 52px; height: 52px; display: grid; place-items: center; background: color-mix(in oklch, var(--accent) 12%, transparent); border-radius: var(--radius-lg); margin: 0 auto 18px; color: var(--accent); }
+.cp-standout-icon svg { width: 24px; height: 24px; }
+.cp-standout-card { text-align: center; padding: 36px 24px; }
+.cp-standout-card h3 { font-size: 17px; margin-bottom: 8px; color: var(--fg); }
+.cp-standout-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+[data-theme="dark"] .cp-standout-icon { background: rgba(39,141,159,.18); color: var(--teal); }
+[data-theme="dark"] .cp-standout-card h3 { color: var(--fg); }
+
+@media (max-width: 1024px) {
+  .cp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+}

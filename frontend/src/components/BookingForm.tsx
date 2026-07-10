@@ -59,16 +59,16 @@ const BookingForm = forwardRef<BookingFormHandle, object>((_props, ref) => {
   const [serverError, setServerError] = useState('');
   const [calendarData, setCalendarData] = useState<{ preferred_date?: string; preferred_time_slot?: string }>({});
 
+  const setDateAndSlot = (preferred_date?: string, preferred_time_slot?: string) => {
+    setCalendarData({ preferred_date, preferred_time_slot });
+  };
+
   useImperativeHandle(ref, () => ({
     submit: () => {
       formRef.current?.requestSubmit();
     },
     setDateAndSlot,
   }));
-
-  const setDateAndSlot = (preferred_date?: string, preferred_time_slot?: string) => {
-    setCalendarData({ preferred_date, preferred_time_slot });
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

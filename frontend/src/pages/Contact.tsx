@@ -9,7 +9,7 @@ import TrustBar from '../components/sections/TrustBar';
 import { site } from '../data/site';
 
 const ChatIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '60px', height: '60px', color: 'var(--accent)' }}>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[60px] h-[60px] text-accent">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   </svg>
 );
@@ -127,34 +127,18 @@ export default function Contact() {
       {/* S01 Hero */}
       <Section>
         <Container>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 'var(--gap-2xl)',
-            alignItems: 'center',
-          }}>
+          <div className="grid grid-cols-2 gap-[var(--gap-2xl)] items-center">
             <div>
-              <div style={{
-                display: 'inline-block',
-                padding: '6px 18px',
-                borderRadius: '100px',
-                background: 'var(--accent-soft)',
-                color: 'var(--accent)',
-                fontSize: '13px',
-                fontWeight: 600,
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                marginBottom: '16px',
-              }}>
+              <div className="inline-block px-[18px] py-[6px] rounded-full bg-accent-soft text-accent text-[13px] font-semibold tracking-[1px] uppercase mb-4">
                 Get In Touch
               </div>
-              <h1 style={{ fontSize: 'var(--fs-h1)', fontWeight: 700, lineHeight: 1.15, marginBottom: '12px' }}>
+              <h1 className="text-h1 font-bold leading-tight mb-3">
                 Let's talk about your operations
               </h1>
-              <p className="lead" style={{ marginBottom: '32px', maxWidth: '480px' }}>
+              <p className="lead mb-8 max-w-[480px]">
                 Whether you need a demo, have a sales question, or need support — we're here to help. Reach out and we'll respond within one business day.
               </p>
-              <div style={{ display: 'flex', gap: 'var(--gap-sm)', flexWrap: 'wrap' }}>
+              <div className="flex gap-[var(--gap-sm)] flex-wrap">
                 <Button
                   as="button"
                   size="lg"
@@ -171,39 +155,19 @@ export default function Contact() {
               </div>
             </div>
 
-            <div style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-xl)',
-              padding: '48px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '24px',
-              position: 'relative',
-              minHeight: '320px',
-            }}>
-              <div style={{
-                width: '96px', height: '96px',
-                borderRadius: '50%',
-                background: 'var(--accent-soft)',
-                display: 'grid', placeItems: 'center',
-              }}>
+            <div className="bg-surface border border-border rounded-xl p-12 flex flex-col items-center justify-center gap-6 relative min-h-[320px]">
+              <div className="w-24 h-24 rounded-full bg-accent-soft grid place-items-center">
                 <ChatIcon />
               </div>
-              <div style={{
-                display: 'flex', gap: 'var(--gap-lg)',
-                flexWrap: 'wrap', justifyContent: 'center',
-              }}>
+              <div className="flex gap-[var(--gap-lg)] flex-wrap justify-center">
                 {[
                   { value: site.stats.businesses, label: 'Businesses' },
                   { value: '< 24 Hours', label: 'Avg Response' },
                   { value: site.stats.users, label: 'Users' },
                 ].map((stat, i) => (
-                  <div key={i} style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '22px', fontWeight: 700, color: 'var(--accent)' }}>{stat.value}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '2px' }}>{stat.label}</div>
+                  <div key={i} className="text-center">
+                    <div className="text-[22px] font-bold text-accent">{stat.value}</div>
+                    <div className="text-xs text-muted mt-0.5">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -222,13 +186,7 @@ export default function Contact() {
       {/* S03 Sales Channels */}
       <Section heading="Sales Inquiries" lead="Ready to explore OptiFlow OS? Choose how you'd like to connect.">
         <Container>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'var(--gap-lg)',
-            maxWidth: '900px',
-            marginInline: 'auto',
-          }}>
+          <div className="grid grid-cols-3 gap-[var(--gap-lg)] max-w-[900px] mx-auto">
             <ChannelCard
               variant="sales"
               icon={<PhoneIcon />}
@@ -260,13 +218,7 @@ export default function Contact() {
       {/* S04 Support Channels */}
       <Section heading="Support" lead="Existing customer? We're here to help." background="surface">
         <Container>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'var(--gap-lg)',
-            maxWidth: '900px',
-            marginInline: 'auto',
-          }}>
+          <div className="grid grid-cols-3 gap-[var(--gap-lg)] max-w-[900px] mx-auto">
             <ChannelCard
               variant="support"
               icon={<SupportIcon />}
@@ -305,13 +257,7 @@ export default function Contact() {
       {/* S06 Response Promises */}
       <Section heading="Response Promises" lead="Here's when you can expect to hear from us." background="surface">
         <Container>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 'var(--gap-lg)',
-            maxWidth: '1000px',
-            marginInline: 'auto',
-          }}>
+          <div className="grid grid-cols-4 gap-[var(--gap-lg)] max-w-[1000px] mx-auto">
             <ResponsePromiseCard
               icon={<ClockIcon />}
               title="Sales Inquiries"
@@ -366,13 +312,13 @@ export default function Contact() {
         <p className="lead reveal reveal-delay-1">
           Start with a free demo — see how OptiFlow OS brings visibility, accountability, and growth to your business.
         </p>
-        <div className="reveal reveal-delay-2" style={{ display: 'flex', gap: 'var(--gap-sm)', justifyContent: 'center', flexWrap: 'wrap', marginTop: 8 }}>
+        <div className="reveal reveal-delay-2 flex gap-[var(--gap-sm)] justify-center flex-wrap mt-2">
           <Button as={Link} to="/demo-booking" variant="primary" size="lg" glow>Book Free Demo</Button>
           <Button as="button" variant="secondary" size="lg" onClick={() => {
             document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
           }}>Send Message</Button>
         </div>
-        <div className="hero-trust reveal reveal-delay-3" style={{ gridTemplateColumns: 'repeat(4,1fr)', margin: '40px auto 0', justifyContent: 'center', maxWidth: 600 }}>
+        <div className="hero-trust reveal reveal-delay-3 grid-cols-4 mt-10 mx-auto justify-center max-w-[600px]" style={{ display: 'grid' }}>
           {['Fast Deployment', 'MSME Focused', 'Dedicated Support', 'Easy Adoption'].map((b) => (
             <span key={b}><CheckIcon /> {b}</span>
           ))}

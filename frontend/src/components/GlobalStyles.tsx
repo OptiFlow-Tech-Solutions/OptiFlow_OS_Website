@@ -151,7 +151,7 @@ export default function GlobalStyles() {
       }
 
       .section-dark {
-        background: oklch(12% 0.018 250);
+        background: #0F172A;
         color: var(--bg);
       }
       .section-dark .container { position: relative; z-index: var(--z-content); }
@@ -160,10 +160,10 @@ export default function GlobalStyles() {
       .section-dark h2, .section-dark h3 { color: white; }
       .section-dark .card { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); }
       .section-dark .card:hover { border-color: rgba(84,184,154,.40); background: rgba(255,255,255,.12); }
-      [data-theme="dark"] .section-dark { background: oklch(12% 0.018 250); }
+      [data-theme="dark"] .section-dark { background: #0F172A; }
       [data-theme="dark"] .section-dark h2, [data-theme="dark"] .section-dark h3 { color: var(--fg); }
       [data-theme="dark"] .section-dark .lead { color: var(--muted); }
-      [data-theme="dark"] .section-dark .card { background: oklch(18% 0.018 250); border-color: oklch(25% 0.015 250); }
+      [data-theme="dark"] .section-dark .card { background: #1E293B; border-color: #334155; }
 
       .btn-glow { position: relative; }
       .btn-glow::before {
@@ -219,10 +219,10 @@ export default function GlobalStyles() {
         align-items: center;
         gap: var(--gap-sm);
         padding: var(--gap-sm) var(--gap-md);
-        background: color-mix(in oklch, oklch(60% 0.15 25) 12%, transparent);
-        border: 1px solid color-mix(in oklch, oklch(60% 0.15 25) 25%, transparent);
+        background: color-mix(in oklch, #EF4444 12%, transparent);
+        border: 1px solid color-mix(in oklch, #EF4444 25%, transparent);
         border-radius: var(--radius);
-        color: oklch(50% 0.14 25);
+        color: #DC2626;
         font-size: 14px;
         font-weight: 500;
         margin-bottom: var(--gap-md);
@@ -233,9 +233,9 @@ export default function GlobalStyles() {
       form.form-error .form-error-retry { display: inline-flex; }
       form.form-error .btn[type="submit"] { display: none; }
       [data-theme="dark"] .form-error-msg {
-        background: color-mix(in oklch, oklch(55% 0.14 25) 14%, transparent);
-        border-color: color-mix(in oklch, oklch(55% 0.14 25) 30%, transparent);
-        color: oklch(65% 0.12 25);
+        background: color-mix(in oklch, #EF4444 14%, transparent);
+        border-color: color-mix(in oklch, #EF4444 30%, transparent);
+        color: #FCA5A5;
       }
 
       @media (prefers-reduced-motion: reduce) {

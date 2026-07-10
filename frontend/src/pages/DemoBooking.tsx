@@ -5,6 +5,7 @@ import {
   BookingForm, CalendarWidget, DashboardMockup,
 } from '../components';
 import type { BookingFormHandle } from '../components/BookingForm';
+import './DemoBooking.css';
 
 const WHY_BOOK_CARDS = [
   {
@@ -107,11 +108,10 @@ const iconColorMap: Record<string, { bg: string; color: string }> = {
 function BenefitIcon({ name, color }: { name: string; color: 'blue' | 'teal' | 'green' }) {
   const c = iconColorMap[color];
   return (
-    <div style={{
-      width: '48px', height: '48px', borderRadius: 'var(--radius)',
-      display: 'grid', placeItems: 'center', flexShrink: 0,
-      background: c.bg, color: c.color,
-    }}>
+    <div
+      className="w-12 h-12 rounded-[var(--radius)] grid place-items-center shrink-0"
+      style={{ background: c.bg, color: c.color }}
+    >
       {iconSvg(name)}
     </div>
   );
@@ -119,24 +119,15 @@ function BenefitIcon({ name, color }: { name: string; color: 'blue' | 'teal' | '
 
 function FAQItem({ q, a, defaultOpen }: { q: string; a: string; defaultOpen?: boolean }) {
   return (
-    <details className="faq-item" open={defaultOpen} style={{ borderBottom: '1px solid var(--border)' }}>
-      <style>{`
-        .faq-item summary::-webkit-details-marker { display: none; }
-        .faq-item summary { list-style: none; }
-        .faq-item[open] .faq-arrow { transform: rotate(180deg); color: var(--teal); }
-      `}</style>
-      <summary style={{
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '20px 0', cursor: 'pointer', fontSize: '17px', fontWeight: 600,
-        color: 'var(--fg)',
-      }}>
+    <details className="faq-item border-b border-border" open={defaultOpen}>
+      <summary className="flex justify-between items-center py-5 cursor-pointer text-[17px] font-semibold text-fg">
         {q}
         <svg className="faq-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
           style={{ flexShrink: 0, color: 'var(--muted)', transition: 'transform 0.3s ease' }}>
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </summary>
-      <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.7, paddingBottom: '20px' }}>{a}</p>
+      <p className="text-muted text-[15px] leading-relaxed pb-5">{a}</p>
     </details>
   );
 }
@@ -154,116 +145,6 @@ export default function DemoBooking() {
 
   return (
     <>
-      <style>{`
-        .hero-demo {
-          padding-top: calc(var(--nav-h) + 60px);
-          padding-bottom: 80px;
-          overflow: hidden;
-          position: relative;
-        }
-        .hero-demo::before {
-          content: '';
-          position: absolute;
-          top: -30%; right: -10%;
-          width: 70%; height: 130%;
-          background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 7%, transparent) 0%, transparent 70%);
-          pointer-events: none;
-        }
-        .hero-badge {
-          display: inline-flex; align-items: center; gap: 8px;
-          padding: 6px 14px; border-radius: 100px;
-          background: var(--accent-soft); color: var(--accent);
-          font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;
-          margin-bottom: 24px;
-        }
-        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        .hero-badge .dot {
-          width: 8px; height: 8px; border-radius: 50%;
-          background: var(--green); animation: pulse-dot 2s ease infinite;
-        }
-        .trust-row {
-          display: flex; gap: 24px; flex-wrap: wrap;
-          font-size: 14px; color: var(--muted);
-        }
-        .trust-row span {
-          display: flex; align-items: center; gap: 6px;
-        }
-        .trust-row .chk { color: var(--green); font-size: 16px; }
-        .trust-metric-val {
-          font-family: var(--font-mono);
-          font-size: clamp(28px, 3vw, 40px);
-          font-weight: 700; color: var(--accent);
-        }
-        .trust-metric-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
-        .tl-step { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 32px; position: relative; padding-left: 72px; }
-        .tl-step:last-child { margin-bottom: 0; }
-        .tl-num {
-          position: absolute; left: 20px;
-          width: 24px; height: 24px; border-radius: 50%;
-          background: var(--accent); color: white;
-          display: grid; place-items: center;
-          font-family: var(--font-mono); font-size: 12px; font-weight: 700; z-index: 1;
-        }
-        .tl-step:nth-child(even) .tl-num { background: var(--teal); }
-        .limited-banner {
-          display: flex; align-items: center; gap: 10px;
-          padding: 12px 20px; border-radius: var(--radius);
-          background: var(--accent-soft);
-          border: 1px solid color-mix(in oklch, var(--accent) 20%, var(--border));
-          font-size: 14px; font-weight: 500; color: var(--accent);
-          margin-bottom: 32px; max-width: 600px; margin-inline: auto;
-        }
-        @keyframes pulse-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        .limited-banner .blink {
-          width: 8px; height: 8px; border-radius: 50%;
-          background: oklch(55% 0.16 25);
-          animation: pulse-blink 1.5s ease infinite; flex-shrink: 0;
-        }
-        .cta-section-page {
-          padding-block: clamp(56px, 8vw, var(--gap-2xl));
-          background: linear-gradient(135deg, oklch(25% 0.07 250) 0%, oklch(18% 0.04 245) 50%, oklch(12% 0.018 250) 100%);
-          color: white; text-align: center; position: relative; overflow: hidden;
-        }
-        .cta-inner { position: relative; z-index: 1; }
-        .cta-ctas {
-          display: flex; gap: var(--gap-sm); justify-content: center;
-          flex-wrap: wrap; margin-bottom: 32px;
-        }
-        .cta-trust {
-          display: flex; gap: 24px; justify-content: center;
-          flex-wrap: wrap; font-size: 14px; opacity: 0.85;
-        }
-        .cta-trust span { display: flex; align-items: center; gap: 6px; }
-        [data-theme="dark"] .form-group input,
-        [data-theme="dark"] .form-group select,
-        [data-theme="dark"] .form-group textarea {
-          background: var(--surface); color: var(--fg); border-color: var(--border);
-        }
-        [data-theme="dark"] .form-group input::placeholder,
-        [data-theme="dark"] .form-group textarea::placeholder {
-          color: oklch(65% 0.01 240); opacity: 0.5;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .dash-main, .hero-badge .dot, .limited-banner .blink { animation: none; }
-        }
-        @media (max-width: 1024px) {
-          .hero-grid-demo { grid-template-columns: 1fr; gap: 48px; }
-        }
-        @media (max-width: 768px) {
-          .trust-metrics-row { gap: 24px; }
-          .tl-step { padding-left: 56px; }
-          .tl-num { left: 12px; }
-        }
-        @media (max-width: 480px) {
-          .hero-cta-row { flex-direction: column; }
-          .trust-row { flex-direction: column; gap: 6px; }
-          .trust-metrics-row { flex-direction: column; gap: 16px; }
-          .cta-trust { flex-direction: column; gap: 8px; }
-          .limited-banner { flex-direction: column; text-align: center; padding: 10px 16px; font-size: 13px; }
-        }
-      `}</style>
-
       {/* S01: HERO */}
       <section className="hero-demo">
         <div className="container">
@@ -274,7 +155,7 @@ export default function DemoBooking() {
                 LIVE PRODUCT DEMONSTRATION
               </div>
               <h1>See How OptiFlow Can Transform Your Operations.</h1>
-              <p className="lead" style={{ marginBottom: '32px' }}>
+              <p className="lead mb-8">
                 Book a personalized demo and discover how OptiFlow helps MSMEs improve accountability, visibility, execution, and growth — built specifically for businesses like yours.
               </p>
               <div className="hero-cta-row" style={{ display: 'flex', gap: 'var(--gap-sm)', flexWrap: 'wrap', marginBottom: '32px' }}>
@@ -288,7 +169,7 @@ export default function DemoBooking() {
                 <span><span className="chk">&#10003;</span> Business Consultation Included</span>
               </div>
             </div>
-            <div style={{ maxWidth: '500px', margin: '0 auto' }}>
+            <div className="max-w-[500px] mx-auto">
               <DashboardMockup />
             </div>
           </div>
@@ -299,16 +180,11 @@ export default function DemoBooking() {
       <Section heading="Why Business Owners Book A Demo" lead="A 30-minute session that can fundamentally change how you think about business operations.">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--gap-lg)' }}>
           {WHY_BOOK_CARDS.map((card, i) => (
-            <div key={i} style={{
-              background: 'var(--surface)', border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-lg)', padding: 'var(--gap-md)',
-              display: 'flex', gap: '16px', alignItems: 'flex-start',
-              boxShadow: 'var(--shadow-card)',
-            }}>
+            <div key={i} className="bg-surface border border-border rounded-[var(--radius-lg)] p-[var(--gap-md)] flex gap-4 items-start" style={{ boxShadow: 'var(--shadow-card)' }}>
               <BenefitIcon name={card.icon} color={card.iconColor as 'blue' | 'teal' | 'green'} />
               <div>
-                <h3 style={{ marginBottom: '4px' }}>{card.title}</h3>
-                <p style={{ color: 'var(--muted)', fontSize: '14px' }}>{card.body}</p>
+                <h3 className="mb-1">{card.title}</h3>
+                <p className="text-muted text-sm">{card.body}</p>
               </div>
             </div>
           ))}
@@ -316,10 +192,7 @@ export default function DemoBooking() {
       </Section>
 
       {/* TRUST BAR */}
-      <div style={{
-        background: 'var(--surface)', borderBlock: '1px solid var(--border)',
-        paddingBlock: '40px', textAlign: 'center',
-      }}>
+      <div className="bg-surface border-y border-border py-10 text-center">
         <Container>
           <div className="trust-metrics-row" style={{ display: 'flex', justifyContent: 'center', gap: '48px', flexWrap: 'wrap' }}>
             {TRUST_METRICS.map((m) => (
@@ -337,13 +210,8 @@ export default function DemoBooking() {
         heading="What You'll Experience During The Demo"
         lead="A structured walkthrough designed to answer your questions and show how OptiFlow fits your business."
       >
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <span style={{
-            display: 'inline-flex', alignItems: 'center', gap: '6px',
-            padding: '10px 18px', borderRadius: '100px',
-            background: 'var(--accent-soft)', color: 'var(--accent)',
-            fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 600,
-          }}>
+        <div className="text-center mb-8">
+          <span className="inline-flex items-center gap-[6px] px-[18px] py-[10px] rounded-full bg-accent-soft text-accent font-mono text-[13px] font-semibold">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ opacity: 0.7 }}>
               <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
             </svg>
@@ -351,17 +219,14 @@ export default function DemoBooking() {
           </span>
         </div>
 
-        <div style={{ position: 'relative', maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{
-            position: 'absolute', top: 0, bottom: 0, left: '32px', width: '2px',
-            background: 'linear-gradient(to bottom, var(--accent), var(--teal))',
-          }} />
+        <div className="relative max-w-[900px] mx-auto">
+          <div className="absolute top-0 bottom-0 left-8 w-0.5 bg-gradient-to-b from-accent to-teal" />
           {TIMELINE_STEPS.map((step, i) => (
             <div key={i} className="tl-step">
               <div className="tl-num">{step.step}</div>
               <div>
-                <h3 style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' }}>{step.title}</h3>
-                <p style={{ color: 'var(--muted)', fontSize: '15px' }}>{step.body}</p>
+                <h3 className="font-display tracking-tight">{step.title}</h3>
+                <p className="text-muted text-[15px]">{step.body}</p>
               </div>
             </div>
           ))}
@@ -372,14 +237,10 @@ export default function DemoBooking() {
       <Section background="surface" heading="What You Will Walk Away With" lead="More than a product tour — a complete operational assessment for your business.">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--gap-lg)' }}>
           {WALK_AWAY_CARDS.map((card, i) => (
-            <div key={i} style={{
-              background: 'var(--bg)', border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-lg)', padding: 'var(--gap-md)',
-              boxShadow: 'var(--shadow-card)',
-            }}>
+            <div key={i} className="bg-bg border border-border rounded-[var(--radius-lg)] p-[var(--gap-md)]" style={{ boxShadow: 'var(--shadow-card)' }}>
               <BenefitIcon name={card.icon} color={card.iconColor as 'blue' | 'teal' | 'green'} />
-              <h3 style={{ marginTop: '12px', marginBottom: '6px' }}>{card.title}</h3>
-              <p style={{ color: 'var(--muted)', fontSize: '14px' }}>{card.body}</p>
+              <h3 className="mt-3 mb-1.5">{card.title}</h3>
+              <p className="text-muted text-sm">{card.body}</p>
             </div>
           ))}
         </div>
@@ -406,7 +267,7 @@ export default function DemoBooking() {
 
       {/* S07: FAQ */}
       <Section heading="Frequently Asked Questions">
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div className="max-w-[800px] mx-auto">
           {FAQ_ITEMS.map((item, i) => (
             <FAQItem key={i} q={item.q} a={item.a} defaultOpen={i === 0} />
           ))}
@@ -416,8 +277,8 @@ export default function DemoBooking() {
       {/* S08: FINAL CTA */}
       <section className="cta-section-page">
         <div className="cta-inner container">
-          <h2 style={{ color: 'white' }}>Ready To See OptiFlow In Action?</h2>
-          <p className="lead" style={{ color: 'var(--muted)', maxWidth: '700px', margin: '16px auto' }}>
+          <h2 className="text-white">Ready To See OptiFlow In Action?</h2>
+          <p className="lead text-muted max-w-[700px] mx-auto my-4">
             Book a personalized demo and discover how OptiFlow can help your business become more accountable, visible, efficient, and scalable.
           </p>
           <div className="cta-ctas">

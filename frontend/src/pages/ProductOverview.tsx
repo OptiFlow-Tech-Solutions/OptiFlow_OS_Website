@@ -69,7 +69,7 @@ export default function ProductOverview() {
       <Section heading="What Is OptiFlow OS?" lead="A Business Operating System that transforms organisations from people-dependent operations into process-driven enterprises." data-screen-label="02 What Is OptiFlow">
         <div className="transform-flow reveal">
           <div className="transform-stage chaos">
-            <h3 style={{ fontSize: 18, color: 'color-mix(in oklch, red 70%, white)', margin: '0 0 8px' }}>Traditional Operations</h3>
+            <h3 className="text-lg text-red-400 m-0 mb-2">Traditional Operations</h3>
             <div className="transform-tag">WhatsApp</div>
             <div className="transform-tag">Excel</div>
             <div className="transform-tag">Calls</div>
@@ -79,14 +79,14 @@ export default function ProductOverview() {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </div>
           <div className="transform-stage optiflow">
-            <h3 style={{ fontSize: 18, color: 'var(--accent)', margin: '0 0 8px' }}>OptiFlow OS</h3>
-            <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0 }}>One centralised platform replacing scattered tools, messages, and spreadsheets.</p>
+            <h3 className="text-lg text-accent m-0 mb-2">OptiFlow OS</h3>
+            <p className="text-[13px] text-muted m-0">One centralised platform replacing scattered tools, messages, and spreadsheets.</p>
           </div>
           <div className="transform-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </div>
           <div className="transform-stage system">
-            <h3 style={{ fontSize: 18, color: 'var(--green)', margin: '0 0 8px' }}>Systemised Operations</h3>
+            <h3 className="text-lg text-green m-0 mb-2">Systemised Operations</h3>
             <div className="transform-tag">Predictable</div>
             <div className="transform-tag">Accountable</div>
             <div className="transform-tag">Scalable</div>
@@ -97,12 +97,12 @@ export default function ProductOverview() {
 
       {/* S03: Product Vision */}
       <Section heading="Building The Operating System For Growing Businesses" lead="A single platform that gives every business &mdash; regardless of size &mdash; the same operational discipline as the world's best-run companies." data-screen-label="03 Product Vision">
-        <div className="grid-3 stagger reveal" style={{ marginTop: 32 }}>
+        <div className="grid-3 stagger reveal mt-8">
           {visionCards.map((card, i) => (
             <Card key={i}>
-              <div style={{ fontSize: 28, marginBottom: 12 }}>{card.icon}</div>
+              <div className="text-[28px] mb-3">{card.icon}</div>
               <h3>{card.title}</h3>
-              <p style={{ fontSize: 14, color: 'var(--muted)', marginTop: 8 }}>{card.desc}</p>
+              <p className="text-sm text-muted mt-2">{card.desc}</p>
             </Card>
           ))}
         </div>

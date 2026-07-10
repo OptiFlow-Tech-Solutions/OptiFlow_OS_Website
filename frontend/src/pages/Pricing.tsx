@@ -9,6 +9,7 @@ import ROICalculator from '../components/pricing/ROICalculator';
 import ImplementationTimeline from '../components/pricing/ImplementationTimeline';
 import PricingFAQ from '../components/pricing/PricingFAQ';
 import { PLANS, PHILOSOPHY_CARDS, SECURITY_CARDS, TRUST_BADGES_PRICING } from '../components/pricing/pricingData';
+import './Pricing.css';
 
 /* SVG icons for philosophy & security cards */
 const iconPaths: Record<string, ReactNode> = {
@@ -50,114 +51,60 @@ export default function Pricing() {
       <MetaHead />
 
       {/* S01: Hero */}
-      <section
-        className="hero"
-        style={{
-          paddingTop: 'calc(var(--nav-h) + 72px)',
-          paddingBottom: 80,
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Background glow */}
-        <div style={{
-          content: '""',
-          position: 'absolute',
-          top: '-40%',
-          right: '-15%',
-          width: '70%',
-          height: '150%',
-          background: 'radial-gradient(ellipse at center, color-mix(in oklch, var(--accent) 6%, transparent) 0%, color-mix(in oklch, var(--teal) 4%, transparent) 40%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-
+      <section className="pricing-hero">
+        <div className="pricing-hero-glow" />
         <Container>
-          <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
-            <div className="hero-content" style={{ position: 'relative', zIndex: 2 }}>
+          <div className="pricing-hero-grid">
+            <div className="pricing-hero-content">
               <h1>Simple, Predictable Pricing. No Per-User Charges.</h1>
-              <p className="lead" style={{ marginBottom: 32 }}>
+              <p className="lead pricing-hero-lead">
                 One annual investment covers your entire team. Cloud hosting, product updates, and support included. No hidden fees — just a predictable path to operational excellence.
               </p>
-              <div className="hero-cta" style={{ display: 'flex', gap: 'var(--gap-sm)', flexWrap: 'wrap', marginBottom: 36 }}>
+              <div className="pricing-hero-cta">
                 <Button variant="primary" size="lg" onClick={scrollToPlans}>Compare Plans</Button>
                 <Button as={Link} to="/demo-booking" variant="secondary" size="lg">Book Demo</Button>
               </div>
-              <div className="trust-badges" style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-sm) var(--gap-lg)' }}>
+              <div className="pricing-hero-badges">
                 {TRUST_BADGES_PRICING.map((badge: string) => (
-                  <span key={badge} style={{ fontSize: 14, color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span key={badge} className="pricing-hero-badge">
                     <span style={{ color: 'var(--green)', display: 'flex' }}><CheckSvg /></span>
                     {badge}
                   </span>
                 ))}
               </div>
             </div>
-
-            <div className="pricing-visual" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="pricing-hero-visual">
               <ROIDashboard />
             </div>
           </div>
         </Container>
-
-        <style>{`
-          .hero-content > * { opacity: 0; transform: translateY(16px); animation: heroReveal 0.65s cubic-bezier(0.22,0.61,0.36,1) forwards; }
-          .hero-content h1 { animation-delay: 0.12s; }
-          .hero-content .lead { animation-delay: 0.22s; }
-          .hero-content .hero-cta { animation-delay: 0.32s; }
-          .hero-content .trust-badges { animation-delay: 0.46s; }
-          @keyframes heroReveal { to { opacity: 1; transform: translateY(0); } }
-          .pricing-visual .roi-dashboard { opacity: 0; transform: translateY(16px); animation: heroReveal 0.65s cubic-bezier(0.22,0.61,0.36,1) forwards; animation-delay: 0.2s; }
-          .pricing-visual .rd-row { opacity: 0; animation: heroReveal 0.5s cubic-bezier(0.22,0.61,0.36,1) forwards; }
-          .pricing-visual .rd-row:nth-child(2) { animation-delay: 0.3s; }
-          .pricing-visual .rd-row:nth-child(3) { animation-delay: 0.38s; }
-          .pricing-visual .rd-row:nth-child(4) { animation-delay: 0.46s; }
-          .pricing-visual .rd-row:nth-child(5) { animation-delay: 0.54s; }
-          .pricing-visual .rd-row:nth-child(6) { animation-delay: 0.62s; }
-
-          @media (max-width: 1024px) {
-            .hero-grid { grid-template-columns: 1fr !important; gap: 48px; }
-            .hero-content { text-align: center; }
-            .hero-content .hero-cta, .hero-content .trust-badges { justify-content: center; }
-          }
-          @media (max-width: 768px) {
-            .hero-visual, .pricing-visual { display: none; }
-          }
-        `}</style>
       </section>
 
       {/* S02: Pricing Philosophy */}
       <Section background="surface">
-        <div className="section-header reveal" style={{ textAlign: 'center', marginBottom: 'var(--gap-xl)' }}>
+        <div className="pricing-section-header reveal">
           <h2>Built Around Business Value, Not User Counts</h2>
           <p className="lead">Most SaaS tools charge per user — the bigger your team, the higher the bill. OptiFlow was designed differently: one fixed annual investment that covers your entire team so you can scale without surprise costs.</p>
         </div>
         <Container width="narrow">
-          <div className="grid-4 stagger-4 reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--gap-md)' }}>
+          <div className="pricing-grid-4 stagger-4 reveal">
             {PHILOSOPHY_CARDS.map((card: typeof PHILOSOPHY_CARDS[number]) => (
-              <div key={card.title} className="card" style={{ textAlign: 'center', padding: 'var(--gap-md)' }}>
+              <div key={card.title} className="card pricing-card-centered">
                 <IconSvg name={card.icon} />
-                <h4 style={{ fontSize: 15, marginBottom: 4 }}>{card.title}</h4>
-                <p style={{ fontSize: 13, color: 'var(--muted)' }}>{card.description}</p>
+                <h4 className="pricing-card-title">{card.title}</h4>
+                <p className="pricing-card-desc">{card.description}</p>
               </div>
             ))}
           </div>
         </Container>
       </Section>
 
-      <style>{`
-        @media (max-width: 1024px) {
-          .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 480px) {
-          .grid-4 { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
-
       {/* Trust Bar */}
       <TrustBar />
 
       {/* S03+S04: Pricing Plans */}
       <Section eyebrow="PRICING PLANS" heading="Choose the plan built for your scale" lead="Annual pricing. One-time implementation. Everything included.">
-        <div className="pricing-grid stagger-3 reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-lg)', alignItems: 'start' }}>
+        <div className="pricing-plan-grid stagger-3 reveal">
           {PLANS.map((plan: typeof PLANS[number]) => (
             <PricingCard
               key={plan.name}
@@ -173,16 +120,6 @@ export default function Pricing() {
           ))}
         </div>
       </Section>
-
-      <style>{`
-        @media (max-width: 1024px) {
-          .pricing-grid { grid-template-columns: repeat(3, 1fr) !important; gap: var(--gap-md) !important; }
-        }
-        @media (max-width: 768px) {
-          .pricing-grid { grid-template-columns: 1fr !important; max-width: 440px; margin-inline: auto; }
-          .pricing-card.featured { order: -1; }
-        }
-      `}</style>
 
       {/* S05: Comparison Matrix */}
       <Section heading="Compare Plans Side By Side" lead="Find the plan that fits your business scale and needs." background="dark">
@@ -202,12 +139,12 @@ export default function Pricing() {
       {/* S08: Security */}
       <Section heading="Built-In Security. Included With Every Plan." lead="Role-based access, audit logs, secure infrastructure — the same security enterprises demand, designed for MSME simplicity." background="dark">
         <Container width="narrow">
-          <div className="grid-3 stagger-3 reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-md)' }}>
+          <div className="pricing-grid-3 stagger-3 reveal">
             {SECURITY_CARDS.map((card: typeof SECURITY_CARDS[number]) => (
-              <div key={card.title} className="card" style={{ textAlign: 'center', padding: 'var(--gap-md)' }}>
+              <div key={card.title} className="card pricing-card-centered">
                 <IconSvg name={card.icon} />
-                <h3 style={{ fontSize: 16, marginBottom: 6 }}>{card.title}</h3>
-                <p style={{ fontSize: 13, color: 'var(--muted)' }}>{card.description}</p>
+                <h3 className="pricing-card-title-lg">{card.title}</h3>
+                <p className="pricing-card-desc">{card.description}</p>
               </div>
             ))}
           </div>
@@ -220,37 +157,26 @@ export default function Pricing() {
       </Section>
 
       {/* S10: CTA */}
-      <Section className="cta-section" background="dark">
-        <div className="reveal" style={{ textAlign: 'center' }}>
+      <Section className="pricing-cta" background="dark">
+        <div className="pricing-cta-inner reveal">
           <h2>Build a Structured, Accountable, Scalable Operation</h2>
-          <p className="lead" style={{ maxWidth: 560, marginInline: 'auto', color: 'var(--muted)' }}>
+          <p className="lead pricing-cta-lead">
             See how OptiFlow can help your business improve visibility, accountability, execution, and growth — starting at ₹49,000/year.
           </p>
-          <div style={{ display: 'flex', gap: 'var(--gap-sm)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 36 }}>
+          <div className="pricing-cta-actions">
             <Button as={Link} to="/demo-booking" variant="primary" size="lg" glow>Book Free Demo</Button>
             <Button as={Link} to="/contact" variant="secondary" size="lg">Talk To An Expert</Button>
           </div>
-          <div className="trust-badges" style={{ justifyContent: 'center', display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-sm) var(--gap-lg)' }}>
+          <div className="pricing-cta-badges">
             {['No Hidden Costs', 'Fixed Annual Pricing', 'Cloud Hosting Included', 'MSME Focused'].map((b) => (
-              <span key={b} style={{ fontSize: 14, color: 'color-mix(in oklch, white 85%, transparent)', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ color: 'var(--lime)', display: 'flex' }}><CheckSvg /></span>
+              <span key={b} className="pricing-cta-badge">
+                <CheckSvg />
                 {b}
               </span>
             ))}
           </div>
         </div>
       </Section>
-
-      <style>{`
-        .cta-section .btn-primary { background: white; color: var(--accent); box-shadow: var(--shadow-button-hover); }
-        .cta-section .btn-primary:hover { box-shadow: var(--shadow-elevated); transform: translateY(-2px); }
-        .cta-section .btn-secondary { background: transparent; color: white; border-color: color-mix(in oklch, white 40%, transparent); }
-        .cta-section .btn-secondary:hover { border-color: white; }
-
-        @media (max-width: 768px) {
-          .grid-3 { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </>
   );
 }

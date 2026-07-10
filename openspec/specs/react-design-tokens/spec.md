@@ -2,52 +2,70 @@
 
 ## Purpose
 
-Standalone CSS design token file (`design-tokens.css`) extracted from `assets/css/core.css` containing all CSS custom properties for colors, typography, spacing, shadows, and motion — serving as the single source of truth for the React design system.
+Standalone CSS design token file (`design-tokens.css`) containing all CSS custom properties for colors, typography, spacing, shadows, and motion — serving as the single source of truth for the React design system, reconciled with the canonical `DESIGN.md` specification using hex color values, Inter font family, 1320px container, and fixed pixel type scale.
 
 ## Requirements
 
-### Requirement: Design tokens CSS file exists
-The system SHALL provide a standalone `design-tokens.css` file containing all CSS custom properties from `assets/css/core.css` scoped under `:root` (light mode) and `[data-theme="dark"]` (dark mode).
+### Requirement: Color tokens match DESIGN.md hex values
+The system SHALL define all semantic color tokens using hex values that match the DESIGN.md specification: `--accent: #1B4D81`, `--teal: #278D9F`, `--green: #54B89A`, `--lime: #99D271`, `--bg: #F8FAFC`, `--surface: #FFFFFF`, `--fg: #0F172A`, `--muted: #475569`, with corresponding soft variants derived via `color-mix()`.
+
+#### Scenario: Primary blue token matches DESIGN.md
+- **WHEN** inspecting `--accent` in `design-tokens.css`
+- **THEN** the value is `#1B4D81`
+
+#### Scenario: Teal token matches DESIGN.md
+- **WHEN** inspecting `--teal` in `design-tokens.css`
+- **THEN** the value is `#278D9F`
+
+#### Scenario: All color tokens use DESIGN.md hex values
+- **WHEN** running `rgrep "oklch"` on `design-tokens.css` inside `:root` and `[data-theme="dark"]`
+- **THEN** no Oklch values remain; all token definitions use hex or `color-mix()` with hex inputs
 
 #### Scenario: All color tokens are defined
 - **WHEN** `design-tokens.css` is inspected
-- **THEN** it contains `--bg`, `--surface`, `--fg`, `--muted`, `--fg-disabled`, `--border`, `--border-soft`, `--border-default`, `--border-strong`, `--accent`, `--teal`, `--green`, `--lime`, `--accent-soft`, `--teal-soft`, `--green-soft`, `--fg-soft`, `--glow-accent` with matching Oklch values from `core.css`
+- **THEN** it contains `--bg`, `--surface`, `--fg`, `--muted`, `--fg-disabled`, `--border`, `--border-soft`, `--border-default`, `--border-strong`, `--accent`, `--teal`, `--green`, `--lime`, `--accent-soft`, `--teal-soft`, `--green-soft`, `--fg-soft`, `--glow-accent` with hex values matching DESIGN.md
 
-#### Scenario: Typography tokens are defined
+#### Scenario: Oklch fallback removed
 - **WHEN** `design-tokens.css` is inspected
-- **THEN** it contains `--font-display`, `--font-body`, `--font-mono`, `--fs-h1`, `--fs-h2`, `--fs-h3`, `--fs-lead`, `--fs-body`, `--fs-meta` with matching values from `core.css`
+- **THEN** no `@supports (color: oklch(0 0 0))` fallback block exists (tokens are now hex-based)
 
-#### Scenario: Spacing and layout tokens are defined
-- **WHEN** `design-tokens.css` is inspected
-- **THEN** it contains `--gap-xs`, `--gap-sm`, `--gap-md`, `--gap-lg`, `--gap-xl`, `--gap-2xl`, `--container`, `--gutter`, `--radius`, `--radius-lg`, `--radius-xl` with matching values from `core.css`
+#### Scenario: Dark mode tokens match DESIGN.md
+- **WHEN** comparing `[data-theme="dark"]` block in `design-tokens.css`
+- **THEN** all dark-mode token overrides use hex equivalents matching DESIGN.md intent
 
-#### Scenario: Shadow tokens are defined
-- **WHEN** `design-tokens.css` is inspected
-- **THEN** it contains `--shadow-card`, `--shadow-card-hover`, `--shadow-elevated`, `--shadow-button`, `--shadow-button-hover`, `--shadow-inset`, `--shadow-nav` with matching values from `core.css`
+### Requirement: Font family matches DESIGN.md
+The system SHALL define `--font-display` and `--font-body` using `'Inter', system-ui, -apple-system, sans-serif` as the font stack, with `--font-mono` using `'JetBrains Mono', ui-monospace, monospace`.
 
-#### Scenario: Transition and motion tokens are defined
-- **WHEN** `design-tokens.css` is inspected
-- **THEN** it contains `--transition-fast`, `--transition-base`, `--transition-slow`, `--ease-out`, `--ease-in`, `--ease-in-out`, `--ease-spring`, `--motion-distance` with matching values from `core.css`
+#### Scenario: Display font uses Inter
+- **WHEN** inspecting `--font-display` in `design-tokens.css`
+- **THEN** the value starts with `'Inter'`
 
-#### Scenario: Z-index tokens are defined
-- **WHEN** `design-tokens.css` is inspected
-- **THEN** it contains all z-index tokens from `--z-base` through `--z-skip-link` with matching values from `core.css`
+#### Scenario: Inter is loaded via link tag
+- **WHEN** inspecting `frontend/index.html`
+- **THEN** a `<link>` tag loads Inter font from Google Fonts with `font-display: swap` for weights 400, 500, 600, 700
 
-#### Scenario: Dark mode tokens match core.css
-- **WHEN** comparing `[data-theme="dark"]` block in `design-tokens.css` with `core.css`
-- **THEN** all dark-mode token overrides match exactly
+### Requirement: Container width matches DESIGN.md
+The system SHALL set `--container: 1320px` and `--gutter: 32px`, matching the DESIGN.md layout specification.
 
-#### Scenario: Tokens are importable by both React and static site
-- **WHEN** `design-tokens.css` is linked via `<link>` in a static HTML page or imported in a React component
-- **THEN** all CSS custom properties are available on the document root
+#### Scenario: Container is 1320px
+- **WHEN** inspecting `--container` in `design-tokens.css`
+- **THEN** the value is `1320px`
 
-#### Scenario: Oklch fallback exists
-- **WHEN** `design-tokens.css` is inspected
-- **THEN** a `@supports (color: oklch(0 0 0))` block provides sRGB fallbacks for `--bg`, `--surface`, `--fg`, `--accent`, and `--teal`
+### Requirement: Type scale matches DESIGN.md
+The system SHALL define font-size tokens using fixed pixel values matching DESIGN.md: `--fs-h1: 52px`, `--fs-h2: 42px`, `--fs-h3: 34px`, `--fs-h4: 28px`, `--fs-h5: 22px`, `--fs-lead: 20px`, `--fs-body: 18px`, `--fs-small: 16px`, `--fs-caption: 14px`. Responsive scaling SHALL be handled via media queries, not `clamp()`.
 
-### Requirement: No hardcoded values
-All color values in `design-tokens.css` SHALL use the `oklch()` functional notation. No hex values, no RGB values SHALL appear as token values.
+#### Scenario: H3 is 34px
+- **WHEN** inspecting `--fs-h3` in `design-tokens.css`
+- **THEN** the value is `34px`
 
-#### Scenario: No hex values in token definitions
-- **WHEN** running `rgrep "#[0-9a-fA-F]"` on `design-tokens.css`
-- **THEN** no hex color values are found in `:root` or `[data-theme="dark"]` blocks (fallback block excluded)
+#### Scenario: Body text is 18px
+- **WHEN** inspecting `--fs-body` in `design-tokens.css`
+- **THEN** the value is `18px`
+
+#### Scenario: Responsive re-scaling via media queries
+- **WHEN** viewport is below 1024px
+- **THEN** `--fs-h1` reduces to 42px, `--fs-h2` reduces to 34px
+
+#### Scenario: Mobile re-scaling
+- **WHEN** viewport is below 768px
+- **THEN** `--fs-h1` reduces to 36px, `--fs-h2` reduces to 28px

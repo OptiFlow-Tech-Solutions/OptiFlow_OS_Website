@@ -7,6 +7,7 @@
   --color-surface: var(--surface);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
+  --color-fg-muted: var(--fg-muted);
   --color-fg-disabled: var(--fg-disabled);
   --color-border: var(--border);
   --color-border-soft: var(--border-soft);
@@ -28,8 +29,12 @@
   --text-h1: var(--fs-h1);
   --text-h2: var(--fs-h2);
   --text-h3: var(--fs-h3);
+  --text-h4: var(--fs-h4);
+  --text-h5: var(--fs-h5);
   --text-lead: var(--fs-lead);
   --text-body: var(--fs-body);
+  --text-small: var(--fs-small);
+  --text-caption: var(--fs-caption);
   --text-meta: var(--fs-meta);
   --spacing-gap-xs: var(--gap-xs);
   --spacing-gap-sm: var(--gap-sm);

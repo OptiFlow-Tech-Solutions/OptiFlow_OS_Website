@@ -21,31 +21,17 @@ export default function Section({
   ...props
 }: SectionProps) {
   const isDark = background === 'dark';
+  const isSurface = background === 'surface';
 
-  let bgStyle: React.CSSProperties = {};
-  let sectionClass = className;
-
-  if (background === 'surface') {
-    bgStyle = { background: 'var(--surface)' };
-  }
-  if (isDark) {
-    sectionClass = `${className} section-dark`.trim();
-  }
+  const bgClass = isDark ? 'section-dark' : isSurface ? 'bg-surface' : '';
+  const sectionClass = `section ${bgClass} ${className}`.trim();
 
   return (
-    <section
-      className={sectionClass}
-      style={{
-        paddingBlock: 'clamp(56px, 8vw, var(--gap-2xl))',
-        position: 'relative',
-        scrollMarginTop: 'var(--nav-h)',
-        ...bgStyle,
-      }}
-      {...props}
-    >
+    <section className={sectionClass} {...props}>
+      {isDark && <div className="noise-overlay" />}
       <Container width={isDark ? 'default' : width}>
         {(heading || lead || eyebrow) && (
-          <div className="section-header">
+          <div className="section-header reveal">
             {eyebrow && <p className="eyebrow">{eyebrow}</p>}
             {heading && <h2>{heading}</h2>}
             {lead && <p className="lead">{lead}</p>}

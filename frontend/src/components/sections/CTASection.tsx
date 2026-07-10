@@ -19,11 +19,11 @@ export default function CTASection() {
       <p className="lead reveal reveal-delay-1">
         See how OptiFlow helps MSMEs improve visibility, accountability, execution, and growth — with one operating system.
       </p>
-      <div className="reveal reveal-delay-2" style={{ display: 'flex', gap: 'var(--gap-sm)', justifyContent: 'center', flexWrap: 'wrap', marginTop: 8 }}>
+      <div className="reveal reveal-delay-2 flex gap-[var(--gap-sm)] justify-center flex-wrap mt-2">
         <Button as={Link} to="/demo-booking" variant="primary" size="lg" glow>Book Free Demo</Button>
         <Button as={Link} to="/product-overview" variant="secondary" size="lg">Watch Product Tour</Button>
       </div>
-      <div className="hero-trust reveal reveal-delay-3" style={{ gridTemplateColumns: 'repeat(4,1fr)', margin: '40px auto 0', justifyContent: 'center', maxWidth: 600 }}>
+      <div className="hero-trust reveal reveal-delay-3 grid grid-cols-4 justify-center max-w-[600px] mx-auto mt-10">
         {BULLETS.map((b) => (
           <span key={b}><CheckIcon /> {b}</span>
         ))}

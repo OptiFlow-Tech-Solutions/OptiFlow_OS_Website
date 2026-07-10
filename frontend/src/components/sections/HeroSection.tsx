@@ -45,7 +45,7 @@ export default function HeroSection() {
               Stop Losing Time on Manual Processes
             </div>
             <h1 className="reveal reveal-delay-1">
-              <span id="typewriterText" aria-live="polite" style={{ color: 'rgb(239, 68, 68)' }}>
+              <span id="typewriterText" aria-live="polite" className="highlight-gradient">
                 {text}
               </span>
               <span

@@ -26,7 +26,7 @@ export default function Input({
     background: 'var(--surface)',
     color: 'var(--fg)',
     border: isError
-      ? '1px solid color-mix(in oklch, oklch(60% 0.15 25) 25%, transparent)'
+      ? '1px solid color-mix(in oklch, #EF4444 25%, transparent)'
       : '1px solid var(--border)',
     borderRadius: 'var(--radius)',
     outline: 'none',
@@ -39,7 +39,7 @@ export default function Input({
   };
 
   if (isError && !disabled) {
-    baseStyle.background = 'color-mix(in oklch, oklch(60% 0.15 25) 6%, transparent)';
+    baseStyle.background = 'color-mix(in oklch, #EF4444 6%, transparent)';
   }
 
   return (

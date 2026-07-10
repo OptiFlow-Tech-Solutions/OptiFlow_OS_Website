@@ -1,7 +1,9 @@
+import { site } from '../data/site';
+
 export default function WhatsAppFloat() {
   return (
     <a
-      href="https://wa.me/917874677836"
+      href={`https://wa.me/${site.whatsapp}`}
       className="whatsapp-float"
       target="_blank"
       rel="noopener"

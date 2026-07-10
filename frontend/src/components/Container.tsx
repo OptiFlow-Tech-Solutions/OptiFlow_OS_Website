@@ -6,11 +6,6 @@ interface ContainerProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
 }
 
-const widths: Record<string, string> = {
-  default: 'var(--container)',
-  narrow: '800px',
-};
-
 export default function Container({
   width = 'default',
   as: Tag = 'div',
@@ -18,16 +13,9 @@ export default function Container({
   children,
   ...props
 }: ContainerProps) {
+  const widthClass = width === 'narrow' ? 'container-narrow' : '';
   return (
-    <Tag
-      className={className}
-      style={{
-        maxWidth: widths[width],
-        marginInline: 'auto',
-        paddingInline: 'var(--gutter)',
-      }}
-      {...props}
-    >
+    <Tag className={`container ${widthClass} ${className}`.trim()} {...props}>
       {children}
     </Tag>
   );

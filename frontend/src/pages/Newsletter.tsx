@@ -3,9 +3,9 @@ import { Section, Container } from '../components';
 export default function Newsletter() {
   return (
     <Section>
-      <Container width="narrow" style={{ textAlign: 'center' }}>
+      <Container width="narrow" className="text-center">
         <h1>Newsletter</h1>
-        <p className="lead" style={{ margin: '12px auto 0' }}>
+        <p className="lead mt-3 mx-auto">
           Practical strategies, operational frameworks, and business systems for Indian MSMEs.
         </p>
       </Container>

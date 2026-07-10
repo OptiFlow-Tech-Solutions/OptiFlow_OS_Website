@@ -56,26 +56,13 @@ export default function Features() {
         if (entry.id === 'leave') {
           return (
             <FeatureSection key={entry.id} entry={entry}>
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: 16,
-                marginBottom: 16, padding: 12,
-                background: 'var(--bg)', borderRadius: 'var(--radius)',
-              }}>
-                <div style={{
-                  width: 40, height: 40, borderRadius: '50%',
-                  background: 'var(--accent)', display: 'flex',
-                  alignItems: 'center', justifyContent: 'center',
-                  color: 'white', fontWeight: 700, fontSize: 14,
-                }}>ST</div>
+              <div className="flex items-center gap-4 mb-4 p-3 bg-bg rounded-[var(--radius)]">
+                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-bold text-sm">ST</div>
                 <div>
-                  <div style={{ fontWeight: 600, fontSize: 14 }}>Sanjay Tiwari → Ruchi Mehta</div>
-                  <div style={{ fontSize: 12, color: 'var(--muted)' }}>3 active tasks reassigned</div>
+                  <div className="font-semibold text-sm">Sanjay Tiwari → Ruchi Mehta</div>
+                  <div className="text-xs text-muted">3 active tasks reassigned</div>
                 </div>
-                <span style={{
-                  marginLeft: 'auto', display: 'inline-block', padding: '2px 10px',
-                  borderRadius: 20, fontSize: 11, fontWeight: 600,
-                  background: 'var(--green-soft)', color: 'var(--green)',
-                }}>Done</span>
+                <span className="ml-auto inline-block px-[10px] py-0.5 rounded-[20px] text-[11px] font-semibold bg-green-soft text-green">Done</span>
               </div>
             </FeatureSection>
           );
@@ -90,24 +77,21 @@ export default function Features() {
           <p className="lead">
             Discover how OptiFlow helps MSMEs improve accountability, visibility, productivity, and growth through one powerful operating system.
           </p>
-          <div style={{ display: 'flex', gap: 'var(--gap-sm)', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="flex gap-[var(--gap-sm)] justify-center flex-wrap">
             <Button as={Link} to="/os/demo-booking/" size="lg">Book Free Demo</Button>
             <Button as={Link} to="/os/product-overview/" variant="secondary" size="lg">Watch Product Tour</Button>
           </div>
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', justifyItems: 'center',
-            marginTop: 28, color: 'color-mix(in oklch, white 80%, transparent)',
-          }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'var(--muted)' }}>
+          <div className="grid grid-cols-4 justify-items-center mt-7">
+            <span className="flex items-center gap-2 text-sm text-muted">
               <CheckIcon /> MSME Focused
             </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'var(--muted)' }}>
+            <span className="flex items-center gap-2 text-sm text-muted">
               <CheckIcon /> Fast Deployment
             </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'var(--muted)' }}>
+            <span className="flex items-center gap-2 text-sm text-muted">
               <CheckIcon /> Easy Adoption
             </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'var(--muted)' }}>
+            <span className="flex items-center gap-2 text-sm text-muted">
               <CheckIcon /> Dedicated Support
             </span>
           </div>

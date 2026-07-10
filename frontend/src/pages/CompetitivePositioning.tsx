@@ -10,32 +10,11 @@ import {
   costCardEntries,
   standoutEntries,
 } from '../data';
+import './CompetitivePositioning.css';
 
 export default function CompetitivePositioning() {
   return (
     <>
-      <style>{`
-        .cp-hero { padding-top: calc(var(--nav-h) + 72px); padding-bottom: 72px; position: relative; overflow: hidden; }
-        .cp-hero::before { content: ''; position: absolute; top: -40%; right: -15%; width: 70%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--accent) 6%, transparent) 0%, color-mix(in oklch, var(--teal) 4%, transparent) 40%, transparent 70%); pointer-events: none; }
-        .cp-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-        .cp-hero-content { position: relative; z-index: 2; }
-        .cp-hero-content h1 { margin-bottom: 20px; }
-        .cp-hero-content .lead { margin-bottom: 32px; }
-        .cp-hero-cta { display: flex; gap: var(--gap-sm); flex-wrap: wrap; }
-        .cp-standout-icon { width: 52px; height: 52px; display: grid; place-items: center; background: color-mix(in oklch, var(--accent) 12%, transparent); border-radius: var(--radius-lg); margin: 0 auto 18px; color: var(--accent); }
-        .cp-standout-icon svg { width: 24px; height: 24px; }
-        .cp-standout-card { text-align: center; padding: 36px 24px; }
-        .cp-standout-card h3 { font-size: 17px; margin-bottom: 8px; color: var(--fg); }
-        .cp-standout-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
-
-        [data-theme="dark"] .cp-standout-icon { background: rgba(39,141,159,.18); color: var(--teal); }
-        [data-theme="dark"] .cp-standout-card h3 { color: var(--fg); }
-
-        @media (max-width: 1024px) {
-          .cp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
-        }
-      `}</style>
-
       {/* Hero */}
       <section className="cp-hero">
         <Container className="cp-hero-grid reveal">
@@ -72,7 +51,7 @@ export default function CompetitivePositioning() {
         <Container>
           <div className="section-header reveal">
             <h2>The Competitive Landscape</h2>
-            <p className="lead" style={{ maxWidth: 680, margin: '0 auto' }}>MSMEs typically rely on one of four approaches. Each solves part of the problem — none solves it all.</p>
+            <p className="lead max-w-[680px] mx-auto">MSMEs typically rely on one of four approaches. Each solves part of the problem — none solves it all.</p>
           </div>
           <QuadrantGrid
             entries={quadrantEntries}
@@ -87,7 +66,7 @@ export default function CompetitivePositioning() {
         <Container>
           <div className="section-header reveal">
             <h2>Feature-by-Feature Comparison</h2>
-            <p className="lead" style={{ maxWidth: 720, margin: '0 auto' }}>A transparent look at how OptiFlow OS stacks up across the capabilities that matter for daily operations.</p>
+            <p className="lead max-w-[720px] mx-auto">A transparent look at how OptiFlow OS stacks up across the capabilities that matter for daily operations.</p>
           </div>
           <ComparisonTable columns={matrixColumns} rows={matrixRows} />
         </Container>
@@ -101,13 +80,9 @@ export default function CompetitivePositioning() {
             sectionHeading="What You Actually Pay — Annual Cost Comparison"
             sectionLead="Based on a typical 25-employee MSME. Real numbers, no surprises."
           />
-          <p style={{
-            textAlign: 'center', marginTop: 24,
-            color: 'color-mix(in oklch, white 78%, transparent)',
-            fontSize: 14,
-          }}>
+          <p className="text-center mt-6 text-[color-mix(in_oklch,white_78%,transparent)] text-sm">
             Want the full pricing breakdown?{' '}
-            <Link to="/os/pricing/" style={{ color: 'var(--lime)', fontWeight: 600 }}>See detailed pricing plans</Link>
+            <Link to="/os/pricing/" className="text-lime font-semibold">See detailed pricing plans</Link>
           </p>
         </Container>
       </section>
@@ -117,13 +92,9 @@ export default function CompetitivePositioning() {
         <Container>
           <div className="section-header reveal">
             <h2>Why OptiFlow OS Stands Apart</h2>
-            <p className="lead" style={{ maxWidth: 640, margin: '0 auto' }}>Three things no competitor offers — and why they matter for your business.</p>
+            <p className="lead max-w-[640px] mx-auto">Three things no competitor offers — and why they matter for your business.</p>
           </div>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'var(--gap-md)',
-          }} className="stagger-3">
+          <div className="grid grid-cols-3 gap-[var(--gap-md)] stagger-3">
             {standoutEntries.map((entry, i) => (
               <Card key={i} className="cp-standout-card reveal">
                 <div className="cp-standout-icon">
@@ -147,12 +118,12 @@ export default function CompetitivePositioning() {
 
       {/* CTA */}
       <section className="cta-section reveal">
-        <Container style={{ textAlign: 'center' }}>
-          <h2 style={{ color: 'white', marginBottom: 16 }}>See the difference yourself</h2>
-          <p style={{ color: 'color-mix(in oklch, white 78%, transparent)', maxWidth: 560, margin: '0 auto 32px', fontSize: 18, lineHeight: 1.6 }}>
+        <Container className="text-center">
+          <h2 className="text-white mb-4">See the difference yourself</h2>
+          <p className="text-[color-mix(in_oklch,white_78%,transparent)] max-w-[560px] mx-auto mb-8 text-lg leading-relaxed">
             Book a free personalized demo. We'll show you how OptiFlow OS replaces chaos with clarity — in 30 minutes.
           </p>
-          <div style={{ display: 'flex', gap: 'var(--gap-sm)', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="flex gap-[var(--gap-sm)] justify-center flex-wrap">
             <Button as={Link} to="/os/demo-booking/" size="lg">Book a Free Demo</Button>
             <Button as={Link} to="/os/contact/" variant="secondary" size="lg">Talk to Sales</Button>
           </div>

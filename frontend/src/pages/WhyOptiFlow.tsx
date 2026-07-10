@@ -6,6 +6,7 @@ import { useMouseGlow } from '../hooks/useMouseGlow';
 import { useCountUp } from '../hooks/useCountUp';
 import { Section, Card, Container, Button } from '../components';
 import ComparisonTable from '../components/sections/ComparisonTable';
+import './WhyOptiFlow.css';
 
 // ─── SVG Icons ───
 
@@ -206,10 +207,10 @@ function ROICard({ target, suffix = '', prefix = '', label, desc }: { target: nu
   const { display, ref } = useCountUp(target, { suffix, prefix, duration: 1500 });
   return (
     <div ref={ref}>
-      <Card style={{ textAlign: 'center', padding: '32px 20px' }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 40, fontWeight: 700, color: 'var(--accent)', marginBottom: 8 }}>{display}</div>
-        <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 6 }}>{label}</div>
-        <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.5 }}>{desc}</p>
+      <Card className="text-center p-8">
+        <div className="font-mono text-[40px] font-bold text-accent mb-2">{display}</div>
+        <div className="text-sm font-semibold mb-1.5">{label}</div>
+        <p className="text-xs text-muted leading-relaxed">{desc}</p>
       </Card>
     </div>
   );
@@ -225,106 +226,15 @@ export default function WhyOptiFlow() {
 
   return (
     <>
-      <style>{`
-        .wof-hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
-        .wof-hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 8%, transparent) 0%, transparent 70%); pointer-events: none; }
-        .wof-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-        .wof-hero-content { position: relative; z-index: 2; }
-        .wof-hero-content h1 { margin-bottom: 20px; }
-        .wof-hero-content .lead { margin-bottom: 32px; }
-        .wof-hero-cta { display: flex; gap: var(--gap-sm); flex-wrap: wrap; margin-bottom: 40px; }
-        .wof-hero-trust { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .wof-hero-trust span { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
-        .wof-hero-trust svg { color: var(--green); flex-shrink: 0; }
-        .mouse-glow2 { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, color-mix(in oklch, var(--accent) 12%, transparent) 0%, transparent 60%); pointer-events: none; transform: translate(-50%, -50%); z-index: 0; opacity: 0; transition: opacity 0.3s; }
-        .mouse-glow2.active { opacity: 1; }
-        .tw-cursor2 { display: inline-block; width: 3px; height: 0.8em; background: #84cc16; margin-left: 4px; vertical-align: middle; }
-
-        .transform-visual2 { display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; z-index: 2; }
-        .transform-stage2 { padding: 20px 36px; border-radius: var(--radius-lg); font-weight: 600; font-size: 18px; text-align: center; width: 100%; max-width: 360px; }
-        .transform-stage2.chaos2 { background: oklch(90% 0.06 25); color: #0F172A; border: 1px solid oklch(80% 0.08 25); }
-        [data-theme="dark"] .transform-stage2.chaos2 { background: rgba(200,80,30,.16); color: rgba(255,255,255,.88); border-color: rgba(200,80,30,.30); }
-        .transform-stage2.of { background: linear-gradient(135deg, var(--accent), var(--teal)); color: white; font-size: 22px; padding: 28px 48px; box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 30%, transparent); animation: wofPulse 3s ease-in-out infinite; }
-        @keyframes wofPulse { 0%, 100% { box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 30%, transparent); } 50% { box-shadow: 0 12px 48px color-mix(in oklch, var(--accent) 45%, transparent); } }
-        .transform-stage2.excellence2 { background: var(--green-soft); color: #0F172A; border: 1px solid color-mix(in oklch, var(--green) 30%, transparent); }
-        [data-theme="dark"] .transform-stage2.excellence2 { background: rgba(84,184,154,.16); color: rgba(255,255,255,.88); border-color: rgba(84,184,154,.30); }
-        .transform-arrow2 { color: var(--muted); font-size: 24px; }
-        .transform-kpi2 { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; font-size: 12px; box-shadow: 0 6px 20px color-mix(in oklch, var(--fg) 8%, transparent); animation: floatKPI2 4s ease-in-out infinite; }
-        .transform-kpi2.t1 { top: 10px; left: -80px; animation-delay: 0s; }
-        .transform-kpi2.t2 { top: 60px; right: -80px; animation-delay: 1.3s; }
-        .transform-kpi2.t3 { bottom: 10px; left: -60px; animation-delay: 2.6s; }
-        @keyframes floatKPI2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .tk-value2 { font-family: var(--font-mono); font-weight: 700; color: var(--accent); }
-        .tk-label2 { color: var(--muted); }
-
-        .problem-card2 { padding: 32px; }
-        .problem-icon2 { width: 44px; height: 44px; display: grid; place-items: center; background: oklch(96% 0.01 230); border-radius: var(--radius); margin-bottom: 20px; color: var(--accent); box-shadow: 0 2px 6px rgba(27,77,129,.08); }
-        [data-theme="dark"] .problem-icon2 { background: rgba(255,255,255,.08); color: var(--teal); box-shadow: 0 2px 6px rgba(0,0,0,.25); }
-        .problem-card2 h3 { margin-bottom: 8px; }
-        [data-theme="dark"] .problem-card2 h3 { color: var(--fg); }
-        .problem-desc2 { color: var(--muted); font-size: 14px; line-height: 1.5; margin-bottom: 12px; }
-        [data-theme="dark"] .problem-desc2 { color: var(--muted); }
-        .problem-impact2 { font-size: 12px; color: var(--accent); font-weight: 500; background: var(--accent-soft); display: inline-block; padding: 4px 10px; border-radius: 999px; }
-        [data-theme="dark"] .problem-impact2 { color: oklch(78% 0.06 220); background: rgba(39,141,159,.18); }
-        .problem-solution2 { font-size: 13px; color: var(--green); font-weight: 600; margin-top: 8px; }
-
-        .designer-card2 { text-align: center; padding: 32px 24px; }
-        .designer-icon2 { width: 56px; height: 56px; display: grid; place-items: center; background: linear-gradient(135deg, color-mix(in oklch, var(--bg) 10%, transparent), color-mix(in oklch, var(--green) 20%, transparent)); border-radius: var(--radius-lg); margin: 0 auto 16px; color: var(--green); }
-        .designer-card2 h3 { margin-bottom: 8px; font-size: 16px; color: var(--fg); }
-        .designer-card2 p { font-size: 13px; color: color-mix(in oklch, var(--bg) 60%, transparent); line-height: 1.5; }
-
-        .timeline2 { position: relative; max-width: 900px; margin: 0 auto; padding: 0; }
-        .timeline2::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: linear-gradient(180deg, var(--accent), var(--teal), var(--green)); transform: translateX(-50%); }
-        .timeline-item2 { display: flex; align-items: center; margin-bottom: 32px; position: relative; }
-        .timeline-item2:nth-child(odd) { flex-direction: row; padding-right: 52%; }
-        .timeline-item2:nth-child(even) { flex-direction: row-reverse; padding-left: 52%; }
-        .timeline-dot2 { width: 48px; height: 48px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 700; color: var(--accent); position: absolute; left: 50%; transform: translateX(-50%); z-index: 2; flex-shrink: 0; }
-        .timeline-content2 { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
-        .timeline-content2 h3 { font-size: 16px; margin-bottom: 4px; }
-        .timeline-content2 p { font-size: 13px; color: var(--muted); }
-
-        .trust-grid2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); text-align: center; }
-        .trust-item2 { padding: 28px 16px; }
-        .trust-item-icon2 { width: 48px; height: 48px; display: grid; place-items: center; background: var(--accent-soft); border-radius: var(--radius-lg); margin: 0 auto 16px; color: var(--accent); }
-        .trust-item2 h3 { font-size: 15px; margin-bottom: 4px; }
-        .trust-item2 p { font-size: 12px; color: var(--muted); }
-
-        .adoption-stats2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-lg); margin-top: 56px; text-align: center; }
-        .adoption-stat-value2 { font-family: var(--font-mono); font-size: clamp(28px, 4vw, 40px); font-weight: 700; color: var(--accent); margin-bottom: 4px; }
-        .adoption-stat-label2 { font-size: 14px; color: var(--muted); font-weight: 500; }
-
-        @media (max-width: 1024px) {
-          .wof-hero-grid { grid-template-columns: 1fr; gap: 40px; }
-          .wof-hero { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 40px; }
-          .transform-kpi2 { display: none; }
-          .trust-grid2 { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 768px) {
-          .wof-hero { padding-top: calc(var(--nav-h) + 24px); }
-          .wof-hero-trust { grid-template-columns: 1fr; }
-          .timeline2::before { left: 24px; }
-          .timeline-item2 { padding: 0 0 0 56px !important; flex-direction: row !important; margin-bottom: 24px; }
-          .timeline-dot2 { left: 24px; width: 40px; height: 40px; font-size: 14px; }
-          .transform-visual2 { gap: 12px; }
-        }
-        @media (max-width: 480px) {
-          .wof-hero-cta { flex-direction: column; }
-          .transform-stage2 { font-size: 14px; padding: 14px 20px; }
-          .transform-stage2.of { font-size: 16px; padding: 18px 28px; }
-          .trust-grid2 { grid-template-columns: 1fr; }
-          .adoption-stats2 { grid-template-columns: repeat(2, 1fr); }
-        }
-      `}</style>
-
       <main id="content" role="main">
 
         {/* 01: HERO */}
         <section className="section wof-hero" ref={heroRef}>
           <div className={`mouse-glow2 ${glow.isActive ? 'active' : ''}`} style={{ left: glow.x, top: glow.y }} />
-          <Container style={{ position: 'relative', zIndex: 1 }}>
+          <Container className="relative z-10">
             <div className="wof-hero-grid">
               <div className="wof-hero-content">
-                <h1 className="reveal reveal-delay-1" style={{ marginTop: 0, minHeight: '1.2em', color: '#84cc16' }} aria-live="polite">
+                <h1 className="reveal reveal-delay-1 mt-0 min-h-[1.2em] text-[#84cc16]" aria-live="polite">
                   <span id="twText">{text}</span>
                   <span className="tw-cursor2" style={{ opacity: isCursorVisible ? 1 : 0 }}>|</span>
                 </h1>
@@ -340,7 +250,7 @@ export default function WhyOptiFlow() {
                   <span><CheckSmall /> Process Driven Operations</span>
                 </div>
               </div>
-              <div className="reveal reveal-delay-2" style={{ position: 'relative' }}>
+              <div className="reveal reveal-delay-2 relative">
                 <div className="transform-visual2">
                   <div className="transform-stage2 chaos2">Traditional Business Chaos</div>
                   <div className="transform-arrow2"><ArrowDown /></div>
@@ -395,27 +305,27 @@ export default function WhyOptiFlow() {
         {/* 04: EASY ADOPTION */}
         <Section heading="Software Only Works If People Actually Use It" lead="Designed to be simple enough for frontline employees while powerful enough for business owners.">
           <div className="grid-3 stagger">
-            <Card className="reveal" style={{ textAlign: 'center', padding: '36px 28px' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: 'color-mix(in oklch,var(--teal),transparent 88%)', display: 'grid', placeItems: 'center', margin: '0 auto 16px' }}><SettingsIcon /></div>
+            <Card className="reveal text-center py-9 px-7">
+              <div className="w-12 h-12 rounded-xl bg-teal-soft grid place-items-center mx-auto mb-4"><SettingsIcon /></div>
               <h3>Simple Interface</h3>
-              <p style={{ fontSize: 14, color: 'var(--muted)', marginTop: 8, lineHeight: 1.65 }}>Works like the apps your team already uses — no confusing menus, no training manuals needed.</p>
+              <p className="text-sm text-muted mt-2 leading-relaxed">Works like the apps your team already uses — no confusing menus, no training manuals needed.</p>
             </Card>
-            <Card className="reveal" style={{ textAlign: 'center', padding: '36px 28px' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: 'color-mix(in oklch,var(--teal),transparent 88%)', display: 'grid', placeItems: 'center', margin: '0 auto 16px' }}><RoleIcon /></div>
+            <Card className="reveal text-center py-9 px-7">
+              <div className="w-12 h-12 rounded-xl bg-teal-soft grid place-items-center mx-auto mb-4"><RoleIcon /></div>
               <h3>Role-Based Views</h3>
-              <p style={{ fontSize: 14, color: 'var(--muted)', marginTop: 8, lineHeight: 1.65 }}>Admin, Captain, or Doer — each person sees exactly what they need. Nothing more, nothing less.</p>
+              <p className="text-sm text-muted mt-2 leading-relaxed">Admin, Captain, or Doer — each person sees exactly what they need. Nothing more, nothing less.</p>
             </Card>
-            <Card className="reveal" style={{ textAlign: 'center', padding: '36px 28px' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: 'color-mix(in oklch,var(--teal),transparent 88%)', display: 'grid', placeItems: 'center', margin: '0 auto 16px' }}><MobileIcon /></div>
+            <Card className="reveal text-center py-9 px-7">
+              <div className="w-12 h-12 rounded-xl bg-teal-soft grid place-items-center mx-auto mb-4"><MobileIcon /></div>
               <h3>Mobile First</h3>
-              <p style={{ fontSize: 14, color: 'var(--muted)', marginTop: 8, lineHeight: 1.65 }}>Attendance, tasks, approvals, reports — everything works on your phone. No desktop required.</p>
+              <p className="text-sm text-muted mt-2 leading-relaxed">Attendance, tasks, approvals, reports — everything works on your phone. No desktop required.</p>
             </Card>
           </div>
           <div className="adoption-stats2 reveal">
             <div><div className="adoption-stat-value2 num">90%+</div><div className="adoption-stat-label2">Adoption Rate</div></div>
-            <div><div className="adoption-stat-value2 num" style={{ color: 'var(--green)' }}>&lt; 7 days</div><div className="adoption-stat-label2">Average Team Onboarding</div></div>
-            <div><div className="adoption-stat-value2 num" style={{ color: 'var(--teal)' }}>3 roles</div><div className="adoption-stat-label2">Admin / Captain / Doer</div></div>
-            <div><div className="adoption-stat-value2 num" style={{ color: 'var(--lime)' }}>24/7</div><div className="adoption-stat-label2">Accessible Anywhere</div></div>
+            <div><div className="adoption-stat-value2 num text-green">&lt; 7 days</div><div className="adoption-stat-label2">Average Team Onboarding</div></div>
+            <div><div className="adoption-stat-value2 num text-teal">3 roles</div><div className="adoption-stat-label2">Admin / Captain / Doer</div></div>
+            <div><div className="adoption-stat-value2 num text-lime">24/7</div><div className="adoption-stat-label2">Accessible Anywhere</div></div>
           </div>
         </Section>
 
@@ -441,13 +351,9 @@ export default function WhyOptiFlow() {
 
         {/* 06: ROI STATS */}
         <Section heading="Operational Improvements That Pay For Themselves" lead="Every rupee invested in process-driven operations returns measurable business value. Here's what OptiFlow customers consistently achieve.">
-          <div className="roi-grid-auto" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--gap-lg)' }}>
+          <div className="roi-grid-auto">
             {ROI_STATS.map((s, i) => <ROICard key={i} {...s} />)}
           </div>
-          <style>{`
-            @media (max-width: 1024px) { .roi-grid-auto { grid-template-columns: repeat(2, 1fr) !important; } }
-            @media (max-width: 480px) { .roi-grid-auto { grid-template-columns: 1fr !important; } }
-          `}</style>
         </Section>
 
         {/* 07: COMPARISON TABLE */}
@@ -473,10 +379,10 @@ export default function WhyOptiFlow() {
             ))}
           </div>
           <div className="testimonial-stats reveal">
-            <div><div className="testimonial-stat-value num" style={{ color: 'var(--accent)' }}>80%</div><div className="testimonial-stat-label">Reduced Follow-Ups</div></div>
-            <div><div className="testimonial-stat-value num" style={{ color: 'var(--green)' }}>95%</div><div className="testimonial-stat-label">Accountability Improvement</div></div>
-            <div><div className="testimonial-stat-value num" style={{ color: 'var(--teal)' }}>92%</div><div className="testimonial-stat-label">Process Compliance</div></div>
-            <div><div className="testimonial-stat-value num" style={{ color: 'var(--lime)' }}>100%</div><div className="testimonial-stat-label">Team Visibility</div></div>
+            <div><div className="testimonial-stat-value num text-accent">80%</div><div className="testimonial-stat-label">Reduced Follow-Ups</div></div>
+            <div><div className="testimonial-stat-value num text-green">95%</div><div className="testimonial-stat-label">Accountability Improvement</div></div>
+            <div><div className="testimonial-stat-value num text-teal">92%</div><div className="testimonial-stat-label">Process Compliance</div></div>
+            <div><div className="testimonial-stat-value num text-lime">100%</div><div className="testimonial-stat-label">Team Visibility</div></div>
           </div>
         </Section>
 
@@ -492,12 +398,12 @@ export default function WhyOptiFlow() {
 
         {/* 10: FINAL CTA */}
         <Section background="surface" heading="Ready To Build A Process Driven Business?" lead="Discover how OptiFlow helps MSMEs improve accountability, visibility, execution, and growth through one unified operating system — built specifically for businesses like yours.">
-          <div className="reveal reveal-delay-2" style={{ display: 'flex', gap: 'var(--gap-sm)', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="reveal reveal-delay-2 flex gap-[var(--gap-sm)] justify-center flex-wrap">
             <Button as={Link} to="/demo-booking" variant="primary" size="lg" glow>Book Free Demo</Button>
             <Button as={Link} to="/product-overview" variant="secondary" size="lg">Watch Product Tour</Button>
             <Button as={Link} to="/competitive-positioning" variant="secondary" size="lg">Compare vs Alternatives</Button>
           </div>
-          <div style={{ display: 'flex', gap: 40, justifyContent: 'center', flexWrap: 'wrap', marginTop: 40, fontSize: 14, opacity: 0.9 }} className="reveal reveal-delay-3">
+          <div className="flex gap-10 justify-center flex-wrap mt-10 text-sm opacity-90 reveal reveal-delay-3">
             <span><CheckSmall /> MSME Focused</span>
             <span><CheckSmall /> Fast Deployment</span>
             <span><CheckSmall /> Easy Adoption</span>

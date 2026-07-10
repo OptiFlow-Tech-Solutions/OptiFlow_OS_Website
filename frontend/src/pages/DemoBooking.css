@@ -1,0 +1,53 @@
+/* DemoBooking page-specific styles */
+
+.hero-demo { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 80px; overflow: hidden; position: relative; }
+.hero-demo::before { content: ''; position: absolute; top: -30%; right: -10%; width: 70%; height: 130%; background: radial-gradient(ellipse at center, color-mix(in oklch, var(--teal) 7%, transparent) 0%, transparent 70%); pointer-events: none; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 100px; background: var(--accent-soft); color: var(--accent); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; margin-bottom: 24px; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse-dot 2s ease infinite; }
+.trust-row { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+.trust-row span { display: flex; align-items: center; gap: 6px; }
+.trust-row .chk { color: var(--green); font-size: 16px; }
+.trust-metric-val { font-family: var(--font-mono); font-size: clamp(28px, 3vw, 40px); font-weight: 700; color: var(--accent); }
+.trust-metric-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.tl-step { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 32px; position: relative; padding-left: 72px; }
+.tl-step:last-child { margin-bottom: 0; }
+.tl-num { position: absolute; left: 20px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: white; display: grid; place-items: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; z-index: 1; }
+.tl-step:nth-child(even) .tl-num { background: var(--teal); }
+.limited-banner { display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: var(--radius); background: var(--accent-soft); border: 1px solid color-mix(in oklch, var(--accent) 20%, var(--border)); font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 32px; max-width: 600px; margin-inline: auto; }
+@keyframes pulse-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.limited-banner .blink { width: 8px; height: 8px; border-radius: 50%; background: oklch(55% 0.16 25); animation: pulse-blink 1.5s ease infinite; flex-shrink: 0; }
+.cta-section-page { padding-block: clamp(56px, 8vw, var(--gap-2xl)); background: linear-gradient(135deg, oklch(25% 0.07 250) 0%, oklch(18% 0.04 245) 50%, oklch(12% 0.018 250) 100%); color: white; text-align: center; position: relative; overflow: hidden; }
+.cta-inner { position: relative; z-index: 1; }
+.cta-ctas { display: flex; gap: var(--gap-sm); justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+.cta-trust { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; font-size: 14px; opacity: 0.85; }
+.cta-trust span { display: flex; align-items: center; gap: 6px; }
+
+/* FAQ */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary { list-style: none; }
+.faq-item[open] .faq-arrow { transform: rotate(180deg); color: var(--teal); }
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .form-group textarea { background: var(--surface); color: var(--fg); border-color: var(--border); }
+[data-theme="dark"] .form-group input::placeholder,
+[data-theme="dark"] .form-group textarea::placeholder { color: oklch(65% 0.01 240); opacity: 0.5; }
+@media (prefers-reduced-motion: reduce) {
+  .dash-main, .hero-badge .dot, .limited-banner .blink { animation: none; }
+}
+@media (max-width: 1024px) {
+  .hero-grid-demo { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 768px) {
+  .trust-metrics-row { gap: 24px; }
+  .tl-step { padding-left: 56px; }
+  .tl-num { left: 12px; }
+}
+@media (max-width: 480px) {
+  .hero-cta-row { flex-direction: column; }
+  .trust-row { flex-direction: column; gap: 6px; }
+  .trust-metrics-row { flex-direction: column; gap: 16px; }
+  .cta-trust { flex-direction: column; gap: 8px; }
+  .limited-banner { flex-direction: column; text-align: center; padding: 10px 16px; font-size: 13px; }
+}

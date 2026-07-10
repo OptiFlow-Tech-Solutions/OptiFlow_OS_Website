@@ -1,5 +1,4 @@
 import useScrollReveal from '../hooks/useScrollReveal';
-import HomeStyles from '../components/HomeStyles';
 import HeroSection from '../components/sections/HeroSection';
 import TrustBar from '../components/sections/TrustBar';
 import ProblemSection from '../components/sections/ProblemSection';
@@ -15,13 +14,15 @@ import CTASection from '../components/sections/CTASection';
 import FAQPreview from '../components/sections/FAQPreview';
 import ExitOverlay from '../components/ExitOverlay';
 import WhatsAppFloat from '../components/WhatsAppFloat';
+import StickyCTA from '../components/StickyCTA';
+import ScrollTop from '../components/ScrollTop';
+import './Home.css';
 
 export default function Home() {
   useScrollReveal();
 
   return (
     <>
-      <HomeStyles />
       <HeroSection />
       <TrustBar />
       <ProblemSection />
@@ -37,6 +38,8 @@ export default function Home() {
       <FAQPreview />
       <ExitOverlay />
       <WhatsAppFloat />
+      <StickyCTA />
+      <ScrollTop />
     </>
   );
 }

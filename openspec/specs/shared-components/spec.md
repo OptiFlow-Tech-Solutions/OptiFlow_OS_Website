@@ -225,3 +225,35 @@ The system SHALL provide a StickyCTA bottom bar visible after scrolling past vie
 #### Scenario: StickyCTA component exists
 - **WHEN** importing `{ StickyCTA }` from `./components`
 - **THEN** StickyCTA is a valid React component
+
+### Requirement: Button component has transition animation
+The Button component SHALL apply CSS transitions on `background-color`, `border-color`, `box-shadow`, and `transform` properties using `var(--transition-base)` duration and `var(--ease-out)` timing.
+
+#### Scenario: Button hover transitions smoothly
+- **WHEN** hovering over a primary button
+- **THEN** the background, shadow, and transform change over ~250ms with an ease-out curve
+
+#### Scenario: Button active state provides feedback
+- **WHEN** pressing a button
+- **THEN** the button scales down slightly (`transform: scale(0.97)`) providing tactile feedback
+
+### Requirement: Card component has hover transition
+The Card component SHALL apply a smooth elevation transition on hover using CSS `transition` on `box-shadow` and `transform` properties.
+
+#### Scenario: Card hover elevates smoothly
+- **WHEN** hovering over a card with `hover` prop
+- **THEN** the shadow deepens and the card lifts over ~250ms
+
+### Requirement: Input component focus transition
+The Input component SHALL apply a CSS transition on `border-color` and `box-shadow` during focus/blur events.
+
+#### Scenario: Input focus has smooth border transition
+- **WHEN** an input receives `:focus-visible`
+- **THEN** the border and box-shadow change over ~150ms
+
+### Requirement: Nav dropdown menu animation
+The Nav component's Resource dropdown SHALL animate in/out using `opacity` and `transform: translateY()` with `var(--transition-base)` duration.
+
+#### Scenario: Dropdown animates open
+- **WHEN** hovering over the Resources nav item
+- **THEN** the dropdown menu fades in and slides down over 250ms
