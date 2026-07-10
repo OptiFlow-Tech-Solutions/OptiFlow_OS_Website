@@ -6,3 +6,4 @@ export { useMouseGlow } from './useMouseGlow';
 export { useParallax } from './useParallax';
 export { useCountUp } from './useCountUp';
 export { useCardTilt } from './useCardTilt';
+export { default as usePrefersReducedMotion } from './usePrefersReducedMotion';

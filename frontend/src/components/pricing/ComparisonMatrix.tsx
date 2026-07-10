@@ -38,7 +38,7 @@ export default function ComparisonMatrix() {
       maxWidth: 960,
       margin: '0 auto',
       background: 'oklch(12% 0.018 250)',
-      color: '#fff',
+      color: 'white',
       borderRadius: 'var(--radius-xl)',
       padding: '48px 40px',
     }}>

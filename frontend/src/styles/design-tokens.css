@@ -1,37 +1,36 @@
 /* ═══════════════════════════════════════════
    OptiFlow OS — Design Tokens
-   Source of truth: DESIGN.md/DESIGN.md v5.0
-   Colors, fonts, type scale, spacing all match canonical spec.
+   Single source of truth: assets/css/core.css
    ═══════════════════════════════════════════ */
 
 :root {
-  --bg: #F8FAFC;
-  --surface: #FFFFFF;
-  --fg: #0F172A;
-  --muted: #475569;
-  --fg-muted: #64748B;
-  --fg-disabled: #94A3B8;
-  --border: #E2E8F0;
-  --border-soft: #F1F5F9;
-  --border-default: #E2E8F0;
-  --border-strong: #CBD5E1;
-  --accent: #1B4D81;
-  --teal: #278D9F;
-  --green: #54B89A;
-  --lime: #99D271;
-  --accent-soft: color-mix(in oklch, #1B4D81 12%, transparent);
-  --teal-soft: color-mix(in oklch, #278D9F 10%, transparent);
-  --green-soft: color-mix(in oklch, #54B89A 10%, transparent);
-  --fg-soft: color-mix(in oklch, #0F172A 5%, transparent);
-  --glow-accent: color-mix(in oklch, #99D271 18%, transparent);
+  --bg: oklch(97.5% 0.005 240);
+  --surface: oklch(100% 0 0);
+  --fg: oklch(15% 0.02 250);
+  --muted: oklch(50% 0.018 250);
+  --fg-disabled: oklch(67% 0.015 250);
+  --border: oklch(92% 0.006 240);
+  --border-soft: oklch(96% 0.004 240);
+  --border-default: oklch(92% 0.006 240);
+  --border-strong: oklch(84% 0.012 250);
+  --accent: oklch(33% 0.09 255);
+  --teal: oklch(52% 0.10 210);
+  --green: oklch(72% 0.12 145);
+  --lime: oklch(82% 0.14 125);
+  --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+  --teal-soft: color-mix(in oklch, var(--teal) 10%, transparent);
+  --green-soft: color-mix(in oklch, var(--green) 10%, transparent);
+  --fg-soft: color-mix(in oklch, var(--fg) 5%, transparent);
+  --glow-accent: color-mix(in oklch, var(--lime) 18%, transparent);
   --nav-bg: transparent;
-  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-  --fs-display: 64px; --fs-h1: 52px; --fs-h2: 42px; --fs-h3: 34px; --fs-h4: 28px; --fs-h5: 22px;
-  --fs-lead: 20px; --fs-body: 18px; --fs-small: 16px; --fs-caption: 14px; --fs-meta: 13px;
+  --font-display: 'Inter', -apple-system, blinkmacsystemfont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', -apple-system, blinkmacsystemfont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', menlo, monospace;
+  --fs-display: 64px; --fs-h1: clamp(36px, 5.5vw, 68px); --fs-h2: clamp(28px, 3.8vw, 46px);
+  --fs-h3: 20px; --fs-h4: 28px; --fs-h5: 22px;
+  --fs-lead: 18px; --fs-body: 16px; --fs-small: 16px; --fs-caption: 14px; --fs-meta: 13px;
   --gap-xs: 8px; --gap-sm: 12px; --gap-md: 20px; --gap-lg: 32px; --gap-xl: 56px; --gap-2xl: 96px;
-  --container: 1320px; --gutter: 32px;
+  --container: 1200px; --gutter: 32px;
   --radius: 10px; --radius-lg: 16px; --radius-xl: 24px;
   --nav-h: 80px;
   --z-base: 0;
@@ -62,23 +61,22 @@
 }
 
 [data-theme="dark"] {
-  --bg: #0F172A;
-  --surface: #1E293B;
-  --fg: #F8FAFC;
-  --muted: #94A3B8;
-  --fg-muted: #94A3B8;
-  --fg-disabled: #64748B;
-  --border: #334155;
-  --border-soft: #1E293B;
-  --border-default: #334155;
-  --border-strong: #475569;
-  --accent: #60A5FA;
-  --teal: #5BC0D0;
-  --accent-soft: color-mix(in oklch, #60A5FA 18%, transparent);
-  --teal-soft: color-mix(in oklch, #5BC0D0 14%, transparent);
-  --green-soft: color-mix(in oklch, #54B89A 14%, transparent);
-  --fg-soft: color-mix(in oklch, #F8FAFC 8%, transparent);
-  --glow-accent: color-mix(in oklch, #99D271 14%, transparent);
+  --bg: oklch(9% 0.02 250);
+  --surface: oklch(15% 0.018 250);
+  --fg: oklch(98% 0.002 240);
+  --muted: oklch(70% 0.016 240);
+  --fg-disabled: oklch(45% 0.015 250);
+  --border: oklch(28% 0.015 250);
+  --border-soft: oklch(18% 0.01 250);
+  --border-default: oklch(28% 0.015 250);
+  --border-strong: oklch(38% 0.02 250);
+  --accent: oklch(68% 0.12 210);
+  --teal: oklch(72% 0.11 215);
+  --accent-soft: color-mix(in oklch, var(--accent) 18%, transparent);
+  --teal-soft: color-mix(in oklch, var(--teal) 14%, transparent);
+  --green-soft: color-mix(in oklch, var(--green) 14%, transparent);
+  --fg-soft: color-mix(in oklch, var(--fg) 8%, transparent);
+  --glow-accent: color-mix(in oklch, var(--lime) 14%, transparent);
   --shadow-card: 0 1px 3px rgba(0,0,0,.20), 0 4px 12px rgba(0,0,0,.25), 0 10px 24px rgba(0,0,0,.30);
   --shadow-card-hover: 0 1px 3px rgba(0,0,0,.25), 0 8px 18px rgba(0,0,0,.30), 0 18px 42px rgba(0,0,0,.35);
   --shadow-elevated: 0 2px 6px rgba(0,0,0,.22), 0 8px 20px rgba(0,0,0,.28), 0 20px 48px rgba(0,0,0,.32);
@@ -91,14 +89,14 @@
 
 @media (max-width: 1024px) {
   :root {
-    --fs-display: 48px; --fs-h1: 42px; --fs-h2: 34px; --fs-h3: 28px; --fs-h4: 24px;
+    --fs-display: 48px; --fs-h4: 24px;
     --fs-h5: 20px; --fs-lead: 18px; --fs-body: 16px;
   }
 }
 
 @media (max-width: 768px) {
   :root {
-    --fs-display: 36px; --fs-h1: 36px; --fs-h2: 28px; --fs-h3: 24px; --fs-h4: 20px;
+    --fs-display: 36px; --fs-h4: 20px;
     --fs-h5: 18px; --fs-lead: 17px; --fs-body: 16px;
   }
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from './ThemeProvider';
 import Button from './Button';
@@ -42,8 +42,6 @@ const navDropdown: NavDropdown = {
 
 const navCTA: NavCTA = { label: 'Book Demo', href: '/os/demo-booking/' };
 
-// ponytail: map routes to active labels for useLocation matching.
-// Add label+path pairs here as new pages get routes.
 const routeToActive: Record<string, string> = {
   '/': 'Home',
   '/problem-solutions': 'Solutions',
@@ -71,28 +69,54 @@ export default function Nav() {
   const { toggleTheme } = useTheme();
   const scrollY = useScrollPosition();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const openDrawer = useCallback(() => setDrawerOpen(true), []);
-  const closeDrawer = useCallback(() => setDrawerOpen(false), []);
+  const closeDrawer = useCallback(() => {
+    setDrawerOpen(false);
+    hamburgerRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape' && drawerOpen) {
-        closeDrawer();
+      if (e.key === 'Escape') {
+        if (drawerOpen) {
+          closeDrawer();
+        }
+        if (dropdownOpen) {
+          setDropdownOpen(false);
+        }
       }
     }
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [drawerOpen, closeDrawer]);
+  }, [drawerOpen, dropdownOpen, closeDrawer]);
 
   useEffect(() => {
     if (drawerOpen) {
       document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        const firstLink = drawerRef.current?.querySelector('a');
+        firstLink?.focus();
+      }, 100);
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
   }, [drawerOpen]);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [dropdownOpen]);
 
   const scrolled = scrollY > 20;
 
@@ -127,20 +151,34 @@ export default function Nav() {
                 {link.label}
               </Link>
             ))}
-            <div className="react-nav-dropdown">
-              <span className={`react-nav-link${resolveActiveClass(pathname, '', navDropdown.label) ? ' active' : ''}`}>
+            <div className="react-nav-dropdown" ref={dropdownRef}>
+              <button
+                className={`react-nav-link${resolveActiveClass(pathname, '', navDropdown.label) ? ' active' : ''}`}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setDropdownOpen(!dropdownOpen);
+                  }
+                }}
+                aria-expanded={dropdownOpen}
+                aria-haspopup="true"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', font: 'inherit' }}
+              >
                 {navDropdown.label}{' '}
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 4 }} aria-hidden="true">
                   <polyline points="1,1 5,5 9,1" />
                 </svg>
-              </span>
-              <div className="react-nav-dropdown-menu">
-                {navDropdown.items.map((item) => (
-                  <Link key={item.label} to={item.href.replace(/^\/os/, '')}>
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
+              </button>
+              {dropdownOpen && (
+                <div className="react-nav-dropdown-menu">
+                  {navDropdown.items.map((item) => (
+                    <Link key={item.label} to={item.href.replace(/^\/os/, '')} onClick={() => setDropdownOpen(false)}>
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </nav>
 
@@ -148,7 +186,7 @@ export default function Nav() {
             <button
               className="react-nav-theme-toggle"
               onClick={toggleTheme}
-              aria-label="Toggle theme"
+              aria-label="Toggle dark mode"
             >
               <svg className="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
@@ -163,9 +201,10 @@ export default function Nav() {
           </div>
 
           <button
+            ref={hamburgerRef}
             className={`react-nav-hamburger${drawerOpen ? ' open' : ''}`}
             onClick={() => drawerOpen ? closeDrawer() : openDrawer()}
-            aria-label="Toggle menu"
+            aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={drawerOpen}
           >
             <span /><span /><span />
@@ -176,9 +215,10 @@ export default function Nav() {
       <div
         className={`react-nav-overlay${drawerOpen ? ' active' : ''}`}
         onClick={closeDrawer}
+        aria-hidden="true"
       />
 
-      <div className={`react-nav-drawer${drawerOpen ? ' open' : ''}`}>
+      <div ref={drawerRef} className={`react-nav-drawer${drawerOpen ? ' open' : ''}`} role="dialog" aria-label="Mobile navigation" aria-modal={drawerOpen}>
         {navLinks.map((link) => (
           <Link
             key={link.label}

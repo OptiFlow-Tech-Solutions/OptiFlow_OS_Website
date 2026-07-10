@@ -89,7 +89,7 @@ function CellRenderer({ value }: { value: string }) {
     return <span style={{ color: 'red', fontWeight: 600 }}>{value.replace('red:', '')}</span>;
 
   if (value.startsWith('yellow:'))
-    return <span style={{ color: '#f0a020' }}>{value.replace('yellow:', '')}</span>;
+    return <span style={{ color: 'oklch(70% 0.12 80)' }}>{value.replace('yellow:', '')}</span>;
 
   if (value.startsWith('accent:'))
     return <span style={{ color: 'var(--accent)' }}>{value.replace('accent:', '')}</span>;

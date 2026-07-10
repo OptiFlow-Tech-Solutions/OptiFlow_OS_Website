@@ -186,7 +186,7 @@ export default function ROIDashboard() {
                     style={{
                       width: '100%',
                       height: 18,
-                      background: '#EEF2F7',
+                      background: 'oklch(95% 0.004 240)',
                       border: '1px solid rgba(255,255,255,.5)',
                       boxShadow: 'inset 0 1px 3px rgba(0,0,0,.05)',
                       borderRadius: 999,
@@ -203,7 +203,7 @@ export default function ROIDashboard() {
                         position: 'absolute',
                         left: 0,
                         top: 0,
-                        background: 'linear-gradient(180deg, #FFB347 0%, #FF8A00 50%, #F97316 100%)',
+                        background: 'linear-gradient(180deg, oklch(82% 0.14 70) 0%, oklch(72% 0.16 55) 50%, oklch(62% 0.18 40) 100%)',
                         boxShadow: '0 1px 2px rgba(0,0,0,.08)',
                         transition: prefersReduced.current ? 'none' : 'width 1s cubic-bezier(0.22,1,0.36,1)',
                       }}
@@ -212,7 +212,7 @@ export default function ROIDashboard() {
                         className="rd-bar-val"
                         style={{
                           background: 'rgba(0,0,0,.45)',
-                          color: '#fff',
+                          color: 'white',
                           padding: '2px 8px',
                           borderRadius: 999,
                           fontSize: 10,
@@ -234,7 +234,7 @@ export default function ROIDashboard() {
                     style={{
                       width: '100%',
                       height: 18,
-                      background: '#EEF2F7',
+                      background: 'oklch(95% 0.004 240)',
                       border: '1px solid rgba(255,255,255,.5)',
                       boxShadow: 'inset 0 1px 3px rgba(0,0,0,.05)',
                       borderRadius: 999,
@@ -251,7 +251,7 @@ export default function ROIDashboard() {
                         position: 'absolute',
                         left: 0,
                         top: 0,
-                        background: 'linear-gradient(180deg, color-mix(in oklch, var(--lime) 90%, #4D9A0A) 0%, var(--lime) 50%, color-mix(in oklch, var(--lime) 70%, #000) 100%)',
+                        background: 'linear-gradient(180deg, color-mix(in oklch, var(--lime) 90%, oklch(55% 0.14 135)) 0%, var(--lime) 50%, color-mix(in oklch, var(--lime) 70%, black) 100%)',
                         boxShadow: '0 1px 2px rgba(0,0,0,.08)',
                         transition: prefersReduced.current ? 'none' : 'width 1s cubic-bezier(0.22,1,0.36,1)',
                       }}
@@ -260,7 +260,7 @@ export default function ROIDashboard() {
                         className="rd-bar-val"
                         style={{
                           background: 'rgba(0,0,0,.45)',
-                          color: '#fff',
+                          color: 'white',
                           padding: '2px 8px',
                           borderRadius: 999,
                           fontSize: 10,

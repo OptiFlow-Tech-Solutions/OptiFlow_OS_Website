@@ -62,7 +62,7 @@ export default function CostComparison({ entries, sectionHeading, sectionLead }:
           text-transform: uppercase;
           letter-spacing: 0.04em;
           background: var(--green);
-          color: #fff;
+          color: white;
           padding: 4px 12px;
           border-radius: 999px;
           margin-bottom: 8px;
@@ -74,7 +74,7 @@ export default function CostComparison({ entries, sectionHeading, sectionLead }:
         .cc-best .cc-cost { color: var(--green); }
 
         [data-theme="dark"] .cc-card {
-          background: #111827;
+          background: oklch(18% 0.018 250);
           border-color: rgba(255,255,255,.08);
           box-shadow: 0 10px 30px rgba(0,0,0,.35);
         }
@@ -82,9 +82,9 @@ export default function CostComparison({ entries, sectionHeading, sectionLead }:
           box-shadow: 0 14px 40px rgba(0,0,0,.45);
           border-color: rgba(255,255,255,.16);
         }
-        [data-theme="dark"] .cc-card h3 { color: #F9FAFB; }
-        [data-theme="dark"] .cc-cost { color: #F9FAFB; }
-        [data-theme="dark"] .cc-detail { color: #D1D5DB; }
+        [data-theme="dark"] .cc-card h3 { color: var(--fg); }
+        [data-theme="dark"] .cc-cost { color: var(--fg); }
+        [data-theme="dark"] .cc-detail { color: var(--muted); }
         [data-theme="dark"] .cc-best {
           border-color: var(--lime);
           box-shadow: 0 0 24px rgba(153,210,113,.14), 0 10px 30px rgba(0,0,0,.35);

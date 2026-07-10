@@ -91,7 +91,7 @@ export default function ROICalculator() {
           <div className="pc-bd-section" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div className="pc-bd-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
               <span className="pc-bd-l" style={{ fontSize: 13, color: 'var(--muted)' }}>Traditional SaaS (Annual)</span>
-              <span className="pc-bd-v pc-bd-red" style={{ fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 600, color: '#dc2626' }}>
+              <span className="pc-bd-v pc-bd-red" style={{ fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 600, color: 'oklch(50% 0.14 25)' }}>
                 {fmtINR(result.tradAnnual)}
               </span>
             </div>

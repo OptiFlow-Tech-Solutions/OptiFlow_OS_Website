@@ -58,7 +58,7 @@ export default function ProductOverviewStyles() {
 
       /* === Architecture Diagram === */
       .arch-diagram { position: relative; display: flex; align-items: center; justify-content: center; min-height: 420px; margin: 40px 0; }
-      .arch-hub { position: relative; z-index: 2; width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px; text-align: center; line-height: 1.2; box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 35%, transparent); animation: hubPulse 3s ease-in-out infinite; }
+      .arch-hub { position: relative; z-index: 2; width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); display: grid; place-items: center; color: white; font-weight: 700; font-size: 15px; text-align: center; line-height: 1.2; box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 35%, transparent); animation: hubPulse 3s ease-in-out infinite; }
       @keyframes hubPulse { 0%, 100% { box-shadow: 0 8px 32px color-mix(in oklch, var(--accent) 35%, transparent); } 50% { box-shadow: 0 8px 48px color-mix(in oklch, var(--accent) 55%, transparent); } }
       .arch-connections { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
       .arch-node { position: absolute; z-index: 3; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border); background: var(--surface); display: grid; place-items: center; font-size: 14px; transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
@@ -99,16 +99,16 @@ export default function ProductOverviewStyles() {
       .sec-feat svg { width: 28px; height: 28px; color: var(--teal); margin-bottom: 12px; }
 
       /* === CTA Section === */
-      .cta-section { background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--accent) 50%, var(--teal)), var(--teal)); color: #fff; text-align: center; padding-block: clamp(64px, 10vw, 100px); position: relative; overflow: hidden; }
+      .cta-section { background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--accent) 50%, var(--teal)), var(--teal)); color: white; text-align: center; padding-block: clamp(64px, 10vw, 100px); position: relative; overflow: hidden; }
       .cta-section::before { content: ''; position: absolute; inset: 0; background: url('/assets/img/OptiFlow.Logo.png') center / 300px no-repeat; opacity: 0.04; }
       .cta-section .container { position: relative; z-index: 2; }
-      .cta-section h2 { color: #fff; margin-bottom: 16px; }
-      .cta-section .lead { color: color-mix(in srgb, #fff 80%, transparent); margin: 0 auto 32px; }
+      .cta-section h2 { color: white; margin-bottom: 16px; }
+      .cta-section .lead { color: color-mix(in oklch, white 80%, transparent); margin: 0 auto 32px; }
       .cta-btns { display: flex; justify-content: center; gap: var(--gap-sm); flex-wrap: wrap; margin-bottom: 36px; }
-      .cta-section .btn-primary { background: #fff; color: var(--accent); }
-      .cta-section .btn-secondary { background: transparent; color: #fff; border-color: color-mix(in srgb, #fff 40%, transparent); }
-      .cta-section .btn-secondary:hover { border-color: #fff; background: color-mix(in srgb, #fff 12%, transparent); }
-      .cta-trust { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 13px; color: color-mix(in srgb, #fff 70%, transparent); }
+      .cta-section .btn-primary { background: white; color: var(--accent); }
+      .cta-section .btn-secondary { background: transparent; color: white; border-color: color-mix(in oklch, white 40%, transparent); }
+      .cta-section .btn-secondary:hover { border-color: white; background: color-mix(in oklch, white 12%, transparent); }
+      .cta-trust { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 13px; color: color-mix(in oklch, white 70%, transparent); }
       .cta-trust-item { display: flex; align-items: center; gap: 6px; }
 
       /* === Animations === */

@@ -6,8 +6,12 @@ interface CountUpOptions {
   suffix?: string;
 }
 
+function easeOutExpo(t: number): number {
+  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+}
+
 export function useCountUp(target: number, options: CountUpOptions = {}) {
-  const { duration = 1500, prefix = '', suffix = '' } = options;
+  const { duration = 2000, prefix = '', suffix = '' } = options;
   const [display, setDisplay] = useState('');
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -44,7 +48,8 @@ export function useCountUp(target: number, options: CountUpOptions = {}) {
     function animate(timestamp: number) {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const current = Math.round(progress * target);
+      const easedProgress = easeOutExpo(progress);
+      const current = Math.round(easedProgress * target);
       setDisplay(`${prefix}${current.toLocaleString()}${suffix}`);
       if (progress < 1) {
         rafId = requestAnimationFrame(animate);

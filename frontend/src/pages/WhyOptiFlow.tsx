@@ -234,7 +234,7 @@ export default function WhyOptiFlow() {
           <Container className="relative z-10">
             <div className="wof-hero-grid">
               <div className="wof-hero-content">
-                <h1 className="reveal reveal-delay-1 mt-0 min-h-[1.2em] text-[#84cc16]" aria-live="polite">
+                <h1 className="reveal reveal-delay-1 mt-0 min-h-[1.2em] text-lime" aria-live="polite">
                   <span id="twText">{text}</span>
                   <span className="tw-cursor2" style={{ opacity: isCursorVisible ? 1 : 0 }}>|</span>
                 </h1>
