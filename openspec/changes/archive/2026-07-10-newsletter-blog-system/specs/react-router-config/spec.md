@@ -1,10 +1,6 @@
 # react-router-config
 
-## Purpose
-
-Centralized route configuration module serving as the single source of truth for all SPA routes, including path-to-component mapping, SEO metadata, lazy loading declarations, and integration with React Router via `<custom-ident>BrowserRouter<basename="/os"></custom-ident>`.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Centralized route configuration
 The system SHALL provide a single `routes.ts` module that defines all SPA routes as an array of route objects, each containing `path`, `component` (lazy-loaded), `title`, and `description` fields.
@@ -35,29 +31,3 @@ The `App.tsx` component SHALL render a `<Routes>` element containing one `<Route
 #### Scenario: BrowserRouter basename is /os
 - **WHEN** the user navigates to `/os/pricing/`
 - **THEN** React Router matches the `/pricing/` path relative to the `/os` basename
-
-### Requirement: Catch-all 404 route
-The route configuration SHALL include a wildcard `*` path as the last route that renders a NotFound component for any unmatched `/os/*` URL.
-
-#### Scenario: Unknown path renders 404
-- **WHEN** a user navigates to `/os/nonexistent-page/`
-- **THEN** the NotFound component renders with a 404 message
-
-#### Scenario: 404 page includes navigation options
-- **WHEN** the NotFound component renders
-- **THEN** it displays links to Home, Product Overview, Features, Pricing, Contact, and FAQ
-
-### Requirement: Document head updates on route change
-The system SHALL update the document `<title>` and `<meta name="description">` tags to match the current route's metadata on every navigation.
-
-#### Scenario: Title updates on navigation
-- **WHEN** the user navigates from Home to Pricing
-- **THEN** the document title changes to the Pricing page title from the route config
-
-#### Scenario: Meta description updates on navigation
-- **WHEN** the user navigates to any page
-- **THEN** the `<meta name="description">` content reflects that page's description from the route config
-
-#### Scenario: Default title on 404
-- **WHEN** the NotFound component renders
-- **THEN** the document title is "Page Not Found — OptiFlow OS"

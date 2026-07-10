@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ article.title }} — OptiFlow OS Newsletter</title>
+  <link rel="icon" href="/assets/img/OptiFlow.Logo.png" sizes="any" />
+  <meta name="description" content="{{ article.excerpt }}" />
+  <meta name="author" content="{{ article.author }}" />
+
+  <meta property="og:title" content="{{ article.title }}" />
+  <meta property="og:description" content="{{ article.excerpt }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ canonical_url }}" />
+  <meta property="og:site_name" content="OptiFlow OS" />
+  <meta property="og:article:published_time" content="{{ article.published_at|date:'c' }}" />
+  <meta property="og:article:author" content="{{ article.author }}" />
+  <meta property="og:article:section" content="{{ article.category.name }}" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ article.title }}" />
+  <meta name="twitter:description" content="{{ article.excerpt }}" />
+  <meta name="twitter:label1" content="Reading time" />
+  <meta name="twitter:data1" content="{{ article.read_time }} min read" />
+
+  <link rel="canonical" href="{{ canonical_url }}" />
+
+  {% if article.featured_image %}
+  <meta property="og:image" content="{{ article.featured_image }}" />
+  <meta name="twitter:image" content="{{ article.featured_image }}" />
+  {% endif %}
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ article.title|escapejs }}",
+  "description": "{{ article.excerpt|escapejs }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ article.author|escapejs }}"
+  },
+  "datePublished": "{{ article.published_at|date:'c' }}",
+  "dateModified": "{{ article.updated_at|date:'c' }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "OptiFlow OS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://optiflowos.com/assets/img/OptiFlow.Logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ canonical_url }}"
+  }
+}
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/core.css" />
+  <style>
+    .article-page { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 80px; }
+    .article-page .container { max-width: 780px; }
+    .article-cat { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 12px; }
+    .article-page h1 { font-size: clamp(28px, 4.5vw, 44px); margin-bottom: 16px; letter-spacing: -0.02em; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .article-content { font-size: 17px; line-height: 1.75; color: var(--fg); }
+    .article-content h2 { font-size: 24px; margin-top: 40px; margin-bottom: 16px; }
+    .article-content h3 { font-size: 20px; margin-top: 32px; margin-bottom: 12px; }
+    .article-content p { margin-bottom: 20px; }
+    .article-content ul, .article-content ol { margin-bottom: 20px; padding-left: 24px; }
+    .article-content li { margin-bottom: 8px; }
+    .article-content blockquote { border-left: 3px solid var(--accent); padding-left: 20px; margin: 24px 0; color: var(--muted); font-style: italic; }
+    .article-content a { color: var(--accent); text-decoration: underline; }
+    .article-content img { max-width: 100%; border-radius: var(--radius-lg); margin: 24px 0; }
+    .article-content pre { background: var(--bg); padding: 16px 20px; border-radius: var(--radius); overflow-x: auto; margin: 20px 0; }
+    .article-content code { font-family: var(--font-mono); font-size: 14px; }
+    .article-back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; margin-bottom: 32px; transition: color 0.2s; }
+    .article-back:hover { color: var(--accent); }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 10000; transition: width 0.1s linear; }
+    .newsletter-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; text-align: center; margin-top: 56px; }
+    .newsletter-box h3 { margin-bottom: 12px; }
+    .newsletter-box .nl-form-row { display: flex; gap: var(--gap-sm); max-width: 460px; margin: 20px auto 0; }
+    .newsletter-box input { flex: 1; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--fg); font-size: 15px; font-family: inherit; }
+    .newsletter-box input:focus { outline: none; border-color: var(--accent); }
+    .newsletter-box .btn { white-space: nowrap; }
+    .section-cta { margin-top: 64px; }
+
+    [data-theme="dark"] .article-content { color: var(--fg); }
+    [data-theme="dark"] .newsletter-box input { background: var(--bg); color: var(--fg); }
+
+    @media (max-width: 768px) {
+      .article-page .container { padding-inline: 20px; }
+      .newsletter-box { padding: 28px; }
+      .newsletter-box .nl-form-row { flex-direction: column; }
+    }
+  </style>
+  <script defer data-domain="optiflowos.com" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <a href="#content" class="skip-link">Skip to content</a>
+
+  <!-- INCLUDE: nav -->
+
+  <div class="progress-bar" id="progressBar" style="width:0"></div>
+
+  <main id="content" role="main">
+    <article class="article-page">
+      <div class="container">
+        <a href="/os/newsletter/" class="article-back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to Newsletter
+        </a>
+
+        <div class="article-cat">{{ article.category.name }}</div>
+        <h1>{{ article.title }}</h1>
+
+        <div class="article-meta">
+          <span class="meta">{{ article.author }}</span>
+          <span class="meta">&mdash;</span>
+          <span class="meta">{{ article.read_time }} min read</span>
+          <span class="meta">&mdash;</span>
+          <span class="meta">{{ article.published_at|date:"F j, Y" }}</span>
+          <span class="meta" style="margin-left:auto">{{ article.view_count }} views</span>
+        </div>
+
+        <div class="article-content">
+          {{ article.content|safe }}
+        </div>
+      </div>
+    </article>
+
+    <section class="section" data-screen-label="Article Newsletter CTA">
+      <div class="container" style="max-width:780px">
+        <div class="newsletter-box">
+          <h3>Enjoyed this article?</h3>
+          <p class="lead" style="margin-bottom:0">Get weekly operational insights delivered to your inbox.</p>
+          <form class="form-capture" name="newsletter" action="/api/newsletter/subscribe/" method="POST" data-js-subscribe>
+            <div class="nl-form-row">
+              <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none">
+              <input type="email" name="email" placeholder="Your email address" required />
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-cta" data-screen-label="Article CTA">
+      <div class="container" style="position:relative;z-index:1">
+        <h2>Ready To Build A More Accountable And Scalable Business?</h2>
+        <p class="lead">See how OptiFlow helps MSMEs turn operational knowledge into measurable business results.</p>
+        <div class="cta-row">
+          <a href="/os/demo-booking/" class="btn btn-primary btn-lg">Book Free Demo</a>
+          <a href="/os/product-overview/" class="btn btn-secondary btn-lg">Explore OptiFlow</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- INCLUDE: footer -->
+
+  <script src="/assets/js/core.js" defer></script>
+  <script>
+    (function() {
+      var bar = document.getElementById('progressBar');
+      if (!bar) return;
+      window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = Math.min(progress, 100) + '%';
+      });
+    })();
+  </script>
+</body>
+</html>

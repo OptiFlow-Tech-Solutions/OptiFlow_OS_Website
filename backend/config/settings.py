@@ -131,6 +131,7 @@ REST_FRAMEWORK = {
         "anon": "100/hour",
         "enquiries": "5/hour",
         "faq_feedback": "30/hour",
+        "newsletter": "30/hour",
     },
 }
 

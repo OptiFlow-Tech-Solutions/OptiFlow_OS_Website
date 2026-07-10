@@ -57,6 +57,12 @@ const routes: RouteConfig[] = [
     component: lazy(() => import('./pages/Newsletter')),
   },
   {
+    path: '/newsletter/:slug',
+    title: 'Article — OptiFlow OS',
+    description: 'Read the full article from the OptiFlow OS newsletter.',
+    component: lazy(() => import('./pages/ArticleDetail')),
+  },
+  {
     path: '/faq',
     title: 'FAQ & Self-Service — OptiFlow OS',
     description: 'Find answers about OptiFlow OS or use self-service tools — video tutorials, troubleshooting guide, and guided setup. Help yourself, fast.',
