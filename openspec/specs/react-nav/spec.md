@@ -7,15 +7,19 @@ React navigation bar component with desktop links, Resources dropdown, mobile ha
 ## Requirements
 
 ### Requirement: Nav component renders desktop navigation
-The system SHALL provide a Nav component that renders a fixed-position `<header>` with the OptiFlow logo, 8 desktop navigation links, a Resources hover dropdown, a theme toggle button, and a "Book Demo" CTA button.
+The system SHALL provide a Nav component that renders a fixed-position `<header>` with the OptiFlow logo, 8 desktop navigation links, a Resources hover dropdown, a theme toggle button, and a "Book Demo" CTA button. Navigation data SHALL be imported from the centralized site module (`frontend/src/data/site.ts`) rather than hardcoded within the component.
 
-#### Scenario: Desktop nav renders all links
+#### Scenario: Desktop nav renders all links from site module
 - **WHEN** Nav is rendered on a viewport wider than 1024px
-- **THEN** an `<header>` element with `role="navigation"` contains the OptiFlow logo linking to `/os/`, 8 nav links (Home, Solutions, Product, Features, Showcase, Why OptiFlow, Pricing, Contact), a Resources dropdown (Newsletter, FAQ, Competitive Positioning), a theme toggle button with sun/moon SVG icons, and a "Book Demo" button linking to `/os/demo-booking/`
+- **THEN** an `<header>` element with `role="navigation"` contains the OptiFlow logo linking to `/os/`, all nav links matching the site module's `navLinks`, a Resources dropdown matching the site module's `navDropdown`, a theme toggle button with sun/moon SVG icons, and a "Book Demo" button matching the site module's `navCTA`
 
 #### Scenario: Desktop nav hides on mobile
 - **WHEN** Nav is rendered on a viewport narrower than 1024px
 - **THEN** the desktop nav links are hidden via CSS `display: none` and a hamburger button is shown instead
+
+#### Scenario: Nav links are not hardcoded
+- **WHEN** inspecting Nav.tsx source
+- **THEN** the `navLinks`, `navDropdown`, and `navCTA` constants are imported from the site module, not defined inline in the component file
 
 ### Requirement: Nav component highlights active page
 The system SHALL highlight the nav link matching the current route using the `.active` CSS class.

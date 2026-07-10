@@ -1,6 +1,18 @@
 export { default as features } from './features';
 export { default as showcase } from './showcase';
-export { site } from './site';
+export {
+  site,
+  navLinks,
+  navDropdown,
+  navCTA,
+  footerColumns,
+} from './site';
+export type {
+  NavLink,
+  NavDropdown,
+  NavCTA,
+  FooterColumn,
+} from './site';
 export {
   quadrantEntries,
   matrixColumns,

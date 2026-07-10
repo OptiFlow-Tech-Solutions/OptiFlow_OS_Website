@@ -99,6 +99,12 @@ const routes: RouteConfig[] = [
     component: lazy(() => import('./pages/CompetitivePositioning')),
   },
   {
+    path: '/500',
+    title: 'Server Error — OptiFlow OS',
+    description: 'We are experiencing a temporary technical issue. Our team has been notified and is working to resolve it. Contact OptiFlow OS support for help.',
+    component: lazy(() => import('./pages/ServerError')),
+  },
+  {
     path: '*',
     title: 'Page Not Found — OptiFlow OS',
     description: 'The page you\'re looking for doesn\'t exist. Navigate back to explore OptiFlow OS — the Business Execution Operating System for Indian MSMEs.',

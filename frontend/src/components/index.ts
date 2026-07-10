@@ -13,6 +13,8 @@ export { ThemeProvider, useTheme } from './ThemeProvider';
 export { default as GlobalStyles } from './GlobalStyles';
 export { default as PageLoader } from './PageLoader';
 export { default as MetaHead } from './MetaHead';
+export { default as SEOHead } from './MetaHead';
+export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as ScrollRestoration } from './ScrollRestoration';
 export { default as Breadcrumb } from './Breadcrumb';
 export { default as BookingForm } from './BookingForm';

@@ -1,4 +1,5 @@
 import { useTheme } from './ThemeProvider';
+import { site, footerColumns } from '../data';
 import './Footer.css';
 
 const socialLinks = [
@@ -19,51 +20,7 @@ const socialLinks = [
   },
 ];
 
-interface FooterColumn {
-  title: string;
-  links: { label: string; href?: string }[];
-}
-
-interface FooterProps {
-  company?: string;
-  tagline?: string;
-  phone?: string;
-  email?: string;
-  location?: string;
-  columns?: FooterColumn[];
-}
-
-export default function Footer({
-  company = 'OptiFlow Tech Solutions',
-  tagline = 'The Business Operating System for Indian MSMEs. Move from people-dependent operations to process-driven growth.',
-  phone = '+91 7874677836',
-  email = 'info@optiflow.co.in',
-  location = 'Surat, India',
-  columns = [
-    { title: 'Product', links: [
-      { label: 'Overview', href: '/os/product-overview/' },
-      { label: 'Features', href: '/os/features/' },
-      { label: 'Pricing', href: '/os/pricing/' },
-      { label: 'Book Demo', href: '/os/demo-booking/' },
-    ]},
-    { title: 'Solutions', links: [
-      { label: 'Problem & Solutions', href: '/os/problem-solutions/' },
-      { label: 'Why OptiFlow', href: '/os/why-optiflow/' },
-    ]},
-    { title: 'Resources', links: [
-      { label: 'Newsletter', href: '/os/newsletter/' },
-      { label: 'FAQ', href: '/os/faq/' },
-      { label: 'Competitive Positioning', href: '/os/competitive-positioning/' },
-      { label: 'Privacy Policy', href: '/os/privacy-policy/' },
-      { label: 'Terms & Conditions', href: '/os/terms/' },
-    ]},
-    { title: 'Contact', links: [
-      { label: phone, href: `tel:+91${phone.replace(/[^0-9]/g, '').slice(-10)}` },
-      { label: email, href: `mailto:${email}` },
-      { label: location },
-    ]},
-  ],
-}: FooterProps) {
+export default function Footer() {
   const { toggleTheme } = useTheme();
   const year = new Date().getFullYear();
 
@@ -83,9 +40,9 @@ export default function Footer({
               />
               OptiFlow
             </a>
-            <p>{tagline}</p>
+            <p>{site.tagline}</p>
           </div>
-          {columns.map((col) => (
+          {footerColumns.map((col) => (
             <div className="react-footer-col" key={col.title}>
               <h4>{col.title}</h4>
               <ul>
@@ -103,7 +60,7 @@ export default function Footer({
           ))}
         </div>
         <div className="react-footer-bottom">
-          <span>&copy; {year} {company}. Built for Indian MSMEs.</span>
+          <span>&copy; {year} {site.company}. Built for Indian MSMEs.</span>
           <div className="react-footer-social">
             {socialLinks.map((s) => (
               <a

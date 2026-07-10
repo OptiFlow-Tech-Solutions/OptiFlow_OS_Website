@@ -65,13 +65,21 @@ The system SHALL render the copyright year dynamically using `new Date().getFull
 - **WHEN** Footer is rendered in 2026
 - **THEN** the copyright line displays "2026 OptiFlow Tech Solutions. Built for Indian MSMEs."
 
-### Requirement: Footer link data from site.json
-The system SHALL source footer link column data from `site.json.footer.columns`.
+### Requirement: Footer link data from site module
+The system SHALL source footer link column data and company contact information from the centralized site module (`frontend/src/data/site.ts`) rather than hardcoded values or direct `site.json` imports.
 
-#### Scenario: Product column matches site.json
+#### Scenario: Product column matches site module
 - **WHEN** Footer is rendered
-- **THEN** the Product column links match the href and label values defined in `site.json.footer.columns` for the Product section
+- **THEN** the Product column links match the href and label values defined in the site module's `footerColumns` for the Product section
 
-#### Scenario: Solutions column matches site.json
+#### Scenario: Solutions column matches site module
 - **WHEN** Footer is rendered
-- **THEN** the Solutions column links match the href and label values defined in `site.json.footer.columns` for the Solutions section
+- **THEN** the Solutions column links match the href and label values defined in the site module's `footerColumns` for the Solutions section
+
+#### Scenario: Resources column matches site module
+- **WHEN** Footer is rendered
+- **THEN** the Resources column links match the href and label values defined in the site module's `footerColumns` for the Resources section
+
+#### Scenario: Contact column matches site module
+- **WHEN** Footer is rendered
+- **THEN** the Contact column links (phone, email) and location text match the site module's `site` export

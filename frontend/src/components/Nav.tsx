@@ -3,44 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from './ThemeProvider';
 import Button from './Button';
 import useScrollPosition from '../hooks/useScrollPosition';
+import { navLinks, navDropdown, navCTA } from '../data';
 import './Nav.css';
-
-interface NavLink {
-  label: string;
-  href: string;
-}
-
-interface NavDropdown {
-  label: string;
-  items: NavLink[];
-}
-
-interface NavCTA {
-  label: string;
-  href: string;
-}
-
-const navLinks: NavLink[] = [
-  { label: 'Home', href: '/os/' },
-  { label: 'Solutions', href: '/os/problem-solutions/' },
-  { label: 'Product', href: '/os/product-overview/' },
-  { label: 'Features', href: '/os/features/' },
-  { label: 'Showcase', href: '/os/feature-showcase/' },
-  { label: 'Why OptiFlow', href: '/os/why-optiflow/' },
-  { label: 'Pricing', href: '/os/pricing/' },
-  { label: 'Contact', href: '/os/contact/' },
-];
-
-const navDropdown: NavDropdown = {
-  label: 'Resources',
-  items: [
-    { label: 'Newsletter', href: '/os/newsletter/' },
-    { label: 'FAQ', href: '/os/faq/' },
-    { label: 'Competitive Positioning', href: '/os/competitive-positioning/' },
-  ],
-};
-
-const navCTA: NavCTA = { label: 'Book Demo', href: '/os/demo-booking/' };
 
 const routeToActive: Record<string, string> = {
   '/': 'Home',
@@ -145,7 +109,7 @@ export default function Nav() {
             {navLinks.map((link) => (
               <Link
                 key={link.label}
-                to={link.href.replace(/^\/os/, '')}
+                to={link.href}
                 className={`react-nav-link${resolveActiveClass(pathname, link.label, navDropdown.label) ? ' active' : ''}`}
               >
                 {link.label}
@@ -173,7 +137,7 @@ export default function Nav() {
               {dropdownOpen && (
                 <div className="react-nav-dropdown-menu">
                   {navDropdown.items.map((item) => (
-                    <Link key={item.label} to={item.href.replace(/^\/os/, '')} onClick={() => setDropdownOpen(false)}>
+                    <Link key={item.label} to={item.href} onClick={() => setDropdownOpen(false)}>
                       {item.label}
                     </Link>
                   ))}
@@ -195,7 +159,7 @@ export default function Nav() {
                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
               </svg>
             </button>
-            <Button variant="primary" glow as={Link} to={navCTA.href.replace(/^\/os/, '')}>
+            <Button variant="primary" glow as={Link} to={navCTA.href}>
               {navCTA.label}
             </Button>
           </div>
@@ -222,7 +186,7 @@ export default function Nav() {
         {navLinks.map((link) => (
           <Link
             key={link.label}
-            to={link.href.replace(/^\/os/, '')}
+            to={link.href}
             className={`react-nav-link${resolveActiveClass(pathname, link.label, navDropdown.label) ? ' active' : ''}`}
             onClick={closeDrawer}
           >
@@ -235,14 +199,14 @@ export default function Nav() {
           </span>
           <div className="react-nav-dropdown-menu">
             {navDropdown.items.map((item) => (
-              <Link key={item.label} to={item.href.replace(/^\/os/, '')} onClick={closeDrawer}>
+              <Link key={item.label} to={item.href} onClick={closeDrawer}>
                 {item.label}
               </Link>
             ))}
           </div>
         </div>
         <div className="react-nav-drawer-cta">
-          <Button variant="primary" as={Link} to={navCTA.href.replace(/^\/os/, '')} onClick={closeDrawer} className="w-full justify-center">
+          <Button variant="primary" as={Link} to={navCTA.href} onClick={closeDrawer} className="w-full justify-center">
             {navCTA.label}
           </Button>
         </div>
