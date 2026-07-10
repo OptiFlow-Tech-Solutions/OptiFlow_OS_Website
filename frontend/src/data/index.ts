@@ -54,3 +54,14 @@ export type {
   VisionCard,
   PermissionRow,
 } from './productOverview';
+export {
+  FAQ_CATEGORIES,
+  FAQ_ITEMS,
+  TROUBLESHOOTING_TREE,
+  SEARCH_SUGGESTIONS,
+  FAQ_ESCALATION_CHANNELS,
+} from './faq';
+export type {
+  FAQCategory,
+  FAQItem,
+} from './faq';

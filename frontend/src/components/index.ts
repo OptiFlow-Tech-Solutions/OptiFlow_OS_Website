@@ -24,3 +24,4 @@ export { default as ContactForm } from './ContactForm';
 export { default as OfficeInfo } from './OfficeInfo';
 export { default as ComparisonTable } from './sections/ComparisonTable';
 export { default as DashboardMockup } from './sections/DashboardMockup';
+export { default as FAQAccordion } from './sections/FAQAccordion';

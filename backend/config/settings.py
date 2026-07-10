@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "cms",
     "blog",
     "leads",
+    "faq",
 ]
 
 MIDDLEWARE = [
@@ -129,6 +130,7 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {
         "anon": "100/hour",
         "enquiries": "5/hour",
+        "faq_feedback": "30/hour",
     },
 }
 

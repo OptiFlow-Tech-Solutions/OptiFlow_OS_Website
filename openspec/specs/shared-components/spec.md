@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Reusable React components (Button, Card, Section, Container, Input, Nav, Footer, PageLayout, ScrollTop, StickyCTA, SEOHead) providing design system consistency across all pages with variant support and unit tests.
+Reusable React components (Button, Card, Section, Container, Input, Nav, Footer, PageLayout, ScrollTop, StickyCTA, SEOHead, FAQAccordion) providing design system consistency across all pages with variant support and unit tests.
 
 ## Requirements
 
@@ -257,3 +257,22 @@ The Nav component's Resource dropdown SHALL animate in/out using `opacity` and `
 #### Scenario: Dropdown animates open
 - **WHEN** hovering over the Resources nav item
 - **THEN** the dropdown menu fades in and slides down over 250ms
+
+### Requirement: FAQAccordion component
+The system SHALL provide a shared `FAQAccordion` component with single-open behavior, smooth grid-rows animation, and an `items` prop accepting `{ question: string, answer: ReactNode }[]`. The component SHALL be exported from `components/index.ts`.
+
+#### Scenario: FAQAccordion renders items
+- **WHEN** `<FAQAccordion items={[{question: "Q", answer: <p>A</p>}]} />` is rendered
+- **THEN** one accordion item is displayed with the question and expandable answer
+
+#### Scenario: Single-open behavior
+- **WHEN** user clicks a second accordion item while the first is open
+- **THEN** the first item closes and the second opens
+
+#### Scenario: Uses design tokens
+- **WHEN** FAQAccordion renders
+- **THEN** styles reference `var(--surface)`, `var(--border)`, `var(--radius-lg)`, `var(--fg)`, `var(--muted)`, `var(--teal)` CSS variables
+
+#### Scenario: Exported from barrel
+- **WHEN** importing `{ FAQAccordion }` from `'../../components'`
+- **THEN** the component is available and usable
