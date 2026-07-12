@@ -132,12 +132,12 @@ if (isAmend) {
 console.log('6. Branch name');
 try {
   const branch = execSync('git symbolic-ref --short HEAD', { encoding: 'utf-8', cwd: ROOT }).trim();
-  const branchRe = /^(main|staging|develop|feature\/|fix\/|chore\/|docs\/)/;
+  const branchRe = /^(main|staging|develop|dev|feature\/|fix\/|chore\/|docs\/)/;
   if (branchRe.test(branch)) {
     ok(branch);
   } else {
     fail(`branch "${branch}" not allowed`);
-    console.log('  Allowed: main, staging, develop, feature/*, fix/*, chore/*, docs/*');
+    console.log('  Allowed: main, staging, develop, dev, feature/*, fix/*, chore/*, docs/*');
   }
 } catch {
   fail('could not read branch name');

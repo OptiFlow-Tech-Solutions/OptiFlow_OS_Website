@@ -69,3 +69,22 @@ docker-compose.*.local.yml
 
 # Cloudflare (local dev only)
 .wrangler/
+
+# Python / Django
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.eggs/
+dist/
+build/
+*.so
+backend/staticfiles/
+backend/media/
+venv/
+.venv/
+env/
+
+# Frontend build output (separate from root dist/)
+frontend/dist/
+frontend/node_modules/

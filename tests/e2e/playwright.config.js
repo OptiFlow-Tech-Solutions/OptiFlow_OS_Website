@@ -8,12 +8,13 @@ export default defineConfig({
   retries: 1,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:5173/os',
     trace: 'on-first-retry',
   },
   webServer: {
-    command: 'npx serve dist -p 3000',
-    port: 3000,
+    command: 'npx vite --port 5173 --strictPort',
+    port: 5173,
+    cwd: '../../frontend',
     reuseExistingServer: true,
   },
   projects: [

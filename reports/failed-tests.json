@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-07-08T06:22:06.781Z",
+  "failed": [
+    {
+      "section": "code_quality",
+      "check": "Full ESLint validation",
+      "errors": [
+        "ESLint found issues"
+      ],
+      "warnings": []
+    },
+    {
+      "section": "security",
+      "check": "CSRF protection (forms)",
+      "errors": [
+        "CSRF tokens missing"
+      ],
+      "warnings": []
+    },
+    {
+      "section": "documentation",
+      "check": "API documentation",
+      "errors": [],
+      "warnings": [
+        "API documentation not found"
+      ]
+    }
+  ]
+}

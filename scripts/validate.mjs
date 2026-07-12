@@ -284,5 +284,46 @@ for (const file of sourceFiles) {
   }
 }
 
+console.log('\n--- Site Config Sync ---');
+checkSiteConfigSync();
+
 console.log(`\n${errors} error(s), ${warnings} warning(s)`);
 process.exit(errors > 0 ? 1 : 0);
+
+function checkSiteConfigSync() {
+  const siteJsonPath = path.join(ROOT, 'site.json');
+  const siteTsPath = path.join(ROOT, 'frontend', 'src', 'data', 'site.ts');
+
+  if (!fs.existsSync(siteTsPath)) {
+    log('error', `site.ts not found at ${siteTsPath}. Run task 1.1 to create it.`);
+    return;
+  }
+  if (!fs.existsSync(siteJsonPath)) {
+    log('warn', 'site.json not found, skipping site config sync check.');
+    return;
+  }
+
+  const siteJson = JSON.parse(fs.readFileSync(siteJsonPath, 'utf8'));
+  const siteTsSrc = fs.readFileSync(siteTsPath, 'utf8');
+
+  const checks = [
+    { key: 'company', jsonVal: siteJson.company, tsField: 'company' },
+    { key: 'phone', jsonVal: siteJson.phone, tsField: 'phone' },
+    { key: 'email', jsonVal: siteJson.email, tsField: 'email' },
+    { key: 'location', jsonVal: siteJson.location, tsField: 'location' },
+  ];
+
+  for (const check of checks) {
+    if (!siteTsSrc.includes(check.jsonVal)) {
+      log('warn', `site.ts may be out of sync: "${check.tsField}" expected value "${check.jsonVal}" from site.json not found in site.ts`);
+    }
+  }
+
+  if (siteJson.nav) {
+    for (const link of siteJson.nav.links) {
+      if (!siteTsSrc.includes(link.label)) {
+        log('warn', `site.ts nav may be out of sync: nav link "${link.label}" from site.json not found in site.ts`);
+      }
+    }
+  }
+}

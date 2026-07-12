@@ -1,0 +1,513 @@
+{
+  "timestamp": "2026-07-08T06:22:06.779Z",
+  "score": 89,
+  "verdict": "FAIL",
+  "sections": {
+    "code_quality": {
+      "score": 67,
+      "weight": 10,
+      "checks": 3,
+      "passed": 2,
+      "failed": 1,
+      "skipped": 0
+    },
+    "frontend": {
+      "score": 90,
+      "weight": 10,
+      "checks": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    "testing": {
+      "score": 100,
+      "weight": 15,
+      "checks": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 1
+    },
+    "accessibility": {
+      "score": 100,
+      "weight": 5,
+      "checks": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 1
+    },
+    "security": {
+      "score": 70,
+      "weight": 20,
+      "checks": 5,
+      "passed": 4,
+      "failed": 1,
+      "skipped": 0
+    },
+    "performance": {
+      "score": 100,
+      "weight": 10,
+      "checks": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    "docker": {
+      "score": 100,
+      "weight": 10,
+      "checks": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 3
+    },
+    "backend": {
+      "score": 100,
+      "weight": 10,
+      "checks": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 4
+    },
+    "database": {
+      "score": 100,
+      "weight": 10,
+      "checks": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 3
+    },
+    "documentation": {
+      "score": 77,
+      "weight": 5,
+      "checks": 3,
+      "passed": 2,
+      "failed": 1,
+      "skipped": 0
+    }
+  },
+  "checks": [
+    {
+      "section": "code_quality",
+      "name": "Full ESLint validation",
+      "passed": false,
+      "score": 0,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [
+        "ESLint found issues"
+      ],
+      "warnings": [],
+      "details": [
+        "FAIL: ESLint found issues",
+        "INFO: \nD:\\OptiFlow_OS_Website\\scripts\\validate.mjs\n  247:52  error  Redundant double negation  no-extra-boolean-cast\n\n✖ 1 problem (1 error, 0 warnings)\n  1 error and 0 warnings potentially fixable with the `--fix` option.\n\n"
+      ]
+    },
+    {
+      "section": "code_quality",
+      "name": "Full Stylelint validation",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: Stylelint passed"
+      ]
+    },
+    {
+      "section": "code_quality",
+      "name": "HTML validation",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: HTML validation passed"
+      ]
+    },
+    {
+      "section": "frontend",
+      "name": "Build succeeds",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: Build successful"
+      ]
+    },
+    {
+      "section": "frontend",
+      "name": "Validation script",
+      "passed": true,
+      "score": 7,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [
+        "minor validation issues (hardcoded colors, short descriptions)"
+      ],
+      "details": [
+        "WARN: minor validation issues (hardcoded colors, short descriptions)",
+        "PARTIAL (70%): 1 error(s), fix in follow-up",
+        "INFO: \n─ Link Check ─\n\n─ Hardcoded Colors ─\n  ⚠ Hardcoded #0a1628 in 404\\index.html\n  ⚠ Hardcoded #0a1628 in 500\\index.html\n  ⚠ Hardcoded #0a1628 in os\\competitive-positioning\\index.html\n  ⚠ Hardcoded #0a1628 in os\\contact\\index.html\n  ⚠ Hardcoded #0a1628 in os\\demo-booking\\index.html\n  ⚠ Hardcoded #0a1628 in os\\faq\\index.html\n  ⚠ Hardcoded #0a1628 in os\\feature-showcase\\index.html\n  ⚠ Hardcoded #0a1628 in os\\features\\index.html\n  ⚠ Hardcoded #f0a020 in os\\features\\index.html\n  ⚠ Hardcoded #0a1628 in "
+      ]
+    },
+    {
+      "section": "frontend",
+      "name": "All routes resolve",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: All 16 routes resolve"
+      ]
+    },
+    {
+      "section": "testing",
+      "name": "E2E tests (Playwright)",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "SKIP_TESTS=1",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: SKIP_TESTS=1"
+      ]
+    },
+    {
+      "section": "accessibility",
+      "name": "Axe-core accessibility",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "local mode — accessibility validated in CI",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: local mode — accessibility validated in CI"
+      ]
+    },
+    {
+      "section": "security",
+      "name": "Secrets present in build",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: No secrets found in dist"
+      ]
+    },
+    {
+      "section": "security",
+      "name": "Dependency vulnerabilities",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: No high/critical vulnerabilities"
+      ]
+    },
+    {
+      "section": "security",
+      "name": "CSRF protection (forms)",
+      "passed": false,
+      "score": 0,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [
+        "CSRF tokens missing"
+      ],
+      "warnings": [],
+      "details": [
+        "INFO: os\\contact\\index.html: no visible CSRF token",
+        "INFO: os\\demo-booking\\index.html: no visible CSRF token",
+        "INFO: os\\newsletter\\index.html: no visible CSRF token",
+        "FAIL: CSRF tokens missing"
+      ]
+    },
+    {
+      "section": "security",
+      "name": "Content Security Policy",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: CSP header configured in nginx.conf"
+      ]
+    },
+    {
+      "section": "security",
+      "name": "CORS configuration",
+      "passed": true,
+      "score": 5,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [
+        "CORS headers not in nginx.conf"
+      ],
+      "details": [
+        "WARN: CORS headers not in nginx.conf",
+        "PARTIAL (50%): should be configured for API backend"
+      ]
+    },
+    {
+      "section": "performance",
+      "name": "Total bundle size",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: Total: 1.3 MB"
+      ]
+    },
+    {
+      "section": "performance",
+      "name": "Image optimization",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: All 3 images under 500 KB"
+      ]
+    },
+    {
+      "section": "performance",
+      "name": "Compression (gzip/brotli)",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: Compression configured"
+      ]
+    },
+    {
+      "section": "docker",
+      "name": "Docker build",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "SKIP_DOCKER=1",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: SKIP_DOCKER=1"
+      ]
+    },
+    {
+      "section": "docker",
+      "name": "Docker healthcheck",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "SKIP_DOCKER=1",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: SKIP_DOCKER=1"
+      ]
+    },
+    {
+      "section": "docker",
+      "name": "Container startup",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "SKIP_DOCKER=1",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: SKIP_DOCKER=1"
+      ]
+    },
+    {
+      "section": "backend",
+      "name": "Django system checks",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "Django dependencies not installed",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: Django dependencies not installed"
+      ]
+    },
+    {
+      "section": "backend",
+      "name": "REST API endpoints",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "requires running server",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: requires running server"
+      ]
+    },
+    {
+      "section": "backend",
+      "name": "Authentication flow",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "requires running server",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: requires running server"
+      ]
+    },
+    {
+      "section": "backend",
+      "name": "Error handling",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "requires running server",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: requires running server"
+      ]
+    },
+    {
+      "section": "database",
+      "name": "PostgreSQL connectivity",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "requires DATABASE_URL",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: requires DATABASE_URL"
+      ]
+    },
+    {
+      "section": "database",
+      "name": "Pending migrations",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "requires DATABASE_URL",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: requires DATABASE_URL"
+      ]
+    },
+    {
+      "section": "database",
+      "name": "Database constraints",
+      "passed": null,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": true,
+      "skipReason": "requires DATABASE_URL",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "SKIP: requires DATABASE_URL"
+      ]
+    },
+    {
+      "section": "documentation",
+      "name": "Changelog exists",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: CHANGELOG.md found"
+      ]
+    },
+    {
+      "section": "documentation",
+      "name": "API documentation",
+      "passed": false,
+      "score": 3,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [
+        "API documentation not found"
+      ],
+      "details": [
+        "WARN: API documentation not found",
+        "PARTIAL (30%): should exist for active backend"
+      ]
+    },
+    {
+      "section": "documentation",
+      "name": "Production gate docs",
+      "passed": true,
+      "score": 10,
+      "maxScore": 10,
+      "skipped": false,
+      "skipReason": "",
+      "errors": [],
+      "warnings": [],
+      "details": [
+        "PASS: PRODUCTION_GATE.md found"
+      ]
+    }
+  ]
+}

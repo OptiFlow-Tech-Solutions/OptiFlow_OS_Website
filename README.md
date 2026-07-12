@@ -5,7 +5,7 @@ Business Execution Operating System marketing website for Indian MSMEs. 14 stati
 ## Quick Start
 
 ```bash
-git clone <repo>
+git clone https://github.com/optiflow-tech/optiflow-website.git
 cd OptiFlow_OS_Website
 npm install
 npm run dev          # Build + serve locally at http://localhost:3000

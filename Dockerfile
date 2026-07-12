@@ -1,5 +1,5 @@
-# Stage 1: Build website
-FROM node:20.18-alpine AS builder
+# Stage 1: Build static website
+FROM node:20.18-alpine AS static-builder
 
 WORKDIR /app
 
@@ -15,7 +15,21 @@ COPY scripts/ scripts/
 
 RUN node scripts/assemble.mjs
 
-# Stage 2: Build nginx brotli module
+# Stage 2: Build React SPA
+FROM node:20.18-alpine AS react-builder
+
+WORKDIR /app
+
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci --ignore-scripts && npm cache clean --force
+
+COPY frontend/ ./
+
+RUN npm run build
+
+# Stage 3: Build nginx brotli module
 FROM nginx:1.27.3-alpine AS brotli-builder
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -35,7 +49,7 @@ RUN git clone --depth=1 --recurse-submodules \
     && apk del .build-deps \
     && rm -rf /tmp/nginx-* /tmp/ngx_brotli
 
-# Stage 3: Runtime
+# Stage 4: Runtime
 FROM nginx:1.27.3-alpine
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -47,7 +61,8 @@ RUN apk add --no-cache curl tzdata \
     && rm -rf /var/cache/apk/*
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=static-builder /app/dist /usr/share/nginx/html
+COPY --from=react-builder /app/dist /usr/share/nginx/html/os/
 
 RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx
 
